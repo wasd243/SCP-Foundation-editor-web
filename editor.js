@@ -554,7 +554,7 @@ import { wikidotCompletionSource } from "./completion.js";
 // 3. 初始化编辑器
 const startEditor = () => {
     const state = EditorState.create({
-        doc: `EXAMPLE_CODE`,
+        doc: EXAMPLE_CODE,
         extensions: [
             // 将 customKeymap 放在 basicSetup 之前，确保优先级
             customKeymap,
