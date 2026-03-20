@@ -1,15 +1,25 @@
 /**
  * @file editor.js
  * @description SCP Foundation Wikidot Editor - Core Module
- * @license AGPL-3.0-or-later
- * * --- Attribution & Third-Party Code ---
- * 1. This project is licensed under AGPLv3.
- * 2. Includes ACS (Anomaly Classification System) and AIM components:
- * - The logic and patterns for ACS/AIM are derived from the SCP Foundation community.
- * - These specific components are licensed under Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0).
- * - Original credits: SCP Wiki, ACS Team, and AIM Contributors.
- * ---------------------------------------
- */ 
+ * * --- LICENSE INFORMATION ---
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ * * --- ATTRIBUTION & THIRD-PARTY COMPONENTS ---
+ * 1. Editor Engine: CodeMirror 6 (MIT License) - © Marijn Haverbeke
+ * 2. Syntax Patterns: ACS & AIM logic patterns are derived from the 
+ * SCP Foundation community under CC BY-SA 3.0.
+ * -------------------------------------------------------------------
+ */
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
 import { StreamLanguage, syntaxHighlighting, HighlightStyle } from "@codemirror/language";
