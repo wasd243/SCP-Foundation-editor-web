@@ -22,6 +22,72 @@ import { Tag } from "@lezer/highlight";
 import { colorPreviewExtension, setupColorPickerHandler } from "./color_preview.js";
 import { wikidotColorExtension } from "./color_widgets.js";
 
+// 初始化内容
+const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:basalt]]
+
++ 一级标题
+
+**加粗文字**
+//斜体文字//
+__下划线文字__
+--删除线文字--
+
+[[size 150%]]大号文字[[/size]]
+
+[[include :scp-wiki-cn:component:anomaly-class-bar-source
+|lang=cn
+|item-number=SCP-CN-XXXX
+|clearance= 
+|container-class= 
+|disruption= 
+|risk-class= 
+]]
+
+[[footnote]]这是一个脚注[[/footnote]]
+
+[[div class="example"]]
+123
+[[/div]]
+
+* 这是一个无序列表项
+# 这是一个有序列表项
+: 123 : 这是一个定义列表项
+
+> 这是一个引用
+
+[http://scp-wiki.wikidot.com SCP基金会]
+
+||~表头1||~表头2||~表头3||
+||单元格1||单元格2||单元格3||
+||单元格4||单元格5||单元格6||
+
+[[tabview]]
+[[tab 123]]
+123123
+[[/tab]]
+[[tab 456]]
+456456
+[[/tab]]
+[[/tabview]]
+
+----
+
+[[code type="python"]]
+# 这是一个代码块
+print("Hello, World!")
+[[/code]]
+
+# 颜色示例
+#ff0000 红色（普通16进制颜色）
+#00ff00 绿色（普通16进制颜色）
+#0000ff 蓝色（普通16进制颜色）
+
+# Wikidot颜色标签示例
+###ff0000|这是红色文字##
+###00ff00|这是绿色文字##
+###0000ff|这是蓝色文字##
+###ffff00|这是黄色文字##`
+
 // 1. 定义自定义高亮标签，防止 "Unknown highlighting tag" 报错
 const customTags = {
     header: Tag.define(),
@@ -488,70 +554,7 @@ import { wikidotCompletionSource } from "./completion.js";
 // 3. 初始化编辑器
 const startEditor = () => {
     const state = EditorState.create({
-        doc: `[[include :scp-wiki-cn:theme:basalt]]
-
-+ 一级标题
-
-**加粗文字**
-//斜体文字//
-__下划线文字__
---删除线文字--
-
-[[size 150%]]大号文字[[/size]]
-
-[[include :scp-wiki-cn:component:anomaly-class-bar-source
-|lang=cn
-|item-number=SCP-CN-XXXX
-|clearance= 
-|container-class= 
-|disruption= 
-|risk-class= 
-]]
-
-[[footnote]]这是一个脚注[[/footnote]]
-
-[[div class="example"]]
-123
-[[/div]]
-
-* 这是一个无序列表项
-# 这是一个有序列表项
-: 123 : 这是一个定义列表项
-
-> 这是一个引用
-
-[http://scp-wiki.wikidot.com SCP基金会]
-
-||~表头1||~表头2||~表头3||
-||单元格1||单元格2||单元格3||
-||单元格4||单元格5||单元格6||
-
-[[tabview]]
-[[tab 123]]
-123123
-[[/tab]]
-[[tab 456]]
-456456
-[[/tab]]
-[[/tabview]]
-
-----
-
-[[code type="python"]]
-# 这是一个代码块
-print("Hello, World!")
-[[/code]]
-
-# 颜色示例
-#ff0000 红色（普通16进制颜色）
-#00ff00 绿色（普通16进制颜色）
-#0000ff 蓝色（普通16进制颜色）
-
-# Wikidot颜色标签示例
-###ff0000|这是红色文字##
-###00ff00|这是绿色文字##
-###0000ff|这是蓝色文字##
-###ffff00|这是黄色文字##`,
+        doc: `EXAMPLE_CODE`,
         extensions: [
             // 将 customKeymap 放在 basicSetup 之前，确保优先级
             customKeymap,
