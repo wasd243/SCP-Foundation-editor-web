@@ -3,18 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
-    paths:
-      - '**.js'
-      - '**.html'
-      - '**.css'
-      - 'package.json'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,24 +29,23 @@ jobs:
       - name: Build project
         run: npm run build
         
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # 关键步骤：整理部署所需的静态资源到 public 文件夹
+      - name: Prepare static files
+        run: |
+          mkdir -p public
+          cp index.html public/
+          cp code_view.css public/
+          cp -r assets public/
+          # 如果有其他静态文件也一并放入 public/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 部署当前目录，但排除掉所有开发环境的文件
-          publish_dir: ./
-          exclude_assets: |
-            node_modules/
-            .github/
-            .git/
-            build.js
-            editor.js
-            completion.js
-            color_preview.js
-            color_widgets.js
-            package.json
-            package-lock.json
-            .gitignore
-            *.py
-            README.md
-          publish_branch: gh-pages
+          path: './public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
