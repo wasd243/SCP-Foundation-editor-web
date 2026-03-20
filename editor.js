@@ -226,7 +226,7 @@ const wikidotLanguage = StreamLanguage.define({
         }
 
         // LICENSE
-        if (stream.match(/include :scp-wiki-cn:components:license-box/)) {
+        if (stream.match(/include :scp-wiki-cn:component:license-box/)) {
             return "license";
         }
 
@@ -235,7 +235,7 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/include :scp-wiki-cn:component:anomaly-class-bar-source *?/)) {
             return "acs";
         }
-        if (stream.match(/include :scp-wiki-cn:components:advanced-information-methodaology *?/)){
+        if (stream.match(/include :scp-wiki-cn:component:advanced-information-methodaology *?/)){
             return "aim";
         }
         // ================================================================

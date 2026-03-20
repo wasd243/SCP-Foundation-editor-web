@@ -361,11 +361,11 @@ export const wikidotCompletionSource = (context) => {
                 source: "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000" // 设定较高的优先级,
             },
             {
-                label: "[[include :scp-wiki-cn:components:advanced-information-methodaology",
+                label: "[[include :scp-wiki-cn:component:advanced-information-methodaology",
                 type: "keyword",
                 apply: (view, completion, from, to) => {
                     // 插入 advanced-information-methodaology 类名
-                    const text = "[[include :scp-wiki-cn:components:advanced-information-methodaology\n|lang=cn\n|XXXX=SCP-XXXX\n|lv=等级\n|cc= \n|dc= \n|site= \n|dir= \n|head= \n|mtf= \n";
+                    const text = "[[include :scp-wiki-cn:component:advanced-information-methodaology\n|lang=cn\n|XXXX=SCP-XXXX\n|lv=等级\n|cc= \n|dc= \n|site= \n|dir= \n|head= \n|mtf= \n";
                     view.dispatch({
                         changes: { from, to, insert: text },
                         selection: { anchor: from + 87, head: from + 91 }
@@ -373,11 +373,11 @@ export const wikidotCompletionSource = (context) => {
                 }
             },
             {
-                label: "[[include :scp-wiki-cn:components:license-box",
+                label: "[[include :scp-wiki-cn:component:license-box",
                 type: "keyword",
                 apply: (view, completion, from, to) => {
                     // 插入 license-box 类名
-                    const text = "[[include :scp-wiki-cn:components:license-box]]\n|lang=cn\n|author= \n=====\n> 文件名：\n> 图像名： \n> 图像作者： \n> 授权协议： \n> 来源链接：\n=====\n[[include :scp-wiki-cn:components:license-end";
+                    const text = "[[include :scp-wiki-cn:component:license-box\n|lang=cn\n|author= \n]]\n=====\n> 文件名：\n> 图像名： \n> 图像作者： \n> 授权协议： \n> 来源链接：\n=====\n[[include :scp-wiki-cn:component:license-end";
                     view.dispatch({
                         changes: { from, to, insert: text },
                         selection: { anchor: from + 81 }
