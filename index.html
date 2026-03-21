@@ -36,5 +36,46 @@
     <!-- 路径指向 build.js 输出的默认位置 -->
     <script type="module" src="assets/bundle_editor.js"></script>
 
+    <!-- 按钮区 -->
+    <button id="init-btn" onclick="initEditorWithExample()" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+    padding: 5px 10px;
+    background: rgba(65, 65, 65, 0.5);
+    color: #fff;
+    border: 1px solid #707070;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: opacity 0.3s;
+    opacity: 0.3;
+" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.3'">
+    初始化模板
+    </button>
+
+    <script>
+        function initEditorWithExample() {
+            const EXAMPLE_CODE = `[[include :scp-wiki:theme:peroxide]]\n\n[[div class="container"]]\n在此输入你的内容...\n[[/div]]`;
+            
+            // 确保 window.WikidotEditor 已经加载并暴露了实例
+            // 假设你在 editor.js 中将 editorView 暴露到了全局或者 window.WikidotEditor 下
+            if (window.editorInstance) {
+                const view = window.editorInstance;
+                view.dispatch({
+                    changes: {
+                        from: 0,
+                        to: view.state.doc.length,
+                        insert: EXAMPLE_CODE
+                    },
+                    selection: { anchor: 0 }
+                });
+                console.log("编辑器已手动初始化");
+            } else {
+                alert("编辑器尚未就绪，请稍后再试");
+            }
+        }
+    </script>
 </body>
 </html>

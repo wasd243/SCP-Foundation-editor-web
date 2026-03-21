@@ -681,6 +681,9 @@ const startEditor = () => {
         console.warn('无法从本地存储加载内容:', error);
     }
     
+    // 将实例挂载到全局，方便 index.html 的按钮调用
+    window.editorInstance = editorView;
+    
     return editorView;
 };
 
