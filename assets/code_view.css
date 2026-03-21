@@ -202,7 +202,7 @@ font-weight: bold !important;
 .cm-editor .cm-tabview {
 color: #b179ff !important;
 font-family: 'Cascadia Mono', 'Consolas', monospace !important;
-font-weight: bold !important;
+font-weight: normal !important;
 }
 
 /* ACS */
@@ -223,7 +223,7 @@ font-weight: bold !important;
 .cm-editor .cm-components {
 color: #00ffc8 !important;
 font-family: 'Cascadia Mono', 'Consolas', monospace !important;
-font-weight: bold !important;
+font-weight: normal !important;
 }
 
 /* collapsible */
@@ -246,7 +246,12 @@ color: #fd7a00 !important;
 /* note */
 .cm-editor .cm-note {
 color:lightseagreen !important;
-font-weight: bold;
+font-weight: normal;
+}
+
+/* user */
+.cm-editor .cm-user {
+color: aqua !important;
 }
 
 /* LICENSE */
