@@ -561,6 +561,20 @@ export const wikidotCompletionSource = (context) => {
                 }, 
                 detail: "图片" 
             },
+            {
+                label: "[[include component:image-block",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    // 导入插图块
+                    const text = "[[include component:image-block\n|name= \n|caption= \n|width= \n|height= \n|align= ";
+                    const selectFrom = from + "[[include component:image-block\n|name=".length;
+                    view.dispatch({
+                        changes: { from, to, insert: text },
+                        selection: { anchor: selectFrom } // 光标
+                    });
+                }, 
+                detail: "插图块"
+            },
             { 
                 label: "[[footnote]]", 
                 type: "keyword", 

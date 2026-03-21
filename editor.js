@@ -295,7 +295,7 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/\[\[\/\=?\]\]/)) return "center";
 
         // 图片
-        if (stream.match(/\[\[.*?image.*?\]\]/)) return "image";
+        if (stream.match(/\[\[.*?image.*?\]\]/) || stream.match(/include component:image-block/)) return "image";
 
         // 脚注
         if (stream.match(/\[\[footnote\]\]/) || stream.match(/\[\[\/footnote\]\]/)) return "footnote";
@@ -383,6 +383,9 @@ const wikidotLanguage = StreamLanguage.define({
             return "components";
         }
         if (stream.match(/translator/)){
+            return "components";
+        }
+        if (stream.match(/name/) || stream.match(/caption/) || stream.match(/width/) || stream.match(/height/) || stream.match(/align/)) {
             return "components";
         }
         // ================================================================
