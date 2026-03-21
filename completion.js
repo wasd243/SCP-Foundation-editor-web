@@ -409,6 +409,19 @@ export const wikidotCompletionSource = (context) => {
                 },
                 detail: "可折叠内容"
             },
+            {
+                label: "[[note",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    // 插入 note
+                    const text = "[[note]]\n\n[[/note";
+                    view.dispatch({
+                        changes: { from, to, insert: text},
+                        selection: { anchor: from + text.length}
+                    });
+                },
+                detail: "笔记"
+            },
             { 
                 label: "[[module ", 
                 type: "keyword", 

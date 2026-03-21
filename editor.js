@@ -141,6 +141,7 @@ const customTags = {
     aim: Tag.define(), // 用于AIM
     collapsible: Tag.define(), // 用于可折叠内容
     license: Tag.define(), // LICENSE
+    note: Tag.define(), // note
 };
 
 /**
@@ -312,6 +313,11 @@ const wikidotLanguage = StreamLanguage.define({
             return "license";
         }
 
+        // note
+        if (stream.match(/\[\[note\]\]/) || stream.match(/\[\[\/note\]\]/)) {
+            return "note";
+        }
+
         // ACS AIM
         // ================================================================
         if (stream.match(/include :scp-wiki-cn:component:anomaly-class-bar-source *?/)) {
@@ -448,6 +454,7 @@ const wikidotLanguage = StreamLanguage.define({
         "size": customTags.size,
         "aim": customTags.aim,
         "collapsible": customTags.collapsible,
+        "note": customTags.note,
     }
 });
 
@@ -493,6 +500,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.size, class: "cm-size" },
     { tag: customTags.aim, class: "cm-aim" },
     { tag: customTags.collapsible, class: "cm-collapsible" },
+    { tag: customTags.note, class: "cm-note" },
 ]);
 
 /**
