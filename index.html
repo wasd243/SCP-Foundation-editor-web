@@ -4,195 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCP Foundation Editor</title>
-    
-    <!-- 仅保留核心样式引用 -->
     <link rel="stylesheet" href="assets/code_view.css">
-    
-    <!-- Qt 桥接脚本（用于本地 Python 通信，网页版会自动忽略） -->
     <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
     <style>
-        /* 基础布局：确保编辑器占满全屏 */
         html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            background-color: #282c34; /* 防止 JS 加载前的白屏 */
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            background-color: #282c34;
             overflow: hidden;
+            font-family: var(--p-font-monospace, 'Sarasa Gothic SC', monospace);
         }
         #editor-container {
             width: 100%;
             height: 100%;
+            z-index: 1; /* 底层 */
         }
-        /* 强烈对比按钮基础样式 */
+
+        /* 强制置顶的按钮区 */
+        .editor-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 9999; /* 确保在最顶层 */
+            display: flex;
+            gap: 15px;
+        }
+
         .ctrl-btn {
             background: #000000;
             color: #ffffff;
             border: 1px solid #ffffff;
-            padding: 6px 14px;
-            font-family: var(--p-font-monospace, 'Sarasa Gothic SC', monospace);
+            padding: 8px 16px;
             font-size: 12px;
+            font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.2s ease;
-            letter-spacing: 1px;
             box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.1s;
         }
 
         .ctrl-btn:hover {
-            background: #ffffff;
-            color: #000000;
-            box-shadow: 0px 0px 0px #ffffff;
             transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #ffffff;
         }
 
-        .ctrl-btn:active {
-            transform: translate(4px, 4px);
-        }
-
-        /* 警告色：清空按钮可以稍微特殊点 */
         .btn-clear {
-            border-color: #ff4500;
             color: #ff4500;
+            border-color: #ff4500;
             box-shadow: 4px 4px 0px #ff4500;
         }
-        .btn-clear:hover {
-            background: #ff4500;
-            color: #000000;
-        }
+        .btn-clear:hover { box-shadow: 2px 2px 0px #ff4500; }
     </style>
 </head>
 <body>
 
-    <!-- 唯一的 DOM 挂载点 -->
-    <div id="editor-container"></div>
-
-    <!-- 仅保留核心 JS 引用 -->
-    <!-- 路径指向 build.js 输出的默认位置 -->
-    <script type="module" src="assets/bundle_editor.js"></script>
-
-    <!-- 按钮区 -->
     <div class="editor-controls">
-    <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
-    <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
+        <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
+        <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
     </div>
 
+    <div id="editor-container"></div>
+
+    <script type="module" src="assets/bundle_editor.js"></script>
+
     <script>
+        // 定义模板
+        const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
+
+[[div class="container"]]
+在此输入内容...
+[[/div]]`;
+
         function handleAction(type) {
+            // 注意：这里用的是你在 editor.js 里挂载的 window.editorInstance
             const view = window.editorInstance;
+            
             if (!view) {
-                alert("编辑器正在加载，请稍候...");
+                alert("编辑器尚未就绪，请稍等 bundle_editor.js 加载完毕");
                 return;
             }
-            
-            let newContent = "";
+
+            let content = "";
             if (type === 'init') {
-                // 使用模板内容
-                newContent = EXAMPLE_CODE; 
+                content = EXAMPLE_CODE;
             } else if (type === 'clear') {
-                if(!confirm("确定要清空所有内容吗？")) return;
-                newContent = "";
+                if (!confirm("确定要清空所有内容吗？")) return;
+                content = "";
             }
 
-            // 优化点：使用 transactions 确保撤销(Undo)历史不会被弄乱
             view.dispatch({
-                changes: { from: 0, to: view.state.doc.length, insert: newContent },
-                scrollIntoView: true,
-                // 如果是初始化，通常不希望用户按 Ctrl+Z 把整个模板撤销掉，
-                // 但如果是清空，可能需要保留撤销功能。
-                annotations: type === 'init' ? [] : undefined 
+                changes: { from: 0, to: view.state.doc.length, insert: content },
+                selection: { anchor: 0 }
             });
         }
-        function initEditorWithExample() {
-            const EXAMPLE_CODE = `
-[[include xxxxx]]            
-[[note]]
-各位好呀，这里是[[*user wasd243]]
-@@很明显，在这里，我应该称各位为用户@@
-@@这是**web版**wikidot编辑器的初始化页面，我将在此向你展示这个简易的web版wikidot编辑器@@
-[[=]]
-  这个简易编辑器将作为一个插件进入WYSIWYG编辑器的2.1版本，内置了如：
-  ###f23131|代码行数显示##
-  调色板，你也看到了
-  **wikidot关键源代码高亮**
-  //斜过来也可以//
-  __下划线真的会渲染一条__
-  --删除线真的会给你的文字来上一刀--
-  所有常用的wikidot源代码都支持高亮和自动补全，让各位更好的区分你的文章和代码[[footnote]]真的很不错，像在VS Code里一样[[/footnote]]
-  还支持各种SCP wiki专用代码的插入和补全
-  [[collapsible show="+比如这个" hide="-折叠起来"]]
-  真的会折叠起来
-  [[/collapsible]]
-  @@当需要处理复杂的嵌套时，如果你想的话，按下Tab，code mirror会为你缩进，就像这样@@
-[[include :scp-wiki-cn:theme:peroxide]]
-  [[div class="blockquote"]]
-  [[code type="python"]]
-    print('hello world')
-  [[/code]]
-  [[div class="papernote"]]
-    123123123213
-    [[collapsible show="+越套越多" hide="-越来越多"]]
-    真的越来越多
-    ||~Header 1||~Header 2||
-    ||Cell 1||Cell 2
-    [[include :scp-wiki-cn:component:acs-animation]]
-    [[include :scp-wiki-cn:component:anomaly-class-bar-source
-    |lang=cn
-    |item-number=SCP-CN-XXXX
-    |clearance= 
-    |container-class= 
-    |disruption= 
-    |risk-class= 
-    ]]
-    [[include :scp-wiki-cn:component:advanced-information-methodaology
-    |lang=cn
-    |XXXX=SCP-XXXX
-    |lv=等级
-    |cc= 
-    |dc= 
-    |site= 
-    |dir= 
-    |head= 
-    |mtf= 
-    ]]
-    [[include component:image-block
-    |name= 
-    |caption= 
-    |width= 
-    |height= 
-    |align= ]]
-    [[tabview]]
-      [[tab 1231]]
-      [[collapsible show="+123" hide="-123"]]
-      123123[[footnote]]缩进就是好看[[/footnote]]
-      [[/collapsible]]
-      [[/tab]]
-    [[/tabview]]
-    [[/collapsible]]
-  [[/div]]
-  [[/div]]
-[[/=]]
-[[/note]]
-            `;
-            
-            // 确保 window.WikidotEditor 已经加载并暴露了实例
-            // 假设你在 editor.js 中将 editorView 暴露到了全局或者 window.WikidotEditor 下
-            if (window.editorInstance) {
-                const view = window.editorInstance;
-                view.dispatch({
-                    changes: {
-                        from: 0,
-                        to: view.state.doc.length,
-                        insert: EXAMPLE_CODE
-                    },
-                    selection: { anchor: 0 }
-                });
-                console.log("编辑器已手动初始化");
-            } else {
-                alert("编辑器尚未就绪，请稍后再试");
-            }
-        }
-    </script>
-</body>
+    </script> 
+    </body>
 </html>
