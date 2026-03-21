@@ -142,6 +142,7 @@ const customTags = {
     collapsible: Tag.define(), // 用于可折叠内容
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
+    user: Tag.define(), // user
 };
 
 /**
@@ -185,6 +186,9 @@ const wikidotLanguage = StreamLanguage.define({
 
         // size 标签
         if (stream.match(/\[\[size.*?\]\]/) || stream.match(/\[\[\/size\]\]/)) return "size";
+
+        // user 标签
+        if (stream.match(/\[\[user .*?\]\]/) || stream.match(/\[\[\*user .*?\]\]/)) return "user";
 
         // 在wikidotLanguage的token函数中修改颜色匹配部分：
         // Wikidot颜色标签：###ffffff|文字##
@@ -236,7 +240,7 @@ const wikidotLanguage = StreamLanguage.define({
         }
 
         // 高级列表
-        if (stream.match(/ul/) || stream.match(/li/) || stream.match(/ol/)){
+        if (stream.match(/\[\[ul\]\]/) || stream.match(/\[\[li\]\]/) || stream.match(/\[\[ol\]\]/)){
             return "list4";
         }
 
@@ -327,7 +331,6 @@ const wikidotLanguage = StreamLanguage.define({
             return "aim";
         }
         // ================================================================
-
         // Components
         // ================================================================
         if (stream.match(/lang.*?/)){
@@ -382,7 +385,6 @@ const wikidotLanguage = StreamLanguage.define({
             return "components";
         }
         // ================================================================
-
         // Tabview
         // ================================================================
         if (stream.match(/\[\[tabview.*?\]\]/) || stream.match(/\[\[\/tabview\]\]/)) {
@@ -392,7 +394,6 @@ const wikidotLanguage = StreamLanguage.define({
             return "tabview";
         }
         // ================================================================
-
         if (stream.match(/\[\[include[^\]]*\]\]/)) {
             // 匹配整个 include 标签
             // 我们可以检查里面是否有分会
@@ -455,6 +456,7 @@ const wikidotLanguage = StreamLanguage.define({
         "aim": customTags.aim,
         "collapsible": customTags.collapsible,
         "note": customTags.note,
+        "user": customTags.user,
     }
 });
 
@@ -501,6 +503,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.aim, class: "cm-aim" },
     { tag: customTags.collapsible, class: "cm-collapsible" },
     { tag: customTags.note, class: "cm-note" },
+    { tag: customTags.user, class: "cm-user" },
 ]);
 
 /**

@@ -422,6 +422,19 @@ export const wikidotCompletionSource = (context) => {
                 },
                 detail: "笔记"
             },
+            {
+                label: "[[user",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    // 插入 user
+                    const text = "[[*user "
+                    view.dispatch({
+                        changes: { from, to, insert: text},
+                        selection: { anchor: from + "[[#user ".length }
+                    });
+                },
+                detail: "用户头像"
+            },
             { 
                 label: "[[module ", 
                 type: "keyword", 
