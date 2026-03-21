@@ -27,25 +27,25 @@ font-size: 1.2em;
 
 /* 加粗 */
 .cm-editor .cm-strong {
-color: #abb2bf !important;
+color: #f1f4f9 !important;
 font-weight: bold !important;
 }
 
 /* 斜体 */
 .cm-editor .cm-em {
-color: #abb2bf !important;
+color: #f1f4f9 !important;
 font-style: italic !important;
 }
 
 /* 下划线 */
 .cm-editor .cm-underline {
-color: #abb2bf !important;
+color: #f1f4f9 !important;
 text-decoration: underline !important;
 }
 
 /* 删除线 */
 .cm-editor .cm-strikethrough {
-color: #5c6370 !important;
+color: #f1f4f9 !important;
 text-decoration: line-through !important;
 }
 
@@ -169,7 +169,7 @@ color: #5383de !important;
 font-weight: bold !important;
 }
 .cm-table-cell {
-color: #abb2bf !important;
+color: #f1f4f9 !important;
 }
 
 /* 代码块 */
