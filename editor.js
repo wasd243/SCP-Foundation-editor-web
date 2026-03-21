@@ -349,7 +349,7 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/\]\]/) || stream.match(/\[\[/)) return "wikiTag";
 
         // 分割线
-        if (stream.sol() && stream.match(/^-{5,}$/)) return "hr";
+        if (stream.sol() && stream.match(/^-{6,}$/)) return "hr";
 
         stream.next();
         return null;
