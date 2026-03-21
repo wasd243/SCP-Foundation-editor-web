@@ -20,6 +20,30 @@
             height: 100%;
             z-index: 1; /* 底层 */
         }
+        
+        /*----------------------------------同步----------------------------------*/
+        .btn-sync {
+            color: #00ff00;
+            border-color: #00ff00;
+            box-shadow: 4px 4px 0px #00ff00;
+        }
+        .btn-sync:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 2px 2px 0px #00ff00;
+        }
+
+        /* 同步时的闪烁动画 */
+        /* 补全同步时的闪烁动画，增加反馈感 */
+        @keyframes sync-flash {
+            0% { background-color: rgba(0, 255, 0, 0); }
+            50% { background-color: rgba(0, 255, 0, 0.15); }
+            100% { background-color: rgba(0, 255, 0, 0); }
+        }
+        .syncing {
+            animation: sync-flash 0.6s ease-in-out;
+        }
+        /*----------------------------------同步----------------------------------*/
 
         /* 强制置顶的按钮区 */
         .editor-controls {
@@ -58,13 +82,26 @@
     </style>
 </head>
 <body>
-
+    <!----------------------------------顶部栏扫描---------------------------------->
     <div class="editor-controls">
-        <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
-        <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
+    <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
+    <button class="ctrl-btn btn-sync" onclick="handleAction('sync')">SYNC TO WIKIDOT</button>
+    <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
     </div>
+    <!----------------------------------顶部栏扫描---------------------------------->
 
+    <!----------------------------------顶部工具栏---------------------------------->
+    <div class="quick-toolbar">
+        <div class="toolbar-group">
+            <button class="tool-btn" onclick="insertCode('**', '**')">B</button>
+            <button class="tool-btn" onclick="insertCode('//', '//')">I</button>
+            <button class="tool-btn" onclick="insertCode('__', '__')">U</button>
+            <button class="tool-btn" onclick="insertCode('--', '--')">S</button>
+        </div>
+        <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
+    </div>
     <div id="editor-container"></div>
+    <!----------------------------------顶部工具栏---------------------------------->
 
     <script type="module" src="assets/bundle_editor.js"></script>
 
@@ -72,29 +109,48 @@
         // 定义模板
         const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
 
-[[div class="container"]]
-在此输入内容...
-[[/div]]`;
-
+        [[div class="container"]]
+        在此输入内容...
+        [[/div]]`;
         function handleAction(type) {
-            // 注意：这里用的是你在 editor.js 里挂载的 window.editorInstance
             const view = window.editorInstance;
             
+            // 优化：如果实例没加载完，给出明确提示而不是静默失败
             if (!view) {
-                alert("编辑器尚未就绪，请稍等 bundle_editor.js 加载完毕");
+                console.warn("[Editor] 实例尚未初始化，请稍后...");
                 return;
             }
 
-            let content = "";
+            let contentToInsert = ""; 
+
+            if (type === 'sync') {
+                const docContent = view.state.doc.toString(); 
+                navigator.clipboard.writeText(docContent).then(() => {
+                    const syncBtn = document.querySelector('.btn-sync');
+                    const oldText = syncBtn.innerText;
+                    syncBtn.innerText = "COPIED!";
+                    
+                    // 触发闪烁动画
+                    const container = document.getElementById('editor-container');
+                    container.classList.add('syncing');
+                    
+                    setTimeout(() => { 
+                        syncBtn.innerText = oldText; 
+                        container.classList.remove('syncing');
+                    }, 2000);
+                });
+                return; 
+            } 
+            
             if (type === 'init') {
-                content = EXAMPLE_CODE;
+                contentToInsert = EXAMPLE_CODE;
             } else if (type === 'clear') {
                 if (!confirm("确定要清空所有内容吗？")) return;
-                content = "";
+                contentToInsert = "";
             }
 
             view.dispatch({
-                changes: { from: 0, to: view.state.doc.length, insert: content },
+                changes: { from: 0, to: view.state.doc.length, insert: contentToInsert },
                 selection: { anchor: 0 }
             });
         }
