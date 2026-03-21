@@ -187,9 +187,47 @@
         // 定义模板
         const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
 
-[[div class="container"]]
-在此输入内容...
-[[/div]]`;
+[[div class="xxx"]]
+++ **SCP-CN-WEB-EDITOR**
+//测试版 v1.0.0 //
+[[/center]]
+
+---
+
+> **编辑器功能演示：**
+> * **高亮测试**：[[span style="color: #ff4d4d"]]这行文本应该是红色的[[/span]]。
+> * **代码块**：{{这是你刚刚修复的等宽字体功能}}。
+> * **折叠块**：
+[[collapsible show="+ 展开技术细节" hide="- 隐藏内容"]]
+当前编辑器基于 **CodeMirror 6** 核心，支持：
+1. **自动补全**：尝试在下方输入 \`[[\` 或 \`@@\`。
+2. **快捷工具栏**：点击上方 **CODE TOOLS** 标签试试看！
+3. **安全初始化**：已移除危险的重载按键，改为静默加载。
+[[/collapsible]]
+
+---
+
+||~ 语法项目 ||~ 高亮状态 ||
+|| 加粗 || **完成** ||
+|| 斜体 || //完成// ||
+|| 下划线 || __完成__ ||
+|| 删除线 || --完成-- ||
+
+[[footnote]]xxx[[/footnote]]
+
+[[footnoteblock]]
+
+@@@@
+[[div class="footer"]]
+[[/div]]
+[[/div]]
+
+[[module CSS]]
+/* 未来将支持 CSS 高亮补全 */
+.container {
+    border: 1px solid #fff;
+}
+[[/module]]`;
 
         // 插入代码逻辑
         function insertCode(before, after = before) {
