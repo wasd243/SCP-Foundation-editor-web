@@ -139,24 +139,24 @@ color: #639a3c !important;
 /* 原始文本 */
 .cm-editor .cm-original-text {
 color: #ffffff !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 }
 
 /* 图片 */
 .cm-editor .cm-image {
 color: #2ac7a5 !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 }
 
 /* 脚注 */
 .cm-editor .cm-footnote {
 color: #910f0f !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 }
 /* 脚注块 */
 .cm-editor .cm-footnote-block {
 color: #910f0f !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold !important;
 }
 
@@ -187,49 +187,52 @@ font-weight: normal !important;
 /* size标签 */
 .cm-editor .cm-size {
 color: #7a54ed !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold !important;
 }
 
 /* div标签 */
 .cm-editor .cm-div {
 color: #9597ff !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold !important;
 }
 
 /* tabview标签 */
 .cm-editor .cm-tabview {
-color: #b179ff !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+color: #b179ff;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: normal !important;
+}
+.cm-editor .cm-tab {
+color: #e2d0fc !important;
 }
 
 /* ACS */
 .cm-editor .cm-acs {
 color: #00ffc8 !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold !important;
 }
 
 /* AIM */
 .cm-editor .cm-aim {
 color: #00ffc8 !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold !important;
 }
 
 /* Components */
 .cm-editor .cm-components {
 color: #00ffc8 !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: normal !important;
 }
 
 /* collapsible */
 .cm-editor .cm-collapsible {
 color: #bc0404 !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold !important;
 }
 
