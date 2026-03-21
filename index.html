@@ -33,8 +33,6 @@
             box-shadow: 2px 2px 0px #00ff00;
         }
 
-        /* 同步时的闪烁动画 */
-        /* 补全同步时的闪烁动画，增加反馈感 */
         @keyframes sync-flash {
             0% { background-color: rgba(0, 255, 0, 0); }
             50% { background-color: rgba(0, 255, 0, 0.15); }
@@ -59,63 +57,146 @@
             background: #000000;
             color: #ffffff;
             border: 1px solid #ffffff;
-            padding: 8px 16px;
+            padding: 6px 14px;
+            font-family: var(--p-font-monospace, 'Sarasa Gothic SC', monospace);
             font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
             cursor: pointer;
             box-shadow: 4px 4px 0px #ffffff;
-            transition: all 0.1s;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
         .ctrl-btn:hover {
-            transform: translate(2px, 2px);
+            background: #ffffff;
+            color: #000000;
             box-shadow: 2px 2px 0px #ffffff;
+            transform: translate(2px, 2px);
         }
 
         .btn-clear {
-            color: #ff4500;
-            border-color: #ff4500;
-            box-shadow: 4px 4px 0px #ff4500;
+            color: #ff4444;
+            border-color: #ff4444;
+            box-shadow: 4px 4px 0px #ff4444;
         }
-        .btn-clear:hover { box-shadow: 2px 2px 0px #ff4500; }
+        .btn-clear:hover {
+            background: #ff4444;
+            color: #ffffff;
+            box-shadow: 2px 2px 0px #ff4444;
+        }
+
+        /*----------------------------------顶部工具栏---------------------------------*/
+        .quick-toolbar {
+            position: relative;
+            background: #000;
+            border-bottom: 2px solid #fff;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 10px; 
+            max-height: 0;   /* 初始高度 */
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
+            z-index: 100;
+        }
+
+        #toolbar-toggle:checked + .quick-toolbar {
+            max-height: 120px; /* 修复点：确保高度足够滑下来 */
+            padding: 10px;
+        }
+
+        .toolbar-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tool-btn {
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 4px 12px;
+            font-family: monospace;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tool-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .toolbar-label {
+            position: absolute;
+            bottom: -26px;
+            left: 20px;
+            background: #fff;
+            color: #000;
+            padding: 2px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid #000;
+            border-top: none;
+            z-index: 101;
+            text-transform: uppercase;
+        }
+        /*----------------------------------顶部工具栏---------------------------------*/
+
     </style>
 </head>
 <body>
-    <!----------------------------------顶部栏扫描---------------------------------->
-    <div class="editor-controls">
-    <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
-    <button class="ctrl-btn btn-sync" onclick="handleAction('sync')">SYNC TO WIKIDOT</button>
-    <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
-    </div>
-    <!----------------------------------顶部栏扫描---------------------------------->
 
-    <!----------------------------------顶部工具栏---------------------------------->
+    <div class="editor-controls">
+        <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
+        <button class="ctrl-btn btn-sync" onclick="handleAction('sync')">SYNC TO WIKIDOT</button>
+        <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
+    </div>
+
+    <!------------------------------------------------功能区---------------------------------------------->
+    <input type="checkbox" id="toolbar-toggle" style="display: none;">
     <div class="quick-toolbar">
         <div class="toolbar-group">
-            <button class="tool-btn" onclick="insertCode('**', '**')">B</button>
-            <button class="tool-btn" onclick="insertCode('//', '//')">I</button>
-            <button class="tool-btn" onclick="insertCode('__', '__')">U</button>
-            <button class="tool-btn" onclick="insertCode('--', '--')">S</button>
+            <button class="tool-btn" onclick="insertCode('**')">B</button>
+            <button class="tool-btn" onclick="insertCode('//')">I</button>
+            <button class="tool-btn" onclick="insertCode('__')">U</button>
+            <button class="tool-btn" onclick="insertCode('--')">S</button>
         </div>
         <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
     </div>
     <div id="editor-container"></div>
-    <!----------------------------------顶部工具栏---------------------------------->
-
+    <!------------------------------------------------功能区---------------------------------------------->
     <script type="module" src="assets/bundle_editor.js"></script>
 
     <script>
         // 定义模板
         const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
 
-        [[div class="container"]]
-        在此输入内容...
-        [[/div]]`;
+[[div class="container"]]
+在此输入内容...
+[[/div]]`;
+
+        // 插入代码逻辑
+        function insertCode(before, after = before) {
+            const view = window.editorInstance;
+            if (!view) return;
+
+            const { state } = view;
+            const mainSelection = state.selection.main;
+            const from = mainSelection.from;
+            const to = mainSelection.to;
+            const selectedText = state.sliceDoc(from, to);
+
+            view.dispatch({
+                changes: { from, to, insert: before + selectedText + after },
+                selection: { anchor: from + before.length + selectedText.length },
+                scrollIntoView: true
+            });
+            view.focus();
+        }
+
         function handleAction(type) {
             const view = window.editorInstance;
-            
-            // 优化：如果实例没加载完，给出明确提示而不是静默失败
             if (!view) {
                 console.warn("[Editor] 实例尚未初始化，请稍后...");
                 return;
@@ -130,7 +211,6 @@
                     const oldText = syncBtn.innerText;
                     syncBtn.innerText = "COPIED!";
                     
-                    // 触发闪烁动画
                     const container = document.getElementById('editor-container');
                     container.classList.add('syncing');
                     
@@ -155,5 +235,5 @@
             });
         }
     </script> 
-    </body>
+</body>
 </html>
