@@ -133,6 +133,7 @@ const customTags = {
     scp_wiki: Tag.define(), // 用于特定的主题标签
     div: Tag.define(), // 用于 [[div ...]] 标签
     tabview: Tag.define(), // 用于 [[tabview]] 标签
+    tab: Tag.define(), // tabview增强
     acs: Tag.define(), // 用于ACS
     components: Tag.define(), // Components
     equal: Tag.define(), // 用于 = 号
@@ -391,7 +392,7 @@ const wikidotLanguage = StreamLanguage.define({
             return "tabview";
         }
         if (stream.match(/\[\[tab.*?\]\]/) || stream.match(/\[\[\/tab\]\]/)) {
-            return "tabview";
+            return "tab";
         }
         // ================================================================
         if (stream.match(/\[\[include[^\]]*\]\]/)) {
@@ -448,6 +449,7 @@ const wikidotLanguage = StreamLanguage.define({
         "scp_wiki": customTags.scp_wiki,
         "div": customTags.div,
         "tabview": customTags.tabview,
+        "tab": customTags.tab,
         "acs": customTags.acs,
         "components": customTags.components,
         "equal": customTags.equal,
@@ -495,6 +497,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.scp_wiki, class: "cm-scp-wiki" },
     { tag: customTags.div, class: "cm-div" },
     { tag: customTags.tabview, class: "cm-tabview" },
+    { tag: customTags.tab, class: "cm-tab" },
     { tag: customTags.acs, class: "cm-acs" },
     { tag: customTags.components, class: "cm-components" },
     { tag: customTags.equal, class: "cm-equal" },
