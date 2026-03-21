@@ -25,6 +25,42 @@
             width: 100%;
             height: 100%;
         }
+        /* 强烈对比按钮基础样式 */
+        .ctrl-btn {
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 6px 14px;
+            font-family: var(--p-font-monospace, 'Sarasa Gothic SC', monospace);
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 1px;
+            box-shadow: 4px 4px 0px #ffffff;
+        }
+
+        .ctrl-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0px 0px 0px #ffffff;
+            transform: translate(2px, 2px);
+        }
+
+        .ctrl-btn:active {
+            transform: translate(4px, 4px);
+        }
+
+        /* 警告色：清空按钮可以稍微特殊点 */
+        .btn-clear {
+            border-color: #ff4500;
+            color: #ff4500;
+            box-shadow: 4px 4px 0px #ff4500;
+        }
+        .btn-clear:hover {
+            background: #ff4500;
+            color: #000000;
+        }
     </style>
 </head>
 <body>
@@ -37,25 +73,37 @@
     <script type="module" src="assets/bundle_editor.js"></script>
 
     <!-- 按钮区 -->
-    <button id="init-btn" onclick="initEditorWithExample()" style="
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 9999;
-        padding: 5px 10px;
-        background: rgba(0, 132, 255, 0.5);
-        color: #e30000c6;
-        border: 1px solid #5a39ff;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-        transition: opacity 0.3s;
-        opacity: 0.3;
-    " onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.3'">
-        初始化模板
-    </button>
+    <div class="editor-controls">
+    <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
+    <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
+    </div>
 
     <script>
+        function handleAction(type) {
+            const view = window.editorInstance;
+            if (!view) {
+                alert("编辑器正在加载，请稍候...");
+                return;
+            }
+            
+            let newContent = "";
+            if (type === 'init') {
+                // 使用模板内容
+                newContent = EXAMPLE_CODE; 
+            } else if (type === 'clear') {
+                if(!confirm("确定要清空所有内容吗？")) return;
+                newContent = "";
+            }
+
+            // 优化点：使用 transactions 确保撤销(Undo)历史不会被弄乱
+            view.dispatch({
+                changes: { from: 0, to: view.state.doc.length, insert: newContent },
+                scrollIntoView: true,
+                // 如果是初始化，通常不希望用户按 Ctrl+Z 把整个模板撤销掉，
+                // 但如果是清空，可能需要保留撤销功能。
+                annotations: type === 'init' ? [] : undefined 
+            });
+        }
         function initEditorWithExample() {
             const EXAMPLE_CODE = `
 [[include xxxxx]]            
