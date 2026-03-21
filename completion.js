@@ -417,7 +417,7 @@ export const wikidotCompletionSource = (context) => {
                     const text = "[[note]]\n\n[[/note";
                     view.dispatch({
                         changes: { from, to, insert: text},
-                        selection: { anchor: from + text.length}
+                        selection: { anchor: from + 8}
                     });
                 },
                 detail: "笔记"
