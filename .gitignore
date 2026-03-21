@@ -2,6 +2,7 @@
 node_modules/
 .pnp
 .pnp.js
+jsconfig.json
 
 # log
 npm-debug.log*
