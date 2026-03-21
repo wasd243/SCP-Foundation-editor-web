@@ -126,6 +126,11 @@ color: #98c379 !important;
 color: #98c379 !important;
 }
 
+/* 高级列表 */
+.cm-editor .cm-list4 {
+color: #98c379 !important;
+}
+
 /* 引用 */
 .cm-editor .cm-quote {
 color: #639a3c !important;

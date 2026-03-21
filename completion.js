@@ -389,7 +389,7 @@ export const wikidotCompletionSource = (context) => {
                 type: "keyword",
                 apply: (view, completion, from, to) => {
                     // 插入 span 标签，光标放在属性位置
-                    const text = "[[span class=\"\"";
+                    const text = "[[span class=\"\"]]\n\n[[/span";
                     view.dispatch({
                         changes: { from, to, insert: text },
                         selection: { anchor: from + "[[span class=\"".length } // 光标放在 class 属性的双引号之间

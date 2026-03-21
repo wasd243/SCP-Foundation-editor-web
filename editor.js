@@ -119,6 +119,7 @@ const customTags = {
     list1: Tag.define(),
     list2: Tag.define(),
     list3: Tag.define(),
+    list4: Tag.define(),
     quote: Tag.define(),
     table: Tag.define(),
     table_header: Tag.define(),
@@ -231,6 +232,11 @@ const wikidotLanguage = StreamLanguage.define({
         // 定义列表
         if (stream.sol() && stream.match(/\:.*?\:/)) {
             return "list3";
+        }
+
+        // 高级列表
+        if (stream.match(/ul/) || stream.match(/li/) || stream.match(/ol/)){
+            return "list4";
         }
 
         // 引用
@@ -421,6 +427,7 @@ const wikidotLanguage = StreamLanguage.define({
         "list1": customTags.list1,
         "list2": customTags.list2,
         "list3": customTags.list3,
+        "list4": customTags.list4,
         "quote": customTags.quote,
         "table": customTags.table,
         "table_header": customTags.table_header,
@@ -465,6 +472,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.list1, class: "cm-list1" },
     { tag: customTags.list2, class: "cm-list2" },
     { tag: customTags.list3, class: "cm-list3" },
+    { tag: customTags.list4, class: "cm-list4" },
     { tag: customTags.quote, class: "cm-quote" },
     { tag: customTags.table, class: "cm-table" },
     { tag: customTags.table_header, class: "cm-table-header" },
