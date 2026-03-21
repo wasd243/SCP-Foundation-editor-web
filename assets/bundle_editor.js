@@ -64,7 +64,7 @@ var nr=[],Zl=[];(()=>{let n="lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,
 [[/span`},selection:{anchor:l+14}})}},{label:"[[collapsible]]",type:"keyword",apply:(r,o,l,a)=>{r.dispatch({changes:{from:l,to:a,insert:`[[collapsible show="+" hide="-"]]
 [[/collapsible`},selection:{anchor:l+13+8}})},detail:"\u53EF\u6298\u53E0\u5185\u5BB9"},{label:"[[note",type:"keyword",apply:(r,o,l,a)=>{r.dispatch({changes:{from:l,to:a,insert:`[[note]]
 
-[[/note`},selection:{anchor:l+8}})},detail:"\u7B14\u8BB0"},{label:"[[module ",type:"keyword",apply:(r,o,l,a)=>{let h="[[module ";r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:l+h.length}})},detail:"\u529F\u80FD\u7EC4\u4EF6"},{label:"[[module css]]",type:"keyword",apply:(r,o,l,a)=>{r.dispatch({changes:{from:l,to:a,insert:`[[module css]]
+[[/note`},selection:{anchor:l+9}})},detail:"\u7B14\u8BB0"},{label:"[[module ",type:"keyword",apply:(r,o,l,a)=>{let h="[[module ";r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:l+h.length}})},detail:"\u529F\u80FD\u7EC4\u4EF6"},{label:"[[module css]]",type:"keyword",apply:(r,o,l,a)=>{r.dispatch({changes:{from:l,to:a,insert:`[[module css]]
 
 [[/module`},selection:{anchor:l+12+2}})},detail:"CSS \u6A21\u5757"},{label:"[[html]]",type:"keyword",apply:(r,o,l,a)=>{r.dispatch({changes:{from:l,to:a,insert:`[[html]]
 
