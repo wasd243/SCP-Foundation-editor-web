@@ -111,7 +111,7 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/\^\^(?:[^\^]|\^[^\^])*\^\^/)) return "sup";
         
         // 下标：允许内部包含单个,字符
-        if (stream.match(/,,(?:[^,]|,[^,])*,/)) return "sub";
+        if (stream.match(/,,(?:[^,]|,[^,])*,,/)) return "sub";
 
         // 链接
         if (stream.match(/\[https?:\/\/.*?\]/)) return "link";
