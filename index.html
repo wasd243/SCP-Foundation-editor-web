@@ -94,27 +94,18 @@
             display: flex;
             gap: 10px;
             padding: 0 10px; 
-            max-height: 0;   /* 初始高度为 0 */
+            max-height: 0;   
+            overflow: hidden; /* 加上这行，确保按钮收起时完全不可见 */
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
             z-index: 100;
         }
 
-        /* 核心修复：当 Checkbox 被选中时，展开工具栏 */
-        #toolbar-toggle:checked + .quick-toolbar {
-            max-height: 150px; /* 确保这个值足够大，能放下你的按钮 */
-            padding: 10px;    /* 展开时恢复内边距 */
-        }
-        .toolbar-group {
-            display: flex;
-            gap: 5px;
-            overflow: hidden; /* 让按钮组在折叠时消失 */
-        }
-
-        /* 确保标签始终可见并可以点击 */
+        /* 标签初始状态：居中悬停 */
         .toolbar-label {
             position: absolute;
-            top: 0; /* 改为从顶部定位，确保它始终挂在页面顶端 */
-            left: 20px;
+            top: 0; 
+            left: 50%; /* 科学居中：定位到屏幕正中间 */
+            transform: translateX(-50%); /* 科学居中：根据自身宽度往回拉一半，实现绝对居中 */
             background: #fff;
             color: #000;
             padding: 2px 12px;
@@ -124,6 +115,25 @@
             border-top: none;
             font-size: 11px;
             font-weight: bold;
+            /* 赋予它和工具栏一样的丝滑过渡动画 */
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+
+        /* 1. 当开关被选中，工具栏变高 */
+        #toolbar-toggle:checked ~ .quick-toolbar {
+            max-height: 150px; 
+            padding: 10px;    
+        }
+
+        /* 2. 当开关被选中，标签跟着往下挪动！ */
+        #toolbar-toggle:checked ~ .toolbar-label {
+            /* 保持居中的同时，向下平移 43px（大约是工具栏展开的高度） */
+            transform: translate(-50%, 43px); 
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 5px;
         }
 
         .tool-btn {
@@ -154,9 +164,9 @@
     </div>
 
     <!------------------------------------------------功能区---------------------------------------------->
-    <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
-
     <input type="checkbox" id="toolbar-toggle" style="display: none;">
+
+    <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
 
     <div class="quick-toolbar">
         <div class="toolbar-group">
