@@ -144,74 +144,13 @@ const customTags = {
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
     user: Tag.define(), // user
-    // CSS Tags
-    // ================================================================
-    css_comment: Tag.define(),
-    css_bracket: Tag.define(),
-    css_punctuation: Tag.define(),
-    css_property: Tag.define(),
-    css_class: Tag.define(),
-    css_id: Tag.define(),
-    css_value: Tag.define(),
-    css_keyword: Tag.define(),
-    // ================================================================
 };
 
 /**
  * 自定义 Wikidot 语法解析器
  */
 const wikidotLanguage = StreamLanguage.define({
-    // 定义初始状态，解析器默认不在 CSS 里
-    startState() {
-        return { inCSS: false, inCssComment: false };
-    },
-
     token(stream) {
-        // ================== CSS 判定 ================== //
-        // --- 第一步：检查是否进出 CSS 模块  ---
-        if (stream.match(/\[\[module css\]\]/i)) {
-            state.inCSS = true;
-            return "components"; // 或者用你喜欢的其他颜色标签
-        }
-        if (stream.match(/\[\[\/module\]\]/i)) {
-            state.inCSS = false;
-            state.inCssComment = false; // 离开时重置注释状态
-            return "components";
-        }
-
-        // --- 第二步：如果正处于 CSS 模块内，只解析 CSS ---
-        if (state.inCSS) {
-            // 处理 CSS 多行注释 /* ... */
-            if (state.inCssComment) {
-                if (stream.match(/.*?\*\//)) {
-                    state.inCssComment = false; // 找到结束符，退出注释状态
-                } else {
-                    stream.skipToEnd(); // 没找到结束符，吃掉这一整行
-                }
-                return "css_comment";
-            }
-            if (stream.match(/\/\*/)) {
-                state.inCssComment = true; // 进入注释状态
-                return "css_comment";
-            }
-
-            // CSS 基础高亮正则
-            if (stream.match(/[\{\}\(\)]/)) return "css_bracket"; // 括号
-            if (stream.match(/[:;]/)) return "css_punctuation"; // 冒号分号
-            if (stream.match(/#[0-9a-fA-F]{3,8}\b/)) return "css_color"; // 16进制颜色
-            if (stream.match(/\.[a-zA-Z0-9_-]+/)) return "css_class"; // 类选择器 (.class)
-            if (stream.match(/#[a-zA-Z0-9_-]+/)) return "css_id"; // ID选择器 (#id)
-            if (stream.match(/@[a-zA-Z0-9_-]+/)) return "css_keyword"; // @media 等
-            
-            // 匹配属性名 (比如 color: 里的 color)
-            if (stream.match(/[a-zA-Z0-9_-]+(?=\s*:)/)) return "css_property"; 
-
-            // 其他的一律当做值或空白处理
-            stream.next();
-            return "css_value";
-        }
-        // ================== CSS 判定 ================== //
-
         // 标题
         if (stream.sol() && stream.match(/\++ /)) {
             stream.skipToEnd();
@@ -520,16 +459,6 @@ const wikidotLanguage = StreamLanguage.define({
         "collapsible": customTags.collapsible,
         "note": customTags.note,
         "user": customTags.user,
-        // --- 新增 CSS token 映射 ---
-        "css_comment": customTags.css_comment,
-        "css_bracket": customTags.css_bracket,
-        "css_punctuation": customTags.css_punctuation,
-        "css_property": customTags.css_property,
-        "css_class": customTags.css_class,
-        "css_id": customTags.css_id,
-        "css_value": customTags.css_value,
-        "css_keyword": customTags.css_keyword,
-        // --- 新增 CSS token 映射 ---
     }
 });
 
@@ -578,16 +507,6 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.collapsible, class: "cm-collapsible" },
     { tag: customTags.note, class: "cm-note" },
     { tag: customTags.user, class: "cm-user" },
-    // --- 新增 CSS 颜色映射 ---
-    { tag: customTags.css_comment, color: "#5c6370", fontStyle: "italic" }, // 灰色斜体
-    { tag: customTags.css_bracket, color: "#abb2bf" }, // 普通括号
-    { tag: customTags.css_punctuation, color: "#abb2bf" }, // 冒号分号
-    { tag: customTags.css_property, color: "#d19a66" }, // 属性名橙色
-    { tag: customTags.css_class, color: "#e5c07b" }, // 类名黄色
-    { tag: customTags.css_id, color: "#e06c75" }, // ID红色
-    { tag: customTags.css_value, color: "#98c379" }, // 值绿色
-    { tag: customTags.css_keyword, color: "#c678dd" }, // 关键字紫色 (@media等)
-    // --- 新增 CSS 颜色映射 ---
 ]);
 
 /**
