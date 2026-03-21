@@ -33,76 +33,7 @@ import { colorPreviewExtension, setupColorPickerHandler } from "./color_preview.
 import { wikidotColorExtension } from "./color_widgets.js";
 
 // 初始化内容
-const EXAMPLE_CODE = `
-[[include xxxxx]]            
-[[note]]
-各位好呀，这里是[[*user wasd243]]
-@@很明显，在这里，我应该称各位为用户@@
-@@这是**web版**wikidot编辑器的初始化页面，我将在此向你展示这个简易的web版wikidot编辑器@@
-[[=]]
-  这个简易编辑器将作为一个插件进入WYSIWYG编辑器的2.1版本，内置了如：
-  ###f23131|代码行数显示##
-  调色板，你也看到了
-  **wikidot关键源代码高亮**
-  //斜过来也可以//
-  __下划线真的会渲染一条__
-  --删除线真的会给你的文字来上一刀--
-  所有常用的wikidot源代码都支持高亮和自动补全，让各位更好的区分你的文章和代码[[footnote]]真的很不错，像在VS Code里一样[[/footnote]]
-  还支持各种SCP wiki专用代码的插入和补全
-  [[collapsible show="+比如这个" hide="-折叠起来"]]
-  真的会折叠起来
-  [[/collapsible]]
-  @@当需要处理复杂的嵌套时，如果你想的话，按下Tab，code mirror会为你缩进，就像这样@@
-[[include :scp-wiki-cn:theme:peroxide]]
-  [[div class="blockquote"]]
-  [[code type="python"]]
-    print('hello world')
-  [[/code]]
-  [[div class="papernote"]]
-    123123123213
-    [[collapsible show="+越套越多" hide="-越来越多"]]
-    真的越来越多
-    ||~Header 1||~Header 2||
-    ||Cell 1||Cell 2
-    [[include :scp-wiki-cn:component:acs-animation]]
-    [[include :scp-wiki-cn:component:anomaly-class-bar-source
-    |lang=cn
-    |item-number=SCP-CN-XXXX
-    |clearance= 
-    |container-class= 
-    |disruption= 
-    |risk-class= 
-    ]]
-    [[include :scp-wiki-cn:component:advanced-information-methodaology
-    |lang=cn
-    |XXXX=SCP-XXXX
-    |lv=等级
-    |cc= 
-    |dc= 
-    |site= 
-    |dir= 
-    |head= 
-    |mtf= 
-    ]]
-    [[include component:image-block
-    |name= 
-    |caption= 
-    |width= 
-    |height= 
-    |align= ]]
-    [[tabview]]
-      [[tab 1231]]
-      [[collapsible show="+123" hide="-123"]]
-      123123[[footnote]]缩进就是好看[[/footnote]]
-      [[/collapsible]]
-      [[/tab]]
-    [[/tabview]]
-    [[/collapsible]]
-  [[/div]]
-  [[/div]]
-[[/=]]
-[[/note]]
-`
+const EXAMPLE_CODE = ``
 
 // 1. 定义自定义高亮标签，防止 "Unknown highlighting tag" 报错
 const customTags = {

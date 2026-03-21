@@ -158,7 +158,6 @@
 <body>
 
     <div class="editor-controls">
-        <button class="ctrl-btn" onclick="handleAction('init')">INITIALIZE</button>
         <button class="ctrl-btn btn-sync" onclick="handleAction('sync')">SYNC TO WIKIDOT</button>
         <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR ALL</button>
     </div>
@@ -174,6 +173,10 @@
             <button class="tool-btn" onclick="insertCode('//')">I</button>
             <button class="tool-btn" onclick="insertCode('__')">U</button>
             <button class="tool-btn" onclick="insertCode('--')">S</button>
+            <button class="tool-btn" onclick="insertCode('{{}}')">tt</button>
+            <button class="tool-btn" onclick="insertCode('^^')">X^2</button>
+            <button class="tool-btn" onclick="insertCode(',,')">X,2</button>
+            <button class="tool-btn" onclick="insertCode('@@')">@@</button>
         </div>
     </div>
     <div id="editor-container"></div>
