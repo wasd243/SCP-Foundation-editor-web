@@ -81,69 +81,75 @@ var nr=[],Zl=[];(()=>{let n="lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,
 |caption= 
 |width= 
 |height= 
-|align= `,c=l+38;r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:c}})},detail:"\u63D2\u56FE\u5757"},{label:"[[footnote]]",type:"keyword",apply:(r,o,l,a)=>{let h="[[footnote]]\u8FD9\u662F\u4E00\u6761\u811A\u6CE8[[/footnote",c=l+12,f=c+6;r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:c,head:f}})},detail:"\u811A\u6CE8"},{label:"[[footnoteblock]]",type:"keyword",apply:(r,o,l,a)=>{let h="[[footnoteblock";r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:l+h.length}})},detail:"\u811A\u6CE8\u5757"}],filter:!0}};var Ny=`[[include :scp-wiki-cn:theme:basalt]]
-
-+ \u4E00\u7EA7\u6807\u9898
-
-**\u52A0\u7C97\u6587\u5B57**
-//\u659C\u4F53\u6587\u5B57//
-__\u4E0B\u5212\u7EBF\u6587\u5B57__
---\u5220\u9664\u7EBF\u6587\u5B57--
-
-[[size 150%]]\u5927\u53F7\u6587\u5B57[[/size]]
-
-[[include :scp-wiki-cn:component:anomaly-class-bar-source
-|lang=cn
-|item-number=SCP-CN-XXXX
-|clearance= 
-|container-class= 
-|disruption= 
-|risk-class= 
-]]
-
-[[footnote]]\u8FD9\u662F\u4E00\u4E2A\u811A\u6CE8[[/footnote]]
-
-[[div class="example"]]
-123
-[[/div]]
-
-* \u8FD9\u662F\u4E00\u4E2A\u65E0\u5E8F\u5217\u8868\u9879
-# \u8FD9\u662F\u4E00\u4E2A\u6709\u5E8F\u5217\u8868\u9879
-: 123 : \u8FD9\u662F\u4E00\u4E2A\u5B9A\u4E49\u5217\u8868\u9879
-
-> \u8FD9\u662F\u4E00\u4E2A\u5F15\u7528
-
-[http://scp-wiki.wikidot.com SCP\u57FA\u91D1\u4F1A]
-
-||~\u8868\u59341||~\u8868\u59342||~\u8868\u59343||
-||\u5355\u5143\u683C1||\u5355\u5143\u683C2||\u5355\u5143\u683C3||
-||\u5355\u5143\u683C4||\u5355\u5143\u683C5||\u5355\u5143\u683C6||
-
-[[tabview]]
-[[tab 123]]
-123123
-[[/tab]]
-[[tab 456]]
-456456
-[[/tab]]
-[[/tabview]]
-
-----
-
-[[code type="python"]]
-# \u8FD9\u662F\u4E00\u4E2A\u4EE3\u7801\u5757
-print("Hello, World!")
-[[/code]]
-
-# \u989C\u8272\u793A\u4F8B
-#ff0000 \u7EA2\u8272\uFF08\u666E\u901A16\u8FDB\u5236\u989C\u8272\uFF09
-#00ff00 \u7EFF\u8272\uFF08\u666E\u901A16\u8FDB\u5236\u989C\u8272\uFF09
-#0000ff \u84DD\u8272\uFF08\u666E\u901A16\u8FDB\u5236\u989C\u8272\uFF09
-
-# Wikidot\u989C\u8272\u6807\u7B7E\u793A\u4F8B
-###ff0000|\u8FD9\u662F\u7EA2\u8272\u6587\u5B57##
-###00ff00|\u8FD9\u662F\u7EFF\u8272\u6587\u5B57##
-###0000ff|\u8FD9\u662F\u84DD\u8272\u6587\u5B57##
-###ffff00|\u8FD9\u662F\u9EC4\u8272\u6587\u5B57##`,S={header:L.define(),strong:L.define(),em:L.define(),underline:L.define(),strikethrough:L.define(),wikiTag:L.define(),link:L.define(),hr:L.define(),rate:L.define(),right:L.define(),left:L.define(),center:L.define(),sup:L.define(),sub:L.define(),newline:L.define(),monosapace:L.define(),list1:L.define(),list2:L.define(),list3:L.define(),list4:L.define(),quote:L.define(),table:L.define(),table_header:L.define(),table_cell:L.define(),original_text:L.define(),image:L.define(),footnote:L.define(),footnote_block:L.define(),color:L.define(),include:L.define(),scp_wiki:L.define(),div:L.define(),tabview:L.define(),tab:L.define(),acs:L.define(),components:L.define(),equal:L.define(),line_up:L.define(),size:L.define(),aim:L.define(),collapsible:L.define(),license:L.define(),note:L.define(),user:L.define()},Fy=Ss.define({token(n){if(n.sol()&&n.match(/\++ /))return n.skipToEnd(),"header";if(n.match(/\*\*(?:[^*]|\*[^*])*\*\*/))return"strong";if(n.match(/\/\/(?:[^/]|\/[^/])*\/\//))return"em";if(n.match(/__(?:[^_]|_[^_])*__/))return"underline";if(n.match(/--(?:[^-]|-[^-])*--/))return"strikethrough";if(n.match(/\^\^(?:[^\^]|\^[^\^])*\^\^/))return"sup";if(n.match(/,,(?:[^,]|,[^,])*,/))return"sub";if(n.match(/\[https?:\/\/.*?\]/))return"link";if(n.match(/\@\@\@\@/))return"newline";if(n.match(/\{\{.*?\}\}/))return"monosapace";if(n.match(/\[\[size.*?\]\]/)||n.match(/\[\[\/size\]\]/))return"size";if(n.match(/\[\[user .*?\]\]/)||n.match(/\[\[\*user .*?\]\]/))return"user";if(n.match(/###([0-9a-fA-F]{6})\|/)){let e="";for(;!n.eol();)if(n.peek()==="#"){if(n.next(),n.peek()==="#")return n.next(),"color"}else e+=n.next();return null}return n.match(/#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/)?"color":n.match(/\@\@.*?\@\@/)?(n.skipToEnd(),"original_text"):n.sol()&&n.match(/\*+ /)?"list1":n.sol()&&n.match(/#+ /)?"list2":n.sol()&&n.match(/\:.*?\:/)?"list3":n.match(/\[\[ul\]\]/)||n.match(/\[\[li\]\]/)||n.match(/\[\[ol\]\]/)?"list4":n.sol()&&n.match(/>+ /)?(n.skipToEnd(),"quote"):n.match(/=/)?"equal":n.match(/\|/)?"line_up":n.match(/\|\|/)?"table":n.match(/\~/)?"table_header":n.sol()&&n.match(/\|\|(?!~)/)?(n.skipToEnd(),"table_cell"):n.match(/\[\[module rate\]\]/i)?"rate":n.match(/\[\[\>?\]\]/)||n.match(/\[\[\/\>?\]\]/)?"right":n.match(/\[\[\<?\]\]/)||n.match(/\[\[\/\<?\]\]/)?"left":n.match(/\[\[\=?\]\]/)||n.match(/\[\[\/\=?\]\]/)?"center":n.match(/\[\[.*?image.*?\]\]/)||n.match(/include component:image-block/)?"image":n.match(/\[\[footnote\]\]/)||n.match(/\[\[\/footnote\]\]/)?"footnote":n.match(/\[\[footnoteblock\]\]/)?"footnote_block":n.match(/\[\[div.*?\]\]/)||n.match(/\[\[\/div\]\]/)?"div":n.match(/\[\[collapsible.*?\]\]/)||n.match(/\[\[\/collapsible\]\]/)?"collapsible":n.match(/include :scp-wiki-cn:component:license-box/)?"license":n.match(/\[\[note\]\]/)||n.match(/\[\[\/note\]\]/)?"note":n.match(/include :scp-wiki-cn:component:anomaly-class-bar-source *?/)?"acs":n.match(/include :scp-wiki-cn:component:advanced-information-methodaology *?/)?"aim":n.match(/lang.*?/)||n.match(/item-number.*?/)||n.match(/clearance.*?/)||n.match(/container-class.*?/)||n.match(/disruption.*?/)||n.match(/risk-class.*?/)||n.match(/lv/)||n.match(/cc/)||n.match(/dc/)||n.match(/site/)||n.match(/dir/)||n.match(/head/)||n.match(/mtf/)||n.match(/XXXX/)||n.match(/blocks/)||n.match(/author/)||n.match(/translator/)||n.match(/name/)||n.match(/caption/)||n.match(/width/)||n.match(/height/)||n.match(/align/)?"components":n.match(/\[\[tabview.*?\]\]/)||n.match(/\[\[\/tabview\]\]/)?"tabview":n.match(/\[\[tab.*?\]\]/)||n.match(/\[\[\/tab\]\]/)?"tab":n.match(/\[\[include[^\]]*\]\]/)?n.current().includes(":scp-wiki")?"scp_wiki":"include":n.match(/\]\]/)||n.match(/\[\[/)?"wikiTag":n.sol()&&n.match(/^-{5,}$/)?"hr":(n.next(),null)},tokenTable:{header:S.header,strong:S.strong,em:S.em,underline:S.underline,strikethrough:S.strikethrough,wikiTag:S.wikiTag,sup:S.sup,sub:S.sub,link:S.link,hr:S.hr,rate:S.rate,right:S.right,left:S.left,center:S.center,newline:S.newline,monosapace:S.monosapace,list1:S.list1,list2:S.list2,list3:S.list3,list4:S.list4,quote:S.quote,table:S.table,table_header:S.table_header,table_cell:S.table_cell,original_text:S.original_text,image:S.image,footnote:S.footnote,footnote_block:S.footnote_block,color:S.color,include:S.include,scp_wiki:S.scp_wiki,div:S.div,tabview:S.tabview,tab:S.tab,acs:S.acs,components:S.components,equal:S.equal,line_up:S.line_up,size:S.size,aim:S.aim,collapsible:S.collapsible,note:S.note,user:S.user}}),Hy=vt.define([{tag:S.header,class:"cm-header"},{tag:S.strong,class:"cm-strong"},{tag:S.em,class:"cm-em"},{tag:S.underline,class:"cm-underline"},{tag:S.strikethrough,class:"cm-strikethrough"},{tag:S.wikiTag,class:"cm-wikiTag"},{tag:S.link,class:"cm-link"},{tag:S.hr,class:"cm-hr"},{tag:S.rate,class:"cm-rate"},{tag:S.right,class:"cm-right"},{tag:S.left,class:"cm-left"},{tag:S.center,class:"cm-center"},{tag:S.sup,class:"cm-sup"},{tag:S.sub,class:"cm-sub"},{tag:S.newline,class:"cm-newline"},{tag:S.monosapace,class:"cm-monosapace"},{tag:S.list1,class:"cm-list1"},{tag:S.list2,class:"cm-list2"},{tag:S.list3,class:"cm-list3"},{tag:S.list4,class:"cm-list4"},{tag:S.quote,class:"cm-quote"},{tag:S.table,class:"cm-table"},{tag:S.table_header,class:"cm-table-header"},{tag:S.table_cell,class:"cm-table-cell"},{tag:S.original_text,class:"cm-original-text"},{tag:S.image,class:"cm-image"},{tag:S.footnote,class:"cm-footnote"},{tag:S.footnote_block,class:"cm-footnote-block"},{tag:S.color,class:"cm-color"},{tag:S.include,class:"cm-include"},{tag:S.scp_wiki,class:"cm-scp-wiki"},{tag:S.div,class:"cm-div"},{tag:S.tabview,class:"cm-tabview"},{tag:S.tab,class:"cm-tab"},{tag:S.acs,class:"cm-acs"},{tag:S.components,class:"cm-components"},{tag:S.equal,class:"cm-equal"},{tag:S.line_up,class:"cm-line-up"},{tag:S.size,class:"cm-size"},{tag:S.aim,class:"cm-aim"},{tag:S.collapsible,class:"cm-collapsible"},{tag:S.note,class:"cm-note"},{tag:S.user,class:"cm-user"}]),Wy=Wt.of([{key:"Enter",run:n=>{let e=n.state,t=e.selection.main;if(!t.empty)return!1;let i=e.doc.lineAt(t.head);if(!(t.head-i.from>=i.text.length-1))return!1;let o=i.text.match(/^([*#])\s+/),l=i.text.match(/^(:.*?:)\s+/);if(o||l){let a=o?o[1]:l[1];if(i.text.substring(a.length+1).trim()==="")return n.dispatch({changes:{from:i.from,to:i.to,insert:""},selection:{anchor:i.from}}),!0;{let f=`
+|align= `,c=l+38;r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:c}})},detail:"\u63D2\u56FE\u5757"},{label:"[[footnote]]",type:"keyword",apply:(r,o,l,a)=>{let h="[[footnote]]\u8FD9\u662F\u4E00\u6761\u811A\u6CE8[[/footnote",c=l+12,f=c+6;r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:c,head:f}})},detail:"\u811A\u6CE8"},{label:"[[footnoteblock]]",type:"keyword",apply:(r,o,l,a)=>{let h="[[footnoteblock";r.dispatch({changes:{from:l,to:a,insert:h},selection:{anchor:l+h.length}})},detail:"\u811A\u6CE8\u5757"}],filter:!0}};var Ny=`
+[[include xxxxx]]            
+[[note]]
+\u5404\u4F4D\u597D\u5440\uFF0C\u8FD9\u91CC\u662F[[*user wasd243]]
+@@\u5F88\u660E\u663E\uFF0C\u5728\u8FD9\u91CC\uFF0C\u6211\u5E94\u8BE5\u79F0\u5404\u4F4D\u4E3A\u7528\u6237@@
+@@\u8FD9\u662F**web\u7248**wikidot\u7F16\u8F91\u5668\u7684\u521D\u59CB\u5316\u9875\u9762\uFF0C\u6211\u5C06\u5728\u6B64\u5411\u4F60\u5C55\u793A\u8FD9\u4E2A\u7B80\u6613\u7684web\u7248wikidot\u7F16\u8F91\u5668@@
+[[=]]
+  \u8FD9\u4E2A\u7B80\u6613\u7F16\u8F91\u5668\u5C06\u4F5C\u4E3A\u4E00\u4E2A\u63D2\u4EF6\u8FDB\u5165WYSIWYG\u7F16\u8F91\u5668\u76842.1\u7248\u672C\uFF0C\u5185\u7F6E\u4E86\u5982\uFF1A
+  ###f23131|\u4EE3\u7801\u884C\u6570\u663E\u793A##
+  \u8C03\u8272\u677F\uFF0C\u4F60\u4E5F\u770B\u5230\u4E86
+  **wikidot\u5173\u952E\u6E90\u4EE3\u7801\u9AD8\u4EAE**
+  //\u659C\u8FC7\u6765\u4E5F\u53EF\u4EE5//
+  __\u4E0B\u5212\u7EBF\u771F\u7684\u4F1A\u6E32\u67D3\u4E00\u6761__
+  --\u5220\u9664\u7EBF\u771F\u7684\u4F1A\u7ED9\u4F60\u7684\u6587\u5B57\u6765\u4E0A\u4E00\u5200--
+  \u6240\u6709\u5E38\u7528\u7684wikidot\u6E90\u4EE3\u7801\u90FD\u652F\u6301\u9AD8\u4EAE\u548C\u81EA\u52A8\u8865\u5168\uFF0C\u8BA9\u5404\u4F4D\u66F4\u597D\u7684\u533A\u5206\u4F60\u7684\u6587\u7AE0\u548C\u4EE3\u7801[[footnote]]\u771F\u7684\u5F88\u4E0D\u9519\uFF0C\u50CF\u5728VS Code\u91CC\u4E00\u6837[[/footnote]]
+  \u8FD8\u652F\u6301\u5404\u79CDSCP wiki\u4E13\u7528\u4EE3\u7801\u7684\u63D2\u5165\u548C\u8865\u5168
+  [[collapsible show="+\u6BD4\u5982\u8FD9\u4E2A" hide="-\u6298\u53E0\u8D77\u6765"]]
+  \u771F\u7684\u4F1A\u6298\u53E0\u8D77\u6765
+  [[/collapsible]]
+  @@\u5F53\u9700\u8981\u5904\u7406\u590D\u6742\u7684\u5D4C\u5957\u65F6\uFF0C\u5982\u679C\u4F60\u60F3\u7684\u8BDD\uFF0C\u6309\u4E0BTab\uFF0Ccode mirror\u4F1A\u4E3A\u4F60\u7F29\u8FDB\uFF0C\u5C31\u50CF\u8FD9\u6837@@
+[[include :scp-wiki-cn:theme:peroxide]]
+  [[div class="blockquote"]]
+  [[code type="python"]]
+    print('hello world')
+  [[/code]]
+  [[div class="papernote"]]
+    123123123213
+    [[collapsible show="+\u8D8A\u5957\u8D8A\u591A" hide="-\u8D8A\u6765\u8D8A\u591A"]]
+    \u771F\u7684\u8D8A\u6765\u8D8A\u591A
+    ||~Header 1||~Header 2||
+    ||Cell 1||Cell 2
+    [[include :scp-wiki-cn:component:acs-animation]]
+    [[include :scp-wiki-cn:component:anomaly-class-bar-source
+    |lang=cn
+    |item-number=SCP-CN-XXXX
+    |clearance= 
+    |container-class= 
+    |disruption= 
+    |risk-class= 
+    ]]
+    [[include :scp-wiki-cn:component:advanced-information-methodaology
+    |lang=cn
+    |XXXX=SCP-XXXX
+    |lv=\u7B49\u7EA7
+    |cc= 
+    |dc= 
+    |site= 
+    |dir= 
+    |head= 
+    |mtf= 
+    ]]
+    [[include component:image-block
+    |name= 
+    |caption= 
+    |width= 
+    |height= 
+    |align= ]]
+    [[tabview]]
+      [[tab 1231]]
+      [[collapsible show="+123" hide="-123"]]
+      123123[[footnote]]\u7F29\u8FDB\u5C31\u662F\u597D\u770B[[/footnote]]
+      [[/collapsible]]
+      [[/tab]]
+    [[/tabview]]
+    [[/collapsible]]
+  [[/div]]
+  [[/div]]
+[[/=]]
+[[/note]]
+`,S={header:L.define(),strong:L.define(),em:L.define(),underline:L.define(),strikethrough:L.define(),wikiTag:L.define(),link:L.define(),hr:L.define(),rate:L.define(),right:L.define(),left:L.define(),center:L.define(),sup:L.define(),sub:L.define(),newline:L.define(),monosapace:L.define(),list1:L.define(),list2:L.define(),list3:L.define(),list4:L.define(),quote:L.define(),table:L.define(),table_header:L.define(),table_cell:L.define(),original_text:L.define(),image:L.define(),footnote:L.define(),footnote_block:L.define(),color:L.define(),include:L.define(),scp_wiki:L.define(),div:L.define(),tabview:L.define(),tab:L.define(),acs:L.define(),components:L.define(),equal:L.define(),line_up:L.define(),size:L.define(),aim:L.define(),collapsible:L.define(),license:L.define(),note:L.define(),user:L.define()},Fy=Ss.define({token(n){if(n.sol()&&n.match(/\++ /))return n.skipToEnd(),"header";if(n.match(/\*\*(?:[^*]|\*[^*])*\*\*/))return"strong";if(n.match(/\/\/(?:[^/]|\/[^/])*\/\//))return"em";if(n.match(/__(?:[^_]|_[^_])*__/))return"underline";if(n.match(/--(?:[^-]|-[^-])*--/))return"strikethrough";if(n.match(/\^\^(?:[^\^]|\^[^\^])*\^\^/))return"sup";if(n.match(/,,(?:[^,]|,[^,])*,/))return"sub";if(n.match(/\[https?:\/\/.*?\]/))return"link";if(n.match(/\@\@\@\@/))return"newline";if(n.match(/\{\{.*?\}\}/))return"monosapace";if(n.match(/\[\[size.*?\]\]/)||n.match(/\[\[\/size\]\]/))return"size";if(n.match(/\[\[user .*?\]\]i/)||n.match(/\[\[\*user .*?\]\]i/))return"user";if(n.match(/###([0-9a-fA-F]{6})\|/)){let e="";for(;!n.eol();)if(n.peek()==="#"){if(n.next(),n.peek()==="#")return n.next(),"color"}else e+=n.next();return null}return n.match(/#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/)?"color":n.match(/\@\@.*?\@\@/)?(n.skipToEnd(),"original_text"):n.sol()&&n.match(/\*+ /)?"list1":n.sol()&&n.match(/#+ /)?"list2":n.sol()&&n.match(/\:.*?\:/)?"list3":n.match(/\[\[ul\]\]/)||n.match(/\[\[li\]\]/)||n.match(/\[\[ol\]\]/)?"list4":n.sol()&&n.match(/>+ /)?(n.skipToEnd(),"quote"):n.match(/=/)?"equal":n.match(/\|/)?"line_up":n.match(/\|\|/)?"table":n.match(/\~/)?"table_header":n.sol()&&n.match(/\|\|(?!~)/)?(n.skipToEnd(),"table_cell"):n.match(/\[\[module rate\]\]/i)?"rate":n.match(/\[\[\>?\]\]/)||n.match(/\[\[\/\>?\]\]/)?"right":n.match(/\[\[\<?\]\]/)||n.match(/\[\[\/\<?\]\]/)?"left":n.match(/\[\[\=?\]\]/)||n.match(/\[\[\/\=?\]\]/)?"center":n.match(/\[\[.*?image.*?\]\]/)||n.match(/include component:image-block/)?"image":n.match(/\[\[footnote\]\]/)||n.match(/\[\[\/footnote\]\]/)?"footnote":n.match(/\[\[footnoteblock\]\]/)?"footnote_block":n.match(/\[\[div.*?\]\]/)||n.match(/\[\[\/div\]\]/)?"div":n.match(/\[\[collapsible.*?\]\]/)||n.match(/\[\[\/collapsible\]\]/)?"collapsible":n.match(/include :scp-wiki-cn:component:license-box/)?"license":n.match(/\[\[note\]\]/)||n.match(/\[\[\/note\]\]/)?"note":n.match(/include :scp-wiki-cn:component:anomaly-class-bar-source *?/)?"acs":n.match(/include :scp-wiki-cn:component:advanced-information-methodaology *?/)?"aim":n.match(/lang.*?/)||n.match(/item-number.*?/)||n.match(/clearance.*?/)||n.match(/container-class.*?/)||n.match(/disruption.*?/)||n.match(/risk-class.*?/)||n.match(/lv/)||n.match(/cc/)||n.match(/dc/)||n.match(/site/)||n.match(/dir/)||n.match(/head/)||n.match(/mtf/)||n.match(/XXXX/)||n.match(/blocks/)||n.match(/author/)||n.match(/translator/)||n.match(/name/)||n.match(/caption/)||n.match(/width/)||n.match(/height/)||n.match(/align/)?"components":n.match(/\[\[tabview.*?\]\]/)||n.match(/\[\[\/tabview\]\]/)?"tabview":n.match(/\[\[tab.*?\]\]/)||n.match(/\[\[\/tab\]\]/)?"tab":n.match(/\[\[include[^\]]*\]\]/)?n.current().includes(":scp-wiki")?"scp_wiki":"include":n.match(/\]\]/)||n.match(/\[\[/)?"wikiTag":n.sol()&&n.match(/^-{5,}$/)?"hr":(n.next(),null)},tokenTable:{header:S.header,strong:S.strong,em:S.em,underline:S.underline,strikethrough:S.strikethrough,wikiTag:S.wikiTag,sup:S.sup,sub:S.sub,link:S.link,hr:S.hr,rate:S.rate,right:S.right,left:S.left,center:S.center,newline:S.newline,monosapace:S.monosapace,list1:S.list1,list2:S.list2,list3:S.list3,list4:S.list4,quote:S.quote,table:S.table,table_header:S.table_header,table_cell:S.table_cell,original_text:S.original_text,image:S.image,footnote:S.footnote,footnote_block:S.footnote_block,color:S.color,include:S.include,scp_wiki:S.scp_wiki,div:S.div,tabview:S.tabview,tab:S.tab,acs:S.acs,components:S.components,equal:S.equal,line_up:S.line_up,size:S.size,aim:S.aim,collapsible:S.collapsible,note:S.note,user:S.user}}),Hy=vt.define([{tag:S.header,class:"cm-header"},{tag:S.strong,class:"cm-strong"},{tag:S.em,class:"cm-em"},{tag:S.underline,class:"cm-underline"},{tag:S.strikethrough,class:"cm-strikethrough"},{tag:S.wikiTag,class:"cm-wikiTag"},{tag:S.link,class:"cm-link"},{tag:S.hr,class:"cm-hr"},{tag:S.rate,class:"cm-rate"},{tag:S.right,class:"cm-right"},{tag:S.left,class:"cm-left"},{tag:S.center,class:"cm-center"},{tag:S.sup,class:"cm-sup"},{tag:S.sub,class:"cm-sub"},{tag:S.newline,class:"cm-newline"},{tag:S.monosapace,class:"cm-monosapace"},{tag:S.list1,class:"cm-list1"},{tag:S.list2,class:"cm-list2"},{tag:S.list3,class:"cm-list3"},{tag:S.list4,class:"cm-list4"},{tag:S.quote,class:"cm-quote"},{tag:S.table,class:"cm-table"},{tag:S.table_header,class:"cm-table-header"},{tag:S.table_cell,class:"cm-table-cell"},{tag:S.original_text,class:"cm-original-text"},{tag:S.image,class:"cm-image"},{tag:S.footnote,class:"cm-footnote"},{tag:S.footnote_block,class:"cm-footnote-block"},{tag:S.color,class:"cm-color"},{tag:S.include,class:"cm-include"},{tag:S.scp_wiki,class:"cm-scp-wiki"},{tag:S.div,class:"cm-div"},{tag:S.tabview,class:"cm-tabview"},{tag:S.tab,class:"cm-tab"},{tag:S.acs,class:"cm-acs"},{tag:S.components,class:"cm-components"},{tag:S.equal,class:"cm-equal"},{tag:S.line_up,class:"cm-line-up"},{tag:S.size,class:"cm-size"},{tag:S.aim,class:"cm-aim"},{tag:S.collapsible,class:"cm-collapsible"},{tag:S.note,class:"cm-note"},{tag:S.user,class:"cm-user"}]),Wy=Wt.of([{key:"Enter",run:n=>{let e=n.state,t=e.selection.main;if(!t.empty)return!1;let i=e.doc.lineAt(t.head);if(!(t.head-i.from>=i.text.length-1))return!1;let o=i.text.match(/^([*#])\s+/),l=i.text.match(/^(:.*?:)\s+/);if(o||l){let a=o?o[1]:l[1];if(i.text.substring(a.length+1).trim()==="")return n.dispatch({changes:{from:i.from,to:i.to,insert:""},selection:{anchor:i.from}}),!0;{let f=`
 ${a} `;return n.dispatch({changes:{from:t.head,to:t.head,insert:f},selection:{anchor:t.head+f.length}}),!0}}return!1}},Jf]),Gl=()=>{let n=_.create({doc:Ny,extensions:[Wy,Lu,Hu,Fy,bi(Hy),zu,Wu,Js({override:[qu],selectOnOpen:!0}),M.updateListener.of(t=>{if(t.docChanged)try{let i=t.state.doc.toString();localStorage.setItem("wikidot-editor-content",i),window.dispatchEvent(new CustomEvent("editorContentChanged",{detail:{content:i}}))}catch(i){console.warn("\u65E0\u6CD5\u4FDD\u5B58\u5230\u672C\u5730\u5B58\u50A8:",i)}}),M.theme({"&":{height:"100%"},"&.cm-focused":{outline:"none"},".cm-scroller":{fontFamily:"'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace",lineHeight:"1.6",fontSize:"14px"},".cm-color-preview":{display:"inline-block",width:"12px",height:"12px",margin:"0 4px 0 0",border:"1px solid #555",borderRadius:"2px",backgroundColor:"var(--color-value, #ccc)",verticalAlign:"middle",cursor:"pointer",transition:"transform 0.2s ease, border-color 0.2s ease"},".cm-color-preview:hover":{transform:"scale(1.1)",borderColor:"#888"},".cm-wikidot-colored-text":{fontWeight:"normal!important"}})]}),e=new M({state:n,parent:document.getElementById("editor-container")});Vu(e);try{let t=localStorage.getItem("wikidot-editor-content");t&&setTimeout(()=>{e.dispatch({changes:{from:0,to:e.state.doc.length,insert:t}})},100)}catch(t){console.warn("\u65E0\u6CD5\u4ECE\u672C\u5730\u5B58\u50A8\u52A0\u8F7D\u5185\u5BB9:",t)}return window.editorInstance=e,e};window.WikidotEditor={startEditor:Gl};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",Gl):Gl();
 //# sourceMappingURL=bundle_editor.js.map
