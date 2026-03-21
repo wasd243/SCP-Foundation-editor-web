@@ -243,6 +243,12 @@ color: #fd7a00 !important;
 color: #fd7a00 !important;
 }
 
+/* note */
+.cm-editor .cm-note {
+color:lightseagreen !important;
+font-weight: bold;
+}
+
 /* LICENSE */
 .cm-editor .cm-license {
 color: #ff0000 !important;
