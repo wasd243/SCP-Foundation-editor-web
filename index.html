@@ -86,28 +86,44 @@
         }
 
         /*----------------------------------顶部工具栏---------------------------------*/
+        /* 初始状态：折叠 */
         .quick-toolbar {
             position: relative;
             background: #000;
             border-bottom: 2px solid #fff;
             display: flex;
-            flex-wrap: wrap;
             gap: 10px;
             padding: 0 10px; 
-            max-height: 0;   /* 初始高度 */
-            overflow: hidden;
+            max-height: 0;   /* 初始高度为 0 */
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
             z-index: 100;
         }
 
+        /* 核心修复：当 Checkbox 被选中时，展开工具栏 */
         #toolbar-toggle:checked + .quick-toolbar {
-            max-height: 120px; /* 修复点：确保高度足够滑下来 */
-            padding: 10px;
+            max-height: 150px; /* 确保这个值足够大，能放下你的按钮 */
+            padding: 10px;    /* 展开时恢复内边距 */
         }
-
         .toolbar-group {
             display: flex;
             gap: 5px;
+            overflow: hidden; /* 让按钮组在折叠时消失 */
+        }
+
+        /* 确保标签始终可见并可以点击 */
+        .toolbar-label {
+            position: absolute;
+            top: 0; /* 改为从顶部定位，确保它始终挂在页面顶端 */
+            left: 20px;
+            background: #fff;
+            color: #000;
+            padding: 2px 12px;
+            cursor: pointer;
+            z-index: 101; 
+            border: 2px solid #000;
+            border-top: none;
+            font-size: 11px;
+            font-weight: bold;
         }
 
         .tool-btn {
@@ -125,22 +141,6 @@
             background: #fff;
             color: #000;
         }
-
-        .toolbar-label {
-            position: absolute;
-            bottom: -26px;
-            left: 20px;
-            background: #fff;
-            color: #000;
-            padding: 2px 12px;
-            font-size: 11px;
-            font-weight: bold;
-            cursor: pointer;
-            border: 2px solid #000;
-            border-top: none;
-            z-index: 101;
-            text-transform: uppercase;
-        }
         /*----------------------------------顶部工具栏---------------------------------*/
 
     </style>
@@ -155,6 +155,9 @@
 
     <!------------------------------------------------功能区---------------------------------------------->
     <input type="checkbox" id="toolbar-toggle" style="display: none;">
+
+    <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
+
     <div class="quick-toolbar">
         <div class="toolbar-group">
             <button class="tool-btn" onclick="insertCode('**')">B</button>
@@ -162,7 +165,6 @@
             <button class="tool-btn" onclick="insertCode('__')">U</button>
             <button class="tool-btn" onclick="insertCode('--')">S</button>
         </div>
-        <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
     </div>
     <div id="editor-container"></div>
     <!------------------------------------------------功能区---------------------------------------------->
