@@ -233,7 +233,7 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/\[\[size.*?\]\]/) || stream.match(/\[\[\/size\]\]/)) return "size";
 
         // user 标签
-        if (stream.match(/\[\[user .*?\]\]i/) || stream.match(/\[\[\*user .*?\]\]i/)) return "user";
+        if (stream.match(/\[\[user .*?\]\]/i) || stream.match(/\[\[\*user .*?\]\]/i)) return "user";
 
         // 在wikidotLanguage的token函数中修改颜色匹配部分：
         // Wikidot颜色标签：###ffffff|文字##
@@ -300,11 +300,6 @@ const wikidotLanguage = StreamLanguage.define({
             return "equal";
         }
 
-        // | 竖线
-        if (stream.match(/\|/)) {
-            return "line_up";
-        }
-
         // 表格
         // ================================================================
         if (stream.match(/\|\|/)) {
@@ -320,6 +315,11 @@ const wikidotLanguage = StreamLanguage.define({
             return "table_cell";
         }
         // ================================================================
+
+        // | 竖线
+        if (stream.match(/\|/)) {
+            return "line_up";
+        }
 
         // 带有[[]]的注意需要放在标签前面，因为它也是以 [[ 开头的
         // ================================================================
@@ -339,21 +339,21 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/\[\[\/\=?\]\]/)) return "center";
 
         // 图片
-        if (stream.match(/\[\[.*?image.*?\]\]/) || stream.match(/include component:image-block/)) return "image";
+        if (stream.match(/\[\[.*?image.*?\]\]/i) || stream.match(/include component:image-block/i)) return "image";
 
         // 脚注
         if (stream.match(/\[\[footnote\]\]/) || stream.match(/\[\[\/footnote\]\]/)) return "footnote";
 
         // 脚注块
-        if (stream.match(/\[\[footnoteblock\]\]/)) return "footnote_block";
+        if (stream.match(/\[\[footnoteblock\]\]/i)) return "footnote_block";
 
         // div
-        if (stream.match(/\[\[div.*?\]\]/) || stream.match(/\[\[\/div\]\]/)) {
+        if (stream.match(/\[\[div.*?\]\]/i) || stream.match(/\[\[\/div\]\]/i)) {
             return "div";
         }
 
         // collapsible
-        if (stream.match(/\[\[collapsible.*?\]\]/) || stream.match(/\[\[\/collapsible\]\]/)) {
+        if (stream.match(/\[\[collapsible.*?\]\]/i) || stream.match(/\[\[\/collapsible\]\]/i)) {
             return "collapsible";
         }
 
@@ -363,16 +363,16 @@ const wikidotLanguage = StreamLanguage.define({
         }
 
         // note
-        if (stream.match(/\[\[note\]\]/) || stream.match(/\[\[\/note\]\]/)) {
+        if (stream.match(/\[\[note\]\]/i) || stream.match(/\[\[\/note\]\]/i)) {
             return "note";
         }
 
         // ACS AIM
         // ================================================================
-        if (stream.match(/include :scp-wiki-cn:component:anomaly-class-bar-source *?/)) {
+        if (stream.match(/include :scp-wiki-cn:component:anomaly-class-bar-source *?/i)) {
             return "acs";
         }
-        if (stream.match(/include :scp-wiki-cn:component:advanced-information-methodaology *?/)){
+        if (stream.match(/include :scp-wiki-cn:component:advanced-information-methodaology *?/i)){
             return "aim";
         }
         // ================================================================
