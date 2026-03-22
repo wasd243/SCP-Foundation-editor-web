@@ -358,7 +358,7 @@ const wikidotLanguage = StreamLanguage.define({
         }
 
         // LICENSE
-        if (stream.match(/include :scp-wiki-cn:component:license-box/)) {
+        if (stream.match(/include :scp-wiki-cn:component:license-box/i) || stream.match(/include :scp-wiki-cn:component:license-end/i)) {
             return "license";
         }
 
