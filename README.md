@@ -13,14 +13,14 @@
 - **组件集成**：内置对主流社区组件 ACS 和 AIM 的完美支持。
 - **现代交互**：基于 CodeMirror 6，集成 One Dark 主题及实时字符统计。
 
-## 📚 引用与鸣谢
-本项目集成并致敬以下社区组件：
+## 📚 引用与鸣谢/Imports
 
 * **AIM (Advanced Information Methodology)** — By *Dr Moned*
     * [查看组件页面](https://scp-wiki.wikidot.com/component:advanced-information-methodology)
 * **ACS Animation (Anomaly Classification System)** — By *EstrellaYoshte*
     * [查看组件页面](https://scp-wiki.wikidot.com/component:acs-animation)
-
+* **Peroxide Theme** - By *OxygenNine*
+    * [查看版式页面](https://scp-wiki-cn.wikidot.com/theme:peroxide)
 ## 🛠 构建指南
 本项目前端部分使用 `esbuild` 进行模块打包。
 
