@@ -264,6 +264,10 @@ font-family: 'Cascadia Mono', 'Consolas', monospace !important;
 font-weight: bold !important;
 }
 
+/* 临时的CSS和HTML代码高亮 */
+.cm-editor .cm-Highlight {
+color: #3e79e7 !important;
+}
 
 
 /* ====== 颜色相关样式 ====== */

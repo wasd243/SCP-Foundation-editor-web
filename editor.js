@@ -127,6 +127,7 @@ const customTags = {
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
     user: Tag.define(), // user
+    Highlight: Tag.define(), // CSS and html temporary highlight
 };
 
 /**
@@ -166,7 +167,7 @@ const wikidotLanguage = StreamLanguage.define({
             }
             if (stream.match(/[\{\}\:\;]/)) return "equal"; // 符号复用等号颜色
             if (stream.match(/\.[a-zA-Z0-9_-]+/)) return "components"; // 类名
-            if (stream.match(/#[a-zA-Z0-9_-]+/)) return "color"; // #ID 或 颜色代码
+            if (stream.match(/#[a-zA-Z0-9_-]+/)) return "Highlight"; // #ID 或 颜色代码
             if (stream.match(/[a-zA-Z-]+(?=\s*:)/)) return "aim"; // 属性名 (如 color:)
             stream.next();
             return "original_text";
@@ -187,7 +188,7 @@ const wikidotLanguage = StreamLanguage.define({
                 return "equal"; // 借用定义的等号颜色 (#d19a66 橙色) 
             }
             if (stream.match(/[a-zA-Z-]+(?=\=)/)) return "aim"; // 属性名
-            if (stream.match(/".*?"/)) return "color"; // 引号内字符串
+            if (stream.match(/".*?"/)) return "Highlight"; // 引号内字符串
             stream.next();
             return "original_text";
         }
@@ -505,6 +506,7 @@ const wikidotLanguage = StreamLanguage.define({
         "collapsible": customTags.collapsible,
         "note": customTags.note,
         "user": customTags.user,
+        "Highlight": customTags.Highlight,
     }
 });
 
@@ -553,6 +555,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.collapsible, class: "cm-collapsible" },
     { tag: customTags.note, class: "cm-note" },
     { tag: customTags.user, class: "cm-user" },
+    { tag: customTags.Highlight, class: "cm-Highlight"},
 ]);
 
 /**
