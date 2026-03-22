@@ -87,6 +87,8 @@ var nr=[],Ql=[];(()=>{let n="lc,34,7n,7,7b,19,,,,2,,2,,,20,b,1c,l,g,,2t,7,2,6,2,
 |height= 
 |align= `,x=p+38;u.dispatch({changes:{from:p,to:g,insert:y},selection:{anchor:x}})},detail:"\u63D2\u56FE\u5757"},{label:"[[footnote]]",type:"keyword",apply:(u,m,p,g)=>{let y="[[footnote]]\u8FD9\u662F\u4E00\u6761\u811A\u6CE8[[/footnote",x=p+12,k=x+6;u.dispatch({changes:{from:p,to:g,insert:y},selection:{anchor:x,head:k}})},detail:"\u811A\u6CE8"},{label:"[[footnoteblock]]",type:"keyword",apply:(u,m,p,g)=>{let y="[[footnoteblock";u.dispatch({changes:{from:p,to:g,insert:y},selection:{anchor:p+y.length}})},detail:"\u811A\u6CE8\u5757"}],filter:!0}};var Ny=`[[include :scp-wiki-cn:theme:peroxide]]
 
+[https://github.com/wasd243/SCP-Foundation-editor-web \u6E90\u4EE3\u7801\u94FE\u63A5]
+
 [[div class="xxx"]]
 ++ **SCP-CN-WEB-EDITOR**
 //\u6D4B\u8BD5\u7248 v1.0.0 //
