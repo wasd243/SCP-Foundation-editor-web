@@ -133,7 +133,60 @@ const customTags = {
  * 自定义 Wikidot 语法解析器
  */
 const wikidotLanguage = StreamLanguage.define({
-    token(stream) {
+    // ====== 新增：1. 初始化状态 ======
+    startState() {
+        return { inCSS: false, inHTML: false };
+    },
+    // ====== 新增：2. 状态拷贝（处理撤销/重做必须） ======
+    copyState(state) {
+        return { inCSS: state.inCSS, inHTML: state.inHTML };
+    },
+    token(stream, state) {
+        // ====== 新增：3. 范围判定与拦截 ======
+
+        // ================================================================
+        
+        // 检测进入特定模块
+        if (!state.inCSS && !state.inHTML) {
+            if (stream.match(/\[\[module css\]\]/i)) {
+                state.inCSS = true;
+                return "wikiTag"; 
+            }
+            if (stream.match(/\[\[html\]\]/i)) {
+                state.inHTML = true;
+                return "wikiTag";
+            }
+        }
+
+        // CSS 模块内部解析逻辑（完美复用你现有的Tag）
+        if (state.inCSS) {
+            if (stream.match(/\[\[\/module\]\]/i)) {
+                state.inCSS = false;
+                return "wikiTag";
+            }
+            if (stream.match(/[\{\}\:\;]/)) return "equal"; // 符号复用等号颜色
+            if (stream.match(/\.[a-zA-Z0-9_-]+/)) return "components"; // 类名
+            if (stream.match(/#[a-zA-Z0-9_-]+/)) return "color"; // #ID 或 颜色代码
+            if (stream.match(/[a-zA-Z-]+(?=\s*:)/)) return "aim"; // 属性名 (如 color:)
+            stream.next();
+            return "original_text";
+        }
+
+        // HTML 模块内部解析逻辑（完美复用你现有的Tag）
+        if (state.inHTML) {
+            if (stream.match(/\[\[\/html\]\]/i)) {
+                state.inHTML = false;
+                return "wikiTag";
+            }
+            if (stream.match(/<\/?[a-zA-Z0-9-]+(?=[\s>])/)) return "components"; // 标签名
+            if (stream.match(/[a-zA-Z-]+(?=\=)/)) return "aim"; // 属性名
+            if (stream.match(/".*?"/)) return "color"; // 引号内字符串
+            stream.next();
+            return "original_text";
+        }
+
+        // ================================================================
+
         // 标题
         if (stream.sol() && stream.match(/\++ /)) {
             stream.skipToEnd();

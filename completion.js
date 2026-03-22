@@ -1,5 +1,55 @@
 // completion.js
 export const wikidotCompletionSource = (context) => {
+
+    // ====== 新增：判定当前上下文范围 ======
+    // 获取从文档开头到当前光标的所有文本
+    const textBefore = context.state.sliceDoc(0, context.pos);
+    
+    // 判定是否在 CSS 内：比较最后一次开启和关闭标签的位置
+    const lowerText = textBefore.toLowerCase();
+    const lastCssOpen = lowerText.lastIndexOf('[[module css]]');
+    const lastCssClose = lowerText.lastIndexOf('[[/module]]');
+    const inCSS = lastCssOpen > lastCssClose;
+
+    // 判定是否在 HTML 内
+    const lastHtmlOpen = textBefore.toLowerCase().lastIndexOf('[[html]]');
+    const lastHtmlClose = textBefore.toLowerCase().lastIndexOf('[[/html]]');
+    const inHTML = lastHtmlOpen > lastHtmlClose;
+
+    // 如果在 CSS 内部，拦截并专属补全
+    if (inCSS) {
+        let word = context.matchBefore(/[a-zA-Z-]+/);
+        if (!word || (word.from === word.to && !context.explicit)) return null;
+        return {
+            from: word.from,
+            options: [
+                // 往这里加 CSS 词库
+                { label: "color", type: "property", apply: "color: ;", detail: "文本颜色" },
+                { label: "background-color", type: "property", apply: "background-color: ;", detail: "背景色" },
+                { label: "display", type: "property", apply: "display: flex;", detail: "弹性布局" },
+                { label: "border", type: "property", apply: "border: 1px solid #fff;", detail: "边框" },
+            ],
+            filter: true
+        };
+    }
+
+    // 如果在 HTML 内部，拦截并专属补全
+    if (inHTML) {
+        let word = context.matchBefore(/<\/?[a-zA-Z0-9-]*/);
+        if (!word || (word.from === word.to && !context.explicit)) return null;
+        return {
+            from: word.from,
+            options: [
+                { label: "<div>", type: "keyword", apply: "<div>\n\n</div>", detail: "块级元素" },
+                { label: "<span>", type: "keyword", apply: "<span></span>", detail: "行内元素" },
+                { label: "<style>", type: "keyword", apply: "<style>\n\n</style>", detail: "样式表" },
+                { label: "class", type: "property", apply: "class=\"\"", detail: "类名" },
+            ],
+            filter: true
+        };
+    }
+    // ====== 新增判定结束 ======
+
     // 查找光标前最近的 "[["
     let before = context.matchBefore(/\[\[[\w\s:]*/);
     let atMatch = context.matchBefore(/^\@+/);
