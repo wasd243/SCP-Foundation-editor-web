@@ -14,6 +14,7 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (c) 2026 Zichen Wang(wasd243)
  * * --- ATTRIBUTION & THIRD-PARTY COMPONENTS ---
  * 1. Editor Engine: CodeMirror 6 (MIT License) - © Marijn Haverbeke
  * 2. Syntax Patterns: ACS & AIM logic patterns are derived from the 
