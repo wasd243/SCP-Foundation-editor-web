@@ -162,14 +162,14 @@ font-weight: bold;
 
 /* 表格 */
 .cm-editor .cm-table {
-color: #e5c07b;
+color: #e5c07b !important;
 }
 .cm-table-header {
 color: #5383de;
 font-weight: bold;
 }
 .cm-table-cell {
-color: #f1f4f9;
+color: #f1f4f9 !important;
 }
 
 /* 代码块 */
@@ -180,32 +180,32 @@ font-family: 'Cascadia Mono', 'Consolas', monospace;
 
 /* 分会高亮 */
 .cm-editor .cm-scp-wiki {
-color: #f88222;
+color: #f88222 !important;
 font-weight: normal;
 }
 
 /* size标签 */
 .cm-editor .cm-size {
-color: #7a54ed;
+color: #7a54ed !important;
 font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold;
 }
 
 /* div标签 */
 .cm-editor .cm-div {
-color: #9597ff;
+color: #9597ff !important;
 font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold;
 }
 
 /* tabview标签 */
 .cm-editor .cm-tabview {
-color: #b179ff;
+color: #b179ff !important;
 font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: normal;
 }
 .cm-editor .cm-tab {
-color: #e2d0fc;
+color: #e2d0fc !important;
 }
 
 /* ACS */
@@ -231,7 +231,7 @@ font-weight: normal;
 
 /* collapsible */
 .cm-editor .cm-collapsible {
-color: #bc0404;
+color: #bc0404 !important;
 font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold;
 }
@@ -248,18 +248,18 @@ color: #fd7a00;
 
 /* note */
 .cm-editor .cm-note {
-color:lightseagreen;
+color:lightseagreen !important;
 font-weight: normal;
 }
 
 /* user */
 .cm-editor .cm-user {
-color: aqua;
+color: aqua !important;
 }
 
 /* LICENSE */
 .cm-editor .cm-license {
-color: #ff0000;
+color: #ff0000 !important;
 font-family: 'Cascadia Mono', 'Consolas', monospace;
 font-weight: bold;
 }
