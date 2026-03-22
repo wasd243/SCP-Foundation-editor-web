@@ -36,6 +36,8 @@ import { wikidotColorExtension } from "./color_widgets.js";
 // 初始化内容
 const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
 
+[https://github.com/wasd243/SCP-Foundation-editor-web 源代码链接]
+
 [[div class="xxx"]]
 ++ **SCP-CN-WEB-EDITOR**
 //测试版 v1.0.0 //
