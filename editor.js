@@ -178,7 +178,14 @@ const wikidotLanguage = StreamLanguage.define({
                 state.inHTML = false;
                 return "wikiTag";
             }
-            if (stream.match(/<\/?[a-zA-Z0-9-]+(?=[\s>])/)) return "components"; // 标签名
+            if (stream.match(/<\/?[a-zA-Z0-9-]+\s?>?/)) {
+                return "components"; 
+            }
+
+            // 如果上面没匹配到，单独匹配剩下的尖括号或等号
+            if (stream.match(/[\<\>\=\/]/)) {
+                return "equal"; // 借用定义的等号颜色 (#d19a66 橙色) 
+            }
             if (stream.match(/[a-zA-Z-]+(?=\=)/)) return "aim"; // 属性名
             if (stream.match(/".*?"/)) return "color"; // 引号内字符串
             stream.next();
