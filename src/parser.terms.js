@@ -11,4 +11,5 @@ export const
   AttrValue = 9,
   TagEnd = 10,
   DivClose = 11,
-  Text = 12
+  StrongText = 12,
+  Text = 13

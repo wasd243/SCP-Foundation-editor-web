@@ -1,7 +1,7 @@
 @top Document { element* }
 
 element {
-  DivBlock | Text
+  DivBlock | StrongText |Text
 }
 
 DivBlock {
@@ -25,6 +25,7 @@ Attr {
   DivClose { "[[/div]]" }
   TagEnd   { "]]" }
 
+  StrongText { "**" (![*\n] | "*" ![*])* "**" }
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
   Equals    { "=" }
   AttrValue { '"' !["\n\r]* '"' }
@@ -34,7 +35,11 @@ Attr {
   Text  { ![\[ \t\n\r]+ }
   space { $[ \t\n\r]+ }
 
-  @precedence { DivClose, DivOpen, TagEnd, AttrValue, Equals, AttrName, Text, space }
+  @precedence {
+    DivClose, DivOpen, TagEnd, AttrValue, Equals,
+    StrongText,
+    AttrName, Text, space 
+  }
 }
 
 @skip { space }
