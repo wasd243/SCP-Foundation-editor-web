@@ -432,6 +432,30 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/translator/)){
             return "components";
         }
+        if (stream.match(/custom/i)){
+            return "components";
+        }
+        if (stream.match(/title/i)){
+            return "components";
+        }
+        if (stream.match(/slogan/i)){
+            return "components";
+        }
+        if (stream.match(/logo/i)){
+            return "components";
+        }
+        if (stream.match(/colorlight/i)){
+            return "components";
+        }
+        if (stream.match(/colornormal/i)){
+            return "components";
+        }
+        if (stream.match(/colordark/i)){
+            return "components";
+        }
+        if (stream.match(/logoinvert/i)){
+            return "components";
+        }
         if (stream.match(/name/) || stream.match(/caption/) || stream.match(/width/) || stream.match(/height/) || stream.match(/align/)) {
             return "components";
         }
