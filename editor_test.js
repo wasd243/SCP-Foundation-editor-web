@@ -148,7 +148,7 @@ const wikidotParser = parser.configure({
             "TagEnd":     customTags.div,
             "DivClose":   customTags.div,
             // ——————————————————————————常用标记——————————————————————————
-            "TitleMark":    customTags.header,  // + 号用 wikiTag 的颜色
+            "Title":    customTags.header,
             "StrongText": customTags.strong,
             "EmText":        customTags.em,
             "UnderlineText": customTags.underline,
