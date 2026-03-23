@@ -10,7 +10,7 @@ element {
   | StrikeText
   | SupText
   | SubText
-  | Orginal
+  | Original
   | StarChar
   | BracketChar
   | Text
@@ -48,7 +48,7 @@ Attr {
   StrikeText    { "--" (![-\n] | "-" ![-])* "--" }
   SupText       { "^^" (![^\n] | "^" ![^])* "^^" }
   SubText       { ",," (![,\n] | "," ![,])* ",," }
-  Orginal       { "@@" (![,\n] | "@" ![@])* "@@" }
+  Original      { "@@" (![@\n] | "@" ![@])* "@@" }
   // ——————————————————————————常用标记——————————————————————————
 
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
@@ -64,7 +64,7 @@ Attr {
 
   @precedence {
     DivClose, DivOpen, TagEnd, AttrValue, Equals,
-    Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Orginal,
+    Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Original,
     AttrName, Text, space 
   }
 }
