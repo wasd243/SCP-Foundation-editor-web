@@ -770,7 +770,6 @@ const startEditor = () => {
     });
 
     // AST测试
-    const tree = syntaxTree(window.editorInstance.state);
     // 在 startEditor 里，editorView 创建之后加：
     window._debugAST = () => {
         const tree = syntaxTree(editorView.state);
