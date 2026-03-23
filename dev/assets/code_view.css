@@ -1,0 +1,350 @@
+/* 基础背景 */
+html, body, #editor-container {
+margin: 0;
+padding: 0;
+height: 100%;
+width: 100%;
+overflow: hidden;
+background-color: #282c34;
+}
+
+.cm-editor {
+height: 100%;
+}
+
+.cm-scroller {
+font-family: 'Cascadia Code', 'Consolas', monospace;
+font-size: 14px;
+line-height: 1.6;
+}
+
+/* 强制高亮类 - 增加了层级以确保覆盖 One Dark 默认样式 */
+.cm-editor .cm-header {
+color: #e06c75;
+font-weight: bold;
+font-size: 1.2em;
+}
+
+/* 加粗 */
+.cm-editor .cm-strong {
+color: #f1f4f9;
+font-weight: bold;
+}
+
+/* 斜体 */
+.cm-editor .cm-em {
+color: #f1f4f9;
+font-style: italic;
+}
+
+/* 下划线 */
+.cm-editor .cm-underline {
+color: #f1f4f9;
+text-decoration: underline;
+}
+
+/* 删除线 */
+.cm-editor .cm-strikethrough {
+color: #f1f4f9;
+text-decoration: line-through;
+}
+
+/* 上标 */
+.cm-editor .cm-sup {
+color: #c678dd;
+font-size: 0.8em;
+vertical-align: super;
+}
+
+/* 下标 */
+.cm-editor .cm-sub {
+color: #c678dd;
+font-size: 0.8em;
+vertical-align: sub;
+}
+
+/* wiki[[]] */
+.cm-editor .cm-wikiTag {
+color: #61afef;
+}
+
+/* 链接 */
+.cm-editor .cm-link {
+color: #043eff;
+text-decoration: underline;
+}
+
+/* 分隔线 */
+.cm-editor .cm-hr {
+color: #5c6370;
+}
+
+/* 评分模块 */
+.cm-editor .cm-rate {
+color: #c45d6a;
+}
+
+/* 右对齐 */
+.cm-editor .cm-right {
+color: #5173b1;
+}
+
+/* 左对齐 */
+.cm-editor .cm-left {
+color: #5173b1;
+}
+
+/* 居中 */
+.cm-editor .cm-center {
+color: #5173b1;
+}
+
+/* 强制换行符 */
+.cm-editor .cm-newline {
+color: #527ac4;
+font-weight: bold;
+}
+
+/* 英文等宽字体 */
+.cm-editor .cm-monosapace {
+color: #3e79e7;
+font-family: 'Cascadia Mono', 'Consolas', monospace ;
+}
+
+/* 无序列表 */
+.cm-editor .cm-list1 {
+color: #98c379;
+}
+
+/* 有序列表 */
+.cm-editor .cm-list2 {
+color: #98c379;
+}
+
+/* 定义列表 */
+.cm-editor .cm-list3 {
+color: #98c379;
+}
+
+/* 高级列表 */
+.cm-editor .cm-list4 {
+color: #98c379;
+}
+
+/* 引用 */
+.cm-editor .cm-quote {
+color: #639a3c;
+}
+
+/* 原始文本 */
+.cm-editor .cm-original-text {
+color: #ffffff;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+}
+
+/* 图片 */
+.cm-editor .cm-image {
+color: #2ac7a5;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+}
+
+/* 脚注 */
+.cm-editor .cm-footnote {
+color: #910f0f;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+}
+/* 脚注块 */
+.cm-editor .cm-footnote-block {
+color: #910f0f;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: bold;
+}
+
+/* 表格 */
+.cm-editor .cm-table {
+color: #e5c07b !important;
+}
+.cm-table-header {
+color: #5383de;
+font-weight: bold;
+}
+.cm-table-cell {
+color: #f1f4f9 !important;
+}
+
+/* 代码块 */
+.cm-editor .cm-include {
+color: #61cdb4;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+}
+
+/* 分会高亮 */
+.cm-editor .cm-scp-wiki {
+color: #f88222 !important;
+font-weight: normal;
+}
+
+/* size标签 */
+.cm-editor .cm-size {
+color: #7a54ed !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: bold;
+}
+
+/* div标签 */
+.cm-editor .cm-div {
+color: #9597ff !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: bold;
+}
+
+/* tabview标签 */
+.cm-editor .cm-tabview {
+color: #b179ff !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: normal;
+}
+.cm-editor .cm-tab {
+color: #e2d0fc !important;
+}
+
+/* ACS */
+.cm-editor .cm-acs {
+color: #00ffc8;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: bold;
+}
+
+/* AIM */
+.cm-editor .cm-aim {
+color: #00ffc8;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: bold;
+}
+
+/* Components */
+.cm-editor .cm-components {
+color: #00ffc8;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: normal;
+}
+
+/* collapsible */
+.cm-editor .cm-collapsible {
+color: #bc0404 !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: bold;
+}
+
+/* = */
+.cm-editor .cm-equal {
+color: #fd7a00;
+}
+
+/* | */
+.cm-editor .cm-line-up {
+color: #fd7a00;
+}
+
+/* note */
+.cm-editor .cm-note {
+color:lightseagreen !important;
+font-weight: normal;
+}
+
+/* user */
+.cm-editor .cm-user {
+color: aqua !important;
+}
+
+/* LICENSE */
+.cm-editor .cm-license {
+color: #ff0000 !important;
+font-family: 'Cascadia Mono', 'Consolas', monospace;
+font-weight: bold;
+}
+
+/* 临时的CSS和HTML代码高亮 */
+.cm-editor .cm-Highlight {
+color: #3e79e7;
+}
+
+
+/* ====== 颜色相关样式 ====== */
+/* 颜色代码高亮 */
+.cm-editor.cm-color {
+    color: var(--color-value) !important;
+    font-weight: normal;
+}
+
+/* 颜色预览小部件 */
+.cm-editor.cm-color-preview {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: var(--color-value, #ccc);
+    vertical-align: middle;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cm-editor.cm-color-preview:hover {
+    transform: scale(1.2);
+    border-color: #666;
+}
+
+/* 1. 普通16进制颜色代码高亮 */
+.cm-editor.cm-color {
+    color: #e06c75; /* 默认颜色代码的文本颜色 */
+}
+
+/* 2. 颜色预览小部件样式 */
+.cm-editor.cm-color-preview {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px 0 0;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.cm-editor.cm-color-preview:hover {
+    transform: scale(1.2);
+    border-color: #666;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. Wikidot颜色标签中的文字样式 */
+.cm-editor.cm-wikidot-colored-text {
+    /* 这里不需要设置颜色，因为通过内联样式动态设置 */
+    font-weight: normal;
+}
+
+/* 4. 颜色代码的视觉增强 */
+.cm-editor .cm-color {
+    position: relative;
+    padding: 1px 3px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* 5. 为不同的颜色模式添加主题支持 */
+.cm-editor.cm-theme-light .cm-color-preview {
+    border-color: #999;
+}
+
+.cm-editor.cm-theme-dark .cm-color-preview {
+    border-color: #555;
+}
+
+.cm-editor.cm-theme-dark .cm-color {
+    color: #ff6b6b; /* 深色主题下的颜色代码文本颜色 */
+}
+
+/* ====== 颜色相关样式 ====== */
