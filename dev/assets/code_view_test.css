@@ -25,11 +25,6 @@ html, body, #editor-container {
     font-weight: bold;
     font-size: 1.5em;
 }
-.cm-editor .cm-header_text {
-    color: #f7c3c8;
-    font-weight: bold;
-    font-size: 1.4em;
-}
 
 
 /* 加粗 */

@@ -24291,17 +24291,17 @@ var init_parser = __esm({
     init_dist11();
     parser = LRParser.deserialize({
       version: 14,
-      states: "#lQVQPOOOwQPO'#C_O!PQPO'#C^O!WQQO'#ChOOQO'#Cx'#CxOOQO'#Cs'#CsQVQPOOO!]QPO'#CbOOQO'#Ct'#CtO!bQPO'#CaO!jQPO,58yOOQO,58x,58xO!oQPO,58xOOQO,59S,59SOOQO-E6q-E6qO!vQPO,58|OOQO-E6r-E6rOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.h1G.h",
-      stateData: "#_~OkOS~OSPO]RO_SO`SOaSObSOcSOdSOeSOfSO~OVVOYTP~OZZO~PVO^]O~OW_O~OVVOYTX~OYaO~OZbO~PVOXcO~OZSYXW]^_`abcdVfk`~",
-      goto: "!imPPntPz}PPPPPnPPPPPPPPPP!R!]PPP!cXSOQU[XQOQU[RYPTWPXQUOQ[QT^U[QXPR`XXTOQU[",
-      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue TagEnd DivClose Title TitleMark TitleContent StrongText EmText UnderlineText StrikeText SupText SubText StarChar Text",
-      maxTerm: 28,
+      states: "#`QVQPOOOzQPO'#C_O!SQPO'#C^OOQO'#Cw'#CwOOQO'#Cr'#CrQVQPOOO!ZQPO'#CbOOQO'#Cs'#CsO!`QPO'#CaO!hQPO,58yOOQO,58x,58xO!mQPO,58xOOQO-E6p-E6pO!tQPO,58|OOQO-E6q-E6qOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.h1G.h",
+      stateData: "#]~OjOS~OSPO[RO]RO^RO_RO`ROaRObROcROdROeRO~OVUOYTP~OZYO~PVOW]O~OVUOYTX~OY_O~OZ`O~PVOXaO~OZSYXW[d]^_`abVej^~",
+      goto: "!hlPPmsPy|PPPPPPPPPPPPPPP!Q![PPP!bXROQTZXQOQTZRXPTVPWQTOQZQT[TZQWPR^WXSOQTZ",
+      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue TagEnd DivClose Title StrongText EmText UnderlineText StrikeText SupText SubText StarChar BracketChar Text",
+      maxTerm: 27,
       skippedNodes: [0],
       repeatNodeCount: 2,
-      tokenData: "!'i~RnOX#PXY%QYZ%wZ]#P]^%w^p#Ppq%Qqr#Prs&Ysz#Pz{*`{|-}|}6c}!O:O!O!P#P!P!Q=k!Q!_#P!_!`AW!`!c#P!c!}Bi!}#OEd#O#P#P#P#QKl#Q#RNa#R#S!#|#S#T#P#T#oBi#o;'S#P;'S;=`$z<%lO#P~#Wb^Qf~OX#PXY$`Z]#P^p#Ppq$`qz#Pz{$`{|#P|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#PQ$eT^QOY$`Z]$`^;'S$`;'S;=`$t<%lO$`Q$wP;=`<%l$`~$}P;=`<%l#P~%XY^Qk~OX$`XY%QYZ%wZ]$`]^%w^p$`pq%Qq;'S$`;'S;=`$t<%lO$`~%|Sk~XY%wYZ%w]^%wpq%w~&ad^Qf~OX&YXY'oZ]&Y^p&Ypq'oqr&Yrs(wsz&Yz{'o{|&Y|!O'o!O!P&Y!P!Q'o!Q!}&Y!}#O'o#O#Q&Y#Q#S'o#S;'S&Y;'S;=`*Y<%lO&Y~'tV^QOY'oZ]'o^r'ors(Zs;'S'o;'S;=`(q<%lO'o~(bTX~^QOY$`Z]$`^;'S$`;'S;=`$t<%lO$`~(tP;=`<%l'o~)QbX~^Qf~OX#PXY$`Z]#P^p#Ppq$`qz#Pz{$`{|#P|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~*]P;=`<%l&Y~*gVeP^QOY$`Z]$`^z$`z{*|{;'S$`;'S;=`$t<%lO$`~+RW^QOY*|Z]*|]^+k^z*|z{,o{;'S*|;'S;=`-w<%lO*|~+nUOY+kZz+kz{,Q{;'S+k;'S;=`,i<%lO+k~,TTOz+kz{,d{;'S+k;'S;=`,i<%lO+k~,iO_~~,lP;=`<%l+k~,tX^QOY*|YZ+kZ]*|]^+k^z*|z{-a{;'S*|;'S;=`-w<%lO*|~-hT^Q_~OY$`Z]$`^;'S$`;'S;=`$t<%lO$`~-zP;=`<%l*|~.Ub^Qf~OX#PXY$`Z]#P^p#Ppq/^qz#Pz{$`{|/t|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~/eT]~^QOY$`Z]$`^;'S$`;'S;=`$t<%lO$`~/{b^Qf~OX#PXY$`Z]#P^p#Ppq/^qz#Pz{$`{|1T|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~1[b^Qf~OX#PXY$`Z]#P^p#Ppq/^qz#Pz{$`{|2d|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~2kb^Qf~OX#PXY$`Z]#P^p#Ppq/^qz#Pz{$`{|3s|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~3zb^Qf~OX#PXY$`Z]#P^p#Ppq/^qz#Pz{$`{|5S|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~5Zb^Qf~OX#PXY$`Z]#P^p#Ppq/^qz#Pz{$`{|#P|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~6hV^QOY$`Z]$`^|$`|}6}};'S$`;'S;=`$t<%lO$`~7SW^QOY6}Z]6}]^7l^|6}|}8p};'S6};'S;=`9x<%lO6}~7oUOY7lZ|7l|}8R};'S7l;'S;=`8j<%lO7l~8UTO|7l|}8e};'S7l;'S;=`8j<%lO7l~8jOd~~8mP;=`<%l7l~8uX^QOY6}YZ7lZ]6}]^7l^|6}|}9b};'S6};'S;=`9x<%lO6}~9iT^Qd~OY$`Z]$`^;'S$`;'S;=`$t<%lO$`~9{P;=`<%l6}~:TV^QOY$`Z]$`^}$`}!O:j!O;'S$`;'S;=`$t<%lO$`~:oW^QOY:jZ]:j]^;X^}:j}!O<]!O;'S:j;'S;=`=e<%lO:j~;[UOY;XZ};X}!O;n!O;'S;X;'S;=`<V<%lO;X~;qTO};X}!O<Q!O;'S;X;'S;=`<V<%lO;X~<VOb~~<YP;=`<%l;X~<bX^QOY:jYZ;XZ]:j]^;X^}:j}!O<}!O;'S:j;'S;=`=e<%lO:j~=UT^Qb~OY$`Z]$`^;'S$`;'S;=`$t<%lO$`~=hP;=`<%l:j~=pV^QOY$`Z]$`^!P$`!P!Q>V!Q;'S$`;'S;=`$t<%lO$`~>[W^QOY>VZ]>V]^>t^!P>V!P!Q?x!Q;'S>V;'S;=`AQ<%lO>V~>wUOY>tZ!P>t!P!Q?Z!Q;'S>t;'S;=`?r<%lO>t~?^TO!P>t!P!Q?m!Q;'S>t;'S;=`?r<%lO>t~?rO`~~?uP;=`<%l>t~?}X^QOY>VYZ>tZ]>V]^>t^!P>V!P!Q@j!Q;'S>V;'S;=`AQ<%lO>V~@qT^Q`~OY$`Z]$`^;'S$`;'S;=`$t<%lO$`~ATP;=`<%l>V~AabW~^Qf~OX#PXY$`Z]#P^p#Ppq$`qz#Pz{$`{|#P|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~Brh^QV~f~OX#PXY$`Z]#P^p#Ppq$`qz#Pz{$`{|#P|}$`}!OD^!O!P#P!P!Q$`!Q![Bi![!c#P!c!}Bi!}#O$`#O#Q#P#Q#R$`#R#SD^#S#T#P#T#oBi#o;'S#P;'S;=`$z<%lO#P~De_^QV~OY$`Z]$`^}$`}!OD^!O!Q$`!Q![D^![!c$`!c!}D^!}#R$`#R#SD^#S#T$`#T#oD^#o;'S$`;'S;=`$t<%lO$`~EiV^QOY$`Z]$`^!}$`!}#OFO#O;'S$`;'S;=`$t<%lO$`~FTX^QOY$`Z]$`^!P$`!P!QFp!Q#W$`#W#XJO#X;'S$`;'S;=`$t<%lO$`~FuV^QOY$`Z]$`^#W$`#W#XG[#X;'S$`;'S;=`$t<%lO$`~GaV^QOY$`Z]$`^#]$`#]#^Gv#^;'S$`;'S;=`$t<%lO$`~G{V^QOY$`Z]$`^#j$`#j#kHb#k;'S$`;'S;=`$t<%lO$`~HgV^QOY$`Z]$`^#P$`#P#QH|#Q;'S$`;'S;=`$t<%lO$`~IRV^QOY$`Z]$`^#P$`#P#QIh#Q;'S$`;'S;=`$t<%lO$`~IoTZ~^QOY$`Z]$`^;'S$`;'S;=`$t<%lO$`~JTV^QOY$`Z]$`^#]$`#]#^Jj#^;'S$`;'S;=`$t<%lO$`~JoV^QOY$`Z]$`^#j$`#j#kKU#k;'S$`;'S;=`$t<%lO$`~K]TS~^QOY$`Z]$`^;'S$`;'S;=`$t<%lO$`~Ksc^Qf~OX#PXY$`Z]#P^p#Ppq$`qz#Pz{$`{|#P|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#P#P#P#QMO#Q#S$`#S;'S#P;'S;=`$z<%lO#P~MXbY~^Qf~OX#PXY$`Z]#P^p#Ppq$`qz#Pz{$`{|#P|!O$`!O!P#P!P!Q$`!Q!}#P!}#O$`#O#Q#P#Q#S$`#S;'S#P;'S;=`$z<%lO#P~NfV^QOY$`Z]$`^#Q$`#Q#RN{#R;'S$`;'S;=`$t<%lO$`~! QW^QOYN{Z]N{]^! j^#QN{#Q#R!!n#R;'SN{;'S;=`!#v<%lON{~! mUOY! jZ#Q! j#Q#R!!P#R;'S! j;'S;=`!!h<%lO! j~!!STO#Q! j#Q#R!!c#R;'S! j;'S;=`!!h<%lO! j~!!hOc~~!!kP;=`<%l! j~!!sX^QOYN{YZ! jZ]N{]^! j^#QN{#Q#R!#`#R;'SN{;'S;=`!#v<%lON{~!#gT^Qc~OY$`Z]$`^;'S$`;'S;=`$t<%lO$`~!#yP;=`<%lN{~!$RV^QOY$`Z]$`^#R$`#R#S!$h#S;'S$`;'S;=`$t<%lO$`~!$mW^QOY!$hZ]!$h]^!%V^#R!$h#R#S!&Z#S;'S!$h;'S;=`!'c<%lO!$h~!%YUOY!%VZ#R!%V#R#S!%l#S;'S!%V;'S;=`!&T<%lO!%V~!%oTO#R!%V#R#S!&O#S;'S!%V;'S;=`!&T<%lO!%V~!&TOa~~!&WP;=`<%l!%V~!&`X^QOY!$hYZ!%VZ]!$h]^!%V^#R!$h#R#S!&{#S;'S!$h;'S;=`!'c<%lO!$h~!'ST^Qa~OY$`Z]$`^;'S$`;'S;=`$t<%lO$`~!'fP;=`<%l!$h",
-      tokenizers: [0, 1],
+      tokenData: ":n~RnOX#PXY#}YZ#}Z]#P]^#}^p#Ppq#}qr#Prs$`sz#Pz{'h{|(t|}.p}!O/z!O!P#P!P!Q1U!Q!_#P!_!`2`!`!c#P!c!}3Y!}#O4z#O#P#P#P#Q6c#Q#R8Y#R#S9d#S#T#P#T#o3Y#o;'S#P;'S;=`#w<%lO#P~#UZe~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~#zP;=`<%l#P~$SSj~XY#}YZ#}]^#}pq#}~$ede~OX$`XY%sZ]$`^p$`pq%sqr$`rs&hsz$`z{%s{|$`|!O%s!O!P$`!P!Q%s!Q!}$`!}#O%s#O#Q$`#Q#S%s#S;'S$`;'S;=`'b<%lO$`~%vVOY%sZ]%s^r%srs&]s;'S%s;'S;=`&b<%lO%s~&bOX~~&eP;=`<%l%s~&oZX~e~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~'eP;=`<%l$`~'mPc~z{'p~'sUOY'pZz'pz{(V{;'S'p;'S;=`(n<%lO'p~(YTOz'pz{(i{;'S'p;'S;=`(n<%lO'p~(nO]~~(qP;=`<%l'p~(y[e~OX#PZ]#P^p#Ppq)oqz#P{|*Z!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~)tT[~OY)oZ])o^;'S)o;'S;=`*T<%lO)o~*WP;=`<%l)o~*`[e~OX#PZ]#P^p#Ppq)oqz#P{|+U!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~+Z[e~OX#PZ]#P^p#Ppq)oqz#P{|,P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~,U[e~OX#PZ]#P^p#Ppq)oqz#P{|,z!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~-P[e~OX#PZ]#P^p#Ppq)oqz#P{|-u!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~-z[e~OX#PZ]#P^p#Ppq)oqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~.sP|}.v~.yUOY.vZ|.v|}/]};'S.v;'S;=`/t<%lO.v~/`TO|.v|}/o};'S.v;'S;=`/t<%lO.v~/tOb~~/wP;=`<%l.v~/}P}!O0Q~0TUOY0QZ}0Q}!O0g!O;'S0Q;'S;=`1O<%lO0Q~0jTO}0Q}!O0y!O;'S0Q;'S;=`1O<%lO0Q~1OO`~~1RP;=`<%l0Q~1XP!P!Q1[~1_UOY1[Z!P1[!P!Q1q!Q;'S1[;'S;=`2Y<%lO1[~1tTO!P1[!P!Q2T!Q;'S1[;'S;=`2Y<%lO1[~2YO^~~2]P;=`<%l1[~2gZW~e~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~3aaV~e~OX#PZ]#P^p#Pqz#P{|#P}!O4f!O!P#P!Q![3Y![!c#P!c!}3Y#O#Q#P#R#S4f#S#T#P#T#o3Y#o;'S#P;'S;=`#w<%lO#P~4kTV~}!O4f!Q![4f!c!}4f#R#S4f#T#o4f~5PPd~!}#O5S~5VQ!P!Q5]#W#X6Q~5`P#W#X5c~5fP#]#^5i~5lP#j#k5o~5rP#P#Q5u~5xP#P#Q5{~6QOZ~~6TP#]#^6W~6ZP#j#k6^~6cOS~~6j[d~e~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#P#P#P#Q7`#S;'S#P;'S;=`#w<%lO#P~7gZY~e~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~8]P#Q#R8`~8cUOY8`Z#Q8`#Q#R8u#R;'S8`;'S;=`9^<%lO8`~8xTO#Q8`#Q#R9X#R;'S8`;'S;=`9^<%lO8`~9^Oa~~9aP;=`<%l8`~9gP#R#S9j~9mUOY9jZ#R9j#R#S:P#S;'S9j;'S;=`:h<%lO9j~:STO#R9j#R#S:c#S;'S9j;'S;=`:h<%lO9j~:hO_~~:kP;=`<%l9j",
+      tokenizers: [0],
       topRules: { "Document": [0, 1] },
-      tokenPrec: 89
+      tokenPrec: 87
     });
   }
 });
@@ -25371,8 +25371,6 @@ var require_editor_test = __commonJS({
 [[/module]]`;
     var customTags = {
       header: Tag.define(),
-      header_text: Tag.define(),
-      // 标题文字
       strong: Tag.define(),
       em: Tag.define(),
       underline: Tag.define(),
@@ -25445,8 +25443,6 @@ var require_editor_test = __commonJS({
           // ——————————————————————————常用标记——————————————————————————
           "TitleMark": customTags.header,
           // + 号用 wikiTag 的颜色
-          "TitleContent": customTags.header_text,
-          // 标题文字用 header_text 的颜色
           "StrongText": customTags.strong,
           "EmText": customTags.em,
           "UnderlineText": customTags.underline,
@@ -25473,7 +25469,6 @@ var require_editor_test = __commonJS({
     });
     var wikidotHighlightStyle = HighlightStyle.define([
       { tag: customTags.header, class: "cm-header" },
-      { tag: customTags.header_text, class: "cm-header_text" },
       { tag: customTags.strong, class: "cm-strong" },
       { tag: customTags.em, class: "cm-em" },
       { tag: customTags.underline, class: "cm-underline" },
