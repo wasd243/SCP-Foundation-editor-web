@@ -29,13 +29,11 @@ Attr {
   Equals    { "=" }
   AttrValue { '"' !["\n\r]* '"' }
 
-  // Text 排除 [ 就够了，其他 [[ 开头的东西
-  // 因为没有对应规则，Lezer 会把 [ 单个字符作为 Text 处理
-  Text  { ![\[ \t\n\r]+ }
+  // 同时排除 ] 防止 ]] 被 Text 吞掉
+  Text  { ![\[\] \t\n\r]+ }
   space { $[ \t\n\r]+ }
 
-  // DivOpen 和 DivClose 优先级最高，其余 [[ 自然降级为 Text
-  @precedence { DivClose, DivOpen, TagEnd, AttrValue, AttrName, Equals, Text, space }
+  @precedence { DivClose, DivOpen, TagEnd, AttrValue, Equals, AttrName, Text, space }
 }
 
 @skip { space }
