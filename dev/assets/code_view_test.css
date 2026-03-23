@@ -73,7 +73,7 @@ html, body, #editor-container {
 
 /* original_Text */
 .cm-editor .cm-original-text {
-    color: #999999;
+    color: #f1f4f9;
     font-weight: bold;
 }
 
