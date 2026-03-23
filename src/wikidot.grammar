@@ -1,7 +1,15 @@
 @top Document { element* }
 
 element {
-  DivBlock | StrongText | StarChar | Text
+  DivBlock
+  | StrongText
+  | EmText
+  | UnderlineText
+  | StrikeText
+  | SupText
+  | SubText
+  | StarChar
+  | Text
 }
 
 DivBlock {
@@ -25,7 +33,15 @@ Attr {
   DivClose { "[[/div]]" }
   TagEnd   { "]]" }
 
-  StrongText { "**" (![*\n] | "*" ![*])* "**" }
+  // ——————————————————————————常用标记——————————————————————————
+  StrongText    { "**" (![*\n] | "*" ![*])* "**" }
+  EmText        { "//" (![/\n] | "/" ![/])* "//" }
+  UnderlineText { "__" (![_\n] | "_" ![_])* "__" }
+  StrikeText    { "--" (![-\n] | "-" ![-])* "--" }
+  SupText       { "^^" (![^\n] | "^" ![^])* "^^" }
+  SubText       { ",," (![,\n] | "," ![,])* ",," }
+  // ——————————————————————————常用标记——————————————————————————
+
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
   Equals    { "=" }
   AttrValue { '"' !["\n\r]* '"' }
@@ -33,12 +49,12 @@ Attr {
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
-  Text  { ![\[* \t\n\r]+ }
+  Text  { ![\[*/\-_^, \t\n\r]+ }
   space { $[ \t\n\r]+ }
 
   @precedence {
     DivClose, DivOpen, TagEnd, AttrValue, Equals,
-    StrongText,
+    StrongText, EmText, UnderlineText, StrikeText, SupText, SubText,
     AttrName, Text, space 
   }
 }

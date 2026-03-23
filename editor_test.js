@@ -148,7 +148,14 @@ const wikidotParser = parser.configure({
             "DivOpen":    customTags.div,
             "TagEnd":     customTags.div,
             "DivClose":   customTags.div,
+            // ——————————————————————————常用标记——————————————————————————
             "StrongText": customTags.strong,
+            "EmText":        customTags.em,
+            "UnderlineText": customTags.underline,
+            "StrikeText":    customTags.strikethrough,
+            "SupText":       customTags.sup,
+            "SubText":       customTags.sub,
+            // ——————————————————————————常用标记——————————————————————————
             "AttrName":   customTags.components,
             "Equals":     customTags.equal,
             "AttrValue":  customTags.Highlight,
