@@ -18,6 +18,7 @@ export const
   StrikeText = 16,
   SupText = 17,
   SubText = 18,
-  StarChar = 19,
-  BracketChar = 20,
-  Text = 21
+  Orginal = 19,
+  StarChar = 20,
+  BracketChar = 21,
+  Text = 22

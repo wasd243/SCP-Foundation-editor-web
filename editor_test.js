@@ -155,6 +155,7 @@ const wikidotParser = parser.configure({
             "StrikeText":    customTags.strikethrough,
             "SupText":       customTags.sup,
             "SubText":       customTags.sub,
+            "Original":      customTags.original_text,
             // ——————————————————————————常用标记——————————————————————————
             "AttrName":   customTags.components,
             "Equals":     customTags.equal,
