@@ -441,6 +441,9 @@ const wikidotLanguage = StreamLanguage.define({
         if (stream.match(/slogan/i)){
             return "components";
         }
+        if (stream.match(/logoinvert/i)){
+            return "components";
+        }
         if (stream.match(/logo/i)){
             return "components";
         }
@@ -451,9 +454,6 @@ const wikidotLanguage = StreamLanguage.define({
             return "components";
         }
         if (stream.match(/colordark/i)){
-            return "components";
-        }
-        if (stream.match(/logoinvert/i)){
             return "components";
         }
         if (stream.match(/name/) || stream.match(/caption/) || stream.match(/width/) || stream.match(/height/) || stream.match(/align/)) {
