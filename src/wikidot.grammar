@@ -11,6 +11,7 @@ element {
   | SupText
   | SubText
   | StarChar
+  | BracketChar
   | Text
 }
 
@@ -26,10 +27,6 @@ DivOpenTag {
 }
 // ——————————————————————————div——————————————————————————
 
-Title {
-  TitleMark TitleContent
-}
-
 AttrList { Attr* }
 
 Attr {
@@ -41,8 +38,7 @@ Attr {
   DivClose { "[[/div]]" }
   TagEnd   { "]]" }
 
-  TitleMark    { "+" "+"? "+"? "+"? "+"? "+"? " " }
-  TitleContent { ![\n\r]+ }
+  Title { "+" "+"? "+"? "+"? "+"? "+"? " " ![\n\r]* }
 
   // ——————————————————————————常用标记——————————————————————————
   StrongText    { "**" (![*\n] | "*" ![*])* "**" }
@@ -60,12 +56,13 @@ Attr {
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
+  BracketChar { "[" | "]" }
   Text  { ![\[*/\-_^, \t\n\r]+ }
   space { $[ \t\n\r]+ }
 
   @precedence {
     DivClose, DivOpen, TagEnd, AttrValue, Equals,
-    TitleMark, TitleContent, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText,
+    Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText,
     AttrName, Text, space 
   }
 }
