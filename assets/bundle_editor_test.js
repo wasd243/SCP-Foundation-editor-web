@@ -25619,9 +25619,12 @@ ${listMarker} `;
         parent: document.getElementById("editor-container")
       });
       const tree = syntaxTree(window.editorInstance.state);
-      tree.cursor().iterate((node) => {
-        console.log(node.name, window.editorInstance.state.sliceDoc(node.from, node.to));
-      });
+      window._debugAST = () => {
+        const tree2 = syntaxTree(editorView.state);
+        tree2.cursor().iterate((node) => {
+          console.log(node.name, editorView.state.sliceDoc(node.from, node.to));
+        });
+      };
       setupColorPickerHandler(editorView);
       try {
         const savedContent = localStorage.getItem("wikidot-editor-content");
