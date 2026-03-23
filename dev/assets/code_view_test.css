@@ -71,6 +71,13 @@ html, body, #editor-container {
 }
 
 
+/* original_Text */
+.cm-editor .cm-orginal-text {
+    color: #999999;
+    font-weight: bold;
+}
+
+
 /* div */
 .cm-editor .cm-div {
     color: #E8BF6A;
