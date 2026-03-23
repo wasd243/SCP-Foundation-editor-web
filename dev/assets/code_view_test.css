@@ -29,7 +29,7 @@ font-size: 1.2em;
 
 /* 加粗 */
 .cm-editor .cm-strong {
-color: #f1f4f9;
+color: #f1f4f9 !important;
 font-weight: bold;
 }
 
