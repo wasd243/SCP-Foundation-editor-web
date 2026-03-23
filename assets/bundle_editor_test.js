@@ -25618,10 +25618,9 @@ ${listMarker} `;
         state,
         parent: document.getElementById("editor-container")
       });
-      const tree = syntaxTree(window.editorInstance.state);
       window._debugAST = () => {
-        const tree2 = syntaxTree(editorView.state);
-        tree2.cursor().iterate((node) => {
+        const tree = syntaxTree(editorView.state);
+        tree.cursor().iterate((node) => {
           console.log(node.name, editorView.state.sliceDoc(node.from, node.to));
         });
       };
