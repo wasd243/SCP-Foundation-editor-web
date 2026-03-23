@@ -24291,17 +24291,17 @@ var init_parser = __esm({
     init_dist11();
     parser = LRParser.deserialize({
       version: 14,
-      states: "#`QVQPOOO}QPO'#C_O!VQPO'#C^OOQO'#Cx'#CxOOQO'#Cs'#CsQVQPOOO!^QPO'#CbOOQO'#Ct'#CtO!cQPO'#CaO!kQPO,58yOOQO,58x,58xO!pQPO,58xOOQO-E6q-E6qO!wQPO,58|OOQO-E6r-E6rOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.h1G.h",
-      stateData: "#a~OkOS~OSPO[RO]RO^RO_RO`ROaRObROcROdROeROfRO~OVUOYTP~OZYO~PVOW]O~OVUOYTX~OY_O~OZ`O~PVOXaO~OZSYXW[e]^_`abcVfk^~",
-      goto: "!imPPntPz}PPPPPPPPPPPPPPPP!R!]PPP!cXROQTZXQOQTZRXPTVPWQTOQZQT[TZQWPR^WXSOQTZ",
-      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue TagEnd DivClose Title StrongText EmText UnderlineText StrikeText SupText SubText Original StarChar BracketChar Text",
-      maxTerm: 28,
+      states: "$hQVQPOOO!QQPO'#C_O!YQPO'#C^O!QQPO'#CjO!aQPO'#CiOOQO'#DO'#DOOOQO'#Cy'#CyQVQPOOO!hQPO'#CbOOQO'#Cz'#CzO!mQPO'#CaO!uQPO,58yOOQO,58x,58xO!zQPO,58xO#RQPO,59UOOQO,59T,59TO#WQPO,59TOOQO-E6w-E6wO#_QPO,58|OOQO-E6x-E6xOOQO'#Cf'#CfOOQO1G.e1G.eOOQO1G.d1G.dOOQO'#Cl'#ClOOQO1G.p1G.pOOQO1G.o1G.oOOQO1G.h1G.h",
+      stateData: "#y~OqOS~OSPO_RObTOcTOdTOeTOfTOgTOhTOiTOjTOkTOlTO~OVWOZTP~O[[O~PVOa_O~PVOWbO~OVWOZTX~OZdO~O[fO~PVOZgO~OaiO~PVOXjO~O[Sa_ZXWbkcdefghiVlqc~",
+      goto: "#^sPPt|P!U![PPP!aPPt!dP!lPPPPPPPPPPPP!o!}PPP#U]TOQSV]`]QOQSV]`QZPR^RVXPRYReZ]SOQSV]`Rh^QVOQ]QQ`SVaV]`SYPRRcY]UOQSV]`",
+      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue DivTagEnd TagEnd DivClose CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose Title StrongText EmText UnderlineText StrikeText SupText SubText Original StarChar BracketChar Text",
+      maxTerm: 34,
       skippedNodes: [0],
       repeatNodeCount: 2,
-      tokenData: "@q~RoOX#SXY$QYZ$QZ]#S]^$Q^p#Spq$Qqr#Srs$csz#Sz{'k{|(w|}.s}!O/}!O!P#S!P!Q1X!Q!_#S!_!`2c!`!b#S!b!c3]!c!}9]!}#O:}#O#P#S#P#Q<f#Q#R>]#R#S?g#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~#XZf~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~#}P;=`<%l#S~$VSk~XY$QYZ$Q]^$Qpq$Q~$hdf~OX$cXY%vZ]$c^p$cpq%vqr$crs&ksz$cz{%v{|$c|!O%v!O!P$c!P!Q%v!Q!}$c!}#O%v#O#Q$c#Q#S%v#S;'S$c;'S;=`'e<%lO$c~%yVOY%vZ]%v^r%vrs&`s;'S%v;'S;=`&e<%lO%v~&eOX~~&hP;=`<%l%v~&rZX~f~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~'hP;=`<%l$c~'pPd~z{'s~'vUOY'sZz'sz{(Y{;'S's;'S;=`(q<%lO's~(]TOz'sz{(l{;'S's;'S;=`(q<%lO's~(qO]~~(tP;=`<%l's~(|[f~OX#SZ]#S^p#Spq)rqz#S{|*^!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~)wT[~OY)rZ])r^;'S)r;'S;=`*W<%lO)r~*ZP;=`<%l)r~*c[f~OX#SZ]#S^p#Spq)rqz#S{|+X!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~+^[f~OX#SZ]#S^p#Spq)rqz#S{|,S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~,X[f~OX#SZ]#S^p#Spq)rqz#S{|,}!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-S[f~OX#SZ]#S^p#Spq)rqz#S{|-x!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-}[f~OX#SZ]#S^p#Spq)rqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~.vP|}.y~.|UOY.yZ|.y|}/`};'S.y;'S;=`/w<%lO.y~/cTO|.y|}/r};'S.y;'S;=`/w<%lO.y~/wOb~~/zP;=`<%l.y~0QP}!O0T~0WUOY0TZ}0T}!O0j!O;'S0T;'S;=`1R<%lO0T~0mTO}0T}!O0|!O;'S0T;'S;=`1R<%lO0T~1RO`~~1UP;=`<%l0T~1[P!P!Q1_~1bUOY1_Z!P1_!P!Q1t!Q;'S1_;'S;=`2]<%lO1_~1wTO!P1_!P!Q2W!Q;'S1_;'S;=`2]<%lO1_~2]O^~~2`P;=`<%l1_~2jZW~f~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~3b]f~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!b#S!b!c4Z!c!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~4`ef~OX4ZXY5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c6u!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~5tUOY5qZ!b5q!b!c6W!c;'S5q;'S;=`6o<%lO5q~6ZTO!b5q!b!c6j!c;'S5q;'S;=`6o<%lO5q~6oOc~~6rP;=`<%l5q~6zef~OX4ZXZ5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c8]!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~8dZc~f~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~9YP;=`<%l4Z~9daV~f~OX#SZ]#S^p#Sqz#S{|#S}!O:i!O!P#S!Q![9]![!c#S!c!}9]#O#Q#S#R#S:i#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~:nTV~}!O:i!Q![:i!c!}:i#R#S:i#T#o:i~;SPe~!}#O;V~;YQ!P!Q;`#W#X<T~;cP#W#X;f~;iP#]#^;l~;oP#j#k;r~;uP#P#Q;x~;{P#P#Q<O~<TOZ~~<WP#]#^<Z~<^P#j#k<a~<fOS~~<m[e~f~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#P#S#P#Q=c#S;'S#S;'S;=`#z<%lO#S~=jZY~f~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~>`P#Q#R>c~>fUOY>cZ#Q>c#Q#R>x#R;'S>c;'S;=`?a<%lO>c~>{TO#Q>c#Q#R?[#R;'S>c;'S;=`?a<%lO>c~?aOa~~?dP;=`<%l>c~?jP#R#S?m~?pUOY?mZ#R?m#R#S@S#S;'S?m;'S;=`@k<%lO?m~@VTO#R?m#R#S@f#S;'S?m;'S;=`@k<%lO?m~@kO_~~@nP;=`<%l?m",
+      tokenData: "C{~RoOX#SXY$QYZ$QZ]#S]^$Q^p#Spq$Qqr#Srs$csz#Sz{'k{|(w|}.s}!O/}!O!P#S!P!Q1X!Q!_#S!_!`2c!`!b#S!b!c3]!c!}9]!}#O:}#O#P#S#P#Q?p#Q#RAg#R#SBq#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~#XZl~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~#}P;=`<%l#S~$VSq~XY$QYZ$Q]^$Qpq$Q~$hdl~OX$cXY%vZ]$c^p$cpq%vqr$crs&ksz$cz{%v{|$c|!O%v!O!P$c!P!Q%v!Q!}$c!}#O%v#O#Q$c#Q#S%v#S;'S$c;'S;=`'e<%lO$c~%yVOY%vZ]%v^r%vrs&`s;'S%v;'S;=`&e<%lO%v~&eOX~~&hP;=`<%l%v~&rZX~l~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~'hP;=`<%l$c~'pPj~z{'s~'vUOY'sZz'sz{(Y{;'S's;'S;=`(q<%lO's~(]TOz'sz{(l{;'S's;'S;=`(q<%lO's~(qOc~~(tP;=`<%l's~(|[l~OX#SZ]#S^p#Spq)rqz#S{|*^!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~)wTb~OY)rZ])r^;'S)r;'S;=`*W<%lO)r~*ZP;=`<%l)r~*c[l~OX#SZ]#S^p#Spq)rqz#S{|+X!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~+^[l~OX#SZ]#S^p#Spq)rqz#S{|,S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~,X[l~OX#SZ]#S^p#Spq)rqz#S{|,}!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-S[l~OX#SZ]#S^p#Spq)rqz#S{|-x!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-}[l~OX#SZ]#S^p#Spq)rqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~.vP|}.y~.|UOY.yZ|.y|}/`};'S.y;'S;=`/w<%lO.y~/cTO|.y|}/r};'S.y;'S;=`/w<%lO.y~/wOh~~/zP;=`<%l.y~0QP}!O0T~0WUOY0TZ}0T}!O0j!O;'S0T;'S;=`1R<%lO0T~0mTO}0T}!O0|!O;'S0T;'S;=`1R<%lO0T~1ROf~~1UP;=`<%l0T~1[P!P!Q1_~1bUOY1_Z!P1_!P!Q1t!Q;'S1_;'S;=`2]<%lO1_~1wTO!P1_!P!Q2W!Q;'S1_;'S;=`2]<%lO1_~2]Od~~2`P;=`<%l1_~2jZW~l~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~3b]l~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!b#S!b!c4Z!c!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~4`el~OX4ZXY5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c6u!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~5tUOY5qZ!b5q!b!c6W!c;'S5q;'S;=`6o<%lO5q~6ZTO!b5q!b!c6j!c;'S5q;'S;=`6o<%lO5q~6oOi~~6rP;=`<%l5q~6zel~OX4ZXZ5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c8]!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~8dZi~l~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~9YP;=`<%l4Z~9daV~l~OX#SZ]#S^p#Sqz#S{|#S}!O:i!O!P#S!Q![9]![!c#S!c!}9]#O#Q#S#R#S:i#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~:nTV~}!O:i!Q![:i!c!}:i#R#S:i#T#o:i~;SPk~!}#O;V~;YR!P!Q;c#V#W=z#W#X?_~;fQ#V#W;l#W#X=]~;oP#c#d;r~;uP#`#a;x~;{P#`#a<O~<RP#T#U<U~<XP#d#e<[~<_P#g#h<b~<eP#]#^<h~<kP#U#V<n~<qP#`#a<t~<wP#X#Y<z~<}P#P#Q=Q~=TP#P#Q=W~=]Oa~~=`P#]#^=c~=fP#j#k=i~=lP#P#Q=o~=rP#P#Q=u~=zO[~~=}P#c#d>Q~>TP#`#a>W~>ZP#`#a>^~>aP#T#U>d~>gP#d#e>j~>mP#g#h>p~>sP#]#^>v~>yP#U#V>|~?PP#`#a?S~?VP#X#Y?Y~?_O_~~?bP#]#^?e~?hP#j#k?k~?pOS~~?w[k~l~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#P#S#P#Q@m#S;'S#S;'S;=`#z<%lO#S~@tZZ~l~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~AjP#Q#RAm~ApUOYAmZ#QAm#Q#RBS#R;'SAm;'S;=`Bk<%lOAm~BVTO#QAm#Q#RBf#R;'SAm;'S;=`Bk<%lOAm~BkOg~~BnP;=`<%lAm~BtP#R#SBw~BzUOYBwZ#RBw#R#SC^#S;'SBw;'S;=`Cu<%lOBw~CaTO#RBw#R#SCp#S;'SBw;'S;=`Cu<%lOBw~CuOe~~CxP;=`<%lBw",
       tokenizers: [0],
       topRules: { "Document": [0, 1] },
-      tokenPrec: 90
+      tokenPrec: 112
     });
   }
 });
@@ -25438,10 +25438,13 @@ var require_editor_test = __commonJS({
       props: [
         styleTags({
           "DivOpen": customTags.div,
-          "TagEnd": customTags.div,
+          "DivTagEnd": customTags.div,
           "DivClose": customTags.div,
+          "CollapsibleOpen": customTags.collapsible,
+          "CollapsibleTagEnd": customTags.collapsible,
+          "CollapsibleClose": customTags.collapsible,
           // ——————————————————————————常用标记——————————————————————————
-          "Title": customTags.header,
+          "Title": ustomTags.header,
           "StrongText": customTags.strong,
           "EmText": customTags.em,
           "UnderlineText": customTags.underline,
@@ -25456,7 +25459,8 @@ var require_editor_test = __commonJS({
           "Text": customTags.original_text
         }),
         foldNodeProp.add({
-          "DivBlock": foldInside
+          "DivBlock": foldInside,
+          "CollapsibleBlock": foldInside
         })
       ]
     });
