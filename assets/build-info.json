@@ -1,14 +1,4 @@
 {
-  "timestamp": "2026-03-23T15:15:05.591Z",
-  "version": "1.0.0",
-  "buildConfig": {
-    "entryPoints": [
-      "editor.js"
-    ],
-    "format": "esm",
-    "platform": "browser",
-    "target": [
-      "es2020"
-    ]
-  }
+  "timestamp": "2026-03-23T20:20:57.896Z",
+  "version": "1.0.0"
 }
