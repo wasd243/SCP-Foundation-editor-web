@@ -771,9 +771,13 @@ const startEditor = () => {
 
     // AST测试
     const tree = syntaxTree(window.editorInstance.state);
-    tree.cursor().iterate(node => {
-        console.log(node.name, window.editorInstance.state.sliceDoc(node.from, node.to));
-    });
+    // 在 startEditor 里，editorView 创建之后加：
+    window._debugAST = () => {
+        const tree = syntaxTree(editorView.state);
+        tree.cursor().iterate(node => {
+            console.log(node.name, editorView.state.sliceDoc(node.from, node.to));
+        });
+    };
     
     // 设置颜色选择器事件处理
     setupColorPickerHandler(editorView);
