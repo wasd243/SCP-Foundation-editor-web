@@ -151,7 +151,7 @@ const wikidotParser = parser.configure({
             "CollapsibleTagEnd":customTags.collapsible,
             "CollapsibleClose": customTags.collapsible,
             // ——————————————————————————常用标记——————————————————————————
-            "Title":            ustomTags.header,
+            "Title":            customTags.header,
             "StrongText":       customTags.strong,
             "EmText":           customTags.em,
             "UnderlineText":    customTags.underline,
