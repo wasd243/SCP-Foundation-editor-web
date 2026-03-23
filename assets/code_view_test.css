@@ -23,7 +23,12 @@ html, body, #editor-container {
 .cm-editor .cm-header {
     color: #e06c75;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.5em;
+}
+.cm-editor .cm-header_text {
+    color: #f7c3c8;
+    font-weight: bold;
+    font-size: 1.4em;
 }
 
 
@@ -75,7 +80,6 @@ html, body, #editor-container {
 .cm-editor .cm-div {
     color: #E8BF6A;
 }
-
 
 
 

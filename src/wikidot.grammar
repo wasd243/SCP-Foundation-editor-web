@@ -1,7 +1,9 @@
+@skip { space }
 @top Document { element* }
 
 element {
   DivBlock
+  | Title
   | StrongText
   | EmText
   | UnderlineText
@@ -12,6 +14,7 @@ element {
   | Text
 }
 
+// ——————————————————————————div——————————————————————————
 DivBlock {
   DivOpenTag
   element*
@@ -20,6 +23,11 @@ DivBlock {
 
 DivOpenTag {
   DivOpen AttrList TagEnd
+}
+// ——————————————————————————div——————————————————————————
+
+Title {
+  TitleMark TitleContent
 }
 
 AttrList { Attr* }
@@ -32,6 +40,9 @@ Attr {
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
   TagEnd   { "]]" }
+
+  TitleMark    { "+" "+"? "+"? "+"? "+"? "+"? " " }
+  TitleContent { ![\n\r]+ }
 
   // ——————————————————————————常用标记——————————————————————————
   StrongText    { "**" (![*\n] | "*" ![*])* "**" }
@@ -54,9 +65,7 @@ Attr {
 
   @precedence {
     DivClose, DivOpen, TagEnd, AttrValue, Equals,
-    StrongText, EmText, UnderlineText, StrikeText, SupText, SubText,
+    TitleMark, TitleContent, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText,
     AttrName, Text, space 
   }
 }
-
-@skip { space }

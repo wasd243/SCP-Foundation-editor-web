@@ -96,11 +96,11 @@ const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
 // 定义自定义高亮标签，防止 "Unknown highlighting tag" 报错
 const customTags = {
     header: Tag.define(),
+    header_text: Tag.define(), // 标题文字
     strong: Tag.define(),
     em: Tag.define(),
     underline: Tag.define(),
     strikethrough: Tag.define(),
-    wikiTag: Tag.define(),
     link: Tag.define(),
     hr: Tag.define(),
     rate: Tag.define(),
@@ -149,6 +149,8 @@ const wikidotParser = parser.configure({
             "TagEnd":     customTags.div,
             "DivClose":   customTags.div,
             // ——————————————————————————常用标记——————————————————————————
+            "TitleMark":    customTags.header,  // + 号用 wikiTag 的颜色
+            "TitleContent": customTags.header_text,   // 标题文字用 header_text 的颜色
             "StrongText": customTags.strong,
             "EmText":        customTags.em,
             "UnderlineText": customTags.underline,
@@ -181,6 +183,7 @@ const wikidotLanguage = LRLanguage.define({
 
 const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.header, class: "cm-header" },
+    { tag: customTags.header_text, class: "cm-header_text"},
     { tag: customTags.strong, class: "cm-strong" },
     { tag: customTags.em, class: "cm-em" },
     { tag: customTags.underline, class: "cm-underline" },
