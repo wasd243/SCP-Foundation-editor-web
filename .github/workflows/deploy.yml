@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
     paths:
       - '**.js'
       - '**.html'
@@ -40,7 +40,6 @@ jobs:
         run: |
           mkdir -p public/assets
           cp index.html public/
-          # 复制测试页（如果存在）
           if [ -f "test.html" ]; then
             cp test.html public/
           fi
@@ -52,6 +51,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 部署新准备的 public 目录
           publish_dir: ./public
           publish_branch: gh-pages
+          destination_dir: ${{ github.ref_name == 'develop' && 'dev' || '.' }}
