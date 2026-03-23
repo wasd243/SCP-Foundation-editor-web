@@ -25478,7 +25478,6 @@ var require_editor_test = __commonJS({
       { tag: customTags.em, class: "cm-em" },
       { tag: customTags.underline, class: "cm-underline" },
       { tag: customTags.strikethrough, class: "cm-strikethrough" },
-      { tag: customTags.wikiTag, class: "cm-wikiTag" },
       { tag: customTags.link, class: "cm-link" },
       { tag: customTags.hr, class: "cm-hr" },
       { tag: customTags.rate, class: "cm-rate" },
