@@ -8,6 +8,7 @@ on:
       - '**.html'
       - '**.css'
       - 'package.json'
+      - 'src/**.grammar'
   workflow_dispatch:
 
 permissions:
@@ -28,16 +29,21 @@ jobs:
           
       - name: Install dependencies
         run: npm ci
-
+      
+      - name: Generate Lezer Parser
+        run: npx lezer-generator src/wikidot.grammar -o src/parser.js
+      
       - name: Build project
         run: npm run build
         
       - name: Prepare Public Directory
         run: |
           mkdir -p public/assets
-          # 复制根目录的 HTML
           cp index.html public/
-          # 复制 assets 目录下的所有内容 (包含 code_view.css, bundle_editor.js 等)
+          # 复制测试页（如果存在）
+          if [ -f "test.html" ]; then
+            cp test.html public/
+          fi
           if [ -d "assets" ]; then
             cp -r assets/* public/assets/
           fi

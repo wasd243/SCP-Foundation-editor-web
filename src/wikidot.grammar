@@ -1,0 +1,41 @@
+@top Document { element* }
+
+element {
+  DivBlock | Text
+}
+
+DivBlock {
+  DivOpenTag
+  element*
+  DivClose
+}
+
+DivOpenTag {
+  DivOpen AttrList TagEnd
+}
+
+AttrList { Attr* }
+
+Attr {
+  AttrName Equals AttrValue
+}
+
+@tokens {
+  DivOpen  { "[[div" }
+  DivClose { "[[/div]]" }
+  TagEnd   { "]]" }
+
+  AttrName  { $[a-zA-Z\-]+ }
+  Equals    { "=" }
+  AttrValue { '"' $[^"]* '"' }
+
+  // Text 必须排除所有 space 能匹配的字符
+  // space 匹配：空格、\t、\n、\r
+  // Text 就必须把这四个全排除掉
+  Text  { ![\[ \t\n\r]+ }
+  space { $[ \t\n\r]+ }
+
+  @precedence { DivOpen, DivClose, TagEnd, AttrValue, AttrName, Equals, Text, space }
+}
+
+@skip { space }

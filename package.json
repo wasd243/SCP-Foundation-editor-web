@@ -4,11 +4,11 @@
   "description": "Frontend editor module for SCP Foundation Editor using CodeMirror 6",
   "main": "assets/bundle_editor.js",
   "scripts": {
-    "build": "node build.js",
-    "dev": "node build.js --watch",
+    "build": "lezer-generator src/wikidot.grammar -o src/parser.js && node build.js",
+    "dev": "lezer-generator src/wikidot.grammar -o src/parser.js && node build.js --watch",
     "serve": "npx serve . -p 3000",
     "start": "npm run build && npm run serve",
-    "clean": "rm -f assets/bundle_editor.js",
+    "clean": "rm -f assets/bundle_editor.js assets/bundle_editor_test.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js",
     "format": "prettier --write \"**/*.{js,html,css,json,md}\""
@@ -21,7 +21,7 @@
     "frontend"
   ],
   "author": "Zichen Wang",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.4",
     "@codemirror/commands": "^6.7.1",
@@ -33,6 +33,7 @@
     "codemirror": "^6.0.1"
   },
   "devDependencies": {
+    "@lezer/generator": "^1.8.0",
     "esbuild": "^0.25.0",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
@@ -50,10 +51,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/scp-wikidot-editor.git"
+    "url": "git+https://github.com/yourusername/scp-wikidot-editor.git"
   },
   "bugs": {
     "url": "https://github.com/yourusername/scp-wikidot-editor/issues"
   },
-  "homepage": "https://github.com/yourusername/scp-wikidot-editor#readme"
+  "homepage": "https://github.com/yourusername/scp-wikidot-editor#readme",
+  "type": "commonjs"
 }
