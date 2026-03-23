@@ -12,4 +12,5 @@ export const
   TagEnd = 10,
   DivClose = 11,
   StrongText = 12,
-  Text = 13
+  StarChar = 13,
+  Text = 14
