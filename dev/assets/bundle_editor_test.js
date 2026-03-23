@@ -24291,17 +24291,17 @@ var init_parser = __esm({
     init_dist11();
     parser = LRParser.deserialize({
       version: 14,
-      states: "#`QVQPOOOeQPO'#C_OmQPO'#C^OOQO'#Cp'#CpOOQO'#Ck'#CkQVQPOOO!OQPO'#CbOOQO'#Cl'#ClO!TQPO'#CaO!]QPO,58yOOQO,58x,58xO!bQPO,58xOOQO-E6i-E6iO!sQPO,58|OOQO-E6j-E6jOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.h1G.h",
-      stateData: "#T~OcOS~OSPO[RO]RO^RO~OVUOYTP~OSPOZYO[RO]RO^RO~OW]O~OVUOYTX~OY_O~OSPOZ`O[RO]RO^RO~OXaO~OZSYXW[V^cW~",
-      goto: "!aePPflPruPPPPPPPPy!TPPP!ZXROQTZXQOQTZRXPTVPWQTOQZQT[TZQWPR^WXSOQTZ",
-      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue TagEnd DivClose StrongText StarChar Text",
-      maxTerm: 20,
+      states: "#`QVQPOOOtQPO'#C_O|QPO'#C^OOQO'#Cu'#CuOOQO'#Cp'#CpQVQPOOO!TQPO'#CbOOQO'#Cq'#CqO!YQPO'#CaO!bQPO,58yOOQO,58x,58xO!gQPO,58xOOQO-E6n-E6nO!nQPO,58|OOQO-E6o-E6oOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.h1G.h",
+      stateData: "#T~OhOS~OSPO[RO]RO^RO_RO`ROaRObROcRO~OVUOYTP~OZYO~PVOW]O~OVUOYTX~OY_O~OZ`O~PVOXaO~OZSYXW[]^_`aVch^~",
+      goto: "!fjPPkqPwzPPPPPPPPPPPPP!O!YPPP!`XROQTZXQOQTZRXPTVPWQTOQZQT[TZQWPR^WXSOQTZ",
+      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue TagEnd DivClose StrongText EmText UnderlineText StrikeText SupText SubText StarChar Text",
+      maxTerm: 25,
       skippedNodes: [0],
       repeatNodeCount: 2,
-      tokenData: ",a~RgOX!jXY#_YZ#_Z]!j]^#_^p!jpq#_qr!jrs#psz!jz{&]{!_!j!_!`'i!`!c!j!c!}(Y!}#O)f#O#P!j#P#Q*{#Q#T!j#T#o(Y#o;'S!j;'S;=`#X<%lO!j~!oW^~OX!jZ]!j^p!jqz!j{!}!j#O;'S!j;'S;=`#X<%lO!j~#[P;=`<%l!j~#dSc~XY#_YZ#_]^#_pq#_~#u^^~OX#pXY$qZ]#p^p#ppq$qqr#prs%fsz#pz{$q{!}#p!}#O$q#O;'S#p;'S;=`&V<%lO#p~$tVOY$qZ]$q^r$qrs%Zs;'S$q;'S;=`%`<%lO$q~%`OX~~%cP;=`<%l$q~%mWX~^~OX!jZ]!j^p!jqz!j{!}!j#O;'S!j;'S;=`#X<%lO!j~&YP;=`<%l#p~&bP]~z{&e~&hUOY&eZz&ez{&z{;'S&e;'S;=`'c<%lO&e~&}TOz&ez{'^{;'S&e;'S;=`'c<%lO&e~'cO[~~'fP;=`<%l&e~'pWW~^~OX!jZ]!j^p!jqz!j{!}!j#O;'S!j;'S;=`#X<%lO!j~(aaV~^~OX!jZ]!j^p!jqz!j{}!j}!O(Y!O!Q!j!Q![(Y![!c!j!c!}(Y#O#R!j#R#S(Y#S#T!j#T#o(Y#o;'S!j;'S;=`#X<%lO!j~)iP!}#O)l~)oQ!P!Q)u#W#X*j~)xP#W#X){~*OP#]#^*R~*UP#j#k*X~*[P#P#Q*_~*bP#P#Q*e~*jOZ~~*mP#]#^*p~*sP#j#k*v~*{OS~~+QY^~OX!jZ]!j^p!jqz!j{!}!j#O#P!j#P#Q+p#Q;'S!j;'S;=`#X<%lO!j~+wWY~^~OX!jZ]!j^p!jqz!j{!}!j#O;'S!j;'S;=`#X<%lO!j",
+      tokenData: "4n~RnOX#PXY#}YZ#}Z]#P]^#}^p#Ppq#}qr#Prs$`sz#Pz{'h{|#P|}(t}!O*O!O!P#P!P!Q+Y!Q!_#P!_!`,d!`!c#P!c!}-^!}#O/O#O#P#P#P#Q0e#Q#R2Y#R#S3d#S#T#P#T#o-^#o;'S#P;'S;=`#w<%lO#P~#UZc~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~#zP;=`<%l#P~$SSh~XY#}YZ#}]^#}pq#}~$edc~OX$`XY%sZ]$`^p$`pq%sqr$`rs&hsz$`z{%s{|$`|!O%s!O!P$`!P!Q%s!Q!}$`!}#O%s#O#Q$`#Q#S%s#S;'S$`;'S;=`'b<%lO$`~%vVOY%sZ]%s^r%srs&]s;'S%s;'S;=`&b<%lO%s~&bOX~~&eP;=`<%l%s~&oZX~c~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~'eP;=`<%l$`~'mPb~z{'p~'sUOY'pZz'pz{(V{;'S'p;'S;=`(n<%lO'p~(YTOz'pz{(i{;'S'p;'S;=`(n<%lO'p~(nO[~~(qP;=`<%l'p~(wP|}(z~(}UOY(zZ|(z|})a};'S(z;'S;=`)x<%lO(z~)dTO|(z|})s};'S(z;'S;=`)x<%lO(z~)xOa~~){P;=`<%l(z~*RP}!O*U~*XUOY*UZ}*U}!O*k!O;'S*U;'S;=`+S<%lO*U~*nTO}*U}!O*}!O;'S*U;'S;=`+S<%lO*U~+SO_~~+VP;=`<%l*U~+]P!P!Q+`~+cUOY+`Z!P+`!P!Q+u!Q;'S+`;'S;=`,^<%lO+`~+xTO!P+`!P!Q,X!Q;'S+`;'S;=`,^<%lO+`~,^O]~~,aP;=`<%l+`~,kZW~c~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~-eaV~c~OX#PZ]#P^p#Pqz#P{|#P}!O.j!O!P#P!Q![-^![!c#P!c!}-^#O#Q#P#R#S.j#S#T#P#T#o-^#o;'S#P;'S;=`#w<%lO#P~.oTV~}!O.j!Q![.j!c!}.j#R#S.j#T#o.j~/RP!}#O/U~/XQ!P!Q/_#W#X0S~/bP#W#X/e~/hP#]#^/k~/nP#j#k/q~/tP#P#Q/w~/zP#P#Q/}~0SOZ~~0VP#]#^0Y~0]P#j#k0`~0eOS~~0j[c~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#P#P#P#Q1`#S;'S#P;'S;=`#w<%lO#P~1gZY~c~OX#PZ]#P^p#Pqz#P{|#P!O!P#P!Q!}#P#O#Q#P#S;'S#P;'S;=`#w<%lO#P~2]P#Q#R2`~2cUOY2`Z#Q2`#Q#R2u#R;'S2`;'S;=`3^<%lO2`~2xTO#Q2`#Q#R3X#R;'S2`;'S;=`3^<%lO2`~3^O`~~3aP;=`<%l2`~3gP#R#S3j~3mUOY3jZ#R3j#R#S4P#S;'S3j;'S;=`4h<%lO3j~4STO#R3j#R#S4c#S;'S3j;'S;=`4h<%lO3j~4hO^~~4kP;=`<%l3j",
       tokenizers: [0],
       topRules: { "Document": [0, 1] },
-      tokenPrec: 86
+      tokenPrec: 81
     });
   }
 });
@@ -25441,7 +25441,14 @@ var require_editor_test = __commonJS({
           "DivOpen": customTags.div,
           "TagEnd": customTags.div,
           "DivClose": customTags.div,
+          // ——————————————————————————常用标记——————————————————————————
           "StrongText": customTags.strong,
+          "EmText": customTags.em,
+          "UnderlineText": customTags.underline,
+          "StrikeText": customTags.strikethrough,
+          "SupText": customTags.sup,
+          "SubText": customTags.sub,
+          // ——————————————————————————常用标记——————————————————————————
           "AttrName": customTags.components,
           "Equals": customTags.equal,
           "AttrValue": customTags.Highlight,
