@@ -144,26 +144,30 @@ const customTags = {
 const wikidotParser = parser.configure({
     props: [
         styleTags({
-            "DivOpen":    customTags.div,
-            "TagEnd":     customTags.div,
-            "DivClose":   customTags.div,
+            "DivOpen":          customTags.div,
+            "DivTagEnd":        customTags.div,
+            "DivClose":         customTags.div,
+            "CollapsibleOpen":  customTags.collapsible,
+            "CollapsibleTagEnd":customTags.collapsible,
+            "CollapsibleClose": customTags.collapsible,
             // ——————————————————————————常用标记——————————————————————————
-            "Title":    customTags.header,
-            "StrongText": customTags.strong,
-            "EmText":        customTags.em,
-            "UnderlineText": customTags.underline,
-            "StrikeText":    customTags.strikethrough,
-            "SupText":       customTags.sup,
-            "SubText":       customTags.sub,
-            "Original":      customTags.original_text,
+            "Title":            ustomTags.header,
+            "StrongText":       customTags.strong,
+            "EmText":           customTags.em,
+            "UnderlineText":    customTags.underline,
+            "StrikeText":       customTags.strikethrough,
+            "SupText":          customTags.sup,
+            "SubText":          customTags.sub,
+            "Original":         customTags.original_text,
             // ——————————————————————————常用标记——————————————————————————
-            "AttrName":   customTags.components,
-            "Equals":     customTags.equal,
-            "AttrValue":  customTags.Highlight,
-            "Text":       customTags.original_text,
+            "AttrName":         customTags.components,
+            "Equals":           customTags.equal,
+            "AttrValue":        customTags.Highlight,
+            "Text":             customTags.original_text,
         }),
         foldNodeProp.add({
-            "DivBlock": foldInside
+            "DivBlock": foldInside,
+            "CollapsibleBlock": foldInside,
         })
     ]
 });
