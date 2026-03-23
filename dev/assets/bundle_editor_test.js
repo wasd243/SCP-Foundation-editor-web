@@ -25444,7 +25444,7 @@ var require_editor_test = __commonJS({
           "CollapsibleTagEnd": customTags.collapsible,
           "CollapsibleClose": customTags.collapsible,
           // ——————————————————————————常用标记——————————————————————————
-          "Title": ustomTags.header,
+          "Title": customTags.header,
           "StrongText": customTags.strong,
           "EmText": customTags.em,
           "UnderlineText": customTags.underline,
