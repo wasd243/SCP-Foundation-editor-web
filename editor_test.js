@@ -114,7 +114,6 @@ const customTags = {
     list3: Tag.define(),
     list4: Tag.define(),
     code: Tag.define(), // 用于代码块
-    quote: Tag.define(),
     table: Tag.define(),
     table_header: Tag.define(),
     table_cell: Tag.define(),
@@ -168,6 +167,7 @@ const wikidotParser = parser.configure({
             "SupText":          customTags.sup,
             "SubText":          customTags.sub,
             "Monospace":        customTags.monospace,
+            "ForcedNewLine":    customTags.newline,
             "Original":         customTags.original_text,
             // ——————————————————————————常用标记——————————————————————————
             "AttrName":         customTags.components,
@@ -217,7 +217,6 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.list3, class: "cm-list3" },
     { tag: customTags.list4, class: "cm-list4" },
     { tag: customTags.code, class: "cm-code"},
-    { tag: customTags.quote, class: "cm-quote" },
     { tag: customTags.table, class: "cm-table" },
     { tag: customTags.table_header, class: "cm-table-header" },
     { tag: customTags.table_cell, class: "cm-table-cell" },

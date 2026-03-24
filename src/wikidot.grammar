@@ -8,6 +8,7 @@ element {
   | FootnoteBlock
   | Footnote
   | LinkURL
+  | ForcedNewLine
   | Title
   | StrongText
   | EmText
@@ -85,6 +86,7 @@ Attr {
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
   FootnoteClose { "[[/footnote]]" }
+  ForcedNewLine { "@@@@" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
   _tagEnd   { "]]" }
@@ -122,10 +124,10 @@ Attr {
     DivClose, DivOpen,
     CollapsibleClose, CollapsibleOpen,
     CodeClose, CodeOpen, codeContent,
-    FootnoteOpen, FootnoteClose,
     FootnoteBlock,
+    FootnoteOpen, FootnoteClose,
     LinkURL,
-    _tagEnd, AttrValue, Equals,
+    _tagEnd, AttrValue, Equals, ForcedNewLine,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
     AttrName, Text, space 
   }
