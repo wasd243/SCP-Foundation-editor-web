@@ -25,7 +25,7 @@ export const
   Footnote = 27,
   FootnoteOpen = 28,
   FootnoteClose = 30,
-  TableMarker = 31,
+  TableBar = 31,
   TableTilde = 32,
   Hr = 33,
   LinkURL = 34,

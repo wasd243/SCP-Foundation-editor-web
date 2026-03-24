@@ -8,7 +8,8 @@ element {
   | CodeBlock
   | FootnoteBlock
   | Footnote
-  | TableMarker
+  | TableBar
+  | TableTilde
   | Hr
   | LinkURL
   | ForcedNewLine
@@ -85,10 +86,6 @@ IncludeBlock {
 // ——————————————————————————include——————————————————————————
 
 
-TableMarker {
-  tableBar (TableTilde)? 
-}
-
 
 AttrList { Attr* }
 
@@ -109,7 +106,7 @@ AttrPath { attrPathToken }
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
   FootnoteClose { "[[/footnote]]" }
-  tableBar { "||" }
+  TableBar { "||" }
   TableTilde { "~" }
   ForcedNewLine { "@@@@" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
@@ -150,7 +147,7 @@ AttrPath { attrPathToken }
   space { $[ \t\n\r]+ }
 
   @precedence {
-    tableBar, TableTilde,
+    TableBar, TableTilde,
     IncludeOpen,
     DivClose, DivOpen,
     _tagEnd,
