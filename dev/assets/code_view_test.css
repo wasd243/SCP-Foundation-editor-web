@@ -129,10 +129,16 @@ html, body, #editor-container {
 }
 
 
-
-
-
-
+/* ——————————————————————————表格操作—————————————————————————— */
+.cm-editor .cm-table {
+    color: #FFC66D;
+    font-weight: bold !important;
+}
+.cm-editor .cm-table {
+    color: #FFC66D;
+    font-weight: normal;
+}
+/* ——————————————————————————表格操作—————————————————————————— */
 
 
 
