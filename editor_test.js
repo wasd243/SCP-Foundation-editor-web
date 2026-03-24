@@ -154,6 +154,9 @@ const wikidotParser = parser.configure({
             "CodeOpen":         customTags.code,
             "CodeTagEnd":       customTags.code,
             "CodeClose":        customTags.code,
+            "FootnoteOpen":     customTags.footnote,
+            "FootnoteTagEnd":   customTags.footnote,
+            "FootnoteClose":    customTags.footnote,
             "LinkURL":          customTags.link,
             "FootnoteBlock":    customTags.footnote_block,
             // ——————————————————————————常用标记——————————————————————————
@@ -176,6 +179,7 @@ const wikidotParser = parser.configure({
             "DivBlock": foldInside,
             "CollapsibleBlock": foldInside,
             "CodeBlock": foldInside,
+            "Footnote": foldInside,
         })
     ]
 });

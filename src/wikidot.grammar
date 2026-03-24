@@ -6,6 +6,7 @@ element {
   | CollapsibleBlock
   | CodeBlock
   | FootnoteBlock
+  | Footnote
   | LinkURL
   | Title
   | StrongText
@@ -57,6 +58,18 @@ CodeOpenTag {
 }
 // ——————————————————————————Code——————————————————————————
 
+// ——————————————————————————footnote——————————————————————————
+Footnote {
+  FootnoteOpenTag
+  element*
+  FootnoteClose
+}
+
+FootnoteOpenTag {
+  FootnoteOpen AttrList FootnoteTagEnd {_tagEnd}
+}
+// ——————————————————————————footnote——————————————————————————
+
 AttrList { Attr* }
 
 Attr {
@@ -70,6 +83,8 @@ Attr {
   CollapsibleClose { "[[/collapsible]]" }
   CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
+  FootnoteOpen { "[[footnote" }
+  FootnoteClose { "[[/footnote]]" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
   _tagEnd   { "]]" }
@@ -107,6 +122,7 @@ Attr {
     DivClose, DivOpen,
     CollapsibleClose, CollapsibleOpen,
     CodeClose, CodeOpen, codeContent,
+    FootnoteOpen, FootnoteClose,
     FootnoteBlock,
     LinkURL,
     _tagEnd, AttrValue, Equals,
