@@ -13,6 +13,7 @@ element {
   | StrikeText
   | SupText
   | SubText
+  | Monospace
   | Original
   | StarChar
   | BracketChar
@@ -81,6 +82,7 @@ Attr {
   SupText       { "^^" (![^\n] | "^" ![^])* "^^" }
   SubText       { ",," (![,\n] | "," ![,])* ",," }
   Original      { "@@" (![@\n] | "@" ![@])* "@@" }
+  Monospace { "{{" (![}\n] | "}" ![}])? (![}\n] | "}" ![}])* "}}" }
   // ——————————————————————————常用标记——————————————————————————
 
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
@@ -105,7 +107,7 @@ Attr {
     CodeClose, CodeOpen, codeContent,
     FootnoteBlock,
     _tagEnd, AttrValue, Equals,
-    Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Original,
+    Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
     AttrName, Text, space 
   }
 }
