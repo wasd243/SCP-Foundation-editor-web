@@ -25495,7 +25495,7 @@ var require_editor_test = __commonJS({
       { tag: customTags.sup, class: "cm-sup" },
       { tag: customTags.sub, class: "cm-sub" },
       { tag: customTags.newline, class: "cm-newline" },
-      { tag: customTags.monosapace, class: "cm-monospace" },
+      { tag: customTags.monospace, class: "cm-monospace" },
       { tag: customTags.list1, class: "cm-list1" },
       { tag: customTags.list2, class: "cm-list2" },
       { tag: customTags.list3, class: "cm-list3" },
