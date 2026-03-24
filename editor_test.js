@@ -144,6 +144,7 @@ const wikidotParser = parser.configure({
     props: [
         styleTags({
             "IncludeOpen":         customTags.include,
+            "IncludeTagEnd":       customTags.include,
             "DivOpen":             customTags.div,
             "DivTagEnd":           customTags.div,
             "DivClose":            customTags.div,
