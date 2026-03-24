@@ -180,7 +180,6 @@ const wikidotParser = parser.configure({
             "AttrName":            customTags.components,
             "Equals":              customTags.equal,
             "AttrValue":           customTags.Highlight,
-            "Text":                customTags.original_text,
         }),
         foldNodeProp.add({
             "DivBlock": foldInside,
