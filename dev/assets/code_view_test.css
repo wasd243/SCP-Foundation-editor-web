@@ -153,8 +153,11 @@ html, body, #editor-container {
 /* ——————————————————————————表格操作—————————————————————————— */
 
 
-
-
+/* image */
+.cm-editor .cm-image {
+    color: #E8BF6A;
+    font-style: italic;
+}
 
 
 
