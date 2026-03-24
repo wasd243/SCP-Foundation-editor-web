@@ -162,7 +162,7 @@ const wikidotParser = parser.configure({
 
             // ——————————————————————————表格操作——————————————————————————
             "TableTilde":          customTags.table_header,
-            "tableBar":            customTags.table,
+            "TableBar":            customTags.table,
             // ——————————————————————————表格操作——————————————————————————
 
 
