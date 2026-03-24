@@ -7,8 +7,8 @@ element {
   | CodeBlock
   | FootnoteBlock
   | Footnote
-  | tableDelimiter //table
-  | tableHeaderDelimiter //table
+  | tableHeaderDelimiter
+  | tableDelimiter
   | LinkURL
   | ForcedNewLine
   | Title
@@ -37,6 +37,8 @@ DivOpenTag {
 }
 // ——————————————————————————div——————————————————————————
 
+
+
 // ——————————————————————————Collapsible——————————————————————————
 CollapsibleBlock {
   CollapsibleOpenTag
@@ -48,6 +50,8 @@ CollapsibleOpenTag {
   CollapsibleOpen AttrList CollapsibleTagEnd { _tagEnd }
 }
 // ——————————————————————————Collapsible——————————————————————————
+
+
 
 // ——————————————————————————Code——————————————————————————
 CodeBlock {
@@ -61,17 +65,17 @@ CodeOpenTag {
 }
 // ——————————————————————————Code——————————————————————————
 
+
+
 // ——————————————————————————footnote——————————————————————————
 Footnote {
-  FootnoteOpenTag
+  FootnoteOpen FootnoteTagEnd {_tagEnd}
   element*
   FootnoteClose
 }
-
-FootnoteOpenTag {
-  FootnoteOpen AttrList FootnoteTagEnd {_tagEnd}
-}
 // ——————————————————————————footnote——————————————————————————
+
+
 
 AttrList { Attr* }
 
@@ -121,7 +125,7 @@ Attr {
     "\n" | "\r"
   }
   BracketChar { "[" | "]" }
-  Text { ![\[\]*/\-_^, \t\n\r|]+ }
+  Text { ![\[\]*/\-_^, \t\n\r|~@]+ }
   space { $[ \t\n\r]+ }
 
   @precedence {
