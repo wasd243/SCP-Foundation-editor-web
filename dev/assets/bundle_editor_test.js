@@ -25455,6 +25455,7 @@ var require_editor_test = __commonJS({
           "FootnoteClose": customTags.footnote,
           "LinkURL": customTags.link,
           "ImageOpen": customTags.image,
+          "ImageTagEnd": customTags.image,
           // ——————————————————————————表格操作——————————————————————————
           "TableTilde": customTags.table_header,
           "TableBar": customTags.table,
