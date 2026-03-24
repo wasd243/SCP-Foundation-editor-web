@@ -25471,8 +25471,7 @@ var require_editor_test = __commonJS({
           // ——————————————————————————常用标记——————————————————————————
           "AttrName": customTags.components,
           "Equals": customTags.equal,
-          "AttrValue": customTags.Highlight,
-          "Text": customTags.original_text
+          "AttrValue": customTags.Highlight
         }),
         foldNodeProp.add({
           "DivBlock": foldInside,
