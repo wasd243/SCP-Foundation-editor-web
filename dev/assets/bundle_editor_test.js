@@ -25456,7 +25456,7 @@ var require_editor_test = __commonJS({
           "LinkURL": customTags.link,
           // ——————————————————————————表格操作——————————————————————————
           "TableTilde": customTags.table_header,
-          "TableBar": customTags.table,
+          "tableBar": customTags.table,
           // ——————————————————————————表格操作——————————————————————————
           "FootnoteBlock": customTags.footnote_block,
           // ——————————————————————————常用标记——————————————————————————
