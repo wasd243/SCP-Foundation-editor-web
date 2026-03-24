@@ -19,6 +19,16 @@ line-height: 1.6;
 }
 
 /* 强制高亮类 - 增加了层级以确保覆盖 One Dark 默认样式 */
+/* 1. 针对编辑器内容区的全局文本颜色 */
+.cm-editor .cm-content {
+    color: #f1f4f9 !important;
+}
+
+/* 2. 针对普通行（未被其他 Token 捕获的部分） */
+.cm-editor .cm-line {
+    color: #f1f4f9;
+}
+
 .cm-editor .cm-header {
 color: #e06c75;
 font-weight: bold;
