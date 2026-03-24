@@ -172,6 +172,7 @@ const wikidotParser = parser.configure({
         foldNodeProp.add({
             "DivBlock": foldInside,
             "CollapsibleBlock": foldInside,
+            "CodeBlock": foldInside,
         })
     ]
 });
