@@ -2,7 +2,7 @@
 import {Parser} from "lezer"
 export const parser = Parser.deserialize({
   version: 13,
-  states: "%vQVQPOOO!TQPO'#C_O!]QPO'#C^O!TQPO'#CiO!dQPO'#ChO!TQPO'#CnO!kOQO'#CmOOQO'#DT'#DTOOQO'#C}'#C}QVQPOOO!sQPO'#CbOOQO'#DO'#DOO!xQPO'#CaO#QQPO,58yOOQO,58x,58xO#VQPO,58xO#^QPO,59TOOQO,59S,59SO#cQPO,59SO#jQPO,59YOOOO'#DP'#DPO#oOQO,59XOOQO,59X,59XOOQO-E6{-E6{O#wQPO,58|OOQO-E6|-E6|OOQO'#Cf'#CfOOQO1G.e1G.eOOQO1G.d1G.dOOQO'#Ck'#CkOOQO1G.o1G.oOOQO1G.n1G.nOOQO'#Cp'#CpOOQO1G.t1G.tOOOO-E6}-E6}OOQO1G.s1G.sOOQO1G.h1G.h",
+  states: "%vQVQPOOO!TQPO'#C_O!]QPO'#C^O!TQPO'#CiO!dQPO'#ChO!TQPO'#CnO!kQQO'#CmOOQO'#DT'#DTOOQO'#C}'#C}QVQPOOO!sQPO'#CbOOQO'#DO'#DOO!xQPO'#CaO#QQPO,58yOOQO,58x,58xO#VQPO,58xO#^QPO,59TOOQO,59S,59SO#cQPO,59SO#jQPO,59YOOQO'#DP'#DPO#oQQO,59XOOQO,59X,59XOOQO-E6{-E6{O#wQPO,58|OOQO-E6|-E6|OOQO'#Cf'#CfOOQO1G.e1G.eOOQO1G.d1G.dOOQO'#Ck'#CkOOQO1G.o1G.oOOQO1G.n1G.nOOQO'#Cp'#CpOOQO1G.t1G.tOOQO-E6}-E6}OOQO1G.s1G.sOOQO1G.h1G.h",
   stateData: "$O~OvOS~OSPO^ROcTOfVOgVOhVOiVOjVOkVOlVOmVOnVOoVOpVO~OVYOxTP~OZ^O~PVO`aO~PVOefOydO~OWhO~OVYOxTX~OxjO~OZlO~PVOxmO~O`oO~PVOxpO~OesOydO~OXtO~Oy~",
   goto: "#yxPPy!RP!Z!dPPP!jPy!mP!uPy!xP#QPPPPPPPPPPPP#T#c#kPPP#q]VOQSX_b]QOQSX_bQ]PQ`RRcTXZPRT[Rk]]SOQSX_bRn`]UOQSX_bRqcQXOQ_QQbSVgX_bU[PRTRi[QeURre]WOQSX_b",
   nodeNames: "⚠ Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue DivTagEnd DivClose CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd CodeClose Title StrongText EmText UnderlineText StrikeText SupText SubText Original StarChar BracketChar Text",

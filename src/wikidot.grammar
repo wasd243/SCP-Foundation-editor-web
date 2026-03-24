@@ -43,16 +43,14 @@ CollapsibleOpenTag {
 // ——————————————————————————Collapsible——————————————————————————
 
 // ——————————————————————————Code——————————————————————————
-@skip {} {
-    CodeBlock {
-    CodeOpenTag
-    codeContent* // 确保中间的换行和文字都在 CodeBlock 内部
-    CodeClose
-  }
+CodeBlock {
+  CodeOpenTag
+  codeContent* // 直接放这里就行，不需要任何 @skip 修饰！
+  CodeClose
 }
 
 CodeOpenTag {
-  CodeOpen AttrList CodeTagEnd {_tagEnd}
+  CodeOpen AttrList CodeTagEnd { _tagEnd }
 }
 // ——————————————————————————Code——————————————————————————
 
@@ -91,9 +89,9 @@ Attr {
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
   codeContent { 
-    ![\[\n\r]+ |           // 吃掉所有不是 [ 和 换行的字符
-    "[" ![\[] |            // 如果只有一个 [，后面不是 [，也吃掉
-    "\n" | "\r"
+    ![\[\n\r]+ | 
+    "[" ![\[] | 
+    "\n" | "\r" 
   }
   BracketChar { "[" | "]" }
   Text  { ![\[*/\-_^, \t\n\r]+ }
