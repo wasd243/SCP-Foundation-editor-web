@@ -12,6 +12,7 @@ element {
   | TableBar
   | TableTilde
   | Hr
+  | Blockquote
   | LinkURL
   | ForcedNewLine
   | Title
@@ -120,6 +121,7 @@ AttrPath { attrPathToken }
   ImageOpen { "[[" $[>=<]? "image"}
   TableBar { "||" }
   TableTilde { "~" }
+  Blockquote { "> " }
   ForcedNewLine { "@@@@" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
@@ -155,10 +157,11 @@ AttrPath { attrPathToken }
     "\n" | "\r"
   }
   BracketChar { "[" | "]" }
-  Text { ![\[\]*/\-_^, \t\n\r|~@]+ }
+  Text { ![\[\]*/\-_^, \t\n\r|~@>=<]+ }
   space { $[ \t\n\r]+ }
 
   @precedence {
+    Blockquote,
     TableBar, TableTilde,
     IncludeOpen,
     DivClose, DivOpen,

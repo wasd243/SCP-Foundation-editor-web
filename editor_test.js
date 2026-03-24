@@ -113,6 +113,7 @@ const customTags = {
     list2: Tag.define(),
     list3: Tag.define(),
     list4: Tag.define(),
+    quote: Tag.define(),
     code: Tag.define(), // 用于代码块
     table: Tag.define(),
     table_header: Tag.define(),
@@ -172,6 +173,7 @@ const wikidotParser = parser.configure({
 
 
             // ——————————————————————————常用标记——————————————————————————
+            "Blockquote":          customTags.quote,
             "Hr":                  customTags.hr,
             "Title":               customTags.header,
             "StrongText":          customTags.strong,
@@ -229,6 +231,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.list2, class: "cm-list2" },
     { tag: customTags.list3, class: "cm-list3" },
     { tag: customTags.list4, class: "cm-list4" },
+    { tag: customTags.quote, class: "cm-quote"},
     { tag: customTags.code, class: "cm-code"},
     { tag: customTags.table, class: "cm-table" },
     { tag: customTags.table_header, class: "cm-table-header" },
