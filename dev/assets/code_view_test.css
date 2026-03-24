@@ -90,8 +90,10 @@ html, body, #editor-container {
 }
 
 
-
-
+/* code */
+.cm-editor .cm-code {
+    color: #61AFEF;
+}
 
 
 

@@ -24291,17 +24291,17 @@ var init_parser = __esm({
     init_dist11();
     parser = LRParser.deserialize({
       version: 14,
-      states: "$hQVQPOOO!QQPO'#C_O!YQPO'#C^O!QQPO'#CiO!aQPO'#ChOOQO'#C}'#C}OOQO'#Cx'#CxQVQPOOO!hQPO'#CbOOQO'#Cy'#CyO!mQPO'#CaO!uQPO,58yOOQO,58x,58xO!zQPO,58xO#RQPO,59TOOQO,59S,59SO#WQPO,59SOOQO-E6v-E6vO#_QPO,58|OOQO-E6w-E6wOOQO'#Cf'#CfOOQO1G.e1G.eOOQO1G.d1G.dOOQO'#Ck'#CkOOQO1G.o1G.oOOQO1G.n1G.nOOQO1G.h1G.h",
-      stateData: "#y~OpOS~OSPO^ROaTObTOcTOdTOeTOfTOgTOhTOiTOjTOkTO~OVWOrTP~OZ[O~PVO`_O~PVOWbO~OVWOrTX~OrdO~OZfO~PVOrgO~O`iO~PVOXjO~OZS`^rXWajbcdefghVkpb~",
-      goto: "#]rPPs{P!T!ZPPP!`Ps!cP!kPPPPPPPPPPPP!n!|PPP#T]TOQSV]`]QOQSV]`QZPR^RVXPRYReZ]SOQSV]`Rh^QVOQ]QQ`SVaV]`SYPRRcY]UOQSV]`",
-      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue DivTagEnd DivClose CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose Title StrongText EmText UnderlineText StrikeText SupText SubText Original StarChar BracketChar Text",
-      maxTerm: 34,
+      states: "%jQVQPOOO!TQPO'#C_O!]QPO'#C^O!TQPO'#CiO!dQPO'#ChO!TQPO'#CnO!kQPO'#CmOOQO'#DS'#DSOOQO'#C}'#C}QVQPOOO!rQPO'#CbOOQO'#DO'#DOO!wQPO'#CaO#PQPO,58yOOQO,58x,58xO#UQPO,58xO#]QPO,59TOOQO,59S,59SO#bQPO,59SO#iQPO,59YOOQO,59X,59XO#nQPO,59XOOQO-E6{-E6{O#uQPO,58|OOQO-E6|-E6|OOQO'#Cf'#CfOOQO1G.e1G.eOOQO1G.d1G.dOOQO'#Ck'#CkOOQO1G.o1G.oOOQO1G.n1G.nOOQO'#Cp'#CpOOQO1G.t1G.tOOQO1G.s1G.sOOQO1G.h1G.h",
+      stateData: "$c~OuOS~OSPO^ROcTOfVOgVOhVOiVOjVOkVOlVOmVOnVOoVOpVO~OVYOwTP~OZ^O~PVO`aO~PVOedO~PVOWgO~OVYOwTX~OwiO~OZkO~PVOwlO~O`nO~PVOwoO~OeqO~PVOXrO~OZS`^ecwXWfoghijklmVpuo~",
+      goto: "$QwPPx!SP!^!gPPP!mPx!pP!zPx!}P#XPPPPPPPPPPPP#[#nPPP#vaVOQSUX_beaQOQSUX_beQ]PQ`RRcTXZPRT[Rj]aSOQSUX_beRm`aUOQSUX_beRpcQXOQ_QQbSQeUXfX_beU[PRTRh[aWOQSUX_be",
+      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue DivTagEnd DivClose CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd CodeClose Title StrongText EmText UnderlineText StrikeText SupText SubText Original StarChar BracketChar Text",
+      maxTerm: 39,
       skippedNodes: [0],
       repeatNodeCount: 2,
-      tokenData: "C{~RoOX#SXY$QYZ$QZ]#S]^$Q^p#Spq$Qqr#Srs$csz#Sz{'k{|(w|}.s}!O/}!O!P#S!P!Q1X!Q!_#S!_!`2c!`!b#S!b!c3]!c!}9]!}#O:}#O#P#S#P#Q?p#Q#RAg#R#SBq#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~#XZk~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~#}P;=`<%l#S~$VSp~XY$QYZ$Q]^$Qpq$Q~$hdk~OX$cXY%vZ]$c^p$cpq%vqr$crs&ksz$cz{%v{|$c|!O%v!O!P$c!P!Q%v!Q!}$c!}#O%v#O#Q$c#Q#S%v#S;'S$c;'S;=`'e<%lO$c~%yVOY%vZ]%v^r%vrs&`s;'S%v;'S;=`&e<%lO%v~&eOX~~&hP;=`<%l%v~&rZX~k~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~'hP;=`<%l$c~'pPi~z{'s~'vUOY'sZz'sz{(Y{;'S's;'S;=`(q<%lO's~(]TOz'sz{(l{;'S's;'S;=`(q<%lO's~(qOb~~(tP;=`<%l's~(|[k~OX#SZ]#S^p#Spq)rqz#S{|*^!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~)wTa~OY)rZ])r^;'S)r;'S;=`*W<%lO)r~*ZP;=`<%l)r~*c[k~OX#SZ]#S^p#Spq)rqz#S{|+X!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~+^[k~OX#SZ]#S^p#Spq)rqz#S{|,S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~,X[k~OX#SZ]#S^p#Spq)rqz#S{|,}!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-S[k~OX#SZ]#S^p#Spq)rqz#S{|-x!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-}[k~OX#SZ]#S^p#Spq)rqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~.vP|}.y~.|UOY.yZ|.y|}/`};'S.y;'S;=`/w<%lO.y~/cTO|.y|}/r};'S.y;'S;=`/w<%lO.y~/wOg~~/zP;=`<%l.y~0QP}!O0T~0WUOY0TZ}0T}!O0j!O;'S0T;'S;=`1R<%lO0T~0mTO}0T}!O0|!O;'S0T;'S;=`1R<%lO0T~1ROe~~1UP;=`<%l0T~1[P!P!Q1_~1bUOY1_Z!P1_!P!Q1t!Q;'S1_;'S;=`2]<%lO1_~1wTO!P1_!P!Q2W!Q;'S1_;'S;=`2]<%lO1_~2]Oc~~2`P;=`<%l1_~2jZW~k~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~3b]k~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!b#S!b!c4Z!c!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~4`ek~OX4ZXY5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c6u!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~5tUOY5qZ!b5q!b!c6W!c;'S5q;'S;=`6o<%lO5q~6ZTO!b5q!b!c6j!c;'S5q;'S;=`6o<%lO5q~6oOh~~6rP;=`<%l5q~6zek~OX4ZXZ5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c8]!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~8dZh~k~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~9YP;=`<%l4Z~9daV~k~OX#SZ]#S^p#Sqz#S{|#S}!O:i!O!P#S!Q![9]![!c#S!c!}9]#O#Q#S#R#S:i#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~:nTV~}!O:i!Q![:i!c!}:i#R#S:i#T#o:i~;SPj~!}#O;V~;YR!P!Q;c#V#W=z#W#X?_~;fQ#V#W;l#W#X=]~;oP#c#d;r~;uP#`#a;x~;{P#`#a<O~<RP#T#U<U~<XP#d#e<[~<_P#g#h<b~<eP#]#^<h~<kP#U#V<n~<qP#`#a<t~<wP#X#Y<z~<}P#P#Q=Q~=TP#P#Q=W~=]O`~~=`P#]#^=c~=fP#j#k=i~=lP#P#Q=o~=rP#P#Q=u~=zOZ~~=}P#c#d>Q~>TP#`#a>W~>ZP#`#a>^~>aP#T#U>d~>gP#d#e>j~>mP#g#h>p~>sP#]#^>v~>yP#U#V>|~?PP#`#a?S~?VP#X#Y?Y~?_O^~~?bP#]#^?e~?hP#j#k?k~?pOS~~?w[j~k~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#P#S#P#Q@m#S;'S#S;'S;=`#z<%lO#S~@tZr~k~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~AjP#Q#RAm~ApUOYAmZ#QAm#Q#RBS#R;'SAm;'S;=`Bk<%lOAm~BVTO#QAm#Q#RBf#R;'SAm;'S;=`Bk<%lOAm~BkOf~~BnP;=`<%lAm~BtP#R#SBw~BzUOYBwZ#RBw#R#SC^#S;'SBw;'S;=`Cu<%lOBw~CaTO#RBw#R#SCp#S;'SBw;'S;=`Cu<%lOBw~CuOd~~CxP;=`<%lBw",
+      tokenData: "Du~RoOX#SXY$QYZ$QZ]#S]^$Q^p#Spq$Qqr#Srs$csz#Sz{'k{|(w|}.s}!O/}!O!P#S!P!Q1X!Q!_#S!_!`2c!`!b#S!b!c3]!c!}9]!}#O:}#O#P#S#P#Q@j#Q#RBa#R#SCk#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~#XZp~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~#}P;=`<%l#S~$VSu~XY$QYZ$Q]^$Qpq$Q~$hdp~OX$cXY%vZ]$c^p$cpq%vqr$crs&ksz$cz{%v{|$c|!O%v!O!P$c!P!Q%v!Q!}$c!}#O%v#O#Q$c#Q#S%v#S;'S$c;'S;=`'e<%lO$c~%yVOY%vZ]%v^r%vrs&`s;'S%v;'S;=`&e<%lO%v~&eOX~~&hP;=`<%l%v~&rZX~p~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~'hP;=`<%l$c~'pPn~z{'s~'vUOY'sZz'sz{(Y{;'S's;'S;=`(q<%lO's~(]TOz'sz{(l{;'S's;'S;=`(q<%lO's~(qOg~~(tP;=`<%l's~(|[p~OX#SZ]#S^p#Spq)rqz#S{|*^!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~)wTf~OY)rZ])r^;'S)r;'S;=`*W<%lO)r~*ZP;=`<%l)r~*c[p~OX#SZ]#S^p#Spq)rqz#S{|+X!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~+^[p~OX#SZ]#S^p#Spq)rqz#S{|,S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~,X[p~OX#SZ]#S^p#Spq)rqz#S{|,}!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-S[p~OX#SZ]#S^p#Spq)rqz#S{|-x!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~-}[p~OX#SZ]#S^p#Spq)rqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~.vP|}.y~.|UOY.yZ|.y|}/`};'S.y;'S;=`/w<%lO.y~/cTO|.y|}/r};'S.y;'S;=`/w<%lO.y~/wOl~~/zP;=`<%l.y~0QP}!O0T~0WUOY0TZ}0T}!O0j!O;'S0T;'S;=`1R<%lO0T~0mTO}0T}!O0|!O;'S0T;'S;=`1R<%lO0T~1ROj~~1UP;=`<%l0T~1[P!P!Q1_~1bUOY1_Z!P1_!P!Q1t!Q;'S1_;'S;=`2]<%lO1_~1wTO!P1_!P!Q2W!Q;'S1_;'S;=`2]<%lO1_~2]Oh~~2`P;=`<%l1_~2jZW~p~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~3b]p~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!b#S!b!c4Z!c!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~4`ep~OX4ZXY5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c6u!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~5tUOY5qZ!b5q!b!c6W!c;'S5q;'S;=`6o<%lO5q~6ZTO!b5q!b!c6j!c;'S5q;'S;=`6o<%lO5q~6oOm~~6rP;=`<%l5q~6zep~OX4ZXZ5qZ]4Z]^5q^p4Zpq5qqz4Zz{5q{|4Z|!O5q!O!P4Z!P!Q5q!Q!b4Z!b!c8]!c!}4Z!}#O5q#O#Q4Z#Q#S5q#S;'S4Z;'S;=`9V<%lO4Z~8dZm~p~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~9YP;=`<%l4Z~9daV~p~OX#SZ]#S^p#Sqz#S{|#S}!O:i!O!P#S!Q![9]![!c#S!c!}9]#O#Q#S#R#S:i#S#T#S#T#o9]#o;'S#S;'S;=`#z<%lO#S~:nTV~}!O:i!Q![:i!c!}:i#R#S:i#T#o:i~;SPo~!}#O;V~;YR!P!Q;c#V#W>f#W#X@X~;fQ#V#W;l#W#X=w~;oP#c#d;r~;uQ#W#X;{#`#a<d~<OP#X#Y<R~<UP#P#Q<X~<[P#P#Q<_~<dOe~~<gP#`#a<j~<mP#T#U<p~<sP#d#e<v~<yP#g#h<|~=PP#]#^=S~=VP#U#V=Y~=]P#`#a=`~=cP#X#Y=f~=iP#P#Q=l~=oP#P#Q=r~=wO`~~=zP#]#^=}~>QP#j#k>T~>WP#P#Q>Z~>^P#P#Q>a~>fOZ~~>iP#c#d>l~>oQ#W#X>u#`#a?Q~>xP#X#Y>{~?QOc~~?TP#`#a?W~?ZP#T#U?^~?aP#d#e?d~?gP#g#h?j~?mP#]#^?p~?sP#U#V?v~?yP#`#a?|~@PP#X#Y@S~@XO^~~@[P#]#^@_~@bP#j#k@e~@jOS~~@q[o~p~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#P#S#P#QAg#S;'S#S;'S;=`#z<%lO#S~AnZw~p~OX#SZ]#S^p#Sqz#S{|#S!O!P#S!Q!}#S#O#Q#S#S;'S#S;'S;=`#z<%lO#S~BdP#Q#RBg~BjUOYBgZ#QBg#Q#RB|#R;'SBg;'S;=`Ce<%lOBg~CPTO#QBg#Q#RC`#R;'SBg;'S;=`Ce<%lOBg~CeOk~~ChP;=`<%lBg~CnP#R#SCq~CtUOYCqZ#RCq#R#SDW#S;'SCq;'S;=`Do<%lOCq~DZTO#RCq#R#SDj#S;'SCq;'S;=`Do<%lOCq~DoOi~~DrP;=`<%lCq",
       tokenizers: [0],
       topRules: { "Document": [0, 1] },
-      tokenPrec: 112
+      tokenPrec: 134
     });
   }
 });
@@ -25389,6 +25389,8 @@ var require_editor_test = __commonJS({
       list2: Tag.define(),
       list3: Tag.define(),
       list4: Tag.define(),
+      code: Tag.define(),
+      // 用于代码块
       quote: Tag.define(),
       table: Tag.define(),
       table_header: Tag.define(),
@@ -25443,6 +25445,9 @@ var require_editor_test = __commonJS({
           "CollapsibleOpen": customTags.collapsible,
           "CollapsibleTagEnd": customTags.collapsible,
           "CollapsibleClose": customTags.collapsible,
+          "CodeOpen": customTags.code,
+          "CodeTagEnd": customTags.code,
+          "CodeClose": customTags.code,
           // ——————————————————————————常用标记——————————————————————————
           "Title": customTags.header,
           "StrongText": customTags.strong,
@@ -25491,6 +25496,7 @@ var require_editor_test = __commonJS({
       { tag: customTags.list2, class: "cm-list2" },
       { tag: customTags.list3, class: "cm-list3" },
       { tag: customTags.list4, class: "cm-list4" },
+      { tag: customTags.code, class: "cm-code" },
       { tag: customTags.quote, class: "cm-quote" },
       { tag: customTags.table, class: "cm-table" },
       { tag: customTags.table_header, class: "cm-table-header" },
