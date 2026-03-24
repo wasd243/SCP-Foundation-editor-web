@@ -90,8 +90,11 @@ IncludeBlock {
 AttrList { Attr* }
 
 Attr {
-  AttrName Equals AttrValue
+  (AttrName Equals AttrValue) | AttrPath
 }
+
+// AttrPath 对应 tokens 里的一个完整字符串
+AttrPath { attrPathToken }
 
 @tokens {
   DivOpen  { "[[div" }
@@ -111,7 +114,6 @@ Attr {
   _tagEnd   { "]]" }
 
   Title { "+" "+"? "+"? "+"? "+"? "+"? " " ![\n\r]* }
-
   // ——————————————————————————常用标记——————————————————————————
   Hr            { "----" "-"* }
   StrongText    { "**" (![*\n] | "*" ![*])* "**" }
@@ -124,6 +126,10 @@ Attr {
   Monospace     { "{{" (![}\n] | "}" ![}])? (![}\n] | "}" ![}])* "}}" }
   // ——————————————————————————常用标记——————————————————————————
 
+  // 把路径定义为一个完整的 Token
+  // 允许：字母、数字、冒号、横杠、下划线、点、竖线
+  // 关键：不包含空格和 ]，这样它遇到空格或闭合标签会自动停止
+  attrPathToken { $[a-zA-Z0-9\-_:|.]+ }
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
   Equals    { "=" }
   AttrValue { '"' !["\n\r]* '"' }
@@ -143,6 +149,7 @@ Attr {
   @precedence {
     IncludeOpen,
     DivClose, DivOpen,
+    _tagEnd,
     CollapsibleClose, CollapsibleOpen,
     CodeClose, CodeOpen,
     FootnoteBlock,
@@ -150,8 +157,9 @@ Attr {
     Hr,
     tableHeaderDelimiter, tableDelimiter,
     LinkURL,
-    _tagEnd, AttrValue, Equals, ForcedNewLine,
+    AttrValue, Equals, ForcedNewLine,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
+    attrPathToken,
     AttrName,
     Text, codeContent, space 
   }
