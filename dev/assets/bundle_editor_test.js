@@ -25440,6 +25440,7 @@ var require_editor_test = __commonJS({
       props: [
         styleTags({
           "IncludeOpen": customTags.include,
+          "IncludeTagEnd": customTags.include,
           "DivOpen": customTags.div,
           "DivTagEnd": customTags.div,
           "DivClose": customTags.div,
