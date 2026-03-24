@@ -67,7 +67,7 @@ Attr {
   DivClose { "[[/div]]" }
   CollapsibleOpen  { "[[collapsible" }
   CollapsibleClose { "[[/collapsible]]" }
-  CodeOpen { "[[code" }
+  CodeOpen { "[[" "code" (std.whitespace | "]]") }
   CodeClose { "[[/code]]" }
   FootnoteBlock { "[[footnoteblock]]" }
   _tagEnd   { "]]" }
