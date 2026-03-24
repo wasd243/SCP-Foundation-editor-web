@@ -135,7 +135,7 @@ const customTags = {
     size: Tag.define(), // 用于字体大小标签
     aim: Tag.define(), // 用于AIM
     collapsible: Tag.define(), // 用于可折叠内容
-    monosapace: Tag.define(), // 等宽字
+    monospace: Tag.define(), // 等宽字
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
     user: Tag.define(), // user
@@ -163,7 +163,7 @@ const wikidotParser = parser.configure({
             "StrikeText":       customTags.strikethrough,
             "SupText":          customTags.sup,
             "SubText":          customTags.sub,
-            "Monospace":        customTags.monosapace,
+            "Monospace":        customTags.monospace,
             "Original":         customTags.original_text,
             // ——————————————————————————常用标记——————————————————————————
             "AttrName":         customTags.components,
