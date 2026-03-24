@@ -8,8 +8,7 @@ element {
   | CodeBlock
   | FootnoteBlock
   | Footnote
-  | tableHeaderDelimiter
-  | tableDelimiter
+  | TableMarker
   | Hr
   | LinkURL
   | ForcedNewLine
@@ -86,6 +85,10 @@ IncludeBlock {
 // ——————————————————————————include——————————————————————————
 
 
+TableMarker {
+  tableBar (TableTilde)? 
+}
+
 
 AttrList { Attr* }
 
@@ -106,8 +109,8 @@ AttrPath { attrPathToken }
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
   FootnoteClose { "[[/footnote]]" }
-  tableHeaderDelimiter { "||~" }
-  tableDelimiter { "||" }
+  tableBar { "||" }
+  TableTilde { "~" }
   ForcedNewLine { "@@@@" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
@@ -147,6 +150,7 @@ AttrPath { attrPathToken }
   space { $[ \t\n\r]+ }
 
   @precedence {
+    tableBar, TableTilde,
     IncludeOpen,
     DivClose, DivOpen,
     _tagEnd,
@@ -155,7 +159,6 @@ AttrPath { attrPathToken }
     FootnoteBlock,
     FootnoteOpen, FootnoteClose,
     Hr,
-    tableHeaderDelimiter, tableDelimiter,
     LinkURL,
     AttrValue, Equals, ForcedNewLine,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,

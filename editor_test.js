@@ -161,8 +161,8 @@ const wikidotParser = parser.configure({
 
 
             // ——————————————————————————表格操作——————————————————————————
-            "tableHeaderDelimiter":customTags.table_header,
-            "tableDelimiter":      customTags.table,
+            "TableTilde":          customTags.table_header,
+            "TableBar":            customTags.table,
             // ——————————————————————————表格操作——————————————————————————
 
 
