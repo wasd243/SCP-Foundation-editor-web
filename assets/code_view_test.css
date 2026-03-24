@@ -167,9 +167,15 @@ html, body, #editor-container {
 }
 
 
-
-
-
+/* tabview */
+.cm-editor .cm-tabview {
+    color: #FFC66D;
+    font-style: italic;
+}
+.cm-editor .cm-tab {
+    color: #E06C75;
+    font-style: normal;
+}
 
 
 

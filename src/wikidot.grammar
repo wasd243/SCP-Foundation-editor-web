@@ -13,6 +13,8 @@ element {
   | TableTilde
   | Hr
   | Blockquote
+  | TabViewBlock
+  | TabBlock
   | LinkURL
   | ForcedNewLine
   | Title
@@ -99,6 +101,22 @@ ImageBlock {
 
 
 
+// ——————————————————————————TabView——————————————————————————
+TabViewBlock {
+  TabViewOpenToken
+  element*
+  TabViewCloseToken
+}
+
+TabBlock {
+  TabOpenTag { TabOpenToken AttrList TabTagEnd { _tagEnd } }
+  element*
+  TabCloseToken
+}
+// ——————————————————————————TabView——————————————————————————
+
+
+
 AttrList { Attr* }
 
 Attr {
@@ -118,6 +136,10 @@ AttrPath { attrPathToken }
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
   FootnoteClose { "[[/footnote]]" }
+  TabViewOpenToken  { "[[tabview]]" }
+  TabViewCloseToken { "[[/tabview]]" }
+  TabOpenToken      { "[[tab" }
+  TabCloseToken     { "[[/tab]]" }
   ImageOpen { "[[" $[>=<]? "image"}
   TableBar { "||" }
   TableTilde { "~" }
@@ -162,6 +184,8 @@ AttrPath { attrPathToken }
 
   @precedence {
     Blockquote,
+    TabViewOpenToken, TabViewCloseToken,
+    TabOpenToken, TabCloseToken,
     TableBar, TableTilde,
     IncludeOpen,
     DivClose, DivOpen,

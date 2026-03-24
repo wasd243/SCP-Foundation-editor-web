@@ -161,6 +161,10 @@ const wikidotParser = parser.configure({
             "LinkURL":             customTags.link,
             "ImageOpen":           customTags.image,
             "ImageTagEnd":         customTags.image,
+            "TabViewOpenToken":    customTags.tabview,
+            "TabViewCloseToken":   customTags.tabview,
+            "TabOpenToken":        customTags.tab,
+            "TabCloseToken":       customTags.tab,
 
 
             // ——————————————————————————表格操作——————————————————————————
@@ -191,10 +195,12 @@ const wikidotParser = parser.configure({
             "AttrValue":           customTags.Highlight,
         }),
         foldNodeProp.add({
-            "DivBlock": foldInside,
+            "DivBlock":         foldInside,
             "CollapsibleBlock": foldInside,
-            "CodeBlock": foldInside,
-            "Footnote": foldInside,
+            "CodeBlock":        foldInside,
+            "Footnote":         foldInside,
+            "TabViewBlock":     foldInside,
+            "TabBlock":         foldInside,
         })
     ]
 });
