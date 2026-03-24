@@ -43,10 +43,12 @@ CollapsibleOpenTag {
 // ——————————————————————————Collapsible——————————————————————————
 
 // ——————————————————————————Code——————————————————————————
-CodeBlock {
-  CodeOpenTag
-  element*
-  CodeClose
+@skip {} {
+    CodeBlock {
+    CodeOpenTag
+    codeContent* // 确保中间的换行和文字都在 CodeBlock 内部
+    CodeClose
+  }
 }
 
 CodeOpenTag {
@@ -88,6 +90,7 @@ Attr {
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
+  codeContent { $[^] }
   BracketChar { "[" | "]" }
   Text  { ![\[*/\-_^, \t\n\r]+ }
   space { $[ \t\n\r]+ }
@@ -95,7 +98,7 @@ Attr {
   @precedence {
     DivClose, DivOpen,
     CollapsibleClose, CollapsibleOpen,
-    CodeClose, CodeOpen,
+    CodeClose, CodeOpen, codeContent,
     _tagEnd, AttrValue, Equals,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Original,
     AttrName, Text, space 
