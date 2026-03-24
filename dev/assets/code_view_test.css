@@ -130,6 +130,11 @@ html, body, #editor-container {
 }
 
 
+/* hr */
+.cm-editor .cm-hr {
+    color: #E8BF6A;
+}
+
 /* ——————————————————————————表格操作—————————————————————————— */
 .cm-editor .cm-table-header {
     color: #FFC66D;
