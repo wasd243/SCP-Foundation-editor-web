@@ -107,8 +107,12 @@ html, body, #editor-container {
 }
 
 
-
-
+/* link */
+.cm-editor .cm-link {
+    color: #61AFEF;
+    font-style: italic;
+    font-weight: lighter;
+}
 
 
 
