@@ -111,6 +111,7 @@ html, body, #editor-container {
 .cm-editor .cm-link {
     color: #61AFEF;
     font-style: italic;
+    text-decoration: underline;
     font-weight: lighter;
 }
 
@@ -130,9 +131,9 @@ html, body, #editor-container {
 
 
 /* ——————————————————————————表格操作—————————————————————————— */
-.cm-editor .cm-table {
+.cm-editor .cm-table-header {
     color: #FFC66D;
-    font-weight: bold !important;
+    font-weight: bold;
 }
 .cm-editor .cm-table {
     color: #FFC66D;
