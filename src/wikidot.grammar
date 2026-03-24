@@ -4,6 +4,7 @@
 element {
   DivBlock
   | CollapsibleBlock
+  | CodeBlock
   | Title
   | StrongText
   | EmText
@@ -41,6 +42,18 @@ CollapsibleOpenTag {
 }
 // ——————————————————————————Collapsible——————————————————————————
 
+// ——————————————————————————Code——————————————————————————
+CodeBlock {
+  CodeOpenTag
+  element*
+  CodeClose
+}
+
+CodeOpenTag {
+  CodeOpen AttrList CodeTagEnd {_tagEnd}
+}
+// ——————————————————————————Code——————————————————————————
+
 AttrList { Attr* }
 
 Attr {
@@ -52,6 +65,8 @@ Attr {
   DivClose { "[[/div]]" }
   CollapsibleOpen  { "[[collapsible" }
   CollapsibleClose { "[[/collapsible]]" }
+  CodeOpen { "[[code" }
+  CodeClose { "[[/code]]" }
   _tagEnd   { "]]" }
 
   Title { "+" "+"? "+"? "+"? "+"? "+"? " " ![\n\r]* }
@@ -80,6 +95,7 @@ Attr {
   @precedence {
     DivClose, DivOpen,
     CollapsibleClose, CollapsibleOpen,
+    CodeClose, CodeOpen,
     _tagEnd, AttrValue, Equals,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Original,
     AttrName, Text, space 
