@@ -160,8 +160,11 @@ html, body, #editor-container {
 }
 
 
-
-
+/* quote */
+.cm-editor .cm-quote {
+    color: #98C379;
+    font-style: italic;
+}
 
 
 
