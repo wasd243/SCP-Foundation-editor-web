@@ -159,6 +159,7 @@ const wikidotParser = parser.configure({
             "FootnoteClose":       customTags.footnote,
             "LinkURL":             customTags.link,
             "ImageOpen":           customTags.image,
+            "ImageTagEnd":         customTags.image,
 
 
             // ——————————————————————————表格操作——————————————————————————
