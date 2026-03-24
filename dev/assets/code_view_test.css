@@ -122,8 +122,11 @@ html, body, #editor-container {
 }
 
 
-
-
+/* @@@@ */
+.cm-editor .cm-newline {
+    color: #C678DD;
+    font-weight: bold;
+}
 
 
 
