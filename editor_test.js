@@ -165,7 +165,10 @@ const wikidotParser = parser.configure({
 
 
             "FootnoteBlock":       customTags.footnote_block,
+
+
             // ——————————————————————————常用标记——————————————————————————
+            "Hr":                  customTags.hr,
             "Title":               customTags.header,
             "StrongText":          customTags.strong,
             "EmText":              customTags.em,
