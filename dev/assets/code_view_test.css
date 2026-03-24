@@ -115,8 +115,11 @@ html, body, #editor-container {
 }
 
 
-
-
+/* footnote */
+.cm-editor .cm-footnote {
+    color: #E8BF6A;
+    font-weight: lighter;
+}
 
 
 
