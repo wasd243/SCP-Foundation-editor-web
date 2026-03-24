@@ -29,35 +29,35 @@ html, body, #editor-container {
 
 /* 加粗 */
 .cm-editor .cm-strong {
-    color: #f1f4f9;
+    color: #abb2bf;
     font-weight: bold;
 }
 
 
 /* 斜体 */
 .cm-editor .cm-em {
-    color: #f1f4f9;
+    color: #abb2bf;
     font-style: italic;
 }
 
 
 /* 下划线 */
 .cm-editor .cm-underline {
-    color: #f1f4f9;
+    color: #abb2bf;
     text-decoration: underline;
 }
 
 
 /* 删除线 */
 .cm-editor .cm-strikethrough {
-    color: #f1f4f9;
+    color: #abb2bf;
     text-decoration: line-through;
 }
 
 
 /* 上标 */
 .cm-editor .cm-sup {
-    color: #f1f4f9;
+    color: #abb2bf;
     font-size: 0.8em;
     vertical-align: super;
 }
@@ -65,7 +65,7 @@ html, body, #editor-container {
 
 /* 下标 */
 .cm-editor .cm-sub {
-    color: #f1f4f9;
+    color: #abb2bf;
     font-size: 0.8em;
     vertical-align: sub;
 }
@@ -73,7 +73,7 @@ html, body, #editor-container {
 
 /* original_Text */
 .cm-editor .cm-original-text {
-    color: #f1f4f9;
+    color: #abb2bf;
     font-weight: normal !important;
 }
 
