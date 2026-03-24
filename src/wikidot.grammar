@@ -67,7 +67,7 @@ Attr {
   DivClose { "[[/div]]" }
   CollapsibleOpen  { "[[collapsible" }
   CollapsibleClose { "[[/collapsible]]" }
-  CodeOpen { "[[" "code"}
+  CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
   FootnoteBlock { "[[footnoteblock]]" }
   _tagEnd   { "]]" }
@@ -76,7 +76,7 @@ Attr {
 
   // ——————————————————————————常用标记——————————————————————————
   StrongText    { "**" (![*\n] | "*" ![*])* "**" }
-  EmText        { "//" (![/\n] | "/" ![/])* "//" }
+  EmText    { "//" ![/] (![/\n] | "/" ![/])* "//" }
   UnderlineText { "__" (![_\n] | "_" ![_])* "__" }
   StrikeText    { "--" (![-\n] | "-" ![-])* "--" }
   SupText       { "^^" (![^\n] | "^" ![^])* "^^" }
@@ -94,7 +94,7 @@ Attr {
   StarChar { "*" }
   codeContent { 
     ![\[\n\r]+ | 
-    "[" ![\[/] |  // 允许单括号，但如果是 [/ 则可能是关闭标签的开始，停下
+    "[" ![\[/] |
     "\n" | "\r"
   }
   BracketChar { "[" | "]" }
