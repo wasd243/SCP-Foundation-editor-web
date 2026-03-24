@@ -25426,7 +25426,7 @@ var require_editor_test = __commonJS({
       // 用于AIM
       collapsible: Tag.define(),
       // 用于可折叠内容
-      monosapace: Tag.define(),
+      monospace: Tag.define(),
       // 等宽字
       license: Tag.define(),
       // LICENSE
@@ -25458,7 +25458,7 @@ var require_editor_test = __commonJS({
           "StrikeText": customTags.strikethrough,
           "SupText": customTags.sup,
           "SubText": customTags.sub,
-          "Monospace": customTags.monosapace,
+          "Monospace": customTags.monospace,
           "Original": customTags.original_text,
           // ——————————————————————————常用标记——————————————————————————
           "AttrName": customTags.components,

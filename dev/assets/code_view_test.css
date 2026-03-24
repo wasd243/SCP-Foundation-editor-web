@@ -101,8 +101,10 @@ html, body, #editor-container {
     color: #E8BF6A;
 }
 
-
-
+/* monospace */
+.cm-editor .cm-monospace {
+    color: #759DCB;
+}
 
 
 
