@@ -100,7 +100,7 @@ const customTags = {
     em: Tag.define(),
     underline: Tag.define(),
     strikethrough: Tag.define(),
-    link: Tag.define(),
+    link: Tag.define(), // 链接🔗
     hr: Tag.define(),
     rate: Tag.define(),
     right: Tag.define(),
@@ -154,6 +154,7 @@ const wikidotParser = parser.configure({
             "CodeOpen":         customTags.code,
             "CodeTagEnd":       customTags.code,
             "CodeClose":        customTags.code,
+            "LinkURL":          customTags.link,
             "FootnoteBlock":    customTags.footnote_block,
             // ——————————————————————————常用标记——————————————————————————
             "Title":            customTags.header,

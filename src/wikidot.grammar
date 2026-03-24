@@ -6,6 +6,7 @@ element {
   | CollapsibleBlock
   | CodeBlock
   | FootnoteBlock
+  | LinkURL
   | Title
   | StrongText
   | EmText
@@ -69,6 +70,7 @@ Attr {
   CollapsibleClose { "[[/collapsible]]" }
   CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
+  LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
   _tagEnd   { "]]" }
 
@@ -106,6 +108,7 @@ Attr {
     CollapsibleClose, CollapsibleOpen,
     CodeClose, CodeOpen, codeContent,
     FootnoteBlock,
+    LinkURL,
     _tagEnd, AttrValue, Equals,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
     AttrName, Text, space 
