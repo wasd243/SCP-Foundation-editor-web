@@ -116,7 +116,6 @@ const customTags = {
     code: Tag.define(), // 用于代码块
     table: Tag.define(),
     table_header: Tag.define(),
-    table_cell: Tag.define(),
     original_text: Tag.define(), // 用于原始文本
     image: Tag.define(), // 用于图片
     footnote: Tag.define(),
@@ -144,36 +143,44 @@ const customTags = {
 const wikidotParser = parser.configure({
     props: [
         styleTags({
-            "DivOpen":          customTags.div,
-            "DivTagEnd":        customTags.div,
-            "DivClose":         customTags.div,
-            "CollapsibleOpen":  customTags.collapsible,
-            "CollapsibleTagEnd":customTags.collapsible,
-            "CollapsibleClose": customTags.collapsible,
-            "CodeOpen":         customTags.code,
-            "CodeTagEnd":       customTags.code,
-            "CodeClose":        customTags.code,
-            "FootnoteOpen":     customTags.footnote,
-            "FootnoteTagEnd":   customTags.footnote,
-            "FootnoteClose":    customTags.footnote,
-            "LinkURL":          customTags.link,
-            "FootnoteBlock":    customTags.footnote_block,
+            "DivOpen":             customTags.div,
+            "DivTagEnd":           customTags.div,
+            "DivClose":            customTags.div,
+            "CollapsibleOpen":     customTags.collapsible,
+            "CollapsibleTagEnd":   customTags.collapsible,
+            "CollapsibleClose":    customTags.collapsible,
+            "CodeOpen":            customTags.code,
+            "CodeTagEnd":          customTags.code,
+            "CodeClose":           customTags.code,
+            "FootnoteOpen":        customTags.footnote,
+            "FootnoteTagEnd":      customTags.footnote,
+            "FootnoteClose":       customTags.footnote,
+            "LinkURL":             customTags.link,
+
+
+            // ——————————————————————————表格操作——————————————————————————
+            "tableHeaderDelimiter":customTags.table_header,
+            "tableDelimiter":      customTags.table,
+            // ——————————————————————————表格操作——————————————————————————
+
+
+            "FootnoteBlock":       customTags.footnote_block,
             // ——————————————————————————常用标记——————————————————————————
-            "Title":            customTags.header,
-            "StrongText":       customTags.strong,
-            "EmText":           customTags.em,
-            "UnderlineText":    customTags.underline,
-            "StrikeText":       customTags.strikethrough,
-            "SupText":          customTags.sup,
-            "SubText":          customTags.sub,
-            "Monospace":        customTags.monospace,
-            "ForcedNewLine":    customTags.newline,
-            "Original":         customTags.original_text,
+            "Title":               customTags.header,
+            "StrongText":          customTags.strong,
+            "EmText":              customTags.em,
+            "UnderlineText":       customTags.underline,
+            "StrikeText":          customTags.strikethrough,
+            "SupText":             customTags.sup,
+            "SubText":             customTags.sub,
+            "Monospace":           customTags.monospace,
+            "ForcedNewLine":       customTags.newline,
+            "Original":            customTags.original_text,
             // ——————————————————————————常用标记——————————————————————————
-            "AttrName":         customTags.components,
-            "Equals":           customTags.equal,
-            "AttrValue":        customTags.Highlight,
-            "Text":             customTags.original_text,
+            "AttrName":            customTags.components,
+            "Equals":              customTags.equal,
+            "AttrValue":           customTags.Highlight,
+            "Text":                customTags.original_text,
         }),
         foldNodeProp.add({
             "DivBlock": foldInside,
@@ -219,7 +226,6 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.code, class: "cm-code"},
     { tag: customTags.table, class: "cm-table" },
     { tag: customTags.table_header, class: "cm-table-header" },
-    { tag: customTags.table_cell, class: "cm-table-cell" },
     { tag: customTags.original_text, class: "cm-original-text" },
     { tag: customTags.image, class: "cm-image" },
     { tag: customTags.footnote, class: "cm-footnote" },

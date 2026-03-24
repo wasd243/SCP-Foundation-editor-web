@@ -7,6 +7,8 @@ element {
   | CodeBlock
   | FootnoteBlock
   | Footnote
+  | tableDelimiter //table
+  | tableHeaderDelimiter //table
   | LinkURL
   | ForcedNewLine
   | Title
@@ -86,6 +88,8 @@ Attr {
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
   FootnoteClose { "[[/footnote]]" }
+  tableHeaderDelimiter { "||~" }
+  tableDelimiter { "||" }
   ForcedNewLine { "@@@@" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
@@ -117,7 +121,7 @@ Attr {
     "\n" | "\r"
   }
   BracketChar { "[" | "]" }
-  Text  { ![\[*/\-_^, \t\n\r]+ }
+  Text { ![\[\]*/\-_^, \t\n\r|]+ }
   space { $[ \t\n\r]+ }
 
   @precedence {
@@ -126,6 +130,7 @@ Attr {
     CodeClose, CodeOpen, codeContent,
     FootnoteBlock,
     FootnoteOpen, FootnoteClose,
+    tableHeaderDelimiter, tableDelimiter,
     LinkURL,
     _tagEnd, AttrValue, Equals, ForcedNewLine,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
