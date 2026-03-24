@@ -3,6 +3,7 @@
 
 element {
   DivBlock
+  | IncludeBlock
   | CollapsibleBlock
   | CodeBlock
   | FootnoteBlock
@@ -78,6 +79,14 @@ Footnote {
 
 
 
+// ——————————————————————————include——————————————————————————
+IncludeBlock {
+  IncludeOpen AttrList IncludeTagEnd {_tagEnd}
+}
+// ——————————————————————————include——————————————————————————
+
+
+
 AttrList { Attr* }
 
 Attr {
@@ -89,6 +98,7 @@ Attr {
   DivClose { "[[/div]]" }
   CollapsibleOpen  { "[[collapsible" }
   CollapsibleClose { "[[/collapsible]]" }
+  IncludeOpen { "[[include"}
   CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
@@ -131,6 +141,7 @@ Attr {
   space { $[ \t\n\r]+ }
 
   @precedence {
+    IncludeOpen,
     DivClose, DivOpen,
     CollapsibleClose, CollapsibleOpen,
     CodeClose, CodeOpen,
