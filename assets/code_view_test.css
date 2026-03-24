@@ -23,7 +23,7 @@ html, body, #editor-container {
 .cm-editor .cm-header {
     color: #e06c75;
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 
@@ -96,8 +96,10 @@ html, body, #editor-container {
 }
 
 
-
-
+/* footnoteblock */
+.cm-editor .cm-footnote-block {
+    color: #E8BF6A;
+}
 
 
 

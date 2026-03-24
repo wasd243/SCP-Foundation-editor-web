@@ -5,6 +5,7 @@ element {
   DivBlock
   | CollapsibleBlock
   | CodeBlock
+  | FootnoteBlock
   | Title
   | StrongText
   | EmText
@@ -67,6 +68,7 @@ Attr {
   CollapsibleClose { "[[/collapsible]]" }
   CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
+  FootnoteBlock { "[[footnoteblock]]" }
   _tagEnd   { "]]" }
 
   Title { "+" "+"? "+"? "+"? "+"? "+"? " " ![\n\r]* }
@@ -101,6 +103,7 @@ Attr {
     DivClose, DivOpen,
     CollapsibleClose, CollapsibleOpen,
     CodeClose, CodeOpen, codeContent,
+    FootnoteBlock,
     _tagEnd, AttrValue, Equals,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Original,
     AttrName, Text, space 

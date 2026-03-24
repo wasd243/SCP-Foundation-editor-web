@@ -154,6 +154,7 @@ const wikidotParser = parser.configure({
             "CodeOpen":         customTags.code,
             "CodeTagEnd":       customTags.code,
             "CodeClose":        customTags.code,
+            "FootnoteBlock":    customTags.footnote_block,
             // ——————————————————————————常用标记——————————————————————————
             "Title":            customTags.header,
             "StrongText":       customTags.strong,
