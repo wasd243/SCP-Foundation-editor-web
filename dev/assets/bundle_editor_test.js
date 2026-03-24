@@ -25465,7 +25465,8 @@ var require_editor_test = __commonJS({
         }),
         foldNodeProp.add({
           "DivBlock": foldInside,
-          "CollapsibleBlock": foldInside
+          "CollapsibleBlock": foldInside,
+          "CodeBlock": foldInside
         })
       ]
     });
