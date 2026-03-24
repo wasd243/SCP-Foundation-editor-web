@@ -67,7 +67,7 @@ Attr {
   DivClose { "[[/div]]" }
   CollapsibleOpen  { "[[collapsible" }
   CollapsibleClose { "[[/collapsible]]" }
-  CodeOpen { "[[" "code" (std.whitespace | "]]") }
+  CodeOpen { "[[" "code"}
   CodeClose { "[[/code]]" }
   FootnoteBlock { "[[footnoteblock]]" }
   _tagEnd   { "]]" }
@@ -94,8 +94,8 @@ Attr {
   StarChar { "*" }
   codeContent { 
     ![\[\n\r]+ | 
-    "[" ![\[] | 
-    "\n" | "\r" 
+    "[" ![\[/] |  // 允许单括号，但如果是 [/ 则可能是关闭标签的开始，停下
+    "\n" | "\r"
   }
   BracketChar { "[" | "]" }
   Text  { ![\[*/\-_^, \t\n\r]+ }
