@@ -8,6 +8,7 @@ element {
   | CodeBlock
   | FootnoteBlock
   | Footnote
+  | ImageBlock
   | TableBar
   | TableTilde
   | Hr
@@ -87,6 +88,16 @@ IncludeBlock {
 
 
 
+// ——————————————————————————image——————————————————————————
+ImageBlock {
+  ImageOpenTag { ImageOpen }
+  AttrList
+  ImageTagEnd { _tagEnd }
+}
+// ——————————————————————————image——————————————————————————
+
+
+
 AttrList { Attr* }
 
 Attr {
@@ -106,6 +117,7 @@ AttrPath { attrPathToken }
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
   FootnoteClose { "[[/footnote]]" }
+  ImageOpen { "[[" $[>=<]? "image"}
   TableBar { "||" }
   TableTilde { "~" }
   ForcedNewLine { "@@@@" }
@@ -155,6 +167,7 @@ AttrPath { attrPathToken }
     CodeClose, CodeOpen,
     FootnoteBlock,
     FootnoteOpen, FootnoteClose,
+    ImageOpen,
     Hr,
     LinkURL,
     AttrValue, Equals, ForcedNewLine,
