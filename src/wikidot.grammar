@@ -262,7 +262,7 @@ AttrPath { attrPathToken }
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
   Equals    { "=" }
   // 在 @tokens 里面增加一个不带引号的值定义
-  attrValueUnquoted { ![ \t\n\r\]|]+ } 
+  attrValueUnquoted { $[^\s\]]+ } 
   
   // 然后修改 AttrValue 的定义
   AttrValue { 
