@@ -94,9 +94,6 @@ IncludeBlock {
 
 IncludeParamList {
   IncludeBar // 竖线
-  IncludeAttr {
-    IncludeParamValue 
-  }
 }
 
 IncludePart1 {
@@ -112,8 +109,6 @@ IncludePart2 {
 IncludePart3 {
   includeSeg_
 }
-
-IncludeParamValue { AttrValue }
 // ——————————————————————————include——————————————————————————
 
 
