@@ -181,21 +181,7 @@ const wikidotParser = parser.configure({
         }
         // HTML
         if (node.name === "HTMLContent") {
-            let htmlBlock = node.node.parent;
-
-            if (htmlBlock && htmlBlock.name === "HTMLBlock") {
-                let openTag = htmlBlock.getChild("HTMLOpenTag");
-                if (openTag) {
-                    let attrList = openTag.getChild("AttrList")
-
-                    if (attrList) {
-                        let attrText = input.read(attrList.from, attrList.to).toLowerCase();
-                        if (attrText.includes("html")) {
-                            return { parser: htmlLanguage.parser};
-                        }
-                    }
-                }
-            }
+            return { parser: htmlLanguage.parser };
         }
         // 如果不是 CSS/HTML，或者没匹配上，返回 null（保持原生 Wikidot 解析）
         return null;
