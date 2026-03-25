@@ -28,6 +28,8 @@ import { syntaxHighlighting, HighlightStyle } from "@codemirror/language";
 // Lezer导入
 import { parser } from "./src/parser.js";
 import { LRLanguage, LanguageSupport } from "@codemirror/language";
+import { parseMixed } from "@lezer/common"
+import { cssLanguage } from "@codemirror/lang-css"
 import { styleTags, tags as t, Tag } from "@lezer/highlight";
 import { foldNodeProp, foldInside } from "@codemirror/language";
 // 其他导入
@@ -143,6 +145,36 @@ const customTags = {
 };
 
 const wikidotParser = parser.configure({
+    // 混合解析逻辑
+    wrap: parseMixed((node, input) => {
+        // 当解析器走到 ModuleContent 节点时触发
+        if (node.name === "ModuleContent") {
+            // 1. 向上找，拿到整个 ModuleBlock 父节点
+            let moduleBlock = node.node.parent;
+            
+            if (moduleBlock && moduleBlock.name === "ModuleBlock") {
+                // 2. 找到它前面的 ModuleOpenTag
+                let openTag = moduleBlock.getChild("ModuleOpenTag");
+                
+                if (openTag) {
+                    // 3. 提取属性列表 AttrList
+                    let attrList = openTag.getChild("AttrList");
+                    
+                    if (attrList) {
+                        // 4. 读取 AttrList 的真实文本内容 (通过 input.read 截取源码)
+                        let attrText = input.read(attrList.from, attrList.to).toLowerCase();
+                        
+                        // 5. 如果属性里带 'css'，移交解析权！
+                        if (attrText.includes("css")) {
+                            return { parser: cssLanguage.parser };
+                        }
+                    }
+                }
+            }
+        }
+        // 如果不是 CSS，或者没匹配上，返回 null（保持原生 Wikidot 解析）
+        return null;
+    }),
     props: [
         styleTags({
             "IncludeOpen":         customTags.include,
