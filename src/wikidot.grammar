@@ -16,6 +16,7 @@ element {
   | TableBar
   | TableTilde
   | Hr
+  | HTMLBlock
   | Blockquote
   | TabViewBlock
   | TabBlock
@@ -179,6 +180,25 @@ ModuleContent {
 // ——————————————————————————Module——————————————————————————
 
 
+// ——————————————————————————HTML——————————————————————————
+HTMLBlock {
+  HTMLOpenTag
+  HTMLContent
+  HTMLCloseToken
+}
+
+HTMLOpenTag {
+  HTMLOpenToken
+  AttrList
+  HTMLTagEnd {_tagEnd}
+}
+
+HTMLContent {
+  codeContent*
+}
+// ——————————————————————————HTML——————————————————————————
+
+
 
 AttrList { Attr* }
 
@@ -196,6 +216,8 @@ AttrPath { attrPathToken }
   CollapsibleClose { "[[/collapsible]]" }
   ModuleOpenToken { "[[module"}
   ModuleCloseToken { "[[/module]]"}
+  HTMLOpenToken { "[[html" }
+  HTMLCloseToken { "[[/html]]" }
   // include begin
   IncludeOpen { "[[include" }
   IncludeBar { "|" }
@@ -268,6 +290,8 @@ AttrPath { attrPathToken }
     TabCloseToken,
     ModuleOpenToken,
     ModuleCloseToken,
+    HTMLOpenToken,
+    HTMLCloseToken,
     TableBar,
     TableTilde,
     IncludeOpen,

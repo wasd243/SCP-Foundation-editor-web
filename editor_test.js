@@ -102,7 +102,8 @@ const customTags = {
     em: Tag.define(),
     underline: Tag.define(),
     strikethrough: Tag.define(),
-    module: Tag.define(),
+    module: Tag.define(), // MODULE
+    html: Tag.define(), // HTML
     link: Tag.define(), // 链接🔗
     hr: Tag.define(),
     rate: Tag.define(),
@@ -146,7 +147,7 @@ const customTags = {
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
     user: Tag.define(), // user
-    Highlight: Tag.define(), // CSS and html temporary highlight
+    Highlight: Tag.define(), // ATTR highlight
 };
 
 const wikidotParser = parser.configure({
@@ -214,6 +215,9 @@ const wikidotParser = parser.configure({
             "ModuleOpenToken":     customTags.module,
             "ModuleCloseToken":    customTags.module,
             "ModuleTagEnd":        customTags.module,
+            "HTMLOpenToken":       customTags.html,
+            "HTMLCloseToken":      customTags.html,
+            "HTMLTagEnd":          customTags.html,
 
             // ——————————————————————————表格操作——————————————————————————
             "TableTilde":          customTags.table_header,
@@ -276,6 +280,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.link, class: "cm-link" },
     { tag: customTags.hr, class: "cm-hr" },
     { tag: customTags.module, class: "cm-module"},
+    { tag: customTags.html, class: "cm-html"},
     { tag: customTags.rate, class: "cm-rate" },
     { tag: customTags.right, class: "cm-right" },
     { tag: customTags.left, class: "cm-left" },
