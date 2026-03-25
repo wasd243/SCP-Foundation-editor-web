@@ -6,6 +6,7 @@ element {
   | IncludeBlock
   | CollapsibleBlock
   | CodeBlock
+  | UserBlock
   | ModuleBlock
   | FootnoteBlock
   | Footnote
@@ -138,6 +139,13 @@ TabBlock {
 // ——————————————————————————TabView——————————————————————————
 
 
+// ——————————————————————————User——————————————————————————
+UserBlock {
+  UserOpenTag { UserOpen AttrList UserTagEnd { _tagEnd } }
+}
+// ——————————————————————————User——————————————————————————
+
+
 
 // ——————————————————————————Module——————————————————————————
 ModuleBlock {
@@ -180,6 +188,7 @@ AttrPath { attrPathToken }
   IncludeBar { "|" }
   includeSeg_ { ":" ![ :\[\]\n\r]+ }
   // include end
+  UserOpen { "[[" "*"? "user" }
   CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
@@ -238,6 +247,7 @@ AttrPath { attrPathToken }
     TableBar, TableTilde,
     IncludeOpen, IncludeBar, includeSeg_,
     DivClose, DivOpen,
+    UserOpen,
     _tagEnd,
     CollapsibleClose, CollapsibleOpen,
     CodeClose, CodeOpen,

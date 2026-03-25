@@ -196,6 +196,8 @@ const wikidotParser = parser.configure({
             "CodeOpen":            customTags.code,
             "CodeTagEnd":          customTags.code,
             "CodeClose":           customTags.code,
+            "UserOpen":            customTags.user,
+            "UserTagEnd":          customTags.user,
             "FootnoteOpen":        customTags.footnote,
             "FootnoteTagEnd":      customTags.footnote,
             "FootnoteClose":       customTags.footnote,
