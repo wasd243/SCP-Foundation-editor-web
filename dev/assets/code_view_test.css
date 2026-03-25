@@ -194,6 +194,11 @@ html, body, #editor-container {
     font-style: italic;
 }
 
+/* components */
+.cm-editor .cm-components {
+    color: #61AFEF;
+}
+
 
 
 
