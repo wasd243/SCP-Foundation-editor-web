@@ -25495,7 +25495,8 @@ var require_editor_test = __commonJS({
           "CodeBlock": foldInside,
           "Footnote": foldInside,
           "TabViewBlock": foldInside,
-          "TabBlock": foldInside
+          "TabBlock": foldInside,
+          "ModuleBlock": foldInside
         })
       ]
     });
