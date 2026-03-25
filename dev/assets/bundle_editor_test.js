@@ -26036,6 +26036,8 @@ var require_editor_test = __commonJS({
       // 用于字体大小标签
       aim: Tag.define(),
       // 用于AIM
+      components: Tag.define(),
+      // ATTRNAME
       collapsible: Tag.define(),
       // 用于可折叠内容
       monospace: Tag.define(),
@@ -26155,6 +26157,8 @@ var require_editor_test = __commonJS({
       { tag: customTags.center, class: "cm-center" },
       { tag: customTags.sup, class: "cm-sup" },
       { tag: customTags.sub, class: "cm-sub" },
+      { tag: customTags.components, class: "cm-components" },
+      // ATTRLIST IMPORTANT
       { tag: customTags.newline, class: "cm-newline" },
       { tag: customTags.monospace, class: "cm-monospace" },
       { tag: customTags.list1, class: "cm-list1" },
