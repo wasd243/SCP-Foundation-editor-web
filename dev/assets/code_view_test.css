@@ -194,9 +194,27 @@ html, body, #editor-container {
     font-style: italic;
 }
 
+
 /* components */
 .cm-editor .cm-components {
     color: #61AFEF;
+}
+
+
+/* = */
+.cm-editor .cm-equal {
+    color: orange;
+}
+
+
+/* | */
+.cm-editor .cm-line-up {
+    color: #C678DD;
+}
+
+/* numbers */
+.cm-editor .cm-num {
+    color: #E06C75;
 }
 
 
