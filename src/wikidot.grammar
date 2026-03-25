@@ -93,8 +93,7 @@ IncludeBlock {
 }
 
 IncludeParamList {
-  IncludeBar // 专属于 include 的竖线
-  IncludeColon
+  IncludeBar // 竖线
   IncludeAttr {
     IncludeParamValue 
   }
@@ -184,7 +183,6 @@ AttrPath { attrPathToken }
   // include begin
   IncludeOpen { "[[include" }
   IncludeBar { "|" }
-  IncludeColon { ":" }
   includeSeg_ { ":" ![ :\[\]\n\r]+ }
   // include end
   CodeOpen { "[[code" }
@@ -243,7 +241,7 @@ AttrPath { attrPathToken }
     TabOpenToken, TabCloseToken,
     ModuleOpenToken, ModuleCloseToken,
     TableBar, TableTilde,
-    IncludeOpen, IncludeBar, IncludeColon, includeSeg_,
+    IncludeOpen, IncludeBar, includeSeg_,
     DivClose, DivOpen,
     _tagEnd,
     CollapsibleClose, CollapsibleOpen,
