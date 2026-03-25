@@ -96,8 +96,7 @@ IncludeParamList {
   IncludeBar // 专属于 include 的竖线
   IncludeColon
   IncludeAttr {
-    (IncludeParamName IncludeParamValue) | 
-    IncludeAttrPath
+    IncludeParamValue 
   }
 }
 
@@ -115,9 +114,7 @@ IncludePart3 {
   includeSeg_
 }
 
-IncludeParamName  { AttrName }
 IncludeParamValue { AttrValue }
-IncludeAttrPath   { attrPathToken }
 // ——————————————————————————include——————————————————————————
 
 

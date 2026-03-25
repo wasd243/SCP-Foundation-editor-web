@@ -129,7 +129,6 @@ const customTags = {
     include_1: Tag.define(),
     include_2: Tag.define(),
     include_3: Tag.define(),
-    propertyName: Tag.define(),
     num: Tag.define(),
     scp_wiki: Tag.define(), // 用于特定的主题标签
     div: Tag.define(), // 用于 [[div ...]] 标签
@@ -187,7 +186,6 @@ const wikidotParser = parser.configure({
             "IncludePart2":        customTags.include_2,
             "IncludePart3":        customTags.include_3,
             "IncludeBar":          customTags.line_up,
-            "IncludeParamName":    customTags.propertyName,
             "IncludeParamValue":   customTags.num,
             "IncludeParamColon":   customTags.equal,
             "IncludeTagEnd":       customTags.include,
@@ -288,7 +286,6 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.list2, class: "cm-list2" },
     { tag: customTags.list3, class: "cm-list3" },
     { tag: customTags.list4, class: "cm-list4" },
-    { tag: customTags.propertyName, class: "cm-propertyname"},
     { tag: customTags.num, class: "cm-num"},
     { tag: customTags.quote, class: "cm-quote"},
     { tag: customTags.code, class: "cm-code"},
