@@ -86,7 +86,11 @@ Footnote {
 
 // ——————————————————————————include——————————————————————————
 IncludeBlock {
-  IncludeOpen AttrList IncludeTagEnd {_tagEnd}
+  IncludeOpen
+  IncludeSeg1?
+  IncludeSeg2?
+  IncludeSeg3?
+  IncludeTagEnd { _tagEnd }
 }
 // ——————————————————————————include——————————————————————————
 
@@ -154,7 +158,12 @@ AttrPath { attrPathToken }
   CollapsibleClose { "[[/collapsible]]" }
   ModuleOpenToken { "[[module"}
   ModuleCloseToken { "[[/module]]"}
-  IncludeOpen { "[[include"}
+  // include begin
+  IncludeOpen { "[[include" }
+  IncludeSeg1 { ":" ![ :\[\]\n\r]+ }
+  IncludeSeg2 { ":" ![ :\[\]\n\r]+ }
+  IncludeSeg3 { ":" ![ :\[\]\n\r]+ }
+  // include end
   CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
   FootnoteOpen { "[[footnote" }
@@ -211,7 +220,7 @@ AttrPath { attrPathToken }
     TabOpenToken, TabCloseToken,
     ModuleOpenToken, ModuleCloseToken,
     TableBar, TableTilde,
-    IncludeOpen,
+    IncludeOpen, IncludeSeg1, IncludeSeg2, IncludeSeg3,
     DivClose, DivOpen,
     _tagEnd,
     CollapsibleClose, CollapsibleOpen,

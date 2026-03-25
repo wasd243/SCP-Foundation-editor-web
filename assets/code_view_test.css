@@ -134,6 +134,15 @@ html, body, #editor-container {
 .cm-editor .cm-include {
     color: #61AFEF;
 }
+.cm-editor .cm-include-1 {
+    color: #C678DD;
+}
+.cm-editor .cm-include-2 {
+    color: #E8BF6A;
+}
+.cm-editor .cm-include-3 {
+    color: #98C379;
+}
 
 
 /* hr */

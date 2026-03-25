@@ -126,12 +126,14 @@ const customTags = {
     footnote_block: Tag.define(), // 用于脚注块
     color: Tag.define(), 
     include: Tag.define(), // 用于 [[include ...]] 标签
+    include_1: Tag.define(),
+    include_2: Tag.define(),
+    include_3: Tag.define(),
     scp_wiki: Tag.define(), // 用于特定的主题标签
     div: Tag.define(), // 用于 [[div ...]] 标签
     tabview: Tag.define(), // 用于 [[tabview]] 标签
     tab: Tag.define(), // tabview增强
     acs: Tag.define(), // 用于ACS
-    components: Tag.define(), // Components
     equal: Tag.define(), // 用于 = 号
     line_up: Tag.define(), // 用于|
     size: Tag.define(), // 用于字体大小标签
@@ -178,6 +180,9 @@ const wikidotParser = parser.configure({
     props: [
         styleTags({
             "IncludeOpen":         customTags.include,
+            "IncludeSeg1":         customTags.include_1,
+            "IncludeSeg2":         customTags.include_2,
+            "IncludeSeg3":         customTags.include_3,
             "IncludeTagEnd":       customTags.include,
             "DivOpen":             customTags.div,
             "DivTagEnd":           customTags.div,
@@ -285,12 +290,14 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.footnote_block, class: "cm-footnote-block" },
     { tag: customTags.color, class: "cm-color" },
     { tag: customTags.include, class: "cm-include" },
+    { tag: customTags.include_1, class: "cm-include-1"},
+    { tag: customTags.include_2, class: "cm-include-2"},
+    { tag: customTags.include_3, class: "cm-include-3"},
     { tag: customTags.scp_wiki, class: "cm-scp-wiki" },
     { tag: customTags.div, class: "cm-div" },
     { tag: customTags.tabview, class: "cm-tabview" },
     { tag: customTags.tab, class: "cm-tab" },
     { tag: customTags.acs, class: "cm-acs" },
-    { tag: customTags.components, class: "cm-components" },
     { tag: customTags.equal, class: "cm-equal" },
     { tag: customTags.line_up, class: "cm-line-up" },
     { tag: customTags.size, class: "cm-size" },
