@@ -88,7 +88,17 @@ Footnote {
 IncludeBlock {
   IncludeOpen
   IncludePart1?
+  IncludeParamList*
   IncludeTagEnd { _tagEnd }
+}
+
+IncludeParamList {
+  IncludeBar // 专属于 include 的竖线
+  IncludeColon
+  IncludeAttr {
+    (IncludeParamName IncludeParamValue) | 
+    IncludeAttrPath
+  }
 }
 
 IncludePart1 {
@@ -104,6 +114,10 @@ IncludePart2 {
 IncludePart3 {
   includeSeg_
 }
+
+IncludeParamName  { AttrName }
+IncludeParamValue { AttrValue }
+IncludeAttrPath   { attrPathToken }
 // ——————————————————————————include——————————————————————————
 
 
@@ -172,6 +186,8 @@ AttrPath { attrPathToken }
   ModuleCloseToken { "[[/module]]"}
   // include begin
   IncludeOpen { "[[include" }
+  IncludeBar { "|" }
+  IncludeColon { ":" }
   includeSeg_ { ":" ![ :\[\]\n\r]+ }
   // include end
   CodeOpen { "[[code" }
@@ -230,7 +246,7 @@ AttrPath { attrPathToken }
     TabOpenToken, TabCloseToken,
     ModuleOpenToken, ModuleCloseToken,
     TableBar, TableTilde,
-    IncludeOpen, includeSeg_,
+    IncludeOpen, IncludeBar, IncludeColon, includeSeg_,
     DivClose, DivOpen,
     _tagEnd,
     CollapsibleClose, CollapsibleOpen,
