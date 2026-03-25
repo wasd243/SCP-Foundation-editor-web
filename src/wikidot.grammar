@@ -121,7 +121,7 @@ TabBlock {
 // ——————————————————————————Module——————————————————————————
 ModuleBlock {
   ModuleOpenTag
-  element*
+  codeContent*
   ModuleCloseToken
 }
 
