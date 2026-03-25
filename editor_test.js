@@ -164,6 +164,7 @@ const wikidotParser = parser.configure({
             "TabViewOpenToken":    customTags.tabview,
             "TabViewCloseToken":   customTags.tabview,
             "TabOpenToken":        customTags.tab,
+            "TabTagEnd":           customTags.tab,
             "TabCloseToken":       customTags.tab,
 
 
