@@ -30,6 +30,7 @@ import { parser } from "./src/parser.js";
 import { LRLanguage, LanguageSupport } from "@codemirror/language";
 import { parseMixed } from "@lezer/common"
 import { cssLanguage } from "@codemirror/lang-css"
+import { htmlLanguage} from "@codemirror/lang-html"
 import { styleTags, tags as t, Tag } from "@lezer/highlight";
 import { foldNodeProp, foldInside } from "@codemirror/language";
 // 其他导入
@@ -178,7 +179,25 @@ const wikidotParser = parser.configure({
                 }
             }
         }
-        // 如果不是 CSS，或者没匹配上，返回 null（保持原生 Wikidot 解析）
+        // HTML
+        if (node.name === "HTMLContent") {
+            let htmlBlock = node.node.parent;
+
+            if (htmlBlock && htmlBlock.name === "HTMLBlock") {
+                let openTag = htmlBlock.getChild("HTMLOpenTag");
+                if (openTag) {
+                    let attrList = openTag.getChild("AttrList")
+
+                    if (attrList) {
+                        let attrText = input.read(attrList.from, attrList.to).toLowerCase();
+                        if (attrText.includes("html")) {
+                            return { parser: htmlLanguage.parser};
+                        }
+                    }
+                }
+            }
+        }
+        // 如果不是 CSS/HTML，或者没匹配上，返回 null（保持原生 Wikidot 解析）
         return null;
     }),
     props: [
@@ -250,11 +269,11 @@ const wikidotParser = parser.configure({
             "DivBlock":         foldInside,
             "CollapsibleBlock": foldInside,
             "CodeBlock":        foldInside,
-            "Footnote":         foldInside,
             "TabViewBlock":     foldInside,
             "TabBlock":         foldInside,
             "ModuleBlock":      foldInside,
             "IncludeBlock":     foldInside,
+            "HTMLBlock":        foldInside,
         })
     ]
 });
