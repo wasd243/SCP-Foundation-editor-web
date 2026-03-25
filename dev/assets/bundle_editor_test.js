@@ -25460,6 +25460,7 @@ var require_editor_test = __commonJS({
           "TabViewOpenToken": customTags.tabview,
           "TabViewCloseToken": customTags.tabview,
           "TabOpenToken": customTags.tab,
+          "TabTagEnd": customTags.tab,
           "TabCloseToken": customTags.tab,
           // ——————————————————————————表格操作——————————————————————————
           "TableTilde": customTags.table_header,
