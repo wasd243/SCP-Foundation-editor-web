@@ -1,5 +1,7 @@
 @skip { space }
-@top Document { element* }
+@top Document { 
+  element* 
+}
 
 element {
   DivBlock
@@ -89,12 +91,36 @@ Footnote {
 IncludeBlock {
   IncludeOpen
   IncludePart1?
-  IncludeParamList*
+  (IncludeParamList | include_plus)*
   IncludeTagEnd { _tagEnd }
 }
 
 IncludeParamList {
   IncludeBar // 竖线
+}
+
+include_plus {
+  newline+
+  IncludeKey
+}
+
+IncludeKey {
+  IncludeKeyword |     // 优先匹配下面的核心关键字
+  IncludeAttr          // 匹配不到关键字时，走普通的 key=value 逻辑
+}
+
+IncludeKeyword {
+  // include核心参数
+  @specialize<AttrName, 
+    "lang" | "item-number" | "clearance" | "container-class" | 
+    "disruption" | "risk-class" | "lv" | "cc" | "dc" |
+    "site" | "dir" | "head" | "mtf" | "name" | 
+    "caption" | "width" | "height" | "align"
+  >
+}
+
+IncludeAttr {
+  (AttrName Equals AttrValue) | AttrPath
 }
 
 IncludePart1 {
@@ -202,6 +228,7 @@ AttrPath { attrPathToken }
   TableBar { "||" }
   TableTilde { "~" }
   Blockquote { "> " }
+  newline { $[\n\r] }
   ForcedNewLine { "@@@@" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
@@ -237,7 +264,7 @@ AttrPath { attrPathToken }
   }
   BracketChar { "[" | "]" }
   Text { ![\[\]*/\-_^, \t\n\r|~@>=<]+ }
-  space { $[ \t\n\r]+ }
+  space { $[ \t]+ }
 
   @precedence {
     Blockquote,
@@ -246,6 +273,7 @@ AttrPath { attrPathToken }
     ModuleOpenToken, ModuleCloseToken,
     TableBar, TableTilde,
     IncludeOpen, IncludeBar, includeSeg_,
+    newline,
     DivClose, DivOpen,
     UserOpen,
     _tagEnd,

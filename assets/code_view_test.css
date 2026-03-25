@@ -227,7 +227,11 @@ html, body, #editor-container {
 }
 
 
-
+/* keyword */
+.cm-editor .cm-keyword {
+    color: #98C379;
+    font-style: italic;
+}
 
 
 
