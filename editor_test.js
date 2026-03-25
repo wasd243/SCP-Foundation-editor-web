@@ -100,6 +100,7 @@ const customTags = {
     em: Tag.define(),
     underline: Tag.define(),
     strikethrough: Tag.define(),
+    module: Tag.define(),
     link: Tag.define(), // 链接🔗
     hr: Tag.define(),
     rate: Tag.define(),
@@ -166,7 +167,9 @@ const wikidotParser = parser.configure({
             "TabOpenToken":        customTags.tab,
             "TabTagEnd":           customTags.tab,
             "TabCloseToken":       customTags.tab,
-
+            "ModuleOpenToken":     customTags.module,
+            "ModuleCloseToken":    customTags.module,
+            "ModuleTagEnd":        customTags.module,
 
             // ——————————————————————————表格操作——————————————————————————
             "TableTilde":          customTags.table_header,
@@ -226,6 +229,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.strikethrough, class: "cm-strikethrough" },
     { tag: customTags.link, class: "cm-link" },
     { tag: customTags.hr, class: "cm-hr" },
+    { tag: customTags.module, class: "cm-module"},
     { tag: customTags.rate, class: "cm-rate" },
     { tag: customTags.right, class: "cm-right" },
     { tag: customTags.left, class: "cm-left" },
