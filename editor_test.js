@@ -246,6 +246,7 @@ const wikidotParser = parser.configure({
             "TabViewBlock":     foldInside,
             "TabBlock":         foldInside,
             "ModuleBlock":      foldInside,
+            "IncludeBlock":     foldInside,
         })
     ]
 });
