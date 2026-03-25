@@ -147,8 +147,8 @@ const customTags = {
 const wikidotParser = parser.configure({
     // 混合解析逻辑
     wrap: parseMixed((node, input) => {
-        // 当解析器走到 ModuleContent 节点时触发
-        if (node.name === "ModuleContent") {
+        // 当解析器走到 codeContent 节点时触发
+        if (node.name === "codeContent") {
             // 1. 向上找，拿到整个 ModuleBlock 父节点
             let moduleBlock = node.node.parent;
             
