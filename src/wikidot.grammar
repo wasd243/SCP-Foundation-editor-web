@@ -121,7 +121,7 @@ TabBlock {
 // ——————————————————————————Module——————————————————————————
 ModuleBlock {
   ModuleOpenTag
-  codeContent*
+  ModuleContent
   ModuleCloseToken
 }
 
@@ -129,6 +129,10 @@ ModuleOpenTag {
   ModuleOpenToken
   AttrList
   ModuleTagEnd { _tagEnd }
+}
+
+ModuleContent {
+  codeContent*
 }
 // ——————————————————————————Module——————————————————————————
 
