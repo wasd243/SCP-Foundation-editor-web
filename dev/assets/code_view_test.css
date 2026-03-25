@@ -193,6 +193,15 @@ html, body, #editor-container {
 .cm-editor .cm-module {
     color: #61AFEF;
     font-style: italic;
+    font-weight: bold;
+}
+
+
+/* html */
+.cm-editor .cm-html {
+    color: #FFC66D;
+    font-style: italic;
+    font-weight: bold;
 }
 
 
