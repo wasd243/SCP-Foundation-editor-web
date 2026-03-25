@@ -169,8 +169,9 @@ html, body, #editor-container {
 
 /* tabview */
 .cm-editor .cm-tabview {
-    color: #FFC66D;
+    color: #ff0000;
     font-style: italic;
+    font-weight: normal;
 }
 .cm-editor .cm-tab {
     color: #E06C75;
