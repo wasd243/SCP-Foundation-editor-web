@@ -91,22 +91,13 @@ Footnote {
 IncludeBlock {
   IncludeOpen
   IncludePart1?
-  (IncludeParamList | include_plus)*
+  (IncludeBar | include_plus)* // 允许单行竖线 或 多行换行竖线
   IncludeTagEnd { _tagEnd }
-}
-
-IncludeParamList {
-  IncludeBar // 竖线
 }
 
 include_plus {
   newline+
-  IncludeKey
-}
-
-IncludeKey {
-  IncludeKeyword |     // 优先匹配下面的核心关键字
-  IncludeAttr          // 匹配不到关键字时，走普通的 key=value 逻辑
+  IncludeKeyword
 }
 
 IncludeKeyword {
@@ -117,10 +108,6 @@ IncludeKeyword {
     "site" | "dir" | "head" | "mtf" | "name" | 
     "caption" | "width" | "height" | "align"
   >
-}
-
-IncludeAttr {
-  (AttrName Equals AttrValue) | AttrPath
 }
 
 IncludePart1 {
@@ -252,7 +239,14 @@ AttrPath { attrPathToken }
   attrPathToken { $[a-zA-Z0-9\-_:|./%]+ }
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
   Equals    { "=" }
-  AttrValue { '"' !["\n\r]* '"' }
+  // 在 @tokens 里面增加一个不带引号的值定义
+  attrValueUnquoted { ![ \t\n\r\]|]+ } 
+  
+  // 然后修改 AttrValue 的定义
+  AttrValue { 
+    '"' !["\n\r]* '"' | // 带引号的
+    attrValueUnquoted     // 不带引号的
+  }
 
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
@@ -268,26 +262,38 @@ AttrPath { attrPathToken }
 
   @precedence {
     Blockquote,
-    TabViewOpenToken, TabViewCloseToken,
-    TabOpenToken, TabCloseToken,
-    ModuleOpenToken, ModuleCloseToken,
-    TableBar, TableTilde,
-    IncludeOpen, IncludeBar, includeSeg_,
+    TabViewOpenToken,
+    TabViewCloseToken,
+    TabOpenToken,
+    TabCloseToken,
+    ModuleOpenToken,
+    ModuleCloseToken,
+    TableBar,
+    TableTilde,
+    IncludeOpen,
+    IncludeBar,
+    includeSeg_,
     newline,
-    DivClose, DivOpen,
+    DivClose,
+    DivOpen,
     UserOpen,
     _tagEnd,
-    CollapsibleClose, CollapsibleOpen,
-    CodeClose, CodeOpen,
+    CollapsibleClose,
+    CollapsibleOpen,
+    CodeClose,
+    CodeOpen,
     FootnoteBlock,
-    FootnoteOpen, FootnoteClose,
+    FootnoteOpen,
+    FootnoteClose,
     ImageOpen,
     Hr,
     LinkURL,
-    AttrValue, Equals, ForcedNewLine,
+    AttrValue,
+    Equals,
+    ForcedNewLine,
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
-    attrPathToken,
     AttrName,
+    attrPathToken,
     Text, codeContent, space 
   }
 }
