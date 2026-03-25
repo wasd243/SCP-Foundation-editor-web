@@ -13285,12 +13285,12 @@ var init_dist2 = __esm({
           for (let t2 of this.manager.tooltipViews)
             t2.dom.style.position = "absolute";
         }
-        let { visible, space, scaleX, scaleY } = measured;
+        let { visible, space: space2, scaleX, scaleY } = measured;
         let others = [];
         for (let i = 0; i < this.manager.tooltips.length; i++) {
           let tooltip = this.manager.tooltips[i], tView = this.manager.tooltipViews[i], { dom } = tView;
           let pos = measured.pos[i], size = measured.size[i];
-          if (!pos || tooltip.clip !== false && (pos.bottom <= Math.max(visible.top, space.top) || pos.top >= Math.min(visible.bottom, space.bottom) || pos.right < Math.max(visible.left, space.left) - 0.1 || pos.left > Math.min(visible.right, space.right) + 0.1)) {
+          if (!pos || tooltip.clip !== false && (pos.bottom <= Math.max(visible.top, space2.top) || pos.top >= Math.min(visible.bottom, space2.bottom) || pos.right < Math.max(visible.left, space2.left) - 0.1 || pos.left > Math.min(visible.right, space2.right) + 0.1)) {
             dom.style.top = Outside;
             continue;
           }
@@ -13298,11 +13298,11 @@ var init_dist2 = __esm({
           let arrowHeight = arrow ? 7 : 0;
           let width = size.right - size.left, height = (_a2 = knownHeight.get(tView)) !== null && _a2 !== void 0 ? _a2 : size.bottom - size.top;
           let offset = tView.offset || noOffset, ltr = this.view.textDirection == Direction.LTR;
-          let left = size.width > space.right - space.left ? ltr ? space.left : space.right - size.width : ltr ? Math.max(space.left, Math.min(pos.left - (arrow ? 14 : 0) + offset.x, space.right - width)) : Math.min(Math.max(space.left, pos.left - width + (arrow ? 14 : 0) - offset.x), space.right - width);
+          let left = size.width > space2.right - space2.left ? ltr ? space2.left : space2.right - size.width : ltr ? Math.max(space2.left, Math.min(pos.left - (arrow ? 14 : 0) + offset.x, space2.right - width)) : Math.min(Math.max(space2.left, pos.left - width + (arrow ? 14 : 0) - offset.x), space2.right - width);
           let above = this.above[i];
-          if (!tooltip.strictSide && (above ? pos.top - height - arrowHeight - offset.y < space.top : pos.bottom + height + arrowHeight + offset.y > space.bottom) && above == space.bottom - pos.bottom > pos.top - space.top)
+          if (!tooltip.strictSide && (above ? pos.top - height - arrowHeight - offset.y < space2.top : pos.bottom + height + arrowHeight + offset.y > space2.bottom) && above == space2.bottom - pos.bottom > pos.top - space2.top)
             above = this.above[i] = !above;
-          let spaceVert = (above ? pos.top - space.top : space.bottom - pos.bottom) - arrowHeight;
+          let spaceVert = (above ? pos.top - space2.top : space2.bottom - pos.bottom) - arrowHeight;
           if (spaceVert < height && tView.resize !== false) {
             if (spaceVert < this.view.defaultLineHeight) {
               dom.style.top = Outside;
@@ -13454,10 +13454,10 @@ var init_dist2 = __esm({
         }
         this.mounted = true;
       }
-      positioned(space) {
+      positioned(space2) {
         for (let hostedView of this.manager.tooltipViews) {
           if (hostedView.positioned)
-            hostedView.positioned(space);
+            hostedView.positioned(space2);
         }
       }
       update(update) {
@@ -14578,7 +14578,137 @@ function balanceRange(balanceType, children, positions, from, to, start, length,
   divide(children, positions, from, to, 0);
   return (mkTop || mkTree)(localChildren, localPositions, length);
 }
-var DefaultBufferLength, nextPropID, Range2, NodeProp, MountedTree, noProps, NodeType, NodeSet, CachedNode, CachedInnerNode, IterMode, Tree, FlatBufferCursor, TreeBuffer, BaseNode, TreeNode, BufferContext, BufferNode, StackIterator, TreeCursor, nodeSizeCache, TreeFragment, Parser, StringInput, stoppedInner;
+function parseMixed(nest) {
+  return (parse, input, fragments, ranges) => new MixedParse(parse, nest, input, fragments, ranges);
+}
+function checkRanges(ranges) {
+  if (!ranges.length || ranges.some((r) => r.from >= r.to))
+    throw new RangeError("Invalid inner parse ranges given: " + JSON.stringify(ranges));
+}
+function checkCover(covered, from, to) {
+  for (let range of covered) {
+    if (range.from >= to)
+      break;
+    if (range.to > from)
+      return range.from <= from && range.to >= to ? 2 : 1;
+  }
+  return 0;
+}
+function sliceBuf(buf, startI, endI, nodes, positions, off) {
+  if (startI < endI) {
+    let from = buf.buffer[startI + 1];
+    nodes.push(buf.slice(startI, endI, from));
+    positions.push(from - off);
+  }
+}
+function materialize(cursor2) {
+  let { node } = cursor2, stack = [];
+  let buffer = node.context.buffer;
+  do {
+    stack.push(cursor2.index);
+    cursor2.parent();
+  } while (!cursor2.tree);
+  let base2 = cursor2.tree, i = base2.children.indexOf(buffer);
+  let buf = base2.children[i], b = buf.buffer, newStack = [i];
+  function split(startI, endI, type, innerOffset, length, stackPos) {
+    let targetI = stack[stackPos];
+    let children = [], positions = [];
+    sliceBuf(buf, startI, targetI, children, positions, innerOffset);
+    let from = b[targetI + 1], to = b[targetI + 2];
+    newStack.push(children.length);
+    let child = stackPos ? split(targetI + 4, b[targetI + 3], buf.set.types[b[targetI]], from, to - from, stackPos - 1) : node.toTree();
+    children.push(child);
+    positions.push(from - innerOffset);
+    sliceBuf(buf, b[targetI + 3], endI, children, positions, innerOffset);
+    return new Tree(type, children, positions, length);
+  }
+  base2.children[i] = split(0, b.length, NodeType.none, 0, buf.length, stack.length - 1);
+  for (let index of newStack) {
+    let tree = cursor2.tree.children[index], pos = cursor2.tree.positions[index];
+    cursor2.yield(new TreeNode(tree, pos + cursor2.from, index, cursor2._tree));
+  }
+}
+function punchRanges(outer, ranges) {
+  let copy = null, current = ranges;
+  for (let i = 1, j = 0; i < outer.length; i++) {
+    let gapFrom = outer[i - 1].to, gapTo = outer[i].from;
+    for (; j < current.length; j++) {
+      let r = current[j];
+      if (r.from >= gapTo)
+        break;
+      if (r.to <= gapFrom)
+        continue;
+      if (!copy)
+        current = copy = ranges.slice();
+      if (r.from < gapFrom) {
+        copy[j] = new Range2(r.from, gapFrom);
+        if (r.to > gapTo)
+          copy.splice(j + 1, 0, new Range2(gapTo, r.to));
+      } else if (r.to > gapTo) {
+        copy[j--] = new Range2(gapTo, r.to);
+      } else {
+        copy.splice(j--, 1);
+      }
+    }
+  }
+  return current;
+}
+function findCoverChanges(a, b, from, to) {
+  let iA = 0, iB = 0, inA = false, inB = false, pos = -1e9;
+  let result = [];
+  for (; ; ) {
+    let nextA = iA == a.length ? 1e9 : inA ? a[iA].to : a[iA].from;
+    let nextB = iB == b.length ? 1e9 : inB ? b[iB].to : b[iB].from;
+    if (inA != inB) {
+      let start = Math.max(pos, from), end = Math.min(nextA, nextB, to);
+      if (start < end)
+        result.push(new Range2(start, end));
+    }
+    pos = Math.min(nextA, nextB);
+    if (pos == 1e9)
+      break;
+    if (nextA == pos) {
+      if (!inA)
+        inA = true;
+      else {
+        inA = false;
+        iA++;
+      }
+    }
+    if (nextB == pos) {
+      if (!inB)
+        inB = true;
+      else {
+        inB = false;
+        iB++;
+      }
+    }
+  }
+  return result;
+}
+function enterFragments(mounts, ranges) {
+  let result = [];
+  for (let { pos, mount, frag } of mounts) {
+    let startPos = pos + (mount.overlay ? mount.overlay[0].from : 0), endPos = startPos + mount.tree.length;
+    let from = Math.max(frag.from, startPos), to = Math.min(frag.to, endPos);
+    if (mount.overlay) {
+      let overlay = mount.overlay.map((r) => new Range2(r.from + pos, r.to + pos));
+      let changes = findCoverChanges(ranges, overlay, from, to);
+      for (let i = 0, pos2 = from; ; i++) {
+        let last = i == changes.length, end = last ? to : changes[i].from;
+        if (end > pos2)
+          result.push(new TreeFragment(pos2, end, mount.tree, -startPos, frag.from >= pos2 || frag.openStart, frag.to <= end || frag.openEnd));
+        if (last)
+          break;
+        pos2 = changes[i].to;
+      }
+    } else {
+      result.push(new TreeFragment(from, to, mount.tree, -startPos, frag.from >= startPos || frag.openStart, frag.to <= endPos || frag.openEnd));
+    }
+  }
+  return result;
+}
+var DefaultBufferLength, nextPropID, Range2, NodeProp, MountedTree, noProps, NodeType, NodeSet, CachedNode, CachedInnerNode, IterMode, Tree, FlatBufferCursor, TreeBuffer, BaseNode, TreeNode, BufferContext, BufferNode, StackIterator, TreeCursor, nodeSizeCache, TreeFragment, Parser, StringInput, InnerParse, ActiveOverlay, stoppedInner, MixedParse, StructureCursor, FragmentCursor;
 var init_dist3 = __esm({
   "node_modules/@lezer/common/dist/index.js"() {
     DefaultBufferLength = 1024;
@@ -14633,10 +14763,10 @@ var init_dist3 = __esm({
     NodeProp.lookAhead = new NodeProp({ perNode: true });
     NodeProp.mounted = new NodeProp({ perNode: true });
     MountedTree = class {
-      constructor(tree, overlay, parser2, bracketed = false) {
+      constructor(tree, overlay, parser3, bracketed = false) {
         this.tree = tree;
         this.overlay = overlay;
-        this.parser = parser2;
+        this.parser = parser3;
         this.bracketed = bracketed;
       }
       /**
@@ -15840,7 +15970,254 @@ var init_dist3 = __esm({
         return this.string.slice(from, to);
       }
     };
+    InnerParse = class {
+      constructor(parser3, parse, overlay, bracketed, target, from) {
+        this.parser = parser3;
+        this.parse = parse;
+        this.overlay = overlay;
+        this.bracketed = bracketed;
+        this.target = target;
+        this.from = from;
+      }
+    };
+    ActiveOverlay = class {
+      constructor(parser3, predicate, mounts, index, start, bracketed, target, prev) {
+        this.parser = parser3;
+        this.predicate = predicate;
+        this.mounts = mounts;
+        this.index = index;
+        this.start = start;
+        this.bracketed = bracketed;
+        this.target = target;
+        this.prev = prev;
+        this.depth = 0;
+        this.ranges = [];
+      }
+    };
     stoppedInner = new NodeProp({ perNode: true });
+    MixedParse = class {
+      constructor(base2, nest, input, fragments, ranges) {
+        this.nest = nest;
+        this.input = input;
+        this.fragments = fragments;
+        this.ranges = ranges;
+        this.inner = [];
+        this.innerDone = 0;
+        this.baseTree = null;
+        this.stoppedAt = null;
+        this.baseParse = base2;
+      }
+      advance() {
+        if (this.baseParse) {
+          let done2 = this.baseParse.advance();
+          if (!done2)
+            return null;
+          this.baseParse = null;
+          this.baseTree = done2;
+          this.startInner();
+          if (this.stoppedAt != null)
+            for (let inner2 of this.inner)
+              inner2.parse.stopAt(this.stoppedAt);
+        }
+        if (this.innerDone == this.inner.length) {
+          let result = this.baseTree;
+          if (this.stoppedAt != null)
+            result = new Tree(result.type, result.children, result.positions, result.length, result.propValues.concat([[stoppedInner, this.stoppedAt]]));
+          return result;
+        }
+        let inner = this.inner[this.innerDone], done = inner.parse.advance();
+        if (done) {
+          this.innerDone++;
+          let props = Object.assign(/* @__PURE__ */ Object.create(null), inner.target.props);
+          props[NodeProp.mounted.id] = new MountedTree(done, inner.overlay, inner.parser, inner.bracketed);
+          inner.target.props = props;
+        }
+        return null;
+      }
+      get parsedPos() {
+        if (this.baseParse)
+          return 0;
+        let pos = this.input.length;
+        for (let i = this.innerDone; i < this.inner.length; i++) {
+          if (this.inner[i].from < pos)
+            pos = Math.min(pos, this.inner[i].parse.parsedPos);
+        }
+        return pos;
+      }
+      stopAt(pos) {
+        this.stoppedAt = pos;
+        if (this.baseParse)
+          this.baseParse.stopAt(pos);
+        else
+          for (let i = this.innerDone; i < this.inner.length; i++)
+            this.inner[i].parse.stopAt(pos);
+      }
+      startInner() {
+        let fragmentCursor = new FragmentCursor(this.fragments);
+        let overlay = null;
+        let covered = null;
+        let cursor2 = new TreeCursor(new TreeNode(this.baseTree, this.ranges[0].from, 0, null), IterMode.IncludeAnonymous | IterMode.IgnoreMounts);
+        scan: for (let nest, isCovered; ; ) {
+          let enter = true, range;
+          if (this.stoppedAt != null && cursor2.from >= this.stoppedAt) {
+            enter = false;
+          } else if (fragmentCursor.hasNode(cursor2)) {
+            if (overlay) {
+              let match = overlay.mounts.find((m) => m.frag.from <= cursor2.from && m.frag.to >= cursor2.to && m.mount.overlay);
+              if (match)
+                for (let r of match.mount.overlay) {
+                  let from = r.from + match.pos, to = r.to + match.pos;
+                  if (from >= cursor2.from && to <= cursor2.to && !overlay.ranges.some((r2) => r2.from < to && r2.to > from))
+                    overlay.ranges.push({ from, to });
+                }
+            }
+            enter = false;
+          } else if (covered && (isCovered = checkCover(covered.ranges, cursor2.from, cursor2.to))) {
+            enter = isCovered != 2;
+          } else if (!cursor2.type.isAnonymous && (nest = this.nest(cursor2, this.input)) && (cursor2.from < cursor2.to || !nest.overlay)) {
+            if (!cursor2.tree) {
+              materialize(cursor2);
+              if (overlay)
+                overlay.depth++;
+              if (covered)
+                covered.depth++;
+            }
+            let oldMounts = fragmentCursor.findMounts(cursor2.from, nest.parser);
+            if (typeof nest.overlay == "function") {
+              overlay = new ActiveOverlay(nest.parser, nest.overlay, oldMounts, this.inner.length, cursor2.from, !!nest.bracketed, cursor2.tree, overlay);
+            } else {
+              let ranges = punchRanges(this.ranges, nest.overlay || (cursor2.from < cursor2.to ? [new Range2(cursor2.from, cursor2.to)] : []));
+              if (ranges.length)
+                checkRanges(ranges);
+              if (ranges.length || !nest.overlay)
+                this.inner.push(new InnerParse(nest.parser, ranges.length ? nest.parser.startParse(this.input, enterFragments(oldMounts, ranges), ranges) : nest.parser.startParse(""), nest.overlay ? nest.overlay.map((r) => new Range2(r.from - cursor2.from, r.to - cursor2.from)) : null, !!nest.bracketed, cursor2.tree, ranges.length ? ranges[0].from : cursor2.from));
+              if (!nest.overlay)
+                enter = false;
+              else if (ranges.length)
+                covered = { ranges, depth: 0, prev: covered };
+            }
+          } else if (overlay && (range = overlay.predicate(cursor2))) {
+            if (range === true)
+              range = new Range2(cursor2.from, cursor2.to);
+            if (range.from < range.to) {
+              let last = overlay.ranges.length - 1;
+              if (last >= 0 && overlay.ranges[last].to == range.from)
+                overlay.ranges[last] = { from: overlay.ranges[last].from, to: range.to };
+              else
+                overlay.ranges.push(range);
+            }
+          }
+          if (enter && cursor2.firstChild()) {
+            if (overlay)
+              overlay.depth++;
+            if (covered)
+              covered.depth++;
+          } else {
+            for (; ; ) {
+              if (cursor2.nextSibling())
+                break;
+              if (!cursor2.parent())
+                break scan;
+              if (overlay && !--overlay.depth) {
+                let ranges = punchRanges(this.ranges, overlay.ranges);
+                if (ranges.length) {
+                  checkRanges(ranges);
+                  this.inner.splice(overlay.index, 0, new InnerParse(overlay.parser, overlay.parser.startParse(this.input, enterFragments(overlay.mounts, ranges), ranges), overlay.ranges.map((r) => new Range2(r.from - overlay.start, r.to - overlay.start)), overlay.bracketed, overlay.target, ranges[0].from));
+                }
+                overlay = overlay.prev;
+              }
+              if (covered && !--covered.depth)
+                covered = covered.prev;
+            }
+          }
+        }
+      }
+    };
+    StructureCursor = class {
+      constructor(root, offset) {
+        this.offset = offset;
+        this.done = false;
+        this.cursor = root.cursor(IterMode.IncludeAnonymous | IterMode.IgnoreMounts);
+      }
+      // Move to the first node (in pre-order) that starts at or after `pos`.
+      moveTo(pos) {
+        let { cursor: cursor2 } = this, p = pos - this.offset;
+        while (!this.done && cursor2.from < p) {
+          if (cursor2.to >= pos && cursor2.enter(p, 1, IterMode.IgnoreOverlays | IterMode.ExcludeBuffers)) ;
+          else if (!cursor2.next(false))
+            this.done = true;
+        }
+      }
+      hasNode(cursor2) {
+        this.moveTo(cursor2.from);
+        if (!this.done && this.cursor.from + this.offset == cursor2.from && this.cursor.tree) {
+          for (let tree = this.cursor.tree; ; ) {
+            if (tree == cursor2.tree)
+              return true;
+            if (tree.children.length && tree.positions[0] == 0 && tree.children[0] instanceof Tree)
+              tree = tree.children[0];
+            else
+              break;
+          }
+        }
+        return false;
+      }
+    };
+    FragmentCursor = class {
+      constructor(fragments) {
+        var _a2;
+        this.fragments = fragments;
+        this.curTo = 0;
+        this.fragI = 0;
+        if (fragments.length) {
+          let first = this.curFrag = fragments[0];
+          this.curTo = (_a2 = first.tree.prop(stoppedInner)) !== null && _a2 !== void 0 ? _a2 : first.to;
+          this.inner = new StructureCursor(first.tree, -first.offset);
+        } else {
+          this.curFrag = this.inner = null;
+        }
+      }
+      hasNode(node) {
+        while (this.curFrag && node.from >= this.curTo)
+          this.nextFrag();
+        return this.curFrag && this.curFrag.from <= node.from && this.curTo >= node.to && this.inner.hasNode(node);
+      }
+      nextFrag() {
+        var _a2;
+        this.fragI++;
+        if (this.fragI == this.fragments.length) {
+          this.curFrag = this.inner = null;
+        } else {
+          let frag = this.curFrag = this.fragments[this.fragI];
+          this.curTo = (_a2 = frag.tree.prop(stoppedInner)) !== null && _a2 !== void 0 ? _a2 : frag.to;
+          this.inner = new StructureCursor(frag.tree, -frag.offset);
+        }
+      }
+      findMounts(pos, parser3) {
+        var _a2;
+        let result = [];
+        if (this.inner) {
+          this.inner.cursor.moveTo(pos, 1);
+          for (let pos2 = this.inner.cursor.node; pos2; pos2 = pos2.parent) {
+            let mount = (_a2 = pos2.tree) === null || _a2 === void 0 ? void 0 : _a2.prop(NodeProp.mounted);
+            if (mount && mount.parser == parser3) {
+              for (let i = this.fragI; i < this.fragments.length; i++) {
+                let frag = this.fragments[i];
+                if (frag.from >= pos2.to)
+                  break;
+                if (frag.tree == this.curFrag.tree)
+                  result.push({
+                    frag,
+                    pos: pos2.from - frag.offset,
+                    mount
+                  });
+              }
+            }
+          }
+        }
+        return result;
+      }
+    };
   }
 });
 
@@ -16682,19 +17059,25 @@ function bracketedAligned(context) {
     if (!next.type.isSkipped) {
       if (next.from >= lineEnd)
         return null;
-      let space = /^ */.exec(openLine.text.slice(openToken.to - openLine.from))[0].length;
-      return { from: openToken.from, to: openToken.to + space };
+      let space2 = /^ */.exec(openLine.text.slice(openToken.to - openLine.from))[0].length;
+      return { from: openToken.from, to: openToken.to + space2 };
     }
     pos = next.to;
   }
 }
 function delimitedStrategy(context, align, units, closing2, closedAt) {
-  let after = context.textAfter, space = after.match(/^\s*/)[0].length;
-  let closed = closing2 && after.slice(space, space + closing2.length) == closing2 || closedAt == context.pos + space;
+  let after = context.textAfter, space2 = after.match(/^\s*/)[0].length;
+  let closed = closing2 && after.slice(space2, space2 + closing2.length) == closing2 || closedAt == context.pos + space2;
   let aligned = align ? bracketedAligned(context) : null;
   if (aligned)
     return closed ? context.column(aligned.from) : context.column(aligned.to);
   return context.baseIndent + (closed ? 0 : context.unit * units);
+}
+function continuedIndent({ except, units = 1 } = {}) {
+  return (context) => {
+    let matchExcept = except && except.test(context.textAfter);
+    return context.baseIndent + (matchExcept ? 0 : units * context.unit);
+  };
 }
 function indentOnInput() {
   return EditorState.transactionFilter.of((tr) => {
@@ -17081,14 +17464,14 @@ var init_dist5 = __esm({
       configure your parser to [attach](https://codemirror.net/6/docs/ref/#language.languageDataProp) it
       to the language's outer syntax node.
       */
-      constructor(data, parser2, extraExtensions = [], name2 = "") {
+      constructor(data, parser3, extraExtensions = [], name2 = "") {
         this.data = data;
         this.name = name2;
         if (!EditorState.prototype.hasOwnProperty("tree"))
           Object.defineProperty(EditorState.prototype, "tree", { get() {
             return syntaxTree(this);
           } });
-        this.parser = parser2;
+        this.parser = parser3;
         this.extension = [
           language.of(this),
           EditorState.languageData.of((state, pos, side) => {
@@ -17166,9 +17549,9 @@ var init_dist5 = __esm({
     };
     Language.setState = /* @__PURE__ */ StateEffect.define();
     LRLanguage = class _LRLanguage extends Language {
-      constructor(data, parser2, name2) {
-        super(data, parser2, [], name2);
-        this.parser = parser2;
+      constructor(data, parser3, name2) {
+        super(data, parser3, [], name2);
+        this.parser = parser3;
       }
       /**
       Define a language from a parser.
@@ -17225,8 +17608,8 @@ var init_dist5 = __esm({
     };
     currentContext = null;
     ParseContext = class _ParseContext {
-      constructor(parser2, state, fragments = [], tree, treeLen, viewport, skipped, scheduleOn) {
-        this.parser = parser2;
+      constructor(parser3, state, fragments = [], tree, treeLen, viewport, skipped, scheduleOn) {
+        this.parser = parser3;
         this.state = state;
         this.fragments = fragments;
         this.tree = tree;
@@ -17240,8 +17623,8 @@ var init_dist5 = __esm({
       /**
       @internal
       */
-      static create(parser2, state, viewport) {
-        return new _ParseContext(parser2, state, [], Tree.empty, 0, viewport, [], null);
+      static create(parser3, state, viewport) {
+        return new _ParseContext(parser3, state, [], Tree.empty, 0, viewport, [], null);
       }
       startParse() {
         return this.parser.startParse(new DocInput(this.state.doc), this.fragments);
@@ -17389,7 +17772,7 @@ var init_dist5 = __esm({
         return new class extends Parser {
           createParse(input, fragments, ranges) {
             let from = ranges[0].from, to = ranges[ranges.length - 1].to;
-            let parser2 = {
+            let parser3 = {
               parsedPos: from,
               advance() {
                 let cx = currentContext;
@@ -17406,7 +17789,7 @@ var init_dist5 = __esm({
               stopAt() {
               }
             };
-            return parser2;
+            return parser3;
           }
         }();
       }
@@ -18462,9 +18845,9 @@ function moveByLineBoundary(view, start, forward) {
   if (moved.head == start.head && moved.head != (forward ? line.to : line.from))
     moved = view.moveToLineBoundary(start, forward, false);
   if (!forward && moved.head == line.from && line.length) {
-    let space = /^\s*/.exec(view.state.sliceDoc(line.from, Math.min(line.from + 100, line.to)))[0].length;
-    if (space && start.head != line.from + space)
-      moved = EditorSelection.cursor(line.from + space);
+    let space2 = /^\s*/.exec(view.state.sliceDoc(line.from, Math.min(line.from + 100, line.to)))[0].length;
+    if (space2 && start.head != line.from + space2)
+      moved = EditorSelection.cursor(line.from + space2);
   }
   return moved;
 }
@@ -19130,14 +19513,14 @@ var init_dist6 = __esm({
       if (state.readOnly)
         return false;
       dispatch(state.update(changeBySelectedLine(state, (line, changes) => {
-        let space = /^\s*/.exec(line.text)[0];
-        if (!space)
+        let space2 = /^\s*/.exec(line.text)[0];
+        if (!space2)
           return;
-        let col = countColumn(space, state.tabSize), keep = 0;
+        let col = countColumn(space2, state.tabSize), keep = 0;
         let insert2 = indentString(state, Math.max(0, col - getIndentUnit(state)));
-        while (keep < space.length && keep < insert2.length && space.charCodeAt(keep) == insert2.charCodeAt(keep))
+        while (keep < space2.length && keep < insert2.length && space2.charCodeAt(keep) == insert2.charCodeAt(keep))
           keep++;
-        changes.push({ from: line.from + keep, to: line.from + space.length, insert: insert2.slice(keep) });
+        changes.push({ from: line.from + keep, to: line.from + space2.length, insert: insert2.slice(keep) });
       }), { userEvent: "delete.dedent" }));
       return true;
     };
@@ -19646,10 +20029,10 @@ var init_dist7 = __esm({
           return;
         }
         let startLine = state.doc.lineAt(state.selection.main.head);
-        let [, sign, ln, cl, percent] = match;
+        let [, sign, ln, cl, percent2] = match;
         let col = cl ? +cl.slice(1) : 0;
         let line2 = ln ? +ln : startLine.number;
-        if (ln && percent) {
+        if (ln && percent2) {
           let pc = line2 / 100;
           if (sign)
             pc = pc * (sign == "-" ? -1 : 1) + startLine.number / state.doc.lines;
@@ -20363,26 +20746,26 @@ function asSource(source) {
 function joinClass(a, b) {
   return a ? b ? a + " " + b : a : b;
 }
-function defaultPositionInfo(view, list, option, info, space, tooltip) {
+function defaultPositionInfo(view, list, option, info, space2, tooltip) {
   let rtl = view.textDirection == Direction.RTL, left = rtl, narrow = false;
   let side = "top", offset, maxWidth;
-  let spaceLeft = list.left - space.left, spaceRight = space.right - list.right;
+  let spaceLeft = list.left - space2.left, spaceRight = space2.right - list.right;
   let infoWidth = info.right - info.left, infoHeight = info.bottom - info.top;
   if (left && spaceLeft < Math.min(infoWidth, spaceRight))
     left = false;
   else if (!left && spaceRight < Math.min(infoWidth, spaceLeft))
     left = true;
   if (infoWidth <= (left ? spaceLeft : spaceRight)) {
-    offset = Math.max(space.top, Math.min(option.top, space.bottom - infoHeight)) - list.top;
+    offset = Math.max(space2.top, Math.min(option.top, space2.bottom - infoHeight)) - list.top;
     maxWidth = Math.min(400, left ? spaceLeft : spaceRight);
   } else {
     narrow = true;
     maxWidth = Math.min(
       400,
-      (rtl ? list.right : space.right - list.left) - 30
+      (rtl ? list.right : space2.right - list.left) - 30
       /* Info.Margin */
     );
-    let spaceBelow = space.bottom - list.bottom;
+    let spaceBelow = space2.bottom - list.bottom;
     if (spaceBelow >= infoHeight || spaceBelow > list.top) {
       offset = option.bottom - list.top;
     } else {
@@ -21120,8 +21503,8 @@ var init_dist8 = __esm({
           this.currentClass = cls;
         }
       }
-      positioned(space) {
-        this.space = space;
+      positioned(space2) {
+        this.space = space2;
         if (this.info)
           this.view.requestMeasure(this.placeInfoReq);
       }
@@ -21196,14 +21579,14 @@ var init_dist8 = __esm({
         let listRect = this.dom.getBoundingClientRect();
         let infoRect = this.info.getBoundingClientRect();
         let selRect = sel.getBoundingClientRect();
-        let space = this.space;
-        if (!space) {
+        let space2 = this.space;
+        if (!space2) {
           let docElt = this.dom.ownerDocument.documentElement;
-          space = { left: 0, top: 0, right: docElt.clientWidth, bottom: docElt.clientHeight };
+          space2 = { left: 0, top: 0, right: docElt.clientWidth, bottom: docElt.clientHeight };
         }
-        if (selRect.top > Math.min(space.bottom, listRect.bottom) - 10 || selRect.bottom < Math.max(space.top, listRect.top) + 10)
+        if (selRect.top > Math.min(space2.bottom, listRect.bottom) - 10 || selRect.bottom < Math.max(space2.top, listRect.top) + 10)
           return null;
-        return this.view.state.facet(completionConfig).positionInfo(this.view, listRect, selRect, infoRect, space, this.dom);
+        return this.view.state.facet(completionConfig).positionInfo(this.view, listRect, selRect, infoRect, space2, this.dom);
       }
       placeInfo(pos) {
         if (this.info) {
@@ -22685,7 +23068,7 @@ function getSpecializer(spec) {
   }
   return spec.get;
 }
-var Stack, StackContext, SimulatedStack, StackBufferCursor, CachedToken, nullToken, InputStream, TokenGroup, LocalTokenGroup, verbose, stackIDs, FragmentCursor, TokenCache, Parse, Dialect, LRParser;
+var Stack, StackContext, SimulatedStack, StackBufferCursor, CachedToken, nullToken, InputStream, TokenGroup, LocalTokenGroup, ExternalTokenizer, verbose, stackIDs, FragmentCursor2, TokenCache, Parse, Dialect, LRParser;
 var init_dist11 = __esm({
   "node_modules/@lezer/lr/dist/index.js"() {
     init_dist3();
@@ -22745,14 +23128,14 @@ var init_dist11 = __esm({
       reduce(action) {
         var _a2;
         let depth = action >> 19, type = action & 65535;
-        let { parser: parser2 } = this.p;
+        let { parser: parser3 } = this.p;
         let lookaheadRecord = this.reducePos < this.pos - 25 && this.setLookAhead(this.pos);
-        let dPrec = parser2.dynamicPrecedence(type);
+        let dPrec = parser3.dynamicPrecedence(type);
         if (dPrec)
           this.score += dPrec;
         if (depth == 0) {
-          this.pushState(parser2.getGoto(this.state, type, true), this.reducePos);
-          if (type < parser2.minRepeatTerm)
+          this.pushState(parser3.getGoto(this.state, type, true), this.reducePos);
+          if (type < parser3.minRepeatTerm)
             this.storeNode(type, this.reducePos, this.reducePos, lookaheadRecord ? 8 : 4, true);
           this.reduceContext(type, this.reducePos);
           return;
@@ -22770,8 +23153,8 @@ var init_dist11 = __esm({
           }
         }
         let bufferBase = base2 ? this.stack[base2 - 1] : 0, count = this.bufferBase + this.buffer.length - bufferBase;
-        if (type < parser2.minRepeatTerm || action & 131072) {
-          let pos = parser2.stateFlag(
+        if (type < parser3.minRepeatTerm || action & 131072) {
+          let pos = parser3.stateFlag(
             this.state,
             1
             /* StateFlag.Skipped */
@@ -22782,7 +23165,7 @@ var init_dist11 = __esm({
           this.state = this.stack[base2];
         } else {
           let baseStateID = this.stack[base2 - 3];
-          this.state = parser2.getGoto(baseStateID, type, true);
+          this.state = parser3.getGoto(baseStateID, type, true);
         }
         while (this.stack.length > base2)
           this.stack.pop();
@@ -22845,18 +23228,18 @@ var init_dist11 = __esm({
         if (action & 131072) {
           this.pushState(action & 65535, this.pos);
         } else if ((action & 262144) == 0) {
-          let nextState = action, { parser: parser2 } = this.p;
+          let nextState = action, { parser: parser3 } = this.p;
           this.pos = end;
-          let skipped = parser2.stateFlag(
+          let skipped = parser3.stateFlag(
             nextState,
             1
             /* StateFlag.Skipped */
           );
-          if (!skipped && (end > start || type <= parser2.maxNode))
+          if (!skipped && (end > start || type <= parser3.maxNode))
             this.reducePos = end;
           this.pushState(nextState, skipped ? start : Math.min(start, this.reducePos));
           this.shiftContext(type, start);
-          if (type <= parser2.maxNode)
+          if (type <= parser3.maxNode)
             this.buffer.push(type, start, end, 4);
         } else {
           this.pos = end;
@@ -22990,18 +23373,18 @@ var init_dist11 = __esm({
       @internal
       */
       forceReduce() {
-        let { parser: parser2 } = this.p;
-        let reduce = parser2.stateSlot(
+        let { parser: parser3 } = this.p;
+        let reduce = parser3.stateSlot(
           this.state,
           5
           /* ParseState.ForcedReduce */
         );
         if ((reduce & 65536) == 0)
           return false;
-        if (!parser2.validAction(this.state, reduce)) {
+        if (!parser3.validAction(this.state, reduce)) {
           let depth = reduce >> 19, term = reduce & 65535;
           let target = this.stack.length - depth * 3;
-          if (target < 0 || parser2.getGoto(this.stack[target], term, false) < 0) {
+          if (target < 0 || parser3.getGoto(this.stack[target], term, false) < 0) {
             let backup = this.findForcedReduction();
             if (backup == null)
               return false;
@@ -23020,18 +23403,18 @@ var init_dist11 = __esm({
       isn't a valid action. @internal
       */
       findForcedReduction() {
-        let { parser: parser2 } = this.p, seen = [];
+        let { parser: parser3 } = this.p, seen = [];
         let explore = (state, depth) => {
           if (seen.includes(state))
             return;
           seen.push(state);
-          return parser2.allActions(state, (action) => {
+          return parser3.allActions(state, (action) => {
             if (action & (262144 | 131072)) ;
             else if (action & 65536) {
               let rDepth = (action >> 19) - depth;
               if (rDepth > 1) {
                 let term = action & 65535, target = this.stack.length - rDepth * 3;
-                if (target >= 0 && parser2.getGoto(this.stack[target], term, false) >= 0)
+                if (target >= 0 && parser3.getGoto(this.stack[target], term, false) >= 0)
                   return rDepth << 19 | 65536 | term;
               }
             } else {
@@ -23067,12 +23450,12 @@ var init_dist11 = __esm({
       get deadEnd() {
         if (this.stack.length != 3)
           return false;
-        let { parser: parser2 } = this.p;
-        return parser2.data[parser2.stateSlot(
+        let { parser: parser3 } = this.p;
+        return parser3.data[parser3.stateSlot(
           this.state,
           1
           /* ParseState.Actions */
-        )] == 65535 && !parser2.stateSlot(
+        )] == 65535 && !parser3.stateSlot(
           this.state,
           4
           /* ParseState.DefaultReduce */
@@ -23462,8 +23845,8 @@ var init_dist11 = __esm({
         this.id = id;
       }
       token(input, stack) {
-        let { parser: parser2 } = stack.p;
-        readToken(this.data, input, stack, this.id, parser2.data, parser2.tokenPrecTable);
+        let { parser: parser3 } = stack.p;
+        readToken(this.data, input, stack, this.id, parser3.data, parser3.tokenPrecTable);
       }
     };
     TokenGroup.prototype.contextual = TokenGroup.prototype.fallback = TokenGroup.prototype.extend = false;
@@ -23495,9 +23878,24 @@ var init_dist11 = __esm({
       }
     };
     LocalTokenGroup.prototype.contextual = TokenGroup.prototype.fallback = TokenGroup.prototype.extend = false;
+    ExternalTokenizer = class {
+      /**
+      Create a tokenizer. The first argument is the function that,
+      given an input stream, scans for the types of tokens it
+      recognizes at the stream's position, and calls
+      [`acceptToken`](#lr.InputStream.acceptToken) when it finds
+      one.
+      */
+      constructor(token, options = {}) {
+        this.token = token;
+        this.contextual = !!options.contextual;
+        this.fallback = !!options.fallback;
+        this.extend = !!options.extend;
+      }
+    };
     verbose = typeof process != "undefined" && process.env && /\bparse\b/.test(process.env.LOG);
     stackIDs = null;
-    FragmentCursor = class {
+    FragmentCursor2 = class {
       constructor(fragments, nodeSet) {
         this.fragments = fragments;
         this.nodeSet = nodeSet;
@@ -23580,18 +23978,18 @@ var init_dist11 = __esm({
       }
     };
     TokenCache = class {
-      constructor(parser2, stream) {
+      constructor(parser3, stream) {
         this.stream = stream;
         this.tokens = [];
         this.mainToken = null;
         this.actions = [];
-        this.tokens = parser2.tokenizers.map((_) => new CachedToken());
+        this.tokens = parser3.tokenizers.map((_) => new CachedToken());
       }
       getActions(stack) {
         let actionIndex = 0;
         let main = null;
-        let { parser: parser2 } = stack.p, { tokenizers } = parser2;
-        let mask = parser2.stateSlot(
+        let { parser: parser3 } = stack.p, { tokenizers } = parser3;
+        let mask = parser3.stateSlot(
           stack.state,
           3
           /* ParseState.TokenizerMask */
@@ -23649,10 +24047,10 @@ var init_dist11 = __esm({
         let start = this.stream.clipPos(stack.pos);
         tokenizer.token(this.stream.reset(start, token), stack);
         if (token.value > -1) {
-          let { parser: parser2 } = stack.p;
-          for (let i = 0; i < parser2.specialized.length; i++)
-            if (parser2.specialized[i] == token.value) {
-              let result = parser2.specializers[i](this.stream.read(token.start, token.end), stack);
+          let { parser: parser3 } = stack.p;
+          for (let i = 0; i < parser3.specialized.length; i++)
+            if (parser3.specialized[i] == token.value) {
+              let result = parser3.specializers[i](this.stream.read(token.start, token.end), stack);
               if (result >= 0 && stack.p.parser.dialect.allows(result >> 1)) {
                 if ((result & 1) == 0)
                   token.value = result >> 1;
@@ -23676,9 +24074,9 @@ var init_dist11 = __esm({
         return index;
       }
       addActions(stack, token, end, index) {
-        let { state } = stack, { parser: parser2 } = stack.p, { data } = parser2;
+        let { state } = stack, { parser: parser3 } = stack.p, { data } = parser3;
         for (let set = 0; set < 2; set++) {
-          for (let i = parser2.stateSlot(
+          for (let i = parser3.stateSlot(
             state,
             set ? 2 : 1
             /* ParseState.Actions */
@@ -23700,8 +24098,8 @@ var init_dist11 = __esm({
       }
     };
     Parse = class {
-      constructor(parser2, input, fragments, ranges) {
-        this.parser = parser2;
+      constructor(parser3, input, fragments, ranges) {
+        this.parser = parser3;
         this.input = input;
         this.ranges = ranges;
         this.recovering = 0;
@@ -23713,11 +24111,11 @@ var init_dist11 = __esm({
         this.lastBigReductionSize = 0;
         this.bigReductionCount = 0;
         this.stream = new InputStream(input, ranges);
-        this.tokens = new TokenCache(parser2, this.stream);
-        this.topTerm = parser2.top[1];
+        this.tokens = new TokenCache(parser3, this.stream);
+        this.topTerm = parser3.top[1];
         let { from } = ranges[0];
-        this.stacks = [Stack.start(this, parser2.top[0], from)];
-        this.fragments = fragments.length && this.stream.end - from > parser2.bufferLength * 4 ? new FragmentCursor(fragments, parser2.nodeSet) : null;
+        this.stacks = [Stack.start(this, parser3.top[0], from)];
+        this.fragments = fragments.length && this.stream.end - from > parser3.bufferLength * 4 ? new FragmentCursor2(fragments, parser3.nodeSet) : null;
       }
       get parsedPos() {
         return this.minStackPos;
@@ -23830,18 +24228,18 @@ var init_dist11 = __esm({
       // given, stacks split off by ambiguous operations will be pushed to
       // `split`, or added to `stacks` if they move `pos` forward.
       advanceStack(stack, stacks, split) {
-        let start = stack.pos, { parser: parser2 } = this;
+        let start = stack.pos, { parser: parser3 } = this;
         let base2 = verbose ? this.stackID(stack) + " -> " : "";
         if (this.stoppedAt != null && start > this.stoppedAt)
           return stack.forceReduce() ? stack : null;
         if (this.fragments) {
           let strictCx = stack.curContext && stack.curContext.tracker.strict, cxHash = strictCx ? stack.curContext.hash : 0;
           for (let cached = this.fragments.nodeAt(start); cached; ) {
-            let match = this.parser.nodeSet.types[cached.type.id] == cached.type ? parser2.getGoto(stack.state, cached.type.id) : -1;
+            let match = this.parser.nodeSet.types[cached.type.id] == cached.type ? parser3.getGoto(stack.state, cached.type.id) : -1;
             if (match > -1 && cached.length && (!strictCx || (cached.prop(NodeProp.contextHash) || 0) == cxHash)) {
               stack.useNode(cached, match);
               if (verbose)
-                console.log(base2 + this.stackID(stack) + ` (via reuse of ${parser2.getName(cached.type.id)})`);
+                console.log(base2 + this.stackID(stack) + ` (via reuse of ${parser3.getName(cached.type.id)})`);
               return true;
             }
             if (!(cached instanceof Tree) || cached.children.length == 0 || cached.positions[0] > 0)
@@ -23853,7 +24251,7 @@ var init_dist11 = __esm({
               break;
           }
         }
-        let defaultReduce = parser2.stateSlot(
+        let defaultReduce = parser3.stateSlot(
           stack.state,
           4
           /* ParseState.DefaultReduce */
@@ -23861,7 +24259,7 @@ var init_dist11 = __esm({
         if (defaultReduce > 0) {
           stack.reduce(defaultReduce);
           if (verbose)
-            console.log(base2 + this.stackID(stack) + ` (via always-reduce ${parser2.getName(
+            console.log(base2 + this.stackID(stack) + ` (via always-reduce ${parser3.getName(
               defaultReduce & 65535
               /* Action.ValueMask */
             )})`);
@@ -23879,10 +24277,10 @@ var init_dist11 = __esm({
           let main = this.tokens.mainToken;
           localStack.apply(action, term, main ? main.start : localStack.pos, end);
           if (verbose)
-            console.log(base2 + this.stackID(localStack) + ` (via ${(action & 65536) == 0 ? "shift" : `reduce of ${parser2.getName(
+            console.log(base2 + this.stackID(localStack) + ` (via ${(action & 65536) == 0 ? "shift" : `reduce of ${parser3.getName(
               action & 65535
               /* Action.ValueMask */
-            )}`} for ${parser2.getName(term)} @ ${start}${localStack == stack ? "" : ", split"})`);
+            )}`} for ${parser3.getName(term)} @ ${start}${localStack == stack ? "" : ", split"})`);
           if (last)
             return true;
           else if (localStack.pos > start)
@@ -24306,9 +24704,219 @@ var init_parser = __esm({
   }
 });
 
+// node_modules/@lezer/css/dist/index.js
+function isAlpha(ch) {
+  return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch >= 161;
+}
+function isDigit(ch) {
+  return ch >= 48 && ch <= 57;
+}
+function isHex(ch) {
+  return isDigit(ch) || ch >= 97 && ch <= 102 || ch >= 65 && ch <= 70;
+}
+var descendantOp, Unit, identifier, callee, VariableName, queryIdentifier, queryVariableName, QueryCallee, space, colon, parenL, underscore, bracketL, dash, period, hash, percent, ampersand, backslash, newline, asterisk, identifierTokens, identifiers, queryIdentifiers, descendant, unitToken, cssHighlighting, spec_callee, spec_queryIdentifier, spec_QueryCallee, spec_AtKeyword, spec_identifier, parser2;
+var init_dist12 = __esm({
+  "node_modules/@lezer/css/dist/index.js"() {
+    init_dist11();
+    init_dist4();
+    descendantOp = 135;
+    Unit = 1;
+    identifier = 136;
+    callee = 137;
+    VariableName = 2;
+    queryIdentifier = 138;
+    queryVariableName = 3;
+    QueryCallee = 4;
+    space = [
+      9,
+      10,
+      11,
+      12,
+      13,
+      32,
+      133,
+      160,
+      5760,
+      8192,
+      8193,
+      8194,
+      8195,
+      8196,
+      8197,
+      8198,
+      8199,
+      8200,
+      8201,
+      8202,
+      8232,
+      8233,
+      8239,
+      8287,
+      12288
+    ];
+    colon = 58;
+    parenL = 40;
+    underscore = 95;
+    bracketL = 91;
+    dash = 45;
+    period = 46;
+    hash = 35;
+    percent = 37;
+    ampersand = 38;
+    backslash = 92;
+    newline = 10;
+    asterisk = 42;
+    identifierTokens = (id, varName, callee2) => (input, stack) => {
+      for (let inside = false, dashes = 0, i = 0; ; i++) {
+        let { next } = input;
+        if (isAlpha(next) || next == dash || next == underscore || inside && isDigit(next)) {
+          if (!inside && (next != dash || i > 0)) inside = true;
+          if (dashes === i && next == dash) dashes++;
+          input.advance();
+        } else if (next == backslash && input.peek(1) != newline) {
+          input.advance();
+          if (isHex(input.next)) {
+            do {
+              input.advance();
+            } while (isHex(input.next));
+            if (input.next == 32) input.advance();
+          } else if (input.next > -1) {
+            input.advance();
+          }
+          inside = true;
+        } else {
+          if (inside) input.acceptToken(
+            dashes == 2 && stack.canShift(VariableName) ? varName : next == parenL ? callee2 : id
+          );
+          break;
+        }
+      }
+    };
+    identifiers = new ExternalTokenizer(
+      identifierTokens(identifier, VariableName, callee),
+      { contextual: true }
+    );
+    queryIdentifiers = new ExternalTokenizer(
+      identifierTokens(queryIdentifier, queryVariableName, QueryCallee),
+      { contextual: true }
+    );
+    descendant = new ExternalTokenizer((input) => {
+      if (space.includes(input.peek(-1))) {
+        let { next } = input;
+        if (isAlpha(next) || next == underscore || next == hash || next == period || next == asterisk || next == bracketL || next == colon && isAlpha(input.peek(1)) || next == dash || next == ampersand)
+          input.acceptToken(descendantOp);
+      }
+    });
+    unitToken = new ExternalTokenizer((input) => {
+      if (!space.includes(input.peek(-1))) {
+        let { next } = input;
+        if (next == percent) {
+          input.advance();
+          input.acceptToken(Unit);
+        }
+        if (isAlpha(next)) {
+          do {
+            input.advance();
+          } while (isAlpha(input.next) || isDigit(input.next));
+          input.acceptToken(Unit);
+        }
+      }
+    });
+    cssHighlighting = styleTags({
+      "AtKeyword import charset namespace keyframes media supports font-feature-values": tags.definitionKeyword,
+      "from to selector scope MatchFlag": tags.keyword,
+      NamespaceName: tags.namespace,
+      KeyframeName: tags.labelName,
+      KeyframeRangeName: tags.operatorKeyword,
+      TagName: tags.tagName,
+      ClassName: tags.className,
+      PseudoClassName: tags.constant(tags.className),
+      IdName: tags.labelName,
+      "FeatureName PropertyName": tags.propertyName,
+      AttributeName: tags.attributeName,
+      NumberLiteral: tags.number,
+      KeywordQuery: tags.keyword,
+      UnaryQueryOp: tags.operatorKeyword,
+      "CallTag ValueName FontName": tags.atom,
+      VariableName: tags.variableName,
+      Callee: tags.operatorKeyword,
+      Unit: tags.unit,
+      "UniversalSelector NestingSelector": tags.definitionOperator,
+      "MatchOp CompareOp": tags.compareOperator,
+      "ChildOp SiblingOp, LogicOp": tags.logicOperator,
+      BinOp: tags.arithmeticOperator,
+      Important: tags.modifier,
+      Comment: tags.blockComment,
+      ColorLiteral: tags.color,
+      "ParenthesizedContent StringLiteral": tags.string,
+      ":": tags.punctuation,
+      "PseudoOp #": tags.derefOperator,
+      "; , |": tags.separator,
+      "( )": tags.paren,
+      "[ ]": tags.squareBracket,
+      "{ }": tags.brace
+    });
+    spec_callee = { __proto__: null, lang: 44, "nth-child": 44, "nth-last-child": 44, "nth-of-type": 44, "nth-last-of-type": 44, dir: 44, "host-context": 44, if: 90, url: 132, "url-prefix": 132, domain: 132, regexp: 132 };
+    spec_queryIdentifier = { __proto__: null, or: 104, and: 104, not: 112, only: 112, layer: 186 };
+    spec_QueryCallee = { __proto__: null, selector: 118, layer: 182 };
+    spec_AtKeyword = { __proto__: null, "@import": 178, "@media": 190, "@charset": 194, "@namespace": 198, "@keyframes": 204, "@supports": 216, "@scope": 220, "@font-feature-values": 226 };
+    spec_identifier = { __proto__: null, to: 223 };
+    parser2 = LRParser.deserialize({
+      version: 14,
+      states: "IpQYQdOOO#}QdOOP$UO`OOO%OQaO'#CfOOQP'#Ce'#CeO%VQdO'#CgO%[Q`O'#CgO%aQaO'#FdO&XQdO'#CkO&xQaO'#CcO'SQdO'#CnO'_QdO'#DtO'dQdO'#DvO'oQdO'#D}O'oQdO'#EQOOQP'#Fd'#FdO)OQhO'#EsOOQS'#Fc'#FcOOQS'#Ev'#EvQYQdOOO)VQdO'#EWO*cQhO'#E^O)VQdO'#E`O*jQdO'#EbO*uQdO'#EeO)zQhO'#EkO*}QdO'#EmO+YQdO'#EpO+_QaO'#CfO+fQ`O'#ETO+kQ`O'#FnO+vQdO'#FnQOQ`OOP,QO&jO'#CaPOOO)CAR)CAROOQP'#Ci'#CiOOQP,59R,59RO%VQdO,59ROOQP'#Cm'#CmOOQP,59V,59VO&XQdO,59VO,]QdO,59YO'_QdO,5:`O'dQdO,5:bO'oQdO,5:iO'oQdO,5:kO'oQdO,5:lO'oQdO'#E}O,hQ`O,58}O,pQdO'#ESOOQS,58},58}OOQP'#Cq'#CqOOQO'#Dr'#DrOOQP,59Y,59YO,wQ`O,59YO,|Q`O,59YOOQP'#Du'#DuOOQP,5:`,5:`O-RQpO'#DwO-^QdO'#DxO-cQ`O'#DxO-hQpO,5:bO.RQaO,5:iO.iQaO,5:lOOQW'#D^'#D^O/eQhO'#DgO/xQhO,5;_O)zQhO'#DeO0VQ`O'#DkO0[QhO'#DnOOQW'#Fj'#FjOOQS,5;_,5;_O0aQ`O'#DhOOQS-E8t-E8tOOQ['#Cv'#CvO0fQdO'#CwO0|QdO'#C}O1dQdO'#DQO1zQ!pO'#DSO4TQ!jO,5:rOOQO'#DX'#DXO,|Q`O'#DWO4eQ!nO'#FgO6hQ`O'#DYO6mQ`O'#DoOOQ['#Fg'#FgO6rQhO'#FqO7QQ`O,5:xO7VQ!bO,5:zOOQS'#Ed'#EdO7_Q`O,5:|O7dQdO,5:|OOQO'#Eg'#EgO7lQ`O,5;PO7qQhO,5;VO'oQdO'#DjOOQS,5;X,5;XO0aQ`O,5;XO7yQdO,5;XOOQS'#FU'#FUO8RQdO'#ErO7QQ`O,5;[O8ZQdO,5:oO8kQdO'#FPO8xQ`O,5<YO8xQ`O,5<YPOOO'#Eu'#EuP9TO&jO,58{POOO,58{,58{OOQP1G.m1G.mOOQP1G.q1G.qOOQP1G.t1G.tO,wQ`O1G.tO,|Q`O1G.tOOQP1G/z1G/zO9`QpO1G/|O9hQaO1G0TO:OQaO1G0VO:fQaO1G0WO:|QaO,5;iOOQO-E8{-E8{OOQS1G.i1G.iO;WQ`O,5:nO;]QdO'#DsO;dQdO'#CuOOQO'#Dz'#DzOOQO,5:d,5:dO-^QdO,5:dOOQP1G/|1G/|O)VQdO1G/|O;kQ!jO'#D^O;yQ!bO,59yO<RQhO,5:ROOQO'#Fk'#FkO;|Q!bO,59}O<ZQhO'#FVO)zQhO,59{O)zQhO'#FVO=OQhO1G0yOOQS1G0y1G0yO=YQhO,5:PO>QQhO'#DlOOQW,5:V,5:VOOQW,5:Y,5:YOOQW,5:S,5:SO>[Q!fO'#FhOOQS'#Fh'#FhOOQS'#Ex'#ExO?lQdO,59cOOQ[,59c,59cO@SQdO,59iOOQ[,59i,59iO@jQdO,59lOOQ[,59l,59lOOQ[,59n,59nO)VQdO,59pOAQQhO'#EYOOQW'#EY'#EYOAlQ`O1G0^O4^QhO1G0^OOQ[,59r,59rO)zQhO'#D[OOQ[,59t,59tOAqQ#tO,5:ZOA|QhO'#FROBZQ`O,5<]OOQS1G0d1G0dOOQS1G0f1G0fOOQS1G0h1G0hOBfQ`O1G0hOBkQdO'#EhOOQS1G0k1G0kOOQS1G0q1G0qOBvQaO,5:UO7QQ`O1G0sOOQS1G0s1G0sO0aQ`O1G0sOOQS-E9S-E9SOOQS1G0v1G0vOB}Q!fO1G0ZOCeQ`O'#EVOOQO1G0Z1G0ZOOQO,5;k,5;kOCjQdO,5;kOOQO-E8}-E8}OCwQ`O1G1tPOOO-E8s-E8sPOOO1G.g1G.gOOQP7+$`7+$`OOQP7+%h7+%hO)VQdO7+%hOOQS1G0Y1G0YODSQaO'#FmOD^Q`O,5:_ODcQ!fO'#EwOEaQdO'#FfOEkQ`O,59aOOQO1G0O1G0OOEpQ!bO7+%hO)VQdO1G/eOE{QhO1G/iOOQW1G/m1G/mOOQW1G/g1G/gOF^QhO,5;qOOQW-E9T-E9TOOQS7+&e7+&eOGRQhO'#D^OGaQhO'#FlOGlQ`O'#FlOGqQ`O,5:WOOQS-E8v-E8vOOQ[1G.}1G.}OOQ[1G/T1G/TOOQ[1G/W1G/WOOQ[1G/[1G/[OGvQdO,5:tOOQS7+%x7+%xOG{Q`O7+%xOHQQhO'#D]OHYQ`O,59vO)zQhO,59vOOQ[1G/u1G/uOHbQ`O1G/uOHgQhO,5;mOOQO-E9P-E9POOQS7+&S7+&SOHuQbO'#DSOOQO'#Ej'#EjOITQ`O'#EiOOQO'#Ei'#EiOI`Q`O'#FSOIhQdO,5;SOOQS,5;S,5;SOOQ[1G/p1G/pOOQS7+&_7+&_O7QQ`O7+&_OIsQ!fO'#FOO)VQdO'#FOOJzQdO7+%uOOQO7+%u7+%uOOQO,5:q,5:qOOQO1G1V1G1VOK_Q!bO<<ISOKjQdO'#E|OKtQ`O,5<XOOQP1G/y1G/yOOQS-E8u-E8uOK|QdO'#E{OLWQ`O,5<QOOQ]1G.{1G.{OOQP<<IS<<ISOL`Q`O<<ISOLeQdO7+%POOQO'#D`'#D`OLlQ!bO7+%TOLtQhO'#EzOMRQ`O,5<WO)VQdO,5<WOOQW1G/r1G/rOOQO'#E['#E[OMZQ`O1G0`OOQS<<Id<<IdO)VQdO,59wOMzQhO1G/bOOQ[1G/b1G/bONRQ`O1G/bOOQW-E8w-E8wOOQ[7+%a7+%aOOQO,5;T,5;TOBnQdO'#FTOI`Q`O,5;nOOQS,5;n,5;nOOQS-E9Q-E9QOOQS1G0n1G0nOOQS<<Iy<<IyONZQ!fO,5;jOOQS-E8|-E8|OOQO<<Ia<<IaOOQPAN>nAN>nO! bQ`OAN>nO! gQaO,5;hOOQO-E8z-E8zO! qQdO,5;gOOQO-E8y-E8yOOQW<<Hk<<HkOOQW<<Ho<<HoO! {QhO<<HoO!!^QhO,5;fO!!iQ`O,5;fOOQO-E8x-E8xO!!nQdO1G1rOGvQdO'#FQO!!xQ`O7+%zOOQW7+%z7+%zO!#QQ!bO1G/cOOQ[7+$|7+$|O!#]QhO7+$|P!#dQ`O'#EyOOQO,5;o,5;oOOQO-E9R-E9ROOQS1G1Y1G1YOOQPG24YG24YO!#iQ`OAN>ZO)VQdO1G1QO!#nQ`O7+'^OOQO,5;l,5;lOOQO-E9O-E9OOOQW<<If<<IfOOQ[<<Hh<<HhPOQW,5;e,5;eOOQWG23uG23uO!#vQdO7+&l",
+      stateData: "!$Z~O$QOS$RQQ~OWVO^_O`WOcYOdYOl`OmZOp[O!r]O!u^O!{dO#ReO#TfO#VgO#YhO#`iO#bjO#ekO#|RO$XTO~OQmOWVO^_O`WOcYOdYOl`OmZOp[O!r]O!u^O!{dO#ReO#TfO#VgO#YhO#`iO#bjO#ekO#|lO$XTO~O#z$bP~P!jO$RqO~O`YXcYXdYXmYXpYXsYX!aYX!rYX!uYX#{YX$X[X~OgYX~P$ZO#|sO~O$XuO~O$XuO`$WXc$WXd$WXm$WXp$WXs$WX!a$WX!r$WX!u$WX#{$WXg$WX~O#|vO~O`xOcyOdyOmzOp{O!r|O!u!OO#{}O~Os!RO!a!PO~P&^Of!XO#|!TO#}!UO~O#|!YO~OW!^O#|![O$X!]O~OWVO^_O`WOcYOdYOmZOp[O!r]O!u^O#|RO$XTO~OS!fOc!gOd!gOh!cOs!RO!Y!eO!]!jO$O!bO~On!iO~P(dOQ!tOh!mOp!nOs!oOu!wOw!wO}!uO!d!vO#|!lO#}!rO$]!pO~OS!fOc!gOd!gOh!cO!Y!eO!]!jO$O!bO~Os$eP~P)zOw!|O!d!vO#|!{O~Ow#OO#|#OO~Oh#ROs!RO#c#TO~O#|#VO~Oc!xX~P$ZOc#YO~On#ZO#z$bXr$bX~O#z$bXr$bX~P!jO$S#^O$T#^O$U#`O~Of#eO#|!TO#}!UO~Os!RO!a!PO~Or$bP~P!jOh#oO~Oh#pO~Oo!kX!o!kX$X!mX~O#|#qO~O$X#sO~Oo#tO!o#uO~O`xOcyOdyOmzOp{O~Os!qa!a!qa!r!qa!u!qa#{!qag!qa~P-pOs!ta!a!ta!r!ta!u!ta#{!tag!ta~P-pOS!fOc!gOd!gOh!cO!Y!eO!]!jO~OR#yOu#yOw#yO$O#vO$]!pO~P/POn$PO!U#|O!a#}O~P(dOh$RO~O$O$TO~Oh#RO~O`$WOc$WOg$ZOl$WOm$WOn$WO~P)VO`$WOc$WOl$WOm$WOn$WOo$]O~P)VO`$WOc$WOl$WOm$WOn$WOr$_O~P)VOP$`OSvXcvXdvXhvXnvXyvX!YvX!]vX!}vX#PvX$OvX!WvXQvX`vXgvXlvXmvXpvXsvXuvXwvX}vX!dvX#|vX#}vX$]vXovXrvX!avX#zvX$dvX!pvX~Oy$aO!}$bO#P$cOn$eP~P)zOh#pOS$ZXc$ZXd$ZXn$ZXy$ZX!Y$ZX!]$ZX!}$ZX#P$ZX$O$ZXQ$ZX`$ZXg$ZXl$ZXm$ZXp$ZXs$ZXu$ZXw$ZX}$ZX!d$ZX#|$ZX#}$ZX$]$ZXo$ZXr$ZX!a$ZX#z$ZX$d$ZX!p$ZX~Oh$gO~Oh$iO~O!U#|O!a$jOs$eXn$eX~Os!RO~On$mOy$aO~On$nO~Ow$oO!d!vO~Os$pO~Os!RO!U#|O~Os!RO#c$vO~O#|#VOs#fX~O$d$zOn!wa#z!war!wa~P)VOn#sX#z#sXr#sX~P!jOn#ZO#z$bar$ba~O$S#^O$T#^O$U%RO~Oo%TO!o%UO~Os!qi!a!qi!r!qi!u!qi#{!qig!qi~P-pOs!si!a!si!r!si!u!si#{!sig!si~P-pOs!ti!a!ti!r!ti!u!ti#{!tig!ti~P-pOs#qa!a#qa~P&^Or%VO~Og$aP~P'oOg$YP~P)VOc!SXg!QX!U!QX!W!SX~Oc%_O!W%`O~Og%aO!U#|O~O!U#|OS#yXc#yXd#yXh#yXn#yXs#yX!Y#yX!]#yX!a#yX$O#yX~On%eO!a#}O~P(dO!U#|OS!Xac!Xad!Xah!Xan!Xas!Xa!Y!Xa!]!Xa!a!Xa$O!Xag!Xa~O$O%fOg$`P~P/POy$aOQ$[X`$[Xc$[Xg$[Xh$[Xl$[Xm$[Xn$[Xp$[Xs$[Xu$[Xw$[X}$[X!d$[X#|$[X#}$[X$]$[Xo$[Xr$[X~O`$WOc$WOg%kOl$WOm$WOn$WO~P)VO`$WOc$WOl$WOm$WOn$WOo%lO~P)VO`$WOc$WOl$WOm$WOn$WOr%mO~P)VOh%oOS!|Xc!|Xd!|Xn!|X!Y!|X!]!|X$O!|X~On%pO~Og%uOw%vO!e%vO~Os#uX!a#uXn#uX~P)zO!a$jOs$ean$ea~On%yO~Or&QO#|%{O$]%zO~Og&RO~P&^Oy$aO!a&VO$d$zOn!wi#z!wir!wi~P)VO$c&YO~On#sa#z#sar#sa~P!jOn#ZO#z$bir$bi~O!a&]Og$aX~P&^Og&_O~Oy$aOQ#kXg#kXh#kXp#kXs#kXu#kXw#kX}#kX!a#kX!d#kX#|#kX#}#kX$]#kX~O!a&aOg$YX~P)VOg&cO~Oo&dOy$aO!p&eO~OR#yOu#yOw#yO$O&gO$]!pO~O!U#|OS#yac#yad#yah#yan#yas#ya!Y#ya!]#ya!a#ya$O#ya~Oc!SXg!QX!U!QX!a!QX~O!U#|O!a&iOg$`X~Oc&kO~Og&lO~O#|&mO~On&oO~Oc&pO!U#|O~Og&rOn&qO~Og&uO~O!U#|Os#ua!a#uan#ua~OP$`OsvX!avXgvX~O$]%zOs#]X!a#]X~Os!RO!a&wO~Or&{O#|%{O$]%zO~Oy$aOQ#rXh#rXn#rXp#rXs#rXu#rXw#rX}#rX!a#rX!d#rX#z#rX#|#rX#}#rX$]#rX$d#rXr#rX~O!a&VO$d$zOn!wq#z!wqr!wq~P)VOo'QOy$aO!p'RO~Og#pX!a#pX~P'oO!a&]Og$aa~Og#oX!a#oX~P)VO!a&aOg$Ya~Oo'QO~Og'WO~P)VOg'XO!W'YO~O$O%fOg#nX!a#nX~P/PO!a&iOg$`a~O`'_Og'aO~OS#mac#mad#mah#ma!Y#ma!]#ma$O#ma~Og'cO~PMcOg'cOn'dO~Oy$aOQ#rah#ran#rap#ras#rau#raw#ra}#ra!a#ra!d#ra#z#ra#|#ra#}#ra$]#ra$d#rar#ra~Oo'iO~Og#pa!a#pa~P&^Og#oa!a#oa~P)VOR#yOu#yOw#yO$O&gO$]%zO~O!U#|Og#na!a#na~Oc'kO~O!a&iOg$`i~P)VO`'_Og'oO~Oy$aOg!Pin!Pi~Og'pO~PMcOn'qO~Og'rO~O!a&iOg$`q~Og#nq!a#nq~P)VO$Q!e$R$]`$]y!u~",
+      goto: "4h$fPPPPP$gP$jP$s%V$s%i%{P$sP&R$sPP&XPPP&_&i&iPPPPP&iPP&iP'VP&iP&i(Q&iP(n(q(w(w)Z(wP(wP(wP(w(wP)j(w)vP(w)yPP*m*s$s*y$s+P+P+V+ZPP$sP$s$sP+a,],j,q$jP,zP,}P$jP$jP$jP-T$jP-W-Z-^-e$jP$jPP$jP-j$jP-m-s.S.j.x/O/Y/`/f/l/r/|0S0Y0`0f0lPPPPPPPPPPP0r0{P1q1t2vP3O3x4R4U4XPP4_RrQ_aOPco!R#Z$}q_OP]^co|}!O!P!R#R#Z#o$}&]qSOP]^co|}!O!P!R#R#Z#o$}&]qUOP]^co|}!O!P!R#R#Z#o$}&]QtTR#auQwWR#bxQ!VYR#cyQ#c!XS$f!s!tR%S#e!V!wdf!m!n!o#Y#p#u$Y$[$^$a$y%U%Z%_&V&W&a&f&k&p'U'^'k's!U!wdf!m!n!o#Y#p#u$Y$[$^$a$y%U%Z%_&V&W&a&f&k&p'U'^'k'sU#y!c%`'YU%}$p&P&wR&v%|!V!sdf!m!n!o#Y#p#u$Y$[$^$a$y%U%Z%_&V&W&a&f&k&p'U'^'k'sR$h!uQ%s$gR&s%tq!h`ei!c!d!e!q#|#}$O$R$e$g$j%t&iQ#w!cQ%h$RQ&h%`Q'[&iR'j'YQ#UjQ$U!jQ$t#TR&T$vR$S!f!U!wdf!m!n!o#Y#p#u$Y$[$^$a$y%U%Z%_&V&W&a&f&k&p'U'^'k'sQ!|gR$o!}Q!WYR#dyQ#c!WR%S#dQ!ZZR#fzQ!_[R#g{T!^[{Q#r!]R%]#sQ!SXQ!i`Q#SjQ#m!QQ$P!dQ$l!yQ$r#QQ$u#UQ$x#XQ%e$OQ&S$tQ&y&OQ&|&TR'h&xSnP!RQ#]oQ$|#ZR&Z$}ZmPo!R#Z$}Q${#YQ&X$yR'P&WR$e!qQ&n%oR'm'_R!}gR#PhR$q#PS&O$p&PR'f&wV%|$p&P&wR#XkQ#_qR%Q#_QcOSoP!RU!kco$}R$}#ZQ%Z#pY&`%Z&f'U'^'sQ&f%_Q'U&aQ'^&kR's'kQ$Y!mQ$[!nQ$^!oV%j$Y$[$^Q%t$gR&t%tQ&j%gS']&j'lR'l'^Q&b%ZR'V&bQ&^%WR'T&^Q!QXR#l!QQ&W$yR'O&WQ#[nS%O#[%PR%P#]Q'`&nR'n'`Q$k!xR%x$kQ&P$pR&z&PQ&x&OR'g&xQ#WkR$w#WQ$O!dR%d$O_bOPco!R#Z$}^XOPco!R#Z$}Q!`]Q!a^Q#h|Q#i}Q#j!OQ#k!PQ$s#RQ%W#oR'S&]R%[#pQ!qdQ!zf[$V!m!n!o$Y$[$^Q$y#Yd%Y#p%Z%_&a&f&k'U'^'k'sQ%^#uQ%n$aS&U$y&WQ&[%UQ&}&VR'b&p]$X!m!n!o$Y$[$^Q!d`U!xe!q$eQ#QiQ#x!cS#{!d$OQ$Q!eQ%b#|Q%c#}Q%g$RS%r$g%tQ%w$jR'Z&iQ#z!cQ&h%`R'j'YR%i$RR%X#oQpPR#n!RQ!yeQ$d!qR%q$e",
+      nodeNames: "\u26A0 Unit VariableName VariableName QueryCallee Comment StyleSheet RuleSet UniversalSelector TagSelector TagName NamespacedTagSelector NamespaceName TagName NestingSelector ClassSelector . ClassName PseudoClassSelector : :: PseudoClassName PseudoClassName ) ( ArgList ValueName ParenthesizedValue AtKeyword # ; ] [ BracketedValue } { BracedValue ColorLiteral NumberLiteral StringLiteral BinaryExpression BinOp CallExpression Callee IfExpression if ArgList IfBranch KeywordQuery FeatureQuery FeatureName BinaryQuery LogicOp ComparisonQuery CompareOp UnaryQuery UnaryQueryOp ParenthesizedQuery SelectorQuery selector ParenthesizedSelector CallQuery ArgList , PseudoQuery CallLiteral CallTag ParenthesizedContent PseudoClassName ArgList IdSelector IdName AttributeSelector AttributeName NamespacedAttribute NamespaceName AttributeName MatchOp MatchFlag ChildSelector ChildOp DescendantSelector SiblingSelector SiblingOp Block Declaration PropertyName Important ImportStatement import Layer layer LayerName layer MediaStatement media CharsetStatement charset NamespaceStatement namespace NamespaceName KeyframesStatement keyframes KeyframeName KeyframeList KeyframeSelector KeyframeRangeName SupportsStatement supports ScopeStatement scope to FontFeatureStatement font-feature-values FontName AtRule Styles",
+      maxTerm: 159,
+      nodeProps: [
+        ["isolate", -2, 5, 39, ""],
+        ["openedBy", 23, "(", 31, "[", 34, "{"],
+        ["closedBy", 24, ")", 32, "]", 35, "}"]
+      ],
+      propSources: [cssHighlighting],
+      skippedNodes: [0, 5, 117],
+      repeatNodeCount: 17,
+      tokenData: "K`~R!bOX%ZX^&R^p%Zpq&Rqr)ers)vst+jtu2Xuv%Zvw3Rwx3dxy5Ryz5dz{5i{|6S|}:u}!O;W!O!P;u!P!Q<^!Q![=V![!]>Q!]!^>|!^!_?_!_!`@Z!`!a@n!a!b%Z!b!cAo!c!k%Z!k!lC|!l!u%Z!u!vC|!v!}%Z!}#OD_#O#P%Z#P#QDp#Q#R2X#R#]%Z#]#^ER#^#g%Z#g#hC|#h#o%Z#o#pIf#p#qIw#q#rJ`#r#sJq#s#y%Z#y#z&R#z$f%Z$f$g&R$g#BY%Z#BY#BZ&R#BZ$IS%Z$IS$I_&R$I_$I|%Z$I|$JO&R$JO$JT%Z$JT$JU&R$JU$KV%Z$KV$KW&R$KW&FU%Z&FU&FV&R&FV;'S%Z;'S;=`KY<%lO%Z`%^SOy%jz;'S%j;'S;=`%{<%lO%j`%oS!e`Oy%jz;'S%j;'S;=`%{<%lO%j`&OP;=`<%l%j~&Wh$Q~OX%jX^'r^p%jpq'rqy%jz#y%j#y#z'r#z$f%j$f$g'r$g#BY%j#BY#BZ'r#BZ$IS%j$IS$I_'r$I_$I|%j$I|$JO'r$JO$JT%j$JT$JU'r$JU$KV%j$KV$KW'r$KW&FU%j&FU&FV'r&FV;'S%j;'S;=`%{<%lO%j~'yh$Q~!e`OX%jX^'r^p%jpq'rqy%jz#y%j#y#z'r#z$f%j$f$g'r$g#BY%j#BY#BZ'r#BZ$IS%j$IS$I_'r$I_$I|%j$I|$JO'r$JO$JT%j$JT$JU'r$JU$KV%j$KV$KW'r$KW&FU%j&FU&FV'r&FV;'S%j;'S;=`%{<%lO%jj)jS$dYOy%jz;'S%j;'S;=`%{<%lO%j~)yWOY)vZr)vrs*cs#O)v#O#P*h#P;'S)v;'S;=`+d<%lO)v~*hOw~~*kRO;'S)v;'S;=`*t;=`O)v~*wXOY)vZr)vrs*cs#O)v#O#P*h#P;'S)v;'S;=`+d;=`<%l)v<%lO)v~+gP;=`<%l)vj+oYmYOy%jz!Q%j!Q![,_![!c%j!c!i,_!i#T%j#T#Z,_#Z;'S%j;'S;=`%{<%lO%jj,dY!e`Oy%jz!Q%j!Q![-S![!c%j!c!i-S!i#T%j#T#Z-S#Z;'S%j;'S;=`%{<%lO%jj-XY!e`Oy%jz!Q%j!Q![-w![!c%j!c!i-w!i#T%j#T#Z-w#Z;'S%j;'S;=`%{<%lO%jj.OYuY!e`Oy%jz!Q%j!Q![.n![!c%j!c!i.n!i#T%j#T#Z.n#Z;'S%j;'S;=`%{<%lO%jj.uYuY!e`Oy%jz!Q%j!Q![/e![!c%j!c!i/e!i#T%j#T#Z/e#Z;'S%j;'S;=`%{<%lO%jj/jY!e`Oy%jz!Q%j!Q![0Y![!c%j!c!i0Y!i#T%j#T#Z0Y#Z;'S%j;'S;=`%{<%lO%jj0aYuY!e`Oy%jz!Q%j!Q![1P![!c%j!c!i1P!i#T%j#T#Z1P#Z;'S%j;'S;=`%{<%lO%jj1UY!e`Oy%jz!Q%j!Q![1t![!c%j!c!i1t!i#T%j#T#Z1t#Z;'S%j;'S;=`%{<%lO%jj1{SuY!e`Oy%jz;'S%j;'S;=`%{<%lO%jd2[UOy%jz!_%j!_!`2n!`;'S%j;'S;=`%{<%lO%jd2uS!oS!e`Oy%jz;'S%j;'S;=`%{<%lO%jb3WS^QOy%jz;'S%j;'S;=`%{<%lO%j~3gWOY3dZw3dwx*cx#O3d#O#P4P#P;'S3d;'S;=`4{<%lO3d~4SRO;'S3d;'S;=`4];=`O3d~4`XOY3dZw3dwx*cx#O3d#O#P4P#P;'S3d;'S;=`4{;=`<%l3d<%lO3d~5OP;=`<%l3dj5WShYOy%jz;'S%j;'S;=`%{<%lO%j~5iOg~n5pUWQyWOy%jz!_%j!_!`2n!`;'S%j;'S;=`%{<%lO%jj6ZWyW!uQOy%jz!O%j!O!P6s!P!Q%j!Q![9x![;'S%j;'S;=`%{<%lO%jj6xU!e`Oy%jz!Q%j!Q![7[![;'S%j;'S;=`%{<%lO%jj7cY!e`$]YOy%jz!Q%j!Q![7[![!g%j!g!h8R!h#X%j#X#Y8R#Y;'S%j;'S;=`%{<%lO%jj8WY!e`Oy%jz{%j{|8v|}%j}!O8v!O!Q%j!Q![9_![;'S%j;'S;=`%{<%lO%jj8{U!e`Oy%jz!Q%j!Q![9_![;'S%j;'S;=`%{<%lO%jj9fU!e`$]YOy%jz!Q%j!Q![9_![;'S%j;'S;=`%{<%lO%jj:P[!e`$]YOy%jz!O%j!O!P7[!P!Q%j!Q![9x![!g%j!g!h8R!h#X%j#X#Y8R#Y;'S%j;'S;=`%{<%lO%jj:zS!aYOy%jz;'S%j;'S;=`%{<%lO%jj;]WyWOy%jz!O%j!O!P6s!P!Q%j!Q![9x![;'S%j;'S;=`%{<%lO%jj;zU`YOy%jz!Q%j!Q![7[![;'S%j;'S;=`%{<%lO%j~<cTyWOy%jz{<r{;'S%j;'S;=`%{<%lO%j~<yS!e`$R~Oy%jz;'S%j;'S;=`%{<%lO%jj=[[$]YOy%jz!O%j!O!P7[!P!Q%j!Q![9x![!g%j!g!h8R!h#X%j#X#Y8R#Y;'S%j;'S;=`%{<%lO%jj>VUcYOy%jz![%j![!]>i!];'S%j;'S;=`%{<%lO%jj>pSdY!e`Oy%jz;'S%j;'S;=`%{<%lO%jj?RSnYOy%jz;'S%j;'S;=`%{<%lO%jh?dU!WWOy%jz!_%j!_!`?v!`;'S%j;'S;=`%{<%lO%jh?}S!WW!e`Oy%jz;'S%j;'S;=`%{<%lO%jl@bS!WW!oSOy%jz;'S%j;'S;=`%{<%lO%jj@uV!rQ!WWOy%jz!_%j!_!`?v!`!aA[!a;'S%j;'S;=`%{<%lO%jbAcS!rQ!e`Oy%jz;'S%j;'S;=`%{<%lO%jjArYOy%jz}%j}!OBb!O!c%j!c!}CP!}#T%j#T#oCP#o;'S%j;'S;=`%{<%lO%jjBgW!e`Oy%jz!c%j!c!}CP!}#T%j#T#oCP#o;'S%j;'S;=`%{<%lO%jjCW[lY!e`Oy%jz}%j}!OCP!O!Q%j!Q![CP![!c%j!c!}CP!}#T%j#T#oCP#o;'S%j;'S;=`%{<%lO%jhDRS!pWOy%jz;'S%j;'S;=`%{<%lO%jjDdSpYOy%jz;'S%j;'S;=`%{<%lO%jnDuSo^Oy%jz;'S%j;'S;=`%{<%lO%jjEWU!pWOy%jz#a%j#a#bEj#b;'S%j;'S;=`%{<%lO%jbEoU!e`Oy%jz#d%j#d#eFR#e;'S%j;'S;=`%{<%lO%jbFWU!e`Oy%jz#c%j#c#dFj#d;'S%j;'S;=`%{<%lO%jbFoU!e`Oy%jz#f%j#f#gGR#g;'S%j;'S;=`%{<%lO%jbGWU!e`Oy%jz#h%j#h#iGj#i;'S%j;'S;=`%{<%lO%jbGoU!e`Oy%jz#T%j#T#UHR#U;'S%j;'S;=`%{<%lO%jbHWU!e`Oy%jz#b%j#b#cHj#c;'S%j;'S;=`%{<%lO%jbHoU!e`Oy%jz#h%j#h#iIR#i;'S%j;'S;=`%{<%lO%jbIYS$cQ!e`Oy%jz;'S%j;'S;=`%{<%lO%jjIkSsYOy%jz;'S%j;'S;=`%{<%lO%jfI|U$XUOy%jz!_%j!_!`2n!`;'S%j;'S;=`%{<%lO%jjJeSrYOy%jz;'S%j;'S;=`%{<%lO%jfJvU!uQOy%jz!_%j!_!`2n!`;'S%j;'S;=`%{<%lO%j`K]P;=`<%l%Z",
+      tokenizers: [descendant, unitToken, identifiers, queryIdentifiers, 1, 2, 3, 4, new LocalTokenGroup("m~RRYZ[z{a~~g~aO$T~~dP!P!Qg~lO$U~~", 28, 142)],
+      topRules: { "StyleSheet": [0, 6], "Styles": [1, 116] },
+      dynamicPrecedences: { "84": 1 },
+      specialized: [{ term: 137, get: (value) => spec_callee[value] || -1 }, { term: 138, get: (value) => spec_queryIdentifier[value] || -1 }, { term: 4, get: (value) => spec_QueryCallee[value] || -1 }, { term: 28, get: (value) => spec_AtKeyword[value] || -1 }, { term: 136, get: (value) => spec_identifier[value] || -1 }],
+      tokenPrec: 2256
+    });
+  }
+});
+
+// node_modules/@codemirror/lang-css/dist/index.js
+var cssLanguage;
+var init_dist13 = __esm({
+  "node_modules/@codemirror/lang-css/dist/index.js"() {
+    init_dist12();
+    init_dist5();
+    init_dist3();
+    cssLanguage = /* @__PURE__ */ LRLanguage.define({
+      name: "css",
+      parser: /* @__PURE__ */ parser2.configure({
+        props: [
+          /* @__PURE__ */ indentNodeProp.add({
+            Declaration: /* @__PURE__ */ continuedIndent()
+          }),
+          /* @__PURE__ */ foldNodeProp.add({
+            "Block KeyframeList": foldInside
+          })
+        ]
+      }),
+      languageData: {
+        commentTokens: { block: { open: "/*", close: "*/" } },
+        indentOnInput: /^\s*\}$/,
+        wordChars: "-"
+      }
+    });
+  }
+});
+
 // node_modules/@codemirror/theme-one-dark/dist/index.js
 var chalky, coral, cyan, invalid, ivory, stone, malibu, sage, whiskey, violet, darkBackground, highlightBackground, background, tooltipBackground, selection, cursor, oneDarkTheme, oneDarkHighlightStyle, oneDark;
-var init_dist12 = __esm({
+var init_dist14 = __esm({
   "node_modules/@codemirror/theme-one-dark/dist/index.js"() {
     init_dist2();
     init_dist5();
@@ -25310,9 +25918,11 @@ var require_editor_test = __commonJS({
     init_dist5();
     init_parser();
     init_dist5();
+    init_dist3();
+    init_dist13();
     init_dist4();
     init_dist5();
-    init_dist12();
+    init_dist14();
     init_dist8();
     init_dist2();
     init_dist6();
@@ -25439,6 +26049,25 @@ var require_editor_test = __commonJS({
       // CSS and html temporary highlight
     };
     var wikidotParser = parser.configure({
+      // 混合解析逻辑
+      wrap: parseMixed((node, input) => {
+        if (node.name === "codeContent") {
+          let moduleBlock = node.node.parent;
+          if (moduleBlock && moduleBlock.name === "ModuleBlock") {
+            let openTag = moduleBlock.getChild("ModuleOpenTag");
+            if (openTag) {
+              let attrList = openTag.getChild("AttrList");
+              if (attrList) {
+                let attrText = input.read(attrList.from, attrList.to).toLowerCase();
+                if (attrText.includes("css")) {
+                  return { parser: cssLanguage.parser };
+                }
+              }
+            }
+          }
+        }
+        return null;
+      }),
       props: [
         styleTags({
           "IncludeOpen": customTags.include,
