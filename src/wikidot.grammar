@@ -92,17 +92,17 @@ IncludeBlock {
 }
 
 IncludePart1 {
-  IncludeSeg
+  includeSeg_
   IncludePart2?
 }
 
 IncludePart2 {
-  IncludeSeg
+  includeSeg_
   IncludePart3?
 }
 
 IncludePart3 {
-  IncludeSeg
+  includeSeg_
 }
 // ——————————————————————————include——————————————————————————
 
@@ -172,7 +172,7 @@ AttrPath { attrPathToken }
   ModuleCloseToken { "[[/module]]"}
   // include begin
   IncludeOpen { "[[include" }
-  IncludeSeg { ":" ![ :\[\]\n\r]+ }
+  includeSeg_ { ":" ![ :\[\]\n\r]+ }
   // include end
   CodeOpen { "[[code" }
   CodeClose { "[[/code]]" }
@@ -230,7 +230,7 @@ AttrPath { attrPathToken }
     TabOpenToken, TabCloseToken,
     ModuleOpenToken, ModuleCloseToken,
     TableBar, TableTilde,
-    IncludeOpen, IncludeSeg,
+    IncludeOpen, includeSeg_,
     DivClose, DivOpen,
     _tagEnd,
     CollapsibleClose, CollapsibleOpen,
