@@ -119,6 +119,7 @@ const customTags = {
     list3: Tag.define(),
     list4: Tag.define(),
     quote: Tag.define(),
+    newline_defult: Tag.define(), // IMPORTANT new line defult defination
     code: Tag.define(), // 用于代码块
     table: Tag.define(),
     table_header: Tag.define(),
@@ -249,6 +250,7 @@ const wikidotParser = parser.configure({
             "ForcedNewLine":       customTags.newline,
             "Original":            customTags.original_text,
             // ——————————————————————————常用标记——————————————————————————
+            "newline":             customTags.newline_defult,
             "AttrName":            customTags.components,
             "Equals":              customTags.equal,
             "AttrValue":           customTags.Highlight,
@@ -298,6 +300,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.components, class: "cm-components"}, // ATTRLIST IMPORTANT
     { tag: customTags.keyword, class: "cm-keyword"}, // 参数
     { tag: customTags.newline, class: "cm-newline" },
+    { tag: customTags.newline_defult, class: ""}, // IMPORTANT defult newline defination
     { tag: customTags.monospace, class: "cm-monospace"},
     { tag: customTags.list1, class: "cm-list1" },
     { tag: customTags.list2, class: "cm-list2" },
