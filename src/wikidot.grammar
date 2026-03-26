@@ -8,6 +8,7 @@ element {
   | NoteBlock
   | SizeBlock
   | AlignCenter
+  | AlignLeft
   | IncludeBlock
   | CollapsibleBlock
   | CodeBlock
@@ -152,13 +153,19 @@ NoteBlock {
 
 
 
-// ——————————————————————————center——————————————————————————
+// ——————————————————————————Align——————————————————————————
 AlignCenter {
   AlignCenterOpenToken
   element*
   AlignCenterCloseToken
 }
-// ——————————————————————————center——————————————————————————
+
+AlignLeft {
+  AlignLeftOpenToken
+  element*
+  AlignLeftCloseToken
+}
+// ——————————————————————————Align——————————————————————————
 
 
 
@@ -250,6 +257,8 @@ AttrPath { attrPathToken }
 @tokens {
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
+  AlignLeftOpenToken { "[[<]]" }
+  AlignLeftCloseToken { "[[/<]]" }
   AlignCenterOpenToken { "[[=]]" }
   AlignCenterCloseToken { "[[/=]]" }
   NoteOpenToken { "[[note]]" }
@@ -330,6 +339,8 @@ AttrPath { attrPathToken }
     Blockquote,
     AlignCenterOpenToken,
     AlignCenterCloseToken,
+    AlignLeftOpenToken,
+    AlignLeftCloseToken,
     SizeOpenToken,
     SizeCloseToken,
     NoteOpenToken,
