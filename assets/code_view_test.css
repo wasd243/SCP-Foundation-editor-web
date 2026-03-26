@@ -250,7 +250,12 @@ html, body, #editor-container {
 }
 
 
-
+/* size */
+.cm-editor .cm-size {
+    color: #759DCB;
+    font-style: italic;
+    font-weight: bold;
+}
 
 
 

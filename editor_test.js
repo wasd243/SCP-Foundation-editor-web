@@ -226,6 +226,8 @@ const wikidotParser = parser.configure({
             "HTMLTagEnd":          customTags.html,
             "NoteOpenToken":       customTags.note,
             "NoteCloseToken":      customTags.note,
+            "SizeOpenToken":       customTags.size,
+            "SizeCloseToken":      customTags.size,
 
             // ——————————————————————————表格操作——————————————————————————
             "TableTilde":          customTags.table_header,
@@ -265,6 +267,7 @@ const wikidotParser = parser.configure({
             "IncludeBlock":     foldInside,
             "HTMLBlock":        foldInside,
             "NoteBlock":        foldInside,
+            "SizeBlock":        foldInside,
         })
     ]
 });
