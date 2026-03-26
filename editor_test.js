@@ -228,6 +228,7 @@ const wikidotParser = parser.configure({
             "NoteCloseToken":      customTags.note,
             "SizeOpenToken":       customTags.size,
             "SizeCloseToken":      customTags.size,
+            "SizeTagEnd":          customTags.size,
 
             // ——————————————————————————表格操作——————————————————————————
             "TableTilde":          customTags.table_header,
