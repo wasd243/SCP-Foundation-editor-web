@@ -9,6 +9,7 @@ element {
   | SizeBlock
   | AlignCenter
   | AlignLeft
+  | AlignRight
   | IncludeBlock
   | CollapsibleBlock
   | CodeBlock
@@ -165,6 +166,12 @@ AlignLeft {
   element*
   AlignLeftCloseToken
 }
+
+AlignRight {
+  AlignRightOpenToken
+  element*
+  AlignRightCloseToken
+}
 // ——————————————————————————Align——————————————————————————
 
 
@@ -257,6 +264,8 @@ AttrPath { attrPathToken }
 @tokens {
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
+  AlignRightOpenToken { "[[>]]" }
+  AlignRightCloseToken { "[[/>]]" }
   AlignLeftOpenToken { "[[<]]" }
   AlignLeftCloseToken { "[[/<]]" }
   AlignCenterOpenToken { "[[=]]" }
@@ -341,6 +350,8 @@ AttrPath { attrPathToken }
     AlignCenterCloseToken,
     AlignLeftOpenToken,
     AlignLeftCloseToken,
+    AlignRightOpenToken,
+    AlignRightCloseToken,
     SizeOpenToken,
     SizeCloseToken,
     NoteOpenToken,
