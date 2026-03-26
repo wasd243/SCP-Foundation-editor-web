@@ -174,7 +174,10 @@ const wikidotParser = parser.configure({
                         
                         // 5. 如果属性里带 'css'，移交解析权！
                         if (attrText.includes("css")) {
-                            return { parser: cssLanguage.parser };
+                            return {
+                                parser: cssLanguage.parser,
+                                overlay: [{ from: node.from, to: node.to }]
+                            };
                         }
                     }
                 }
@@ -182,7 +185,11 @@ const wikidotParser = parser.configure({
         }
         // HTML
         if (node.name === "HTMLContent") {
-            return { parser: htmlLanguage.parser };
+            return { 
+                parser: htmlLanguage.parser,
+                // 必须指定 overlay，否则 HTML 解析器会尝试解析外部的 [[/html]]
+                overlay: [{ from: node.from, to: node.to }] 
+            };
         }
         // 如果不是 CSS/HTML，或者没匹配上，返回 null（保持原生 Wikidot 解析）
         return null;
