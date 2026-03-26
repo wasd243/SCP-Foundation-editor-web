@@ -27341,6 +27341,7 @@ var require_editor_test = __commonJS({
           "NoteCloseToken": customTags.note,
           "SizeOpenToken": customTags.size,
           "SizeCloseToken": customTags.size,
+          "SizeTagEnd": customTags.size,
           // ——————————————————————————表格操作——————————————————————————
           "TableTilde": customTags.table_header,
           "TableBar": customTags.table,
