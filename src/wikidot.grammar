@@ -3,6 +3,22 @@
   element* 
 }
 
+// 这是一个“黑洞集合”，包含了所有可能的 Token，唯独排除了 Module, HTML 和 Code 的闭合标签
+GenericToken {
+  DivOpen | DivClose | SpanOpenToken | SpanCloseToken |
+  AlignRightOpenToken | AlignRightCloseToken | AlignLeftOpenToken | AlignLeftCloseToken |
+  AlignCenterOpenToken | AlignCenterCloseToken | NoteOpenToken | NoteCloseToken |
+  SizeOpenToken | SizeCloseToken | CollapsibleOpen | CollapsibleClose |
+  ModuleOpenToken | HTMLOpenToken |
+  IncludeOpen | IncludeBar | includeSeg_ |
+  UserOpen | CodeOpen | FootnoteOpen | FootnoteClose |
+  TabViewOpenToken | TabViewCloseToken | TabOpenToken | TabCloseToken | ImageOpen |
+  _tagEnd | TableBar | TableTilde | Blockquote | newline | ForcedNewLine | LinkURL |
+  FootnoteBlock | Title | Hr | StrongText | EmText | UnderlineText | StrikeText |
+  SupText | SubText | Original | Monospace | attrPathToken | AttrName | Equals |
+  AttrValue | StarChar | BracketChar | Text 
+}
+
 element {
   DivBlock
   | NoteBlock
@@ -74,7 +90,7 @@ CollapsibleOpenTag {
 // ——————————————————————————Code——————————————————————————
 CodeBlock {
   CodeOpenTag
-  codeContent* // 直接放这里就行，不需要任何 @skip 修饰！
+  GenericToken*
   CodeClose
 }
 
@@ -242,7 +258,7 @@ ModuleOpenTag {
 }
 
 ModuleContent {
-  codeContent*
+  GenericToken*
 }
 // ——————————————————————————Module——————————————————————————
 
@@ -261,7 +277,7 @@ HTMLOpenTag {
 }
 
 HTMLContent {
-  codeContent*
+  GenericToken*
 }
 // ——————————————————————————HTML——————————————————————————
 
@@ -352,11 +368,6 @@ AttrPath { attrPathToken }
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
-  codeContent { 
-    ![\[\]\n\r]+ |   // 增加对 ] 的排除
-    "[" ![\[] |      // 只要不是 [[，就当成内容
-    "]" ![\]]        // 只要不是 ] ]，就当成内容
-  }
   BracketChar { "[" | "]" }
   Text { ![\[\]*/\-_^, \t\n\r|~@>=<]+ }
   space { $[ \t]+ }
@@ -409,6 +420,6 @@ AttrPath { attrPathToken }
     Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
     AttrName,
     attrPathToken,
-    Text, codeContent, space 
+    Text, space 
   }
 }
