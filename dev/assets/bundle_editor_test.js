@@ -27369,7 +27369,7 @@ var require_editor_test = __commonJS({
           "ModuleBlock": foldInside,
           "IncludeBlock": foldInside,
           "HTMLBlock": foldInside,
-          "NoteOpenToken": foldInside
+          "NoteCloseToken": foldInside
         })
       ]
     });
