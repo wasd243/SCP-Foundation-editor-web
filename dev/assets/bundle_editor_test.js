@@ -24708,8 +24708,8 @@ var init_parser = __esm({
     spec_AttrName = { __proto__: null, lang: 196, "item-number": 196, clearance: 196, "container-class": 196, disruption: 196, "risk-class": 196, lv: 196, cc: 196, dc: 196, site: 196, dir: 196, head: 196, mtf: 196, name: 196, caption: 196, width: 196, height: 196, align: 196 };
     parser = LRParser.deserialize({
       version: 14,
-      states: ".|QVQPOOO#YQPO'#C_O#eQPO'#C^O#lQPO'#CiO#sQPO'#ClO#YQPO'#CuO$RQPO'#CtO#YQPO'#CzO$YQQO'#CyO#YQPO'#DPOOQO'#DO'#DOO#YQPO'#DTO$bQQO'#DSO$jQPO'#DZOOQO'#D`'#D`O#YQPO'#D_O#YQPO'#DgO$oQQO'#DfO$wQPO'#DmO#YQPO'#DqO%OQPO'#DpOOQO'#E]'#E]OOQO'#ET'#ETQVQPOOOOQO'#Cf'#CfO%VQPO'#CbOOQO'#Cb'#CbOOQO'#EU'#EUO%[QPO'#CaO%gQPO,58yOOQO,58x,58xO%lQPO,58xOOQO,59T,59TO%sQPO,59TO%zQPO'#CnOOQO'#EW'#EWO&YQPO'#EVOOQO'#EV'#EVO&bQPO,59WOOQO'#Cs'#CsOOQO,59W,59WO&bQPO,59WO&mQPO,59aOOQO,59`,59`O&rQPO,59`O&yQPO,59fOOQO'#EX'#EXO'OQQO,59eOOQO,59e,59eO'WQPO,59kO']QPO,59oO'bQQO'#DWO'jQPO,59nOOQO'#D]'#D]O'oQPO,59uO'vQPO,59yO'{QPO,5:RO(QQQO'#DjO(YQPO,5:QOOQO,5:X,5:XO(_QPO,5:XO(fQPO,5:]OOQO,5:[,5:[O(kQPO,5:[OOQO-E8R-E8RO(rQPO,58|OOQO-E8S-E8SOOQO'#Cg'#CgOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.o1G.oO(wQPO'#CoOOQO,59Y,59YOOQO-E8U-E8UOOQO'#Cr'#CrOOQO,5:q,5:qOOQO-E8T-E8TOOQO1G.r1G.rO&bQPO1G.rOOQO'#Cw'#CwOOQO1G.{1G.{OOQO1G.z1G.zOOQO'#C|'#C|OOQO1G/Q1G/QOOQO-E8V-E8VOOQO1G/P1G/POOQO'#DR'#DROOQO1G/V1G/VOOQO'#DV'#DVOOQO1G/Z1G/ZOOQO1G/Y1G/YOOQO1G/a1G/aO)VQPO1G/aOOQO'#Db'#DbOOQO1G/e1G/eOOQO'#Di'#DiOOQO1G/m1G/mOOQO1G/l1G/lOOQO1G/s1G/sOOQO'#Ds'#DsOOQO1G/w1G/wOOQO1G/v1G/vOOQO1G.h1G.hOOQO'#Cp'#CpOOQO,59Z,59ZOOQO7+$^7+$^OOQO7+${7+${",
-      stateData: "*c~O#OOS~OSPO^ROaSOjTOoVOtXOxZO|eO!O]O!T^O!VeO!WeO!XeO![`O!`eO!bbO!fcO!ieO!jeO!keO!leO!meO!neO!oeO!peO!qeO!reO!seO!teO!ueO!veO~OViO#QhO#RTP~O[nO~PVO_pO~PVOeuO#RwO#SrO#TsO~Ol{O~PVOq!QO#V!OO~O#V!OO{zP~O#R!VO~O#V!OO!_!^P~O!c!]O~PVO!h!`O~PVOW!cO~OViO#QhO#RTX~O#R!eO~O[!gO~PVO_!hO~PVO#S!iOebX#RbX#TbX~O#TsO#U!lO~OeuO#RwO#TsO~O#R!qO~Ol!sO~PVO#R!tO~Oq!wO#V!OO~O#R!xO~O#R!zO~O#V!OO{zX~O{!|O~O!Q!}O~PVO#R#PO~O#R#RO~O#V!OO!_!^X~O!_#TO~O!c#UO~PVO#R#VO~O!h#XO~PVOX#YO~O#S#ZOecX#RcX#TcX~O!Q#^O~PVO!`^_!b!c!f!hx{![!_!V!Wae#S#T[St#Rljqo|!O!Q!T!X!iXW!j!k!u!l!m!n!o!p!q!r!sV#Q!v#V#Oo~",
+      states: ".|QVQPOOO#]QPO'#C_O#hQPO'#C^O#oQPO'#CiO#vQPO'#ClO#]QPO'#CuO$UQPO'#CtO#]QPO'#CzO$]QQO'#CyO#]QPO'#DPOOQO'#DO'#DOO#]QPO'#DTO$eQQO'#DSO$mQPO'#DZOOQO'#D`'#D`O#]QPO'#D_O#]QPO'#DgO$rQQO'#DfO$zQPO'#DmO#]QPO'#DqO%RQPO'#DpOOQO'#E]'#E]OOQO'#ET'#ETQVQPOOOOQO'#Cf'#CfO%YQPO'#CbOOQO'#Cb'#CbOOQO'#EU'#EUO%_QPO'#CaO%jQPO,58yOOQO,58x,58xO%oQPO,58xOOQO,59T,59TO%vQPO,59TO%}QPO'#CnOOQO'#EW'#EWO&]QPO'#EVOOQO'#EV'#EVO&eQPO,59WOOQO'#Cs'#CsOOQO,59W,59WO&eQPO,59WO&pQPO,59aOOQO,59`,59`O&uQPO,59`O&|QPO,59fOOQO'#EX'#EXO'RQQO,59eOOQO,59e,59eO'ZQPO,59kO'`QPO,59oO'eQQO'#DWO'mQPO,59nOOQO'#D]'#D]O'rQPO,59uO'yQPO,59yO(OQPO,5:RO(TQQO'#DjO(]QPO,5:QOOQO,5:X,5:XO(bQPO,5:XO(iQPO,5:]OOQO,5:[,5:[O(nQPO,5:[OOQO-E8R-E8RO(uQPO,58|OOQO-E8S-E8SOOQO'#Cg'#CgOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.o1G.oO(zQPO'#CoOOQO,59Y,59YOOQO-E8U-E8UOOQO'#Cr'#CrOOQO,5:q,5:qOOQO-E8T-E8TOOQO1G.r1G.rO&eQPO1G.rOOQO'#Cw'#CwOOQO1G.{1G.{OOQO1G.z1G.zOOQO'#C|'#C|OOQO1G/Q1G/QOOQO-E8V-E8VOOQO1G/P1G/POOQO'#DR'#DROOQO1G/V1G/VOOQO'#DV'#DVOOQO1G/Z1G/ZOOQO1G/Y1G/YOOQO1G/a1G/aO)YQPO1G/aOOQO'#Db'#DbOOQO1G/e1G/eOOQO'#Di'#DiOOQO1G/m1G/mOOQO1G/l1G/lOOQO1G/s1G/sOOQO'#Ds'#DsOOQO1G/w1G/wOOQO1G/v1G/vOOQO1G.h1G.hOOQO'#Cp'#CpOOQO,59Z,59ZOOQO7+$^7+$^OOQO7+${7+${",
+      stateData: "*f~O#OOS~OSPO^ROaSOjTOoVOtXOxZO|eO!O]O!T^O!VeO!WeO!XeO![`O!`eO!bbO!fcO!ieO!jeO!keO!leO!meO!neO!oeO!peO!qeO!reO!seO!teO!ueO!veO#TeO~OViO#QhO#RTP~O[nO~PVO_pO~PVOeuO#RwO#SrO#TsO~Ol{O~PVOq!QO#V!OO~O#V!OO{zP~O#R!VO~O#V!OO!_!^P~O!c!]O~PVO!h!`O~PVOW!cO~OViO#QhO#RTX~O#R!eO~O[!gO~PVO_!hO~PVO#S!iOebX#RbX#TbX~O#TsO#U!lO~OeuO#RwO#TsO~O#R!qO~Ol!sO~PVO#R!tO~Oq!wO#V!OO~O#R!xO~O#R!zO~O#V!OO{zX~O{!|O~O!Q!}O~PVO#R#PO~O#R#RO~O#V!OO!_!^X~O!_#TO~O!c#UO~PVO#R#VO~O!h#XO~PVOX#YO~O#S#ZOecX#RcX#TcX~O!Q#^O~PVO!`^_!b!c!f!hx{![!_!V!Wae#S#T[St#Rljqo|!O!Q!T!X!iXW!j!k!u!l!m!n!o!p!q!r!sV#Q!v#V#Oo~",
       goto: "*b#QPP#R#cP#s$]PPP$h$sP#RPP#RP$v$y$|P%P%S#R%^P%nP#R%qP&RP#R&UP&f#R&iP&y&|PP#RP'PP#R'SP'dPPP#R'gP'w'zPP#RPP#R'}P(_PPPPPPPPPPPPPPP(b)Q)_)i)rPPP*QmeOQRUbdgoq|!W!^!a#OmQOQRUbdgoq|!W!^!a#OQmPQzTQ}VQ!RXQ!SZQ!X_Q!Y`R!_cckPTVXZ_`clcjPTVXZ_`clR!fmRySR!jrR#[!iR!mtQxSS!ovyR#]!pmUOQRUbdgoq|!W!^!a#OR!rzmWOQRUbdgoq|!W!^!a#OR!u}mYOQRUbdgoq|!W!^!a#OR!y!Rm[OQRUbdgoq|!W!^!a#OR!{!SR!U[R!W]m_OQRUbdgoq|!W!^!a#OR#Q!XmaOQRUbdgoq|!W!^!a#OR#S!YR![amdOQRUbdgoq|!W!^!a#OR#W!_QgOQoQQqRQ|UQ!^bQ!ad^!bgoq|!^!a#OR#O!W`lPTVXZ_`cR!dlQvSS!nv!pR!pyWtSvy!pR!ktQ!PWQ!T[Q!ZaV!v!P!T!ZmfOQRUbdgoq|!W!^!a#O",
       nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr AttrName Equals AttrValue AttrPath DivTagEnd DivClose NoteBlock NoteOpenToken NoteCloseToken IncludeBlock IncludeOpen IncludePart1 IncludePart2 IncludePart3 IncludeBar IncludeKeyword IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd CodeClose UserBlock UserOpenTag UserOpen UserTagEnd ModuleBlock ModuleOpenTag ModuleOpenToken ModuleTagEnd ModuleContent ModuleCloseToken FootnoteBlock Footnote FootnoteOpen FootnoteTagEnd FootnoteClose ImageBlock ImageOpenTag ImageOpen ImageTagEnd TableBar TableTilde Hr HTMLBlock HTMLOpenTag HTMLOpenToken HTMLTagEnd HTMLContent HTMLCloseToken Blockquote TabViewBlock TabViewOpenToken TabViewCloseToken TabBlock TabOpenTag TabOpenToken TabTagEnd TabCloseToken LinkURL ForcedNewLine Title StrongText EmText UnderlineText StrikeText SupText SubText Monospace Original StarChar BracketChar Text",
       maxTerm: 99,
@@ -24719,7 +24719,7 @@ var init_parser = __esm({
       tokenizers: [0, 1],
       topRules: { "Document": [0, 1] },
       specialized: [{ term: 7, get: (value) => spec_AttrName[value] || -1 }],
-      tokenPrec: 382
+      tokenPrec: 385
     });
   }
 });
@@ -27222,6 +27222,8 @@ var require_editor_test = __commonJS({
       list3: Tag.define(),
       list4: Tag.define(),
       quote: Tag.define(),
+      newline_defult: Tag.define(),
+      // IMPORTANT new line defult defination
       code: Tag.define(),
       // 用于代码块
       table: Tag.define(),
@@ -27356,6 +27358,7 @@ var require_editor_test = __commonJS({
           "ForcedNewLine": customTags.newline,
           "Original": customTags.original_text,
           // ——————————————————————————常用标记——————————————————————————
+          "newline": customTags.newline_defult,
           "AttrName": customTags.components,
           "Equals": customTags.equal,
           "AttrValue": customTags.Highlight
@@ -27401,6 +27404,8 @@ var require_editor_test = __commonJS({
       { tag: customTags.keyword, class: "cm-keyword" },
       // 参数
       { tag: customTags.newline, class: "cm-newline" },
+      { tag: customTags.newline_defult, class: "" },
+      // IMPORTANT defult newline defination
       { tag: customTags.monospace, class: "cm-monospace" },
       { tag: customTags.list1, class: "cm-list1" },
       { tag: customTags.list2, class: "cm-list2" },
