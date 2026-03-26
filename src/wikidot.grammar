@@ -5,6 +5,7 @@
 
 element {
   DivBlock
+  | NoteBlock
   | IncludeBlock
   | CollapsibleBlock
   | CodeBlock
@@ -138,6 +139,16 @@ ImageBlock {
 
 
 
+// ——————————————————————————note——————————————————————————
+NoteBlock {
+  NoteOpenToken
+  element*
+  NoteCloseToken
+}
+// ——————————————————————————note——————————————————————————
+
+
+
 // ——————————————————————————TabView——————————————————————————
 TabViewBlock {
   TabViewOpenToken
@@ -212,6 +223,8 @@ AttrPath { attrPathToken }
 @tokens {
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
+  NoteOpenToken { "[[note]]" }
+  NoteCloseToken { "[[/note]]" }
   CollapsibleOpen  { "[[collapsible" }
   CollapsibleClose { "[[/collapsible]]" }
   ModuleOpenToken { "[[module"}
@@ -284,6 +297,8 @@ AttrPath { attrPathToken }
 
   @precedence {
     Blockquote,
+    NoteOpenToken,
+    NoteCloseToken,
     TabViewOpenToken,
     TabViewCloseToken,
     TabOpenToken,

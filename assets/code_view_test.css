@@ -243,6 +243,22 @@ html, body, #editor-container {
 }
 
 
+/* note */
+.cm-editor .cm-note {
+    color: #FFC66D;
+    font-style: italic;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
