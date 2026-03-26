@@ -235,6 +235,9 @@ const wikidotParser = parser.configure({
             "AlignLeftCloseToken":    customTags.left,
             "AlignRightOpenToken":    customTags.right,
             "AlignRightCloseToken":   customTags.right,
+            "SpanOpenToken":          customTags.div, // 这里div和span的颜色一样
+            "SpanCloseToken":         customTags.div,
+            "SpanTagEnd":             customTags.div,
 
             // ——————————————————————————表格操作——————————————————————————
             "TableTilde":             customTags.table_header,
@@ -278,6 +281,7 @@ const wikidotParser = parser.configure({
             "AlignCenter":      foldInside,
             "AlignLeft":        foldInside,
             "AlignRight":       foldInside,
+            "SpanBlock":        foldInside,
         })
     ]
 });
