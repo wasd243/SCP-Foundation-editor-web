@@ -7,6 +7,7 @@ element {
   DivBlock
   | NoteBlock
   | SizeBlock
+  | SpanBlock
   | AlignCenter
   | AlignLeft
   | AlignRight
@@ -176,6 +177,20 @@ AlignRight {
 
 
 
+// ——————————————————————————span——————————————————————————
+SpanBlock {
+  SpanOpenTag
+  element*
+  SpanCloseToken
+}
+
+SpanOpenTag {
+  SpanOpenToken AttrList SpanTagEnd { _tagEnd }
+}
+// ——————————————————————————span——————————————————————————
+
+
+
 // ——————————————————————————size——————————————————————————
 SizeBlock {
   SizeOpenTag
@@ -264,6 +279,8 @@ AttrPath { attrPathToken }
 @tokens {
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
+  SpanOpenToken { "[[span" }
+  SpanCloseToken { "[[/span]]" }
   AlignRightOpenToken { "[[>]]" }
   AlignRightCloseToken { "[[/>]]" }
   AlignLeftOpenToken { "[[<]]" }
@@ -352,6 +369,8 @@ AttrPath { attrPathToken }
     AlignLeftCloseToken,
     AlignRightOpenToken,
     AlignRightCloseToken,
+    SpanOpenToken,
+    SpanCloseToken,
     SizeOpenToken,
     SizeCloseToken,
     NoteOpenToken,
