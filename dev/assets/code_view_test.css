@@ -271,6 +271,13 @@ html, body, #editor-container {
     font-style: italic;
 }
 
+/* right */
+
+.cm-editor .cm-right {
+    color: #759DCB;
+    font-style: italic;
+}
+
 
 
 
