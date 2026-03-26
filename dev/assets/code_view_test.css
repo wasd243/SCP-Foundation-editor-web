@@ -252,13 +252,17 @@ html, body, #editor-container {
 
 /* size */
 .cm-editor .cm-size {
-    color: #759DCB;
+    color: #FFC66D;
     font-style: italic;
     font-weight: bold;
 }
 
 
-
+/* center */
+.cm-editor .cm-center {
+    color: #759DCB;
+    font-style: italic;
+}
 
 
 
