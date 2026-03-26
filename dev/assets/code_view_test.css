@@ -279,6 +279,11 @@ html, body, #editor-container {
 }
 
 
+/* quote mark for "" */
+.cm-editor .cm-quote-mark {
+    color: #98C379;
+}
+
 
 
 
