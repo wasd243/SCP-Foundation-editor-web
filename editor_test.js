@@ -264,7 +264,7 @@ const wikidotParser = parser.configure({
             "ModuleBlock":      foldInside,
             "IncludeBlock":     foldInside,
             "HTMLBlock":        foldInside,
-            "NoteCloseToken":   foldInside,
+            "NoteBlock":        foldInside,
         })
     ]
 });
