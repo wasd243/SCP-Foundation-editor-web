@@ -16970,6 +16970,17 @@ function syntaxTree(state) {
   let field = state.field(Language.state, false);
   return field ? field.tree : Tree.empty;
 }
+function ensureSyntaxTree(state, upto, timeout = 50) {
+  var _a2;
+  let parse = (_a2 = state.field(Language.state, false)) === null || _a2 === void 0 ? void 0 : _a2.context;
+  if (!parse)
+    return null;
+  let oldVieport = parse.viewport;
+  parse.updateViewport({ from: 0, to: upto });
+  let result = parse.isDone(upto) || parse.work(timeout, upto) ? parse.tree : null;
+  parse.updateViewport(oldVieport);
+  return result;
+}
 function cutFragments(fragments, from, to) {
   return TreeFragment.applyChanges(fragments, [{ fromA: from, toA: to, fromB: from, toB: to }]);
 }
@@ -27533,7 +27544,6 @@ ${listMarker} `;
           // 再添加普通颜色预览扩展
           colorPreviewExtension,
           autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
-          EditorView.viewportMargin.of(100),
           // Web版本：添加本地存储自动保存功能
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
@@ -27584,6 +27594,9 @@ ${listMarker} `;
         state,
         parent: document.getElementById("editor-container")
       });
+      setTimeout(() => {
+        ensureSyntaxTree(editorView.state, editorView.state.doc.length, 5e3);
+      }, 50);
       window._debugAST = () => {
         const tree = syntaxTree(editorView.state);
         tree.cursor().iterate((node) => {
