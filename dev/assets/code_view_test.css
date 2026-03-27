@@ -86,7 +86,8 @@ html, body, #editor-container {
 
 /* collapsible */
 .cm-editor .cm-collapsible {
-    color: #61AFEF;
+    color: #5757ff;
+    font-style: italic;
 }
 
 
