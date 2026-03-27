@@ -37,6 +37,8 @@ element {
   | ImageBlock
   | TableBar
   | TableTilde
+  | List1
+  | List2
   | Hr
   | HTMLBlock
   | Blockquote
@@ -336,6 +338,8 @@ AttrPath { attrPathToken }
   ForcedNewLine { "@@@@" }
   LinkURL { "http" "s"? "://" ![ \t\n\r\]]+ }
   FootnoteBlock { "[[footnoteblock]]" }
+  List1 { "* " }
+  List2 { "# " }
 
   Title { "+" "+"? "+"? "+"? "+"? "+"? " " ![\n\r]* }
   // ——————————————————————————常用标记——————————————————————————
@@ -375,6 +379,8 @@ AttrPath { attrPathToken }
   @precedence {
     // 1
     Blockquote,
+    List1,
+    List2,
     AlignCenterOpenToken,
     AlignCenterCloseToken,
     AlignLeftOpenToken,

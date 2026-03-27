@@ -83,9 +83,11 @@ export const
   ModuleCloseToken = 90,
   Footnote = 91,
   ImageBlock = 93,
-  HTMLBlock = 96,
-  HTMLOpenTag = 97,
-  HTMLContent = 99,
-  HTMLCloseToken = 100,
-  TabViewBlock = 101,
-  TabBlock = 102
+  List1 = 96,
+  List2 = 97,
+  HTMLBlock = 98,
+  HTMLOpenTag = 99,
+  HTMLContent = 101,
+  HTMLCloseToken = 102,
+  TabViewBlock = 103,
+  TabBlock = 104
