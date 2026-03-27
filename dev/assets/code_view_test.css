@@ -279,7 +279,18 @@ html, body, #editor-container {
 }
 
 
+/* list1 */
+.cm-editor .cm-list1 {
+    color: #98C379;
+    font-weight: bold;
+}
 
+
+/* list2 */
+.cm-editor .cm-list2 {
+    color: #98C379;
+    font-weight: bold;
+}
 
 
 
