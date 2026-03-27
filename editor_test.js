@@ -143,7 +143,7 @@ const customTags = {
     line_up: Tag.define(), // 用于|
     size: Tag.define(), // 用于字体大小标签
     aim: Tag.define(), // 用于AIM
-    components: Tag.define(), // ATTRNAME
+    components: Tag.define(), // ATTRpathToken
     collapsible: Tag.define(), // 用于可折叠内容
     monospace: Tag.define(), // 等宽字
     license: Tag.define(), // LICENSE
@@ -278,7 +278,7 @@ const wikidotParser = parser.configure({
             "Original":               customTags.original_text,
             // ——————————————————————————常用标记——————————————————————————
             "newline":                customTags.newline_defult,
-            "AttrName":               customTags.components,
+            "attrPathToken":          customTags.components,
             "Equals":                 customTags.equal,
             "AttrValue":              customTags.Highlight,
         }),
