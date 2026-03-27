@@ -379,8 +379,6 @@ AttrPath { attrPathToken }
   @precedence {
     // 1
     Blockquote,
-    List1,
-    List2,
     AlignCenterOpenToken,
     AlignCenterCloseToken,
     AlignLeftOpenToken,
@@ -427,6 +425,8 @@ AttrPath { attrPathToken }
     BracketChar,
 
     // 3
+    List1,
+    List2,
     Title, 
     StrongText, 
     EmText, 
