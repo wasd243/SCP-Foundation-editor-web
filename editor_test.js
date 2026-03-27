@@ -172,7 +172,12 @@ const wikidotParser = parser.configure({
                         // 4. 读取 AttrList 的真实文本内容 (通过 input.read 截取源码)
                         let attrText = input.read(attrList.from, attrList.to).toLowerCase();
                         
-                        // 5. 如果属性里带 'css'，移交解析权！
+                        // wikidot native modules fallback
+                        const nativeModules = ["rate", "listpages", "backlinks"]; 
+                        if (nativeModules.some(m => attrText.includes(m))) {
+                            return null; 
+                        }
+                        // 5. 如果属性里带 'css'，移交解析权
                         if (attrText.includes("css")) {
                             return {
                                 parser: cssLanguage.parser,
