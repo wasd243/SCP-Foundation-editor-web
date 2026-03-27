@@ -27272,9 +27272,10 @@ var require_editor_test = __commonJS({
       // LICENSE
       note: Tag.define(),
       // note
-      user: Tag.define()
+      user: Tag.define(),
       // user
-      // Highlight: Tag.define(), // ATTR highlight
+      Highlight: Tag.define()
+      // ATTR highlight
     };
     var wikidotParser = parser.configure({
       // 混合解析逻辑
