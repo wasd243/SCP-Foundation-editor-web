@@ -368,7 +368,7 @@ AttrPath { attrPathToken }
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
-  BracketChar { "[" | "]" }
+  BracketChar { "[" | "]" | "<" | ">" }
   Text { ![\[\]*/\-_^, \t\n\r|~@>=<]+ }
   space { $[ \t]+ }
 
