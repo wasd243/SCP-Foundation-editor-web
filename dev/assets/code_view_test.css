@@ -299,6 +299,12 @@ html, body, #editor-container {
 }
 
 
+/* rate */
+.cm-editor .cm-rate {
+    color: #E06C75;
+    font-weight: bold;
+    font-style: italic;
+}
 
 
 
