@@ -293,6 +293,12 @@ html, body, #editor-container {
 }
 
 
+/* original text */
+.cm-editor .cm-original-text {
+    color: #FFFFFF;
+}
+
+
 
 
 
