@@ -240,6 +240,7 @@ html, body, #editor-container {
 .cm-editor .cm-keyword {
     color: #98C379;
     font-style: italic;
+    font-weight: bold;
 }
 
 
