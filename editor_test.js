@@ -272,7 +272,7 @@ const wikidotParser = parser.configure({
             "newline":                customTags.newline_defult,
             "AttrName":               customTags.components,
             "Equals":                 customTags.equal,
-            "AttrValue":              customTags.components,
+            "AttrValue":              customTags.Highlight,
         }),
         foldNodeProp.add({
             "DivBlock":         foldInside,

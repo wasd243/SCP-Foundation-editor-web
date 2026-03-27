@@ -357,7 +357,7 @@ AttrPath { attrPathToken }
   AttrName  { $[a-zA-Z]$[a-zA-Z0-9\-_]* }
   Equals    { "=" }
   // 在 @tokens 里面增加一个不带引号的值定义
-  attrValueUnquoted { $[^\s\]]+ } 
+  attrValueUnquoted { $[a-zA-Z0-9\-_./%]+ }
   
   // 然后修改 AttrValue 的定义
   AttrValue { 
@@ -373,6 +373,7 @@ AttrPath { attrPathToken }
   space { $[ \t]+ }
 
   @precedence {
+    // 1
     Blockquote,
     AlignCenterOpenToken,
     AlignCenterCloseToken,
@@ -394,32 +395,50 @@ AttrPath { attrPathToken }
     ModuleCloseToken,
     HTMLOpenToken,
     HTMLCloseToken,
-    TableBar,
-    TableTilde,
     IncludeOpen,
-    IncludeBar,
-    includeSeg_,
-    newline,
-    DivClose,
     DivOpen,
-    UserOpen,
-    _tagEnd,
-    CollapsibleClose,
+    DivClose,
     CollapsibleOpen,
-    CodeClose,
+    CollapsibleClose,
     CodeOpen,
-    FootnoteBlock,
+    CodeClose,
+    UserOpen,
     FootnoteOpen,
     FootnoteClose,
+    FootnoteBlock,
     ImageOpen,
+    
+    // 2
+    TableBar,
+    TableTilde,
+    IncludeBar,
+    includeSeg_,
     Hr,
-    LinkURL,
-    AttrValue,
-    Equals,
     ForcedNewLine,
-    Title, BracketChar, StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Monospace, Original,
+    newline,
+    _tagEnd,         // ]] 必须在这个位置，以正确闭合上面的 Open 标签
+    Equals,          // =
+    BracketChar,
+
+    // 3
+    Title, 
+    StrongText, 
+    EmText, 
+    UnderlineText, 
+    StrikeText, 
+    SupText, 
+    SubText, 
+    Monospace, 
+    Original,
+    LinkURL,
+
+    // 4
     AttrName,
+    AttrValue,
     attrPathToken,
-    Text, space 
+
+    // 5
+    Text, 
+    space
   }
 }
