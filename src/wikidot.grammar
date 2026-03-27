@@ -118,23 +118,16 @@ Footnote {
 IncludeBlock {
   IncludeOpen
   IncludePart1?
-  (IncludeBar | include_plus)* // 允许单行竖线 或 多行换行竖线
+  IncludeParam*
   IncludeTagEnd { _tagEnd }
 }
 
-include_plus {
-  newline+
-  IncludeKeyword
+IncludeParam {
+  newline* IncludeBar AttrName Equals IncludeValue
 }
 
-IncludeKeyword {
-  // include核心参数
-  @specialize<AttrName, 
-    "lang" | "item-number" | "clearance" | "container-class" | 
-    "disruption" | "risk-class" | "lv" | "cc" | "dc" |
-    "site" | "dir" | "head" | "mtf" | "name" | 
-    "caption" | "width" | "height" | "align"
-  >
+IncludeValue {
+  (AttrValue | AttrName | attrPathToken | StarChar | Text | LinkURL | BracketChar)+
 }
 
 IncludePart1 {
