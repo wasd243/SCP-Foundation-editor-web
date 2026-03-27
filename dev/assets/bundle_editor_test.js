@@ -27288,6 +27288,10 @@ var require_editor_test = __commonJS({
               let attrList = openTag.getChild("AttrList");
               if (attrList) {
                 let attrText = input.read(attrList.from, attrList.to).toLowerCase();
+                const nativeModules = ["rate", "listpages", "backlinks"];
+                if (nativeModules.some((m) => attrText.includes(m))) {
+                  return null;
+                }
                 if (attrText.includes("css")) {
                   return {
                     parser: cssLanguage.parser,
