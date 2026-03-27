@@ -21,6 +21,7 @@ GenericToken {
 
 element {
   DivBlock
+  | Rate
   | NoteBlock
   | SizeBlock
   | SpanBlock
@@ -295,6 +296,7 @@ Attr {
 AttrPath { attrPathToken }
 
 @tokens {
+  Rate { "[[module rate]]"}
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
   SpanOpenToken { "[[span" }
@@ -379,6 +381,7 @@ AttrPath { attrPathToken }
   @precedence {
     // 1
     Blockquote,
+    Rate,
     AlignCenterOpenToken,
     AlignCenterCloseToken,
     AlignLeftOpenToken,
