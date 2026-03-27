@@ -231,8 +231,9 @@ html, body, #editor-container {
 
 /* user */
 .cm-editor .cm-user {
-    color: #61AFEF;
+    color: #41f4d9;
     font-style: italic;
+    font-weight: bold;
 }
 
 
