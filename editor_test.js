@@ -149,7 +149,7 @@ const customTags = {
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
     user: Tag.define(), // user
-    // Highlight: Tag.define(), // ATTR highlight
+    Highlight: Tag.define(), // ATTR highlight
 };
 
 const wikidotParser = parser.configure({
