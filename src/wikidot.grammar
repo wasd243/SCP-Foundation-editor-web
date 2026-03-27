@@ -407,9 +407,9 @@ AttrPath { attrPathToken }
     CodeOpen,
     CodeClose,
     UserOpen,
+    FootnoteBlock,
     FootnoteOpen,
     FootnoteClose,
-    FootnoteBlock,
     ImageOpen,
     
     // 2
