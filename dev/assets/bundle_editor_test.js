@@ -27533,6 +27533,7 @@ ${listMarker} `;
           // 再添加普通颜色预览扩展
           colorPreviewExtension,
           autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
+          EditorView.viewportMargin.of(100),
           // Web版本：添加本地存储自动保存功能
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
