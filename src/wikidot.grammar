@@ -361,7 +361,7 @@ Attr {
   // 把路径定义为一个完整的 Token
   // 允许：字母、数字、冒号、横杠、下划线、点、竖线
   // 关键：不包含空格和 ]，这样它遇到空格或闭合标签会自动停止
-  attrPathToken { $[a-zA-Z0-9\-_:./%]+ ![\[\]] }  
+  attrPathToken { $[a-zA-Z0-9\-_:./%]+ }
   Equals    { "=" }
   attrValueUnquoted { $[a-zA-Z0-9\-_./%]+ ![ \[\]\s] }
 
