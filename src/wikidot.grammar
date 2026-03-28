@@ -422,6 +422,7 @@ Attr {
     TableTilde,
     IncludeBar,
     includeSeg_,
+    includeSimplePath,
     Hr,
     ForcedNewLine,
     newline,
