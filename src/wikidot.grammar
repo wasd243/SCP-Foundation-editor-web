@@ -15,6 +15,7 @@ GenericToken {
   TabViewOpenToken | TabViewCloseToken | TabOpenToken | TabCloseToken | ImageOpen |
   _tagEnd | TableBar | TableTilde | Blockquote | newline | ForcedNewLine | LinkURL |
   FootnoteBlock | Title | Hr | StrongText | EmText | UnderlineText | StrikeText |
+  attrPathToken | AttrValue |
   SupText | SubText | Original | Monospace | Equals |
   StarChar | BracketChar | Text 
 }
