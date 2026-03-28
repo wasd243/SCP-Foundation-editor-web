@@ -7,6 +7,7 @@ import {
   UnderlineText,
   StrikeText,
   Hr,
+  newline
 } from "./parser.terms.js"
 
 export const myTokenizer = new ExternalTokenizer((input, stack) => {
