@@ -24721,7 +24721,6 @@ var init_tokenizer = __esm({
       const next = input.next;
       if (next < 0) return;
       if (next == 10 || next == 13) {
-        input.acceptToken(newline, 1);
         return;
       }
       if (next == 45) {
@@ -24798,7 +24797,7 @@ function isDigit(ch) {
 function isHex(ch) {
   return isDigit(ch) || ch >= 97 && ch <= 102 || ch >= 65 && ch <= 70;
 }
-var descendantOp, Unit, identifier, callee, VariableName, queryIdentifier, queryVariableName, QueryCallee, space, colon, parenL, underscore, bracketL, dash, period, hash, percent, ampersand, backslash, newline2, asterisk, identifierTokens, identifiers, queryIdentifiers, descendant, unitToken, cssHighlighting, spec_callee, spec_queryIdentifier, spec_QueryCallee, spec_AtKeyword, spec_identifier, parser2;
+var descendantOp, Unit, identifier, callee, VariableName, queryIdentifier, queryVariableName, QueryCallee, space, colon, parenL, underscore, bracketL, dash, period, hash, percent, ampersand, backslash, newline, asterisk, identifierTokens, identifiers, queryIdentifiers, descendant, unitToken, cssHighlighting, spec_callee, spec_queryIdentifier, spec_QueryCallee, spec_AtKeyword, spec_identifier, parser2;
 var init_dist12 = __esm({
   "node_modules/@lezer/css/dist/index.js"() {
     init_dist11();
@@ -24848,7 +24847,7 @@ var init_dist12 = __esm({
     percent = 37;
     ampersand = 38;
     backslash = 92;
-    newline2 = 10;
+    newline = 10;
     asterisk = 42;
     identifierTokens = (id2, varName, callee2) => (input, stack) => {
       for (let inside = false, dashes = 0, i = 0; ; i++) {
@@ -24857,7 +24856,7 @@ var init_dist12 = __esm({
           if (!inside && (next != dash || i > 0)) inside = true;
           if (dashes === i && next == dash) dashes++;
           input.advance();
-        } else if (next == backslash && input.peek(1) != newline2) {
+        } else if (next == backslash && input.peek(1) != newline) {
           input.advance();
           if (isHex(input.next)) {
             do {
@@ -25354,7 +25353,7 @@ var init_dist14 = __esm({
 function identifierChar(ch, start) {
   return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch == 95 || ch >= 192 || !start && ch >= 48 && ch <= 57;
 }
-var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline3, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
+var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline2, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
 var init_dist15 = __esm({
   "node_modules/@lezer/javascript/dist/index.js"() {
     init_dist11();
@@ -25367,7 +25366,7 @@ var init_dist15 = __esm({
     JSXStartTag = 4;
     insertSemi = 318;
     spaces = 320;
-    newline3 = 321;
+    newline2 = 321;
     LineComment = 5;
     BlockComment = 6;
     Dialect_jsx = 0;
@@ -25412,7 +25411,7 @@ var init_dist15 = __esm({
     trackNewline = new ContextTracker({
       start: false,
       shift(context, term) {
-        return term == LineComment || term == BlockComment || term == spaces ? context : term == newline3;
+        return term == LineComment || term == BlockComment || term == spaces ? context : term == newline2;
       },
       strict: false
     });
