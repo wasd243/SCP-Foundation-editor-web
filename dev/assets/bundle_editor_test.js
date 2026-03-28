@@ -24700,24 +24700,169 @@ var init_dist11 = __esm({
   }
 });
 
+// src/parser.terms.js
+var Text2, StrikeText, SupText, SubText, Original, Hr, Dash, Title, Equals, IncludeBar, StarChar, BracketChar, newline, attrPathToken, AttrValue, EmText, LinkURL, includeSeg_;
+var init_parser_terms = __esm({
+  "src/parser.terms.js"() {
+    Text2 = 1;
+    StrikeText = 3;
+    SupText = 4;
+    SubText = 5;
+    Original = 6;
+    Hr = 7;
+    Dash = 8;
+    Title = 10;
+    Equals = 13;
+    IncludeBar = 14;
+    StarChar = 15;
+    BracketChar = 16;
+    newline = 104;
+    attrPathToken = 105;
+    AttrValue = 17;
+    EmText = 18;
+    LinkURL = 19;
+    includeSeg_ = 106;
+  }
+});
+
+// src/tokenizer.js
+var myTokenizer;
+var init_tokenizer = __esm({
+  "src/tokenizer.js"() {
+    init_dist11();
+    init_parser_terms();
+    myTokenizer = new ExternalTokenizer((input, stack) => {
+      let next = input.next;
+      if (next < 0) return;
+      if (next == 10 || next == 13) {
+        input.acceptToken(newline, 1);
+        return;
+      }
+      if (next == 104) {
+        let isHttp = true;
+        let prefix = "http";
+        for (let i = 0; i < prefix.length; i++) {
+          if (input.peek(i) != prefix.charCodeAt(i)) {
+            isHttp = false;
+            break;
+          }
+        }
+        if (isHttp) {
+          let len = 4;
+          if (input.peek(len) == 115) len++;
+          if (input.peek(len) == 58 && input.peek(len + 1) == 47 && input.peek(len + 2) == 47) {
+            len += 3;
+            while (input.peek(len) != -1 && !/[ \t\n\r\]]/.test(String.fromCharCode(input.peek(len)))) {
+              len++;
+            }
+            input.acceptToken(LinkURL, len);
+            return;
+          }
+        }
+      }
+      if (next == 47 && input.peek(1) == 47) {
+        input.acceptToken(EmText, 2);
+        return;
+      }
+      if (next == 58) {
+        let len = 1;
+        while (input.peek(len) != -1 && !/[ :\[\]\n\r]/.test(String.fromCharCode(input.peek(len)))) {
+          len++;
+        }
+        input.acceptToken(includeSeg_, len);
+        return;
+      }
+      if (next == 34) {
+        let len = 1;
+        while (input.peek(len) != 34 && input.peek(len) != -1 && input.peek(len) != 10) {
+          len++;
+        }
+        if (input.peek(len) == 34) len++;
+        input.acceptToken(AttrValue, len);
+        return;
+      }
+      if (next == 45) {
+        let count = 0;
+        while (input.peek(count) == 45) count++;
+        if (count >= 4) {
+          input.acceptToken(Hr, count);
+          return;
+        }
+        if (count == 2) {
+          input.acceptToken(StrikeText, 2);
+          return;
+        }
+        input.acceptToken(Dash, 1);
+        return;
+      }
+      if (next == 43) {
+        let count = 0;
+        while (input.peek(count) == 43) count++;
+        if (count >= 1 && count <= 6 && input.peek(count) == 32) {
+          input.acceptToken(Title, count + 1);
+          return;
+        }
+      }
+      if (/[a-zA-Z0-9\-_:./%]/.test(String.fromCharCode(next))) {
+        let len = 0;
+        while (/[a-zA-Z0-9\-_:./%]/.test(String.fromCharCode(input.peek(len)))) {
+          len++;
+        }
+        input.acceptToken(attrPathToken, len);
+        return;
+      }
+      if (next == 61) {
+        input.acceptToken(Equals, 1);
+        return;
+      }
+      if (next == 124) {
+        input.acceptToken(IncludeBar, 1);
+        return;
+      }
+      if (next == 42) {
+        input.acceptToken(StarChar, 1);
+        return;
+      }
+      if (next == 94 && input.peek(1) == 94) {
+        input.acceptToken(SupText, 2);
+        return;
+      }
+      if (next == 44 && input.peek(1) == 44) {
+        input.acceptToken(SubText, 2);
+        return;
+      }
+      if (next == 64 && input.peek(1) == 64) {
+        input.acceptToken(Original, 2);
+        return;
+      }
+      if (next == 91 || next == 93 || next == 60 || next == 62) {
+        input.acceptToken(BracketChar, 1);
+        return;
+      }
+      input.acceptToken(Text2, 1);
+    });
+  }
+});
+
 // src/parser.js
 var parser;
 var init_parser = __esm({
   "src/parser.js"() {
     init_dist11();
+    init_tokenizer();
     parser = LRParser.deserialize({
       version: 14,
-      states: "3zQVQPOOO#uQPO'#C_O#}QPO'#C^O$UQPO'#ChO#uQPO'#ClO$]QPO'#CkO#uQPO'#CqO$dQPO'#CpO$kQPO'#CuO$rQPO'#CxO$yQPO'#C{O%QQPO'#DOO#uQPO'#D`O%cQPO'#D_O#uQPO'#DeO)UQPO'#DdO#uQPO'#EUOOQO'#ET'#ETO#uQPO'#EXO)]QPO'#EWO)dQPO'#E]OOQO'#E`'#E`O#uQPO'#E_O#uQPO'#EeO)iQPO'#EdO)pQPO'#EiO#uQPO'#EkO)wQPO'#EjOOQO'#Ev'#EvOOQO'#Em'#EmQVQPOOO*OQPO'#CbOOQO'#En'#EnO*ZQPO'#CaO*cQPO,58yOOQO,58x,58xO*hQPO,58xOOQO,59S,59SO*oQPO,59SO*vQPO,59WOOQO,59V,59VO*{QPO,59VO+SQPO,59]OOQO,59[,59[O+XQPO,59[OOQO,59a,59aO+`QPO,59aOOQO,59d,59dO+gQPO,59dOOQO,59g,59gO+nQPO,59gO+uQPO'#DROOQO'#DU'#DUOOQO'#DQ'#DQOOQO'#Ep'#EpO,TQPO'#DVO,]QPO'#DVOOQO'#Eo'#EoO,bQPO,59jOOQO'#D^'#D^OOQO,59j,59jO,bQPO,59jO,mQPO,59zOOQO,59y,59yO,rQPO,59yO,yQPO,5:POOQO'#Dh'#DhOOQO'#Er'#ErO-OQPO,5:OOOQO,5:O,5:OO-VQPO,5:pO-[QPO,5:sO-aQPO'#EZO-hQPO,5:rOOQO'#E^'#E^O-mQPO,5:wO-tQPO,5:yO-yQPO,5;PO.OQPO'#EgO.VQPO,5;OOOQO,5;T,5;TO.[QPO,5;TO.cQPO,5;VOOQO,5;U,5;UO.hQPO,5;UOOQO-E8k-E8kO.oQPO,58|OOQO-E8l-E8lOOQO'#Ce'#CeOOQO1G.e1G.eOOQO1G.d1G.dOOQO1G.n1G.nOOQO'#Cn'#CnOOQO1G.r1G.rOOQO1G.q1G.qOOQO'#Cs'#CsOOQO1G.w1G.wOOQO1G.v1G.vOOQO1G.{1G.{OOQO1G/O1G/OOOQO1G/R1G/RO.tQPO'#DSOOQO,59m,59mOOQO-E8n-E8nO/SQPO,59qO/XQPO,59qOOQO-E8m-E8mOOQO1G/U1G/UO,bQPO1G/UOOQO'#Db'#DbOOQO1G/f1G/fOOQO1G/e1G/eOOQO'#Dg'#DgOOQO1G/k1G/kOOQO-E8p-E8pOOQO1G/j1G/jOOQO'#EV'#EVOOQO1G0[1G0[OOQO'#EY'#EYOOQO1G0_1G0_OOQO1G0^1G0^OOQO1G0c1G0cO/^QPO1G0cOOQO'#Ea'#EaOOQO1G0e1G0eOOQO'#Ef'#EfOOQO1G0k1G0kOOQO1G0j1G0jOOQO1G0o1G0oOOQO'#El'#ElOOQO1G0q1G0qOOQO1G0p1G0pOOQO1G.h1G.hOOQO'#DT'#DTOOQO,59n,59nO/eQPO1G/]O/jQPO1G/]OOQO7+$p7+$pOOQO7+%}7+%}O/jQPO7+$wOOQO'#Eq'#EqO0OQPO'#DXOOQO7+$w7+$wOOQO<<Hc<<HcOOQO-E8o-E8o",
-      stateData: "1n~O#iOS~OSPOZlO]ROaSOfUOjWOmXOpYOsZO|lO}lO!OlO!PlO!T[O!Y^O!]bO!^gO!_`O!`dO!biO!djO!feO!glO!hlO!ilO!jlO!klO!llO!mlO!nlO!olO!plO!qlO!rlO!slO!tlO!ulO#UlO#VlO#olO~O#koO#lTP~OYsO~PVO^uO~PVOcxO~PVOh{O~PVOk}O~PVOn!PO~PVOq!RO~PVOz!YO#l!]O#m!TO#n!UO#o!WO~O!V!aO~PVOS!dOV!dOW!dOY!dO]!dO^!dOa!dOc!dOf!dOh!dOj!dOk!dOm!dOn!dOp!dOq!dOs!dOz!dO|!dO}!dO!O!dO!P!dO!T!dO!V!dO!Y!dO!]!dO!^!dO!_!dO!`!dO!a!dO!b!dO!c!dO!d!dO!e!dO!f!dO!g!dO!h!dO!i!dO!j!dO!k!dO!l!dO!m!dO!n!dO!o!dO!p!dO!q!dO!r!dO!s!dO!t!dO!u!dO#k!dO#l!dO#m!dO#o!dO~O!v!gO~P%jO#O!}P~P%jO#l!lO~O#[#ZP~P%jO!c!rO~PVO!e!uO~PVOV!xO#kUX#lUX~O#koO#lTX~O#l!zO~OY!|O~PVO^!}O~PVO#l#OO~Oc#QO~PVO#l#RO~Oh#TO~PVOk#UO~PVOn#VO~PVOq#WO~PVO#m#XOzuX#luX#ouX~Oz#[O#o!WO~O#k#]O~Oz!YO#l!]O#o!WO~O#l#aO~O!V#cO~PVO#l#dO~O!v#gO~P%jO#l#hO~O#l#jO~O#O!}X~P%jO#O#lO~O!a#mO~PVO#l#oO~O#l#qO~O#[#ZX~P%jO#[#sO~O!c#tO~PVO#l#uO~O!e#wO~PVOW#xO~O#m#yOzvX#lvX#ovX~O#k#{O~OV#|O~O!a$OO~PVOV$PO~OW$QO|$QO}$QO!O$QO!P$QO#k$QO~Oz{X#l{X#o{X~P/jO#l!OV!iZjkmnpqfhac]^!b!c!d!e!]#O!^#[sSY!T!V!Y!v!_!k!`!a!f!g!hz#m#n!m!j#o!P#U#V!l!n!o!p!q!r!s!u!t#kW}#i!Y~",
-      goto: "/a#kPP#l$WP$r%bPP%oPP#lPP#l%rP&^P#l&aP&{P#lPP#lPP#lPP#lP'O'R'U'X'R'[P'bPPPP'h#l'rP(^P#l(aP({)OPPPPPPPPPPPPPPPPPPPPPPPPPP#l)W)r#l)u*a*dP#l*g#l*j+UPP#l+X+s+vP#l#l+y,e,h-l-{.V.`.gPPP.u!RlOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n!RQOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nQrPQwSQzUQ!`[Q!c^Q!h`Q!ibQ!nfQ!ogR!tjgpPSU[^`bfgjqR!{r!RTOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#Pw!RVOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#SzR!_ZR!VZR#Y!TR#z#XX!ZZ![!_#`Q$S#|R$T$PQ!^ZS#_![!_R#}#`!R]OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#b!`!R_OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#e!c]!e_ch!f!j!p!RaOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#i!h!RcOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#k!iR!kcR!md!RfOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#p!n!RhOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#r!oR!qh!RkOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#v!tQnOQtQQvRQyTQ|VQ!OWQ!QXQ!SYQ!b]Q!siQ!vkh!wntvy|!O!Q!S!b!s!v#nR#n!mdqPSU[^`bfgjR!yqQ![ZS#^![#`R#`!_W!XZ![!_#`R#Z!XS$R#|$PR$U$RQ!f_Q!jcQ!phV#f!f!j!p!RmOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n",
-      nodeNames: "\u26A0 Document DivBlock DivOpenTag DivOpen AttrList Attr Equals AttrValue DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeValue StarChar Text LinkURL BracketChar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock Title Hr StrongText EmText UnderlineText StrikeText SupText SubText Original Monospace CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd List1 List2 HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
-      maxTerm: 123,
+      states: "2SQVQROOO$RQRO'#CqO$ZQRO'#CxO$RQRO'#C{O$RQRO'#DPO$bQRO'#DTO$iQRO'#DWO$pQRO'#DZO$wQRO'#D^O$RQRO'#DdOOQP'#Dz'#DzO$RQRO'#DhO$RQRO'#EPO$RQRO'#ERO%YQQO'#EUO$RQRO'#EWO$RQRO'#EZO(|QRO'#EYO)TQRO'#E^O$RQRO'#E_OOQP'#Em'#EmOOQP'#Ea'#EaQVQROOO)[QRO'#CtOOQP'#Eb'#EbO)gQRO'#CsO)oQQO,59]OOQP,59d,59dO)tQRO,59dO){QQO,59gO*QQQO,59kOOQP,59o,59oO*VQRO,59oOOQP,59r,59rO*^QRO,59rOOQP,59u,59uO*eQRO,59uOOQP'#D`'#D`OOQP'#Ed'#EdO*lQRO'#DaO*tQRO'#DaOOQP'#Ec'#EcO*yQRO,59xOOQP'#Dc'#DcOOQP,59x,59xO*yQRO,59xO+UQQO,5:OO+ZQQO,5:SO+`QQO,5:kO+eQQO,5:mOOQP'#EV'#EVO+jQRO,5:pO+qQQO,5:rO+vQQO,5:uOOQP'#Dk'#DkOOQP'#Ef'#EfO+{QRO,5:tOOQP,5:t,5:tOOQP,5:x,5:xO,SQRO,5:xO,ZQQO,5:yOOQP-E8_-E8_O,`QRO,59`OOQP-E8`-E8`OOQP'#Cu'#CuO,eQRO1G.wOOQP1G/O1G/OOOQP'#C}'#C}O,lQRO1G/ROOQP'#DR'#DRO,sQRO1G/VOOQP1G/Z1G/ZOOQP1G/^1G/^OOQP1G/a1G/aOOQP-E8b-E8bO,zQRO,59{O-PQRO,59{OOQP-E8a-E8aOOQP1G/d1G/dO*yQRO1G/dOOQP'#Df'#DfO-UQRO1G/jOOQP'#Dj'#DjO-]QRO1G/nOOQP'#EQ'#EQOOQP1G0V1G0VOOQP'#ES'#ESO-dQRO1G0XOOQP1G0[1G0[O-kQRO1G0[OOQP'#EX'#EXOOQP1G0^1G0^OOQP'#E['#E[OOQP1G0a1G0aOOQP-E8d-E8dOOQP1G0`1G0`OOQP1G0d1G0dOOQP'#E`'#E`O-rQRO1G0eOOQP1G.z1G.zOOQP7+$c7+$cO-yQRO7+$cOOQP7+$m7+$mO.QQRO7+$mOOQP7+$q7+$qO.XQRO7+$qO.`QRO1G/gO.eQRO1G/gOOQP7+%O7+%OOOQP7+%U7+%UO.sQRO7+%UO.zQRO7+%YOOQP7+%Y7+%YO/RQRO7+%sOOQP7+%s7+%sOOQP7+%v7+%vOOQP7+&P7+&PO/YQRO7+&POOQP<<G}<<G}OOQP<<HX<<HXOOQP<<H]<<H]O.eQRO7+%ROOQP'#Ee'#EeO/aQRO'#DbOOQP7+%R7+%ROOQP<<Hp<<HpOOQP<<Ht<<HtOOQP<<I_<<I_OOQP<<Ik<<IkOOQP<<Hm<<HmOOQP-E8c-E8c",
+      stateData: "/x~O#`OS~OPdOQdORdOSdOTdOUdOVdOWdOXdOYdOZdO[dO]dO^dO_dO`dObdOcdOfPOkdOmQOpROtSOxTO{UO!OVO!RWO!XXO!]ZO!`]O!a`O!b[O!c^O!ebO!gcO!i_O!jdO!kdO!ldO!mdO!oYO!pdO!qdO#[dO~O#]gO#bgP~OnkO~PVOyoO~PVO|qO~PVO!PsO~PVO^xO#[vO#^uO#b{O#cuO~O#b!SO~OP!WOQ!WOR!WOS!WOT!WOU!WOV!WOW!WOX!WO]!WO^!WO_!WO`!WOa!WOb!WOc!WOf!WOj!WOm!WOn!WOp!WOr!WOt!WOv!WOx!WOy!WO{!WO|!WO!O!WO!P!WO!R!WO!X!WO!Z!WO!]!WO!`!WO!a!WO!b!WO!c!WO!d!WO!e!WO!f!WO!g!WO!h!WO!i!WO!j!WO!k!WO!l!WO!m!WO!oYO!p!WO!q!WO#[!WO#]!WO#^!WO#b!WO~O#P!ZO~P%_O!f![O~PVO]!`O#]hX#bhX~O#]gO#bgX~O#b!bO~On!dO~PVO#b!eO~O#b!gO~Oy!iO~PVO|!jO~PVO!P!kO~PVO^!mO#[vO~O#]!nO~O^xO#[vO#b{O~O#b!rO~O#b!tO~O#b!vO~O#b!xO~O!d!zO~PVO#b!|O~O#b#OO~O#P#RO~P%_O!f#SO~PVO#b#TO~Oa#VO~Oj#WO~PVOr#YO~PVOv#[O~PVO#]#^O~O]#_O~O!Z#aO~PVO!r#dO~P%_O!w#fO~P%_O!d#gO~PVO!h#hO~PVOj#jO~PVOr#kO~PVOv#lO~PVO]#mO~OP#nO_#nO`#nOa#nO~O!Z#qO~PVO!r#rO~P%_O!w#sO~P%_O!h#tO~PVOP#nO_#nO`#nOa#nO^!UX#[!UX#b!UX~O",
+      goto: "*g#bPPPPPPPPPPPPPPPPPPPPP#cP#}$m$zPP#cPP#cP$}P#cP%QP#cPP#cPP#cPP#cP%T%W%^%d#cP%nP#cP%q%tPPPPPPPPPPPPPP%|PPPP#c&p#c&sP#c&v#c&y#c&|'hP#c#c'k'n(r)R)])f)mPPPPPP){!RdOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#iQjPQmRQnSQ!OXQ!PZQ!Q[Q!R]Q!U_Q!V`R!^cghPRSXZ[]_`ciR!cjR!fmR!hnR}WXyWz}!qQ#p#_R#u#mQ|WS!pz}R#`!qR!s!OR!u!P]!Xa!Y!u!y#c#e!QdOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#i]!Wa!Y!u!y#c#eR!w!QR!y!RR!T^R!}!U!RaOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#iR#P!VR#U!^QfOQlQQpTQrUQtVQ!]bh!_flprt!]!{#X#Z#]#b#iQ!{!TQ#X!cQ#Z!fQ#]!hQ#b!sR#i#UdiPRSXZ[]_`cR!aiQzWS!oz!qR!q}WwWz}!qR!lwS#o#_#mR#v#oQ!YaU#Q!Y#c#eQ#c!uR#e!y!ReOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#i",
+      nodeNames: "\u26A0 Text UnderlineText StrikeText SupText SubText Original Hr Dash Slash Title List1 List2 Equals IncludeBar StarChar BracketChar AttrValue EmText LinkURL Document DivBlock DivOpen AttrList Attr DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludeParam IncludeValue IncludeTagEnd CollapsibleBlock CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock FootnoteBlockToken StrongText Monospace CodeClose UserBlock UserTagEnd ModuleBlock ModuleTagEnd ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageTagEnd HTMLBlock HTMLOpenTag HTMLTagEnd HTMLCloseToken TabViewBlock TabBlock TabTagEnd",
+      maxTerm: 111,
       skippedNodes: [0],
       repeatNodeCount: 6,
-      tokenData: "!Kv~RoXY#SYZ#_]^#_pq#Srs#dst$Xuv$dz{%x{|'^|}(}}!O*X!O!P$d!P!Q8v!Q![Bh![!]Ct!^!_Gl!_!`Gq!`!aGv!b!cHT!c!}Bh!}#OJ_#P#Q!5r#Q#R!6P#R#S!7Z#T#[Bh#[#]!?}#]#oBh#o#p!JY#p#q!Kd#r#s!Kq*5S4/fCc~#XQ#i~XY#Spq#S~#dO#o~~#gVOY#dZ]#d^r#drs#|s;'S#d;'S;=`$R<%lO#d~$ROW~~$UP;=`<%l#d~$[Ppq$_~$dO#V~~$kX#k~W~uv$d}!O$d!O!P$d!P!Q$d!Q![$d![!]%W!c!}$d#R#S$d#T#o$d~%]X#k~uv%W}!O%W!O!P%W!P!Q%W!Q![%W![!]%W!c!}%W#R#S%W#T#o%W~%}Q|~pq&Tz{&Y~&YO#U~~&]UOY&YZz&Yz{&o{;'S&Y;'S;=`'W<%lO&Y~&rTOz&Yz{'R{;'S&Y;'S;=`'W<%lO&Y~'WO!n~~'ZP;=`<%l&Y~'aQpq'g{|(R~'lT!l~OY'gZ]'g^;'S'g;'S;=`'{<%lO'g~(OP;=`<%l'g~(UQpq'g{|([~(_Qpq'g{|(e~(hQpq'g{|(n~(qQpq'g{|(w~(zPpq'g~)QP|})T~)WUOY)TZ|)T|})j};'S)T;'S;=`*R<%lO)T~)mTO|)T|})|};'S)T;'S;=`*R<%lO)T~*RO!s~~*UP;=`<%l)T~*bX#n~#k~W~uv*}}!O,g!O!P*}!P!Q*}!Q![*}![!]+s!c!}*}#R#S*}#T#o*}~+WX#n~#k~W~uv*}}!O*}!O!P*}!P!Q*}!Q![*}![!]+s!c!}*}#R#S*}#T#o*}~+zX#n~#k~uv+s}!O+s!O!P+s!P!Q+s!Q![+s![!]+s!c!}+s#R#S+s#T#o+s~,pb#n~#k~W~OY-xZu-xuv.|v}-x}!O5v!O!P.|!P!Q.|!Q![.|![!]2e!]!c-x!c!}.|!}#R-x#R#S.|#S#T-x#T#o.|#o;'S-x;'S;=`.v<%lO-x~-{UOY-xZ}-x}!O._!O;'S-x;'S;=`.v<%lO-x~.bTO}-x}!O.q!O;'S-x;'S;=`.v<%lO-x~.vO!q~~.yP;=`<%l-x~/Vb#n~#k~W~OY-xZu-xuv.|v}-x}!O0_!O!P.|!P!Q.|!Q![.|![!]2e!]!c-x!c!}.|!}#R-x#R#S.|#S#T-x#T#o.|#o;'S-x;'S;=`.v<%lO-x~0ha#n~#k~W~Ou-xuv.|v}-x}!O1m!O!P.|!P!Q.|!Q![.|![!]2e!]!c-x!c!}.|!}#R-x#R#S.|#S#T-x#T#o.|#o;'S-x;'S;=`.v<%lO-x~1xX#n~!q~#k~W~uv*}}!O*}!O!P*}!P!Q*}!Q![*}![!]+s!c!}*}#R#S*}#T#o*}~2lb#n~#k~OY-xZu-xuv2ev}-x}!O3t!O!P2e!P!Q2e!Q![2e![!]2e!]!c-x!c!}2e!}#R-x#R#S2e#S#T-x#T#o2e#o;'S-x;'S;=`.v<%lO-x~3{a#n~#k~Ou-xuv2ev}-x}!O5Q!O!P2e!P!Q2e!Q![2e![!]2e!]!c-x!c!}2e!}#R-x#R#S2e#S#T-x#T#o2e#o;'S-x;'S;=`.v<%lO-x~5ZX#n~!q~#k~uv+s}!O+s!O!P+s!P!Q+s!Q![+s![!]+s!c!}+s#R#S+s#T#o+s~6Pa#n~#k~W~Ou-xuv.|v}-x}!O7U!O!P.|!P!Q.|!Q![.|![!]2e!]!c-x!c!}.|!}#R-x#R#S.|#S#T-x#T#o.|#o;'S-x;'S;=`.v<%lO-x~7cX#n~!m~!q~#k~W~uv*}}!O8O!O!P*}!P!Q*}!Q![*}![!]+s!c!}*}#R#S*}#T#o*}~8ZX#n~!m~#k~W~uv*}}!O8O!O!P*}!P!Q*}!Q![*}![!]+s!c!}*}#R#S*}#T#o*}~8}X#k~W~uv$d}!O$d!O!P$d!P!Q9j!Q![$d![!]%W!c!}$d#R#S$d#T#o$d~9qa#k~W~Ou:vuv;zv}:v}!O;z!O!P;z!P!Q$d!Q![;z![!]?]!]!c:v!c!};z!}#R:v#R#S;z#S#T:v#T#o;z#o;'S:v;'S;=`;t<%lO:v~:yUOY:vZ!P:v!P!Q;]!Q;'S:v;'S;=`;t<%lO:v~;`TO!P:v!P!Q;o!Q;'S:v;'S;=`;t<%lO:v~;tO!o~~;wP;=`<%l:v~<Rb#k~W~OY:vZu:vuv;zv}:v}!O;z!O!P;z!P!Q=Z!Q![;z![!]?]!]!c:v!c!};z!}#R:v#R#S;z#S#T:v#T#o;z#o;'S:v;'S;=`;t<%lO:v~=ba#k~W~Ou:vuv;zv}:v}!O;z!O!P;z!P!Q>g!Q![;z![!]?]!]!c:v!c!};z!}#R:v#R#S;z#S#T:v#T#o;z#o;'S:v;'S;=`;t<%lO:v~>pX!o~#k~W~uv$d}!O$d!O!P$d!P!Q$d!Q![$d![!]%W!c!}$d#R#S$d#T#o$d~?bb#k~OY:vZu:vuv?]v}:v}!O?]!O!P?]!P!Q@j!Q![?]![!]?]!]!c:v!c!}?]!}#R:v#R#S?]#S#T:v#T#o?]#o;'S:v;'S;=`;t<%lO:v~@oa#k~Ou:vuv?]v}:v}!O?]!O!P?]!P!QAt!Q![?]![!]?]!]!c:v!c!}?]!}#R:v#R#S?]#S#T:v#T#o?]#o;'S:v;'S;=`;t<%lO:v~A{X!o~#k~uv%W}!O%W!O!P%W!P!Q%W!Q![%W![!]%W!c!}%W#R#S%W#T#o%W~BsY#n~#k~W~}~uv*}}!O*}!O!P*}!P!Q*}!Q![Bh![!]+s!c!}Bh#R#S*}#T#oBh*5S4/fCc~ChS}~!Q![Cc!c!}Cc#T#oCc*5S4/fCc~Cye#k~OYE[Z]E[^pE[quE[uvFSv}E[}!OFS!O!PFS!P!QFS!Q![FS![!]%W!]!cE[!c!}FS#O#PE[#Q#RE[#R#SFS#S#TE[#T#oFS#o;'SE[;'S;=`E|<%lOE[~EaX#m~OYE[Z]E[^pE[q![E[!]!}E[#O#PE[#Q;'SE[;'S;=`E|<%lOE[~FPP;=`<%lE[~FZe#m~#k~OYE[Z]E[^pE[quE[uvFSv}E[}!OFS!O!PFS!P!QFS!Q![FS![!]%W!]!cE[!c!}FS#O#PE[#Q#RE[#R#SFS#S#TE[#T#oFS#o;'SE[;'S;=`E|<%lOE[~GqO!P~~GvOV~~G{P!P~pqHO~HTO!i~~HWP!b!cHZ~H^UOYHpZ!bHp!b!cIt!c;'SHp;'S;=`In<%lOHp~HsUOYHpZ!bHp!b!cIV!c;'SHp;'S;=`In<%lOHp~IYTO!bHp!b!cIi!c;'SHp;'S;=`In<%lOHp~InO!t~~IqP;=`<%lHp~IwTO!bHp!b!cJW!c;'SHp;'S;=`In<%lOHp~J_O!j~!t~~JdP!P~!}#OJg~Jj_z{Ki!P!QLW!^!_!)o!_!`!*r!`!a!+W#V#W!+l#W#X!-_#Y#Z!-p#[#]!/o#]#^!0W#a#b!1U#b#c!2w#g#h!3l#h#i!4i#i#jKo~KlP#i#jKo~KrP#g#hKu~KxP#X#YK{~LOP#f#gLR~LWO!_~~LZZ!^!_L|!_!`M_!`!aMp#V#WNR#W#X!!^#Y#Z!!{#[#]!$Y#a#b!$}#b#c!&O#g#h!&s#h#i!(Y~MPP#P#QMS~MVP#P#QMY~M_On~~MbP#P#QMe~MhP#P#QMk~MpOk~~MsP#P#QMv~MyP#P#QM|~NROq~~NUP#c#dNX~N[Q#W#XNb#`#aNy~NeP#X#YNh~NkP#P#QNn~NqP#P#QNt~NyO!v~~N|P#`#a! P~! SP#T#U! V~! YP#d#e! ]~! `P#g#h! c~! fP#]#^! i~! lP#U#V! o~! rP#`#a! u~! xP#X#Y! {~!!OP#P#Q!!R~!!UP#P#Q!!X~!!^O!V~~!!aP#]#^!!d~!!gP#j#k!!j~!!mP#P#Q!!p~!!sP#P#Q!!v~!!{OY~~!#OP#c#d!#R~!#UP#c#d!#X~!#[P#h#i!#_~!#bP#b#c!#e~!#hP#c#d!#k~!#nP#h#i!#q~!#tP#X#Y!#w~!#zP#P#Q!#}~!$QP#P#Q!$T~!$YO!a~~!$]P#h#i!$`~!$cP#a#b!$f~!$iP#`#a!$l~!$oP#P#Q!$r~!$uP#P#Q!$x~!$}O#[~~!%QP#c#d!%T~!%WP#W#X!%Z~!%^P#i#j!%a~!%dP#`#a!%g~!%jP#X#Y!%m~!%pP#P#Q!%s~!%vP#P#Q!%y~!&OO#O~~!&RP#c#d!&U~!&XP#h#i!&[~!&_P#X#Y!&b~!&eP#P#Q!&h~!&kP#P#Q!&n~!&sO^~~!&vQ#]#^!&|#d#e!'k~!'PP#n#o!'S~!'VP#X#Y!'Y~!']P#P#Q!'`~!'cP#P#Q!'f~!'kOc~~!'nP#T#U!'q~!'tP#b#c!'w~!'zP#P#Q!'}~!(QP#P#Q!(T~!(YOh~~!(]P#T#U!(`~!(cP#U#V!(f~!(iQ#P#Q!(o#j#k!(z~!(rP#P#Q!(u~!(zO!e~~!(}P#]#^!)Q~!)TP#X#Y!)W~!)ZP#k#l!)^~!)aP#P#Q!)d~!)gP#P#Q!)j~!)oO!c~~!)rQ#P#Q!)x#]#^!*T~!){P#P#Q!*O~!*TOm~~!*WP#a#b!*Z~!*^P#T#U!*a~!*dP#Z#[!*g~!*jP#X#Y!*m~!*rO!f~~!*uQ#P#Q!*{#]#^!*T~!+OP#P#Q!+R~!+WOj~~!+ZQ#P#Q!+a#]#^!*T~!+dP#P#Q!+g~!+lOp~~!+oP#c#d!+r~!+uQ#W#X!+{#`#a!,W~!,OP#X#Y!,R~!,WO!Y~~!,ZP#`#a!,^~!,aP#T#U!,d~!,gP#d#e!,j~!,mP#g#h!,p~!,sP#]#^!,v~!,yP#U#V!,|~!-PP#`#a!-S~!-VP#X#Y!-Y~!-_O!T~~!-bP#]#^!-e~!-hP#j#k!-k~!-pOS~~!-sP#c#d!-v~!-yP#c#d!-|~!.PP#h#i!.S~!.VP#b#c!.Y~!.]P#c#d!.`~!.cP#h#i!.f~!.iP#X#Y!.l~!.qP!`~#U#V!.t~!.wP#`#a!.z~!.}P#c#d!/Q~!/TP#V#W!/W~!/ZP#_#`!/^~!/aP#P#Q!/d~!/gP#P#Q!/j~!/oO!k~~!/rP#h#i!/u~!/xP#a#b!/{~!0OP#`#a!0R~!0WO!^~~!0ZQ#a#b!*Z#b#c!0a~!0dP#V#W!0g~!0jP#`#a!0m~!0pP#i#j!0s~!0vP#W#X!0y~!0|P#X#Y!1P~!1UOs~~!1XP#c#d!1[~!1_P#W#X!1b~!1eP#i#j!1h~!1kP#`#a!1n~!1qP#X#Y!1t~!1yP!]~pq!1|~!2PP#f#g!2S~!2VP#T#U!2Y~!2]P#h#i!2`~!2cP#X#Y!2f~!2iP#P#Q!2l~!2oP#P#Q!2r~!2wOZ~~!2zP#c#d!2}~!3QP#h#i!3T~!3WP#X#Y!3Z~!3^P#P#Q!3a~!3dP#P#Q!3g~!3lO]~~!3oQ#]#^!3u#d#e!4W~!3xP#n#o!3{~!4OP#X#Y!4R~!4WOa~~!4ZP#T#U!4^~!4aP#b#c!4d~!4iOf~~!4lP#T#U!4o~!4rP#U#V!4u~!4zP!d~#j#k!4}~!5QP#]#^!5T~!5WP#X#Y!5Z~!5^P#k#l!5a~!5dP#P#Q!5g~!5jP#P#Q!5m~!5rO!b~~!5wP!P~#P#Q!5z~!6PO#l~~!6SP#Q#R!6V~!6YUOY!6VZ#Q!6V#Q#R!6l#R;'S!6V;'S;=`!7T<%lO!6V~!6oTO#Q!6V#Q#R!7O#R;'S!6V;'S;=`!7T<%lO!6V~!7TO!r~~!7WP;=`<%l!6V~!7dX#n~#k~W~uv*}}!O*}!O!P*}!P!Q*}!Q![*}![!]+s!c!}*}#R#S!8P#T#o*}~!8Yb#n~#k~W~OY!9bZu!9buv!8Pv}!9b}!O!8P!O!P!8P!P!Q!8P!Q![!8P![!]!:f!]!c!9b!c!}!8P!}#R!9b#R#S!=w#S#T!9b#T#o!8P#o;'S!9b;'S;=`!:`<%lO!9b~!9eUOY!9bZ#R!9b#R#S!9w#S;'S!9b;'S;=`!:`<%lO!9b~!9zTO#R!9b#R#S!:Z#S;'S!9b;'S;=`!:`<%lO!9b~!:`O!p~~!:cP;=`<%l!9b~!:mb#n~#k~OY!9bZu!9buv!:fv}!9b}!O!:f!O!P!:f!P!Q!:f!Q![!:f![!]!:f!]!c!9b!c!}!:f!}#R!9b#R#S!;u#S#T!9b#T#o!:f#o;'S!9b;'S;=`!:`<%lO!9b~!;|a#n~#k~Ou!9buv!:fv}!9b}!O!:f!O!P!:f!P!Q!:f!Q![!:f![!]!:f!]!c!9b!c!}!:f!}#R!9b#R#S!=R#S#T!9b#T#o!:f#o;'S!9b;'S;=`!:`<%lO!9b~!=[X#n~!p~#k~uv+s}!O+s!O!P+s!P!Q+s!Q![+s![!]+s!c!}+s#R#S+s#T#o+s~!>Qa#n~#k~W~Ou!9buv!8Pv}!9b}!O!8P!O!P!8P!P!Q!8P!Q![!8P![!]!:f!]!c!9b!c!}!8P!}#R!9b#R#S!?V#S#T!9b#T#o!8P#o;'S!9b;'S;=`!:`<%lO!9b~!?bX#n~!p~#k~W~uv*}}!O*}!O!P*}!P!Q*}!Q![*}![!]+s!c!}*}#R#S*}#T#o*}~!@Y[#n~#k~W~}~uv*}}!O*}!O!P*}!P!Q*}!Q![Bh![!]+s!c!}Bh#R#S*}#T#hBh#h#i!AO#i#oBh*5S4/fCc~!AZ[#n~#k~W~}~uv*}}!O*}!O!P*}!P!Q*}!Q![Bh![!]+s!c!}Bh#R#S*}#T#hBh#h#i!BP#i#oBh*5S4/fCc~!B[[#n~#k~W~}~uv*}}!O*}!O!P*}!P!Q*}!Q![Bh![!]+s!c!}Bh#R#S*}#T#dBh#d#e!CQ#e#oBh*5S4/fCc~!C][#n~#k~W~}~uv*}}!O*}!O!P*}!P!Q*}!Q![Bh![!]!DR!c!}Bh#R#S*}#T#gBh#g#h!I_#h#oBh*5S4/fCc~!DYX#n~#k~uv+s}!O+s!O!P+s!P!Q!Du!Q![+s![!]+s!c!}+s#R#S+s#T#o+s~!D|X#n~#k~uv+s}!O+s!O!P+s!P!Q!Ei!Q![+s![!]+s!c!}+s#R#S+s#T#o+s~!Epe#n~#k~OX!GRZ]!GR^p!GRqu!GRuv!Gsv}!GR}!O!Gs!O!P!Gs!P!Q!Gs!Q![!Gs![!]!Gs!]!c!GR!c!}!Gs!}#P!GR#Q#R!GR#R#S!Gs#S#T!GR#T#o!Gs#o;'S!GR;'S;=`!Gm<%lO!GR~!GWV!O~OX!GRZ]!GR^p!GRq#P!GR#Q;'S!GR;'S;=`!Gm<%lO!GR~!GpP;=`<%l!GR~!G|e!O~#n~#k~OX!GRZ]!GR^p!GRqu!GRuv!Gsv}!GR}!O!Gs!O!P!Gs!P!Q!Gs!Q![!Gs![!]!Gs!]!c!GR!c!}!Gs!}#P!GR#Q#R!GR#R#S!Gs#S#T!GR#T#o!Gs#o;'S!GR;'S;=`!Gm<%lO!GR~!IjY#n~#k~W~}~uv*}}!O*}!O!P*}!P!Q*}!Q![Bh![!]!DR!c!}Bh#R#S*}#T#oBh*5S4/fCc~!J]P#o#p!J`~!JcUOY!J`Z#q!J`#q#r!Ju#r;'S!J`;'S;=`!K^<%lO!J`~!JxTO#q!J`#q#r!KX#r;'S!J`;'S;=`!K^<%lO!J`~!K^O!u~~!KaP;=`<%l!J`~!KiPz~#p#q!Kl~!KqO!g~~!KvO!h~",
-      tokenizers: [0],
-      topRules: { "Document": [0, 1] },
-      tokenPrec: 703
+      tokenData: "@T~R_XY!Qpq!Qz{!]}!O#g!Q![#g!`!a$X!b!c$d!c!}#g!}#O${#P#Q>^#R#S#g#T#o#g#o#p>i#p#q?s#r#s@O~!VQ#`~XY!Qpq!Q~!`Pz{!c~!fUOY!cZz!cz{!x{;'S!c;'S;=`#a<%lO!c~!{TOz!cz{#[{;'S!c;'S;=`#a<%lO!c~#aO!p~~#dP;=`<%l!c~#lX#c~uv#g}!O#g!O!P#g!P!Q#g!Q![#g![!]#g!c!}#g#R#S#g#T#o#g~$[Ppq$_~$dO!l~~$gP!b!c$j~$mP!b!c$p~$sP!b!c$v~${O!m~~%OP!}#O%R~%U_z{&T!P!Q&r!^!_2Z!_!`3^!`!a3r#V#W4W#W#X5y#Y#Z6[#[#]8Z#]#^8r#a#b9p#b#c;c#g#h<W#h#i=T#i#j&Z~&WP#i#j&Z~&^P#g#h&a~&dP#X#Y&g~&jP#f#g&m~&rO!b~~&uZ!^!_'h!_!`'y!`!a([#V#W(m#W#X*x#Y#Z+g#[#],t#a#b-i#b#c.j#g#h/_#h#i0t~'kP#P#Q'n~'qP#P#Q't~'yO|~~'|P#P#Q(P~(SP#P#Q(V~([Oy~~(_P#P#Q(b~(eP#P#Q(h~(mO!P~~(pP#c#d(s~(vQ#W#X(|#`#a)e~)PP#X#Y)S~)VP#P#Q)Y~)]P#P#Q)`~)eO!r~~)hP#`#a)k~)nP#T#U)q~)tP#d#e)w~)zP#g#h)}~*QP#]#^*T~*WP#U#V*Z~*^P#`#a*a~*dP#X#Y*g~*jP#P#Q*m~*pP#P#Q*s~*xO!Z~~*{P#]#^+O~+RP#j#k+U~+XP#P#Q+[~+_P#P#Q+b~+gOj~~+jP#c#d+m~+pP#c#d+s~+vP#h#i+y~+|P#b#c,P~,SP#c#d,V~,YP#h#i,]~,`P#X#Y,c~,fP#P#Q,i~,lP#P#Q,o~,tO!d~~,wP#h#i,z~,}P#a#b-Q~-TP#`#a-W~-ZP#P#Q-^~-aP#P#Q-d~-iO#P~~-lP#c#d-o~-rP#W#X-u~-xP#i#j-{~.OP#`#a.R~.UP#X#Y.X~.[P#P#Q._~.bP#P#Q.e~.jO!w~~.mP#c#d.p~.sP#h#i.v~.yP#X#Y.|~/PP#P#Q/S~/VP#P#Q/Y~/_On~~/bQ#]#^/h#d#e0V~/kP#n#o/n~/qP#X#Y/t~/wP#P#Q/z~/}P#P#Q0Q~0VOr~~0YP#T#U0]~0`P#b#c0c~0fP#P#Q0i~0lP#P#Q0o~0tOv~~0wP#T#U0z~0}P#U#V1Q~1TQ#P#Q1Z#j#k1f~1^P#P#Q1a~1fO!h~~1iP#]#^1l~1oP#X#Y1r~1uP#k#l1x~1{P#P#Q2O~2RP#P#Q2U~2ZO!f~~2^Q#P#Q2d#]#^2o~2gP#P#Q2j~2oO{~~2rP#a#b2u~2xP#T#U2{~3OP#Z#[3R~3UP#X#Y3X~3^O!i~~3aQ#P#Q3g#]#^2o~3jP#P#Q3m~3rOx~~3uQ#P#Q3{#]#^2o~4OP#P#Q4R~4WO!O~~4ZP#c#d4^~4aQ#W#X4g#`#a4r~4jP#X#Y4m~4rO!]~~4uP#`#a4x~4{P#T#U5O~5RP#d#e5U~5XP#g#h5[~5_P#]#^5b~5eP#U#V5h~5kP#`#a5n~5qP#X#Y5t~5yO!X~~5|P#]#^6P~6SP#j#k6V~6[Of~~6_P#c#d6b~6eP#c#d6h~6kP#h#i6n~6qP#b#c6t~6wP#c#d6z~6}P#h#i7Q~7TP#X#Y7W~7]P!c~#U#V7`~7cP#`#a7f~7iP#c#d7l~7oP#V#W7r~7uP#_#`7x~7{P#P#Q8O~8RP#P#Q8U~8ZO!o~~8^P#h#i8a~8dP#a#b8g~8jP#`#a8m~8rO!a~~8uQ#a#b2u#b#c8{~9OP#V#W9R~9UP#`#a9X~9[P#i#j9_~9bP#W#X9e~9hP#X#Y9k~9pO!R~~9sP#c#d9v~9yP#W#X9|~:PP#i#j:S~:VP#`#a:Y~:]P#X#Y:`~:eP!`~pq:h~:kP#f#g:n~:qP#T#U:t~:wP#h#i:z~:}P#X#Y;Q~;TP#P#Q;W~;ZP#P#Q;^~;cOk~~;fP#c#d;i~;lP#h#i;o~;rP#X#Y;u~;xP#P#Q;{~<OP#P#Q<R~<WOm~~<ZQ#]#^<a#d#e<r~<dP#n#o<g~<jP#X#Y<m~<rOp~~<uP#T#U<x~<{P#b#c=O~=TOt~~=WP#T#U=Z~=^P#U#V=a~=fP!g~#j#k=i~=lP#]#^=o~=rP#X#Y=u~=xP#k#l={~>OP#P#Q>R~>UP#P#Q>X~>^O!e~~>aP#P#Q>d~>iO#b~~>lP#o#p>o~>rUOY>oZ#q>o#q#r?U#r;'S>o;'S;=`?m<%lO>o~?XTO#q>o#q#r?h#r;'S>o;'S;=`?m<%lO>o~?mO!q~~?pP;=`<%l>o~?vP#p#q?y~@OO!j~~@TO!k~",
+      tokenizers: [myTokenizer, 0],
+      topRules: { "Document": [0, 20] },
+      tokenPrec: 0
     });
   }
 });
@@ -24732,7 +24877,7 @@ function isDigit(ch) {
 function isHex(ch) {
   return isDigit(ch) || ch >= 97 && ch <= 102 || ch >= 65 && ch <= 70;
 }
-var descendantOp, Unit, identifier, callee, VariableName, queryIdentifier, queryVariableName, QueryCallee, space, colon, parenL, underscore, bracketL, dash, period, hash, percent, ampersand, backslash, newline, asterisk, identifierTokens, identifiers, queryIdentifiers, descendant, unitToken, cssHighlighting, spec_callee, spec_queryIdentifier, spec_QueryCallee, spec_AtKeyword, spec_identifier, parser2;
+var descendantOp, Unit, identifier, callee, VariableName, queryIdentifier, queryVariableName, QueryCallee, space, colon, parenL, underscore, bracketL, dash, period, hash, percent, ampersand, backslash, newline2, asterisk, identifierTokens, identifiers, queryIdentifiers, descendant, unitToken, cssHighlighting, spec_callee, spec_queryIdentifier, spec_QueryCallee, spec_AtKeyword, spec_identifier, parser2;
 var init_dist12 = __esm({
   "node_modules/@lezer/css/dist/index.js"() {
     init_dist11();
@@ -24782,7 +24927,7 @@ var init_dist12 = __esm({
     percent = 37;
     ampersand = 38;
     backslash = 92;
-    newline = 10;
+    newline2 = 10;
     asterisk = 42;
     identifierTokens = (id2, varName, callee2) => (input, stack) => {
       for (let inside = false, dashes = 0, i = 0; ; i++) {
@@ -24791,7 +24936,7 @@ var init_dist12 = __esm({
           if (!inside && (next != dash || i > 0)) inside = true;
           if (dashes === i && next == dash) dashes++;
           input.advance();
-        } else if (next == backslash && input.peek(1) != newline) {
+        } else if (next == backslash && input.peek(1) != newline2) {
           input.advance();
           if (isHex(input.next)) {
             do {
@@ -25288,7 +25433,7 @@ var init_dist14 = __esm({
 function identifierChar(ch, start) {
   return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch == 95 || ch >= 192 || !start && ch >= 48 && ch <= 57;
 }
-var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline2, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
+var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline3, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
 var init_dist15 = __esm({
   "node_modules/@lezer/javascript/dist/index.js"() {
     init_dist11();
@@ -25301,7 +25446,7 @@ var init_dist15 = __esm({
     JSXStartTag = 4;
     insertSemi = 318;
     spaces = 320;
-    newline2 = 321;
+    newline3 = 321;
     LineComment = 5;
     BlockComment = 6;
     Dialect_jsx = 0;
@@ -25346,7 +25491,7 @@ var init_dist15 = __esm({
     trackNewline = new ContextTracker({
       start: false,
       shift(context, term) {
-        return term == LineComment || term == BlockComment || term == spaces ? context : term == newline2;
+        return term == LineComment || term == BlockComment || term == spaces ? context : term == newline3;
       },
       strict: false
     });
