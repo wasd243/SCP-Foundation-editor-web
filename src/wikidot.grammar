@@ -117,7 +117,7 @@ Footnote {
 // ——————————————————————————include——————————————————————————
 IncludeBlock {
   IncludeOpen
-  IncludePart1?
+  IncludePath?
   IncludeParam*
   IncludeTagEnd { _tagEnd }
 }
@@ -128,6 +128,11 @@ IncludeParam {
 
 IncludeValue {
   (AttrValue | attrPathToken | StarChar | Text | LinkURL | BracketChar)+
+}
+
+IncludePath {
+  IncludePart1
+  | attrPathToken
 }
 
 IncludePart1 {
@@ -371,6 +376,7 @@ Attr {
   @precedence {
     // 1
     _tagEnd,
+    Equals,
     Blockquote,
     Rate,
     AlignCenterOpenToken,
@@ -414,7 +420,6 @@ Attr {
     Hr,
     ForcedNewLine,
     newline,
-    Equals,          // =
     BracketChar,
 
     // 3

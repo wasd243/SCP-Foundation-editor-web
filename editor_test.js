@@ -206,6 +206,7 @@ const wikidotParser = parser.configure({
             "IncludePart1":           customTags.include_1,
             "IncludePart2":           customTags.include_2,
             "IncludePart3":           customTags.include_3,
+            "IncludePath":            customTags.include_2,
             "IncludeBar":             customTags.line_up,
             "IncludeValue":           customTags.keyword,
             "IncludeTagEnd":          customTags.include,
