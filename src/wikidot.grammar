@@ -386,6 +386,8 @@ Attr {
     // 1
     _tagEnd,
     LinkURL,
+    attrPathToken,
+    AttrValue,
     Equals,
     Blockquote,
     Rate,
@@ -444,8 +446,7 @@ Attr {
     Original,
 
     // 4
-    attrPathToken,
-    AttrValue,
+
 
     // 5
     space
