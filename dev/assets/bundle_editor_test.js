@@ -24701,11 +24701,10 @@ var init_dist11 = __esm({
 });
 
 // src/parser.terms.js
-var Text2, UnderlineText, StrikeText, Hr;
+var Text2, StrikeText, Hr;
 var init_parser_terms = __esm({
   "src/parser.terms.js"() {
     Text2 = 1;
-    UnderlineText = 2;
     StrikeText = 3;
     Hr = 4;
   }
@@ -24717,11 +24716,14 @@ var init_tokenizer = __esm({
   "src/tokenizer.js"() {
     init_dist11();
     init_parser_terms();
-    myTokenizer = new ExternalTokenizer((input, stack) => {
+    myTokenizer = new ExternalTokenizer((input) => {
       const { next } = input;
       if (next < 0) return;
       if (` 	
-\r="'[]{}|`.includes(String.fromCharCode(next))) return;
+\r="'[]{}|:./#@+*`.includes(String.fromCharCode(next))) return;
+      if (next >= 48 && next <= 57 || next >= 65 && next <= 90 || next >= 97 && next <= 122) {
+        return;
+      }
       if (next == 45) {
         let count = 0;
         while (input.peek(count) == 45) count++;
@@ -24729,17 +24731,20 @@ var init_tokenizer = __esm({
           input.acceptToken(Hr, count);
           return;
         }
+        if (count == 2) {
+          input.acceptToken(StrikeText, 2);
+          return;
+        }
       }
-      const next2 = input.peek(1);
-      if (next == 95 && next2 == 95) {
-        input.acceptToken(UnderlineText, 2);
-        return;
+      let size = 1;
+      while (true) {
+        let n = input.peek(size);
+        if (n < 0 || ` 	
+\r="'[]{}|:./#@+*-`.includes(String.fromCharCode(n))) break;
+        if (n >= 48 && n <= 57 || n >= 65 && n <= 90 || n >= 97 && n <= 122) break;
+        size++;
       }
-      if (next == 45 && next2 == 45) {
-        input.acceptToken(StrikeText, 2);
-        return;
-      }
-      input.acceptToken(Text2, 1);
+      input.acceptToken(Text2, size);
     });
   }
 });
