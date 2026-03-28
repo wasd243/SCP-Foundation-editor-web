@@ -353,13 +353,11 @@ Attr {
   // 关键：不包含空格和 ]，这样它遇到空格或闭合标签会自动停止
   attrPathToken { $[a-zA-Z0-9\-_:./%]+ }
   Equals    { "=" }
-  // 在 @tokens 里面增加一个不带引号的值定义
   attrValueUnquoted { $[a-zA-Z0-9\-_./%]+ }
-  
-  // 然后修改 AttrValue 的定义
+
   AttrValue { 
-    '"' !["\n\r]* '"' | // 带引号的
-    attrValueUnquoted     // 不带引号的
+    '"' !["\n\r]* '"' |  // 双引号包裹的值
+    attrValueUnquoted     // 不带引号的值
   }
 
   // 同时排除 ] 防止 ]] 被 Text 吞掉
@@ -371,6 +369,7 @@ Attr {
 
   @precedence {
     // 1
+    _tagEnd,
     Blockquote,
     Rate,
     AlignCenterOpenToken,
@@ -414,7 +413,6 @@ Attr {
     Hr,
     ForcedNewLine,
     newline,
-    _tagEnd,         // ]] 必须在这个位置，以正确闭合上面的 Open 标签
     Equals,          // =
     BracketChar,
 
