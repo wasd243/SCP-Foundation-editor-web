@@ -166,7 +166,7 @@ function addInsert(values, sections, value) {
     values[values.length - 1] = values[values.length - 1].append(value);
   } else {
     while (values.length < index)
-      values.push(Text.empty);
+      values.push(Text2.empty);
     values.push(value);
   }
 }
@@ -178,7 +178,7 @@ function iterChanges(desc, f, individual) {
       posA += len;
       posB += len;
     } else {
-      let endA = posA, endB = posB, text = Text.empty;
+      let endA = posA, endB = posB, text = Text2.empty;
       for (; ; ) {
         endA += len;
         endB += ins;
@@ -704,11 +704,11 @@ function findColumn(string2, col, tabSize, strict) {
   }
   return strict === true ? -1 : string2.length;
 }
-var Text, TextLeaf, TextNode, RawTextCursor, PartialTextCursor, LineCursor, Line, DefaultSplit, MapMode, ChangeDesc, ChangeSet, SectionIter, SelectionRange, EditorSelection, nextID, Facet, FacetProvider, initField, StateField, Prec_, Prec, PrecExtension, Compartment, CompartmentInstance, Configuration, languageData, allowMultipleSelections, lineSeparator, changeFilter, transactionFilter, transactionExtender, readOnly, Annotation, AnnotationType, StateEffectType, StateEffect, Transaction, none, CharCategory, nonASCIISingleCaseWordChar, wordChar, EditorState, RangeValue, Range, Chunk, RangeSet, RangeSetBuilder, LayerCursor, HeapCursor, SpanCursor;
+var Text2, TextLeaf, TextNode, RawTextCursor, PartialTextCursor, LineCursor, Line, DefaultSplit, MapMode, ChangeDesc, ChangeSet, SectionIter, SelectionRange, EditorSelection, nextID, Facet, FacetProvider, initField, StateField, Prec_, Prec, PrecExtension, Compartment, CompartmentInstance, Configuration, languageData, allowMultipleSelections, lineSeparator, changeFilter, transactionFilter, transactionExtender, readOnly, Annotation, AnnotationType, StateEffectType, StateEffect, Transaction, none, CharCategory, nonASCIISingleCaseWordChar, wordChar, EditorState, RangeValue, Range, Chunk, RangeSet, RangeSetBuilder, LayerCursor, HeapCursor, SpanCursor;
 var init_dist = __esm({
   "node_modules/@codemirror/state/dist/index.js"() {
     init_src();
-    Text = class _Text {
+    Text2 = class _Text {
       /**
       Get the line description around the given position.
       */
@@ -857,7 +857,7 @@ var init_dist = __esm({
         return text.length <= 32 ? new TextLeaf(text) : TextNode.from(TextLeaf.split(text, []));
       }
     };
-    TextLeaf = class _TextLeaf extends Text {
+    TextLeaf = class _TextLeaf extends Text2 {
       constructor(text, length = textLength(text)) {
         super();
         this.text = text;
@@ -939,7 +939,7 @@ var init_dist = __esm({
         return target;
       }
     };
-    TextNode = class _TextNode extends Text {
+    TextNode = class _TextNode extends Text2 {
       constructor(children, length) {
         super();
         this.children = children;
@@ -1069,7 +1069,7 @@ var init_dist = __esm({
         return chunked.length == 1 ? chunked[0] : new _TextNode(chunked, length);
       }
     };
-    Text.empty = /* @__PURE__ */ new TextLeaf([""], 0);
+    Text2.empty = /* @__PURE__ */ new TextLeaf([""], 0);
     RawTextCursor = class {
       constructor(text, dir = 1) {
         this.dir = dir;
@@ -1203,7 +1203,7 @@ var init_dist = __esm({
       }
     };
     if (typeof Symbol != "undefined") {
-      Text.prototype[Symbol.iterator] = function() {
+      Text2.prototype[Symbol.iterator] = function() {
         return this.iter();
       };
       RawTextCursor.prototype[Symbol.iterator] = PartialTextCursor.prototype[Symbol.iterator] = LineCursor.prototype[Symbol.iterator] = function() {
@@ -1437,8 +1437,8 @@ var init_dist = __esm({
             sections[i + 1] = len;
             let index = i >> 1;
             while (inserted.length < index)
-              inserted.push(Text.empty);
-            inserted.push(len ? doc2.slice(pos, pos + len) : Text.empty);
+              inserted.push(Text2.empty);
+            inserted.push(len ? doc2.slice(pos, pos + len) : Text2.empty);
           }
           pos += len;
         }
@@ -1571,7 +1571,7 @@ var init_dist = __esm({
             let { from, to = from, insert: insert2 } = spec;
             if (from > to || from < 0 || to > length)
               throw new RangeError(`Invalid change range ${from} to ${to} (in doc of length ${length})`);
-            let insText = !insert2 ? Text.empty : typeof insert2 == "string" ? Text.of(insert2.split(lineSep || DefaultSplit)) : insert2;
+            let insText = !insert2 ? Text2.empty : typeof insert2 == "string" ? Text2.of(insert2.split(lineSep || DefaultSplit)) : insert2;
             let insLen = insText.length;
             if (from == to && insLen == 0)
               return;
@@ -1612,8 +1612,8 @@ var init_dist = __esm({
             sections.push(part[0], 0);
           } else {
             while (inserted.length < i)
-              inserted.push(Text.empty);
-            inserted[i] = Text.of(part.slice(1));
+              inserted.push(Text2.empty);
+            inserted[i] = Text2.of(part.slice(1));
             sections.push(part[0], inserted[i].length);
           }
         }
@@ -1651,11 +1651,11 @@ var init_dist = __esm({
       }
       get text() {
         let { inserted } = this.set, index = this.i - 2 >> 1;
-        return index >= inserted.length ? Text.empty : inserted[index];
+        return index >= inserted.length ? Text2.empty : inserted[index];
       }
       textBit(len) {
         let { inserted } = this.set, index = this.i - 2 >> 1;
-        return index >= inserted.length && !len ? Text.empty : inserted[index].slice(this.off, len == null ? void 0 : this.off + len);
+        return index >= inserted.length && !len ? Text2.empty : inserted[index].slice(this.off, len == null ? void 0 : this.off + len);
       }
       forward(len) {
         if (len == this.len)
@@ -2569,7 +2569,7 @@ var init_dist = __esm({
       [`Text`](https://codemirror.net/6/docs/ref/#state.Text) instance from the given string.
       */
       toText(string2) {
-        return Text.of(string2.split(this.facet(_EditorState.lineSeparator) || DefaultSplit));
+        return Text2.of(string2.split(this.facet(_EditorState.lineSeparator) || DefaultSplit));
       }
       /**
       Return the given range of the document as a string.
@@ -2636,7 +2636,7 @@ var init_dist = __esm({
       */
       static create(config2 = {}) {
         let configuration = Configuration.resolve(config2.extensions || [], /* @__PURE__ */ new Map());
-        let doc2 = config2.doc instanceof Text ? config2.doc : Text.of((config2.doc || "").split(configuration.staticFacet(_EditorState.lineSeparator) || DefaultSplit));
+        let doc2 = config2.doc instanceof Text2 ? config2.doc : Text2.of((config2.doc || "").split(configuration.staticFacet(_EditorState.lineSeparator) || DefaultSplit));
         let selection2 = !config2.selection ? EditorSelection.single(0) : config2.selection instanceof EditorSelection ? config2.selection : EditorSelection.single(config2.selection.anchor, config2.selection.head);
         checkSelection(selection2, doc2.length);
         if (!configuration.staticFacet(allowMultipleSelections))
@@ -4922,7 +4922,7 @@ function applyDOMChange(view, domChange) {
       change = {
         from: sel.from,
         to: sel.to,
-        insert: Text.of(domChange.text.slice(sel.from - from, selEnd).split(LineBreakPlaceholder))
+        insert: Text2.of(domChange.text.slice(sel.from - from, selEnd).split(LineBreakPlaceholder))
       };
     } else if (diff = findDiff(cmp, domChange.text, preferredPos - from, preferredSide)) {
       if (browser.chrome && lastKey == 13 && diff.toB == diff.from + 2 && domChange.text.slice(diff.from, diff.toB) == LineBreakPlaceholder + LineBreakPlaceholder)
@@ -4930,7 +4930,7 @@ function applyDOMChange(view, domChange) {
       change = {
         from: from + diff.from,
         to: from + diff.toA,
-        insert: Text.of(domChange.text.slice(diff.from, diff.toB).split(LineBreakPlaceholder))
+        insert: Text2.of(domChange.text.slice(diff.from, diff.toB).split(LineBreakPlaceholder))
       };
     }
   } else if (newSel && (!view.hasFocus && state.facet(editable) || sameSelPos(newSel, sel))) {
@@ -4941,7 +4941,7 @@ function applyDOMChange(view, domChange) {
   if ((browser.mac || browser.android) && change && change.from == change.to && change.from == sel.head - 1 && /^\. ?$/.test(change.insert.toString()) && view.contentDOM.getAttribute("autocorrect") == "off") {
     if (newSel && change.insert.length == 2)
       newSel = EditorSelection.single(newSel.main.anchor - 1, newSel.main.head - 1);
-    change = { from: change.from, to: change.to, insert: Text.of([change.insert.toString().replace(".", " ")]) };
+    change = { from: change.from, to: change.to, insert: Text2.of([change.insert.toString().replace(".", " ")]) };
   } else if (state.doc.lineAt(sel.from).to < sel.to && view.docView.lineHasWidget(sel.to) && view.inputState.insertingTextAt > Date.now() - 50) {
     change = {
       from: sel.from,
@@ -4951,7 +4951,7 @@ function applyDOMChange(view, domChange) {
   } else if (browser.chrome && change && change.from == change.to && change.from == sel.head && change.insert.toString() == "\n " && view.lineWrapping) {
     if (newSel)
       newSel = EditorSelection.single(newSel.main.anchor - 1, newSel.main.head - 1);
-    change = { from: sel.from, to: sel.to, insert: Text.of([" "]) };
+    change = { from: sel.from, to: sel.to, insert: Text2.of([" "]) };
   }
   if (change) {
     return applyDOMChangeInner(view, change, newSel, lastKey);
@@ -7368,10 +7368,10 @@ var init_dist2 = __esm({
       }
       get overrideDOMText() {
         if (!this.length)
-          return Text.empty;
+          return Text2.empty;
         let { root } = this;
         if (!root)
-          return Text.empty;
+          return Text2.empty;
         let start = this.posAtStart;
         return root.view.state.doc.slice(start, start + this.length);
       }
@@ -7399,7 +7399,7 @@ var init_dist2 = __esm({
         return true;
       }
       get overrideDOMText() {
-        return Text.empty;
+        return Text2.empty;
       }
       coordsIn(pos) {
         return this.dom.getBoundingClientRect();
@@ -9439,7 +9439,7 @@ var init_dist2 = __esm({
     HeightOracle = class {
       constructor(lineWrapping) {
         this.lineWrapping = lineWrapping;
-        this.doc = Text.empty;
+        this.doc = Text2.empty;
         this.heightSamples = {};
         this.lineHeight = 14;
         this.charWidth = 7;
@@ -10205,7 +10205,7 @@ var init_dist2 = __esm({
         let guessWrapping = state.facet(contentAttributes).some((v) => typeof v != "function" && v.class == "cm-lineWrapping");
         this.heightOracle = new HeightOracle(guessWrapping);
         this.stateDeco = staticDeco(state);
-        this.heightMap = HeightMap.empty().applyChanges(this.stateDeco, Text.empty, this.heightOracle.setDoc(state.doc), [new ChangedRange(0, 0, 0, state.doc.length)]);
+        this.heightMap = HeightMap.empty().applyChanges(this.stateDeco, Text2.empty, this.heightOracle.setDoc(state.doc), [new ChangedRange(0, 0, 0, state.doc.length)]);
         for (let i = 0; i < 2; i++) {
           this.viewport = this.getViewport(0, null);
           if (!this.updateForViewport())
@@ -10356,7 +10356,7 @@ var init_dist2 = __esm({
           clearHeightChangeFlag();
           for (let vp of this.viewports) {
             let heights = vp.from == this.viewport.from ? lineHeights : view.docView.measureVisibleLineHeights(vp);
-            this.heightMap = (refresh ? HeightMap.empty().applyChanges(this.stateDeco, Text.empty, this.heightOracle, [new ChangedRange(0, 0, 0, view.state.doc.length)]) : this.heightMap).updateHeight(oracle, 0, refresh, new MeasuredHeights(vp.from, heights));
+            this.heightMap = (refresh ? HeightMap.empty().applyChanges(this.stateDeco, Text2.empty, this.heightOracle, [new ChangedRange(0, 0, 0, view.state.doc.length)]) : this.heightMap).updateHeight(oracle, 0, refresh, new MeasuredHeights(vp.from, heights));
           }
           if (heightChangeFlag)
             result |= 2;
@@ -11400,10 +11400,10 @@ var init_dist2 = __esm({
           let change = {
             from: diff.from + from,
             to: diff.toA + from,
-            insert: Text.of(e.text.slice(diff.from, diff.toB).split("\n"))
+            insert: Text2.of(e.text.slice(diff.from, diff.toB).split("\n"))
           };
           if ((browser.mac || browser.android) && change.from == head - 1 && /^\. ?$/.test(e.text) && view.contentDOM.getAttribute("autocorrect") == "off")
-            change = { from, to, insert: Text.of([e.text.replace(".", " ")]) };
+            change = { from, to, insert: Text2.of([e.text.replace(".", " ")]) };
           this.pendingContextChange = change;
           if (!view.state.readOnly) {
             let newLen = this.to - this.from + (change.to - change.from + change.insert.length);
@@ -19052,7 +19052,7 @@ function newlineAndIndent(atEof) {
       if (explode)
         insert2.push(indentString(state, cx.lineIndent(line.from, -1)));
       return {
-        changes: { from, to, insert: Text.of(insert2) },
+        changes: { from, to, insert: Text2.of(insert2) },
         range: EditorSelection.cursor(from + 1 + insert2[1].length)
       };
     });
@@ -19426,7 +19426,7 @@ var init_dist6 = __esm({
         return false;
       let changes = state.changeByRange((range) => {
         return {
-          changes: { from: range.from, to: range.to, insert: Text.of(["", ""]) },
+          changes: { from: range.from, to: range.to, insert: Text2.of(["", ""]) },
           range: EditorSelection.cursor(range.from)
         };
       });
@@ -23072,7 +23072,7 @@ function getSpecializer(spec) {
   }
   return spec.get;
 }
-var Stack, StackContext, SimulatedStack, StackBufferCursor, CachedToken, nullToken, InputStream, TokenGroup, LocalTokenGroup, ExternalTokenizer, verbose, stackIDs, FragmentCursor2, TokenCache, Parse, Dialect, id, ContextTracker, LRParser;
+var Stack, StackContext, SimulatedStack, StackBufferCursor, CachedToken, nullToken, InputStream, TokenGroup, LocalTokenGroup, ExternalTokenizer2, verbose, stackIDs, FragmentCursor2, TokenCache, Parse, Dialect, id, ContextTracker, LRParser;
 var init_dist11 = __esm({
   "node_modules/@lezer/lr/dist/index.js"() {
     init_dist3();
@@ -23882,7 +23882,7 @@ var init_dist11 = __esm({
       }
     };
     LocalTokenGroup.prototype.contextual = TokenGroup.prototype.fallback = TokenGroup.prototype.extend = false;
-    ExternalTokenizer = class {
+    ExternalTokenizer2 = class {
       /**
       Create a tokenizer. The first argument is the function that,
       given an input stream, scans for the types of tokens it
@@ -24700,146 +24700,58 @@ var init_dist11 = __esm({
   }
 });
 
-// src/parser.terms.js
-var Text2, StrikeText, SupText, SubText, Original, Hr, Dash, Title, Equals, IncludeBar, StarChar, BracketChar, newline, attrPathToken, AttrValue, EmText, LinkURL, includeSeg_;
-var init_parser_terms = __esm({
-  "src/parser.terms.js"() {
-    Text2 = 1;
-    StrikeText = 3;
-    SupText = 4;
-    SubText = 5;
-    Original = 6;
-    Hr = 7;
-    Dash = 8;
-    Title = 10;
-    Equals = 13;
-    IncludeBar = 14;
-    StarChar = 15;
-    BracketChar = 16;
-    newline = 104;
-    attrPathToken = 105;
-    AttrValue = 17;
-    EmText = 18;
-    LinkURL = 19;
-    includeSeg_ = 106;
-  }
-});
-
 // src/tokenizer.js
 var myTokenizer;
 var init_tokenizer = __esm({
   "src/tokenizer.js"() {
-    init_dist11();
-    init_parser_terms();
     myTokenizer = new ExternalTokenizer((input, stack) => {
-      let next = input.next;
+      let { next } = input;
       if (next < 0) return;
-      if (next == 10 || next == 13) {
-        input.acceptToken(newline, 1);
-        return;
-      }
-      if (next == 104) {
-        let isHttp = true;
-        let prefix = "http";
-        for (let i = 0; i < prefix.length; i++) {
-          if (input.peek(i) != prefix.charCodeAt(i)) {
-            isHttp = false;
-            break;
-          }
-        }
-        if (isHttp) {
-          let len = 4;
-          if (input.peek(len) == 115) len++;
-          if (input.peek(len) == 58 && input.peek(len + 1) == 47 && input.peek(len + 2) == 47) {
-            len += 3;
-            while (input.peek(len) != -1 && !/[ \t\n\r\]]/.test(String.fromCharCode(input.peek(len)))) {
-              len++;
-            }
-            input.acceptToken(LinkURL, len);
-            return;
-          }
-        }
-      }
-      if (next == 47 && input.peek(1) == 47) {
-        input.acceptToken(EmText, 2);
-        return;
-      }
-      if (next == 58) {
-        let len = 1;
-        while (input.peek(len) != -1 && !/[ :\[\]\n\r]/.test(String.fromCharCode(input.peek(len)))) {
-          len++;
-        }
-        input.acceptToken(includeSeg_, len);
-        return;
-      }
-      if (next == 34) {
-        let len = 1;
-        while (input.peek(len) != 34 && input.peek(len) != -1 && input.peek(len) != 10) {
-          len++;
-        }
-        if (input.peek(len) == 34) len++;
-        input.acceptToken(AttrValue, len);
-        return;
-      }
       if (next == 45) {
         let count = 0;
-        while (input.peek(count) == 45) count++;
+        while (input.peek(count) == 45) {
+          count++;
+        }
         if (count >= 4) {
           input.acceptToken(Hr, count);
           return;
         }
-        if (count == 2) {
+        if (count >= 2) {
           input.acceptToken(StrikeText, 2);
           return;
         }
         input.acceptToken(Dash, 1);
         return;
       }
-      if (next == 43) {
-        let count = 0;
-        while (input.peek(count) == 43) count++;
-        if (count >= 1 && count <= 6 && input.peek(count) == 32) {
-          input.acceptToken(Title, count + 1);
+      if (next == 95) {
+        if (input.peek(1) == 95) {
+          input.acceptToken(UnderlineText, 2);
           return;
         }
       }
-      if (/[a-zA-Z0-9\-_:./%]/.test(String.fromCharCode(next))) {
+      if (next != -1) {
         let len = 0;
-        while (/[a-zA-Z0-9\-_:./%]/.test(String.fromCharCode(input.peek(len)))) {
+        while (true) {
+          let curr = input.peek(len);
+          if (curr == -1) break;
+          if (curr == 91 || // '[' (标签开始)
+          curr == 45 || // '-' (横杠系列)
+          curr == 95 || // '_' (下划线)
+          curr == 42 || // '*' (粗体)
+          curr == 47 || // '/' (斜体)
+          curr == 10 || // '\n'
+          curr == 13) break;
           len++;
         }
-        input.acceptToken(attrPathToken, len);
+        if (len > 0) {
+          input.acceptToken(Text, len);
+          return;
+        }
+      }
+      if (next == 10 || next == 13) {
+        input.acceptToken(newline, 1);
         return;
       }
-      if (next == 61) {
-        input.acceptToken(Equals, 1);
-        return;
-      }
-      if (next == 124) {
-        input.acceptToken(IncludeBar, 1);
-        return;
-      }
-      if (next == 42) {
-        input.acceptToken(StarChar, 1);
-        return;
-      }
-      if (next == 94 && input.peek(1) == 94) {
-        input.acceptToken(SupText, 2);
-        return;
-      }
-      if (next == 44 && input.peek(1) == 44) {
-        input.acceptToken(SubText, 2);
-        return;
-      }
-      if (next == 64 && input.peek(1) == 64) {
-        input.acceptToken(Original, 2);
-        return;
-      }
-      if (next == 91 || next == 93 || next == 60 || next == 62) {
-        input.acceptToken(BracketChar, 1);
-        return;
-      }
-      input.acceptToken(Text2, 1);
     });
   }
 });
@@ -24852,17 +24764,17 @@ var init_parser = __esm({
     init_tokenizer();
     parser = LRParser.deserialize({
       version: 14,
-      states: "2SQVQROOO$RQRO'#CqO$ZQRO'#CxO$RQRO'#C{O$RQRO'#DPO$bQRO'#DTO$iQRO'#DWO$pQRO'#DZO$wQRO'#D^O$RQRO'#DdOOQP'#Dz'#DzO$RQRO'#DhO$RQRO'#EPO$RQRO'#ERO%YQQO'#EUO$RQRO'#EWO$RQRO'#EZO(|QRO'#EYO)TQRO'#E^O$RQRO'#E_OOQP'#Em'#EmOOQP'#Ea'#EaQVQROOO)[QRO'#CtOOQP'#Eb'#EbO)gQRO'#CsO)oQQO,59]OOQP,59d,59dO)tQRO,59dO){QQO,59gO*QQQO,59kOOQP,59o,59oO*VQRO,59oOOQP,59r,59rO*^QRO,59rOOQP,59u,59uO*eQRO,59uOOQP'#D`'#D`OOQP'#Ed'#EdO*lQRO'#DaO*tQRO'#DaOOQP'#Ec'#EcO*yQRO,59xOOQP'#Dc'#DcOOQP,59x,59xO*yQRO,59xO+UQQO,5:OO+ZQQO,5:SO+`QQO,5:kO+eQQO,5:mOOQP'#EV'#EVO+jQRO,5:pO+qQQO,5:rO+vQQO,5:uOOQP'#Dk'#DkOOQP'#Ef'#EfO+{QRO,5:tOOQP,5:t,5:tOOQP,5:x,5:xO,SQRO,5:xO,ZQQO,5:yOOQP-E8_-E8_O,`QRO,59`OOQP-E8`-E8`OOQP'#Cu'#CuO,eQRO1G.wOOQP1G/O1G/OOOQP'#C}'#C}O,lQRO1G/ROOQP'#DR'#DRO,sQRO1G/VOOQP1G/Z1G/ZOOQP1G/^1G/^OOQP1G/a1G/aOOQP-E8b-E8bO,zQRO,59{O-PQRO,59{OOQP-E8a-E8aOOQP1G/d1G/dO*yQRO1G/dOOQP'#Df'#DfO-UQRO1G/jOOQP'#Dj'#DjO-]QRO1G/nOOQP'#EQ'#EQOOQP1G0V1G0VOOQP'#ES'#ESO-dQRO1G0XOOQP1G0[1G0[O-kQRO1G0[OOQP'#EX'#EXOOQP1G0^1G0^OOQP'#E['#E[OOQP1G0a1G0aOOQP-E8d-E8dOOQP1G0`1G0`OOQP1G0d1G0dOOQP'#E`'#E`O-rQRO1G0eOOQP1G.z1G.zOOQP7+$c7+$cO-yQRO7+$cOOQP7+$m7+$mO.QQRO7+$mOOQP7+$q7+$qO.XQRO7+$qO.`QRO1G/gO.eQRO1G/gOOQP7+%O7+%OOOQP7+%U7+%UO.sQRO7+%UO.zQRO7+%YOOQP7+%Y7+%YO/RQRO7+%sOOQP7+%s7+%sOOQP7+%v7+%vOOQP7+&P7+&PO/YQRO7+&POOQP<<G}<<G}OOQP<<HX<<HXOOQP<<H]<<H]O.eQRO7+%ROOQP'#Ee'#EeO/aQRO'#DbOOQP7+%R7+%ROOQP<<Hp<<HpOOQP<<Ht<<HtOOQP<<I_<<I_OOQP<<Ik<<IkOOQP<<Hm<<HmOOQP-E8c-E8c",
-      stateData: "/x~O#`OS~OPdOQdORdOSdOTdOUdOVdOWdOXdOYdOZdO[dO]dO^dO_dO`dObdOcdOfPOkdOmQOpROtSOxTO{UO!OVO!RWO!XXO!]ZO!`]O!a`O!b[O!c^O!ebO!gcO!i_O!jdO!kdO!ldO!mdO!oYO!pdO!qdO#[dO~O#]gO#bgP~OnkO~PVOyoO~PVO|qO~PVO!PsO~PVO^xO#[vO#^uO#b{O#cuO~O#b!SO~OP!WOQ!WOR!WOS!WOT!WOU!WOV!WOW!WOX!WO]!WO^!WO_!WO`!WOa!WOb!WOc!WOf!WOj!WOm!WOn!WOp!WOr!WOt!WOv!WOx!WOy!WO{!WO|!WO!O!WO!P!WO!R!WO!X!WO!Z!WO!]!WO!`!WO!a!WO!b!WO!c!WO!d!WO!e!WO!f!WO!g!WO!h!WO!i!WO!j!WO!k!WO!l!WO!m!WO!oYO!p!WO!q!WO#[!WO#]!WO#^!WO#b!WO~O#P!ZO~P%_O!f![O~PVO]!`O#]hX#bhX~O#]gO#bgX~O#b!bO~On!dO~PVO#b!eO~O#b!gO~Oy!iO~PVO|!jO~PVO!P!kO~PVO^!mO#[vO~O#]!nO~O^xO#[vO#b{O~O#b!rO~O#b!tO~O#b!vO~O#b!xO~O!d!zO~PVO#b!|O~O#b#OO~O#P#RO~P%_O!f#SO~PVO#b#TO~Oa#VO~Oj#WO~PVOr#YO~PVOv#[O~PVO#]#^O~O]#_O~O!Z#aO~PVO!r#dO~P%_O!w#fO~P%_O!d#gO~PVO!h#hO~PVOj#jO~PVOr#kO~PVOv#lO~PVO]#mO~OP#nO_#nO`#nOa#nO~O!Z#qO~PVO!r#rO~P%_O!w#sO~P%_O!h#tO~PVOP#nO_#nO`#nOa#nO^!UX#[!UX#b!UX~O",
-      goto: "*g#bPPPPPPPPPPPPPPPPPPPPP#cP#}$m$zPP#cPP#cP$}P#cP%QP#cPP#cPP#cPP#cP%T%W%^%d#cP%nP#cP%q%tPPPPPPPPPPPPPP%|PPPP#c&p#c&sP#c&v#c&y#c&|'hP#c#c'k'n(r)R)])f)mPPPPPP){!RdOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#iQjPQmRQnSQ!OXQ!PZQ!Q[Q!R]Q!U_Q!V`R!^cghPRSXZ[]_`ciR!cjR!fmR!hnR}WXyWz}!qQ#p#_R#u#mQ|WS!pz}R#`!qR!s!OR!u!P]!Xa!Y!u!y#c#e!QdOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#i]!Wa!Y!u!y#c#eR!w!QR!y!RR!T^R!}!U!RaOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#iR#P!VR#U!^QfOQlQQpTQrUQtVQ!]bh!_flprt!]!{#X#Z#]#b#iQ!{!TQ#X!cQ#Z!fQ#]!hQ#b!sR#i#UdiPRSXZ[]_`cR!aiQzWS!oz!qR!q}WwWz}!qR!lwS#o#_#mR#v#oQ!YaU#Q!Y#c#eQ#c!uR#e!y!ReOQTUVbflprt!T!]!c!f!h!s!{#U#X#Z#]#b#i",
-      nodeNames: "\u26A0 Text UnderlineText StrikeText SupText SubText Original Hr Dash Slash Title List1 List2 Equals IncludeBar StarChar BracketChar AttrValue EmText LinkURL Document DivBlock DivOpen AttrList Attr DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludeParam IncludeValue IncludeTagEnd CollapsibleBlock CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock FootnoteBlockToken StrongText Monospace CodeClose UserBlock UserTagEnd ModuleBlock ModuleTagEnd ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageTagEnd HTMLBlock HTMLOpenTag HTMLTagEnd HTMLCloseToken TabViewBlock TabBlock TabTagEnd",
-      maxTerm: 111,
+      states: "3zQVQROOO#uQQO'#CcO#}QRO'#CbO$UQRO'#ClO#uQQO'#CpO$]QRO'#CoO#uQQO'#CuO$dQRO'#CtO$kQRO'#CyO$rQRO'#C|O$yQRO'#DPO%QQQO'#DSO#uQQO'#DcO%cQRO'#DbO#uQQO'#DhO)UQRO'#DgO#uQQO'#EUOOQP'#ET'#ETO#uQQO'#EXO)]QRO'#EWO)dQQO'#E]OOQO'#E`'#E`O#uQQO'#E_O#uQQO'#EeO)iQRO'#EdO)pQRO'#EiO#uQQO'#EkO)wQRO'#EjOOQP'#Ev'#EvOOQP'#Em'#EmQVQROOO*OQQO'#CfOOQO'#En'#EnO*ZQQO'#CeO*cQQO,58}OOQP,58|,58|O*hQRO,58|OOQP,59W,59WO*oQRO,59WO*vQQO,59[OOQP,59Z,59ZO*{QRO,59ZO+SQQO,59aOOQP,59`,59`O+XQRO,59`OOQP,59e,59eO+`QRO,59eOOQP,59h,59hO+gQRO,59hOOQP,59k,59kO+nQRO,59kO+uQQO'#DVOOQO'#DY'#DYOOQO'#DU'#DUOOQO'#Ep'#EpO,TQQO'#DZO,]QQO'#DZOOQO'#Eo'#EoO,bQQO,59nOOQP'#Da'#DaOOQP,59n,59nO,bQQO,59nO,mQQO,59}OOQP,59|,59|O,rQRO,59|O,yQQO,5:SOOQP'#Dk'#DkOOQP'#Er'#ErO-OQRO,5:ROOQP,5:R,5:RO-VQQO,5:pO-[QQO,5:sO-aQRO'#EZO-hQQO,5:rOOQP'#E^'#E^O-mQRO,5:wO-tQQO,5:yO-yQQO,5;PO.OQRO'#EgO.VQQO,5;OOOQP,5;T,5;TO.[QRO,5;TO.cQQO,5;VOOQP,5;U,5;UO.hQRO,5;UOOQP-E8k-E8kO.oQQO,59QOOQO-E8l-E8lOOQP'#Ci'#CiOOQP1G.i1G.iOOQP1G.h1G.hOOQP1G.r1G.rOOQP'#Cr'#CrOOQP1G.v1G.vOOQP1G.u1G.uOOQP'#Cw'#CwOOQP1G.{1G.{OOQP1G.z1G.zOOQP1G/P1G/POOQP1G/S1G/SOOQP1G/V1G/VO.tQQO'#DWOOQO,59q,59qOOQO-E8n-E8nO/SQQO,59uO/XQQO,59uOOQO-E8m-E8mOOQP1G/Y1G/YO,bQQO1G/YOOQP'#De'#DeOOQP1G/i1G/iOOQP1G/h1G/hOOQP'#Dj'#DjOOQP1G/n1G/nOOQP-E8p-E8pOOQP1G/m1G/mOOQP'#EV'#EVOOQP1G0[1G0[OOQP'#EY'#EYOOQP1G0_1G0_OOQP1G0^1G0^OOQP1G0c1G0cO/^QRO1G0cOOQP'#Ea'#EaOOQP1G0e1G0eOOQP'#Ef'#EfOOQP1G0k1G0kOOQP1G0j1G0jOOQP1G0o1G0oOOQP'#El'#ElOOQP1G0q1G0qOOQP1G0p1G0pOOQO1G.l1G.lOOQO'#DX'#DXOOQO,59r,59rO/eQQO1G/aO/jQRO1G/aOOQP7+$t7+$tOOQP7+%}7+%}O/jQRO7+${OOQP'#Eq'#EqO0OQRO'#D]OOQO7+${7+${OOQO<<Hg<<HgOOQP-E8o-E8o",
+      stateData: "1j~O#iOS~OPlOQlORlOSlOWPO_lOaROeSOjUOnWOqXOtYOwZO!QlO!RlO!SlO!W[O!]^O!`bO!agO!b`O!cdO!eiO!gjO!ieO!jlO!klO!llO!mlO!nlO!olO!plO!qlO!rlO!slO!tlO!ulO#UlO#VlO#olO~O#koO#lXP~O^sO~PVObuO~PVOgxO~PVOl{O~PVOo}O~PVOr!PO~PVOu!RO~PVO!O!YO#l!]O#m!TO#n!UO#o!WO~O!Y!aO~PVOP!dOQ!dOR!dOS!dOW!dOZ!dO[!dO^!dOa!dOb!dOe!dOg!dOj!dOl!dOn!dOo!dOq!dOr!dOt!dOu!dOw!dO!O!dO!Q!dO!R!dO!S!dO!W!dO!Y!dO!]!dO!`!dO!a!dO!b!dO!c!dO!d!dO!e!dO!f!dO!g!dO!h!dO!i!dO!j!dO!k!dO!l!dO!m!dO!n!dO!o!dO!p!dO!q!dO!r!dO!s!dO!t!dO!u!dO#k!dO#l!dO#m!dO#o!dO~O!v!gO~P%jO#O!}P~P%jO#l!lO~O#[#ZP~P%jO!f!rO~PVO!h!uO~PVOZ!xO#kYX#lYX~O#koO#lXX~O#l!zO~O^!|O~PVOb!}O~PVO#l#OO~Og#QO~PVO#l#RO~Ol#TO~PVOo#UO~PVOr#VO~PVOu#WO~PVO#m#XO!OyX#lyX#oyX~O!O#[O#o!WO~O#k#]O~O!O!YO#l!]O#o!WO~O#l#aO~O!Y#cO~PVO#l#dO~O!v#gO~P%jO#l#hO~O#l#jO~O#O!}X~P%jO#O#lO~O!d#mO~PVO#l#oO~O#l#qO~O#[#ZX~P%jO#[#sO~O!f#tO~PVO#l#uO~O!h#wO~PVO[#xO~O#m#yO!OzX#lzX#ozX~O#k#{O~OZ#|O~O!d$OO~PVOZ$PO~OP$QO[$QO!Q$QO!R$QO!S$QO#k$QO~O!O!PX#l!PX#o!PX~P/jO#l!RZ!l_noqrtujlegab!e!f!g!h!`#O!a#[wW^!W!Y!]!v!b!n!c!d!i!j!k!O#m#n!m#o!S#U#V!o!p!q!r!s!u!t#k[#i!W~",
+      goto: "/a#kPPPPPP#l$WP$r%bPP%oPP#lPP#l%rP&^P#l&aP&{P#lPP#lPP#lPP#lP'O'R'U'X'R'[P'bPPP'h#l'rP(^P#l(aP({)OPPPPPPPPPPPPPPPPPPPPPPP#l)W)r#l)u*a*dP#l*g#l*j+UPP#l+X+s+vP#l#l+y,e,h-l-{.V.`.gPPP.u!RlOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n!RQOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nQrPQwSQzUQ!`[Q!c^Q!h`Q!ibQ!nfQ!ogR!tjgpPSU[^`bfgjqR!{r!RTOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#Pw!RVOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#SzR!_ZR!VZR#Y!TR#z#XX!ZZ![!_#`Q$S#|R$T$PQ!^ZS#_![!_R#}#`!R]OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#b!`!R_OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#e!c]!e_ch!f!j!p!RaOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#i!h!RcOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#k!iR!kcR!md!RfOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#p!n!RhOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#r!oR!qh!RkOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#v!tQnOQtQQvRQyTQ|VQ!OWQ!QXQ!SYQ!b]Q!siQ!vkh!wntvy|!O!Q!S!b!s!v#nR#n!mdqPSU[^`bfgjR!yqQ![ZS#^![#`R#`!_W!XZ![!_#`R#Z!XS$R#|$PR$U$RQ!f_Q!jcQ!phV#f!f!j!p!RmOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n",
+      nodeNames: "\u26A0 Text UnderlineText StrikeText Hr Document DivBlock DivOpenTag DivOpen AttrList Attr Equals AttrValue DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeValue StarChar LinkURL BracketChar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock Title StrongText EmText SupText SubText Original Monospace CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd List1 List2 HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
+      maxTerm: 123,
       skippedNodes: [0],
       repeatNodeCount: 6,
-      tokenData: "@T~R_XY!Qpq!Qz{!]}!O#g!Q![#g!`!a$X!b!c$d!c!}#g!}#O${#P#Q>^#R#S#g#T#o#g#o#p>i#p#q?s#r#s@O~!VQ#`~XY!Qpq!Q~!`Pz{!c~!fUOY!cZz!cz{!x{;'S!c;'S;=`#a<%lO!c~!{TOz!cz{#[{;'S!c;'S;=`#a<%lO!c~#aO!p~~#dP;=`<%l!c~#lX#c~uv#g}!O#g!O!P#g!P!Q#g!Q![#g![!]#g!c!}#g#R#S#g#T#o#g~$[Ppq$_~$dO!l~~$gP!b!c$j~$mP!b!c$p~$sP!b!c$v~${O!m~~%OP!}#O%R~%U_z{&T!P!Q&r!^!_2Z!_!`3^!`!a3r#V#W4W#W#X5y#Y#Z6[#[#]8Z#]#^8r#a#b9p#b#c;c#g#h<W#h#i=T#i#j&Z~&WP#i#j&Z~&^P#g#h&a~&dP#X#Y&g~&jP#f#g&m~&rO!b~~&uZ!^!_'h!_!`'y!`!a([#V#W(m#W#X*x#Y#Z+g#[#],t#a#b-i#b#c.j#g#h/_#h#i0t~'kP#P#Q'n~'qP#P#Q't~'yO|~~'|P#P#Q(P~(SP#P#Q(V~([Oy~~(_P#P#Q(b~(eP#P#Q(h~(mO!P~~(pP#c#d(s~(vQ#W#X(|#`#a)e~)PP#X#Y)S~)VP#P#Q)Y~)]P#P#Q)`~)eO!r~~)hP#`#a)k~)nP#T#U)q~)tP#d#e)w~)zP#g#h)}~*QP#]#^*T~*WP#U#V*Z~*^P#`#a*a~*dP#X#Y*g~*jP#P#Q*m~*pP#P#Q*s~*xO!Z~~*{P#]#^+O~+RP#j#k+U~+XP#P#Q+[~+_P#P#Q+b~+gOj~~+jP#c#d+m~+pP#c#d+s~+vP#h#i+y~+|P#b#c,P~,SP#c#d,V~,YP#h#i,]~,`P#X#Y,c~,fP#P#Q,i~,lP#P#Q,o~,tO!d~~,wP#h#i,z~,}P#a#b-Q~-TP#`#a-W~-ZP#P#Q-^~-aP#P#Q-d~-iO#P~~-lP#c#d-o~-rP#W#X-u~-xP#i#j-{~.OP#`#a.R~.UP#X#Y.X~.[P#P#Q._~.bP#P#Q.e~.jO!w~~.mP#c#d.p~.sP#h#i.v~.yP#X#Y.|~/PP#P#Q/S~/VP#P#Q/Y~/_On~~/bQ#]#^/h#d#e0V~/kP#n#o/n~/qP#X#Y/t~/wP#P#Q/z~/}P#P#Q0Q~0VOr~~0YP#T#U0]~0`P#b#c0c~0fP#P#Q0i~0lP#P#Q0o~0tOv~~0wP#T#U0z~0}P#U#V1Q~1TQ#P#Q1Z#j#k1f~1^P#P#Q1a~1fO!h~~1iP#]#^1l~1oP#X#Y1r~1uP#k#l1x~1{P#P#Q2O~2RP#P#Q2U~2ZO!f~~2^Q#P#Q2d#]#^2o~2gP#P#Q2j~2oO{~~2rP#a#b2u~2xP#T#U2{~3OP#Z#[3R~3UP#X#Y3X~3^O!i~~3aQ#P#Q3g#]#^2o~3jP#P#Q3m~3rOx~~3uQ#P#Q3{#]#^2o~4OP#P#Q4R~4WO!O~~4ZP#c#d4^~4aQ#W#X4g#`#a4r~4jP#X#Y4m~4rO!]~~4uP#`#a4x~4{P#T#U5O~5RP#d#e5U~5XP#g#h5[~5_P#]#^5b~5eP#U#V5h~5kP#`#a5n~5qP#X#Y5t~5yO!X~~5|P#]#^6P~6SP#j#k6V~6[Of~~6_P#c#d6b~6eP#c#d6h~6kP#h#i6n~6qP#b#c6t~6wP#c#d6z~6}P#h#i7Q~7TP#X#Y7W~7]P!c~#U#V7`~7cP#`#a7f~7iP#c#d7l~7oP#V#W7r~7uP#_#`7x~7{P#P#Q8O~8RP#P#Q8U~8ZO!o~~8^P#h#i8a~8dP#a#b8g~8jP#`#a8m~8rO!a~~8uQ#a#b2u#b#c8{~9OP#V#W9R~9UP#`#a9X~9[P#i#j9_~9bP#W#X9e~9hP#X#Y9k~9pO!R~~9sP#c#d9v~9yP#W#X9|~:PP#i#j:S~:VP#`#a:Y~:]P#X#Y:`~:eP!`~pq:h~:kP#f#g:n~:qP#T#U:t~:wP#h#i:z~:}P#X#Y;Q~;TP#P#Q;W~;ZP#P#Q;^~;cOk~~;fP#c#d;i~;lP#h#i;o~;rP#X#Y;u~;xP#P#Q;{~<OP#P#Q<R~<WOm~~<ZQ#]#^<a#d#e<r~<dP#n#o<g~<jP#X#Y<m~<rOp~~<uP#T#U<x~<{P#b#c=O~=TOt~~=WP#T#U=Z~=^P#U#V=a~=fP!g~#j#k=i~=lP#]#^=o~=rP#X#Y=u~=xP#k#l={~>OP#P#Q>R~>UP#P#Q>X~>^O!e~~>aP#P#Q>d~>iO#b~~>lP#o#p>o~>rUOY>oZ#q>o#q#r?U#r;'S>o;'S;=`?m<%lO>o~?XTO#q>o#q#r?h#r;'S>o;'S;=`?m<%lO>o~?mO!q~~?pP;=`<%l>o~?vP#p#q?y~@OO!j~~@TO!k~",
+      tokenData: "!4T~RnXY#PYZ#[]^#[pq#Prs#ast$Uuv$az{%u{|'Z|}(z}!O*U!O!P$a!P!Q+n!Q![*U![!]5`!^!_9W!_!`9]!`!a9b!b!c9o!c!}*U!}#O;y#P#Q!'^#Q#R!'k#R#S*U#T#[*U#[#]!(u#]#o*U#o#p!2g#p#q!3q#r#s!4O~#UQ#i~XY#Ppq#P~#aO#o~~#dVOY#aZ]#a^r#ars#ys;'S#a;'S;=`$O<%lO#a~$OO[~~$RP;=`<%l#a~$XPpq$[~$aO#V~~$hX#k~[~uv$a}!O$a!O!P$a!P!Q$a!Q![$a![!]%T!c!}$a#R#S$a#T#o$a~%YX#k~uv%T}!O%T!O!P%T!P!Q%T!Q![%T![!]%T!c!}%T#R#S%T#T#o%T~%zQ!Q~pq&Qz{&V~&VO#U~~&YUOY&VZz&Vz{&l{;'S&V;'S;=`'T<%lO&V~&oTOz&Vz{'O{;'S&V;'S;=`'T<%lO&V~'TO!p~~'WP;=`<%l&V~'^Qpq'd{|(O~'iT!o~OY'dZ]'d^;'S'd;'S;=`'x<%lO'd~'{P;=`<%l'd~(RQpq'd{|(X~([Qpq'd{|(b~(eQpq'd{|(k~(nQpq'd{|(t~(wPpq'd~(}P|})Q~)TUOY)QZ|)Q|})g};'S)Q;'S;=`*O<%lO)Q~)jTO|)Q|})y};'S)Q;'S;=`*O<%lO)Q~*OO!s~~*RP;=`<%l)Q~*_X#n~#k~[~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#o*U~+RX#n~#k~uv*z}!O*z!O!P*z!P!Q*z!Q![*z![!]*z!c!}*z#R#S*z#T#o*z~+uX#k~[~uv$a}!O$a!O!P$a!P!Q,b!Q![$a![!]%T!c!}$a#R#S$a#T#o$a~,ia#k~[~Ou-nuv.rv}-n}!O.r!O!P.r!P!Q$a!Q![.r![!]2T!]!c-n!c!}.r!}#R-n#R#S.r#S#T-n#T#o.r#o;'S-n;'S;=`.l<%lO-n~-qUOY-nZ!P-n!P!Q.T!Q;'S-n;'S;=`.l<%lO-n~.WTO!P-n!P!Q.g!Q;'S-n;'S;=`.l<%lO-n~.lO!q~~.oP;=`<%l-n~.yb#k~[~OY-nZu-nuv.rv}-n}!O.r!O!P.r!P!Q0R!Q![.r![!]2T!]!c-n!c!}.r!}#R-n#R#S.r#S#T-n#T#o.r#o;'S-n;'S;=`.l<%lO-n~0Ya#k~[~Ou-nuv.rv}-n}!O.r!O!P.r!P!Q1_!Q![.r![!]2T!]!c-n!c!}.r!}#R-n#R#S.r#S#T-n#T#o.r#o;'S-n;'S;=`.l<%lO-n~1hX!q~#k~[~uv$a}!O$a!O!P$a!P!Q$a!Q![$a![!]%T!c!}$a#R#S$a#T#o$a~2Yb#k~OY-nZu-nuv2Tv}-n}!O2T!O!P2T!P!Q3b!Q![2T![!]2T!]!c-n!c!}2T!}#R-n#R#S2T#S#T-n#T#o2T#o;'S-n;'S;=`.l<%lO-n~3ga#k~Ou-nuv2Tv}-n}!O2T!O!P2T!P!Q4l!Q![2T![!]2T!]!c-n!c!}2T!}#R-n#R#S2T#S#T-n#T#o2T#o;'S-n;'S;=`.l<%lO-n~4sX!q~#k~uv%T}!O%T!O!P%T!P!Q%T!Q![%T![!]%T!c!}%T#R#S%T#T#o%T~5ee#k~OY6vZ]6v^p6vqu6vuv7nv}6v}!O7n!O!P7n!P!Q7n!Q![7n![!]%T!]!c6v!c!}7n#O#P6v#Q#R6v#R#S7n#S#T6v#T#o7n#o;'S6v;'S;=`7h<%lO6v~6{X#m~OY6vZ]6v^p6vq![6v!]!}6v#O#P6v#Q;'S6v;'S;=`7h<%lO6v~7kP;=`<%l6v~7ue#m~#k~OY6vZ]6v^p6vqu6vuv7nv}6v}!O7n!O!P7n!P!Q7n!Q![7n![!]%T!]!c6v!c!}7n#O#P6v#Q#R6v#R#S7n#S#T6v#T#o7n#o;'S6v;'S;=`7h<%lO6v~9]O!S~~9bOZ~~9gP!S~pq9j~9oO!l~~9rP!b!c9u~9xUOY:[Z!b:[!b!c;`!c;'S:[;'S;=`;Y<%lO:[~:_UOY:[Z!b:[!b!c:q!c;'S:[;'S;=`;Y<%lO:[~:tTO!b:[!b!c;T!c;'S:[;'S;=`;Y<%lO:[~;YO!t~~;]P;=`<%l:[~;cTO!b:[!b!c;r!c;'S:[;'S;=`;Y<%lO:[~;yO!m~!t~~<OP!S~!}#O<R~<U_z{=T!P!Q=r!^!_IZ!_!`J^!`!aJr#V#WKW#W#XLy#Y#ZM[#[#]! Z#]#^! r#a#b!!p#b#c!$c#g#h!%W#h#i!&T#i#j=Z~=WP#i#j=Z~=^P#g#h=a~=dP#X#Y=g~=jP#f#g=m~=rO!b~~=uZ!^!_>h!_!`>y!`!a?[#V#W?m#W#XAx#Y#ZBg#[#]Ct#a#bDi#b#cEj#g#hF_#h#iGt~>kP#P#Q>n~>qP#P#Q>t~>yOr~~>|P#P#Q?P~?SP#P#Q?V~?[Oo~~?_P#P#Q?b~?eP#P#Q?h~?mOu~~?pP#c#d?s~?vQ#W#X?|#`#a@e~@PP#X#Y@S~@VP#P#Q@Y~@]P#P#Q@`~@eO!v~~@hP#`#a@k~@nP#T#U@q~@tP#d#e@w~@zP#g#h@}~AQP#]#^AT~AWP#U#VAZ~A^P#`#aAa~AdP#X#YAg~AjP#P#QAm~ApP#P#QAs~AxO!Y~~A{P#]#^BO~BRP#j#kBU~BXP#P#QB[~B_P#P#QBb~BgO^~~BjP#c#dBm~BpP#c#dBs~BvP#h#iBy~B|P#b#cCP~CSP#c#dCV~CYP#h#iC]~C`P#X#YCc~CfP#P#QCi~ClP#P#QCo~CtO!d~~CwP#h#iCz~C}P#a#bDQ~DTP#`#aDW~DZP#P#QD^~DaP#P#QDd~DiO#[~~DlP#c#dDo~DrP#W#XDu~DxP#i#jD{~EOP#`#aER~EUP#X#YEX~E[P#P#QE_~EbP#P#QEe~EjO#O~~EmP#c#dEp~EsP#h#iEv~EyP#X#YE|~FPP#P#QFS~FVP#P#QFY~F_Ob~~FbQ#]#^Fh#d#eGV~FkP#n#oFn~FqP#X#YFt~FwP#P#QFz~F}P#P#QGQ~GVOg~~GYP#T#UG]~G`P#b#cGc~GfP#P#QGi~GlP#P#QGo~GtOl~~GwP#T#UGz~G}P#U#VHQ~HTQ#P#QHZ#j#kHf~H^P#P#QHa~HfO!h~~HiP#]#^Hl~HoP#X#YHr~HuP#k#lHx~H{P#P#QIO~IRP#P#QIU~IZO!f~~I^Q#P#QId#]#^Io~IgP#P#QIj~IoOq~~IrP#a#bIu~IxP#T#UI{~JOP#Z#[JR~JUP#X#YJX~J^O!i~~JaQ#P#QJg#]#^Io~JjP#P#QJm~JrOn~~JuQ#P#QJ{#]#^Io~KOP#P#QKR~KWOt~~KZP#c#dK^~KaQ#W#XKg#`#aKr~KjP#X#YKm~KrO!]~~KuP#`#aKx~K{P#T#ULO~LRP#d#eLU~LXP#g#hL[~L_P#]#^Lb~LeP#U#VLh~LkP#`#aLn~LqP#X#YLt~LyO!W~~L|P#]#^MP~MSP#j#kMV~M[OW~~M_P#c#dMb~MeP#c#dMh~MkP#h#iMn~MqP#b#cMt~MwP#c#dMz~M}P#h#iNQ~NTP#X#YNW~N]P!c~#U#VN`~NcP#`#aNf~NiP#c#dNl~NoP#V#WNr~NuP#_#`Nx~N{P#P#Q! O~! RP#P#Q! U~! ZO!n~~! ^P#h#i! a~! dP#a#b! g~! jP#`#a! m~! rO!a~~! uQ#a#bIu#b#c! {~!!OP#V#W!!R~!!UP#`#a!!X~!![P#i#j!!_~!!bP#W#X!!e~!!hP#X#Y!!k~!!pOw~~!!sP#c#d!!v~!!yP#W#X!!|~!#PP#i#j!#S~!#VP#`#a!#Y~!#]P#X#Y!#`~!#eP!`~pq!#h~!#kP#f#g!#n~!#qP#T#U!#t~!#wP#h#i!#z~!#}P#X#Y!$Q~!$TP#P#Q!$W~!$ZP#P#Q!$^~!$cO_~~!$fP#c#d!$i~!$lP#h#i!$o~!$rP#X#Y!$u~!$xP#P#Q!${~!%OP#P#Q!%R~!%WOa~~!%ZQ#]#^!%a#d#e!%r~!%dP#n#o!%g~!%jP#X#Y!%m~!%rOe~~!%uP#T#U!%x~!%{P#b#c!&O~!&TOj~~!&WP#T#U!&Z~!&^P#U#V!&a~!&fP!g~#j#k!&i~!&lP#]#^!&o~!&rP#X#Y!&u~!&xP#k#l!&{~!'OP#P#Q!'R~!'UP#P#Q!'X~!'^O!e~~!'cP!S~#P#Q!'f~!'kO#l~~!'nP#Q#R!'q~!'tUOY!'qZ#Q!'q#Q#R!(W#R;'S!'q;'S;=`!(o<%lO!'q~!(ZTO#Q!'q#Q#R!(j#R;'S!'q;'S;=`!(o<%lO!'q~!(oO!r~~!(rP;=`<%l!'q~!)OZ#n~#k~[~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#h*U#h#i!)q#i#o*U~!)zZ#n~#k~[~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#h*U#h#i!*m#i#o*U~!*vZ#n~#k~[~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#d*U#d#e!+i#e#o*U~!+rZ#n~#k~[~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]!,e!c!}*U#R#S*U#T#g*U#g#h!1q#h#o*U~!,lX#n~#k~uv*z}!O*z!O!P*z!P!Q!-X!Q![*z![!]*z!c!}*z#R#S*z#T#o*z~!-`X#n~#k~uv*z}!O*z!O!P*z!P!Q!-{!Q![*z![!]*z!c!}*z#R#S*z#T#o*z~!.Se#n~#k~OX!/eZ]!/e^p!/equ!/euv!0Vv}!/e}!O!0V!O!P!0V!P!Q!0V!Q![!0V![!]!0V!]!c!/e!c!}!0V!}#P!/e#Q#R!/e#R#S!0V#S#T!/e#T#o!0V#o;'S!/e;'S;=`!0P<%lO!/e~!/jV!R~OX!/eZ]!/e^p!/eq#P!/e#Q;'S!/e;'S;=`!0P<%lO!/e~!0SP;=`<%l!/e~!0`e!R~#n~#k~OX!/eZ]!/e^p!/equ!/euv!0Vv}!/e}!O!0V!O!P!0V!P!Q!0V!Q![!0V![!]!0V!]!c!/e!c!}!0V!}#P!/e#Q#R!/e#R#S!0V#S#T!/e#T#o!0V#o;'S!/e;'S;=`!0P<%lO!/e~!1zX#n~#k~[~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]!,e!c!}*U#R#S*U#T#o*U~!2jP#o#p!2m~!2pUOY!2mZ#q!2m#q#r!3S#r;'S!2m;'S;=`!3k<%lO!2m~!3VTO#q!2m#q#r!3f#r;'S!2m;'S;=`!3k<%lO!2m~!3kO!u~~!3nP;=`<%l!2m~!3vP!O~#p#q!3y~!4OO!j~~!4TO!k~",
       tokenizers: [myTokenizer, 0],
-      topRules: { "Document": [0, 20] },
-      tokenPrec: 0
+      topRules: { "Document": [0, 5] },
+      tokenPrec: 703
     });
   }
 });
@@ -24955,22 +24867,22 @@ var init_dist12 = __esm({
         }
       }
     };
-    identifiers = new ExternalTokenizer(
+    identifiers = new ExternalTokenizer2(
       identifierTokens(identifier, VariableName, callee),
       { contextual: true }
     );
-    queryIdentifiers = new ExternalTokenizer(
+    queryIdentifiers = new ExternalTokenizer2(
       identifierTokens(queryIdentifier, queryVariableName, QueryCallee),
       { contextual: true }
     );
-    descendant = new ExternalTokenizer((input) => {
+    descendant = new ExternalTokenizer2((input) => {
       if (space.includes(input.peek(-1))) {
         let { next } = input;
         if (isAlpha(next) || next == underscore || next == hash || next == period || next == asterisk || next == bracketL || next == colon && isAlpha(input.peek(1)) || next == dash || next == ampersand)
           input.acceptToken(descendantOp);
       }
     });
-    unitToken = new ExternalTokenizer((input) => {
+    unitToken = new ExternalTokenizer2((input) => {
       if (!space.includes(input.peek(-1))) {
         let { next } = input;
         if (next == percent) {
@@ -25105,7 +25017,7 @@ function inForeignElement(context) {
 }
 function contentTokenizer(tag, textToken, endToken) {
   let lastState = 2 + tag.length;
-  return new ExternalTokenizer((input) => {
+  return new ExternalTokenizer2((input) => {
     for (let state = 0, matchedLen = 0, i = 0; ; i++) {
       if (input.next < 0) {
         if (i) input.acceptToken(textToken);
@@ -25335,7 +25247,7 @@ var init_dist14 = __esm({
       },
       strict: false
     });
-    tagStart = new ExternalTokenizer((input, stack) => {
+    tagStart = new ExternalTokenizer2((input, stack) => {
       if (input.next != lessThan) {
         if (input.next < 0 && stack.context) input.acceptToken(missingCloseTag);
         return;
@@ -25362,7 +25274,7 @@ var init_dist14 = __esm({
         else input.acceptToken(StartTag);
       }
     }, { contextual: true });
-    commentContent = new ExternalTokenizer((input) => {
+    commentContent = new ExternalTokenizer2((input) => {
       for (let dashes = 0, i = 0; ; i++) {
         if (input.next < 0) {
           if (i) input.acceptToken(commentContent$1);
@@ -25379,7 +25291,7 @@ var init_dist14 = __esm({
         input.advance();
       }
     });
-    endTag = new ExternalTokenizer((input, stack) => {
+    endTag = new ExternalTokenizer2((input, stack) => {
       if (input.next == slash && input.peek(1) == greaterThan) {
         let selfClosing = stack.dialectEnabled(Dialect_selfClosing) || inForeignElement(stack.context);
         input.acceptToken(selfClosing ? SelfClosingEndTag : EndTag, 2);
@@ -25495,22 +25407,22 @@ var init_dist15 = __esm({
       },
       strict: false
     });
-    insertSemicolon = new ExternalTokenizer((input, stack) => {
+    insertSemicolon = new ExternalTokenizer2((input, stack) => {
       let { next } = input;
       if (next == braceR || next == -1 || stack.context)
         input.acceptToken(insertSemi);
     }, { contextual: true, fallback: true });
-    noSemicolon = new ExternalTokenizer((input, stack) => {
+    noSemicolon = new ExternalTokenizer2((input, stack) => {
       let { next } = input, after;
       if (space2.indexOf(next) > -1) return;
       if (next == slash2 && ((after = input.peek(1)) == slash2 || after == star)) return;
       if (next != braceR && next != semicolon && next != -1 && !stack.context)
         input.acceptToken(noSemi);
     }, { contextual: true });
-    noSemicolonType = new ExternalTokenizer((input, stack) => {
+    noSemicolonType = new ExternalTokenizer2((input, stack) => {
       if (input.next == bracketL2 && !stack.context) input.acceptToken(noSemiType);
     }, { contextual: true });
-    operatorToken = new ExternalTokenizer((input, stack) => {
+    operatorToken = new ExternalTokenizer2((input, stack) => {
       let { next } = input;
       if (next == plus || next == minus) {
         input.advance();
@@ -25526,7 +25438,7 @@ var init_dist15 = __esm({
           input.acceptToken(questionDot);
       }
     }, { contextual: true });
-    jsx = new ExternalTokenizer((input, stack) => {
+    jsx = new ExternalTokenizer2((input, stack) => {
       if (input.next != lt || !stack.dialectEnabled(Dialect_jsx)) return;
       input.advance();
       if (input.next == slash2) return;
