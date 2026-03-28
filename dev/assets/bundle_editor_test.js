@@ -24720,9 +24720,7 @@ var init_tokenizer = __esm({
     myTokenizer = new ExternalTokenizer((input, stack) => {
       const next = input.next;
       if (next < 0) return;
-      if (next == 10 || next == 13) {
-        return;
-      }
+      if (next == 10 || next == 13) return;
       if (next == 45) {
         let count = 0;
         while (input.peek(count) == 45) count++;
@@ -24739,6 +24737,11 @@ var init_tokenizer = __esm({
         input.acceptToken(UnderlineText, 2);
         return;
       }
+      if (next == 91 && input.peek(1) == 91) return;
+      if (next == 42 && input.peek(1) == 42) return;
+      if (next == 47 && input.peek(1) == 47) return;
+      if (next == 64 && input.peek(1) == 64) return;
+      if (next == 123 && input.peek(1) == 123) return;
       if (next != -1) {
         let len = 0;
         while (true) {
@@ -24750,7 +24753,8 @@ var init_tokenizer = __esm({
           curr == 42 || // *
           curr == 47 || // /
           curr == 43 || // +
-          curr == 124 || // |
+          curr == 64 || // @
+          curr == 123 || // {
           curr == 10 || curr == 13) break;
           len++;
         }
