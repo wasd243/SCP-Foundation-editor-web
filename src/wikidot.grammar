@@ -132,7 +132,11 @@ IncludeValue {
 
 IncludePath {
   IncludePart1
-  | attrPathToken
+  | IncludeSimplePath
+}
+
+IncludeSimplePath {
+  includeSimplePath
 }
 
 IncludePart1 {
@@ -317,6 +321,7 @@ Attr {
   // include begin
   IncludeOpen { "[[include" }
   IncludeBar { "|" }
+  includeSimplePath { $[a-zA-Z0-9\-_]$[a-zA-Z0-9\-_:./%]* }
   includeSeg_ { ":" ![ :\[\]\n\r]+ }
   // include end
   UserOpen { "[[" "*"? "user" }
