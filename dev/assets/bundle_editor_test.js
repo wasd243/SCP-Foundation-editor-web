@@ -24720,14 +24720,16 @@ var init_tokenizer = __esm({
     myTokenizer = new ExternalTokenizer((input, stack) => {
       const next = input.next;
       if (next < 0) return;
-      if (next == 10 || next == 13 || next == 32 || next == 9) return;
-      if (next == 91 && input.peek(1) == 91) return;
-      if (next == 93 && input.peek(1) == 93) return;
-      if (next == 42 && input.peek(1) == 42) return;
-      if (next == 47 && input.peek(1) == 47) return;
-      if (next == 124 && input.peek(1) == 124) return;
-      if (next == 64 && input.peek(1) == 64) return;
-      if (next == 123 && input.peek(1) == 123) return;
+      if (next == 32 || next == 10 || next == 13 || next == 9) return;
+      const next2 = input.peek(1);
+      if (next == 91 && next2 == 91 || // [[
+      next == 93 && next2 == 93 || // ]]
+      next == 42 && next2 == 42 || // **
+      next == 47 && next2 == 47 || // //
+      next == 124 && next2 == 124 || // ||
+      next == 64 && next2 == 64 || // @@
+      next == 123 && next2 == 123 || // {{
+      next == 95 && next2 == 95) return;
       if (next == 45) {
         let count = 0;
         while (input.peek(count) == 45) count++;
@@ -24740,27 +24742,32 @@ var init_tokenizer = __esm({
           return;
         }
       }
-      if (next == 95 && input.peek(1) == 95) {
+      if (next == 95 && next2 == 95) {
         input.acceptToken(UnderlineText, 2);
         return;
       }
-      if (next !== 91 && // [
-      next !== 93 && // ]
-      next !== 42 && // *
-      next !== 47 && // /
-      next !== 95 && // _
-      next !== 45 && // -
-      next !== 124 && // |
-      next !== 64 && // @
-      next !== 123) {
-        let len = 1;
+      if (next != -1) {
+        let len = 0;
         while (true) {
-          let c = input.peek(len);
-          if (c <= 32 || c == 91 || c == 93 || c == 42 || c == 47 || c == 95 || c == 45 || c == 124 || c == 64 || c == 123 || c == -1) break;
+          let curr = input.peek(len);
+          if (curr == -1) break;
+          if (curr == 32 || curr == 10 || curr == 13 || curr == 9) break;
+          let c2 = input.peek(len + 1);
+          if (curr == 91 && c2 == 91 || // [[
+          curr == 93 && c2 == 93 || // ]]
+          curr == 42 && c2 == 42 || // **
+          curr == 47 && c2 == 47 || // //
+          curr == 124 && c2 == 124 || // ||
+          curr == 95 && c2 == 95 || // __
+          curr == 123 && c2 == 123 || // {{
+          curr == 64 && c2 == 64) break;
           len++;
+          if (len >= 50) break;
         }
-        input.acceptToken(Text2, len);
-        return;
+        if (len > 0) {
+          input.acceptToken(Text2, len);
+          return;
+        }
       }
       input.acceptToken(Text2, 1);
     });
