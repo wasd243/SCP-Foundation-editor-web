@@ -24701,14 +24701,12 @@ var init_dist11 = __esm({
 });
 
 // src/parser.terms.js
-var Text2, UnderlineText, StrikeText, Hr, AttrPair;
+var Text2, StrikeText, Hr;
 var init_parser_terms = __esm({
   "src/parser.terms.js"() {
     Text2 = 1;
-    UnderlineText = 2;
     StrikeText = 3;
     Hr = 4;
-    AttrPair = 5;
   }
 });
 
@@ -24719,73 +24717,31 @@ var init_tokenizer = __esm({
     init_dist11();
     init_parser_terms();
     myTokenizer = new ExternalTokenizer((input) => {
-      const next = input.next;
+      const { next } = input;
       if (next < 0) return;
-      const isContextLikelyTag = () => {
-        let i = -1;
-        while (i > -50) {
-          let prev = input.peek(i);
-          if (prev < 0 || prev === 10 || prev === 13) return false;
-          if (prev === 91 || prev === 124) return true;
-          i--;
-        }
-        return false;
-      };
-      if (isContextLikelyTag() && (next >= 48 && next <= 57 || next >= 65 && next <= 90 || next >= 97 && next <= 122 || next === 58)) {
-        let pos = 0;
-        while (true) {
-          let curr = input.peek(pos);
-          if (curr >= 0 && /[a-zA-Z0-9\-_:./%]/.test(String.fromCharCode(curr))) {
-            pos++;
-          } else {
-            break;
-          }
-        }
-        if (input.peek(pos) === 61) {
-          pos++;
-          let quote = input.peek(pos);
-          if (quote === 34 || quote === 39) {
-            pos++;
-            while (input.peek(pos) !== quote && input.peek(pos) !== -1 && input.peek(pos) !== 10) {
-              pos++;
-            }
-            if (input.peek(pos) === quote) pos++;
-          } else {
-            while (true) {
-              let c = input.peek(pos);
-              if (c < 0 || c === 32 || c === 9 || c === 10 || c === 13 || c === 124 || c === 93) break;
-              pos++;
-            }
-          }
-          input.acceptToken(AttrPair, pos);
-          return;
-        }
-        let after = input.peek(pos);
-        if (after === 32 || after === 9 || after === 124 || after === 93 || after === 10 || after === 13) {
-          input.acceptToken(AttrPair, pos);
-          return;
-        }
+      if (` 	
+\r="'[]{}|:./#@+*`.includes(String.fromCharCode(next))) return;
+      if (next >= 48 && next <= 57 || next >= 65 && next <= 90 || next >= 97 && next <= 122) {
+        return;
       }
-      if (next === 45) {
+      if (next == 45) {
         let count = 0;
-        while (input.peek(count) === 45) count++;
+        while (input.peek(count) == 45) count++;
         if (count >= 4) {
           input.acceptToken(Hr, count);
           return;
         }
-        if (count === 2) {
+        if (count == 2) {
           input.acceptToken(StrikeText, 2);
           return;
         }
       }
-      if (next === 95 && input.peek(1) === 95) {
-        input.acceptToken(UnderlineText, 2);
-        return;
-      }
       let size = 1;
       while (true) {
         let n = input.peek(size);
-        if (n < 0 || n === 91 || n === 93 || n === 123 || n === 125 || n === 124 || n === 61 || n === 10 || n === 13) break;
+        if (n < 0 || ` 	
+\r="'[]{}|:./#@+*-`.includes(String.fromCharCode(n))) break;
+        if (n >= 48 && n <= 57 || n >= 65 && n <= 90 || n >= 97 && n <= 122) break;
         size++;
       }
       input.acceptToken(Text2, size);
@@ -24801,17 +24757,17 @@ var init_parser = __esm({
     init_tokenizer();
     parser = LRParser.deserialize({
       version: 14,
-      states: "2lQVQROOO#uQRO'#CdO#}QRO'#CcO$UQRO'#CjO#uQRO'#CnO$]QRO'#CmO#uQRO'#CsO$dQRO'#CrO$kQRO'#CwO$rQRO'#CzO$yQRO'#C}O%QQQO'#DQO#uQRO'#D]O%cQRO'#D[O#uQRO'#DbO({QRO'#DaO#uQRO'#EROOQP'#EQ'#EQO#uQRO'#EUO)SQRO'#ETO)ZQQO'#EYOOQP'#E]'#E]O#uQRO'#E[O#uQRO'#EbO)`QRO'#EaO)gQRO'#EfO#uQRO'#EhO)nQRO'#EgOOQP'#Er'#ErOOQP'#Ej'#EjQVQROOOOQP'#Ek'#EkO)uQRO'#CfO)}QQO,59OOOQP,58},58}O*SQRO,58}OOQP,59U,59UO*ZQRO,59UO*bQQO,59YOOQP,59X,59XO*gQRO,59XO*nQQO,59_OOQP,59^,59^O*sQRO,59^OOQP,59c,59cO*zQRO,59cOOQP,59f,59fO+RQRO,59fOOQP,59i,59iO+YQRO,59iO+aQQO'#DTOOQO'#DW'#DWOOQO'#DS'#DSOOQO'#Em'#EmO+oQQO'#DXO+wQRO'#DXOOQO'#El'#ElO+|QQO,59lOOQP'#DZ'#DZOOQP,59l,59lO+|QQO,59lO,XQQO,59wOOQP,59v,59vO,^QRO,59vO,eQQO,59|OOQP'#De'#DeOOQP'#En'#EnO,jQRO,59{OOQP,59{,59{O,qQQO,5:mO,vQQO,5:pO,{QRO'#EWO-SQQO,5:oOOQP'#EZ'#EZO-XQRO,5:tO-`QQO,5:vO-eQQO,5:|O-jQRO'#EdO-qQQO,5:{OOQP,5;Q,5;QO-vQRO,5;QO-}QQO,5;SOOQP,5;R,5;RO.SQRO,5;ROOQP-E8h-E8hOOQP-E8i-E8iOOQP'#Cg'#CgOOQP1G.j1G.jOOQP1G.i1G.iOOQP1G.p1G.pOOQP'#Cp'#CpOOQP1G.t1G.tOOQP1G.s1G.sOOQP'#Cu'#CuOOQP1G.y1G.yOOQP1G.x1G.xOOQP1G.}1G.}OOQP1G/Q1G/QOOQP1G/T1G/TO.ZQQO'#DUOOQO,59o,59oOOQO-E8k-E8kO.iQRO,59sOOQO,59s,59sOOQO-E8j-E8jOOQP1G/W1G/WO+|QQO1G/WOOQP'#D_'#D_OOQP1G/c1G/cOOQP1G/b1G/bOOQP'#Dd'#DdOOQP1G/h1G/hOOQP-E8l-E8lOOQP1G/g1G/gOOQP'#ES'#ESOOQP1G0X1G0XOOQP'#EV'#EVOOQP1G0[1G0[OOQP1G0Z1G0ZOOQP1G0`1G0`O.nQRO1G0`OOQP'#E^'#E^OOQP1G0b1G0bOOQP'#Ec'#EcOOQP1G0h1G0hOOQP1G0g1G0gOOQP1G0l1G0lOOQP'#Ei'#EiOOQP1G0n1G0nOOQP1G0m1G0mOOQO'#DV'#DVOOQO,59p,59pOOQO1G/_1G/_OOQP7+$r7+$rOOQP7+%z7+%z",
-      stateData: "0P~O#eOS~OPlOQlORlOSlOXPO]lO_ROcSOhUOlWOoXOrYOuZO!Q[O!V^O!YbO!ZgO![`O!]dO!_iO!ajO!ceO!dlO!elO!flO!glO!hlO!ilO!jlO!klO!llO!mlO!nlO!olO!plO!qlO!rlO#RlO#SlO#jlO~OToO#gYP~O[rO~PVO`tO~PVOewO~PVOjzO~PVOm|O~PVOp!OO~PVOs!QO~PVO|!XO#g![O#h!SO#i!TO#j!VO~O!S!`O~PVOP!cOQ!cOR!cOS!cOX!cO[!cO_!cO`!cOc!cOe!cOh!cOj!cOl!cOm!cOo!cOp!cOr!cOs!cOu!cO|!cO!Q!cO!S!cO!V!cO!Y!cO!Z!cO![!cO!]!cO!^!cO!_!cO!`!cO!a!cO!b!cO!c!cO!d!cO!e!cO!f!cO!g!cO!h!cO!i!cO!j!cO!k!cO!l!cO!m!cO!n!cO!o!cO!p!cO!q!cO!r!cO#g!cO#h!cO#j!cO~O!s!fO~P%jO!{!zP~P%jO#g!kO~O#X#WP~P%jO!`!qO~PVO!b!tO~PVOToO#gYX~O#g!xO~O[!zO~PVO`!{O~PVO#g!|O~Oe#OO~PVO#g#PO~Oj#RO~PVOm#SO~PVOp#TO~PVOs#UO~PVO#h#VO|wX#gwX#jwX~O|#YO#j!VO~OT#ZO~O|!XO#g![O#j!VO~O#g#_O~O!S#aO~PVO#g#bO~O!s#eO~P%jO#g#fO~O#g#hO~O!{!zX~P%jO!{#jO~O!^#kO~PVO#g#mO~O#g#oO~O#X#WX~P%jO#X#qO~O!`#rO~PVO#g#sO~O!b#uO~PVO#h#vO|xX#gxX#jxX~OT#xO~O!^#zO~PVO#g!h!f]lmoprshjce_`!_!`!a!b!Y!{!Z#XuX[!Q!S!V!s![!i!]!^!c!d!e|#h#i!g#j!r#R#S!j!k!l!m!n!p!o#e!Q~",
-      goto: ".q#gPPPPPPP#h$SP$n%^PP#hPP#h%aP%{P#h&OP&jP#hPP#hPP#hPP#hP&m&p&s&v&p&yP'P#h'ZP'uP#h'xP(d(gPPPPPPPPPPPPPPPPPPPPPPPPPP#h(o)Z#h)^)x){P#h*O#h*R*mPP#h*p+[+_P#h#h+b+|,P-T-d-n-wPPP.V!RlOQRTVWXY]iknsux{}!P!R!a!l!r!u#l!RQOQRTVWXY]iknsux{}!P!R!a!l!r!u#lQqPQvSQyUQ!_[Q!b^Q!g`Q!hbQ!mfQ!ngR!sjR!yq!RTOQRTVWXY]iknsux{}!P!R!a!l!r!u#lR!}v!RVOQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#QyR!^ZR!UZR#W!SR#w#VX!YZ!Z!^#^Q!]ZS#]!Z!^R#y#^!R]OQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#`!_!R_OQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#c!b]!d_ch!e!i!o!RaOQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#g!g!RcOQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#i!hR!jcR!ld!RfOQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#n!m!RhOQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#p!nR!ph!RkOQRTVWXY]iknsux{}!P!R!a!l!r!u#lR#t!sQnOQsQQuRQxTQ{VQ}WQ!PXQ!RYQ!a]Q!riQ!ukh!vnsux{}!P!R!a!r!u#lR#l!ldpPSU[^`bfgjR!wpQ!ZZS#[!Z#^R#^!^W!WZ!Z!^#^R#X!WQ!e_Q!icQ!ohV#d!e!i!o!RmOQRTVWXY]iknsux{}!P!R!a!l!r!u#l",
-      nodeNames: "\u26A0 Text UnderlineText StrikeText Hr AttrPair Document DivBlock DivOpenTag DivOpen AttrList DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine LinkURL FootnoteBlock Title StrongText EmText SupText SubText Original Monospace StarChar BracketChar CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd List1 List2 HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
-      maxTerm: 118,
+      states: "3zQVQROOO#uQQO'#CcO#}QRO'#CbO$UQRO'#ClO#uQQO'#CpO$]QRO'#CoO#uQQO'#CuO$dQRO'#CtO$kQRO'#CyO$rQRO'#C|O$yQRO'#DPO%QQQO'#DSO#uQQO'#DcO%cQRO'#DbO#uQQO'#DhO)UQRO'#DgO#uQQO'#EUOOQP'#ET'#ETO#uQQO'#EXO)]QRO'#EWO)dQQO'#E]OOQO'#E`'#E`O#uQQO'#E_O#uQQO'#EeO)iQRO'#EdO)pQRO'#EiO#uQQO'#EkO)wQRO'#EjOOQP'#Ev'#EvOOQP'#Em'#EmQVQROOO*OQQO'#CfOOQO'#En'#EnO*ZQQO'#CeO*cQQO,58}OOQP,58|,58|O*hQRO,58|OOQP,59W,59WO*oQRO,59WO*vQQO,59[OOQP,59Z,59ZO*{QRO,59ZO+SQQO,59aOOQP,59`,59`O+XQRO,59`OOQP,59e,59eO+`QRO,59eOOQP,59h,59hO+gQRO,59hOOQP,59k,59kO+nQRO,59kO+uQQO'#DVOOQO'#DY'#DYOOQO'#DU'#DUOOQO'#Ep'#EpO,TQQO'#DZO,]QQO'#DZOOQO'#Eo'#EoO,bQQO,59nOOQP'#Da'#DaOOQP,59n,59nO,bQQO,59nO,mQQO,59}OOQP,59|,59|O,rQRO,59|O,yQQO,5:SOOQP'#Dk'#DkOOQP'#Er'#ErO-OQRO,5:ROOQP,5:R,5:RO-VQQO,5:pO-[QQO,5:sO-aQRO'#EZO-hQQO,5:rOOQP'#E^'#E^O-mQRO,5:wO-tQQO,5:yO-yQQO,5;PO.OQRO'#EgO.VQQO,5;OOOQP,5;T,5;TO.[QRO,5;TO.cQQO,5;VOOQP,5;U,5;UO.hQRO,5;UOOQP-E8k-E8kO.oQQO,59QOOQO-E8l-E8lOOQP'#Ci'#CiOOQP1G.i1G.iOOQP1G.h1G.hOOQP1G.r1G.rOOQP'#Cr'#CrOOQP1G.v1G.vOOQP1G.u1G.uOOQP'#Cw'#CwOOQP1G.{1G.{OOQP1G.z1G.zOOQP1G/P1G/POOQP1G/S1G/SOOQP1G/V1G/VO.tQQO'#DWOOQO,59q,59qOOQO-E8n-E8nO/SQQO,59uO/XQQO,59uOOQO-E8m-E8mOOQP1G/Y1G/YO,bQQO1G/YOOQP'#De'#DeOOQP1G/i1G/iOOQP1G/h1G/hOOQP'#Dj'#DjOOQP1G/n1G/nOOQP-E8p-E8pOOQP1G/m1G/mOOQP'#EV'#EVOOQP1G0[1G0[OOQP'#EY'#EYOOQP1G0_1G0_OOQP1G0^1G0^OOQP1G0c1G0cO/^QRO1G0cOOQP'#Ea'#EaOOQP1G0e1G0eOOQP'#Ef'#EfOOQP1G0k1G0kOOQP1G0j1G0jOOQP1G0o1G0oOOQP'#El'#ElOOQP1G0q1G0qOOQP1G0p1G0pOOQO1G.l1G.lOOQO'#DX'#DXOOQO,59r,59rO/eQQO1G/aO/jQRO1G/aOOQP7+$t7+$tOOQP7+%}7+%}O/jQRO7+${OOQP'#Eq'#EqO0OQRO'#D]OOQO7+${7+${OOQO<<Hg<<HgOOQP-E8o-E8o",
+      stateData: "1j~O#iOS~OPlOQlORlOSlOWPO_lOaROeSOjUOnWOqXOtYOwZO!QlO!RlO!SlO!W[O!]^O!`bO!agO!b`O!cdO!eiO!gjO!ieO!jlO!klO!llO!mlO!nlO!olO!plO!qlO!rlO!slO!tlO!ulO#UlO#VlO#olO~O#koO#lXP~O^sO~PVObuO~PVOgxO~PVOl{O~PVOo}O~PVOr!PO~PVOu!RO~PVO!O!YO#l!]O#m!TO#n!UO#o!WO~O!Y!aO~PVOP!dOQ!dOR!dOS!dOW!dOZ!dO[!dO^!dOa!dOb!dOe!dOg!dOj!dOl!dOn!dOo!dOq!dOr!dOt!dOu!dOw!dO!O!dO!Q!dO!R!dO!S!dO!W!dO!Y!dO!]!dO!`!dO!a!dO!b!dO!c!dO!d!dO!e!dO!f!dO!g!dO!h!dO!i!dO!j!dO!k!dO!l!dO!m!dO!n!dO!o!dO!p!dO!q!dO!r!dO!s!dO!t!dO!u!dO#k!dO#l!dO#m!dO#o!dO~O!v!gO~P%jO#O!}P~P%jO#l!lO~O#[#ZP~P%jO!f!rO~PVO!h!uO~PVOZ!xO#kYX#lYX~O#koO#lXX~O#l!zO~O^!|O~PVOb!}O~PVO#l#OO~Og#QO~PVO#l#RO~Ol#TO~PVOo#UO~PVOr#VO~PVOu#WO~PVO#m#XO!OyX#lyX#oyX~O!O#[O#o!WO~O#k#]O~O!O!YO#l!]O#o!WO~O#l#aO~O!Y#cO~PVO#l#dO~O!v#gO~P%jO#l#hO~O#l#jO~O#O!}X~P%jO#O#lO~O!d#mO~PVO#l#oO~O#l#qO~O#[#ZX~P%jO#[#sO~O!f#tO~PVO#l#uO~O!h#wO~PVO[#xO~O#m#yO!OzX#lzX#ozX~O#k#{O~OZ#|O~O!d$OO~PVOZ$PO~OP$QO[$QO!Q$QO!R$QO!S$QO#k$QO~O!O!PX#l!PX#o!PX~P/jO#l!R#k[Z!l_noqrtujlegab!e!f!g!h!`#O!a#[wW^!W!Y!]!v!b!n!c!d!i!j!k!O#m#n!m#o!S#U#V!o!p!q!r!s!u!t#iW~",
+      goto: "/a#kPPPPPP#l$WP$r%bPP%oPP#lPP#l%rP&^P#l&aP&{P#lPP#lPP#lPP#lP'O'R'U'X'R'[P'bPPP'h#l'rP(^P#l(aP({)OPPPPPPPPPPPPPPPPPPPPPPP#l)W)r#l)u*a*dP#l*g#l*j+UPP#l+X+s+vP#l#l+y,e,h-l-{.V.`.gPPP.u!RlOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n!RQOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nQrPQwSQzUQ!`[Q!c^Q!h`Q!ibQ!nfQ!ogR!tjgpPSU[^`bfgjqR!{r!RTOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#Pw!RVOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#SzR!_ZR!VZR#Y!TR#z#XX!ZZ![!_#`Q$S#|R$T$PQ!^ZS#_![!_R#}#`!R]OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#b!`!R_OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#e!c]!e_ch!f!j!p!RaOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#i!h!RcOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#k!iR!kcR!md!RfOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#p!n!RhOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#r!oR!qh!RkOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#v!tQnOQtQQvRQyTQ|VQ!OWQ!QXQ!SYQ!b]Q!siQ!vkh!wntvy|!O!Q!S!b!s!v#nR#n!mdqPSU[^`bfgjR!yqQ![ZS#^![#`R#`!_W!XZ![!_#`R#Z!XS$R#|$PR$U$RQ!f_Q!jcQ!phV#f!f!j!p!RmOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n",
+      nodeNames: "\u26A0 Text UnderlineText StrikeText Hr Document DivBlock DivOpenTag DivOpen AttrList Attr Equals AttrValue DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeValue StarChar LinkURL BracketChar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock Title StrongText EmText SupText SubText Original Monospace CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd List1 List2 HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
+      maxTerm: 123,
       skippedNodes: [0],
-      repeatNodeCount: 5,
-      tokenData: "!%l~RjXY!sYZ#O]^#Opq!sst#Tz{#`{|$t|}&e}!O'o!P!Q(a!Q!['o![!])z!^!_+b!`!a+g!b!c+t!c!}'o!}#O.O#P#QGc#Q#RGp#R#S'o#T#['o#[#]Hz#]#o'o#o#p!$O#p#q!%Y#r#s!%g~!xQ#e~XY!spq!s~#TO#j~~#WPpq#Z~#`O#S~~#eQ!q~pq#kz{#p~#pO#R~~#sUOY#pZz#pz{$V{;'S#p;'S;=`$n<%lO#p~$YTOz#pz{$i{;'S#p;'S;=`$n<%lO#p~$nO!k~~$qP;=`<%l#p~$wQpq$}{|%i~%ST!j~OY$}Z]$}^;'S$};'S;=`%c<%lO$}~%fP;=`<%l$}~%lQpq$}{|%r~%uQpq$}{|%{~&OQpq$}{|&U~&XQpq$}{|&_~&bPpq$}~&hP|}&k~&nUOY&kZ|&k|}'Q};'S&k;'S;=`'i<%lO&k~'TTO|&k|}'d};'S&k;'S;=`'i<%lO&k~'iO!n~~'lP;=`<%l&k~'tX#i~uv'o}!O'o!O!P'o!P!Q'o!Q!['o![!]'o!c!}'o#R#S'o#T#o'o~(dP!P!Q(g~(jSO!P(v!Q;'S(v;'S;=`)t<%lO(v~(yUOY(vZ!P(v!P!Q)]!Q;'S(v;'S;=`)t<%lO(v~)`TO!P(v!P!Q)o!Q;'S(v;'S;=`)t<%lO(v~)tO!l~~)wP;=`<%l(v~)}XOY*jZ]*j^p*jq![*j!]!}*j#O#P*j#Q;'S*j;'S;=`+[<%lO*j~*oX#h~OY*jZ]*j^p*jq![*j!]!}*j#O#P*j#Q;'S*j;'S;=`+[<%lO*j~+_P;=`<%l*j~+gO!r~~+lP!r~pq+o~+tO!f~~+wP!b!c+z~+}UOY,aZ!b,a!b!c-e!c;'S,a;'S;=`-_<%lO,a~,dUOY,aZ!b,a!b!c,v!c;'S,a;'S;=`-_<%lO,a~,yTO!b,a!b!c-Y!c;'S,a;'S;=`-_<%lO,a~-_O!o~~-bP;=`<%l,a~-hTO!b,a!b!c-w!c;'S,a;'S;=`-_<%lO,a~.OO!g~!o~~.TP!r~!}#O.W~.Z_z{/Y!P!Q/w!^!_;`!_!`<c!`!a<w#V#W=]#W#X?O#Y#Z?a#[#]A`#]#^Aw#a#bBu#b#cDh#g#hE]#h#iFY#i#j/`~/]P#i#j/`~/cP#g#h/f~/iP#X#Y/l~/oP#f#g/r~/wO![~~/zZ!^!_0m!_!`1O!`!a1a#V#W1r#W#X3}#Y#Z4l#[#]5y#a#b6n#b#c7o#g#h8d#h#i9y~0pP#P#Q0s~0vP#P#Q0y~1OOp~~1RP#P#Q1U~1XP#P#Q1[~1aOm~~1dP#P#Q1g~1jP#P#Q1m~1rOs~~1uP#c#d1x~1{Q#W#X2R#`#a2j~2UP#X#Y2X~2[P#P#Q2_~2bP#P#Q2e~2jO!s~~2mP#`#a2p~2sP#T#U2v~2yP#d#e2|~3PP#g#h3S~3VP#]#^3Y~3]P#U#V3`~3cP#`#a3f~3iP#X#Y3l~3oP#P#Q3r~3uP#P#Q3x~3}O!S~~4QP#]#^4T~4WP#j#k4Z~4^P#P#Q4a~4dP#P#Q4g~4lO[~~4oP#c#d4r~4uP#c#d4x~4{P#h#i5O~5RP#b#c5U~5XP#c#d5[~5_P#h#i5b~5eP#X#Y5h~5kP#P#Q5n~5qP#P#Q5t~5yO!^~~5|P#h#i6P~6SP#a#b6V~6YP#`#a6]~6`P#P#Q6c~6fP#P#Q6i~6nO#X~~6qP#c#d6t~6wP#W#X6z~6}P#i#j7Q~7TP#`#a7W~7ZP#X#Y7^~7aP#P#Q7d~7gP#P#Q7j~7oO!{~~7rP#c#d7u~7xP#h#i7{~8OP#X#Y8R~8UP#P#Q8X~8[P#P#Q8_~8dO`~~8gQ#]#^8m#d#e9[~8pP#n#o8s~8vP#X#Y8y~8|P#P#Q9P~9SP#P#Q9V~9[Oe~~9_P#T#U9b~9eP#b#c9h~9kP#P#Q9n~9qP#P#Q9t~9yOj~~9|P#T#U:P~:SP#U#V:V~:YQ#P#Q:`#j#k:k~:cP#P#Q:f~:kO!b~~:nP#]#^:q~:tP#X#Y:w~:zP#k#l:}~;QP#P#Q;T~;WP#P#Q;Z~;`O!`~~;cQ#P#Q;i#]#^;t~;lP#P#Q;o~;tOo~~;wP#a#b;z~;}P#T#U<Q~<TP#Z#[<W~<ZP#X#Y<^~<cO!c~~<fQ#P#Q<l#]#^;t~<oP#P#Q<r~<wOl~~<zQ#P#Q=Q#]#^;t~=TP#P#Q=W~=]Or~~=`P#c#d=c~=fQ#W#X=l#`#a=w~=oP#X#Y=r~=wO!V~~=zP#`#a=}~>QP#T#U>T~>WP#d#e>Z~>^P#g#h>a~>dP#]#^>g~>jP#U#V>m~>pP#`#a>s~>vP#X#Y>y~?OO!Q~~?RP#]#^?U~?XP#j#k?[~?aOX~~?dP#c#d?g~?jP#c#d?m~?pP#h#i?s~?vP#b#c?y~?|P#c#d@P~@SP#h#i@V~@YP#X#Y@]~@bP!]~#U#V@e~@hP#`#a@k~@nP#c#d@q~@tP#V#W@w~@zP#_#`@}~AQP#P#QAT~AWP#P#QAZ~A`O!i~~AcP#h#iAf~AiP#a#bAl~AoP#`#aAr~AwO!Z~~AzQ#a#b;z#b#cBQ~BTP#V#WBW~BZP#`#aB^~BaP#i#jBd~BgP#W#XBj~BmP#X#YBp~BuOu~~BxP#c#dB{~COP#W#XCR~CUP#i#jCX~C[P#`#aC_~CbP#X#YCe~CjP!Y~pqCm~CpP#f#gCs~CvP#T#UCy~C|P#h#iDP~DSP#X#YDV~DYP#P#QD]~D`P#P#QDc~DhO]~~DkP#c#dDn~DqP#h#iDt~DwP#X#YDz~D}P#P#QEQ~ETP#P#QEW~E]O_~~E`Q#]#^Ef#d#eEw~EiP#n#oEl~EoP#X#YEr~EwOc~~EzP#T#UE}~FQP#b#cFT~FYOh~~F]P#T#UF`~FcP#U#VFf~FkP!a~#j#kFn~FqP#]#^Ft~FwP#X#YFz~F}P#k#lGQ~GTP#P#QGW~GZP#P#QG^~GcO!_~~GhP!r~#P#QGk~GpO#g~~GsP#Q#RGv~GyUOYGvZ#QGv#Q#RH]#R;'SGv;'S;=`Ht<%lOGv~H`TO#QGv#Q#RHo#R;'SGv;'S;=`Ht<%lOGv~HtO!m~~HwP;=`<%lGv~IPZ#i~uv'o}!O'o!O!P'o!P!Q'o!Q!['o![!]'o!c!}'o#R#S'o#T#h'o#h#iIr#i#o'o~IwZ#i~uv'o}!O'o!O!P'o!P!Q'o!Q!['o![!]'o!c!}'o#R#S'o#T#h'o#h#iJj#i#o'o~JoZ#i~uv'o}!O'o!O!P'o!P!Q'o!Q!['o![!]'o!c!}'o#R#S'o#T#d'o#d#eKb#e#o'o~KgZ#i~uv'o}!O'o!O!P'o!P!Q'o!Q!['o![!]LY!c!}'o#R#S'o#T#g'o#g#h!#^#h#o'o~L_X#i~uv'o}!O'o!O!P'o!P!QLz!Q!['o![!]'o!c!}'o#R#S'o#T#o'o~MPX#i~uv'o}!O'o!O!P'o!P!QMl!Q!['o![!]'o!c!}'o#R#S'o#T#o'o~Mqe#i~OX! SZ]! S^p! Squ! Suv! tv}! S}!O! t!O!P! t!P!Q! t!Q![! t![!]! t!]!c! S!c!}! t!}#P! S#Q#R! S#R#S! t#S#T! S#T#o! t#o;'S! S;'S;=`! n<%lO! S~! XV!h~OX! SZ]! S^p! Sq#P! S#Q;'S! S;'S;=`! n<%lO! S~! qP;=`<%l! S~! {e!h~#i~OX! SZ]! S^p! Squ! Suv! tv}! S}!O! t!O!P! t!P!Q! t!Q![! t![!]! t!]!c! S!c!}! t!}#P! S#Q#R! S#R#S! t#S#T! S#T#o! t#o;'S! S;'S;=`! n<%lO! S~!#cX#i~uv'o}!O'o!O!P'o!P!Q'o!Q!['o![!]LY!c!}'o#R#S'o#T#o'o~!$RP#o#p!$U~!$XUOY!$UZ#q!$U#q#r!$k#r;'S!$U;'S;=`!%S<%lO!$U~!$nTO#q!$U#q#r!$}#r;'S!$U;'S;=`!%S<%lO!$U~!%SO!p~~!%VP;=`<%l!$U~!%_P|~#p#q!%b~!%gO!d~~!%lO!e~",
+      repeatNodeCount: 6,
+      tokenData: "!4T~RnXY#PYZ#[]^#[pq#Prs#ast$Uuv$az{%u{|'Z|}(z}!O*U!O!P$a!P!Q+n!Q![*U![!]5`!^!_9W!_!`9]!`!a9b!b!c9o!c!}*U!}#O;y#P#Q!'^#Q#R!'k#R#S*U#T#[*U#[#]!(u#]#o*U#o#p!2g#p#q!3q#r#s!4O~#UQ#i~XY#Ppq#P~#aO#o~~#dVOY#aZ]#a^r#ars#ys;'S#a;'S;=`$O<%lO#a~$OO[~~$RP;=`<%l#a~$XPpq$[~$aO#V~~$hX#k~[~uv$a}!O$a!O!P$a!P!Q$a!Q![$a![!]%T!c!}$a#R#S$a#T#o$a~%YX#k~uv%T}!O%T!O!P%T!P!Q%T!Q![%T![!]%T!c!}%T#R#S%T#T#o%T~%zQ!Q~pq&Qz{&V~&VO#U~~&YUOY&VZz&Vz{&l{;'S&V;'S;=`'T<%lO&V~&oTOz&Vz{'O{;'S&V;'S;=`'T<%lO&V~'TO!p~~'WP;=`<%l&V~'^Qpq'd{|(O~'iT!o~OY'dZ]'d^;'S'd;'S;=`'x<%lO'd~'{P;=`<%l'd~(RQpq'd{|(X~([Qpq'd{|(b~(eQpq'd{|(k~(nQpq'd{|(t~(wPpq'd~(}P|})Q~)TUOY)QZ|)Q|})g};'S)Q;'S;=`*O<%lO)Q~)jTO|)Q|})y};'S)Q;'S;=`*O<%lO)Q~*OO!s~~*RP;=`<%l)Q~*_X#k~[~#n~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#o*U~+RX#k~#n~uv*z}!O*z!O!P*z!P!Q*z!Q![*z![!]*z!c!}*z#R#S*z#T#o*z~+uX#k~[~uv$a}!O$a!O!P$a!P!Q,b!Q![$a![!]%T!c!}$a#R#S$a#T#o$a~,ia#k~[~Ou-nuv.rv}-n}!O.r!O!P.r!P!Q$a!Q![.r![!]2T!]!c-n!c!}.r!}#R-n#R#S.r#S#T-n#T#o.r#o;'S-n;'S;=`.l<%lO-n~-qUOY-nZ!P-n!P!Q.T!Q;'S-n;'S;=`.l<%lO-n~.WTO!P-n!P!Q.g!Q;'S-n;'S;=`.l<%lO-n~.lO!q~~.oP;=`<%l-n~.yb#k~[~OY-nZu-nuv.rv}-n}!O.r!O!P.r!P!Q0R!Q![.r![!]2T!]!c-n!c!}.r!}#R-n#R#S.r#S#T-n#T#o.r#o;'S-n;'S;=`.l<%lO-n~0Ya#k~[~Ou-nuv.rv}-n}!O.r!O!P.r!P!Q1_!Q![.r![!]2T!]!c-n!c!}.r!}#R-n#R#S.r#S#T-n#T#o.r#o;'S-n;'S;=`.l<%lO-n~1hX#k~[~!q~uv$a}!O$a!O!P$a!P!Q$a!Q![$a![!]%T!c!}$a#R#S$a#T#o$a~2Yb#k~OY-nZu-nuv2Tv}-n}!O2T!O!P2T!P!Q3b!Q![2T![!]2T!]!c-n!c!}2T!}#R-n#R#S2T#S#T-n#T#o2T#o;'S-n;'S;=`.l<%lO-n~3ga#k~Ou-nuv2Tv}-n}!O2T!O!P2T!P!Q4l!Q![2T![!]2T!]!c-n!c!}2T!}#R-n#R#S2T#S#T-n#T#o2T#o;'S-n;'S;=`.l<%lO-n~4sX#k~!q~uv%T}!O%T!O!P%T!P!Q%T!Q![%T![!]%T!c!}%T#R#S%T#T#o%T~5ee#k~OY6vZ]6v^p6vqu6vuv7nv}6v}!O7n!O!P7n!P!Q7n!Q![7n![!]%T!]!c6v!c!}7n#O#P6v#Q#R6v#R#S7n#S#T6v#T#o7n#o;'S6v;'S;=`7h<%lO6v~6{X#m~OY6vZ]6v^p6vq![6v!]!}6v#O#P6v#Q;'S6v;'S;=`7h<%lO6v~7kP;=`<%l6v~7ue#k~#m~OY6vZ]6v^p6vqu6vuv7nv}6v}!O7n!O!P7n!P!Q7n!Q![7n![!]%T!]!c6v!c!}7n#O#P6v#Q#R6v#R#S7n#S#T6v#T#o7n#o;'S6v;'S;=`7h<%lO6v~9]O!S~~9bOZ~~9gP!S~pq9j~9oO!l~~9rP!b!c9u~9xUOY:[Z!b:[!b!c;`!c;'S:[;'S;=`;Y<%lO:[~:_UOY:[Z!b:[!b!c:q!c;'S:[;'S;=`;Y<%lO:[~:tTO!b:[!b!c;T!c;'S:[;'S;=`;Y<%lO:[~;YO!t~~;]P;=`<%l:[~;cTO!b:[!b!c;r!c;'S:[;'S;=`;Y<%lO:[~;yO!m~!t~~<OP!S~!}#O<R~<U_z{=T!P!Q=r!^!_IZ!_!`J^!`!aJr#V#WKW#W#XLy#Y#ZM[#[#]! Z#]#^! r#a#b!!p#b#c!$c#g#h!%W#h#i!&T#i#j=Z~=WP#i#j=Z~=^P#g#h=a~=dP#X#Y=g~=jP#f#g=m~=rO!b~~=uZ!^!_>h!_!`>y!`!a?[#V#W?m#W#XAx#Y#ZBg#[#]Ct#a#bDi#b#cEj#g#hF_#h#iGt~>kP#P#Q>n~>qP#P#Q>t~>yOr~~>|P#P#Q?P~?SP#P#Q?V~?[Oo~~?_P#P#Q?b~?eP#P#Q?h~?mOu~~?pP#c#d?s~?vQ#W#X?|#`#a@e~@PP#X#Y@S~@VP#P#Q@Y~@]P#P#Q@`~@eO!v~~@hP#`#a@k~@nP#T#U@q~@tP#d#e@w~@zP#g#h@}~AQP#]#^AT~AWP#U#VAZ~A^P#`#aAa~AdP#X#YAg~AjP#P#QAm~ApP#P#QAs~AxO!Y~~A{P#]#^BO~BRP#j#kBU~BXP#P#QB[~B_P#P#QBb~BgO^~~BjP#c#dBm~BpP#c#dBs~BvP#h#iBy~B|P#b#cCP~CSP#c#dCV~CYP#h#iC]~C`P#X#YCc~CfP#P#QCi~ClP#P#QCo~CtO!d~~CwP#h#iCz~C}P#a#bDQ~DTP#`#aDW~DZP#P#QD^~DaP#P#QDd~DiO#[~~DlP#c#dDo~DrP#W#XDu~DxP#i#jD{~EOP#`#aER~EUP#X#YEX~E[P#P#QE_~EbP#P#QEe~EjO#O~~EmP#c#dEp~EsP#h#iEv~EyP#X#YE|~FPP#P#QFS~FVP#P#QFY~F_Ob~~FbQ#]#^Fh#d#eGV~FkP#n#oFn~FqP#X#YFt~FwP#P#QFz~F}P#P#QGQ~GVOg~~GYP#T#UG]~G`P#b#cGc~GfP#P#QGi~GlP#P#QGo~GtOl~~GwP#T#UGz~G}P#U#VHQ~HTQ#P#QHZ#j#kHf~H^P#P#QHa~HfO!h~~HiP#]#^Hl~HoP#X#YHr~HuP#k#lHx~H{P#P#QIO~IRP#P#QIU~IZO!f~~I^Q#P#QId#]#^Io~IgP#P#QIj~IoOq~~IrP#a#bIu~IxP#T#UI{~JOP#Z#[JR~JUP#X#YJX~J^O!i~~JaQ#P#QJg#]#^Io~JjP#P#QJm~JrOn~~JuQ#P#QJ{#]#^Io~KOP#P#QKR~KWOt~~KZP#c#dK^~KaQ#W#XKg#`#aKr~KjP#X#YKm~KrO!]~~KuP#`#aKx~K{P#T#ULO~LRP#d#eLU~LXP#g#hL[~L_P#]#^Lb~LeP#U#VLh~LkP#`#aLn~LqP#X#YLt~LyO!W~~L|P#]#^MP~MSP#j#kMV~M[OW~~M_P#c#dMb~MeP#c#dMh~MkP#h#iMn~MqP#b#cMt~MwP#c#dMz~M}P#h#iNQ~NTP#X#YNW~N]P!c~#U#VN`~NcP#`#aNf~NiP#c#dNl~NoP#V#WNr~NuP#_#`Nx~N{P#P#Q! O~! RP#P#Q! U~! ZO!n~~! ^P#h#i! a~! dP#a#b! g~! jP#`#a! m~! rO!a~~! uQ#a#bIu#b#c! {~!!OP#V#W!!R~!!UP#`#a!!X~!![P#i#j!!_~!!bP#W#X!!e~!!hP#X#Y!!k~!!pOw~~!!sP#c#d!!v~!!yP#W#X!!|~!#PP#i#j!#S~!#VP#`#a!#Y~!#]P#X#Y!#`~!#eP!`~pq!#h~!#kP#f#g!#n~!#qP#T#U!#t~!#wP#h#i!#z~!#}P#X#Y!$Q~!$TP#P#Q!$W~!$ZP#P#Q!$^~!$cO_~~!$fP#c#d!$i~!$lP#h#i!$o~!$rP#X#Y!$u~!$xP#P#Q!${~!%OP#P#Q!%R~!%WOa~~!%ZQ#]#^!%a#d#e!%r~!%dP#n#o!%g~!%jP#X#Y!%m~!%rOe~~!%uP#T#U!%x~!%{P#b#c!&O~!&TOj~~!&WP#T#U!&Z~!&^P#U#V!&a~!&fP!g~#j#k!&i~!&lP#]#^!&o~!&rP#X#Y!&u~!&xP#k#l!&{~!'OP#P#Q!'R~!'UP#P#Q!'X~!'^O!e~~!'cP!S~#P#Q!'f~!'kO#l~~!'nP#Q#R!'q~!'tUOY!'qZ#Q!'q#Q#R!(W#R;'S!'q;'S;=`!(o<%lO!'q~!(ZTO#Q!'q#Q#R!(j#R;'S!'q;'S;=`!(o<%lO!'q~!(oO!r~~!(rP;=`<%l!'q~!)OZ#k~[~#n~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#h*U#h#i!)q#i#o*U~!)zZ#k~[~#n~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#h*U#h#i!*m#i#o*U~!*vZ#k~[~#n~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]*z!c!}*U#R#S*U#T#d*U#d#e!+i#e#o*U~!+rZ#k~[~#n~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]!,e!c!}*U#R#S*U#T#g*U#g#h!1q#h#o*U~!,lX#k~#n~uv*z}!O*z!O!P*z!P!Q!-X!Q![*z![!]*z!c!}*z#R#S*z#T#o*z~!-`X#k~#n~uv*z}!O*z!O!P*z!P!Q!-{!Q![*z![!]*z!c!}*z#R#S*z#T#o*z~!.Se#k~#n~OX!/eZ]!/e^p!/equ!/euv!0Vv}!/e}!O!0V!O!P!0V!P!Q!0V!Q![!0V![!]!0V!]!c!/e!c!}!0V!}#P!/e#Q#R!/e#R#S!0V#S#T!/e#T#o!0V#o;'S!/e;'S;=`!0P<%lO!/e~!/jV!R~OX!/eZ]!/e^p!/eq#P!/e#Q;'S!/e;'S;=`!0P<%lO!/e~!0SP;=`<%l!/e~!0`e!R~#k~#n~OX!/eZ]!/e^p!/equ!/euv!0Vv}!/e}!O!0V!O!P!0V!P!Q!0V!Q![!0V![!]!0V!]!c!/e!c!}!0V!}#P!/e#Q#R!/e#R#S!0V#S#T!/e#T#o!0V#o;'S!/e;'S;=`!0P<%lO!/e~!1zX#k~[~#n~uv*U}!O*U!O!P*U!P!Q*U!Q![*U![!]!,e!c!}*U#R#S*U#T#o*U~!2jP#o#p!2m~!2pUOY!2mZ#q!2m#q#r!3S#r;'S!2m;'S;=`!3k<%lO!2m~!3VTO#q!2m#q#r!3f#r;'S!2m;'S;=`!3k<%lO!2m~!3kO!u~~!3nP;=`<%l!2m~!3vP!O~#p#q!3y~!4OO!j~~!4TO!k~",
       tokenizers: [myTokenizer, 0],
-      topRules: { "Document": [0, 6] },
-      tokenPrec: 635
+      topRules: { "Document": [0, 5] },
+      tokenPrec: 703
     });
   }
 });
