@@ -24724,11 +24724,14 @@ var init_tokenizer = __esm({
       if (next == 91 && input.peek(1) == 91) return;
       if (next == 93 && input.peek(1) == 93) return;
       if (next == 42 && input.peek(1) == 42) return;
-      if (next == 47 && input.peek(1) == 47) {
-      }
+      if (next == 47 && input.peek(1) == 47) return;
+      if (next == 124 && input.peek(1) == 124) return;
       if (next == 64 && input.peek(1) == 64) return;
       if (next == 123 && input.peek(1) == 123) return;
-      if (next == 124 && input.peek(1) == 124) return;
+      if (next == 95 && input.peek(1) == 95) {
+        input.acceptToken(UnderlineText, 2);
+        return;
+      }
       if (next == 45) {
         let count = 0;
         while (input.peek(count) == 45) count++;
@@ -24741,28 +24744,22 @@ var init_tokenizer = __esm({
           return;
         }
       }
-      if (next == 95 && input.peek(1) == 95) {
-        input.acceptToken(UnderlineText, 2);
-        return;
-      }
       if (next != -1) {
         let len = 0;
         while (true) {
           let curr = input.peek(len);
           if (curr == -1) break;
-          if (curr == 91 || // [
-          curr == 93 || // ]
-          curr == 45 || // -
-          curr == 95 || // _
-          curr == 42 || // *
-          curr == 47 || // /
-          curr == 43 || // +
-          curr == 64 || // @
-          curr == 123 || // {
-          curr == 124 || // | (解决表格坏掉的关键)
-          curr == 126 || // ~ (表格标题)
+          if (curr == 91 && input.peek(len + 1) == 91 || // [[
+          curr == 93 && input.peek(len + 1) == 93 || // ]]
+          curr == 42 && input.peek(len + 1) == 42 || // **
+          curr == 47 && input.peek(len + 1) == 47 || // //
+          curr == 124 && input.peek(len + 1) == 124 || // ||
+          curr == 64 && input.peek(len + 1) == 64 || // @@
+          curr == 123 && input.peek(len + 1) == 123 || // {{
+          curr == 95 && input.peek(len + 1) == 95 || // __
           curr == 10 || curr == 13) break;
           len++;
+          if (len > 100) break;
         }
         if (len > 0) {
           input.acceptToken(Text2, len);
