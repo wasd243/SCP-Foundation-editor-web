@@ -166,7 +166,7 @@ function addInsert(values, sections, value) {
     values[values.length - 1] = values[values.length - 1].append(value);
   } else {
     while (values.length < index)
-      values.push(Text2.empty);
+      values.push(Text.empty);
     values.push(value);
   }
 }
@@ -178,7 +178,7 @@ function iterChanges(desc, f, individual) {
       posA += len;
       posB += len;
     } else {
-      let endA = posA, endB = posB, text = Text2.empty;
+      let endA = posA, endB = posB, text = Text.empty;
       for (; ; ) {
         endA += len;
         endB += ins;
@@ -704,11 +704,11 @@ function findColumn(string2, col, tabSize, strict) {
   }
   return strict === true ? -1 : string2.length;
 }
-var Text2, TextLeaf, TextNode, RawTextCursor, PartialTextCursor, LineCursor, Line, DefaultSplit, MapMode, ChangeDesc, ChangeSet, SectionIter, SelectionRange, EditorSelection, nextID, Facet, FacetProvider, initField, StateField, Prec_, Prec, PrecExtension, Compartment, CompartmentInstance, Configuration, languageData, allowMultipleSelections, lineSeparator, changeFilter, transactionFilter, transactionExtender, readOnly, Annotation, AnnotationType, StateEffectType, StateEffect, Transaction, none, CharCategory, nonASCIISingleCaseWordChar, wordChar, EditorState, RangeValue, Range, Chunk, RangeSet, RangeSetBuilder, LayerCursor, HeapCursor, SpanCursor;
+var Text, TextLeaf, TextNode, RawTextCursor, PartialTextCursor, LineCursor, Line, DefaultSplit, MapMode, ChangeDesc, ChangeSet, SectionIter, SelectionRange, EditorSelection, nextID, Facet, FacetProvider, initField, StateField, Prec_, Prec, PrecExtension, Compartment, CompartmentInstance, Configuration, languageData, allowMultipleSelections, lineSeparator, changeFilter, transactionFilter, transactionExtender, readOnly, Annotation, AnnotationType, StateEffectType, StateEffect, Transaction, none, CharCategory, nonASCIISingleCaseWordChar, wordChar, EditorState, RangeValue, Range, Chunk, RangeSet, RangeSetBuilder, LayerCursor, HeapCursor, SpanCursor;
 var init_dist = __esm({
   "node_modules/@codemirror/state/dist/index.js"() {
     init_src();
-    Text2 = class _Text {
+    Text = class _Text {
       /**
       Get the line description around the given position.
       */
@@ -857,7 +857,7 @@ var init_dist = __esm({
         return text.length <= 32 ? new TextLeaf(text) : TextNode.from(TextLeaf.split(text, []));
       }
     };
-    TextLeaf = class _TextLeaf extends Text2 {
+    TextLeaf = class _TextLeaf extends Text {
       constructor(text, length = textLength(text)) {
         super();
         this.text = text;
@@ -939,7 +939,7 @@ var init_dist = __esm({
         return target;
       }
     };
-    TextNode = class _TextNode extends Text2 {
+    TextNode = class _TextNode extends Text {
       constructor(children, length) {
         super();
         this.children = children;
@@ -1069,7 +1069,7 @@ var init_dist = __esm({
         return chunked.length == 1 ? chunked[0] : new _TextNode(chunked, length);
       }
     };
-    Text2.empty = /* @__PURE__ */ new TextLeaf([""], 0);
+    Text.empty = /* @__PURE__ */ new TextLeaf([""], 0);
     RawTextCursor = class {
       constructor(text, dir = 1) {
         this.dir = dir;
@@ -1203,7 +1203,7 @@ var init_dist = __esm({
       }
     };
     if (typeof Symbol != "undefined") {
-      Text2.prototype[Symbol.iterator] = function() {
+      Text.prototype[Symbol.iterator] = function() {
         return this.iter();
       };
       RawTextCursor.prototype[Symbol.iterator] = PartialTextCursor.prototype[Symbol.iterator] = LineCursor.prototype[Symbol.iterator] = function() {
@@ -1437,8 +1437,8 @@ var init_dist = __esm({
             sections[i + 1] = len;
             let index = i >> 1;
             while (inserted.length < index)
-              inserted.push(Text2.empty);
-            inserted.push(len ? doc2.slice(pos, pos + len) : Text2.empty);
+              inserted.push(Text.empty);
+            inserted.push(len ? doc2.slice(pos, pos + len) : Text.empty);
           }
           pos += len;
         }
@@ -1571,7 +1571,7 @@ var init_dist = __esm({
             let { from, to = from, insert: insert2 } = spec;
             if (from > to || from < 0 || to > length)
               throw new RangeError(`Invalid change range ${from} to ${to} (in doc of length ${length})`);
-            let insText = !insert2 ? Text2.empty : typeof insert2 == "string" ? Text2.of(insert2.split(lineSep || DefaultSplit)) : insert2;
+            let insText = !insert2 ? Text.empty : typeof insert2 == "string" ? Text.of(insert2.split(lineSep || DefaultSplit)) : insert2;
             let insLen = insText.length;
             if (from == to && insLen == 0)
               return;
@@ -1612,8 +1612,8 @@ var init_dist = __esm({
             sections.push(part[0], 0);
           } else {
             while (inserted.length < i)
-              inserted.push(Text2.empty);
-            inserted[i] = Text2.of(part.slice(1));
+              inserted.push(Text.empty);
+            inserted[i] = Text.of(part.slice(1));
             sections.push(part[0], inserted[i].length);
           }
         }
@@ -1651,11 +1651,11 @@ var init_dist = __esm({
       }
       get text() {
         let { inserted } = this.set, index = this.i - 2 >> 1;
-        return index >= inserted.length ? Text2.empty : inserted[index];
+        return index >= inserted.length ? Text.empty : inserted[index];
       }
       textBit(len) {
         let { inserted } = this.set, index = this.i - 2 >> 1;
-        return index >= inserted.length && !len ? Text2.empty : inserted[index].slice(this.off, len == null ? void 0 : this.off + len);
+        return index >= inserted.length && !len ? Text.empty : inserted[index].slice(this.off, len == null ? void 0 : this.off + len);
       }
       forward(len) {
         if (len == this.len)
@@ -2569,7 +2569,7 @@ var init_dist = __esm({
       [`Text`](https://codemirror.net/6/docs/ref/#state.Text) instance from the given string.
       */
       toText(string2) {
-        return Text2.of(string2.split(this.facet(_EditorState.lineSeparator) || DefaultSplit));
+        return Text.of(string2.split(this.facet(_EditorState.lineSeparator) || DefaultSplit));
       }
       /**
       Return the given range of the document as a string.
@@ -2636,7 +2636,7 @@ var init_dist = __esm({
       */
       static create(config2 = {}) {
         let configuration = Configuration.resolve(config2.extensions || [], /* @__PURE__ */ new Map());
-        let doc2 = config2.doc instanceof Text2 ? config2.doc : Text2.of((config2.doc || "").split(configuration.staticFacet(_EditorState.lineSeparator) || DefaultSplit));
+        let doc2 = config2.doc instanceof Text ? config2.doc : Text.of((config2.doc || "").split(configuration.staticFacet(_EditorState.lineSeparator) || DefaultSplit));
         let selection2 = !config2.selection ? EditorSelection.single(0) : config2.selection instanceof EditorSelection ? config2.selection : EditorSelection.single(config2.selection.anchor, config2.selection.head);
         checkSelection(selection2, doc2.length);
         if (!configuration.staticFacet(allowMultipleSelections))
@@ -4922,7 +4922,7 @@ function applyDOMChange(view, domChange) {
       change = {
         from: sel.from,
         to: sel.to,
-        insert: Text2.of(domChange.text.slice(sel.from - from, selEnd).split(LineBreakPlaceholder))
+        insert: Text.of(domChange.text.slice(sel.from - from, selEnd).split(LineBreakPlaceholder))
       };
     } else if (diff = findDiff(cmp, domChange.text, preferredPos - from, preferredSide)) {
       if (browser.chrome && lastKey == 13 && diff.toB == diff.from + 2 && domChange.text.slice(diff.from, diff.toB) == LineBreakPlaceholder + LineBreakPlaceholder)
@@ -4930,7 +4930,7 @@ function applyDOMChange(view, domChange) {
       change = {
         from: from + diff.from,
         to: from + diff.toA,
-        insert: Text2.of(domChange.text.slice(diff.from, diff.toB).split(LineBreakPlaceholder))
+        insert: Text.of(domChange.text.slice(diff.from, diff.toB).split(LineBreakPlaceholder))
       };
     }
   } else if (newSel && (!view.hasFocus && state.facet(editable) || sameSelPos(newSel, sel))) {
@@ -4941,7 +4941,7 @@ function applyDOMChange(view, domChange) {
   if ((browser.mac || browser.android) && change && change.from == change.to && change.from == sel.head - 1 && /^\. ?$/.test(change.insert.toString()) && view.contentDOM.getAttribute("autocorrect") == "off") {
     if (newSel && change.insert.length == 2)
       newSel = EditorSelection.single(newSel.main.anchor - 1, newSel.main.head - 1);
-    change = { from: change.from, to: change.to, insert: Text2.of([change.insert.toString().replace(".", " ")]) };
+    change = { from: change.from, to: change.to, insert: Text.of([change.insert.toString().replace(".", " ")]) };
   } else if (state.doc.lineAt(sel.from).to < sel.to && view.docView.lineHasWidget(sel.to) && view.inputState.insertingTextAt > Date.now() - 50) {
     change = {
       from: sel.from,
@@ -4951,7 +4951,7 @@ function applyDOMChange(view, domChange) {
   } else if (browser.chrome && change && change.from == change.to && change.from == sel.head && change.insert.toString() == "\n " && view.lineWrapping) {
     if (newSel)
       newSel = EditorSelection.single(newSel.main.anchor - 1, newSel.main.head - 1);
-    change = { from: sel.from, to: sel.to, insert: Text2.of([" "]) };
+    change = { from: sel.from, to: sel.to, insert: Text.of([" "]) };
   }
   if (change) {
     return applyDOMChangeInner(view, change, newSel, lastKey);
@@ -7368,10 +7368,10 @@ var init_dist2 = __esm({
       }
       get overrideDOMText() {
         if (!this.length)
-          return Text2.empty;
+          return Text.empty;
         let { root } = this;
         if (!root)
-          return Text2.empty;
+          return Text.empty;
         let start = this.posAtStart;
         return root.view.state.doc.slice(start, start + this.length);
       }
@@ -7399,7 +7399,7 @@ var init_dist2 = __esm({
         return true;
       }
       get overrideDOMText() {
-        return Text2.empty;
+        return Text.empty;
       }
       coordsIn(pos) {
         return this.dom.getBoundingClientRect();
@@ -9439,7 +9439,7 @@ var init_dist2 = __esm({
     HeightOracle = class {
       constructor(lineWrapping) {
         this.lineWrapping = lineWrapping;
-        this.doc = Text2.empty;
+        this.doc = Text.empty;
         this.heightSamples = {};
         this.lineHeight = 14;
         this.charWidth = 7;
@@ -10205,7 +10205,7 @@ var init_dist2 = __esm({
         let guessWrapping = state.facet(contentAttributes).some((v) => typeof v != "function" && v.class == "cm-lineWrapping");
         this.heightOracle = new HeightOracle(guessWrapping);
         this.stateDeco = staticDeco(state);
-        this.heightMap = HeightMap.empty().applyChanges(this.stateDeco, Text2.empty, this.heightOracle.setDoc(state.doc), [new ChangedRange(0, 0, 0, state.doc.length)]);
+        this.heightMap = HeightMap.empty().applyChanges(this.stateDeco, Text.empty, this.heightOracle.setDoc(state.doc), [new ChangedRange(0, 0, 0, state.doc.length)]);
         for (let i = 0; i < 2; i++) {
           this.viewport = this.getViewport(0, null);
           if (!this.updateForViewport())
@@ -10356,7 +10356,7 @@ var init_dist2 = __esm({
           clearHeightChangeFlag();
           for (let vp of this.viewports) {
             let heights = vp.from == this.viewport.from ? lineHeights : view.docView.measureVisibleLineHeights(vp);
-            this.heightMap = (refresh ? HeightMap.empty().applyChanges(this.stateDeco, Text2.empty, this.heightOracle, [new ChangedRange(0, 0, 0, view.state.doc.length)]) : this.heightMap).updateHeight(oracle, 0, refresh, new MeasuredHeights(vp.from, heights));
+            this.heightMap = (refresh ? HeightMap.empty().applyChanges(this.stateDeco, Text.empty, this.heightOracle, [new ChangedRange(0, 0, 0, view.state.doc.length)]) : this.heightMap).updateHeight(oracle, 0, refresh, new MeasuredHeights(vp.from, heights));
           }
           if (heightChangeFlag)
             result |= 2;
@@ -11400,10 +11400,10 @@ var init_dist2 = __esm({
           let change = {
             from: diff.from + from,
             to: diff.toA + from,
-            insert: Text2.of(e.text.slice(diff.from, diff.toB).split("\n"))
+            insert: Text.of(e.text.slice(diff.from, diff.toB).split("\n"))
           };
           if ((browser.mac || browser.android) && change.from == head - 1 && /^\. ?$/.test(e.text) && view.contentDOM.getAttribute("autocorrect") == "off")
-            change = { from, to, insert: Text2.of([e.text.replace(".", " ")]) };
+            change = { from, to, insert: Text.of([e.text.replace(".", " ")]) };
           this.pendingContextChange = change;
           if (!view.state.readOnly) {
             let newLen = this.to - this.from + (change.to - change.from + change.insert.length);
@@ -19052,7 +19052,7 @@ function newlineAndIndent(atEof) {
       if (explode)
         insert2.push(indentString(state, cx.lineIndent(line.from, -1)));
       return {
-        changes: { from, to, insert: Text2.of(insert2) },
+        changes: { from, to, insert: Text.of(insert2) },
         range: EditorSelection.cursor(from + 1 + insert2[1].length)
       };
     });
@@ -19426,7 +19426,7 @@ var init_dist6 = __esm({
         return false;
       let changes = state.changeByRange((range) => {
         return {
-          changes: { from: range.from, to: range.to, insert: Text2.of(["", ""]) },
+          changes: { from: range.from, to: range.to, insert: Text.of(["", ""]) },
           range: EditorSelection.cursor(range.from)
         };
       });
@@ -23072,7 +23072,7 @@ function getSpecializer(spec) {
   }
   return spec.get;
 }
-var Stack, StackContext, SimulatedStack, StackBufferCursor, CachedToken, nullToken, InputStream, TokenGroup, LocalTokenGroup, ExternalTokenizer2, verbose, stackIDs, FragmentCursor2, TokenCache, Parse, Dialect, id, ContextTracker, LRParser;
+var Stack, StackContext, SimulatedStack, StackBufferCursor, CachedToken, nullToken, InputStream, TokenGroup, LocalTokenGroup, ExternalTokenizer, verbose, stackIDs, FragmentCursor2, TokenCache, Parse, Dialect, id, ContextTracker, LRParser;
 var init_dist11 = __esm({
   "node_modules/@lezer/lr/dist/index.js"() {
     init_dist3();
@@ -23882,7 +23882,7 @@ var init_dist11 = __esm({
       }
     };
     LocalTokenGroup.prototype.contextual = TokenGroup.prototype.fallback = TokenGroup.prototype.extend = false;
-    ExternalTokenizer2 = class {
+    ExternalTokenizer = class {
       /**
       Create a tokenizer. The first argument is the function that,
       given an input stream, scans for the types of tokens it
@@ -24700,58 +24700,67 @@ var init_dist11 = __esm({
   }
 });
 
+// src/parser.terms.js
+var Text2, UnderlineText, StrikeText, Hr;
+var init_parser_terms = __esm({
+  "src/parser.terms.js"() {
+    Text2 = 1;
+    UnderlineText = 2;
+    StrikeText = 3;
+    Hr = 4;
+  }
+});
+
 // src/tokenizer.js
 var myTokenizer;
 var init_tokenizer = __esm({
   "src/tokenizer.js"() {
+    init_dist11();
+    init_parser_terms();
     myTokenizer = new ExternalTokenizer((input, stack) => {
-      let { next } = input;
+      const next = input.next;
       if (next < 0) return;
+      if (next == 10 || next == 13) {
+        input.acceptToken(newline, 1);
+        return;
+      }
       if (next == 45) {
         let count = 0;
-        while (input.peek(count) == 45) {
-          count++;
-        }
+        while (input.peek(count) == 45) count++;
         if (count >= 4) {
           input.acceptToken(Hr, count);
           return;
         }
-        if (count >= 2) {
+        if (count == 2) {
           input.acceptToken(StrikeText, 2);
           return;
         }
-        input.acceptToken(Dash, 1);
-        return;
       }
-      if (next == 95) {
-        if (input.peek(1) == 95) {
-          input.acceptToken(UnderlineText, 2);
-          return;
-        }
+      if (next == 95 && input.peek(1) == 95) {
+        input.acceptToken(UnderlineText, 2);
+        return;
       }
       if (next != -1) {
         let len = 0;
         while (true) {
           let curr = input.peek(len);
           if (curr == -1) break;
-          if (curr == 91 || // '[' (标签开始)
-          curr == 45 || // '-' (横杠系列)
-          curr == 95 || // '_' (下划线)
-          curr == 42 || // '*' (粗体)
-          curr == 47 || // '/' (斜体)
-          curr == 10 || // '\n'
-          curr == 13) break;
+          if (curr == 91 || // [
+          curr == 45 || // -
+          curr == 95 || // _
+          curr == 42 || // *
+          curr == 47 || // /
+          curr == 43 || // +
+          curr == 124 || // |
+          curr == 10 || curr == 13) break;
           len++;
         }
         if (len > 0) {
-          input.acceptToken(Text, len);
+          input.acceptToken(Text2, len);
           return;
         }
       }
-      if (next == 10 || next == 13) {
-        input.acceptToken(newline, 1);
-        return;
-      }
+      input.acceptToken(Text2, 1);
     });
   }
 });
@@ -24867,22 +24876,22 @@ var init_dist12 = __esm({
         }
       }
     };
-    identifiers = new ExternalTokenizer2(
+    identifiers = new ExternalTokenizer(
       identifierTokens(identifier, VariableName, callee),
       { contextual: true }
     );
-    queryIdentifiers = new ExternalTokenizer2(
+    queryIdentifiers = new ExternalTokenizer(
       identifierTokens(queryIdentifier, queryVariableName, QueryCallee),
       { contextual: true }
     );
-    descendant = new ExternalTokenizer2((input) => {
+    descendant = new ExternalTokenizer((input) => {
       if (space.includes(input.peek(-1))) {
         let { next } = input;
         if (isAlpha(next) || next == underscore || next == hash || next == period || next == asterisk || next == bracketL || next == colon && isAlpha(input.peek(1)) || next == dash || next == ampersand)
           input.acceptToken(descendantOp);
       }
     });
-    unitToken = new ExternalTokenizer2((input) => {
+    unitToken = new ExternalTokenizer((input) => {
       if (!space.includes(input.peek(-1))) {
         let { next } = input;
         if (next == percent) {
@@ -25017,7 +25026,7 @@ function inForeignElement(context) {
 }
 function contentTokenizer(tag, textToken, endToken) {
   let lastState = 2 + tag.length;
-  return new ExternalTokenizer2((input) => {
+  return new ExternalTokenizer((input) => {
     for (let state = 0, matchedLen = 0, i = 0; ; i++) {
       if (input.next < 0) {
         if (i) input.acceptToken(textToken);
@@ -25247,7 +25256,7 @@ var init_dist14 = __esm({
       },
       strict: false
     });
-    tagStart = new ExternalTokenizer2((input, stack) => {
+    tagStart = new ExternalTokenizer((input, stack) => {
       if (input.next != lessThan) {
         if (input.next < 0 && stack.context) input.acceptToken(missingCloseTag);
         return;
@@ -25274,7 +25283,7 @@ var init_dist14 = __esm({
         else input.acceptToken(StartTag);
       }
     }, { contextual: true });
-    commentContent = new ExternalTokenizer2((input) => {
+    commentContent = new ExternalTokenizer((input) => {
       for (let dashes = 0, i = 0; ; i++) {
         if (input.next < 0) {
           if (i) input.acceptToken(commentContent$1);
@@ -25291,7 +25300,7 @@ var init_dist14 = __esm({
         input.advance();
       }
     });
-    endTag = new ExternalTokenizer2((input, stack) => {
+    endTag = new ExternalTokenizer((input, stack) => {
       if (input.next == slash && input.peek(1) == greaterThan) {
         let selfClosing = stack.dialectEnabled(Dialect_selfClosing) || inForeignElement(stack.context);
         input.acceptToken(selfClosing ? SelfClosingEndTag : EndTag, 2);
@@ -25407,22 +25416,22 @@ var init_dist15 = __esm({
       },
       strict: false
     });
-    insertSemicolon = new ExternalTokenizer2((input, stack) => {
+    insertSemicolon = new ExternalTokenizer((input, stack) => {
       let { next } = input;
       if (next == braceR || next == -1 || stack.context)
         input.acceptToken(insertSemi);
     }, { contextual: true, fallback: true });
-    noSemicolon = new ExternalTokenizer2((input, stack) => {
+    noSemicolon = new ExternalTokenizer((input, stack) => {
       let { next } = input, after;
       if (space2.indexOf(next) > -1) return;
       if (next == slash2 && ((after = input.peek(1)) == slash2 || after == star)) return;
       if (next != braceR && next != semicolon && next != -1 && !stack.context)
         input.acceptToken(noSemi);
     }, { contextual: true });
-    noSemicolonType = new ExternalTokenizer2((input, stack) => {
+    noSemicolonType = new ExternalTokenizer((input, stack) => {
       if (input.next == bracketL2 && !stack.context) input.acceptToken(noSemiType);
     }, { contextual: true });
-    operatorToken = new ExternalTokenizer2((input, stack) => {
+    operatorToken = new ExternalTokenizer((input, stack) => {
       let { next } = input;
       if (next == plus || next == minus) {
         input.advance();
@@ -25438,7 +25447,7 @@ var init_dist15 = __esm({
           input.acceptToken(questionDot);
       }
     }, { contextual: true });
-    jsx = new ExternalTokenizer2((input, stack) => {
+    jsx = new ExternalTokenizer((input, stack) => {
       if (input.next != lt || !stack.dialectEnabled(Dialect_jsx)) return;
       input.advance();
       if (input.next == slash2) return;
