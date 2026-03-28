@@ -24721,11 +24721,21 @@ var init_tokenizer = __esm({
     myTokenizer = new ExternalTokenizer((input) => {
       const next = input.next;
       if (next < 0) return;
-      if (next >= 48 && next <= 57 || next >= 65 && next <= 90 || next >= 97 && next <= 122 || next === 58) {
+      const isContextLikelyTag = () => {
+        let i = -1;
+        while (i > -50) {
+          let prev = input.peek(i);
+          if (prev < 0 || prev === 10 || prev === 13) return false;
+          if (prev === 91 || prev === 124) return true;
+          i--;
+        }
+        return false;
+      };
+      if (isContextLikelyTag() && (next >= 48 && next <= 57 || next >= 65 && next <= 90 || next >= 97 && next <= 122 || next === 58)) {
         let pos = 0;
         while (true) {
           let curr = input.peek(pos);
-          if (/[a-zA-Z0-9\-_:./%]/.test(String.fromCharCode(curr))) {
+          if (curr >= 0 && /[a-zA-Z0-9\-_:./%]/.test(String.fromCharCode(curr))) {
             pos++;
           } else {
             break;
@@ -24749,7 +24759,9 @@ var init_tokenizer = __esm({
           }
           input.acceptToken(AttrPair, pos);
           return;
-        } else {
+        }
+        let after = input.peek(pos);
+        if (after === 32 || after === 9 || after === 124 || after === 93 || after === 10 || after === 13) {
           input.acceptToken(AttrPair, pos);
           return;
         }
@@ -24770,12 +24782,10 @@ var init_tokenizer = __esm({
         input.acceptToken(UnderlineText, 2);
         return;
       }
-      if (" []{}|=".includes(String.fromCharCode(next))) return;
       let size = 1;
       while (true) {
         let n = input.peek(size);
-        if (n < 0 || " []{}|=-_".includes(String.fromCharCode(n))) break;
-        if (n >= 48 && n <= 57 || n >= 65 && n <= 90 || n >= 97 && n <= 122) break;
+        if (n < 0 || n === 91 || n === 93 || n === 123 || n === 125 || n === 124 || n === 61 || n === 10 || n === 13) break;
         size++;
       }
       input.acceptToken(Text2, size);
