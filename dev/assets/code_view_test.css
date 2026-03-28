@@ -309,6 +309,12 @@ html, body, #editor-container {
     font-style: italic;
 }
 
+/* highlight */
+.cm-editor .cm-Highlight {
+    color: #98C379;
+    font-style: italic;
+}
+
 
 
 
