@@ -381,6 +381,7 @@ Attr {
   @precedence {
     // 1
     _tagEnd,
+    LinkURL,
     Equals,
     Blockquote,
     Rate,
@@ -440,7 +441,6 @@ Attr {
     SubText, 
     Monospace, 
     Original,
-    LinkURL,
 
     // 4
     AttrValue,
