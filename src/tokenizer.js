@@ -10,10 +10,29 @@ export const myTokenizer = new ExternalTokenizer((input, stack) => {
   const next = input.next
   if (next < 0) return
 
-  // 1. 换行符避让：绝对不要在这里 accept 换行，直接还给内置引擎
-  if (next == 10 || next == 13) return
+  // 1. 换行与空格绝对不碰
+  if (next == 10 || next == 13 || next == 32 || next == 9) return
 
-  // 2. 横杠逻辑 (---- 或 --) 
+  // 2. 核心逻辑：凡是内置 @tokens 里定义的“多字符符号”，JS 必须提前闭嘴
+  // [[ 或 [[/
+  if (next == 91 && input.peek(1) == 91) return 
+  // ]] 必须归还！否则所有 tagEnd 都会坏掉
+  if (next == 93 && input.peek(1) == 93) return 
+  // **
+  if (next == 42 && input.peek(1) == 42) return 
+  // // 但要排除 https:// 
+  if (next == 47 && input.peek(1) == 47) {
+    // 简单判定：如果前面是 ':'，那这就是链接，JS 把它吞了，不当斜体处理
+    // 注意：input.peek(-1) 在某些版本的 Lezer 里不可用，我们改用 while 里的排除
+  }
+  // @@
+  if (next == 64 && input.peek(1) == 64) return 
+  // {{
+  if (next == 123 && input.peek(1) == 123) return 
+  // || 表格符号
+  if (next == 124 && input.peek(1) == 124) return 
+
+  // 3. 横杠系列 (---- 或 --)
   if (next == 45) {
     let count = 0
     while (input.peek(count) == 45) count++
@@ -25,34 +44,26 @@ export const myTokenizer = new ExternalTokenizer((input, stack) => {
       input.acceptToken(StrikeText, 2)
       return
     }
-    // 注意：如果是单个 '-'，不要在这里认领，往下走让 Text 吞掉或者还给内置
+    // 单个 - 留给 Text
   }
 
-  // 3. 下划线逻辑 (__ )
+  // 4. 下划线系列 (__ )
   if (next == 95 && input.peek(1) == 95) {
     input.acceptToken(UnderlineText, 2)
     return
   }
 
-  // 4. 【关键修正】内置标签避让逻辑
-  // 如果当前是 [ (91), * (42), / (47), + (43), @ (64), { (123) 等
-  // 我们要看看它是不是双发的符号（[[ , **, // 等）
-  if (next == 91 && input.peek(1) == 91) return // 发现 [[，还给内置
-  if (next == 42 && input.peek(1) == 42) return // 发现 **，还给内置
-  if (next == 47 && input.peek(1) == 47) return // 发现 //，还给内置
-  if (next == 64 && input.peek(1) == 64) return // 发现 @@，还给内置
-  if (next == 123 && input.peek(1) == 123) return // 发现 {{，还给内置
-
-  // 5. 暴力 Text 逻辑 (吸尘器模式)
+  // 5. 暴力 Text 逻辑：增加更多“禁区”
   if (next != -1) {
     let len = 0
     while (true) {
       let curr = input.peek(len)
       if (curr == -1) break
       
-      // 这里的“刹车”条件必须和上面的避让逻辑一致
+      // 只要看到这些“可能是标记开头”的符号，Text 必须立刻停止
       if (
         curr == 91 || // [
+        curr == 93 || // ]
         curr == 45 || // -
         curr == 95 || // _
         curr == 42 || // *
@@ -60,6 +71,8 @@ export const myTokenizer = new ExternalTokenizer((input, stack) => {
         curr == 43 || // +
         curr == 64 || // @
         curr == 123 || // {
+        curr == 124 || // | (解决表格坏掉的关键)
+        curr == 126 || // ~ (表格标题)
         curr == 10 || curr == 13 // 换行
       ) break
       len++
@@ -71,6 +84,7 @@ export const myTokenizer = new ExternalTokenizer((input, stack) => {
     }
   }
 
-  // 6. 如果是孤立的单符号（比如单个 [ 或 单个 *），由这里认领
+  // 6. 最后一道防线：单字符回退
+  // 如果是孤立的 [ 或 ]，由 Text 认领
   input.acceptToken(Text, 1)
 })
