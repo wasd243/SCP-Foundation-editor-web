@@ -10,25 +10,22 @@ export const myTokenizer = new ExternalTokenizer((input, stack) => {
   const next = input.next
   if (next < 0) return
 
-  // 1. 换行与空白字符归还内置
+  // 1. 【彻底放手】换行、空格、制表符。
+  // 只有这样，你的 @skip { space } 才能在两个 Token 之间生效
   if (next == 10 || next == 13 || next == 32 || next == 9) return
 
-  // 2. 【核心避让】只要是双发符号，JS 绝对不碰，让给 @tokens
-  // 这里的 peek(1) 检查非常关键
+  // 2. 【双符号紧急避让】
+  // 只要当前位置可能是内置标签的开头或结尾，JS 必须立刻 return
   if (next == 91 && input.peek(1) == 91) return // [[
-  if (next == 93 && input.peek(1) == 93) return // ]] (修复 TagEnd 的关键)
+  if (next == 93 && input.peek(1) == 93) return // ]]
   if (next == 42 && input.peek(1) == 42) return // **
   if (next == 47 && input.peek(1) == 47) return // //
   if (next == 124 && input.peek(1) == 124) return // ||
   if (next == 64 && input.peek(1) == 64) return // @@
   if (next == 123 && input.peek(1) == 123) return // {{
-  if (next == 95 && input.peek(1) == 95) {
-    input.acceptToken(UnderlineText, 2)
-    return
-  }
 
-  // 3. 横杠逻辑 (Hr: ----, Strike: --)
-  if (next == 45) {
+  // 3. 【JS 自有逻辑】Hr 和 删除线
+  if (next == 45) { // '-'
     let count = 0
     while (input.peek(count) == 45) count++
     if (count >= 4) {
@@ -39,43 +36,42 @@ export const myTokenizer = new ExternalTokenizer((input, stack) => {
       input.acceptToken(StrikeText, 2)
       return
     }
-    // 单个 - 交给 Text
   }
 
-  // 4. 吸尘器 Text 逻辑
-  if (next != -1) {
-    let len = 0
+  // 4. 下划线
+  if (next == 95 && input.peek(1) == 95) {
+    input.acceptToken(UnderlineText, 2)
+    return
+  }
+
+  // 5. 【Text 逻辑优化】
+  // 我们不再用 while 循环猛吸，而是“看一步走一步”
+  // 如果当前字符不是上述任何特殊符号的开头，我们就吃掉它
+  
+  // 判定：如果当前是 [ 但后面不是 [，或者是 ] 但后面不是 ]，可以吃
+  // 否则，为了保险，我们只吃掉非特殊字符
+  if (
+    next !== 91 && // [
+    next !== 93 && // ]
+    next !== 42 && // *
+    next !== 47 && // /
+    next !== 95 && // _
+    next !== 45 && // -
+    next !== 124 && // |
+    next !== 64 && // @
+    next !== 123    // {
+  ) {
+    let len = 1
     while (true) {
-      let curr = input.peek(len)
-      if (curr == -1) break
-      
-      // 只要看到这些“双发预警符号”，立刻刹车
-      // 这样能保证 [[, ]], **, //, || 等永远能被内置识别
-      if (
-        (curr == 91 && input.peek(len + 1) == 91) || // [[
-        (curr == 93 && input.peek(len + 1) == 93) || // ]]
-        (curr == 42 && input.peek(len + 1) == 42) || // **
-        (curr == 47 && input.peek(len + 1) == 47) || // //
-        (curr == 124 && input.peek(len + 1) == 124) || // ||
-        (curr == 64 && input.peek(len + 1) == 64) || // @@
-        (curr == 123 && input.peek(len + 1) == 123) || // {{
-        (curr == 95 && input.peek(len + 1) == 95) || // __
-        curr == 10 || curr == 13 // 换行
-      ) break
-
-      // 如果是单字符（不是双发的开头），就吸走
+      let c = input.peek(len)
+      // 碰到任何潜在的特殊符号或空白，立刻停止
+      if (c <= 32 || c == 91 || c == 93 || c == 42 || c == 47 || c == 95 || c == 45 || c == 124 || c == 64 || c == 123 || c == -1) break
       len++
-      
-      // 限制单次 Text 长度，防止它跑太远
-      if (len > 100) break 
     }
-    
-    if (len > 0) {
-      input.acceptToken(Text, len)
-      return
-    }
+    input.acceptToken(Text, len)
+    return
   }
 
-  // 5. 兜底逻辑：如果不是双发符号，就吃掉这一个字符作为 Text
+  // 6. 最后的兜底：如果是单发的 [ 或 ]，以单字符 Text 形式发出去
   input.acceptToken(Text, 1)
 })
