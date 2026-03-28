@@ -376,7 +376,7 @@ Attr {
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
   BracketChar { "[" | "]" | "<" | ">" }
-  Text { ![\[\]*/_^, \t\n\r|~@>=<+#\-]+ }
+  Text { $[a-zA-Z0-9\u4e00-\u9fa5]+ }
   space { $[ \t]+ }
 
   @precedence {
