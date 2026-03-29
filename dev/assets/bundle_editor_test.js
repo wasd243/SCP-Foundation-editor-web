@@ -24924,13 +24924,19 @@ var init_token = __esm({
     moduleTokenizer = new ExternalTokenizer((input, stack) => {
       if (stack.canShift(ModuleContent2)) {
         let start = input.pos;
+        let foundEnd = false;
         while (input.next != -1) {
-          if (input.next == bracketOpen && input.peek(1) == bracketOpen && input.peek(2) == slash && matchString(input, 3, "module")) {
-            break;
+          if (input.next == bracketOpen && input.peek(1) == bracketOpen) {
+            if (input.peek(2) == slash && matchString(input, 3, "module")) {
+              foundEnd = true;
+              break;
+            }
           }
           input.advance();
         }
-        input.acceptToken(ModuleContent2);
+        if (input.pos > start) {
+          input.acceptToken(ModuleContent2);
+        }
         return;
       }
       if (input.next == bracketOpen && input.peek(1) == bracketOpen) {
