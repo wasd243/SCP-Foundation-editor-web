@@ -3,7 +3,7 @@
   element* 
 }
 
-@external tokens inlineTokenizer from "./tokens.js" {
+@external tokens inlineTokenizer from "./token.js" {
   UnderlineText,
   StrikeText,
   Text
