@@ -24922,21 +24922,16 @@ var init_token = __esm({
     bracketClose = 93;
     slash = 47;
     moduleTokenizer = new ExternalTokenizer((input, stack) => {
-      if (stack.canAccept(ModuleContent2)) {
+      if (stack.canShift(ModuleContent2)) {
         let start = input.pos;
-        if (input.next == bracketOpen && input.peek(1) == bracketOpen && input.peek(2) == slash) {
-          if (matchString(input, 3, "module")) return;
-        }
         while (input.next != -1) {
-          if (input.next == bracketOpen && input.peek(1) == bracketOpen && input.peek(2) == slash) {
-            if (matchString(input, 3, "module")) break;
+          if (input.next == bracketOpen && input.peek(1) == bracketOpen && input.peek(2) == slash && matchString(input, 3, "module")) {
+            break;
           }
           input.advance();
         }
-        if (input.pos > start) {
-          input.acceptToken(ModuleContent2);
-          return;
-        }
+        input.acceptToken(ModuleContent2);
+        return;
       }
       if (input.next == bracketOpen && input.peek(1) == bracketOpen) {
         if (input.peek(2) == slash && matchString(input, 3, "module")) {
