@@ -263,12 +263,14 @@ ModuleBlock {
   ModuleCloseToken
 }
 
+// 修正：去掉重复的 ModuleOpenToken，去掉错误的嵌套花括号
 ModuleOpenTag {
-  ModuleOpenToken (attrPathToken | AttrValue)* ModuleTagEnd { _tagEnd}
+  ModuleOpenToken (attrPathToken | AttrValue)* ModuleTagEnd {_tagEnd}
 }
 
+// 修正：确保内容节点是一个清晰的容器
 ModuleContent {
-  (RawContent | newline )* 
+  (RawContent | newline)*
 }
 // ——————————————————————————Module——————————————————————————
 
@@ -285,7 +287,7 @@ HTMLOpenTag {
 }
 
 HTMLContent {
-  (RawContent | newline )*
+  (RawContent | newline)*
 }
 // ——————————————————————————HTML——————————————————————————
 

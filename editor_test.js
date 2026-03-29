@@ -153,50 +153,40 @@ const customTags = {
 };
 
 const wikidotParser = parser.configure({
-    // 混合解析逻辑
     wrap: parseMixed((node, input) => {
-        // 当解析器走到 ModuleContent 节点时触发
+    // 当解析器走到 ModuleContent 节点时
         if (node.name === "ModuleContent") {
-            // 1. 向上找，拿到整个 ModuleBlock 父节点
-            let moduleBlock = node.node.parent;
-            
+            const moduleBlock = node.node.parent;
             if (moduleBlock && moduleBlock.name === "ModuleBlock") {
-                // 2. 找到它前面的 ModuleOpenTag
-                let openTag = moduleBlock.getChild("ModuleOpenTag");
-                
+                const openTag = moduleBlock.getChild("ModuleOpenTag");
                 if (openTag) {
-                    // 3. 提取属性列表 attrPathToken
-                    let attrPathToken = openTag.getChild("attrPathToken");
+                    // 直接读取整个 [[module CSS]] 标签的文本
+                    const tagText = input.read(openTag.from, openTag.to).toLowerCase();
                     
-                    if (attrPathToken) {
-                        // 4. 读取 attrPathToken 的真实文本内容 (通过 input.read 截取源码)
-                        let attrText = input.read(attrPathToken.from, attrPathToken.to).toLowerCase();
-                        
-                        // wikidot native modules fallback
-                        const nativeModules = ["rate", "listpages", "backlinks"]; 
-                        if (nativeModules.some(m => attrText.includes(m))) {
-                            return null; 
-                        }
-                        // 5. 如果属性里带 'css'，移交解析权
-                        if (attrText.includes("css")) {
-                            return {
-                                parser: cssLanguage.parser,
-                                overlay: [{ from: node.from, to: node.to }]
-                            };
-                        }
+                    // 排除原生的 Wikidot 模块
+                    const nativeModules = ["rate", "listpages", "backlinks"];
+                    if (nativeModules.some(m => tagText.includes(m))) {
+                        return null;
+                    }
+
+                    // 只要标签里写了 css，就开启 CSS 嵌套高亮
+                    if (tagText.includes("css")) {
+                        return {
+                            parser: cssLanguage.parser,
+                            overlay: [{ from: node.from, to: node.to }]
+                        };
                     }
                 }
             }
         }
-        // HTML
+        
+        // HTML 同理
         if (node.name === "HTMLContent") {
             return { 
                 parser: htmlLanguage.parser,
-                // 必须指定 overlay，否则 HTML 解析器会尝试解析外部的 [[/html]]
                 overlay: [{ from: node.from, to: node.to }] 
             };
         }
-        // 如果不是 CSS/HTML，或者没匹配上，返回 null（保持原生 Wikidot 解析）
         return null;
     }),
     props: [
