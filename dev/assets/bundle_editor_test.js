@@ -1,9 +1,14 @@
+var __defProp = Object.defineProperty;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __export = (target, all) => {
+  for (var name2 in all)
+    __defProp(target, name2, { get: all[name2], enumerable: true });
 };
 
 // node_modules/@marijn/find-cluster-break/src/index.js
@@ -24701,21 +24706,208 @@ var init_dist11 = __esm({
 });
 
 // src/parser.terms.js
-var UnderlineText, StrikeText, Text2;
+var parser_terms_exports = {};
+__export(parser_terms_exports, {
+  AlignCenter: () => AlignCenter,
+  AlignCenterCloseToken: () => AlignCenterCloseToken,
+  AlignCenterOpenToken: () => AlignCenterOpenToken,
+  AlignLeft: () => AlignLeft,
+  AlignLeftCloseToken: () => AlignLeftCloseToken,
+  AlignLeftOpenToken: () => AlignLeftOpenToken,
+  AlignRight: () => AlignRight,
+  AlignRightCloseToken: () => AlignRightCloseToken,
+  AlignRightOpenToken: () => AlignRightOpenToken,
+  Attr: () => Attr,
+  AttrList: () => AttrList,
+  AttrValue: () => AttrValue,
+  Blockquote: () => Blockquote,
+  BracketChar: () => BracketChar,
+  CodeBlock: () => CodeBlock,
+  CodeClose: () => CodeClose,
+  CodeOpen: () => CodeOpen,
+  CodeOpenTag: () => CodeOpenTag,
+  CollapsibleBlock: () => CollapsibleBlock,
+  CollapsibleClose: () => CollapsibleClose,
+  CollapsibleOpen: () => CollapsibleOpen,
+  CollapsibleOpenTag: () => CollapsibleOpenTag,
+  DivBlock: () => DivBlock,
+  DivClose: () => DivClose,
+  DivOpen: () => DivOpen,
+  DivOpenTag: () => DivOpenTag,
+  Document: () => Document,
+  EmText: () => EmText,
+  Equals: () => Equals,
+  Footnote: () => Footnote,
+  FootnoteBlock: () => FootnoteBlock,
+  FootnoteClose: () => FootnoteClose,
+  FootnoteOpen: () => FootnoteOpen,
+  ForcedNewLine: () => ForcedNewLine,
+  GenericToken: () => GenericToken,
+  HTMLBlock: () => HTMLBlock,
+  HTMLCloseToken: () => HTMLCloseToken,
+  HTMLContent: () => HTMLContent,
+  HTMLOpenTag: () => HTMLOpenTag,
+  HTMLOpenToken: () => HTMLOpenToken,
+  Hr: () => Hr,
+  ImageBlock: () => ImageBlock,
+  ImageOpen: () => ImageOpen,
+  IncludeBar: () => IncludeBar,
+  IncludeBlock: () => IncludeBlock,
+  IncludeOpen: () => IncludeOpen,
+  IncludeParam: () => IncludeParam,
+  IncludePart1: () => IncludePart1,
+  IncludePart2: () => IncludePart2,
+  IncludePart3: () => IncludePart3,
+  IncludePath: () => IncludePath,
+  IncludeSimplePath: () => IncludeSimplePath,
+  IncludeValue: () => IncludeValue,
+  LinkURL: () => LinkURL,
+  List1: () => List1,
+  List2: () => List2,
+  ModuleBlock: () => ModuleBlock,
+  ModuleCloseToken: () => ModuleCloseToken,
+  ModuleContent: () => ModuleContent,
+  ModuleOpenTag: () => ModuleOpenTag,
+  ModuleOpenToken: () => ModuleOpenToken,
+  Monospace: () => Monospace,
+  NoteBlock: () => NoteBlock,
+  NoteCloseToken: () => NoteCloseToken,
+  NoteOpenToken: () => NoteOpenToken,
+  Original: () => Original,
+  Rate: () => Rate,
+  SizeBlock: () => SizeBlock,
+  SizeCloseToken: () => SizeCloseToken,
+  SizeOpenTag: () => SizeOpenTag,
+  SizeOpenToken: () => SizeOpenToken,
+  SpanBlock: () => SpanBlock,
+  SpanCloseToken: () => SpanCloseToken,
+  SpanOpenTag: () => SpanOpenTag,
+  SpanOpenToken: () => SpanOpenToken,
+  StarChar: () => StarChar,
+  StrikeText: () => StrikeText,
+  StrongText: () => StrongText,
+  SubText: () => SubText,
+  SupText: () => SupText,
+  TabBlock: () => TabBlock,
+  TabCloseToken: () => TabCloseToken,
+  TabOpenToken: () => TabOpenToken,
+  TabViewBlock: () => TabViewBlock,
+  TabViewCloseToken: () => TabViewCloseToken,
+  TabViewOpenToken: () => TabViewOpenToken,
+  TableBar: () => TableBar,
+  TableTilde: () => TableTilde,
+  Text: () => Text2,
+  Title: () => Title,
+  UnderlineText: () => UnderlineText,
+  UserBlock: () => UserBlock,
+  UserOpen: () => UserOpen
+});
+var UnderlineText, StrikeText, Text2, Document, DivBlock, DivOpenTag, DivOpen, AttrList, Attr, Equals, AttrValue, DivClose, Rate, NoteBlock, NoteOpenToken, NoteCloseToken, SizeBlock, SizeOpenTag, SizeOpenToken, SizeCloseToken, SpanBlock, SpanOpenTag, SpanOpenToken, SpanCloseToken, AlignCenter, AlignCenterOpenToken, AlignCenterCloseToken, AlignLeft, AlignLeftOpenToken, AlignLeftCloseToken, AlignRight, AlignRightOpenToken, AlignRightCloseToken, IncludeBlock, IncludeOpen, IncludePath, IncludePart1, IncludePart2, IncludePart3, IncludeSimplePath, IncludeParam, IncludeBar, IncludeValue, StarChar, LinkURL, BracketChar, CollapsibleBlock, CollapsibleOpenTag, CollapsibleOpen, CollapsibleClose, CodeBlock, CodeOpenTag, CodeOpen, GenericToken, ModuleOpenToken, HTMLOpenToken, UserOpen, FootnoteOpen, FootnoteClose, TabViewOpenToken, TabViewCloseToken, TabOpenToken, TabCloseToken, ImageOpen, TableBar, TableTilde, Blockquote, ForcedNewLine, FootnoteBlock, Title, Hr, StrongText, EmText, SupText, SubText, Original, Monospace, CodeClose, UserBlock, ModuleBlock, ModuleOpenTag, ModuleContent, ModuleCloseToken, Footnote, ImageBlock, List1, List2, HTMLBlock, HTMLOpenTag, HTMLContent, HTMLCloseToken, TabViewBlock, TabBlock;
 var init_parser_terms = __esm({
   "src/parser.terms.js"() {
     UnderlineText = 1;
     StrikeText = 2;
     Text2 = 3;
+    Document = 4;
+    DivBlock = 5;
+    DivOpenTag = 6;
+    DivOpen = 7;
+    AttrList = 8;
+    Attr = 9;
+    Equals = 10;
+    AttrValue = 11;
+    DivClose = 13;
+    Rate = 14;
+    NoteBlock = 15;
+    NoteOpenToken = 16;
+    NoteCloseToken = 17;
+    SizeBlock = 18;
+    SizeOpenTag = 19;
+    SizeOpenToken = 20;
+    SizeCloseToken = 22;
+    SpanBlock = 23;
+    SpanOpenTag = 24;
+    SpanOpenToken = 25;
+    SpanCloseToken = 27;
+    AlignCenter = 28;
+    AlignCenterOpenToken = 29;
+    AlignCenterCloseToken = 30;
+    AlignLeft = 31;
+    AlignLeftOpenToken = 32;
+    AlignLeftCloseToken = 33;
+    AlignRight = 34;
+    AlignRightOpenToken = 35;
+    AlignRightCloseToken = 36;
+    IncludeBlock = 37;
+    IncludeOpen = 38;
+    IncludePath = 39;
+    IncludePart1 = 40;
+    IncludePart2 = 41;
+    IncludePart3 = 42;
+    IncludeSimplePath = 43;
+    IncludeParam = 44;
+    IncludeBar = 45;
+    IncludeValue = 46;
+    StarChar = 47;
+    LinkURL = 48;
+    BracketChar = 49;
+    CollapsibleBlock = 51;
+    CollapsibleOpenTag = 52;
+    CollapsibleOpen = 53;
+    CollapsibleClose = 55;
+    CodeBlock = 56;
+    CodeOpenTag = 57;
+    CodeOpen = 58;
+    GenericToken = 60;
+    ModuleOpenToken = 61;
+    HTMLOpenToken = 62;
+    UserOpen = 63;
+    FootnoteOpen = 64;
+    FootnoteClose = 65;
+    TabViewOpenToken = 66;
+    TabViewCloseToken = 67;
+    TabOpenToken = 68;
+    TabCloseToken = 69;
+    ImageOpen = 70;
+    TableBar = 71;
+    TableTilde = 72;
+    Blockquote = 73;
+    ForcedNewLine = 74;
+    FootnoteBlock = 75;
+    Title = 76;
+    Hr = 77;
+    StrongText = 78;
+    EmText = 79;
+    SupText = 80;
+    SubText = 81;
+    Original = 82;
+    Monospace = 83;
+    CodeClose = 84;
+    UserBlock = 85;
+    ModuleBlock = 88;
+    ModuleOpenTag = 89;
+    ModuleContent = 91;
+    ModuleCloseToken = 92;
+    Footnote = 93;
+    ImageBlock = 95;
+    List1 = 98;
+    List2 = 99;
+    HTMLBlock = 100;
+    HTMLOpenTag = 101;
+    HTMLContent = 103;
+    HTMLCloseToken = 104;
+    TabViewBlock = 105;
+    TabBlock = 106;
   }
 });
 
 // src/token.js
-var _, dash, newline, carriageReturn, bracketOpen, star, inlineTokenizer;
+var UnderlineText2, StrikeText2, Text3, _, dash, newline, carriageReturn, bracketOpen, star, inlineTokenizer;
 var init_token = __esm({
   "src/token.js"() {
     init_dist11();
     init_parser_terms();
+    ({ UnderlineText: UnderlineText2, StrikeText: StrikeText2, Text: Text3 } = parser_terms_exports);
     _ = 95;
     dash = 45;
     newline = 10;
@@ -24723,75 +24915,59 @@ var init_token = __esm({
     bracketOpen = 91;
     star = 42;
     inlineTokenizer = new ExternalTokenizer((input, stack) => {
-      let { next } = input;
+      let next = input.next;
       if (next == _) {
-        let start = input.pos;
-        input.advance();
-        if (input.next == _) {
-          input.advance();
+        if (input.peek(1) == _) {
+          let offset = 2;
           let hasContent2 = false;
-          while (input.next != -1 && input.next != newline && input.next != carriageReturn) {
-            if (input.next == _) {
-              input.advance();
-              if (input.next == _) {
-                input.advance();
+          while (true) {
+            let curr = input.peek(offset);
+            if (curr == -1 || curr == newline || curr == carriageReturn) break;
+            if (curr == _) {
+              if (input.peek(offset + 1) == _) {
                 if (hasContent2) {
-                  input.acceptToken(UnderlineText);
+                  for (let i = 0; i < offset + 2; i++) input.advance();
+                  input.acceptToken(UnderlineText2);
                   return;
                 }
                 break;
               }
-            } else {
-              hasContent2 = true;
-              input.advance();
             }
+            hasContent2 = true;
+            offset++;
           }
         }
-        input.goto(start);
-        next = input.next;
       }
       if (next == dash) {
-        let start = input.pos;
-        input.advance();
-        if (input.next == dash) {
-          input.advance();
-          if (input.next == dash) {
-            input.goto(start);
-          } else {
-            let hasContent2 = false;
-            while (input.next != -1 && input.next != newline && input.next != carriageReturn) {
-              if (input.next == dash) {
-                input.advance();
-                if (input.next == dash) {
-                  input.advance();
-                  if (hasContent2) {
-                    input.acceptToken(StrikeText);
-                    return;
-                  }
-                  break;
+        if (input.peek(1) == dash && input.peek(2) != dash) {
+          let offset = 2;
+          let hasContent2 = false;
+          while (true) {
+            let curr = input.peek(offset);
+            if (curr == -1 || curr == newline || curr == carriageReturn) break;
+            if (curr == dash) {
+              if (input.peek(offset + 1) == dash) {
+                if (hasContent2) {
+                  for (let i = 0; i < offset + 2; i++) input.advance();
+                  input.acceptToken(StrikeText2);
+                  return;
                 }
-              } else {
-                hasContent2 = true;
-                input.advance();
+                break;
               }
             }
-            input.goto(start);
+            hasContent2 = true;
+            offset++;
           }
-        } else {
-          input.goto(start);
         }
-        next = input.next;
       }
       if (next != -1) {
         while (next != -1 && next != newline && next != carriageReturn) {
-          if (next == _ || next == dash || next == bracketOpen || next == star) {
-            break;
-          }
+          if (next == _ || next == dash || next == bracketOpen || next == star) break;
           input.advance();
           next = input.next;
         }
         if (input.pos > stack.pos) {
-          input.acceptToken(Text2);
+          input.acceptToken(Text3);
         }
       }
     });
