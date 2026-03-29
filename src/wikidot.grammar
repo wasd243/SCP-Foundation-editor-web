@@ -364,19 +364,18 @@ Attr {
   // 关键：不包含空格和 ]，这样它遇到空格或闭合标签会自动停止
   attrPathToken { $[a-zA-Z0-9\-_:./%]+ }
   Equals    { "=" }
-  attrValueUnquoted { $[a-zA-Z0-9\-_./%]+ }
 
   // AttrValue 支持双引号包裹或者不带引号
   AttrValue { 
     '"' (!["\n\r])* '"' |   // 双引号包裹的值
-    attrValueUnquoted        // 不带引号的值
+    $[a-zA-Z0-9\-_:./%]+
   }
 
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
   BracketChar { "[" | "]" | "<" | ">" }
-  Text { $[a-zA-Z0-9\u4e00-\u9fa5]+ }
+  Text { ![\[\]*/\-_^, \t\n\r|~@>=<:#.%]+ }
   space { $[ \t]+ }
 
   @precedence {
