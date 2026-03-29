@@ -550,13 +550,13 @@ function hasWordChar(str) {
   return false;
 }
 function makeCategorizer(wordChars) {
-  return (char) => {
-    if (!/\S/.test(char))
+  return (char2) => {
+    if (!/\S/.test(char2))
       return CharCategory.Space;
-    if (hasWordChar(char))
+    if (hasWordChar(char2))
       return CharCategory.Word;
     for (let i = 0; i < wordChars.length; i++)
-      if (char.indexOf(wordChars[i]) > -1)
+      if (char2.indexOf(wordChars[i]) > -1)
         return CharCategory.Word;
     return CharCategory.Other;
   };
@@ -2438,7 +2438,7 @@ var init_dist = __esm({
     nonASCIISingleCaseWordChar = /[\u00df\u0587\u0590-\u05f4\u0600-\u06ff\u3040-\u309f\u30a0-\u30ff\u3400-\u4db5\u4e00-\u9fcc\uac00-\ud7af]/;
     try {
       wordChar = /* @__PURE__ */ new RegExp("[\\p{Alphabetic}\\p{Number}_]", "u");
-    } catch (_2) {
+    } catch (_) {
     }
     EditorState = class _EditorState {
       constructor(config2, doc2, selection2, values, computeSlot, tr) {
@@ -3833,7 +3833,7 @@ function hasSelection(dom, selection2) {
     return false;
   try {
     return contains(dom, selection2.anchorNode);
-  } catch (_2) {
+  } catch (_) {
     return false;
   }
 }
@@ -4714,11 +4714,11 @@ function moveByChar(view, start, forward, by) {
   let line = view.state.doc.lineAt(start.head), spans = view.bidiSpans(line);
   let direction = view.textDirectionAt(line.from);
   for (let cur2 = start, check = null; ; ) {
-    let next = moveVisually(line, spans, direction, cur2, forward), char = movedOver;
+    let next = moveVisually(line, spans, direction, cur2, forward), char2 = movedOver;
     if (!next) {
       if (line.number == (forward ? view.state.doc.lines : 1))
         return cur2;
-      char = "\n";
+      char2 = "\n";
       line = view.state.doc.line(line.number + (forward ? 1 : -1));
       spans = view.bidiSpans(line);
       next = view.visualLineSide(line, !forward);
@@ -4726,8 +4726,8 @@ function moveByChar(view, start, forward, by) {
     if (!check) {
       if (!by)
         return next;
-      check = by(char);
-    } else if (!check(char)) {
+      check = by(char2);
+    } else if (!check(char2)) {
       return cur2;
     }
     cur2 = next;
@@ -6771,7 +6771,7 @@ var init_dist2 = __esm({
               if (this.value.destroy)
                 try {
                   this.value.destroy();
-                } catch (_2) {
+                } catch (_) {
                 }
               this.deactivate();
             }
@@ -8242,7 +8242,7 @@ var init_dist2 = __esm({
               rawSel.collapse(anchor.node, anchor.offset);
               try {
                 rawSel.extend(head.node, head.offset);
-              } catch (_2) {
+              } catch (_) {
               }
             } else {
               let range = document.createRange();
@@ -20192,7 +20192,7 @@ var init_dist7 = __esm({
       @internal
       */
       unquote(text) {
-        return this.literal ? text : text.replace(/\\([nrt\\])/g, (_2, ch) => ch == "n" ? "\n" : ch == "r" ? "\r" : ch == "t" ? "	" : "\\");
+        return this.literal ? text : text.replace(/\\([nrt\\])/g, (_, ch) => ch == "n" ? "\n" : ch == "r" ? "\r" : ch == "t" ? "	" : "\\");
       }
       /**
       Compare this query to another query.
@@ -21266,8 +21266,8 @@ var init_dist8 = __esm({
         this.score = 0;
         this.matched = [];
         for (let p = 0; p < pattern.length; ) {
-          let char = codePointAt2(pattern, p), size = codePointSize2(char);
-          this.chars.push(char);
+          let char2 = codePointAt2(pattern, p), size = codePointSize2(char2);
+          this.chars.push(char2);
           let part = pattern.slice(p, p + size), upper = part.toUpperCase();
           this.folded.push(codePointAt2(upper == part ? part.toLowerCase() : upper, 0));
           p += size;
@@ -23102,7 +23102,7 @@ var init_dist11 = __esm({
       @internal
       */
       toString() {
-        return `[${this.stack.filter((_2, i) => i % 3 == 0).concat(this.state)}]@${this.pos}${this.score ? "!" + this.score : ""}`;
+        return `[${this.stack.filter((_, i) => i % 3 == 0).concat(this.state)}]@${this.pos}${this.score ? "!" + this.score : ""}`;
       }
       // Start an empty stack
       /**
@@ -23992,7 +23992,7 @@ var init_dist11 = __esm({
         this.tokens = [];
         this.mainToken = null;
         this.actions = [];
-        this.tokens = parser5.tokenizers.map((_2) => new CachedToken());
+        this.tokens = parser5.tokenizers.map((_) => new CachedToken());
       }
       getActions(stack) {
         let actionIndex = 0;
@@ -24803,88 +24803,88 @@ __export(parser_terms_exports, {
   UserBlock: () => UserBlock,
   UserOpen: () => UserOpen
 });
-var UnderlineText, StrikeText, Hr, Document, DivBlock, DivOpenTag, DivOpen, AttrList, Attr, Equals, AttrValue, DivClose, Rate, NoteBlock, NoteOpenToken, NoteCloseToken, SizeBlock, SizeOpenTag, SizeOpenToken, SizeCloseToken, SpanBlock, SpanOpenTag, SpanOpenToken, SpanCloseToken, AlignCenter, AlignCenterOpenToken, AlignCenterCloseToken, AlignLeft, AlignLeftOpenToken, AlignLeftCloseToken, AlignRight, AlignRightOpenToken, AlignRightCloseToken, IncludeBlock, IncludeOpen, IncludePath, IncludePart1, IncludePart2, IncludePart3, IncludeSimplePath, IncludeParam, IncludeBar, IncludeValue, StarChar, Text2, LinkURL, BracketChar, CollapsibleBlock, CollapsibleOpenTag, CollapsibleOpen, CollapsibleClose, CodeBlock, CodeOpenTag, CodeOpen, GenericToken, RawContent, List1, List2, ModuleOpenToken, HTMLOpenToken, UserOpen, FootnoteOpen, FootnoteClose, TabViewOpenToken, TabViewCloseToken, TabOpenToken, TabCloseToken, ImageOpen, TableBar, TableTilde, Blockquote, ForcedNewLine, FootnoteBlock, Title, StrongText, EmText, SupText, SubText, Original, Monospace, CodeClose, UserBlock, ModuleBlock, ModuleOpenTag, ModuleContent, ModuleCloseToken, Footnote, ImageBlock, HTMLBlock, HTMLOpenTag, HTMLContent, HTMLCloseToken, TabViewBlock, TabBlock;
+var StrongText, EmText, UnderlineText, StrikeText, SupText, SubText, Original, Hr, Document, DivBlock, DivOpenTag, DivOpen, AttrList, Attr, Equals, AttrValue, DivClose, Rate, NoteBlock, NoteOpenToken, NoteCloseToken, SizeBlock, SizeOpenTag, SizeOpenToken, SizeCloseToken, SpanBlock, SpanOpenTag, SpanOpenToken, SpanCloseToken, AlignCenter, AlignCenterOpenToken, AlignCenterCloseToken, AlignLeft, AlignLeftOpenToken, AlignLeftCloseToken, AlignRight, AlignRightOpenToken, AlignRightCloseToken, IncludeBlock, IncludeOpen, IncludePath, IncludePart1, IncludePart2, IncludePart3, IncludeSimplePath, IncludeParam, IncludeBar, IncludeValue, StarChar, Text2, LinkURL, BracketChar, CollapsibleBlock, CollapsibleOpenTag, CollapsibleOpen, CollapsibleClose, CodeBlock, CodeOpenTag, CodeOpen, GenericToken, RawContent, List1, List2, ModuleOpenToken, HTMLOpenToken, UserOpen, FootnoteOpen, FootnoteClose, TabViewOpenToken, TabViewCloseToken, TabOpenToken, TabCloseToken, ImageOpen, TableBar, TableTilde, Blockquote, ForcedNewLine, FootnoteBlock, Title, Monospace, CodeClose, UserBlock, ModuleBlock, ModuleOpenTag, ModuleContent, ModuleCloseToken, Footnote, ImageBlock, HTMLBlock, HTMLOpenTag, HTMLContent, HTMLCloseToken, TabViewBlock, TabBlock;
 var init_parser_terms = __esm({
   "src/parser.terms.js"() {
-    UnderlineText = 1;
-    StrikeText = 2;
-    Hr = 3;
-    Document = 4;
-    DivBlock = 5;
-    DivOpenTag = 6;
-    DivOpen = 7;
-    AttrList = 8;
-    Attr = 9;
-    Equals = 10;
-    AttrValue = 11;
-    DivClose = 13;
-    Rate = 14;
-    NoteBlock = 15;
-    NoteOpenToken = 16;
-    NoteCloseToken = 17;
-    SizeBlock = 18;
-    SizeOpenTag = 19;
-    SizeOpenToken = 20;
-    SizeCloseToken = 22;
-    SpanBlock = 23;
-    SpanOpenTag = 24;
-    SpanOpenToken = 25;
-    SpanCloseToken = 27;
-    AlignCenter = 28;
-    AlignCenterOpenToken = 29;
-    AlignCenterCloseToken = 30;
-    AlignLeft = 31;
-    AlignLeftOpenToken = 32;
-    AlignLeftCloseToken = 33;
-    AlignRight = 34;
-    AlignRightOpenToken = 35;
-    AlignRightCloseToken = 36;
-    IncludeBlock = 37;
-    IncludeOpen = 38;
-    IncludePath = 39;
-    IncludePart1 = 40;
-    IncludePart2 = 41;
-    IncludePart3 = 42;
-    IncludeSimplePath = 43;
-    IncludeParam = 44;
-    IncludeBar = 45;
-    IncludeValue = 46;
-    StarChar = 47;
-    Text2 = 48;
-    LinkURL = 49;
-    BracketChar = 50;
-    CollapsibleBlock = 52;
-    CollapsibleOpenTag = 53;
-    CollapsibleOpen = 54;
-    CollapsibleClose = 56;
-    CodeBlock = 57;
-    CodeOpenTag = 58;
-    CodeOpen = 59;
-    GenericToken = 61;
-    RawContent = 62;
-    List1 = 63;
-    List2 = 64;
-    ModuleOpenToken = 65;
-    HTMLOpenToken = 66;
-    UserOpen = 67;
-    FootnoteOpen = 68;
-    FootnoteClose = 69;
-    TabViewOpenToken = 70;
-    TabViewCloseToken = 71;
-    TabOpenToken = 72;
-    TabCloseToken = 73;
-    ImageOpen = 74;
-    TableBar = 75;
-    TableTilde = 76;
-    Blockquote = 77;
-    ForcedNewLine = 78;
-    FootnoteBlock = 79;
-    Title = 80;
-    StrongText = 81;
-    EmText = 82;
-    SupText = 83;
-    SubText = 84;
-    Original = 85;
+    StrongText = 1;
+    EmText = 2;
+    UnderlineText = 3;
+    StrikeText = 4;
+    SupText = 5;
+    SubText = 6;
+    Original = 7;
+    Hr = 8;
+    Document = 9;
+    DivBlock = 10;
+    DivOpenTag = 11;
+    DivOpen = 12;
+    AttrList = 13;
+    Attr = 14;
+    Equals = 15;
+    AttrValue = 16;
+    DivClose = 18;
+    Rate = 19;
+    NoteBlock = 20;
+    NoteOpenToken = 21;
+    NoteCloseToken = 22;
+    SizeBlock = 23;
+    SizeOpenTag = 24;
+    SizeOpenToken = 25;
+    SizeCloseToken = 27;
+    SpanBlock = 28;
+    SpanOpenTag = 29;
+    SpanOpenToken = 30;
+    SpanCloseToken = 32;
+    AlignCenter = 33;
+    AlignCenterOpenToken = 34;
+    AlignCenterCloseToken = 35;
+    AlignLeft = 36;
+    AlignLeftOpenToken = 37;
+    AlignLeftCloseToken = 38;
+    AlignRight = 39;
+    AlignRightOpenToken = 40;
+    AlignRightCloseToken = 41;
+    IncludeBlock = 42;
+    IncludeOpen = 43;
+    IncludePath = 44;
+    IncludePart1 = 45;
+    IncludePart2 = 46;
+    IncludePart3 = 47;
+    IncludeSimplePath = 48;
+    IncludeParam = 49;
+    IncludeBar = 50;
+    IncludeValue = 51;
+    StarChar = 52;
+    Text2 = 53;
+    LinkURL = 54;
+    BracketChar = 55;
+    CollapsibleBlock = 57;
+    CollapsibleOpenTag = 58;
+    CollapsibleOpen = 59;
+    CollapsibleClose = 61;
+    CodeBlock = 62;
+    CodeOpenTag = 63;
+    CodeOpen = 64;
+    GenericToken = 66;
+    RawContent = 67;
+    List1 = 68;
+    List2 = 69;
+    ModuleOpenToken = 70;
+    HTMLOpenToken = 71;
+    UserOpen = 72;
+    FootnoteOpen = 73;
+    FootnoteClose = 74;
+    TabViewOpenToken = 75;
+    TabViewCloseToken = 76;
+    TabOpenToken = 77;
+    TabCloseToken = 78;
+    ImageOpen = 79;
+    TableBar = 80;
+    TableTilde = 81;
+    Blockquote = 82;
+    ForcedNewLine = 83;
+    FootnoteBlock = 84;
+    Title = 85;
     Monospace = 86;
     CodeClose = 87;
     UserBlock = 88;
@@ -24904,45 +24904,86 @@ var init_parser_terms = __esm({
 });
 
 // src/token.js
-var UnderlineText2, StrikeText2, Hr2, _, dash, newline, carriageReturn, inlineTokenizer;
+function scanPair(input, code, termId, checkThird = false) {
+  if (input.next == code && input.peek(1) == code) {
+    if (checkThird && input.peek(2) == code) return false;
+    let offset = 2;
+    let hasContent2 = false;
+    while (true) {
+      let curr = input.peek(offset);
+      if (curr == -1 || curr == char.newline || curr == char.return) break;
+      if (curr == code && input.peek(offset + 1) == code) {
+        if (hasContent2) {
+          for (let i = 0; i < offset + 2; i++) input.advance();
+          input.acceptToken(termId);
+          return true;
+        }
+        break;
+      }
+      hasContent2 = true;
+      offset++;
+    }
+  }
+  return false;
+}
+var StrongText2, EmText2, SupText2, SubText2, Original2, UnderlineText2, StrikeText2, Hr2, char, inlineTokenizer;
 var init_token = __esm({
   "src/token.js"() {
     init_dist11();
     init_parser_terms();
-    ({ UnderlineText: UnderlineText2, StrikeText: StrikeText2, Hr: Hr2 } = parser_terms_exports);
-    _ = 95;
-    dash = 45;
-    newline = 10;
-    carriageReturn = 13;
-    inlineTokenizer = new ExternalTokenizer((input, stack) => {
-      let next = input.next;
-      if (next == _) {
-        if (input.peek(1) == _) {
-          let offset = 2;
-          let hasContent2 = false;
-          while (true) {
-            let curr = input.peek(offset);
-            if (curr == -1 || curr == newline || curr == carriageReturn) break;
-            if (curr == _) {
-              if (input.peek(offset + 1) == _) {
-                if (hasContent2) {
-                  for (let i = 0; i < offset + 2; i++) input.advance();
-                  input.acceptToken(UnderlineText2);
-                  return;
-                }
-                break;
-              }
-            }
-            hasContent2 = true;
-            offset++;
-          }
-        }
+    ({
+      StrongText: StrongText2,
+      EmText: EmText2,
+      SupText: SupText2,
+      SubText: SubText2,
+      Original: Original2,
+      UnderlineText: UnderlineText2,
+      StrikeText: StrikeText2,
+      Hr: Hr2
+    } = parser_terms_exports);
+    char = {
+      asterisk: 42,
+      // *
+      slash: 47,
+      // /
+      caret: 94,
+      // ^
+      comma: 44,
+      // ,
+      at: 64,
+      // @
+      underscore: 95,
+      // _
+      dash: 45,
+      // -
+      newline: 10,
+      // \n
+      return: 13
+      // \r
+    };
+    inlineTokenizer = new ExternalTokenizer((input) => {
+      const next = input.next;
+      if (next == char.asterisk) {
+        if (scanPair(input, char.asterisk, StrongText2, true)) return;
       }
-      if (next == dash) {
+      if (next == char.slash) {
+        if (scanPair(input, char.slash, EmText2, true)) return;
+      }
+      if (next == char.caret) {
+        if (scanPair(input, char.caret, SupText2)) return;
+      }
+      if (next == char.comma) {
+        if (scanPair(input, char.comma, SubText2)) return;
+      }
+      if (next == char.at) {
+        if (scanPair(input, char.at, Original2)) return;
+      }
+      if (next == char.underscore) {
+        if (scanPair(input, char.underscore, UnderlineText2)) return;
+      }
+      if (next == char.dash) {
         let count = 0;
-        while (input.peek(count) == dash) {
-          count++;
-        }
+        while (input.peek(count) == char.dash) count++;
         if (count >= 4) {
           for (let i = 0; i < count; i++) input.advance();
           input.acceptToken(Hr2);
@@ -24953,18 +24994,16 @@ var init_token = __esm({
           let hasContent2 = false;
           while (true) {
             let curr = input.peek(offset);
-            if (curr == -1 || curr == newline || curr == carriageReturn) break;
-            if (curr == dash) {
-              if (input.peek(offset + 1) == dash) {
-                if (input.peek(offset + 2) != dash) {
-                  if (hasContent2) {
-                    for (let i = 0; i < offset + 2; i++) input.advance();
-                    input.acceptToken(StrikeText2);
-                    return;
-                  }
+            if (curr == -1 || curr == char.newline || curr == char.return) break;
+            if (curr == char.dash && input.peek(offset + 1) == char.dash) {
+              if (input.peek(offset + 2) != char.dash) {
+                if (hasContent2) {
+                  for (let i = 0; i < offset + 2; i++) input.advance();
+                  input.acceptToken(StrikeText2);
+                  return;
                 }
-                break;
               }
+              break;
             }
             hasContent2 = true;
             offset++;
@@ -24983,16 +25022,16 @@ var init_parser = __esm({
     init_token();
     parser = LRParser.deserialize({
       version: 14,
-      states: "3zQVQROOO#uQQO'#CbO#}QRO'#CaO$UQRO'#CkO#uQQO'#CoO$]QRO'#CnO#uQQO'#CtO$dQRO'#CsO$kQRO'#CxO$rQRO'#C{O$yQRO'#DOO%QQQO'#DRO#uQQO'#DcO%cQRO'#DbO#uQQO'#DhO)[QRO'#DgO#uQQO'#EXOOQP'#EW'#EWO#uQQO'#E[O)cQRO'#EZO)jQQO'#E`OOQO'#Ec'#EcO#uQQO'#EbO#uQQO'#EfO)oQRO'#EeO)vQRO'#EjO#uQQO'#ElO)}QRO'#EkOOQP'#Ew'#EwOOQP'#En'#EnQVQROOO*UQQO'#CeOOQO'#Eo'#EoO*aQQO'#CdO*iQQO,58|OOQP,58{,58{O*nQRO,58{OOQP,59V,59VO*uQRO,59VO*|QQO,59ZOOQP,59Y,59YO+RQRO,59YO+YQQO,59`OOQP,59_,59_O+_QRO,59_OOQP,59d,59dO+fQRO,59dOOQP,59g,59gO+mQRO,59gOOQP,59j,59jO+tQRO,59jO+{QQO'#DUOOQO'#DX'#DXOOQO'#DT'#DTOOQO'#Eq'#EqO,ZQQO'#DYO,cQQO'#DYOOQO'#Ep'#EpO,hQQO,59mOOQP'#Da'#DaOOQP,59m,59mO,hQQO,59mO,sQQO,59}OOQP,59|,59|O,xQRO,59|O-PQQO,5:SOOQP'#Dk'#DkOOQP'#Es'#EsO-UQRO,5:ROOQP,5:R,5:RO-]QQO,5:sO-bQQO,5:vO-gQRO'#E^O-nQQO,5:uOOQP'#Ea'#EaO-sQRO,5:zO-zQQO,5:|O.PQQO,5;QO.UQRO'#EhO.]QQO,5;POOQP,5;U,5;UO.bQRO,5;UO.iQQO,5;WOOQP,5;V,5;VO.nQRO,5;VOOQP-E8l-E8lO.uQQO,59POOQO-E8m-E8mOOQP'#Ch'#ChOOQP1G.h1G.hOOQP1G.g1G.gOOQP1G.q1G.qOOQP'#Cq'#CqOOQP1G.u1G.uOOQP1G.t1G.tOOQP'#Cv'#CvOOQP1G.z1G.zOOQP1G.y1G.yOOQP1G/O1G/OOOQP1G/R1G/ROOQP1G/U1G/UO.zQQO'#DVOOQO,59p,59pOOQO-E8o-E8oO/YQQO,59tO/_QQO,59tOOQO-E8n-E8nOOQP1G/X1G/XO,hQQO1G/XOOQP'#De'#DeOOQP1G/i1G/iOOQP1G/h1G/hOOQP'#Dj'#DjOOQP1G/n1G/nOOQP-E8q-E8qOOQP1G/m1G/mOOQP'#EY'#EYOOQP1G0_1G0_OOQP'#E]'#E]OOQP1G0b1G0bOOQP1G0a1G0aOOQP1G0f1G0fO/dQRO1G0fOOQP'#Ed'#EdOOQP1G0h1G0hOOQP'#Eg'#EgOOQP1G0l1G0lOOQP1G0k1G0kOOQP1G0p1G0pOOQP'#Em'#EmOOQP1G0r1G0rOOQP1G0q1G0qOOQO1G.k1G.kOOQO'#DW'#DWOOQO,59q,59qO/kQQO1G/`O/pQQO1G/`OOQP7+$s7+$sOOQP7+&Q7+&QO/pQQO7+$zOOQO'#Er'#ErO0UQQO'#D[OOQO7+$z7+$zOOQO<<Hf<<HfOOQO-E8p-E8p",
-      stateData: "1s~O#jOS~OPlOQlORlOVPO^lO`ROdSOiUOmWOpXOsYOvZO!PlO!QlO!RlO!SlO!W[O!]^O!alO!blO!cbO!dgO!e`O!fdO!hiO!jjO!leO!mlO!nlO!olO!plO!qlO!rlO!slO!tlO!ulO!vlO!wlO!xlO#plO~O#loO#mWP~O]sO~PVOauO~PVOfxO~PVOk{O~PVOn}O~PVOq!PO~PVOt!RO~PVO}!YO#m!]O#n!TO#o!UO#p!WO~O!Y!aO~PVOP!dOQ!dOR!dOV!dOY!dOZ!dO]!dO`!dOa!dOd!dOf!dOi!dOk!dOm!dOn!dOp!dOq!dOs!dOt!dOv!dO}!dO!P!dO!Q!dO!R!dO!S!dO!W!dO!Y!dO!]!dO!`!dO!a!dO!b!dO!c!dO!d!dO!e!dO!f!dO!g!dO!h!dO!i!dO!j!dO!k!dO!l!dO!m!dO!n!dO!o!dO!p!dO!q!dO!r!dO!s!dO!t!dO!u!dO!v!dO!w!dO!x!dO#l!dO#n!dO#p!dO~O!y!gO~P%jO#R#QP~P%jO#m!lO~O#]#[P~P%jO!i!rO~PVO!k!uO~PVOY!xO#lXX#mXX~O#loO#mWX~O#m!zO~O]!|O~PVOa!}O~PVO#m#OO~Of#QO~PVO#m#RO~Ok#TO~PVOn#UO~PVOq#VO~PVOt#WO~PVO#n#XO}xX#mxX#pxX~O}#[O#p!WO~O#l#]O~O}!YO#m!]O#p!WO~O#m#aO~O!Y#cO~PVO#m#dO~O!y#gO~P%jO#m#hO~O#m#jO~O#R#QX~P%jO#R#lO~O!g#mO~PVO#m#oO~O#m#qO~O#]#[X~P%jO#]#sO~O!i#tO~PVO#m#uO~O!k#wO~PVOZ#xO~O#n#yO}yX#myX#pyX~O#l#{O~OY#|O~O!g$OO~PVOY$PO~OZ$QO!P$QO!Q$QO!R$QO!S$QO#l$QO~O}!OX#m!OX#p!OX~P/pO#]#R#m!RY!o^mnpqstikdf`a!h!i!j!k!c!dvV]!W!Y!]!y!e!q!f!g!l!m!n}#n#o!p#p!S!P!a!b!r!s!t!u!v!x!w#lZ#j!`!Q!]~",
-      goto: "/b#lPPPPP#m$XP$s%cPP%pPP#mPP#m%sP&_P#m&bP&|P#mPP#mPP#mPP#mP'P'S'V'Y'S']P'cPPPP'i#m'sP(_P#m(bP(|)PPPPPPPPPPPPPPPPPPPPPPPPPPP#m)X)s#m)v*b*eP#m*h#m*k+V#m+Y+t+wP#m#m+z,f,i-m-|.W.a.hPPP.v!RlOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n!RQOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nQrPQwSQzUQ!`[Q!c^Q!h`Q!ibQ!nfQ!ogR!tjgpPSU[^`bfgjqR!{r!RTOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#Pw!RVOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#SzR!_ZR!VZR#Y!TR#z#XX!ZZ![!_#`Q$S#|R$T$PQ!^ZS#_![!_R#}#`!R]OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#b!`!R_OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#e!c]!e_ch!f!j!p!RaOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#i!h!RcOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#k!iR!kcR!md!RfOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#p!n!RhOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#r!oR!qh!RkOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#v!tQnOQtQQvRQyTQ|VQ!OWQ!QXQ!SYQ!b]Q!siQ!vkh!wntvy|!O!Q!S!b!s!v#nR#n!mdqPSU[^`bfgjR!yqQ![ZS#^![#`R#`!_W!XZ![!_#`R#Z!XS$R#|$PR$U$RQ!f_Q!jcQ!phV#f!f!j!p!RmOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n",
-      nodeNames: "\u26A0 UnderlineText StrikeText Hr Document DivBlock DivOpenTag DivOpen AttrList Attr Equals AttrValue DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeValue StarChar Text LinkURL BracketChar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken RawContent List1 List2 ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock Title StrongText EmText SupText SubText Original Monospace CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
+      states: "3zQVQROOO#uQQO'#CgO#}QRO'#CfO$UQRO'#CpO#uQQO'#CtO$]QRO'#CsO#uQQO'#CyO$dQRO'#CxO$kQRO'#C}O$rQRO'#DQO$yQRO'#DTO%QQQO'#DWO#uQQO'#DhO%cQRO'#DgO#uQQO'#DmO)[QRO'#DlO#uQQO'#EXOOQP'#EW'#EWO#uQQO'#E[O)cQRO'#EZO)jQQO'#E`OOQO'#Ec'#EcO#uQQO'#EbO#uQQO'#EfO)oQRO'#EeO)vQRO'#EjO#uQQO'#ElO)}QRO'#EkOOQP'#Ew'#EwOOQP'#En'#EnQVQROOO*UQQO'#CjOOQO'#Eo'#EoO*aQQO'#CiO*iQQO,59ROOQP,59Q,59QO*nQRO,59QOOQP,59[,59[O*uQRO,59[O*|QQO,59`OOQP,59_,59_O+RQRO,59_O+YQQO,59eOOQP,59d,59dO+_QRO,59dOOQP,59i,59iO+fQRO,59iOOQP,59l,59lO+mQRO,59lOOQP,59o,59oO+tQRO,59oO+{QQO'#DZOOQO'#D^'#D^OOQO'#DY'#DYOOQO'#Eq'#EqO,ZQQO'#D_O,cQQO'#D_OOQO'#Ep'#EpO,hQQO,59rOOQP'#Df'#DfOOQP,59r,59rO,hQQO,59rO,sQQO,5:SOOQP,5:R,5:RO,xQRO,5:RO-PQQO,5:XOOQP'#Dp'#DpOOQP'#Es'#EsO-UQRO,5:WOOQP,5:W,5:WO-]QQO,5:sO-bQQO,5:vO-gQRO'#E^O-nQQO,5:uOOQP'#Ea'#EaO-sQRO,5:zO-zQQO,5:|O.PQQO,5;QO.UQRO'#EhO.]QQO,5;POOQP,5;U,5;UO.bQRO,5;UO.iQQO,5;WOOQP,5;V,5;VO.nQRO,5;VOOQP-E8l-E8lO.uQQO,59UOOQO-E8m-E8mOOQP'#Cm'#CmOOQP1G.m1G.mOOQP1G.l1G.lOOQP1G.v1G.vOOQP'#Cv'#CvOOQP1G.z1G.zOOQP1G.y1G.yOOQP'#C{'#C{OOQP1G/P1G/POOQP1G/O1G/OOOQP1G/T1G/TOOQP1G/W1G/WOOQP1G/Z1G/ZO.zQQO'#D[OOQO,59u,59uOOQO-E8o-E8oO/YQQO,59yO/_QQO,59yOOQO-E8n-E8nOOQP1G/^1G/^O,hQQO1G/^OOQP'#Dj'#DjOOQP1G/n1G/nOOQP1G/m1G/mOOQP'#Do'#DoOOQP1G/s1G/sOOQP-E8q-E8qOOQP1G/r1G/rOOQP'#EY'#EYOOQP1G0_1G0_OOQP'#E]'#E]OOQP1G0b1G0bOOQP1G0a1G0aOOQP1G0f1G0fO/dQRO1G0fOOQP'#Ed'#EdOOQP1G0h1G0hOOQP'#Eg'#EgOOQP1G0l1G0lOOQP1G0k1G0kOOQP1G0p1G0pOOQP'#Em'#EmOOQP1G0r1G0rOOQP1G0q1G0qOOQO1G.p1G.pOOQO'#D]'#D]OOQO,59v,59vO/kQQO1G/eO/pQQO1G/eOOQP7+$x7+$xOOQP7+&Q7+&QO/pQQO7+%POOQO'#Er'#ErO0UQQO'#DaOOQO7+%P7+%POOQO<<Hk<<HkOOQO-E8p-E8p",
+      stateData: "1n~O#jOS~OPlOQlORlOSlOTlOUlOVlOWlO[POclOeROiSOnUOrWOuXOxYO{ZO!UlO!VlO!WlO!XlO!][O!b^O!flO!glO!hbO!igO!j`O!kdO!miO!ojO!qeO!rlO!slO!tlO!ulO!vlO!wlO!xlO#plO~O#loO#m]P~ObsO~PVOfuO~PVOkxO~PVOp{O~PVOs}O~PVOv!PO~PVOy!RO~PVO!S!YO#m!]O#n!TO#o!UO#p!WO~O!_!aO~PVOP!dOQ!dOR!dOS!dOT!dOU!dOV!dOW!dO[!dO_!dO`!dOb!dOe!dOf!dOi!dOk!dOn!dOp!dOr!dOs!dOu!dOv!dOx!dOy!dO{!dO!S!dO!U!dO!V!dO!W!dO!X!dO!]!dO!_!dO!b!dO!e!dO!f!dO!g!dO!h!dO!i!dO!j!dO!k!dO!l!dO!m!dO!n!dO!o!dO!p!dO!q!dO!r!dO!s!dO!t!dO!u!dO!v!dO!w!dO!x!dO#l!dO#n!dO#p!dO~O!y!gO~P%jO#R#QP~P%jO#m!lO~O#]#[P~P%jO!n!rO~PVO!p!uO~PVO_!xO#l^X#m^X~O#loO#m]X~O#m!zO~Ob!|O~PVOf!}O~PVO#m#OO~Ok#QO~PVO#m#RO~Op#TO~PVOs#UO~PVOv#VO~PVOy#WO~PVO#n#XO!S}X#m}X#p}X~O!S#[O#p!WO~O#l#]O~O!S!YO#m!]O#p!WO~O#m#aO~O!_#cO~PVO#m#dO~O!y#gO~P%jO#m#hO~O#m#jO~O#R#QX~P%jO#R#lO~O!l#mO~PVO#m#oO~O#m#qO~O#]#[X~P%jO#]#sO~O!n#tO~PVO#m#uO~O!p#wO~PVO`#xO~O#n#yO!S!OX#m!OX#p!OX~O#l#{O~O_#|O~O!l$OO~PVO_$PO~O`$QO!U$QO!V$QO!W$QO!X$QO#l$QO~O!S!TX#m!TX#p!TX~P/pO#]#R#m!W_!tcrsuvxynpikef!m!n!o!p!h!i{[b!]!_!b!y!j!v!k!l!q!r!s!S#n#o!u#p!X!U!f!g!w!x#l`#j!e!Vb~",
+      goto: "/b#lPPPPPPPPPP#m$XP$s%cPP%pPP#mPP#m%sP&_P#m&bP&|P#mPP#mPP#mPP#mP'P'S'V'Y'S']P'cPPPP'i#m'sP(_P#m(bP(|)PPPPPPPPPPPPPPPPPPPPPP#m)X)s#m)v*b*eP#m*h#m*k+V#m+Y+t+wP#m#m+z,f,i-m-|.W.a.hPPP.v!RlOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n!RQOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nQrPQwSQzUQ!`[Q!c^Q!h`Q!ibQ!nfQ!ogR!tjgpPSU[^`bfgjqR!{r!RTOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#Pw!RVOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#SzR!_ZR!VZR#Y!TR#z#XX!ZZ![!_#`Q$S#|R$T$PQ!^ZS#_![!_R#}#`!R]OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#b!`!R_OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#e!c]!e_ch!f!j!p!RaOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#i!h!RcOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#k!iR!kcR!md!RfOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#p!n!RhOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#r!oR!qh!RkOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#v!tQnOQtQQvRQyTQ|VQ!OWQ!QXQ!SYQ!b]Q!siQ!vkh!wntvy|!O!Q!S!b!s!v#nR#n!mdqPSU[^`bfgjR!yqQ![ZS#^![#`R#`!_W!XZ![!_#`R#Z!XS$R#|$PR$U$RQ!f_Q!jcQ!phV#f!f!j!p!RmOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n",
+      nodeNames: "\u26A0 StrongText EmText UnderlineText StrikeText SupText SubText Original Hr Document DivBlock DivOpenTag DivOpen AttrList Attr Equals AttrValue DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeValue StarChar Text LinkURL BracketChar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken RawContent List1 List2 ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock Title Monospace CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
       maxTerm: 124,
       skippedNodes: [0],
       repeatNodeCount: 6,
-      tokenData: "$ ^~R|OX#{XY&rYZ'fZ]#{]^'f^p#{pq&rqr#{rs'kst.Ttu#{uv/_vz#{z{2Z{|6}|}Di}!OHj!O!P/_!P!QKj!Q![!(p![!]!+[!]!^#{!^!_!/u!_!`!0`!`!a!0{!a!b#{!b!c!2V!c!}!(p!}#O!8`#O#P#$X#P#Q#&]#Q#R#'g#R#SHj#S#T#{#T#[!(p#[#]#+h#]#o!(p#o#p#Aa#p#q#Me#q#r#{#r#s#Nq#s;'S#{;'S;=`&l<%lO#{~$Sm!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~&SU!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~&iP;=`<%l%}~&oP;=`<%l#{~&yX#j~!`~OX%}XY&rZ]%}^p%}pq&rq!}%}#O;'S%};'S;=`&f<%lO%}~'kO#p~~'ro!`~!Q~OX'kXY)sZ]'k^p'kpq)sqr'krs+yst)stu'kuv)svz'kz{)s{|'k|!Q)s!Q!['k![!])s!]!^'k!^!a)s!a!b'k!b!c)s!c!}'k!}#O+O#O#P'k#P#S)s#S#p'k#p#q)s#q#r'k#r#s)s#s;'S'k;'S;=`-}<%lO'k~)xX!`~OY)sZ])s^r)srs*es!})s!}#O+O#O;'S)s;'S;=`+s<%lO)s~*lUZ~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~+RVOY+OZ]+O^r+Ors+hs;'S+O;'S;=`+m<%lO+O~+mOZ~~+pP;=`<%l+O~+vP;=`<%l)s~,SmZ~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~.QP;=`<%l'k~.[W!S~!`~OY%}Z]%}^p%}pq.tq!}%}#O;'S%};'S;=`&f<%lO%}~.{U!b~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~/jc!S~#l~Z~!`~OY%}Z]%}^u%}uv0uv}%}}!O0u!O!P0u!P!Q0u!Q![0u![!]0u!]!c%}!c!}0u#O#R%}#R#S0u#S#T%}#T#o0u#o;'S%};'S;=`&f<%lO%}~1Oc#l~Z~!`~OY%}Z]%}^u%}uv0uv}%}}!O0u!O!P0u!P!Q0u!Q![0u![!]0u!]!c%}!c!}0u#O#R%}#R#S0u#S#T%}#T#o0u#o;'S%};'S;=`&f<%lO%}~2dY!S~!P~!`~OY%}Z]%}^p%}pq3Sqz%}z{3m{!}%}#O;'S%};'S;=`&f<%lO%}~3ZU!a~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~3rY!`~OY3mZ]3m]^4b^z3mz{5f{!}3m!}#O4b#O;'S3m;'S;=`6w<%lO3m~4eUOY4bZz4bz{4w{;'S4b;'S;=`5`<%lO4b~4zTOz4bz{5Z{;'S4b;'S;=`5`<%lO4b~5`O!s~~5cP;=`<%l4b~5kZ!`~OY3mYZ4bZ]3m]^4b^z3mz{6^{!}3m!}#O4b#O;'S3m;'S;=`6w<%lO3m~6eU!s~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~6zP;=`<%l3m~7Um!`~!Q~OX#{XY%}Z]#{^p#{pq9Pqs#{st%}tu#{uv%}vz#{z{%}{|:_|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~9WV!r~!`~OY9PZ]9P^!}9P!}#O9m#O;'S9P;'S;=`:X<%lO9P~9rT!r~OY9mZ]9m^;'S9m;'S;=`:R<%lO9m~:UP;=`<%l9m~:[P;=`<%l9P~:fm!`~!Q~OX#{XY%}Z]#{^p#{pq9Pqs#{st%}tu#{uv%}vz#{z{%}{|<a|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~<hm!`~!Q~OX#{XY%}Z]#{^p#{pq9Pqs#{st%}tu#{uv%}vz#{z{%}{|>c|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~>jm!`~!Q~OX#{XY%}Z]#{^p#{pq9Pqs#{st%}tu#{uv%}vz#{z{%}{|@e|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~@lm!`~!Q~OX#{XY%}Z]#{^p#{pq9Pqs#{st%}tu#{uv%}vz#{z{%}{|Bg|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~Bnm!`~!Q~OX#{XY%}Z]#{^p#{pq9Pqs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~DpW!S~!`~OY%}Z]%}^|%}|}EY}!}%}#O;'S%};'S;=`&f<%lO%}~E_Y!`~OYEYZ]EY]^E}^|EY|}GR}!}EY!}#OE}#O;'SEY;'S;=`Hd<%lOEY~FQUOYE}Z|E}|}Fd};'SE};'S;=`F{<%lOE}~FgTO|E}|}Fv};'SE};'S;=`F{<%lOE}~F{O!v~~GOP;=`<%lE}~GWZ!`~OYEYYZE}Z]EY]^E}^|EY|}Gy}!}EY!}#OE}#O;'SEY;'S;=`Hd<%lOEY~HQU!v~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~HgP;=`<%lEY~Hwc#o~!S~#l~Z~!`~OY%}Z]%}^u%}uvJSv}%}}!OJS!O!PJS!P!QJS!Q![JS![!]JS!]!c%}!c!}JS#O#R%}#R#SJS#S#T%}#T#oJS#o;'S%};'S;=`&f<%lO%}~J_c#o~#l~Z~!`~OY%}Z]%}^u%}uvJSv}%}}!OJS!O!PJS!P!QJS!Q![JS![!]JS!]!c%}!c!}JS#O#R%}#R#SJS#S#T%}#T#oJS#o;'S%};'S;=`&f<%lO%}~Kuc!S~#l~Z~!`~OY%}Z]%}^u%}uv0uv}%}}!O0u!O!P0u!P!QMQ!Q![0u![!]0u!]!c%}!c!}0u#O#R%}#R#S0u#S#T%}#T#o0u#o;'S%};'S;=`&f<%lO%}~MZf#l~Z~!`~OYNoYZ! dZ]No]^! d^uNouv!$Pv}No}!O!$P!O!P!$P!P!Q0u!Q![!$P![!]!$P!]!cNo!c!}!$P!}#O! d#O#RNo#R#S!$P#S#TNo#T#o!$P#o;'SNo;'S;=`!#y<%lONo~NtY!`~OYNoZ]No]^! d^!PNo!P!Q!!h!Q!}No!}#O! d#O;'SNo;'S;=`!#y<%lONo~! gUOY! dZ!P! d!P!Q! y!Q;'S! d;'S;=`!!b<%lO! d~! |TO!P! d!P!Q!!]!Q;'S! d;'S;=`!!b<%lO! d~!!bO!t~~!!eP;=`<%l! d~!!mZ!`~OYNoYZ! dZ]No]^! d^!PNo!P!Q!#`!Q!}No!}#O! d#O;'SNo;'S;=`!#y<%lONo~!#gU!t~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!#|P;=`<%lNo~!$Ye#l~Z~!`~OYNoZ]No]^! d^uNouv!$Pv}No}!O!$P!O!P!$P!P!Q!%k!Q![!$P![!]!$P!]!cNo!c!}!$P!}#O! d#O#RNo#R#S!$P#S#TNo#T#o!$P#o;'SNo;'S;=`!#y<%lONo~!%tf#l~Z~!`~OYNoYZ! dZ]No]^! d^uNouv!$Pv}No}!O!$P!O!P!$P!P!Q!'Y!Q![!$P![!]!$P!]!cNo!c!}!$P!}#O! d#O#RNo#R#S!$P#S#TNo#T#o!$P#o;'SNo;'S;=`!#y<%lONo~!'ec!t~#l~Z~!`~OY%}Z]%}^u%}uv0uv}%}}!O0u!O!P0u!P!Q0u!Q![0u![!]0u!]!c%}!c!}0u#O#R%}#R#S0u#S#T%}#T#o0u#o;'S%};'S;=`&f<%lO%}~!(}s#o~#l~Z~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvJSvz#{z{%}{|#{|}%}}!OJS!O!PJS!P!QJS!Q![!(p![!]JS!]!^#{!^!a%}!a!b#{!b!c%}!c!}!(p#O#P#{#P#R%}#R#SJS#S#T#{#T#o!(p#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~!+gg!S~#l~Z~!`~OY!-OZ]!-O^p!-Opq%}qu!-Ouv!.Rv}!-O}!O!.R!O!P!.R!P!Q!.R!Q![!.R![!]0u!]!c!-O!c!}!.R#O#P!-O#P#Q%}#Q#R!-O#R#S!.R#S#T!-O#T#o!.R#o;'S!-O;'S;=`!-{<%lO!-O~!-V[#n~!`~OY!-OZ]!-O^p!-Opq%}q![!-O![!]%}!]!}!-O#O#P!-O#P#Q%}#Q;'S!-O;'S;=`!-{<%lO!-O~!.OP;=`<%l!-O~!.^g#n~#l~Z~!`~OY!-OZ]!-O^p!-Opq%}qu!-Ouv!.Rv}!-O}!O!.R!O!P!.R!P!Q!.R!Q![!.R![!]0u!]!c!-O!c!}!.R#O#P!-O#P#Q%}#Q#R!-O#R#S!.R#S#T!-O#T#o!.R#o;'S!-O;'S;=`!-{<%lO!-O~!/|U!S~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!0iUY~!S~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!1SW!S~!`~OY%}Z]%}^p%}pq!1lq!}%}#O;'S%};'S;=`&f<%lO%}~!1sU!o~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!2^W!S~!`~OY%}Z]%}^!b%}!b!c!2v!c!}%}#O;'S%};'S;=`&f<%lO%}~!2{Y!`~OY!3kZ]!3k]^!4`^!b!3k!b!c!6{!c!}!3k!}#O!4`#O;'S!3k;'S;=`!6u<%lO!3k~!3pY!`~OY!3kZ]!3k]^!4`^!b!3k!b!c!5d!c!}!3k!}#O!4`#O;'S!3k;'S;=`!6u<%lO!3k~!4cUOY!4`Z!b!4`!b!c!4u!c;'S!4`;'S;=`!5^<%lO!4`~!4xTO!b!4`!b!c!5X!c;'S!4`;'S;=`!5^<%lO!4`~!5^O!w~~!5aP;=`<%l!4`~!5iZ!`~OY!3kYZ!4`Z]!3k]^!4`^!b!3k!b!c!6[!c!}!3k!}#O!4`#O;'S!3k;'S;=`!6u<%lO!3k~!6cU!w~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!6xP;=`<%l!3k~!7QZ!`~OY!3kYZ!4`Z]!3k]^!4`^!b!3k!b!c!7s!c!}!3k!}#O!4`#O;'S!3k;'S;=`!6u<%lO!3k~!7|U!p~!w~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!8gV!S~!`~OY%}Z]%}^!}%}!}#O!8|#O;'S%};'S;=`&f<%lO%}~!9P_z{!:O!P!Q!:m!^!_!FU!_!`!GX!`!a!Gm#V#W!HR#W#X!It#Y#Z!JV#[#]!LU#]#^!Lm#a#b!Mk#b#c# ^#g#h#!R#h#i##O#i#j!:U~!:RP#i#j!:U~!:XP#g#h!:[~!:_P#X#Y!:b~!:eP#f#g!:h~!:mO!e~~!:pZ!^!_!;c!_!`!;t!`!a!<V#V#W!<h#W#X!>s#Y#Z!?b#[#]!@o#a#b!Ad#b#c!Be#g#h!CY#h#i!Do~!;fP#P#Q!;i~!;lP#P#Q!;o~!;tOq~~!;wP#P#Q!;z~!;}P#P#Q!<Q~!<VOn~~!<YP#P#Q!<]~!<`P#P#Q!<c~!<hOt~~!<kP#c#d!<n~!<qQ#W#X!<w#`#a!=`~!<zP#X#Y!<}~!=QP#P#Q!=T~!=WP#P#Q!=Z~!=`O!y~~!=cP#`#a!=f~!=iP#T#U!=l~!=oP#d#e!=r~!=uP#g#h!=x~!={P#]#^!>O~!>RP#U#V!>U~!>XP#`#a!>[~!>_P#X#Y!>b~!>eP#P#Q!>h~!>kP#P#Q!>n~!>sO!Y~~!>vP#]#^!>y~!>|P#j#k!?P~!?SP#P#Q!?V~!?YP#P#Q!?]~!?bO]~~!?eP#c#d!?h~!?kP#c#d!?n~!?qP#h#i!?t~!?wP#b#c!?z~!?}P#c#d!@Q~!@TP#h#i!@W~!@ZP#X#Y!@^~!@aP#P#Q!@d~!@gP#P#Q!@j~!@oO!g~~!@rP#h#i!@u~!@xP#a#b!@{~!AOP#`#a!AR~!AUP#P#Q!AX~!A[P#P#Q!A_~!AdO#]~~!AgP#c#d!Aj~!AmP#W#X!Ap~!AsP#i#j!Av~!AyP#`#a!A|~!BPP#X#Y!BS~!BVP#P#Q!BY~!B]P#P#Q!B`~!BeO#R~~!BhP#c#d!Bk~!BnP#h#i!Bq~!BtP#X#Y!Bw~!BzP#P#Q!B}~!CQP#P#Q!CT~!CYOa~~!C]Q#]#^!Cc#d#e!DQ~!CfP#n#o!Ci~!ClP#X#Y!Co~!CrP#P#Q!Cu~!CxP#P#Q!C{~!DQOf~~!DTP#T#U!DW~!DZP#b#c!D^~!DaP#P#Q!Dd~!DgP#P#Q!Dj~!DoOk~~!DrP#T#U!Du~!DxP#U#V!D{~!EOQ#P#Q!EU#j#k!Ea~!EXP#P#Q!E[~!EaO!k~~!EdP#]#^!Eg~!EjP#X#Y!Em~!EpP#k#l!Es~!EvP#P#Q!Ey~!E|P#P#Q!FP~!FUO!i~~!FXQ#P#Q!F_#]#^!Fj~!FbP#P#Q!Fe~!FjOp~~!FmP#a#b!Fp~!FsP#T#U!Fv~!FyP#Z#[!F|~!GPP#X#Y!GS~!GXO!l~~!G[Q#P#Q!Gb#]#^!Fj~!GeP#P#Q!Gh~!GmOm~~!GpQ#P#Q!Gv#]#^!Fj~!GyP#P#Q!G|~!HROs~~!HUP#c#d!HX~!H[Q#W#X!Hb#`#a!Hm~!HeP#X#Y!Hh~!HmO!]~~!HpP#`#a!Hs~!HvP#T#U!Hy~!H|P#d#e!IP~!ISP#g#h!IV~!IYP#]#^!I]~!I`P#U#V!Ic~!IfP#`#a!Ii~!IlP#X#Y!Io~!ItO!W~~!IwP#]#^!Iz~!I}P#j#k!JQ~!JVOV~~!JYP#c#d!J]~!J`P#c#d!Jc~!JfP#h#i!Ji~!JlP#b#c!Jo~!JrP#c#d!Ju~!JxP#h#i!J{~!KOP#X#Y!KR~!KWP!f~#U#V!KZ~!K^P#`#a!Ka~!KdP#c#d!Kg~!KjP#V#W!Km~!KpP#_#`!Ks~!KvP#P#Q!Ky~!K|P#P#Q!LP~!LUO!q~~!LXP#h#i!L[~!L_P#a#b!Lb~!LeP#`#a!Lh~!LmO!d~~!LpQ#a#b!Fp#b#c!Lv~!LyP#V#W!L|~!MPP#`#a!MS~!MVP#i#j!MY~!M]P#W#X!M`~!McP#X#Y!Mf~!MkOv~~!MnP#c#d!Mq~!MtP#W#X!Mw~!MzP#i#j!M}~!NQP#`#a!NT~!NWP#X#Y!NZ~!N`P!c~pq!Nc~!NfP#f#g!Ni~!NlP#T#U!No~!NrP#h#i!Nu~!NxP#X#Y!N{~# OP#P#Q# R~# UP#P#Q# X~# ^O^~~# aP#c#d# d~# gP#h#i# j~# mP#X#Y# p~# sP#P#Q# v~# yP#P#Q# |~#!RO`~~#!UQ#]#^#![#d#e#!m~#!_P#n#o#!b~#!eP#X#Y#!h~#!mOd~~#!pP#T#U#!s~#!vP#b#c#!y~##OOi~~##RP#T#U##U~##XP#U#V##[~##aP!j~#j#k##d~##gP#]#^##j~##mP#X#Y##p~##sP#k#l##v~##yP#P#Q##|~#$PP#P#Q#$S~#$XO!h~~#$bm!S~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#&dW!S~!`~OY%}Z]%}^!}%}#O#P%}#P#Q#&|#Q;'S%};'S;=`&f<%lO%}~#'TU#m~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~#'nW!S~!`~OY%}Z]%}^!}%}#O#Q%}#Q#R#(W#R;'S%};'S;=`&f<%lO%}~#(]Y!`~OY#(WZ]#(W]^#({^!}#(W!}#O#({#O#Q#(W#Q#R#*P#R;'S#(W;'S;=`#+b<%lO#(W~#)OUOY#({Z#Q#({#Q#R#)b#R;'S#({;'S;=`#)y<%lO#({~#)eTO#Q#({#Q#R#)t#R;'S#({;'S;=`#)y<%lO#({~#)yO!u~~#)|P;=`<%l#({~#*UZ!`~OY#(WYZ#({Z]#(W]^#({^!}#(W!}#O#({#O#Q#(W#Q#R#*w#R;'S#(W;'S;=`#+b<%lO#(W~#+OU!u~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~#+eP;=`<%l#(W~#+uu#o~#l~Z~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvJSvz#{z{%}{|#{|}%}}!OJS!O!PJS!P!QJS!Q![!(p![!]JS!]!^#{!^!a%}!a!b#{!b!c%}!c!}!(p#O#P#{#P#R%}#R#SJS#S#T#{#T#h!(p#h#i#.Y#i#o!(p#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#.gu#o~#l~Z~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvJSvz#{z{%}{|#{|}%}}!OJS!O!PJS!P!QJS!Q![!(p![!]JS!]!^#{!^!a%}!a!b#{!b!c%}!c!}!(p#O#P#{#P#R%}#R#SJS#S#T#{#T#h!(p#h#i#0z#i#o!(p#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#1Xu#o~#l~Z~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvJSvz#{z{%}{|#{|}%}}!OJS!O!PJS!P!QJS!Q![!(p![!]JS!]!^#{!^!a%}!a!b#{!b!c%}!c!}!(p#O#P#{#P#R%}#R#SJS#S#T#{#T#d!(p#d#e#3l#e#o!(p#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#3yu#o~#l~Z~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvJSvz#{z{%}{|#{|}%}}!OJS!O!PJS!P!QJS!Q![!(p![!]#6^!]!^#{!^!a%}!a!b#{!b!c%}!c!}!(p#O#P#{#P#R%}#R#SJS#S#T#{#T#g!(p#g#h#>u#h#o!(p#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#6ic#o~#l~Z~!`~OY%}Z]%}^u%}uvJSv}%}}!OJS!O!PJS!P!Q#7t!Q![JS![!]JS!]!c%}!c!}JS#O#R%}#R#SJS#S#T%}#T#oJS#o;'S%};'S;=`&f<%lO%}~#8Pc#o~#l~Z~!`~OY%}Z]%}^u%}uvJSv}%}}!OJS!O!PJS!P!Q#9[!Q![JS![!]JS!]!c%}!c!}JS#O#R%}#R#SJS#S#T%}#T#oJS#o;'S%};'S;=`&f<%lO%}~#9gi#o~#l~Z~!`~OX#;UXY%}Z]#;U^p#;Upq%}qu#;Uuv#<yv}#;U}!O#<y!O!P#<y!P!Q#<y!Q![#<y![!]#<y!]!c#;U!c!}#<y!}#O#<R#O#P#;U#P#Q%}#Q#R#;U#R#S#<y#S#T#;U#T#o#<y#o;'S#;U;'S;=`#<s<%lO#;U~#;][!R~!`~OX#;UXY%}Z]#;U^p#;Upq%}q!}#;U!}#O#<R#O#P#;U#P#Q%}#Q;'S#;U;'S;=`#<s<%lO#;U~#<WV!R~OX#<RZ]#<R^p#<Rq#P#<R#Q;'S#<R;'S;=`#<m<%lO#<R~#<pP;=`<%l#<R~#<vP;=`<%l#;U~#=Wi!R~#o~#l~Z~!`~OX#;UXY%}Z]#;U^p#;Upq%}qu#;Uuv#<yv}#;U}!O#<y!O!P#<y!P!Q#<y!Q![#<y![!]#<y!]!c#;U!c!}#<y!}#O#<R#O#P#;U#P#Q%}#Q#R#;U#R#S#<y#S#T#;U#T#o#<y#o;'S#;U;'S;=`#<s<%lO#;U~#?Ss#o~#l~Z~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvJSvz#{z{%}{|#{|}%}}!OJS!O!PJS!P!QJS!Q![!(p![!]#6^!]!^#{!^!a%}!a!b#{!b!c%}!c!}!(p#O#P#{#P#R%}#R#SJS#S#T#{#T#o!(p#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#Ahn!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#o#{#o#p#Cf#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#Cmo!`~!Q~OX#CfXY#EnZ]#Cf]^#Fc^p#Cfpq#Enqs#Cfst#Entu#Cfuv#Envz#Cfz{#En{|#Cf|!Q#En!Q![#Cf![!]#En!]!^#Cf!^!a#En!a!b#Cf!b!c#En!c!}#Cf!}#O#Fc#O#P#Cf#P#S#En#S#p#Cf#p#q#En#q#r#IO#r#s#En#s;'S#Cf;'S;=`#M_<%lO#Cf~#EsY!`~OY#EnZ]#En]^#Fc^!}#En!}#O#Fc#O#q#En#q#r#Gg#r;'S#En;'S;=`#Hx<%lO#En~#FfUOY#FcZ#q#Fc#q#r#Fx#r;'S#Fc;'S;=`#Ga<%lO#Fc~#F{TO#q#Fc#q#r#G[#r;'S#Fc;'S;=`#Ga<%lO#Fc~#GaO!x~~#GdP;=`<%l#Fc~#GlZ!`~OY#EnYZ#FcZ]#En]^#Fc^!}#En!}#O#Fc#O#q#En#q#r#H_#r;'S#En;'S;=`#Hx<%lO#En~#HfU!x~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~#H{P;=`<%l#En~#IVp!`~!Q~OX#CfXY#EnYZ#FcZ]#Cf]^#Fc^p#Cfpq#Enqs#Cfst#Entu#Cfuv#Envz#Cfz{#En{|#Cf|!Q#En!Q![#Cf![!]#En!]!^#Cf!^!a#En!a!b#Cf!b!c#En!c!}#Cf!}#O#Fc#O#P#Cf#P#S#En#S#p#Cf#p#q#En#q#r#KZ#r#s#En#s;'S#Cf;'S;=`#M_<%lO#Cf~#Kdm!x~!`~!Q~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#MbP;=`<%l#Cf~#MnW}~!S~!`~OY%}Z]%}^!}%}#O#p%}#p#q#NW#q;'S%};'S;=`&f<%lO%}~#N_U!m~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~#NzU!n~!S~!`~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}",
+      tokenData: "#4{~R|OX#{XY&rYZ'fZ]#{]^'f^p#{pq&rqr#{rs'kst.Ttu#{uv/_vz#{z{2Z{|3g|}AR}!OAl!O!P/_!P!Q/_!Q![Dl![!]GW!]!^#{!^!_AR!_!`Kq!`!aL^!a!b#{!b!cMh!c!}Dl!}#O!!O#O#P!;w#P#Q!={#Q#RAR#R#SAl#S#T#{#T#[Dl#[#]!?V#]#oDl#o#p#'O#p#q#3S#q#r#{#r#s#4`#s;'S#{;'S;=`&l<%lO#{~$Sm!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~&SU!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~&iP;=`<%l%}~&oP;=`<%l#{~&yX#j~!e~OX%}XY&rZ]%}^p%}pq&rq!}%}#O;'S%};'S;=`&f<%lO%}~'kO#p~~'ro!e~!V~OX'kXY)sZ]'k^p'kpq)sqr'krs+yst)stu'kuv)svz'kz{)s{|'k|!Q)s!Q!['k![!])s!]!^'k!^!a)s!a!b'k!b!c)s!c!}'k!}#O+O#O#P'k#P#S)s#S#p'k#p#q)s#q#r'k#r#s)s#s;'S'k;'S;=`-}<%lO'k~)xX!e~OY)sZ])s^r)srs*es!})s!}#O+O#O;'S)s;'S;=`+s<%lO)s~*lU`~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~+RVOY+OZ]+O^r+Ors+hs;'S+O;'S;=`+m<%lO+O~+mO`~~+pP;=`<%l+O~+vP;=`<%l)s~,Sm`~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~.QP;=`<%l'k~.[W!X~!e~OY%}Z]%}^p%}pq.tq!}%}#O;'S%};'S;=`&f<%lO%}~.{U!g~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~/jc!X~#l~`~!e~OY%}Z]%}^u%}uv0uv}%}}!O0u!O!P0u!P!Q0u!Q![0u![!]0u!]!c%}!c!}0u#O#R%}#R#S0u#S#T%}#T#o0u#o;'S%};'S;=`&f<%lO%}~1Oc#l~`~!e~OY%}Z]%}^u%}uv0uv}%}}!O0u!O!P0u!P!Q0u!Q![0u![!]0u!]!c%}!c!}0u#O#R%}#R#S0u#S#T%}#T#o0u#o;'S%};'S;=`&f<%lO%}~2dW!X~!U~!e~OY%}Z]%}^p%}pq2|q!}%}#O;'S%};'S;=`&f<%lO%}~3TU!f~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~3nm!e~!V~OX#{XY%}Z]#{^p#{pq5iqs#{st%}tu#{uv%}vz#{z{%}{|6w|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~5pV!w~!e~OY5iZ]5i^!}5i!}#O6V#O;'S5i;'S;=`6q<%lO5i~6[T!w~OY6VZ]6V^;'S6V;'S;=`6k<%lO6V~6nP;=`<%l6V~6tP;=`<%l5i~7Om!e~!V~OX#{XY%}Z]#{^p#{pq5iqs#{st%}tu#{uv%}vz#{z{%}{|8y|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~9Qm!e~!V~OX#{XY%}Z]#{^p#{pq5iqs#{st%}tu#{uv%}vz#{z{%}{|:{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~;Sm!e~!V~OX#{XY%}Z]#{^p#{pq5iqs#{st%}tu#{uv%}vz#{z{%}{|<}|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~=Um!e~!V~OX#{XY%}Z]#{^p#{pq5iqs#{st%}tu#{uv%}vz#{z{%}{|?P|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~?Wm!e~!V~OX#{XY%}Z]#{^p#{pq5iqs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~AYU!X~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~Ayc#o~!X~#l~`~!e~OY%}Z]%}^u%}uvCUv}%}}!OCU!O!PCU!P!QCU!Q![CU![!]CU!]!c%}!c!}CU#O#R%}#R#SCU#S#T%}#T#oCU#o;'S%};'S;=`&f<%lO%}~Cac#o~#l~`~!e~OY%}Z]%}^u%}uvCUv}%}}!OCU!O!PCU!P!QCU!Q![CU![!]CU!]!c%}!c!}CU#O#R%}#R#SCU#S#T%}#T#oCU#o;'S%};'S;=`&f<%lO%}~Dys#o~#l~`~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvCUvz#{z{%}{|#{|}%}}!OCU!O!PCU!P!QCU!Q![Dl![!]CU!]!^#{!^!a%}!a!b#{!b!c%}!c!}Dl#O#P#{#P#R%}#R#SCU#S#T#{#T#oDl#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~Gcg!X~#l~`~!e~OYHzZ]Hz^pHzpq%}quHzuvI}v}Hz}!OI}!O!PI}!P!QI}!Q![I}![!]0u!]!cHz!c!}I}#O#PHz#P#Q%}#Q#RHz#R#SI}#S#THz#T#oI}#o;'SHz;'S;=`Iw<%lOHz~IR[#n~!e~OYHzZ]Hz^pHzpq%}q![Hz![!]%}!]!}Hz#O#PHz#P#Q%}#Q;'SHz;'S;=`Iw<%lOHz~IzP;=`<%lHz~JYg#n~#l~`~!e~OYHzZ]Hz^pHzpq%}quHzuvI}v}Hz}!OI}!O!PI}!P!QI}!Q![I}![!]0u!]!cHz!c!}I}#O#PHz#P#Q%}#Q#RHz#R#SI}#S#THz#T#oI}#o;'SHz;'S;=`Iw<%lOHz~KzU_~!X~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~LeW!X~!e~OY%}Z]%}^p%}pqL}q!}%}#O;'S%};'S;=`&f<%lO%}~MUU!t~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~MoW!X~!e~OY%}Z]%}^!b%}!b!cNX!c!}%}#O;'S%};'S;=`&f<%lO%}~N^W!e~OY%}Z]%}^!b%}!b!cNv!c!}%}#O;'S%};'S;=`&f<%lO%}~N{W!e~OY%}Z]%}^!b%}!b!c! e!c!}%}#O;'S%};'S;=`&f<%lO%}~! lU!u~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!!VV!X~!e~OY%}Z]%}^!}%}!}#O!!l#O;'S%};'S;=`&f<%lO%}~!!o_z{!#n!P!Q!$]!^!_!/t!_!`!0w!`!a!1]#V#W!1q#W#X!3d#Y#Z!3u#[#]!5t#]#^!6]#a#b!7Z#b#c!8|#g#h!9q#h#i!:n#i#j!#t~!#qP#i#j!#t~!#wP#g#h!#z~!#}P#X#Y!$Q~!$TP#f#g!$W~!$]O!j~~!$`Z!^!_!%R!_!`!%d!`!a!%u#V#W!&W#W#X!(c#Y#Z!)Q#[#]!*_#a#b!+S#b#c!,T#g#h!,x#h#i!._~!%UP#P#Q!%X~!%[P#P#Q!%_~!%dOv~~!%gP#P#Q!%j~!%mP#P#Q!%p~!%uOs~~!%xP#P#Q!%{~!&OP#P#Q!&R~!&WOy~~!&ZP#c#d!&^~!&aQ#W#X!&g#`#a!'O~!&jP#X#Y!&m~!&pP#P#Q!&s~!&vP#P#Q!&y~!'OO!y~~!'RP#`#a!'U~!'XP#T#U!'[~!'_P#d#e!'b~!'eP#g#h!'h~!'kP#]#^!'n~!'qP#U#V!'t~!'wP#`#a!'z~!'}P#X#Y!(Q~!(TP#P#Q!(W~!(ZP#P#Q!(^~!(cO!_~~!(fP#]#^!(i~!(lP#j#k!(o~!(rP#P#Q!(u~!(xP#P#Q!({~!)QOb~~!)TP#c#d!)W~!)ZP#c#d!)^~!)aP#h#i!)d~!)gP#b#c!)j~!)mP#c#d!)p~!)sP#h#i!)v~!)yP#X#Y!)|~!*PP#P#Q!*S~!*VP#P#Q!*Y~!*_O!l~~!*bP#h#i!*e~!*hP#a#b!*k~!*nP#`#a!*q~!*tP#P#Q!*w~!*zP#P#Q!*}~!+SO#]~~!+VP#c#d!+Y~!+]P#W#X!+`~!+cP#i#j!+f~!+iP#`#a!+l~!+oP#X#Y!+r~!+uP#P#Q!+x~!+{P#P#Q!,O~!,TO#R~~!,WP#c#d!,Z~!,^P#h#i!,a~!,dP#X#Y!,g~!,jP#P#Q!,m~!,pP#P#Q!,s~!,xOf~~!,{Q#]#^!-R#d#e!-p~!-UP#n#o!-X~!-[P#X#Y!-_~!-bP#P#Q!-e~!-hP#P#Q!-k~!-pOk~~!-sP#T#U!-v~!-yP#b#c!-|~!.PP#P#Q!.S~!.VP#P#Q!.Y~!._Op~~!.bP#T#U!.e~!.hP#U#V!.k~!.nQ#P#Q!.t#j#k!/P~!.wP#P#Q!.z~!/PO!p~~!/SP#]#^!/V~!/YP#X#Y!/]~!/`P#k#l!/c~!/fP#P#Q!/i~!/lP#P#Q!/o~!/tO!n~~!/wQ#P#Q!/}#]#^!0Y~!0QP#P#Q!0T~!0YOu~~!0]P#a#b!0`~!0cP#T#U!0f~!0iP#Z#[!0l~!0oP#X#Y!0r~!0wO!q~~!0zQ#P#Q!1Q#]#^!0Y~!1TP#P#Q!1W~!1]Or~~!1`Q#P#Q!1f#]#^!0Y~!1iP#P#Q!1l~!1qOx~~!1tP#c#d!1w~!1zQ#W#X!2Q#`#a!2]~!2TP#X#Y!2W~!2]O!b~~!2`P#`#a!2c~!2fP#T#U!2i~!2lP#d#e!2o~!2rP#g#h!2u~!2xP#]#^!2{~!3OP#U#V!3R~!3UP#`#a!3X~!3[P#X#Y!3_~!3dO!]~~!3gP#]#^!3j~!3mP#j#k!3p~!3uO[~~!3xP#c#d!3{~!4OP#c#d!4R~!4UP#h#i!4X~!4[P#b#c!4_~!4bP#c#d!4e~!4hP#h#i!4k~!4nP#X#Y!4q~!4vP!k~#U#V!4y~!4|P#`#a!5P~!5SP#c#d!5V~!5YP#V#W!5]~!5`P#_#`!5c~!5fP#P#Q!5i~!5lP#P#Q!5o~!5tO!v~~!5wP#h#i!5z~!5}P#a#b!6Q~!6TP#`#a!6W~!6]O!i~~!6`Q#a#b!0`#b#c!6f~!6iP#V#W!6l~!6oP#`#a!6r~!6uP#i#j!6x~!6{P#W#X!7O~!7RP#X#Y!7U~!7ZO{~~!7^P#c#d!7a~!7dP#W#X!7g~!7jP#i#j!7m~!7pP#`#a!7s~!7vP#X#Y!7y~!8OP!h~pq!8R~!8UP#f#g!8X~!8[P#T#U!8_~!8bP#h#i!8e~!8hP#X#Y!8k~!8nP#P#Q!8q~!8tP#P#Q!8w~!8|Oc~~!9PP#c#d!9S~!9VP#h#i!9Y~!9]P#X#Y!9`~!9cP#P#Q!9f~!9iP#P#Q!9l~!9qOe~~!9tQ#]#^!9z#d#e!:]~!9}P#n#o!:Q~!:TP#X#Y!:W~!:]Oi~~!:`P#T#U!:c~!:fP#b#c!:i~!:nOn~~!:qP#T#U!:t~!:wP#U#V!:z~!;PP!o~#j#k!;S~!;VP#]#^!;Y~!;]P#X#Y!;`~!;cP#k#l!;f~!;iP#P#Q!;l~!;oP#P#Q!;r~!;wO!m~~!<Qm!X~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~!>SW!X~!e~OY%}Z]%}^!}%}#O#P%}#P#Q!>l#Q;'S%};'S;=`&f<%lO%}~!>sU#m~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~!?du#o~#l~`~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvCUvz#{z{%}{|#{|}%}}!OCU!O!PCU!P!QCU!Q![Dl![!]CU!]!^#{!^!a%}!a!b#{!b!c%}!c!}Dl#O#P#{#P#R%}#R#SCU#S#T#{#T#hDl#h#i!Aw#i#oDl#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~!BUu#o~#l~`~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvCUvz#{z{%}{|#{|}%}}!OCU!O!PCU!P!QCU!Q![Dl![!]CU!]!^#{!^!a%}!a!b#{!b!c%}!c!}Dl#O#P#{#P#R%}#R#SCU#S#T#{#T#hDl#h#i!Di#i#oDl#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~!Dvu#o~#l~`~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvCUvz#{z{%}{|#{|}%}}!OCU!O!PCU!P!QCU!Q![Dl![!]CU!]!^#{!^!a%}!a!b#{!b!c%}!c!}Dl#O#P#{#P#R%}#R#SCU#S#T#{#T#dDl#d#e!GZ#e#oDl#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~!Ghu#o~#l~`~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvCUvz#{z{%}{|#{|}%}}!OCU!O!PCU!P!QCU!Q![Dl![!]!I{!]!^#{!^!a%}!a!b#{!b!c%}!c!}Dl#O#P#{#P#R%}#R#SCU#S#T#{#T#gDl#g#h#$d#h#oDl#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~!JWc#o~#l~`~!e~OY%}Z]%}^u%}uvCUv}%}}!OCU!O!PCU!P!Q!Kc!Q![CU![!]CU!]!c%}!c!}CU#O#R%}#R#SCU#S#T%}#T#oCU#o;'S%};'S;=`&f<%lO%}~!Knc#o~#l~`~!e~OY%}Z]%}^u%}uvCUv}%}}!OCU!O!PCU!P!Q!Ly!Q![CU![!]CU!]!c%}!c!}CU#O#R%}#R#SCU#S#T%}#T#oCU#o;'S%};'S;=`&f<%lO%}~!MUi#o~#l~`~!e~OX!NsXY%}Z]!Ns^p!Nspq%}qu!Nsuv#!hv}!Ns}!O#!h!O!P#!h!P!Q#!h!Q![#!h![!]#!h!]!c!Ns!c!}#!h!}#O# p#O#P!Ns#P#Q%}#Q#R!Ns#R#S#!h#S#T!Ns#T#o#!h#o;'S!Ns;'S;=`#!b<%lO!Ns~!Nz[!W~!e~OX!NsXY%}Z]!Ns^p!Nspq%}q!}!Ns!}#O# p#O#P!Ns#P#Q%}#Q;'S!Ns;'S;=`#!b<%lO!Ns~# uV!W~OX# pZ]# p^p# pq#P# p#Q;'S# p;'S;=`#![<%lO# p~#!_P;=`<%l# p~#!eP;=`<%l!Ns~#!ui!W~#o~#l~`~!e~OX!NsXY%}Z]!Ns^p!Nspq%}qu!Nsuv#!hv}!Ns}!O#!h!O!P#!h!P!Q#!h!Q![#!h![!]#!h!]!c!Ns!c!}#!h!}#O# p#O#P!Ns#P#Q%}#Q#R!Ns#R#S#!h#S#T!Ns#T#o#!h#o;'S!Ns;'S;=`#!b<%lO!Ns~#$qs#o~#l~`~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uvCUvz#{z{%}{|#{|}%}}!OCU!O!PCU!P!QCU!Q![Dl![!]!I{!]!^#{!^!a%}!a!b#{!b!c%}!c!}Dl#O#P#{#P#R%}#R#SCU#S#T#{#T#oDl#o#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#'Vn!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#o#{#o#p#)T#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#)[o!e~!V~OX#)TXY#+]Z]#)T]^#,Q^p#)Tpq#+]qs#)Tst#+]tu#)Tuv#+]vz#)Tz{#+]{|#)T|!Q#+]!Q![#)T![!]#+]!]!^#)T!^!a#+]!a!b#)T!b!c#+]!c!}#)T!}#O#,Q#O#P#)T#P#S#+]#S#p#)T#p#q#+]#q#r#.m#r#s#+]#s;'S#)T;'S;=`#2|<%lO#)T~#+bY!e~OY#+]Z]#+]]^#,Q^!}#+]!}#O#,Q#O#q#+]#q#r#-U#r;'S#+];'S;=`#.g<%lO#+]~#,TUOY#,QZ#q#,Q#q#r#,g#r;'S#,Q;'S;=`#-O<%lO#,Q~#,jTO#q#,Q#q#r#,y#r;'S#,Q;'S;=`#-O<%lO#,Q~#-OO!x~~#-RP;=`<%l#,Q~#-ZZ!e~OY#+]YZ#,QZ]#+]]^#,Q^!}#+]!}#O#,Q#O#q#+]#q#r#-|#r;'S#+];'S;=`#.g<%lO#+]~#.TU!x~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~#.jP;=`<%l#+]~#.tp!e~!V~OX#)TXY#+]YZ#,QZ]#)T]^#,Q^p#)Tpq#+]qs#)Tst#+]tu#)Tuv#+]vz#)Tz{#+]{|#)T|!Q#+]!Q![#)T![!]#+]!]!^#)T!^!a#+]!a!b#)T!b!c#+]!c!}#)T!}#O#,Q#O#P#)T#P#S#+]#S#p#)T#p#q#+]#q#r#0x#r#s#+]#s;'S#)T;'S;=`#2|<%lO#)T~#1Rm!x~!e~!V~OX#{XY%}Z]#{^p#{pq%}qs#{st%}tu#{uv%}vz#{z{%}{|#{|!Q%}!Q![#{![!]%}!]!^#{!^!a%}!a!b#{!b!c%}!c!}#{#O#P#{#P#S%}#S#p#{#p#q%}#q#r#{#r#s%}#s;'S#{;'S;=`&l<%lO#{~#3PP;=`<%l#)T~#3]W!S~!X~!e~OY%}Z]%}^!}%}#O#p%}#p#q#3u#q;'S%};'S;=`&f<%lO%}~#3|U!r~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}~#4iU!s~!X~!e~OY%}Z]%}^!}%}#O;'S%};'S;=`&f<%lO%}",
       tokenizers: [inlineTokenizer, 0],
-      topRules: { "Document": [0, 4] },
+      topRules: { "Document": [0, 9] },
       tokenPrec: 709
     });
   }
@@ -25008,7 +25047,7 @@ function isDigit(ch) {
 function isHex(ch) {
   return isDigit(ch) || ch >= 97 && ch <= 102 || ch >= 65 && ch <= 70;
 }
-var descendantOp, Unit, identifier, callee, VariableName, queryIdentifier, queryVariableName, QueryCallee, space, colon, parenL, underscore, bracketL, dash2, period, hash, percent, ampersand, backslash, newline2, asterisk, identifierTokens, identifiers, queryIdentifiers, descendant, unitToken, cssHighlighting, spec_callee, spec_queryIdentifier, spec_QueryCallee, spec_AtKeyword, spec_identifier, parser2;
+var descendantOp, Unit, identifier, callee, VariableName, queryIdentifier, queryVariableName, QueryCallee, space, colon, parenL, underscore, bracketL, dash, period, hash, percent, ampersand, backslash, newline, asterisk, identifierTokens, identifiers, queryIdentifiers, descendant, unitToken, cssHighlighting, spec_callee, spec_queryIdentifier, spec_QueryCallee, spec_AtKeyword, spec_identifier, parser2;
 var init_dist12 = __esm({
   "node_modules/@lezer/css/dist/index.js"() {
     init_dist11();
@@ -25052,22 +25091,22 @@ var init_dist12 = __esm({
     parenL = 40;
     underscore = 95;
     bracketL = 91;
-    dash2 = 45;
+    dash = 45;
     period = 46;
     hash = 35;
     percent = 37;
     ampersand = 38;
     backslash = 92;
-    newline2 = 10;
+    newline = 10;
     asterisk = 42;
     identifierTokens = (id2, varName, callee2) => (input, stack) => {
       for (let inside = false, dashes = 0, i = 0; ; i++) {
         let { next } = input;
-        if (isAlpha(next) || next == dash2 || next == underscore || inside && isDigit(next)) {
-          if (!inside && (next != dash2 || i > 0)) inside = true;
-          if (dashes === i && next == dash2) dashes++;
+        if (isAlpha(next) || next == dash || next == underscore || inside && isDigit(next)) {
+          if (!inside && (next != dash || i > 0)) inside = true;
+          if (dashes === i && next == dash) dashes++;
           input.advance();
-        } else if (next == backslash && input.peek(1) != newline2) {
+        } else if (next == backslash && input.peek(1) != newline) {
           input.advance();
           if (isHex(input.next)) {
             do {
@@ -25097,7 +25136,7 @@ var init_dist12 = __esm({
     descendant = new ExternalTokenizer((input) => {
       if (space.includes(input.peek(-1))) {
         let { next } = input;
-        if (isAlpha(next) || next == underscore || next == hash || next == period || next == asterisk || next == bracketL || next == colon && isAlpha(input.peek(1)) || next == dash2 || next == ampersand)
+        if (isAlpha(next) || next == underscore || next == hash || next == period || next == asterisk || next == bracketL || next == colon && isAlpha(input.peek(1)) || next == dash || next == ampersand)
           input.acceptToken(descendantOp);
       }
     });
@@ -25325,7 +25364,7 @@ function configureNesting(tags2 = [], attributes = []) {
     return null;
   });
 }
-var scriptText, StartCloseScriptTag, styleText, StartCloseStyleTag, textareaText, StartCloseTextareaTag, EndTag, SelfClosingEndTag, StartTag, StartScriptTag, StartStyleTag, StartTextareaTag, StartSelfClosingTag, StartCloseTag, NoMatchStartCloseTag, MismatchedStartCloseTag, missingCloseTag, IncompleteTag, IncompleteCloseTag, commentContent$1, Element, TagName, Attribute, AttributeName, AttributeValue, UnquotedAttributeValue, ScriptText, StyleText, TextareaText, OpenTag, CloseTag, Dialect_noMatch, Dialect_selfClosing, selfClosers, implicitlyClosed, closeOnOpen, cachedName, cachedInput, cachedPos, lessThan, greaterThan, slash, question, bang, dash3, startTagTerms, elementContext, tagStart, commentContent, endTag, scriptTokens, styleTokens, textareaTokens, htmlHighlighting, parser3;
+var scriptText, StartCloseScriptTag, styleText, StartCloseStyleTag, textareaText, StartCloseTextareaTag, EndTag, SelfClosingEndTag, StartTag, StartScriptTag, StartStyleTag, StartTextareaTag, StartSelfClosingTag, StartCloseTag, NoMatchStartCloseTag, MismatchedStartCloseTag, missingCloseTag, IncompleteTag, IncompleteCloseTag, commentContent$1, Element, TagName, Attribute, AttributeName, AttributeValue, UnquotedAttributeValue, ScriptText, StyleText, TextareaText, OpenTag, CloseTag, Dialect_noMatch, Dialect_selfClosing, selfClosers, implicitlyClosed, closeOnOpen, cachedName, cachedInput, cachedPos, lessThan, greaterThan, slash, question, bang, dash2, startTagTerms, elementContext, tagStart, commentContent, endTag, scriptTokens, styleTokens, textareaTokens, htmlHighlighting, parser3;
 var init_dist14 = __esm({
   "node_modules/@lezer/html/dist/index.js"() {
     init_dist11();
@@ -25450,7 +25489,7 @@ var init_dist14 = __esm({
     slash = 47;
     question = 63;
     bang = 33;
-    dash3 = 45;
+    dash2 = 45;
     startTagTerms = [StartTag, StartSelfClosingTag, StartScriptTag, StartStyleTag, StartTextareaTag];
     elementContext = new ContextTracker({
       start: null,
@@ -25499,7 +25538,7 @@ var init_dist14 = __esm({
           if (i) input.acceptToken(commentContent$1);
           break;
         }
-        if (input.next == dash3) {
+        if (input.next == dash2) {
           dashes++;
         } else if (input.next == greaterThan && dashes >= 2) {
           if (i >= 3) input.acceptToken(commentContent$1, -2);
@@ -25564,7 +25603,7 @@ var init_dist14 = __esm({
 function identifierChar(ch, start) {
   return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch == 95 || ch >= 192 || !start && ch >= 48 && ch <= 57;
 }
-var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline3, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
+var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline2, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
 var init_dist15 = __esm({
   "node_modules/@lezer/javascript/dist/index.js"() {
     init_dist11();
@@ -25577,7 +25616,7 @@ var init_dist15 = __esm({
     JSXStartTag = 4;
     insertSemi = 318;
     spaces = 320;
-    newline3 = 321;
+    newline2 = 321;
     LineComment = 5;
     BlockComment = 6;
     Dialect_jsx = 0;
@@ -25622,7 +25661,7 @@ var init_dist15 = __esm({
     trackNewline = new ContextTracker({
       start: false,
       shift(context, term) {
-        return term == LineComment || term == BlockComment || term == spaces ? context : term == newline3;
+        return term == LineComment || term == BlockComment || term == spaces ? context : term == newline2;
       },
       strict: false
     });
