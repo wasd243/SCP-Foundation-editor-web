@@ -1,8 +1,8 @@
 import { ExternalTokenizer } from "@lezer/lr"
 import * as Terms from "./parser.terms.js"
 
-// 注意：这里不再引入 Text
-const { UnderlineText, StrikeText } = Terms
+// 引入 Hr
+const { UnderlineText, StrikeText, Hr } = Terms
 
 const _ = 95, 
       dash = 45, 
@@ -17,11 +17,9 @@ export const inlineTokenizer = new ExternalTokenizer((input, stack) => {
     if (input.peek(1) == _) {
       let offset = 2;
       let hasContent = false;
-      
       while (true) {
         let curr = input.peek(offset);
         if (curr == -1 || curr == newline || curr == carriageReturn) break;
-        
         if (curr == _) {
           if (input.peek(offset + 1) == _) {
             if (hasContent) {
@@ -36,13 +34,25 @@ export const inlineTokenizer = new ExternalTokenizer((input, stack) => {
         offset++;
       }
     }
-    // 如果不是合法的 __...__，什么都不做，交还给 grammar 处理（它会被识别为 Punctuation）
   }
 
-  // 2. 删除线逻辑: --...--
+  // 2. 连字号逻辑: 处理 Hr (分割线) 和 StrikeText (删除线)
   if (next == dash) {
-    // 排除 ---- 分割线 (确保第三个字符不是 -)
-    if (input.peek(1) == dash && input.peek(2) != dash) {
+    let count = 0;
+    // 先数一数有多少个连续的 -
+    while (input.peek(count) == dash) {
+      count++;
+    }
+
+    // --- 情况 A: 水平分割线 (4个或更多 -) ---
+    if (count >= 4) {
+      for (let i = 0; i < count; i++) input.advance();
+      input.acceptToken(Hr);
+      return;
+    }
+
+    // --- 情况 B: 删除线 (--内容--) ---
+    if (count == 2) {
       let offset = 2;
       let hasContent = false;
       
@@ -52,10 +62,13 @@ export const inlineTokenizer = new ExternalTokenizer((input, stack) => {
         
         if (curr == dash) {
           if (input.peek(offset + 1) == dash) {
-            if (hasContent) {
-              for (let i = 0; i < offset + 2; i++) input.advance();
-              input.acceptToken(StrikeText);
-              return;
+            // 确保结尾恰好是两个 -，排除 --- 这种干扰
+            if (input.peek(offset + 2) != dash) {
+              if (hasContent) {
+                for (let i = 0; i < offset + 2; i++) input.advance();
+                input.acceptToken(StrikeText);
+                return;
+              }
             }
             break;
           }
@@ -64,5 +77,6 @@ export const inlineTokenizer = new ExternalTokenizer((input, stack) => {
         offset++;
       }
     }
+    // 如果是 1个 或 3个 -，或者没有正确闭合，直接跳过，交给 grammar 处理
   }
 });

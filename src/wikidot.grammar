@@ -5,7 +5,8 @@
 
 @external tokens inlineTokenizer from "./token.js" {
   UnderlineText,
-  StrikeText
+  StrikeText,
+  Hr
 }
 
 // 这是一个“黑洞集合”，包含了所有可能的 Token，唯独排除了 Module, HTML 和 Code 的闭合标签
@@ -353,7 +354,6 @@ Attr {
 
   Title { "+" "+"? "+"? "+"? "+"? "+"? " " ![\n\r]* }
   // ——————————————————————————常用标记——————————————————————————
-  Hr            { "----" "-"* }
   StrongText    { "**" (![*\n] | "*" ![*])* "**" }
   EmText        { "//" ![/] (![/\n] | "/" ![/])* "//" }
   SupText       { "^^" (![^\n] | "^" ![^])* "^^" }
@@ -427,7 +427,6 @@ Attr {
     IncludeBar,
     includeSeg_,
     includeSimplePath,
-    Hr,
     ForcedNewLine,
     newline,
     BracketChar,
