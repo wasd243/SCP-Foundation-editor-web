@@ -27552,26 +27552,22 @@ var require_editor_test = __commonJS({
       // ATTR highlight
     };
     var wikidotParser = parser.configure({
-      // 混合解析逻辑
       wrap: parseMixed((node, input) => {
         if (node.name === "ModuleContent") {
-          let moduleBlock = node.node.parent;
+          const moduleBlock = node.node.parent;
           if (moduleBlock && moduleBlock.name === "ModuleBlock") {
-            let openTag = moduleBlock.getChild("ModuleOpenTag");
+            const openTag = moduleBlock.getChild("ModuleOpenTag");
             if (openTag) {
-              let attrPathToken = openTag.getChild("attrPathToken");
-              if (attrPathToken) {
-                let attrText = input.read(attrPathToken.from, attrPathToken.to).toLowerCase();
-                const nativeModules = ["rate", "listpages", "backlinks"];
-                if (nativeModules.some((m) => attrText.includes(m))) {
-                  return null;
-                }
-                if (attrText.includes("css")) {
-                  return {
-                    parser: cssLanguage.parser,
-                    overlay: [{ from: node.from, to: node.to }]
-                  };
-                }
+              const tagText = input.read(openTag.from, openTag.to).toLowerCase();
+              const nativeModules = ["rate", "listpages", "backlinks"];
+              if (nativeModules.some((m) => tagText.includes(m))) {
+                return null;
+              }
+              if (tagText.includes("css")) {
+                return {
+                  parser: cssLanguage.parser,
+                  overlay: [{ from: node.from, to: node.to }]
+                };
               }
             }
           }
@@ -27579,7 +27575,6 @@ var require_editor_test = __commonJS({
         if (node.name === "HTMLContent") {
           return {
             parser: htmlLanguage.parser,
-            // 必须指定 overlay，否则 HTML 解析器会尝试解析外部的 [[/html]]
             overlay: [{ from: node.from, to: node.to }]
           };
         }
