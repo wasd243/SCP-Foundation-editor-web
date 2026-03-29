@@ -24701,10 +24701,11 @@ var init_dist11 = __esm({
 });
 
 // src/parser.terms.js
-var Text2, StrikeText, Hr;
+var Text2, UnderlineText, StrikeText, Hr;
 var init_parser_terms = __esm({
   "src/parser.terms.js"() {
     Text2 = 1;
+    UnderlineText = 2;
     StrikeText = 3;
     Hr = 4;
   }
@@ -24717,31 +24718,30 @@ var init_tokenizer = __esm({
     init_dist11();
     init_parser_terms();
     myTokenizer = new ExternalTokenizer((input) => {
-      const { next } = input;
+      const next = input.next;
       if (next < 0) return;
-      if (` 	
-\r="'[]{}|:./#@+*`.includes(String.fromCharCode(next))) return;
-      if (next >= 48 && next <= 57 || next >= 65 && next <= 90 || next >= 97 && next <= 122) {
-        return;
-      }
-      if (next == 45) {
+      if (next === 45) {
         let count = 0;
-        while (input.peek(count) == 45) count++;
+        while (input.peek(count) === 45) count++;
         if (count >= 4) {
           input.acceptToken(Hr, count);
           return;
         }
-        if (count == 2) {
+        if (count === 2) {
           input.acceptToken(StrikeText, 2);
           return;
         }
       }
+      if (next === 95 && input.peek(1) === 95) {
+        input.acceptToken(UnderlineText, 2);
+        return;
+      }
+      const stopChars = " []{}|*+-/_=#@:.~^,<>";
+      if (next <= 32 || stopChars.includes(String.fromCharCode(next))) return;
       let size = 1;
       while (true) {
         let n = input.peek(size);
-        if (n < 0 || ` 	
-\r="'[]{}|:./#@+*-`.includes(String.fromCharCode(n))) break;
-        if (n >= 48 && n <= 57 || n >= 65 && n <= 90 || n >= 97 && n <= 122) break;
+        if (n < 0 || n <= 32 || stopChars.includes(String.fromCharCode(n))) break;
         size++;
       }
       input.acceptToken(Text2, size);
