@@ -24802,53 +24802,53 @@ __export(parser_terms_exports, {
   UserBlock: () => UserBlock,
   UserOpen: () => UserOpen
 });
-var UnderlineText, StrikeText, Text2, Document, DivBlock, DivOpenTag, DivOpen, AttrList, Attr, Equals, AttrValue, DivClose, Rate, NoteBlock, NoteOpenToken, NoteCloseToken, SizeBlock, SizeOpenTag, SizeOpenToken, SizeCloseToken, SpanBlock, SpanOpenTag, SpanOpenToken, SpanCloseToken, AlignCenter, AlignCenterOpenToken, AlignCenterCloseToken, AlignLeft, AlignLeftOpenToken, AlignLeftCloseToken, AlignRight, AlignRightOpenToken, AlignRightCloseToken, IncludeBlock, IncludeOpen, IncludePath, IncludePart1, IncludePart2, IncludePart3, IncludeSimplePath, IncludeParam, IncludeBar, IncludeValue, StarChar, LinkURL, BracketChar, CollapsibleBlock, CollapsibleOpenTag, CollapsibleOpen, CollapsibleClose, CodeBlock, CodeOpenTag, CodeOpen, GenericToken, ModuleOpenToken, HTMLOpenToken, UserOpen, FootnoteOpen, FootnoteClose, TabViewOpenToken, TabViewCloseToken, TabOpenToken, TabCloseToken, ImageOpen, TableBar, TableTilde, Blockquote, ForcedNewLine, FootnoteBlock, Title, Hr, StrongText, EmText, SupText, SubText, Original, Monospace, CodeClose, UserBlock, ModuleBlock, ModuleOpenTag, ModuleContent, ModuleCloseToken, Footnote, ImageBlock, List1, List2, HTMLBlock, HTMLOpenTag, HTMLContent, HTMLCloseToken, TabViewBlock, TabBlock;
+var UnderlineText, StrikeText, Document, DivBlock, DivOpenTag, DivOpen, AttrList, Attr, Equals, AttrValue, DivClose, Rate, NoteBlock, NoteOpenToken, NoteCloseToken, SizeBlock, SizeOpenTag, SizeOpenToken, SizeCloseToken, SpanBlock, SpanOpenTag, SpanOpenToken, SpanCloseToken, AlignCenter, AlignCenterOpenToken, AlignCenterCloseToken, AlignLeft, AlignLeftOpenToken, AlignLeftCloseToken, AlignRight, AlignRightOpenToken, AlignRightCloseToken, IncludeBlock, IncludeOpen, IncludePath, IncludePart1, IncludePart2, IncludePart3, IncludeSimplePath, IncludeParam, IncludeBar, IncludeValue, StarChar, Text2, LinkURL, BracketChar, CollapsibleBlock, CollapsibleOpenTag, CollapsibleOpen, CollapsibleClose, CodeBlock, CodeOpenTag, CodeOpen, GenericToken, ModuleOpenToken, HTMLOpenToken, UserOpen, FootnoteOpen, FootnoteClose, TabViewOpenToken, TabViewCloseToken, TabOpenToken, TabCloseToken, ImageOpen, TableBar, TableTilde, Blockquote, ForcedNewLine, FootnoteBlock, Title, Hr, StrongText, EmText, SupText, SubText, Original, Monospace, CodeClose, UserBlock, ModuleBlock, ModuleOpenTag, ModuleContent, ModuleCloseToken, Footnote, ImageBlock, List1, List2, HTMLBlock, HTMLOpenTag, HTMLContent, HTMLCloseToken, TabViewBlock, TabBlock;
 var init_parser_terms = __esm({
   "src/parser.terms.js"() {
     UnderlineText = 1;
     StrikeText = 2;
-    Text2 = 3;
-    Document = 4;
-    DivBlock = 5;
-    DivOpenTag = 6;
-    DivOpen = 7;
-    AttrList = 8;
-    Attr = 9;
-    Equals = 10;
-    AttrValue = 11;
-    DivClose = 13;
-    Rate = 14;
-    NoteBlock = 15;
-    NoteOpenToken = 16;
-    NoteCloseToken = 17;
-    SizeBlock = 18;
-    SizeOpenTag = 19;
-    SizeOpenToken = 20;
-    SizeCloseToken = 22;
-    SpanBlock = 23;
-    SpanOpenTag = 24;
-    SpanOpenToken = 25;
-    SpanCloseToken = 27;
-    AlignCenter = 28;
-    AlignCenterOpenToken = 29;
-    AlignCenterCloseToken = 30;
-    AlignLeft = 31;
-    AlignLeftOpenToken = 32;
-    AlignLeftCloseToken = 33;
-    AlignRight = 34;
-    AlignRightOpenToken = 35;
-    AlignRightCloseToken = 36;
-    IncludeBlock = 37;
-    IncludeOpen = 38;
-    IncludePath = 39;
-    IncludePart1 = 40;
-    IncludePart2 = 41;
-    IncludePart3 = 42;
-    IncludeSimplePath = 43;
-    IncludeParam = 44;
-    IncludeBar = 45;
-    IncludeValue = 46;
-    StarChar = 47;
+    Document = 3;
+    DivBlock = 4;
+    DivOpenTag = 5;
+    DivOpen = 6;
+    AttrList = 7;
+    Attr = 8;
+    Equals = 9;
+    AttrValue = 10;
+    DivClose = 12;
+    Rate = 13;
+    NoteBlock = 14;
+    NoteOpenToken = 15;
+    NoteCloseToken = 16;
+    SizeBlock = 17;
+    SizeOpenTag = 18;
+    SizeOpenToken = 19;
+    SizeCloseToken = 21;
+    SpanBlock = 22;
+    SpanOpenTag = 23;
+    SpanOpenToken = 24;
+    SpanCloseToken = 26;
+    AlignCenter = 27;
+    AlignCenterOpenToken = 28;
+    AlignCenterCloseToken = 29;
+    AlignLeft = 30;
+    AlignLeftOpenToken = 31;
+    AlignLeftCloseToken = 32;
+    AlignRight = 33;
+    AlignRightOpenToken = 34;
+    AlignRightCloseToken = 35;
+    IncludeBlock = 36;
+    IncludeOpen = 37;
+    IncludePath = 38;
+    IncludePart1 = 39;
+    IncludePart2 = 40;
+    IncludePart3 = 41;
+    IncludeSimplePath = 42;
+    IncludeParam = 43;
+    IncludeBar = 44;
+    IncludeValue = 45;
+    StarChar = 46;
+    Text2 = 47;
     LinkURL = 48;
     BracketChar = 49;
     CollapsibleBlock = 51;
@@ -24902,18 +24902,16 @@ var init_parser_terms = __esm({
 });
 
 // src/token.js
-var UnderlineText2, StrikeText2, Text3, _, dash, newline, carriageReturn, bracketOpen, star, inlineTokenizer;
+var UnderlineText2, StrikeText2, _, dash, newline, carriageReturn, inlineTokenizer;
 var init_token = __esm({
   "src/token.js"() {
     init_dist11();
     init_parser_terms();
-    ({ UnderlineText: UnderlineText2, StrikeText: StrikeText2, Text: Text3 } = parser_terms_exports);
+    ({ UnderlineText: UnderlineText2, StrikeText: StrikeText2 } = parser_terms_exports);
     _ = 95;
     dash = 45;
     newline = 10;
     carriageReturn = 13;
-    bracketOpen = 91;
-    star = 42;
     inlineTokenizer = new ExternalTokenizer((input, stack) => {
       let next = input.next;
       if (next == _) {
@@ -24960,16 +24958,6 @@ var init_token = __esm({
           }
         }
       }
-      if (next != -1) {
-        while (next != -1 && next != newline && next != carriageReturn) {
-          if (next == _ || next == dash || next == bracketOpen || next == star) break;
-          input.advance();
-          next = input.next;
-        }
-        if (input.pos > stack.pos) {
-          input.acceptToken(Text3);
-        }
-      }
     });
   }
 });
@@ -24982,16 +24970,16 @@ var init_parser = __esm({
     init_token();
     parser = LRParser.deserialize({
       version: 14,
-      states: "3zQVQROOO#uQQO'#CbO#}QRO'#CaO$UQRO'#CkO#uQQO'#CoO$]QRO'#CnO#uQQO'#CtO$dQRO'#CsO$kQRO'#CxO$rQRO'#C{O$yQRO'#DOO%QQQO'#DRO#uQQO'#DbO%cQRO'#DaO#uQQO'#DgO)UQRO'#DfO#uQQO'#EUOOQP'#ET'#ETO#uQQO'#EXO)]QRO'#EWO)dQQO'#E]OOQO'#E`'#E`O#uQQO'#E_O#uQQO'#EeO)iQRO'#EdO)pQRO'#EiO#uQQO'#EkO)wQRO'#EjOOQP'#Ev'#EvOOQP'#Em'#EmQVQROOO*OQQO'#CeOOQO'#En'#EnO*ZQQO'#CdO*cQQO,58|OOQP,58{,58{O*hQRO,58{OOQP,59V,59VO*oQRO,59VO*vQQO,59ZOOQP,59Y,59YO*{QRO,59YO+SQQO,59`OOQP,59_,59_O+XQRO,59_OOQP,59d,59dO+`QRO,59dOOQP,59g,59gO+gQRO,59gOOQP,59j,59jO+nQRO,59jO+uQQO'#DUOOQO'#DX'#DXOOQO'#DT'#DTOOQO'#Ep'#EpO,TQQO'#DYO,]QQO'#DYOOQO'#Eo'#EoO,bQQO,59mOOQP'#D`'#D`OOQP,59m,59mO,bQQO,59mO,mQQO,59|OOQP,59{,59{O,rQRO,59{O,yQQO,5:ROOQP'#Dj'#DjOOQP'#Er'#ErO-OQRO,5:QOOQP,5:Q,5:QO-VQQO,5:pO-[QQO,5:sO-aQRO'#EZO-hQQO,5:rOOQP'#E^'#E^O-mQRO,5:wO-tQQO,5:yO-yQQO,5;PO.OQRO'#EgO.VQQO,5;OOOQP,5;T,5;TO.[QRO,5;TO.cQQO,5;VOOQP,5;U,5;UO.hQRO,5;UOOQP-E8k-E8kO.oQQO,59POOQO-E8l-E8lOOQP'#Ch'#ChOOQP1G.h1G.hOOQP1G.g1G.gOOQP1G.q1G.qOOQP'#Cq'#CqOOQP1G.u1G.uOOQP1G.t1G.tOOQP'#Cv'#CvOOQP1G.z1G.zOOQP1G.y1G.yOOQP1G/O1G/OOOQP1G/R1G/ROOQP1G/U1G/UO.tQQO'#DVOOQO,59p,59pOOQO-E8n-E8nO/SQQO,59tO/XQQO,59tOOQO-E8m-E8mOOQP1G/X1G/XO,bQQO1G/XOOQP'#Dd'#DdOOQP1G/h1G/hOOQP1G/g1G/gOOQP'#Di'#DiOOQP1G/m1G/mOOQP-E8p-E8pOOQP1G/l1G/lOOQP'#EV'#EVOOQP1G0[1G0[OOQP'#EY'#EYOOQP1G0_1G0_OOQP1G0^1G0^OOQP1G0c1G0cO/^QRO1G0cOOQP'#Ea'#EaOOQP1G0e1G0eOOQP'#Ef'#EfOOQP1G0k1G0kOOQP1G0j1G0jOOQP1G0o1G0oOOQP'#El'#ElOOQP1G0q1G0qOOQP1G0p1G0pOOQO1G.k1G.kOOQO'#DW'#DWOOQO,59q,59qO/eQQO1G/`O/jQRO1G/`OOQP7+$s7+$sOOQP7+%}7+%}O/jQRO7+$zOOQP'#Eq'#EqO0OQRO'#D[OOQO7+$z7+$zOOQO<<Hf<<HfOOQP-E8o-E8o",
-      stateData: "1k~O#iOS~OPlOQlORlOVPO^lO`ROdSOiUOmWOpXOsYOvZO!PlO!QlO!RlO!V[O![^O!_bO!`gO!a`O!bdO!diO!fjO!heO!ilO!jlO!klO!llO!mlO!nlO!olO!plO!qlO!rlO!slO!tlO!ulO#UlO#VlO#olO~O#koO#lWP~O]sO~PVOauO~PVOfxO~PVOk{O~PVOn}O~PVOq!PO~PVOt!RO~PVO}!YO#l!]O#m!TO#n!UO#o!WO~O!X!aO~PVOP!dOQ!dOR!dOV!dOY!dOZ!dO]!dO`!dOa!dOd!dOf!dOi!dOk!dOm!dOn!dOp!dOq!dOs!dOt!dOv!dO}!dO!P!dO!Q!dO!R!dO!V!dO!X!dO![!dO!_!dO!`!dO!a!dO!b!dO!c!dO!d!dO!e!dO!f!dO!g!dO!h!dO!i!dO!j!dO!k!dO!l!dO!m!dO!n!dO!o!dO!p!dO!q!dO!r!dO!s!dO!t!dO!u!dO#k!dO#l!dO#m!dO#o!dO~O!v!gO~P%jO#O!}P~P%jO#l!lO~O#[#ZP~P%jO!e!rO~PVO!g!uO~PVOY!xO#kXX#lXX~O#koO#lWX~O#l!zO~O]!|O~PVOa!}O~PVO#l#OO~Of#QO~PVO#l#RO~Ok#TO~PVOn#UO~PVOq#VO~PVOt#WO~PVO#m#XO}xX#lxX#oxX~O}#[O#o!WO~O#k#]O~O}!YO#l!]O#o!WO~O#l#aO~O!X#cO~PVO#l#dO~O!v#gO~P%jO#l#hO~O#l#jO~O#O!}X~P%jO#O#lO~O!c#mO~PVO#l#oO~O#l#qO~O#[#ZX~P%jO#[#sO~O!e#tO~PVO#l#uO~O!g#wO~PVOZ#xO~O#m#yO}yX#lyX#oyX~O#k#{O~OY#|O~O!c$OO~PVOY$PO~OR$QOZ$QO!P$QO!Q$QO!R$QO#k$QO~O}!OX#l!OX#o!OX~P/jO#l!QY!k^mnpqstikdf`a!d!e!f!g!_#O!`#[vV]!V!X![!v!a!m!b!c!h!i!j}#m#n!o!l#o!R#U#V!n!p!q!r!s!u!t#kZ#i!X~",
-      goto: "/a#kPPPPP#l$WP$r%bPP%oPP#lPP#l%rP&^P#l&aP&{P#lPP#lPP#lPP#lP'O'R'U'X'R'[P'bPPP'h#l'rP(^P#l(aP({)OPPPPPPPPPPPPPPPPPPPPPPPP#l)W)r#l)u*a*dP#l*g#l*j+UPP#l+X+s+vP#l#l+y,e,h-l-{.V.`.gPPP.u!RlOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n!RQOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nQrPQwSQzUQ!`[Q!c^Q!h`Q!ibQ!nfQ!ogR!tjgpPSU[^`bfgjqR!{r!RTOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#Pw!RVOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#SzR!_ZR!VZR#Y!TR#z#XX!ZZ![!_#`Q$S#|R$T$PQ!^ZS#_![!_R#}#`!R]OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#b!`!R_OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#e!c]!e_ch!f!j!p!RaOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#i!h!RcOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#k!iR!kcR!md!RfOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#p!n!RhOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#r!oR!qh!RkOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#v!tQnOQtQQvRQyTQ|VQ!OWQ!QXQ!SYQ!b]Q!siQ!vkh!wntvy|!O!Q!S!b!s!v#nR#n!mdqPSU[^`bfgjR!yqQ![ZS#^![#`R#`!_W!XZ![!_#`R#Z!XS$R#|$PR$U$RQ!f_Q!jcQ!phV#f!f!j!p!RmOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n",
-      nodeNames: "\u26A0 UnderlineText StrikeText Text Document DivBlock DivOpenTag DivOpen AttrList Attr Equals AttrValue DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeValue StarChar LinkURL BracketChar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock Title Hr StrongText EmText SupText SubText Original Monospace CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd List1 List2 HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
+      states: "3zQVQROOO#uQQO'#CaO#}QRO'#C`O$UQRO'#CjO#uQQO'#CnO$]QRO'#CmO#uQQO'#CsO$dQRO'#CrO$kQRO'#CwO$rQRO'#CzO$yQRO'#C}O%QQQO'#DQO#uQQO'#DbO%cQRO'#DaO#uQQO'#DgO)UQRO'#DfO#uQQO'#EUOOQP'#ET'#ETO#uQQO'#EXO)]QRO'#EWO)dQQO'#E]OOQO'#E`'#E`O#uQQO'#E_O#uQQO'#EeO)iQRO'#EdO)pQRO'#EiO#uQQO'#EkO)wQRO'#EjOOQP'#Ev'#EvOOQP'#Em'#EmQVQROOO*OQQO'#CdOOQO'#En'#EnO*ZQQO'#CcO*cQQO,58{OOQP,58z,58zO*hQRO,58zOOQP,59U,59UO*oQRO,59UO*vQQO,59YOOQP,59X,59XO*{QRO,59XO+SQQO,59_OOQP,59^,59^O+XQRO,59^OOQP,59c,59cO+`QRO,59cOOQP,59f,59fO+gQRO,59fOOQP,59i,59iO+nQRO,59iO+uQQO'#DTOOQO'#DW'#DWOOQO'#DS'#DSOOQO'#Ep'#EpO,TQQO'#DXO,]QQO'#DXOOQO'#Eo'#EoO,bQQO,59lOOQP'#D`'#D`OOQP,59l,59lO,bQQO,59lO,mQQO,59|OOQP,59{,59{O,rQRO,59{O,yQQO,5:ROOQP'#Dj'#DjOOQP'#Er'#ErO-OQRO,5:QOOQP,5:Q,5:QO-VQQO,5:pO-[QQO,5:sO-aQRO'#EZO-hQQO,5:rOOQP'#E^'#E^O-mQRO,5:wO-tQQO,5:yO-yQQO,5;PO.OQRO'#EgO.VQQO,5;OOOQP,5;T,5;TO.[QRO,5;TO.cQQO,5;VOOQP,5;U,5;UO.hQRO,5;UOOQP-E8k-E8kO.oQQO,59OOOQO-E8l-E8lOOQP'#Cg'#CgOOQP1G.g1G.gOOQP1G.f1G.fOOQP1G.p1G.pOOQP'#Cp'#CpOOQP1G.t1G.tOOQP1G.s1G.sOOQP'#Cu'#CuOOQP1G.y1G.yOOQP1G.x1G.xOOQP1G.}1G.}OOQP1G/Q1G/QOOQP1G/T1G/TO.tQQO'#DUOOQO,59o,59oOOQO-E8n-E8nO/SQQO,59sO/XQQO,59sOOQO-E8m-E8mOOQP1G/W1G/WO,bQQO1G/WOOQP'#Dd'#DdOOQP1G/h1G/hOOQP1G/g1G/gOOQP'#Di'#DiOOQP1G/m1G/mOOQP-E8p-E8pOOQP1G/l1G/lOOQP'#EV'#EVOOQP1G0[1G0[OOQP'#EY'#EYOOQP1G0_1G0_OOQP1G0^1G0^OOQP1G0c1G0cO/^QRO1G0cOOQP'#Ea'#EaOOQP1G0e1G0eOOQP'#Ef'#EfOOQP1G0k1G0kOOQP1G0j1G0jOOQP1G0o1G0oOOQP'#El'#ElOOQP1G0q1G0qOOQP1G0p1G0pOOQO1G.j1G.jOOQO'#DV'#DVOOQO,59p,59pO/eQQO1G/_O/jQQO1G/_OOQP7+$r7+$rOOQP7+%}7+%}O/jQQO7+$yOOQO'#Eq'#EqO0OQQO'#DZOOQO7+$y7+$yOOQO<<He<<HeOOQO-E8o-E8o",
+      stateData: "1l~O#iOS~OPlOQlOUPO]lO_ROcSOhUOlWOoXOrYOuZO!OlO!PlO!QlO!RlO!V[O![^O!_bO!`gO!a`O!bdO!diO!fjO!heO!ilO!jlO!klO!llO!mlO!nlO!olO!plO!qlO!rlO!slO!tlO!ulO#UlO#VlO#olO~O#koO#lVP~O[sO~PVO`uO~PVOexO~PVOj{O~PVOm}O~PVOp!PO~PVOs!RO~PVO|!YO#l!]O#m!TO#n!UO#o!WO~O!X!aO~PVOP!dOQ!dOU!dOX!dOY!dO[!dO_!dO`!dOc!dOe!dOh!dOj!dOl!dOm!dOo!dOp!dOr!dOs!dOu!dO|!dO!O!dO!P!dO!Q!dO!R!dO!V!dO!X!dO![!dO!_!dO!`!dO!a!dO!b!dO!c!dO!d!dO!e!dO!f!dO!g!dO!h!dO!i!dO!j!dO!k!dO!l!dO!m!dO!n!dO!o!dO!p!dO!q!dO!r!dO!s!dO!t!dO!u!dO#k!dO#l!dO#m!dO#o!dO~O!v!gO~P%jO#O!}P~P%jO#l!lO~O#[#ZP~P%jO!e!rO~PVO!g!uO~PVOX!xO#kWX#lWX~O#koO#lVX~O#l!zO~O[!|O~PVO`!}O~PVO#l#OO~Oe#QO~PVO#l#RO~Oj#TO~PVOm#UO~PVOp#VO~PVOs#WO~PVO#m#XO|wX#lwX#owX~O|#[O#o!WO~O#k#]O~O|!YO#l!]O#o!WO~O#l#aO~O!X#cO~PVO#l#dO~O!v#gO~P%jO#l#hO~O#l#jO~O#O!}X~P%jO#O#lO~O!c#mO~PVO#l#oO~O#l#qO~O#[#ZX~P%jO#[#sO~O!e#tO~PVO#l#uO~O!g#wO~PVOY#xO~O#m#yO|xX#lxX#oxX~O#k#{O~OX#|O~O!c$OO~PVOX$PO~OY$QO!O$QO!P$QO!Q$QO!R$QO#k$QO~O|}X#l}X#o}X~P/jO#l!QX!k]lmoprshjce_`!d!e!f!g!_#O!`#[uU[!V!X![!v!a!m!b!c!h!i!j|#m#n!o!l#o!R#U#V!n!p!q!r!s!u!t#kY#i!P!X~",
+      goto: "/a#kPPPP#l$WP$r%bPP%oPP#lPP#l%rP&^P#l&aP&{P#lPP#lPP#lPP#lP'O'R'U'X'R'[P'bPPPP'h#l'rP(^P#l(aP({)OPPPPPPPPPPPPPPPPPPPPPPPP#l)W)r#l)u*a*dP#l*g#l*j+UPP#l+X+s+vP#l#l+y,e,h-l-{.V.`.gPPP.u!RlOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n!RQOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nQrPQwSQzUQ!`[Q!c^Q!h`Q!ibQ!nfQ!ogR!tjgpPSU[^`bfgjqR!{r!RTOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#Pw!RVOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#SzR!_ZR!VZR#Y!TR#z#XX!ZZ![!_#`Q$S#|R$T$PQ!^ZS#_![!_R#}#`!R]OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#b!`!R_OQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#e!c]!e_ch!f!j!p!RaOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#i!h!RcOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#k!iR!kcR!md!RfOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#p!n!RhOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#r!oR!qh!RkOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#nR#v!tQnOQtQQvRQyTQ|VQ!OWQ!QXQ!SYQ!b]Q!siQ!vkh!wntvy|!O!Q!S!b!s!v#nR#n!mdqPSU[^`bfgjR!yqQ![ZS#^![#`R#`!_W!XZ![!_#`R#Z!XS$R#|$PR$U$RQ!f_Q!jcQ!phV#f!f!j!p!RmOQRTVWXY]ikntvy|!O!Q!S!b!m!s!v#n",
+      nodeNames: "\u26A0 UnderlineText StrikeText Document DivBlock DivOpenTag DivOpen AttrList Attr Equals AttrValue DivTagEnd DivClose Rate NoteBlock NoteOpenToken NoteCloseToken SizeBlock SizeOpenTag SizeOpenToken SizeTagEnd SizeCloseToken SpanBlock SpanOpenTag SpanOpenToken SpanTagEnd SpanCloseToken AlignCenter AlignCenterOpenToken AlignCenterCloseToken AlignLeft AlignLeftOpenToken AlignLeftCloseToken AlignRight AlignRightOpenToken AlignRightCloseToken IncludeBlock IncludeOpen IncludePath IncludePart1 IncludePart2 IncludePart3 IncludeSimplePath IncludeParam IncludeBar IncludeValue StarChar Text LinkURL BracketChar IncludeTagEnd CollapsibleBlock CollapsibleOpenTag CollapsibleOpen CollapsibleTagEnd CollapsibleClose CodeBlock CodeOpenTag CodeOpen CodeTagEnd GenericToken ModuleOpenToken HTMLOpenToken UserOpen FootnoteOpen FootnoteClose TabViewOpenToken TabViewCloseToken TabOpenToken TabCloseToken ImageOpen TableBar TableTilde Blockquote ForcedNewLine FootnoteBlock Title Hr StrongText EmText SupText SubText Original Monospace CodeClose UserBlock UserOpenTag UserTagEnd ModuleBlock ModuleOpenTag ModuleTagEnd ModuleContent ModuleCloseToken Footnote FootnoteTagEnd ImageBlock ImageOpenTag ImageTagEnd List1 List2 HTMLBlock HTMLOpenTag HTMLTagEnd HTMLContent HTMLCloseToken TabViewBlock TabBlock TabOpenTag TabTagEnd",
       maxTerm: 123,
       skippedNodes: [0],
       repeatNodeCount: 6,
-      tokenData: "!2x~RnXY#PYZ#[]^#[pq#Prs#ast$Uuv$az{%T{|&i|}(Y}!O)d!O!P$a!P!Q-b!Q![*Y![!]3w!^!_7s!_!`7x!`!a7}!b!c8[!c!}*Y!}#O:f#P#Q!%y#Q#R!&W#R#S*Y#T#[*Y#[#]!'b#]#o*Y#o#p!1[#p#q!2f#r#s!2s~#UQ#i~XY#Ppq#P~#aO#o~~#dVOY#aZ]#a^r#ars#ys;'S#a;'S;=`$O<%lO#a~$OOZ~~$RP;=`<%l#a~$XPpq$[~$aO#V~~$hX#k~Z~uv$a}!O$a!O!P$a!P!Q$a!Q![$a![!]$a!c!}$a#R#S$a#T#o$a~%YQ!P~pq%`z{%e~%eO#U~~%hUOY%eZz%ez{%z{;'S%e;'S;=`&c<%lO%e~%}TOz%ez{&^{;'S%e;'S;=`&c<%lO%e~&cO!p~~&fP;=`<%l%e~&lQpq&r{|'^~&wT!n~OY&rZ]&r^;'S&r;'S;=`'W<%lO&r~'ZP;=`<%l&r~'aQpq&r{|'g~'jQpq&r{|'p~'sQpq&r{|'y~'|Qpq&r{|(S~(VPpq&r~(]P|}(`~(cUOY(`Z|(`|}(u};'S(`;'S;=`)^<%lO(`~(xTO|(`|})X};'S(`;'S;=`)^<%lO(`~)^O!s~~)aP;=`<%l(`~)mX#n~#k~Z~uv*Y}!O+O!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#o*Y~*cX#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#o*Y~+XX#n~#k~Z~uv*Y}!O+t!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#o*Y~+}X#n~#k~Z~uv*Y}!O,j!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#o*Y~,uX#n~!o~#k~Z~uv*Y}!O,j!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#o*Y~-iX#k~Z~uv$a}!O$a!O!P$a!P!Q.U!Q![$a![!]$a!c!}$a#R#S$a#T#o$a~.]a#k~Z~Ou/buv0fv}/b}!O0f!O!P0f!P!Q$a!Q![0f![!]0f!]!c/b!c!}0f!}#R/b#R#S0f#S#T/b#T#o0f#o;'S/b;'S;=`0`<%lO/b~/eUOY/bZ!P/b!P!Q/w!Q;'S/b;'S;=`0`<%lO/b~/zTO!P/b!P!Q0Z!Q;'S/b;'S;=`0`<%lO/b~0`O!q~~0cP;=`<%l/b~0mb#k~Z~OY/bZu/buv0fv}/b}!O0f!O!P0f!P!Q1u!Q![0f![!]0f!]!c/b!c!}0f!}#R/b#R#S0f#S#T/b#T#o0f#o;'S/b;'S;=`0`<%lO/b~1|a#k~Z~Ou/buv0fv}/b}!O0f!O!P0f!P!Q3R!Q![0f![!]0f!]!c/b!c!}0f!}#R/b#R#S0f#S#T/b#T#o0f#o;'S/b;'S;=`0`<%lO/b~3[X!q~#k~Z~uv$a}!O$a!O!P$a!P!Q$a!Q![$a![!]$a!c!}$a#R#S$a#T#o$a~4Oe#k~Z~OY5aZ]5a^p5aqu5auv6Xv}5a}!O6X!O!P6X!P!Q6X!Q![6X![!]$a!]!c5a!c!}6X#O#P5a#Q#R5a#R#S6X#S#T5a#T#o6X#o;'S5a;'S;=`6R<%lO5a~5fX#m~OY5aZ]5a^p5aq![5a!]!}5a#O#P5a#Q;'S5a;'S;=`6R<%lO5a~6UP;=`<%l5a~6be#m~#k~Z~OY5aZ]5a^p5aqu5auv6Xv}5a}!O6X!O!P6X!P!Q6X!Q![6X![!]$a!]!c5a!c!}6X#O#P5a#Q#R5a#R#S6X#S#T5a#T#o6X#o;'S5a;'S;=`6R<%lO5a~7xO!R~~7}OY~~8SP!R~pq8V~8[O!k~~8_P!b!c8b~8eUOY8wZ!b8w!b!c9{!c;'S8w;'S;=`9u<%lO8w~8zUOY8wZ!b8w!b!c9^!c;'S8w;'S;=`9u<%lO8w~9aTO!b8w!b!c9p!c;'S8w;'S;=`9u<%lO8w~9uO!t~~9xP;=`<%l8w~:OTO!b8w!b!c:_!c;'S8w;'S;=`9u<%lO8w~:fO!l~!t~~:kP!R~!}#O:n~:q_z{;p!P!Q<_!^!_Gv!_!`Hy!`!aI_#V#WIs#W#XKf#Y#ZKw#[#]Mv#]#^N_#a#b! ]#b#c!#O#g#h!#s#h#i!$p#i#j;v~;sP#i#j;v~;yP#g#h;|~<PP#X#Y<S~<VP#f#g<Y~<_O!a~~<bZ!^!_=T!_!`=f!`!a=w#V#W>Y#W#X@e#Y#ZAS#[#]Ba#a#bCU#b#cDV#g#hDz#h#iFa~=WP#P#Q=Z~=^P#P#Q=a~=fOq~~=iP#P#Q=l~=oP#P#Q=r~=wOn~~=zP#P#Q=}~>QP#P#Q>T~>YOt~~>]P#c#d>`~>cQ#W#X>i#`#a?Q~>lP#X#Y>o~>rP#P#Q>u~>xP#P#Q>{~?QO!v~~?TP#`#a?W~?ZP#T#U?^~?aP#d#e?d~?gP#g#h?j~?mP#]#^?p~?sP#U#V?v~?yP#`#a?|~@PP#X#Y@S~@VP#P#Q@Y~@]P#P#Q@`~@eO!X~~@hP#]#^@k~@nP#j#k@q~@tP#P#Q@w~@zP#P#Q@}~ASO]~~AVP#c#dAY~A]P#c#dA`~AcP#h#iAf~AiP#b#cAl~AoP#c#dAr~AuP#h#iAx~A{P#X#YBO~BRP#P#QBU~BXP#P#QB[~BaO!c~~BdP#h#iBg~BjP#a#bBm~BpP#`#aBs~BvP#P#QBy~B|P#P#QCP~CUO#[~~CXP#c#dC[~C_P#W#XCb~CeP#i#jCh~CkP#`#aCn~CqP#X#YCt~CwP#P#QCz~C}P#P#QDQ~DVO#O~~DYP#c#dD]~D`P#h#iDc~DfP#X#YDi~DlP#P#QDo~DrP#P#QDu~DzOa~~D}Q#]#^ET#d#eEr~EWP#n#oEZ~E^P#X#YEa~EdP#P#QEg~EjP#P#QEm~ErOf~~EuP#T#UEx~E{P#b#cFO~FRP#P#QFU~FXP#P#QF[~FaOk~~FdP#T#UFg~FjP#U#VFm~FpQ#P#QFv#j#kGR~FyP#P#QF|~GRO!g~~GUP#]#^GX~G[P#X#YG_~GbP#k#lGe~GhP#P#QGk~GnP#P#QGq~GvO!e~~GyQ#P#QHP#]#^H[~HSP#P#QHV~H[Op~~H_P#a#bHb~HeP#T#UHh~HkP#Z#[Hn~HqP#X#YHt~HyO!h~~H|Q#P#QIS#]#^H[~IVP#P#QIY~I_Om~~IbQ#P#QIh#]#^H[~IkP#P#QIn~IsOs~~IvP#c#dIy~I|Q#W#XJS#`#aJ_~JVP#X#YJY~J_O![~~JbP#`#aJe~JhP#T#UJk~JnP#d#eJq~JtP#g#hJw~JzP#]#^J}~KQP#U#VKT~KWP#`#aKZ~K^P#X#YKa~KfO!V~~KiP#]#^Kl~KoP#j#kKr~KwOV~~KzP#c#dK}~LQP#c#dLT~LWP#h#iLZ~L^P#b#cLa~LdP#c#dLg~LjP#h#iLm~LpP#X#YLs~LxP!b~#U#VL{~MOP#`#aMR~MUP#c#dMX~M[P#V#WM_~MbP#_#`Me~MhP#P#QMk~MnP#P#QMq~MvO!m~~MyP#h#iM|~NPP#a#bNS~NVP#`#aNY~N_O!`~~NbQ#a#bHb#b#cNh~NkP#V#WNn~NqP#`#aNt~NwP#i#jNz~N}P#W#X! Q~! TP#X#Y! W~! ]Ov~~! `P#c#d! c~! fP#W#X! i~! lP#i#j! o~! rP#`#a! u~! xP#X#Y! {~!!QP!_~pq!!T~!!WP#f#g!!Z~!!^P#T#U!!a~!!dP#h#i!!g~!!jP#X#Y!!m~!!pP#P#Q!!s~!!vP#P#Q!!y~!#OO^~~!#RP#c#d!#U~!#XP#h#i!#[~!#_P#X#Y!#b~!#eP#P#Q!#h~!#kP#P#Q!#n~!#sO`~~!#vQ#]#^!#|#d#e!$_~!$PP#n#o!$S~!$VP#X#Y!$Y~!$_Od~~!$bP#T#U!$e~!$hP#b#c!$k~!$pOi~~!$sP#T#U!$v~!$yP#U#V!$|~!%RP!f~#j#k!%U~!%XP#]#^!%[~!%_P#X#Y!%b~!%eP#k#l!%h~!%kP#P#Q!%n~!%qP#P#Q!%t~!%yO!d~~!&OP!R~#P#Q!&R~!&WO#l~~!&ZP#Q#R!&^~!&aUOY!&^Z#Q!&^#Q#R!&s#R;'S!&^;'S;=`!'[<%lO!&^~!&vTO#Q!&^#Q#R!'V#R;'S!&^;'S;=`!'[<%lO!&^~!'[O!r~~!'_P;=`<%l!&^~!'kZ#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#h*Y#h#i!(^#i#o*Y~!(gZ#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#h*Y#h#i!)Y#i#o*Y~!)cZ#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q*Y!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#d*Y#d#e!*U#e#o*Y~!*_Z#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q*Y!Q![*Y![!]!+Q!c!}*Y#R#S*Y#T#g*Y#g#h!0f#h#o*Y~!+ZX#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q!+v!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#o*Y~!,PX#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q!,l!Q![*Y![!]*Y!c!}*Y#R#S*Y#T#o*Y~!,ue#n~#k~Z~OX!.WZ]!.W^p!.Wqu!.Wuv!.xv}!.W}!O!.x!O!P!.x!P!Q!.x!Q![!.x![!]!.x!]!c!.W!c!}!.x!}#P!.W#Q#R!.W#R#S!.x#S#T!.W#T#o!.x#o;'S!.W;'S;=`!.r<%lO!.W~!.]V!Q~OX!.WZ]!.W^p!.Wq#P!.W#Q;'S!.W;'S;=`!.r<%lO!.W~!.uP;=`<%l!.W~!/Te!Q~#n~#k~Z~OX!.WZ]!.W^p!.Wqu!.Wuv!.xv}!.W}!O!.x!O!P!.x!P!Q!.x!Q![!.x![!]!.x!]!c!.W!c!}!.x!}#P!.W#Q#R!.W#R#S!.x#S#T!.W#T#o!.x#o;'S!.W;'S;=`!.r<%lO!.W~!0oX#n~#k~Z~uv*Y}!O*Y!O!P*Y!P!Q*Y!Q![*Y![!]!+Q!c!}*Y#R#S*Y#T#o*Y~!1_P#o#p!1b~!1eUOY!1bZ#q!1b#q#r!1w#r;'S!1b;'S;=`!2`<%lO!1b~!1zTO#q!1b#q#r!2Z#r;'S!1b;'S;=`!2`<%lO!1b~!2`O!u~~!2cP;=`<%l!1b~!2kP}~#p#q!2n~!2sO!i~~!2xO!j~",
+      tokenData: "!M`~R|OX#{XY%]YZ%hZ]#{]^%h^p#{pq%]qr#{rs%mst)ztu#{uv*Vvz#{z{*y{|,_|}4k}!O5u!O!P*V!P!Q9s!Q![@Y![!]BS!]!^#{!^!_FO!_!`FT!`!aFY!a!b#{!b!cFg!c!}@Y!}#OHq#O#P#{#P#Q!4U#Q#R!4c#R#S6k#S#T#{#T#[@Y#[#]!5m#]#o@Y#o#p!D{#p#q!L|#q#r#{#r#s!MZ#s;'S#{;'S;=`%V<%lO#{~$Qa!P~OX#{Z]#{^p#{qs#{tu#{vz#{{|#{!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~%YP;=`<%l#{~%bQ#i~XY%]pq%]~%mO#o~~%ro!P~OX%mXY'sZ]%m^p%mpq'sqr%mrs(hst'stu%muv'svz%mz{'s{|%m|!Q's!Q![%m![!]'s!]!^%m!^!a's!a!b%m!b!c's!c!}%m!}#O's#O#P%m#P#S's#S#p%m#p#q's#q#r%m#r#s's#s;'S%m;'S;=`)t<%lO%m~'vVOY'sZ]'s^r'srs(]s;'S's;'S;=`(b<%lO's~(bOY~~(eP;=`<%l's~(oaY~!P~OX#{Z]#{^p#{qs#{tu#{vz#{{|#{!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~)wP;=`<%l%m~)}Ppq*Q~*VO#V~~*^X#k~Y~uv*V}!O*V!O!P*V!P!Q*V!Q![*V![!]*V!c!}*V#R#S*V#T#o*V~+OQ!O~pq+Uz{+Z~+ZO#U~~+^UOY+ZZz+Zz{+p{;'S+Z;'S;=`,X<%lO+Z~+sTOz+Zz{,S{;'S+Z;'S;=`,X<%lO+Z~,XO!p~~,[P;=`<%l+Z~,db!P~OX#{Z]#{^p#{pq-lqs#{tu#{vz#{{|.W!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~-qT!n~OY-lZ]-l^;'S-l;'S;=`.Q<%lO-l~.TP;=`<%l-l~.]b!P~OX#{Z]#{^p#{pq-lqs#{tu#{vz#{{|/e!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~/jb!P~OX#{Z]#{^p#{pq-lqs#{tu#{vz#{{|0r!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~0wb!P~OX#{Z]#{^p#{pq-lqs#{tu#{vz#{{|2P!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~2Ub!P~OX#{Z]#{^p#{pq-lqs#{tu#{vz#{{|3^!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~3cb!P~OX#{Z]#{^p#{pq-lqs#{tu#{vz#{{|#{!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~4nP|}4q~4tUOY4qZ|4q|}5W};'S4q;'S;=`5o<%lO4q~5ZTO|4q|}5j};'S4q;'S;=`5o<%lO4q~5oO!s~~5rP;=`<%l4q~6OX#n~#k~Y~uv6k}!O7a!O!P6k!P!Q6k!Q![6k![!]6k!c!}6k#R#S6k#T#o6k~6tX#n~#k~Y~uv6k}!O6k!O!P6k!P!Q6k!Q![6k![!]6k!c!}6k#R#S6k#T#o6k~7jX#n~#k~Y~uv6k}!O8V!O!P6k!P!Q6k!Q![6k![!]6k!c!}6k#R#S6k#T#o6k~8`X#n~#k~Y~uv6k}!O8{!O!P6k!P!Q6k!Q![6k![!]6k!c!}6k#R#S6k#T#o6k~9WX#n~!o~#k~Y~uv6k}!O8{!O!P6k!P!Q6k!Q![6k![!]6k!c!}6k#R#S6k#T#o6k~9zX#k~Y~uv*V}!O*V!O!P*V!P!Q:g!Q![*V![!]*V!c!}*V#R#S*V#T#o*V~:na#k~Y~Ou;suv<wv};s}!O<w!O!P<w!P!Q*V!Q![<w![!]<w!]!c;s!c!}<w!}#R;s#R#S<w#S#T;s#T#o<w#o;'S;s;'S;=`<q<%lO;s~;vUOY;sZ!P;s!P!Q<Y!Q;'S;s;'S;=`<q<%lO;s~<]TO!P;s!P!Q<l!Q;'S;s;'S;=`<q<%lO;s~<qO!q~~<tP;=`<%l;s~=Ob#k~Y~OY;sZu;suv<wv};s}!O<w!O!P<w!P!Q>W!Q![<w![!]<w!]!c;s!c!}<w!}#R;s#R#S<w#S#T;s#T#o<w#o;'S;s;'S;=`<q<%lO;s~>_a#k~Y~Ou;suv<wv};s}!O<w!O!P<w!P!Q?d!Q![<w![!]<w!]!c;s!c!}<w!}#R;s#R#S<w#S#T;s#T#o<w#o;'S;s;'S;=`<q<%lO;s~?mX!q~#k~Y~uv*V}!O*V!O!P*V!P!Q*V!Q![*V![!]*V!c!}*V#R#S*V#T#o*V~@ei#n~#k~Y~!P~OX#{Z]#{^p#{qs#{tu#{uv6kvz#{{|#{}!O6k!O!P6k!P!Q6k!Q![@Y![!]6k!]!^#{!a!b#{!c!}@Y#O#P#{#R#S6k#S#T#{#T#o@Y#o#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~BZe#k~Y~OYClZ]Cl^pClquCluvDdv}Cl}!ODd!O!PDd!P!QDd!Q![Dd![!]*V!]!cCl!c!}Dd#O#PCl#Q#RCl#R#SDd#S#TCl#T#oDd#o;'SCl;'S;=`D^<%lOCl~CqX#m~OYClZ]Cl^pClq![Cl!]!}Cl#O#PCl#Q;'SCl;'S;=`D^<%lOCl~DaP;=`<%lCl~Dme#m~#k~Y~OYClZ]Cl^pClquCluvDdv}Cl}!ODd!O!PDd!P!QDd!Q![Dd![!]*V!]!cCl!c!}Dd#O#PCl#Q#RCl#R#SDd#S#TCl#T#oDd#o;'SCl;'S;=`D^<%lOCl~FTO!R~~FYOX~~F_P!R~pqFb~FgO!k~~FjP!b!cFm~FpUOYGSZ!bGS!b!cHW!c;'SGS;'S;=`HQ<%lOGS~GVUOYGSZ!bGS!b!cGi!c;'SGS;'S;=`HQ<%lOGS~GlTO!bGS!b!cG{!c;'SGS;'S;=`HQ<%lOGS~HQO!t~~HTP;=`<%lGS~HZTO!bGS!b!cHj!c;'SGS;'S;=`HQ<%lOGS~HqO!l~!t~~HvP!R~!}#OHy~H|_z{I{!P!QJj!^!_!(R!_!`!)U!`!a!)j#V#W!*O#W#X!+q#Y#Z!,S#[#]!.R#]#^!.j#a#b!/h#b#c!1Z#g#h!2O#h#i!2{#i#jJR~JOP#i#jJR~JUP#g#hJX~J[P#X#YJ_~JbP#f#gJe~JjO!a~~JmZ!^!_K`!_!`Kq!`!aLS#V#WLe#W#XNp#Y#Z! _#[#]!!l#a#b!#a#b#c!$b#g#h!%V#h#i!&l~KcP#P#QKf~KiP#P#QKl~KqOp~~KtP#P#QKw~KzP#P#QK}~LSOm~~LVP#P#QLY~L]P#P#QL`~LeOs~~LhP#c#dLk~LnQ#W#XLt#`#aM]~LwP#X#YLz~L}P#P#QMQ~MTP#P#QMW~M]O!v~~M`P#`#aMc~MfP#T#UMi~MlP#d#eMo~MrP#g#hMu~MxP#]#^M{~NOP#U#VNR~NUP#`#aNX~N[P#X#YN_~NbP#P#QNe~NhP#P#QNk~NpO!X~~NsP#]#^Nv~NyP#j#kN|~! PP#P#Q! S~! VP#P#Q! Y~! _O[~~! bP#c#d! e~! hP#c#d! k~! nP#h#i! q~! tP#b#c! w~! zP#c#d! }~!!QP#h#i!!T~!!WP#X#Y!!Z~!!^P#P#Q!!a~!!dP#P#Q!!g~!!lO!c~~!!oP#h#i!!r~!!uP#a#b!!x~!!{P#`#a!#O~!#RP#P#Q!#U~!#XP#P#Q!#[~!#aO#[~~!#dP#c#d!#g~!#jP#W#X!#m~!#pP#i#j!#s~!#vP#`#a!#y~!#|P#X#Y!$P~!$SP#P#Q!$V~!$YP#P#Q!$]~!$bO#O~~!$eP#c#d!$h~!$kP#h#i!$n~!$qP#X#Y!$t~!$wP#P#Q!$z~!$}P#P#Q!%Q~!%VO`~~!%YQ#]#^!%`#d#e!%}~!%cP#n#o!%f~!%iP#X#Y!%l~!%oP#P#Q!%r~!%uP#P#Q!%x~!%}Oe~~!&QP#T#U!&T~!&WP#b#c!&Z~!&^P#P#Q!&a~!&dP#P#Q!&g~!&lOj~~!&oP#T#U!&r~!&uP#U#V!&x~!&{Q#P#Q!'R#j#k!'^~!'UP#P#Q!'X~!'^O!g~~!'aP#]#^!'d~!'gP#X#Y!'j~!'mP#k#l!'p~!'sP#P#Q!'v~!'yP#P#Q!'|~!(RO!e~~!(UQ#P#Q!([#]#^!(g~!(_P#P#Q!(b~!(gOo~~!(jP#a#b!(m~!(pP#T#U!(s~!(vP#Z#[!(y~!(|P#X#Y!)P~!)UO!h~~!)XQ#P#Q!)_#]#^!(g~!)bP#P#Q!)e~!)jOl~~!)mQ#P#Q!)s#]#^!(g~!)vP#P#Q!)y~!*OOr~~!*RP#c#d!*U~!*XQ#W#X!*_#`#a!*j~!*bP#X#Y!*e~!*jO![~~!*mP#`#a!*p~!*sP#T#U!*v~!*yP#d#e!*|~!+PP#g#h!+S~!+VP#]#^!+Y~!+]P#U#V!+`~!+cP#`#a!+f~!+iP#X#Y!+l~!+qO!V~~!+tP#]#^!+w~!+zP#j#k!+}~!,SOU~~!,VP#c#d!,Y~!,]P#c#d!,`~!,cP#h#i!,f~!,iP#b#c!,l~!,oP#c#d!,r~!,uP#h#i!,x~!,{P#X#Y!-O~!-TP!b~#U#V!-W~!-ZP#`#a!-^~!-aP#c#d!-d~!-gP#V#W!-j~!-mP#_#`!-p~!-sP#P#Q!-v~!-yP#P#Q!-|~!.RO!m~~!.UP#h#i!.X~!.[P#a#b!._~!.bP#`#a!.e~!.jO!`~~!.mQ#a#b!(m#b#c!.s~!.vP#V#W!.y~!.|P#`#a!/P~!/SP#i#j!/V~!/YP#W#X!/]~!/`P#X#Y!/c~!/hOu~~!/kP#c#d!/n~!/qP#W#X!/t~!/wP#i#j!/z~!/}P#`#a!0Q~!0TP#X#Y!0W~!0]P!_~pq!0`~!0cP#f#g!0f~!0iP#T#U!0l~!0oP#h#i!0r~!0uP#X#Y!0x~!0{P#P#Q!1O~!1RP#P#Q!1U~!1ZO]~~!1^P#c#d!1a~!1dP#h#i!1g~!1jP#X#Y!1m~!1pP#P#Q!1s~!1vP#P#Q!1y~!2OO_~~!2RQ#]#^!2X#d#e!2j~!2[P#n#o!2_~!2bP#X#Y!2e~!2jOc~~!2mP#T#U!2p~!2sP#b#c!2v~!2{Oh~~!3OP#T#U!3R~!3UP#U#V!3X~!3^P!f~#j#k!3a~!3dP#]#^!3g~!3jP#X#Y!3m~!3pP#k#l!3s~!3vP#P#Q!3y~!3|P#P#Q!4P~!4UO!d~~!4ZP!R~#P#Q!4^~!4cO#l~~!4fP#Q#R!4i~!4lUOY!4iZ#Q!4i#Q#R!5O#R;'S!4i;'S;=`!5g<%lO!4i~!5RTO#Q!4i#Q#R!5b#R;'S!4i;'S;=`!5g<%lO!4i~!5gO!r~~!5jP;=`<%l!4i~!5xk#n~#k~Y~!P~OX#{Z]#{^p#{qs#{tu#{uv6kvz#{{|#{}!O6k!O!P6k!P!Q6k!Q![@Y![!]6k!]!^#{!a!b#{!c!}@Y#O#P#{#R#S6k#S#T#{#T#h@Y#h#i!7m#i#o@Y#o#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~!7xk#n~#k~Y~!P~OX#{Z]#{^p#{qs#{tu#{uv6kvz#{{|#{}!O6k!O!P6k!P!Q6k!Q![@Y![!]6k!]!^#{!a!b#{!c!}@Y#O#P#{#R#S6k#S#T#{#T#h@Y#h#i!9m#i#o@Y#o#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~!9xk#n~#k~Y~!P~OX#{Z]#{^p#{qs#{tu#{uv6kvz#{{|#{}!O6k!O!P6k!P!Q6k!Q![@Y![!]6k!]!^#{!a!b#{!c!}@Y#O#P#{#R#S6k#S#T#{#T#d@Y#d#e!;m#e#o@Y#o#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~!;xk#n~#k~Y~!P~OX#{Z]#{^p#{qs#{tu#{uv6kvz#{{|#{}!O6k!O!P6k!P!Q6k!Q![@Y![!]!=m!]!^#{!a!b#{!c!}@Y#O#P#{#R#S6k#S#T#{#T#g@Y#g#h!CR#h#o@Y#o#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~!=vX#n~#k~Y~uv6k}!O6k!O!P6k!P!Q!>c!Q![6k![!]6k!c!}6k#R#S6k#T#o6k~!>lX#n~#k~Y~uv6k}!O6k!O!P6k!P!Q!?X!Q![6k![!]6k!c!}6k#R#S6k#T#o6k~!?be#n~#k~Y~OX!@sZ]!@s^p!@squ!@suv!Aev}!@s}!O!Ae!O!P!Ae!P!Q!Ae!Q![!Ae![!]!Ae!]!c!@s!c!}!Ae!}#P!@s#Q#R!@s#R#S!Ae#S#T!@s#T#o!Ae#o;'S!@s;'S;=`!A_<%lO!@s~!@xV!Q~OX!@sZ]!@s^p!@sq#P!@s#Q;'S!@s;'S;=`!A_<%lO!@s~!AbP;=`<%l!@s~!Ape!Q~#n~#k~Y~OX!@sZ]!@s^p!@squ!@suv!Aev}!@s}!O!Ae!O!P!Ae!P!Q!Ae!Q![!Ae![!]!Ae!]!c!@s!c!}!Ae!}#P!@s#Q#R!@s#R#S!Ae#S#T!@s#T#o!Ae#o;'S!@s;'S;=`!A_<%lO!@s~!C^i#n~#k~Y~!P~OX#{Z]#{^p#{qs#{tu#{uv6kvz#{{|#{}!O6k!O!P6k!P!Q6k!Q![@Y![!]!=m!]!^#{!a!b#{!c!}@Y#O#P#{#R#S6k#S#T#{#T#o@Y#o#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~!EQb!P~OX#{Z]#{^p#{qs#{tu#{vz#{{|#{!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#o#{#o#p!FY#q#r#{#s;'S#{;'S;=`%V<%lO#{~!F_o!P~OX!FYXY!H`Z]!FY]^!H`^p!FYpq!H`qs!FYst!H`tu!FYuv!H`vz!FYz{!H`{|!FY|!Q!H`!Q![!FY![!]!H`!]!^!FY!^!a!H`!a!b!FY!b!c!H`!c!}!FY!}#O!H`#O#P!FY#P#S!H`#S#p!FY#p#q!H`#q#r!Id#r#s!H`#s;'S!FY;'S;=`!Lv<%lO!FY~!HcUOY!H`Z#q!H`#q#r!Hu#r;'S!H`;'S;=`!I^<%lO!H`~!HxTO#q!H`#q#r!IX#r;'S!H`;'S;=`!I^<%lO!H`~!I^O!u~~!IaP;=`<%l!H`~!Iio!P~OX!FYXZ!H`Z]!FY]^!H`^p!FYpq!H`qs!FYst!H`tu!FYuv!H`vz!FYz{!H`{|!FY|!Q!H`!Q![!FY![!]!H`!]!^!FY!^!a!H`!a!b!FY!b!c!H`!c!}!FY!}#O!H`#O#P!FY#P#S!H`#S#p!FY#p#q!H`#q#r!Kj#r#s!H`#s;'S!FY;'S;=`!Lv<%lO!FY~!Kqa!u~!P~OX#{Z]#{^p#{qs#{tu#{vz#{{|#{!Q![#{!]!^#{!a!b#{!c!}#{#O#P#{#S#p#{#q#r#{#s;'S#{;'S;=`%V<%lO#{~!LyP;=`<%l!FY~!MRP|~#p#q!MU~!MZO!i~~!M`O!j~",
       tokenizers: [inlineTokenizer, 0],
-      topRules: { "Document": [0, 4] },
+      topRules: { "Document": [0, 3] },
       tokenPrec: 703
     });
   }
@@ -25563,7 +25551,7 @@ var init_dist14 = __esm({
 function identifierChar(ch, start) {
   return ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122 || ch == 95 || ch >= 192 || !start && ch >= 48 && ch <= 57;
 }
-var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline3, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star2, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
+var noSemi, noSemiType, incdec, incdecPrefix, questionDot, JSXStartTag, insertSemi, spaces, newline3, LineComment, BlockComment, Dialect_jsx, space2, braceR, semicolon, slash2, star, plus, minus, lt, comma, question2, dot, bracketL2, trackNewline, insertSemicolon, noSemicolon, noSemicolonType, operatorToken, jsx, jsHighlight, spec_identifier2, spec_word, spec_LessThan, parser4;
 var init_dist15 = __esm({
   "node_modules/@lezer/javascript/dist/index.js"() {
     init_dist11();
@@ -25610,7 +25598,7 @@ var init_dist15 = __esm({
     braceR = 125;
     semicolon = 59;
     slash2 = 47;
-    star2 = 42;
+    star = 42;
     plus = 43;
     minus = 45;
     lt = 60;
@@ -25633,7 +25621,7 @@ var init_dist15 = __esm({
     noSemicolon = new ExternalTokenizer((input, stack) => {
       let { next } = input, after;
       if (space2.indexOf(next) > -1) return;
-      if (next == slash2 && ((after = input.peek(1)) == slash2 || after == star2)) return;
+      if (next == slash2 && ((after = input.peek(1)) == slash2 || after == star)) return;
       if (next != braceR && next != semicolon && next != -1 && !stack.context)
         input.acceptToken(noSemi);
     }, { contextual: true });
