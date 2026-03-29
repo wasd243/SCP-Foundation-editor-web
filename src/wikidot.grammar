@@ -284,11 +284,11 @@ HTMLBlock {
 }
 
 HTMLOpenTag {
-  HTMLOpenToken (attrPathToken | AttrValue)* HTMLTagEnd {_tagEnd}
+  HTMLOpenToken AttrList HTMLTagEnd { _tagEnd }
 }
 
 HTMLContent {
-  (RawContent | newline)*
+  GenericToken*
 }
 // ——————————————————————————HTML——————————————————————————
 
