@@ -266,7 +266,7 @@ ModuleBlock {
 
 // 修正：去掉重复的 ModuleOpenToken，去掉错误的嵌套花括号
 ModuleOpenTag {
-  ModuleOpenToken (attrPathToken | AttrValue)* ModuleTagEnd {_tagEnd}
+  ModuleOpenToken AttrList ModuleTagEnd { _tagEnd }
 }
 
 // 修正：确保内容节点是一个清晰的容器
@@ -377,10 +377,10 @@ Attr {
   // 同时排除 ] 防止 ]] 被 Text 吞掉
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
-  BracketChar { "[" | "]" | "<" | ">" }
-  Text { 
-    ![\[\]*/\-_^, \t\n\r|~@>=<:#.%]+ | 
-    "]" | "*" | "/" | "\\" | "-" | "_" | "^" | "," | "|" | "~" | "@" | ">" | "=" | "<" | ":" | "#" | "." | "%"
+  Text { ![\[\]*/\-_^, \t\n\r|~@>=<:#.%]+ }
+  BracketChar { 
+    "[" | "]" | "<" | ">" | "*" | "/" | "\\" | "-" | "_" | 
+    "^" | "," | "|" | "~" | "@" | "=" | ":" | "#" | "." | "%" 
   }
   space { $[ \t]+ }
 
