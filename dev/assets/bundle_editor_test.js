@@ -27853,7 +27853,11 @@ ${listMarker} `;
       });
       const editorView = new EditorView({
         state,
-        parent: document.getElementById("editor-container")
+        parent: document.getElementById("editor-container"),
+        extensions: [
+          EditorView.viewportMargin.of(Infinity)
+          // 或者 Infinity (慎用，文档极大时会卡顿)
+        ]
       });
       window._debugAST = () => {
         const tree = syntaxTree(editorView.state);
