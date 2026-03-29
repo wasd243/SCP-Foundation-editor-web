@@ -5,8 +5,7 @@
 
 @external tokens inlineTokenizer from "./token.js" {
   UnderlineText,
-  StrikeText,
-  Text
+  StrikeText
 }
 
 // 这是一个“黑洞集合”，包含了所有可能的 Token，唯独排除了 Module, HTML 和 Code 的闭合标签
@@ -379,6 +378,7 @@ Attr {
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
   BracketChar { "[" | "]" | "<" | ">" }
+  Text { ![\[\]*/\-_^, \t\n\r|~@>=<:#.%]+ }
   space { $[ \t]+ }
 
   @precedence {
@@ -449,5 +449,6 @@ Attr {
 
     // 5
     space
+    Text
   }
 }
