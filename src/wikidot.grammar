@@ -270,7 +270,7 @@ ModuleOpenTag {
 }
 
 ModuleContent {
-  GenericToken*
+  (RawContent | newline )* 
 }
 // ——————————————————————————Module——————————————————————————
 
@@ -289,7 +289,7 @@ HTMLOpenTag {
 }
 
 HTMLContent {
-  GenericToken*
+  (RawContent | newline )*
 }
 // ——————————————————————————HTML——————————————————————————
 
@@ -304,6 +304,7 @@ Attr {
 
 
 @tokens {
+  RawContent { ![\[\n\r]+ | "[" ![\[\n\r]* }
   Rate { "[[module rate]]"}
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
@@ -447,7 +448,8 @@ Attr {
     AttrValue,
 
     // 5
-    space
+    space,
+    RawContent,
     Text
   }
 }
