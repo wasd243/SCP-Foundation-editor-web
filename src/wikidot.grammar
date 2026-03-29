@@ -4,8 +4,13 @@
 }
 
 @external tokens inlineTokenizer from "./token.js" {
+  StrongText,
+  EmText,
   UnderlineText,
   StrikeText,
+  SupText,
+  SubText,
+  Original,
   Hr
 }
 
@@ -354,11 +359,6 @@ Attr {
 
   Title { "+" "+"? "+"? "+"? "+"? "+"? " " ![\n\r]* }
   // ——————————————————————————常用标记——————————————————————————
-  StrongText    { "**" (![*\n] | "*" ![*])* "**" }
-  EmText        { "//" ![/] (![/\n] | "/" ![/])* "//" }
-  SupText       { "^^" (![^\n] | "^" ![^])* "^^" }
-  SubText       { ",," (![,\n] | "," ![,])* ",," }
-  Original      { "@@" (![@\n] | "@" ![@])* "@@" }
   Monospace     { "{{" (![}\n] | "}" ![}])? (![}\n] | "}" ![}])* "}}" }
   // ——————————————————————————常用标记——————————————————————————
 
@@ -439,12 +439,7 @@ Attr {
     List1,
     List2,
     Title, 
-    StrongText, 
-    EmText, 
-    SupText, 
-    SubText, 
     Monospace, 
-    Original,
 
     // 4
     attrPathToken,
