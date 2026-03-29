@@ -30,8 +30,8 @@ import { keymap } from "@codemirror/view";
 import { indentWithTab } from "@codemirror/commands";
 import { Tag } from "@lezer/highlight";
 // 导入颜色预览扩展和事件处理函数
-import { colorPreviewExtension, setupColorPickerHandler } from "./color_preview.js";
-import { wikidotColorExtension } from "./color_widgets.js";
+import { colorPreviewExtension, setupColorPickerHandler } from "./component/color_preview.js";
+import { wikidotColorExtension } from "./component/color_widgets.js";
 
 // 初始化内容
 const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
@@ -657,7 +657,7 @@ const customKeymap = keymap.of([
 /**
  * 自动补全配置
  */
-import { wikidotCompletionSource } from "./completion.js";
+import { wikidotCompletionSource } from "./component/completion.js";
 
 // 3. 初始化编辑器
 const startEditor = () => {

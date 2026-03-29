@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP Foundation Editor-LEZER-TEST-1</title>
+    <link rel="stylesheet" href="assets/code_view_test.css">
+
+    <style>
+        html, body {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            background-color: #282c34;
+            overflow: hidden;
+            font-family: var(--p-font-monospace, 'Sarasa Gothic SC', monospace);
+        }
+        #editor-container {
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* 底层 */
+        }
+        
+        /*----------------------------------同步----------------------------------*/
+        .btn-sync {
+            color: #00ff00;
+            border-color: #00ff00;
+            box-shadow: 4px 4px 0px #00ff00;
+        }
+        .btn-sync:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 2px 2px 0px #00ff00;
+        }
+
+        @keyframes sync-flash {
+            0% { background-color: rgba(0, 255, 0, 0); }
+            50% { background-color: rgba(0, 255, 0, 0.15); }
+            100% { background-color: rgba(0, 255, 0, 0); }
+        }
+        .syncing {
+            animation: sync-flash 0.6s ease-in-out;
+        }
+        /*----------------------------------同步----------------------------------*/
+
+        /* 强制置顶的按钮区 */
+        .editor-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 9999; /* 确保在最顶层 */
+            display: flex;
+            gap: 15px;
+        }
+
+        .ctrl-btn {
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 6px 14px;
+            font-family: var(--p-font-monospace, 'Sarasa Gothic SC', monospace);
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .ctrl-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 2px 2px 0px #ffffff;
+            transform: translate(2px, 2px);
+        }
+
+        .btn-clear {
+            color: #ff4444;
+            border-color: #ff4444;
+            box-shadow: 4px 4px 0px #ff4444;
+        }
+        .btn-clear:hover {
+            background: #ff4444;
+            color: #ffffff;
+            box-shadow: 2px 2px 0px #ff4444;
+        }
+
+        /*----------------------------------顶部工具栏---------------------------------*/
+        /* 初始状态：折叠 */
+        .quick-toolbar {
+            position: relative;
+            background: #000;
+            border-bottom: 2px solid #fff;
+            display: flex;
+            gap: 10px;
+            padding: 0 10px; 
+            max-height: 0;   
+            overflow: hidden; /* 加上这行，确保按钮收起时完全不可见 */
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
+            z-index: 100;
+        }
+
+        /* 标签初始状态：居中悬停 */
+        .toolbar-label {
+            position: absolute;
+            top: 0; 
+            left: 50%; /* 科学居中：定位到屏幕正中间 */
+            transform: translateX(-50%); /* 科学居中：根据自身宽度往回拉一半，实现绝对居中 */
+            background: #fff;
+            color: #000;
+            padding: 2px 12px;
+            cursor: pointer;
+            z-index: 101; 
+            border: 2px solid #000;
+            border-top: none;
+            font-size: 11px;
+            font-weight: bold;
+            /* 赋予它和工具栏一样的丝滑过渡动画 */
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+
+        /* 1. 当开关被选中，工具栏变高 */
+        #toolbar-toggle:checked ~ .quick-toolbar {
+            max-height: 150px; 
+            padding: 10px;    
+        }
+
+        /* 2. 当开关被选中，标签跟着往下挪动！ */
+        #toolbar-toggle:checked ~ .toolbar-label {
+            /* 保持居中的同时，向下平移 43px（大约是工具栏展开的高度） */
+            transform: translate(-50%, 43px); 
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tool-btn {
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 4px 12px;
+            font-family: monospace;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tool-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+        /*----------------------------------顶部工具栏---------------------------------*/
+
+    </style>
+</head>
+<body>
+
+    <div class="editor-controls">
+        <button class="ctrl-btn btn-sync" onclick="handleAction('sync')">SYNC</button>
+        <button class="ctrl-btn btn-init" onclick="handleAction('init')">INIT</button>
+        <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR</button>
+    </div>
+
+    <!------------------------------------------------功能区---------------------------------------------->
+    <input type="checkbox" id="toolbar-toggle" style="display: none;">
+
+    <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
+
+    <div class="quick-toolbar">
+        <div class="toolbar-group">
+            <button class="tool-btn" onclick="insertCode('**')">B</button>
+            <button class="tool-btn" onclick="insertCode('//')">I</button>
+            <button class="tool-btn" onclick="insertCode('__')">U</button>
+            <button class="tool-btn" onclick="insertCode('--')">S</button>
+            <button class="tool-btn" onclick="insertCode('{{', '}}')">tt</button>
+            <button class="tool-btn" onclick="insertCode('^^')">X^2</button>
+            <button class="tool-btn" onclick="insertCode(',,')">X,2</button>
+            <button class="tool-btn" onclick="insertCode('@@')">@@</button>
+        </div>
+    </div>
+    <div id="editor-container"></div>
+    <!------------------------------------------------功能区---------------------------------------------->
+    <script type="module" src="assets/bundle_editor_test.js"></script>
+
+    <script>
+        // 定义模板
+        const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
+
+[[div class="xxx"]]
+++ **SCP-CN-WEB-EDITOR**
+//测试版 v1.0.0 //
+[[/div]]
+
++ 点几下试试？这里是可以编辑的，顺便说一句，这不是Google docs，你编辑的内容别人应该看不到的（当然啊我不保证100%没有低克入侵）
+
+[https://github.com/wasd243/SCP-Foundation-editor-web 源代码链接]
+
+------
+
+> **编辑器功能演示：**
+**高亮测试**：###ff4d4d|这行文本应该是红色的##。
+> 但是在引用里面会默认为绿色
+> * **高亮测试**：###ff4d4d|这行文本应该是红色的##。
+> * **代码块**：{{monospace}}。
+> * **折叠块**：
+[[collapsible show="+ 展开技术细节" hide="- 隐藏内容"]]
+当前编辑器基于 **CodeMirror 6** 核心，支持：
+1. **自动补全**：尝试在下方输入 \`[[\` 或 \`@@\`。
+2. **快捷工具栏**：点击上方 **CODE TOOLS** 标签试试看！
+3. **安全初始化**：初始化不如CLEAR一根，在这里只是为了展示说明
+[[/collapsible]]
+
+-------
+
+||~ 语法项目 ||~ 高亮状态 ||
+|| 加粗 || **完成** ||
+|| 斜体 || //完成// ||
+|| 下划线 || __完成__ ||
+|| 删除线 || --完成-- ||
+
+[[footnote]]xxx[[/footnote]]
+
+[[footnoteblock]]
+
+@@@@
+[[div class="footer"]]
+[[/div]]
+[[/div]]
+
+[[module CSS]]
+/* 未来将支持 CSS 高亮补全 */
+.container {
+    border: 1px solid #fff;
+}
+[[/module]]`;
+
+        // 插入代码逻辑
+        function insertCode(before, after = before) {
+            const view = window.editorInstance;
+            if (!view) return;
+
+            const { state } = view;
+            const mainSelection = state.selection.main;
+            const from = mainSelection.from;
+            const to = mainSelection.to;
+            const selectedText = state.sliceDoc(from, to);
+
+            view.dispatch({
+                changes: { from, to, insert: before + selectedText + after },
+                selection: { anchor: from + before.length + selectedText.length },
+                scrollIntoView: true
+            });
+            view.focus();
+        }
+
+        window.handleAction = function(type) {
+            const view = window.editorInstance;
+            if (!view) {
+                console.warn("[Editor] 实例尚未初始化，请稍后...");
+                return;
+            }
+
+            let contentToInsert = ""; 
+
+            if (type === 'sync') {
+                const docContent = view.state.doc.toString(); 
+                navigator.clipboard.writeText(docContent).then(() => {
+                    const syncBtn = document.querySelector('.btn-sync');
+                    const oldText = syncBtn.innerText;
+                    syncBtn.innerText = "COPIED!";
+                    
+                    // 触发闪烁动画（如果有的话）
+                    const container = document.getElementById('editor-container');
+                    if(container) container.classList.add('syncing');
+                    
+                    setTimeout(() => { 
+                        syncBtn.innerText = oldText; 
+                        if(container) container.classList.remove('syncing');
+                    }, 2000);
+                });
+                return; 
+            } 
+            
+            // --- 核心修改部分 ---
+            if (type === 'init') {
+                // 增加二次确认窗口
+                const msg = "此操作将覆盖当前编辑器内的所有内容并加载演示模板，确定吗？";
+                if (!confirm(msg)) return; 
+                contentToInsert = EXAMPLE_CODE;
+            } else if (type === 'clear') {
+                if (!confirm("确定要清空所有内容吗？")) return;
+                contentToInsert = "";
+            }
+
+            // 执行替换
+            view.dispatch({
+                changes: { from: 0, to: view.state.doc.length, insert: contentToInsert },
+                selection: { anchor: 0 } // 初始化后光标回到开头
+            });
+        }
+    </script> 
+</body>
+</html>
