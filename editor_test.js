@@ -503,7 +503,8 @@ const startEditor = () => {
 
     const editorView = new EditorView({
         state,
-        parent: document.getElementById("editor-container")
+        parent: document.getElementById("editor-container"),
+        viewportMargin: Infinity
     });
 
     // AST测试
