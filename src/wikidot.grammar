@@ -3,6 +3,12 @@
   element* 
 }
 
+@external tokens inlineTokenizer from "./tokens.js" {
+  UnderlineText,
+  StrikeText,
+  Text
+}
+
 // 这是一个“黑洞集合”，包含了所有可能的 Token，唯独排除了 Module, HTML 和 Code 的闭合标签
 GenericToken {
   DivOpen | DivClose | SpanOpenToken | SpanCloseToken |
@@ -351,8 +357,6 @@ Attr {
   Hr            { "----" "-"* }
   StrongText    { "**" (![*\n] | "*" ![*])* "**" }
   EmText        { "//" ![/] (![/\n] | "/" ![/])* "//" }
-  UnderlineText { "__" (![_\n] | "_" ![_])+ "__" }
-  StrikeText    { "--" (![-\n] | "-" ![-])+ "__" }
   SupText       { "^^" (![^\n] | "^" ![^])* "^^" }
   SubText       { ",," (![,\n] | "," ![,])* ",," }
   Original      { "@@" (![@\n] | "@" ![@])* "@@" }
@@ -375,7 +379,6 @@ Attr {
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
   BracketChar { "[" | "]" | "<" | ">" }
-  Text { ![\[\]*/\-_^, \t\n\r|~@>=<:#.%]+ }
   space { $[ \t]+ }
 
   @precedence {
@@ -435,8 +438,6 @@ Attr {
     Title, 
     StrongText, 
     EmText, 
-    UnderlineText, 
-    StrikeText, 
     SupText, 
     SubText, 
     Monospace, 
@@ -447,7 +448,6 @@ Attr {
     AttrValue,
 
     // 5
-    Text, 
     space
   }
 }
