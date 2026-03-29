@@ -165,12 +165,12 @@ const wikidotParser = parser.configure({
                 let openTag = moduleBlock.getChild("ModuleOpenTag");
                 
                 if (openTag) {
-                    // 3. 提取属性列表 AttrList
-                    let attrList = openTag.getChild("AttrList");
+                    // 3. 提取属性列表 attrPathToken
+                    let attrPathToken = openTag.getChild("attrPathToken");
                     
-                    if (attrList) {
-                        // 4. 读取 AttrList 的真实文本内容 (通过 input.read 截取源码)
-                        let attrText = input.read(attrList.from, attrList.to).toLowerCase();
+                    if (attrPathToken) {
+                        // 4. 读取 attrPathToken 的真实文本内容 (通过 input.read 截取源码)
+                        let attrText = input.read(attrPathToken.from, attrPathToken.to).toLowerCase();
                         
                         // wikidot native modules fallback
                         const nativeModules = ["rate", "listpages", "backlinks"]; 

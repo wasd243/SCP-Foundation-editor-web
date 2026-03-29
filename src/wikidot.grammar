@@ -264,9 +264,7 @@ ModuleBlock {
 }
 
 ModuleOpenTag {
-  ModuleOpenToken
-  AttrList
-  ModuleTagEnd { _tagEnd }
+  ModuleOpenToken (attrPathToken | AttrValue)* ModuleTagEnd { _tagEnd}
 }
 
 ModuleContent {
@@ -283,9 +281,7 @@ HTMLBlock {
 }
 
 HTMLOpenTag {
-  HTMLOpenToken
-  AttrList
-  HTMLTagEnd {_tagEnd}
+  HTMLOpenToken (attrPathToken | AttrValue)* HTMLTagEnd {_tagEnd}
 }
 
 HTMLContent {
@@ -384,6 +380,8 @@ Attr {
 
   @precedence {
     // 1
+    HTMLCloseToken,
+    ModuleCloseToken,
     _tagEnd,
     LinkURL,
     Equals,
@@ -406,9 +404,7 @@ Attr {
     TabOpenToken,
     TabCloseToken,
     ModuleOpenToken,
-    ModuleCloseToken,
     HTMLOpenToken,
-    HTMLCloseToken,
     IncludeOpen,
     DivOpen,
     DivClose,
