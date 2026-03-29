@@ -20,7 +20,7 @@ GenericToken {
   IncludeOpen | IncludeBar | includeSeg_ |
   UserOpen | CodeOpen | FootnoteOpen | FootnoteClose |
   TabViewOpenToken | TabViewCloseToken | TabOpenToken | TabCloseToken | ImageOpen |
-  _tagEnd | TableBar | TableTilde | Blockquote | newline | ForcedNewLine | LinkURL |
+  TableBar | TableTilde | Blockquote | newline | ForcedNewLine | LinkURL |
   FootnoteBlock | Title | Hr | StrongText | EmText | UnderlineText | StrikeText |
   attrPathToken | AttrValue |
   SupText | SubText | Original | Monospace | Equals |
