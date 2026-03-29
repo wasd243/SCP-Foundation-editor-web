@@ -24924,41 +24924,39 @@ var init_token = __esm({
     moduleTokenizer = new ExternalTokenizer((input, stack) => {
       if (stack.canShift(ModuleContent2)) {
         let start = input.pos;
-        let foundEnd = false;
         while (input.next != -1) {
           if (input.next == bracketOpen && input.peek(1) == bracketOpen) {
             if (input.peek(2) == slash && matchString(input, 3, "module")) {
-              foundEnd = true;
               break;
             }
           }
           input.advance();
         }
-        if (input.pos > start) {
-          input.acceptToken(ModuleContent2);
-        }
+        input.acceptToken(ModuleContent2);
         return;
       }
       if (input.next == bracketOpen && input.peek(1) == bracketOpen) {
         if (input.peek(2) == slash && matchString(input, 3, "module")) {
           let offset = 9;
-          while (input.peek(offset) != -1 && input.peek(offset) != newline) {
+          while (input.peek(offset) != -1 && offset < 50) {
             if (input.peek(offset) == bracketClose && input.peek(offset + 1) == bracketClose) {
               for (let i = 0; i < offset + 2; i++) input.advance();
               input.acceptToken(ModuleCloseTag2);
               return;
             }
+            if (input.peek(offset) == newline || input.peek(offset) == carriageReturn) break;
             offset++;
           }
         }
         if (matchString(input, 2, "module")) {
           let offset = 8;
-          while (input.peek(offset) != -1 && input.peek(offset) != newline) {
+          while (input.peek(offset) != -1 && offset < 100) {
             if (input.peek(offset) == bracketClose && input.peek(offset + 1) == bracketClose) {
               for (let i = 0; i < offset + 2; i++) input.advance();
               input.acceptToken(ModuleOpenTag2);
               return;
             }
+            if (input.peek(offset) == newline || input.peek(offset) == carriageReturn) break;
             offset++;
           }
         }
