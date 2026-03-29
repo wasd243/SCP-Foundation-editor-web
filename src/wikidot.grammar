@@ -11,6 +11,7 @@
 
 // 这是一个“黑洞集合”，包含了所有可能的 Token，唯独排除了 Module, HTML 和 Code 的闭合标签
 GenericToken {
+  RawContent | List1 | List2 |
   DivOpen | DivClose | SpanOpenToken | SpanCloseToken |
   AlignRightOpenToken | AlignRightCloseToken | AlignLeftOpenToken | AlignLeftCloseToken |
   AlignCenterOpenToken | AlignCenterCloseToken | NoteOpenToken | NoteCloseToken |
@@ -270,7 +271,7 @@ ModuleOpenTag {
 
 // 修正：确保内容节点是一个清晰的容器
 ModuleContent {
-  (RawContent | newline)*
+  GenericToken*
 }
 // ——————————————————————————Module——————————————————————————
 
@@ -377,7 +378,10 @@ Attr {
   // 恢复：] 在外部是普通文本
   StarChar { "*" }
   BracketChar { "[" | "]" | "<" | ">" }
-  Text { ![\[\]*/\-_^, \t\n\r|~@>=<:#.%]+ }
+  Text { 
+    ![\[\]*/\-_^, \t\n\r|~@>=<:#.%]+ | 
+    "]" | "*" | "/" | "\\" | "-" | "_" | "^" | "," | "|" | "~" | "@" | ">" | "=" | "<" | ":" | "#" | "." | "%"
+  }
   space { $[ \t]+ }
 
   @precedence {
@@ -429,6 +433,7 @@ Attr {
     ForcedNewLine,
     newline,
     BracketChar,
+    StarChar,
 
     // 3
     List1,
