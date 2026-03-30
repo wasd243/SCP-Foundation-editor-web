@@ -20,15 +20,16 @@ jobs:
 
       - name: Gemini Multi-File Review
         run: |
-          # 1. 使用 jq 的 --rawfile 功能直接读取大文件，完全避开命令行长度限制
-          # 这步会把整个代码文件包装成一个合法的 JSON 对象
+          # 1. 构造 JSON 请求体
+          # 注意：模型名称已更新为 gemini-3-flash
           jq -n \
             --rawfile code_content temp_code_for_ai.txt \
             --arg prompt "你现在是一位资深的 Full Stack 工程师。请审查以下代码。要求：1. 找出潜在的 Bug、性能问题或不规范的写法。2. 必须指明具体的文件名和行号。3. 使用中英双语输出报告。4. 格式：Markdown 表格。代码如下：\n" \
             '{contents: [{parts: [{text: ($prompt + $code_content)}]}]}' > request.json
 
-          # 2. 使用 @request.json 发送请求
-          curl https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }} \
+          # 2. 使用更新后的 v1 API 路径调用 Gemini 3
+          # 注意：URL 中的模型路径已改为 gemini-3-flash
+          curl "https://generativelanguage.googleapis.com/v1/models/gemini-3-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }}" \
               -H 'Content-Type: application/json' \
               -X POST \
               -d @request.json > response.json
@@ -36,9 +37,9 @@ jobs:
           # 3. 检查并提取报告
           if jq -e '.candidates[0].content.parts[0].text' response.json > /dev/null; then
             jq -r '.candidates[0].content.parts[0].text' response.json > AI_Code_Review.md
-            echo "✅ 报告已成功生成！"
+            echo "✅ Gemini 3 报告生成成功！"
           else
-            echo "❌ AI 返回结果异常，请检查下方日志："
+            echo "❌ API 返回错误，请检查下方日志（可能需要确认 API Key 权限）："
             cat response.json
             exit 1
           fi
