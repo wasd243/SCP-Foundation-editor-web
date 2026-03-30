@@ -1,35 +1,27 @@
 name: Gemini Deep Code Reviewer
 on:
-  workflow_dispatch: # 建议手动触发，因为全量扫描比较费 Token
+  workflow_dispatch:
   push:
     branches: [ main, develop ]
 
 jobs:
   deep-review:
     runs-on: ubuntu-latest
+    # 必须加上这个权限声明，否则官方 Token 没法提交代码
+    permissions:
+      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Get App Token
-        id: get_token
-        # 下面这一串是 v5.0.0 正式版的唯一识别码，它是绝对存在的
-        uses: peter-evans/create-github-app-token@5d86f4460f38c339798083818e11a133f81e7d82
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
       - name: Prepare Code for Review
         run: |
-          # 扫描项目中的核心文件（可以根据需要修改扩展名）
-          # 这里排除掉 node_modules 和 .git 等无关目录
           echo "PROJECT_CONTENT<<EOF" >> $GITHUB_ENV
           find . -maxdepth 5 -not -path '*/.*' -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.vue" \) | xargs -I {} sh -c 'echo "FILE: {}"; cat -n {}; echo "\n---"' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Gemini Multi-File Review
         run: |
-          # 构建深度审查的 Prompt
           PROMPT="你现在是一位资深的 Full Stack 工程师。请审查以下代码。
           要求：
           1. 找出潜在的 Bug、性能问题或不规范的写法。
@@ -40,7 +32,6 @@ jobs:
           代码内容如下：
           ${{ env.PROJECT_CONTENT }}"
 
-          # 发送请求
           RESPONSE=$(curl https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }} \
               -H 'Content-Type: application/json' \
               -X POST \
@@ -50,15 +41,15 @@ jobs:
                 }]
               }")
 
-          # 保存审查报告
           echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' > AI_Code_Review.md
 
       - name: Commit Review Report
         run: |
-          git config --local user.email "gemini-bot[bot]@users.noreply.github.com"
-          git config --local user.name "Gemini-Bot"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add AI_Code_Review.md
           git commit -m "docs: Gemini Deep Code Review Report generated" || echo "No issues found"
           git push
         env:
-          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+          # 直接使用系统自带的令牌，不需要 APP_ID
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
