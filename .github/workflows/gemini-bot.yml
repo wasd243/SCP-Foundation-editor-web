@@ -1,0 +1,49 @@
+name: Gemini Pair Programming
+on:
+  workflow_dispatch: # 支持你在网页上手动点击运行
+  push:
+    branches: [ main ] # 当你向 main 分支推送代码时触发
+
+jobs:
+  ai-codereview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 获取完整历史，方便 AI 对比改动
+
+      - name: Get App Token
+        id: get_token
+        uses: peter-evans/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Gemini Auto-Code
+        run: |
+          # 告诉 Gemini 你的意图，这里可以根据你的需求微调 Prompt
+          # 比如：让它检查 index.html 有没有 Bug，或者优化 CSS
+          PROMPT="你现在是 SCP 编辑器项目的核心开发者。请检查项目中 index.html 的代码结构，并在 ai_optimization_log.md 中给出优化建议或重构后的片段。请只输出代码或技术文档。"
+          
+          RESPONSE=$(curl https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }} \
+              -H 'Content-Type: application/json' \
+              -X POST \
+              -d "{
+                \"contents\": [{
+                  \"parts\":[{\"text\": \"$PROMPT\"}]
+                }]
+              }")
+
+          # 解析并保存结果
+          echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' > ai_optimization_log.md
+
+      - name: Commit and Push by Gemini
+        run: |
+          git config --local user.email "gemini-bot[bot]@users.noreply.github.com"
+          git config --local user.name "Gemini-Bot"
+          git add .
+          git commit -m "chore: Gemini AI 自动代码审查与优化" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
