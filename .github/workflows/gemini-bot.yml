@@ -2,7 +2,7 @@ name: Gemini Deep Code Reviewer
 on:
   workflow_dispatch: # 建议手动触发，因为全量扫描比较费 Token
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   deep-review:
@@ -23,7 +23,7 @@ jobs:
           # 扫描项目中的核心文件（可以根据需要修改扩展名）
           # 这里排除掉 node_modules 和 .git 等无关目录
           echo "PROJECT_CONTENT<<EOF" >> $GITHUB_ENV
-          find . -maxdepth 2 -not -path '*/.*' -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.vue" \) | xargs -I {} sh -c 'echo "FILE: {}"; cat -n {}; echo "\n---"' >> $GITHUB_ENV
+          find . -maxdepth 5 -not -path '*/.*' -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.vue" \) | xargs -I {} sh -c 'echo "FILE: {}"; cat -n {}; echo "\n---"' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Gemini Multi-File Review
