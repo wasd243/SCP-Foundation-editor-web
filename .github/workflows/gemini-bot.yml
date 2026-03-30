@@ -7,49 +7,49 @@ on:
 jobs:
   deep-review:
     runs-on: ubuntu-latest
-    # 必须加上这个权限声明，否则官方 Token 没法提交代码
     permissions:
       contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Prepare Code for Review
+      - name: Prepare Code File
         run: |
-          echo "PROJECT_CONTENT<<EOF" >> $GITHUB_ENV
-          find . -maxdepth 5 -not -path '*/.*' -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.vue" \) | xargs -I {} sh -c 'echo "FILE: {}"; cat -n {}; echo "\n---"' >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          # 将所有代码汇总到一个临时文件中，带上行号和文件名
+          find . -maxdepth 5 -not -path '*/.*' -not -path '*/node_modules/*' -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.vue" \) | xargs -I {} sh -c 'echo "FILE: {}"; cat -n {}; echo "\n---"' > temp_code_for_ai.txt
 
       - name: Gemini Multi-File Review
         run: |
-          PROMPT="你现在是一位资深的 Full Stack 工程师。请审查以下代码。
-          要求：
-          1. 找出潜在的 Bug、性能问题或不规范的写法。
-          2. 必须指明具体的文件名和行号。
-          3. 使用中英双语输出报告 (Bilingual report in Chinese and English)。
-          4. 格式要求：使用 Markdown 表格或列表。
+          # 读取文件内容并进行 JSON 转义，防止特殊字符导致崩溃
+          RAW_CODE=$(cat temp_code_for_ai.txt)
           
-          代码内容如下：
-          ${{ env.PROJECT_CONTENT }}"
+          # 直接在 curl 中通过管道传输数据
+          jq -n --arg code "$RAW_CODE" --arg prompt "你现在是一位资深的 Full Stack 工程师。请审查以下代码。要求：1. 找出潜在的 Bug、性能问题或不规范的写法。2. 必须指明具体的文件名和行号。3. 使用中英双语输出报告。4. 格式：Markdown 表格。代码如下：\n" \
+          '{contents: [{parts: [{text: ($prompt + $code)}]}]}' > request.json
 
-          RESPONSE=$(curl https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }} \
+          curl https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }} \
               -H 'Content-Type: application/json' \
               -X POST \
-              -d "{
-                \"contents\": [{
-                  \"parts\":[{\"text\": $(echo "$PROMPT" | jq -aRs .)}]
-                }]
-              }")
+              -d @request.json > response.json
 
-          echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' > AI_Code_Review.md
+          # 解析并生成报告
+          echo "AI 审查报告生成中..."
+          if jq -e '.candidates[0].content.parts[0].text' response.json > /dev/null; then
+            jq -r '.candidates[0].content.parts[0].text' response.json > AI_Code_Review.md
+          else
+            echo "AI 返回错误或格式不正确："
+            cat response.json
+            exit 1
+          fi
 
       - name: Commit Review Report
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          # 删除临时文件，不推送到仓库
+          rm temp_code_for_ai.txt request.json response.json || true
           git add AI_Code_Review.md
-          git commit -m "docs: Gemini Deep Code Review Report generated" || echo "No issues found"
+          git commit -m "docs: Gemini Deep Code Review Report" || echo "No issues found"
           git push
         env:
-          # 直接使用系统自带的令牌，不需要 APP_ID
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
