@@ -13,7 +13,8 @@ jobs:
 
       - name: Get App Token
         id: get_token
-        uses: peter-evans/create-github-app-token@v5
+        # 下面这一串是 v5.0.0 正式版的唯一识别码，它是绝对存在的
+        uses: peter-evans/create-github-app-token@5d86f4460f38c339798083818e11a133f81e7d82
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
