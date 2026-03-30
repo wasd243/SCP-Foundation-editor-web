@@ -20,26 +20,24 @@ jobs:
 
       - name: Gemini Multi-File Review
         run: |
-          # 1. 构造 JSON 请求体
-          # 使用 gemini-2.0-flash 作为模型标识符
+          # 1. 使用 1.5-flash 构造请求，它对免费用户最友好
           jq -n \
             --rawfile code_content temp_code_for_ai.txt \
             --arg prompt "你现在是一位资深的 Full Stack 工程师。请审查以下代码。要求：1. 找出潜在的 Bug、性能问题或不规范的写法。2. 必须指明具体的文件名和行号。3. 使用中英双语输出报告。4. 格式：Markdown 表格。代码如下：\n" \
             '{contents: [{parts: [{text: ($prompt + $code_content)}]}]}' > request.json
 
-          # 2. 使用 v1beta 路径（这个路径对 Flash 模型最友好）
-          # 将模型名改为 gemini-2.0-flash
-          curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }}" \
+          # 2. 调用 1.5-flash 接口
+          curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${{ secrets.GEMINI_API_KEY }}" \
               -H 'Content-Type: application/json' \
               -X POST \
               -d @request.json > response.json
 
-          # 3. 检查并提取报告
+          # 3. 检查结果
           if jq -e '.candidates[0].content.parts[0].text' response.json > /dev/null; then
             jq -r '.candidates[0].content.parts[0].text' response.json > AI_Code_Review.md
-            echo "✅ 代码审计报告生成成功！"
+            echo "✅ 审计报告已生成！"
           else
-            echo "❌ API 返回错误，请检查下方日志："
+            echo "❌ 还是报错了？看下面日志："
             cat response.json
             exit 1
           fi
