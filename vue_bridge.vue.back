@@ -1,0 +1,161 @@
+<template>
+  <div class="editor-pane">
+    <div class="pane-header">
+      <div class="pane-title">
+        <span>源文本</span>
+        <span class="pane-badge">FTML (H2O2 Engine)</span>
+      </div>
+      <span class="pane-stats">
+        {{ stats?.lines || 0 }} 行 · {{ stats?.words || 0 }} 词 · {{ stats?.chars || 0 }} 字符
+        <template v-if="workerVersion"> · FTML v{{ workerVersion }}</template>
+      </span>
+    </div>
+
+    <div class="editor-wrap relative" style="position: relative; flex: 1; overflow: hidden;">
+      
+      <div class="editor-controls">
+        <button class="ctrl-btn btn-sync" @click="handleAction('sync')">SYNC</button>
+        <button class="ctrl-btn btn-init" @click="handleAction('init')">INIT</button>
+        <button class="ctrl-btn btn-clear" @click="handleAction('clear')">CLEAR</button>
+      </div>
+
+      <input type="checkbox" id="toolbar-toggle" style="display: none;">
+      <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
+      <div class="quick-toolbar">
+        <div class="toolbar-group">
+          <button class="tool-btn" @click="insertCode('**')">B</button>
+          <button class="tool-btn" @click="insertCode('//')">I</button>
+          <button class="tool-btn" @click="insertCode('__')">U</button>
+          <button class="tool-btn" @click="insertCode('--')">S</button>
+          <button class="tool-btn" @click="insertCode('{{', '}}')">tt</button>
+          <button class="tool-btn" @click="insertCode('^^')">X^2</button>
+          <button class="tool-btn" @click="insertCode(',,')">X,2</button>
+          <button class="tool-btn" @click="insertCode('@@')">@@</button>
+        </div>
+      </div>
+
+      <div ref="editorContainerRef" class="cm-container w-full h-full"></div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+
+// 假设你的 bundle 导出了初始化函数 (如果没有导出，直接挂在 window 上也行)
+import { initH2O2Editor } from '../assets/bundle_editor_test.js'
+
+// --- 纯 JS 的 Props 和 Emits 写法 ---
+const props = defineProps({
+  modelValue: String,
+  stats: Object,
+  workerVersion: String
+})
+
+const emit = defineEmits(['update:modelValue', 'render', 'save'])
+
+// --- 核心逻辑 ---
+const editorContainerRef = ref(null)
+let view = null // 存储你的 CM6 实例
+
+onMounted(() => {
+  if (!editorContainerRef.value) return
+
+  // 调用 JS 初始化方法
+  view = initH2O2Editor({
+    parent: editorContainerRef.value,
+    initialDoc: props.modelValue || '', 
+    onChange: (newDoc) => {
+      // CM6 变化时，触发 Vue 更新
+      emit('update:modelValue', newDoc)
+    },
+    onSave: () => emit('save'),
+    onRender: () => emit('render')
+  })
+})
+
+// 监听 Vue 外部（比如 Andy 的其他组件）传来的数据变化
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    if (view && view.state.doc.toString() !== newVal) {
+      view.dispatch({
+        changes: { from: 0, to: view.state.doc.length, insert: newVal || '' }
+      })
+    }
+  }
+)
+
+// --- 插入代码逻辑 ---
+function insertCode(before, after = before) {
+  if (!view) return
+  const { state } = view
+  const mainSelection = state.selection.main
+  const from = mainSelection.from
+  const to = mainSelection.to
+  const selectedText = state.sliceDoc(from, to)
+
+  view.dispatch({
+    changes: { from, to, insert: before + selectedText + after },
+    selection: { anchor: selectedText.length === 0 ? from + before.length : from + before.length + selectedText.length + after.length },
+    scrollIntoView: true
+  })
+  view.focus()
+}
+
+// --- 按钮操作逻辑 ---
+function handleAction(type) {
+  if (!view) return
+  let contentToInsert = ""
+
+  if (type === 'sync') {
+    const docContent = view.state.doc.toString()
+    navigator.clipboard.writeText(docContent)
+    return
+  } 
+  
+  if (type === 'init') {
+    if (!confirm("此操作将覆盖所有内容，确定吗？")) return
+    contentToInsert = "[[include :scp-wiki-cn:theme:peroxide]]\n\n测试版加载成功！"
+  } else if (type === 'clear') {
+    if (!confirm("确定清空吗？")) return
+    contentToInsert = ""
+  }
+
+  view.dispatch({
+    changes: { from: 0, to: view.state.doc.length, insert: contentToInsert },
+    selection: { anchor: 0 }
+  })
+}
+
+// 暴露给 Vue 父组件调用的方法
+defineExpose({
+  focus: () => view && view.focus(),
+  setCursor: () => view && view.focus()
+})
+
+onUnmounted(() => {
+  if (view) view.destroy()
+})
+</script>
+
+<style scoped>
+/* 这里依然贴原生 HTML 里写的 CSS */
+.cm-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.editor-controls {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 99; 
+  display: flex;
+  gap: 10px;
+}
+
+/* 剩下的把之前的 .btn-sync 等复制过来即可 */
+</style>
