@@ -54,7 +54,7 @@ npm run build
 如果你想在 Wikidot 编辑页直接使用本项目的 CodeMirror 编辑器，可以使用仓库中的油猴脚本：
 
 - 脚本文件：`userscript/h2o2-wikidot-editor.user.js`
-- 当前默认编辑器地址：`https://wasd243.github.io/SCP-Foundation-editor-web/`
+- 当前默认编辑器地址：`https://wasd243.github.io/SCP-Foundation-editor-web/test.html`
 
 ### 安装步骤
 
@@ -68,5 +68,5 @@ npm run build
 
 ### 给用户的发布建议
 
-- 若你部署了自己的站点，请修改脚本中的 `EDITOR_URL` 为你的部署地址。
+- 若你部署了自己的网页，请修改脚本中的 `EDITOR_URL` 为你的部署地址。
 - 上线时建议启用 `event.origin` 校验，防止跨站消息被滥用。
