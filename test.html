@@ -281,6 +281,35 @@
                 });
                 return; 
             } 
+            // --- 新增 1: 监听来自 Wikidot (油猴脚本) 的初始化信号 ---
+            window.addEventListener('message', function(event) {
+                // 安全性检查（可选）：if (event.origin !== 'https://scpsandboxcn.wikidot.com') return;
+                
+                if (event.data && event.data.type === 'h2o2-init') {
+                    console.log("H2O2: 收到来自 Wikidot 的初始内容");
+                    const view = window.editorInstance;
+                    if (view) {
+                        view.dispatch({
+                            changes: { 
+                                from: 0, 
+                                to: view.state.doc.length, 
+                                insert: event.data.payload 
+                            }
+                        });
+                    }
+                }
+            });
+        
+            // --- 新增 2: 监听编辑器变动并实时发回给 Wikidot ---
+            // 这里利用你 editor.js 中已经定义的自定义事件 'editorContentChanged'
+            window.addEventListener('editorContentChanged', function(e) {
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'h2o2-update',
+                        payload: e.detail.content
+                    }, '*');
+                }
+            });
             
             // --- 核心修改部分 ---
             if (type === 'init') {
