@@ -45,56 +45,7 @@ import { wikidotColorExtension } from "./component/color_widgets.js";
 // AST测试
 import { syntaxTree } from "@codemirror/language";
 
-// 初始化内容
-const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
-
-[https://github.com/wasd243/SCP-Foundation-editor-web 源代码链接]
-
-[[div class="xxx"]]
-++ **SCP-CN-WEB-EDITOR**
-//测试版 v1.0.0 //
-[[/div]]
-
-+ 点几下试试？这里是可以编辑的，顺便说一句，这不是Google docs，你编辑的内容别人应该看不到的（当然啊我不保证100%没有低克入侵）
-
-------
-
-> **编辑器功能演示：**
-**高亮测试**：###ff4d4d|这行文本应该是红色的##。
-> 但是在引用里面会默认为绿色
-> * **高亮测试**：###ff4d4d|这行文本应该是红色的##。
-> * **代码块**：{{monospace}}。
-> * **折叠块**：
-[[collapsible show="+ 展开技术细节" hide="- 隐藏内容"]]
-当前编辑器基于 **CodeMirror 6** 核心，支持：
-1. **自动补全**：尝试在下方输入 \`[[\` 或 \`@@\`。
-2. **快捷工具栏**：点击上方 **CODE TOOLS** 标签试试看！
-3. **安全初始化**：初始化不如CLEAR一根，在这里只是为了展示说明
-[[/collapsible]]
-
--------
-
-||~ 语法项目 ||~ 高亮状态 ||
-|| 加粗 || **完成** ||
-|| 斜体 || //完成// ||
-|| 下划线 || __完成__ ||
-|| 删除线 || --完成-- ||
-
-[[footnote]]xxx[[/footnote]]
-
-[[footnoteblock]]
-
-@@@@
-[[div class="footer"]]
-[[/div]]
-[[/div]]
-
-[[module CSS]]
-/* 未来将支持 CSS 高亮补全 */
-.container {
-    border: 1px solid #fff;
-}
-[[/module]]`
+// 初始化内容 已删除
 
 // 定义自定义高亮标签，防止 "Unknown highlighting tag" 报错
 const customTags = {
@@ -436,7 +387,7 @@ import { foldEffect } from "@codemirror/language/dist/index.js";
 // 3. 初始化编辑器
 const startEditor = () => {
     const state = EditorState.create({
-        doc: EXAMPLE_CODE,
+        doc: "",
         extensions: [
             // 将 customKeymap 放在 basicSetup 之前，确保优先级
             customKeymap,
