@@ -407,7 +407,6 @@ const startEditor = () => {
                 if (update.docChanged) {
                     const content = update.state.doc.toString();
                     
-                    // 【核心补丁 1：向外发送数据】
                     // 把当前的最新代码通过 postMessage 喊给油猴脚本听
                     window.parent.postMessage({
                         type: 'h2o2-update',
@@ -502,9 +501,10 @@ const startEditor = () => {
     return editorView;
 };
 
-// 【核心补丁 2：接收初始数据】
 // 监听油猴脚本发来的初始化/重新同步请求
 window.addEventListener('message', (event) => {
+    // 域名防护
+    if (event.origin !== 'https://wasd243.github.io') return;
     // 过滤掉无关紧要的消息（比如插件注入的乱七八糟的消息）
     if (!event.data || event.data.type !== 'h2o2-init') return;
     
