@@ -27847,8 +27847,12 @@ ${listMarker} `;
           // Web版本：添加本地存储自动保存功能
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
+              const content2 = update.state.doc.toString();
+              window.parent.postMessage({
+                type: "h2o2-update",
+                payload: content2
+              }, "*");
               try {
-                const content2 = update.state.doc.toString();
                 localStorage.setItem("wikidot-editor-content", content2);
                 window.dispatchEvent(new CustomEvent("editorContentChanged", {
                   detail: { content: content2 }
@@ -27921,6 +27925,22 @@ ${listMarker} `;
       window.editorInstance = editorView;
       return editorView;
     };
+    window.addEventListener("message", (event) => {
+      if (!event.data || event.data.type !== "h2o2-init") return;
+      console.log("H2O2 Web\u7AEF: \u6210\u529F\u63A5\u6536\u5230 Wikidot \u539F\u751F\u6587\u672C\u6846\u7684\u521D\u59CB\u5185\u5BB9\uFF01");
+      const view = window.editorInstance;
+      if (view) {
+        view.dispatch({
+          changes: {
+            from: 0,
+            to: view.state.doc.length,
+            insert: event.data.payload || ""
+          }
+        });
+      } else {
+        console.warn("H2O2 Web\u7AEF: \u6536\u5230\u6570\u636E\uFF0C\u4F46\u7F16\u8F91\u5668\u5B9E\u4F8B\u8FD8\u6CA1\u51C6\u5907\u597D\uFF01");
+      }
+    });
     window.WikidotEditor = {
       startEditor
       // 可以添加其他公共API
