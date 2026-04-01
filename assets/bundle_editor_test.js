@@ -27877,6 +27877,7 @@ ${listMarker} `;
       return editorView;
     };
     window.addEventListener("message", (event) => {
+      if (event.origin !== "https://wasd243.github.io") return;
       if (!event.data || event.data.type !== "h2o2-init") return;
       console.log("H2O2 Web\u7AEF: \u6210\u529F\u63A5\u6536\u5230 Wikidot \u539F\u751F\u6587\u672C\u6846\u7684\u521D\u59CB\u5185\u5BB9\uFF01");
       const view = window.editorInstance;
