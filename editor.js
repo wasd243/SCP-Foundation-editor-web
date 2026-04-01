@@ -691,7 +691,7 @@ const startEditor = () => {
                             type: 'h2o2-update',
                             payload: content,
                             source: 'h2o2-editor'
-                        }, '*');
+                        }, parentOrigin || '*');
                     } else {
                         try {
                             localStorage.setItem('wikidot-editor-content', content);
@@ -772,6 +772,8 @@ const startEditor = () => {
     
     // 接收外部（如油猴脚本宿主页面）发送的初始内容，仅应用一次
     window.addEventListener('message', function(event) {
+        if (!isIframeMode) return;
+        if (parentOrigin && event.origin !== parentOrigin) return;
         if (!event.data || event.data.type !== 'h2o2-init' || hasReceivedInitContent) return;
         const content = event.data.payload;
         if (typeof content === 'string') {
