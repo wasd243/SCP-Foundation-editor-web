@@ -27461,55 +27461,6 @@ var require_editor_test = __commonJS({
     init_color_widgets();
     init_dist5();
     init_completion();
-    var EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
-
-[https://github.com/wasd243/SCP-Foundation-editor-web \u6E90\u4EE3\u7801\u94FE\u63A5]
-
-[[div class="xxx"]]
-++ **SCP-CN-WEB-EDITOR**
-//\u6D4B\u8BD5\u7248 v1.0.0 //
-[[/div]]
-
-+ \u70B9\u51E0\u4E0B\u8BD5\u8BD5\uFF1F\u8FD9\u91CC\u662F\u53EF\u4EE5\u7F16\u8F91\u7684\uFF0C\u987A\u4FBF\u8BF4\u4E00\u53E5\uFF0C\u8FD9\u4E0D\u662FGoogle docs\uFF0C\u4F60\u7F16\u8F91\u7684\u5185\u5BB9\u522B\u4EBA\u5E94\u8BE5\u770B\u4E0D\u5230\u7684\uFF08\u5F53\u7136\u554A\u6211\u4E0D\u4FDD\u8BC1100%\u6CA1\u6709\u4F4E\u514B\u5165\u4FB5\uFF09
-
-------
-
-> **\u7F16\u8F91\u5668\u529F\u80FD\u6F14\u793A\uFF1A**
-**\u9AD8\u4EAE\u6D4B\u8BD5**\uFF1A###ff4d4d|\u8FD9\u884C\u6587\u672C\u5E94\u8BE5\u662F\u7EA2\u8272\u7684##\u3002
-> \u4F46\u662F\u5728\u5F15\u7528\u91CC\u9762\u4F1A\u9ED8\u8BA4\u4E3A\u7EFF\u8272
-> * **\u9AD8\u4EAE\u6D4B\u8BD5**\uFF1A###ff4d4d|\u8FD9\u884C\u6587\u672C\u5E94\u8BE5\u662F\u7EA2\u8272\u7684##\u3002
-> * **\u4EE3\u7801\u5757**\uFF1A{{monospace}}\u3002
-> * **\u6298\u53E0\u5757**\uFF1A
-[[collapsible show="+ \u5C55\u5F00\u6280\u672F\u7EC6\u8282" hide="- \u9690\u85CF\u5185\u5BB9"]]
-\u5F53\u524D\u7F16\u8F91\u5668\u57FA\u4E8E **CodeMirror 6** \u6838\u5FC3\uFF0C\u652F\u6301\uFF1A
-1. **\u81EA\u52A8\u8865\u5168**\uFF1A\u5C1D\u8BD5\u5728\u4E0B\u65B9\u8F93\u5165 \`[[\` \u6216 \`@@\`\u3002
-2. **\u5FEB\u6377\u5DE5\u5177\u680F**\uFF1A\u70B9\u51FB\u4E0A\u65B9 **CODE TOOLS** \u6807\u7B7E\u8BD5\u8BD5\u770B\uFF01
-3. **\u5B89\u5168\u521D\u59CB\u5316**\uFF1A\u521D\u59CB\u5316\u4E0D\u5982CLEAR\u4E00\u6839\uFF0C\u5728\u8FD9\u91CC\u53EA\u662F\u4E3A\u4E86\u5C55\u793A\u8BF4\u660E
-[[/collapsible]]
-
--------
-
-||~ \u8BED\u6CD5\u9879\u76EE ||~ \u9AD8\u4EAE\u72B6\u6001 ||
-|| \u52A0\u7C97 || **\u5B8C\u6210** ||
-|| \u659C\u4F53 || //\u5B8C\u6210// ||
-|| \u4E0B\u5212\u7EBF || __\u5B8C\u6210__ ||
-|| \u5220\u9664\u7EBF || --\u5B8C\u6210-- ||
-
-[[footnote]]xxx[[/footnote]]
-
-[[footnoteblock]]
-
-@@@@
-[[div class="footer"]]
-[[/div]]
-[[/div]]
-
-[[module CSS]]
-/* \u672A\u6765\u5C06\u652F\u6301 CSS \u9AD8\u4EAE\u8865\u5168 */
-.container {
-    border: 1px solid #fff;
-}
-[[/module]]`;
     var customTags = {
       header: Tag.define(),
       strong: Tag.define(),
@@ -27830,7 +27781,7 @@ ${listMarker} `;
     ]);
     var startEditor = () => {
       const state = EditorState.create({
-        doc: EXAMPLE_CODE,
+        doc: "",
         extensions: [
           // 将 customKeymap 放在 basicSetup 之前，确保优先级
           customKeymap,
