@@ -664,6 +664,11 @@ import { wikidotCompletionSource } from "./component/completion.js";
 const startEditor = () => {
     const isIframeMode = window.parent !== window;
     let hasReceivedInitContent = false;
+    const urlParams = new URLSearchParams(window.location.search);
+    const configuredParentOrigin = urlParams.get('parentOrigin');
+    const parentOrigin = configuredParentOrigin && /^https?:\/\//.test(configuredParentOrigin)
+        ? configuredParentOrigin
+        : null;
 
     const state = EditorState.create({
         doc: EXAMPLE_CODE,

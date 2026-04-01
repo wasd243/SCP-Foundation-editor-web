@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         H2O2 Wikidot Editor (Universal)
 // @namespace    https://github.com/wasd243/SCP-Foundation-editor-web
-// @version      1.3.0
-// @description  解决竞态条件与 Wikidot AJAX 幽灵 DOM 问题
+// @version      1.3.1
+// @description  解决竞态条件、取消后重进编辑器、以及 Wikidot AJAX 幽灵 DOM 问题
 // @author       wasd243
 // @match        *://*.wikidot.com/*
 // @grant        none
@@ -13,69 +13,123 @@
     'use strict';
 
     var EDITOR_URL = 'https://wasd243.github.io/SCP-Foundation-editor-web/test.html';
+    var IFRAME_ID = 'h2o2-editor-frame';
+    var EDITOR_ORIGIN = new URL(EDITOR_URL).origin;
 
-    function injectEditor() {
-        var nativeTextarea = document.getElementById('edit-textarea') || document.getElementById('edit-page-textarea');
+    var observer = null;
+    var messageListenerBound = false;
 
-        // 如果页面上目前没有原生框，直接退出
-        if (!nativeTextarea) return;
+    function getNativeTextarea() {
+        return document.getElementById('edit-textarea') || document.getElementById('edit-page-textarea');
+    }
 
-        // 【关键修改1】给具体的 textarea 打上专属标记，而不是去找全局的 iframe
-        if (nativeTextarea.dataset.h2o2Injected === 'true') {
-            // 如果点过取消再点编辑，确保我们的 iframe 也跟着显示出来
-            var existingIframe = document.getElementById('h2o2-editor-frame');
-            if (existingIframe && nativeTextarea.style.display !== 'none') {
-                nativeTextarea.style.display = 'none';
-                existingIframe.style.display = 'block';
-            }
-            return;
-        }
+    function isLikelyEditPage() {
+        return /\/edit\/true\/?$/.test(location.pathname) || !!getNativeTextarea();
+    }
 
-        console.log("H2O2: 发现全新的原生编辑框，开始接管...");
-        nativeTextarea.dataset.h2o2Injected = 'true'; // 打上专属烙印
-
-        // 隐藏原生组件
+    function ensureHostHidden(nativeTextarea) {
         nativeTextarea.style.display = 'none';
+
         var toolbar = document.getElementById('wd-editor-toolbar-panel');
         if (toolbar) toolbar.style.display = 'none';
+
         document.querySelectorAll('.change-textarea-size').forEach(function (el) {
             el.style.display = 'none';
         });
+    }
 
-        // 斩草除根：如果有上一次遗留的幽灵 iframe，先干掉它
-        var oldIframe = document.getElementById('h2o2-editor-frame');
-        if (oldIframe) oldIframe.remove();
+    function buildIframeUrl() {
+        var url = new URL(EDITOR_URL);
+        url.searchParams.set('parentOrigin', window.location.origin);
+        return url.toString();
+    }
 
-        // 创建新的 iframe
-        var iframe = document.createElement('iframe');
-        iframe.id = 'h2o2-editor-frame';
-        iframe.src = EDITOR_URL;
-        iframe.style.cssText = 'width: 100%; height: 70vh; min-height: 520px; border: 1px solid #ccc; border-radius: 4px; display: block; margin-bottom: 8px;';
+    function pushInitContent(iframe, nativeTextarea) {
+        if (!iframe || !iframe.contentWindow || !nativeTextarea) return;
+        iframe.contentWindow.postMessage({
+            type: 'h2o2-init',
+            payload: nativeTextarea.value || ''
+        }, EDITOR_ORIGIN);
+    }
 
-        nativeTextarea.parentNode.insertBefore(iframe, nativeTextarea);
+    function bindMessageListener() {
+        if (messageListenerBound) return;
+        messageListenerBound = true;
 
-        // 【关键修改2】延迟发送数据，等 CodeMirror 完全启动
-        iframe.addEventListener('load', function () {
-            console.log("H2O2: iframe 骨架加载完毕，等待内部 JS 启动...");
-
-            // 延迟 800 毫秒发送数据（如果还是没同步，可以把 800 改成 1500 试试）
-            setTimeout(function() {
-                console.log("H2O2: 向 iframe 发送沙盒原生内容!");
-                iframe.contentWindow.postMessage({
-                    type: 'h2o2-init',
-                    payload: nativeTextarea.value
-                }, '*');
-            }, 800);
-        });
-
-        // 接收编辑器更新，同步回原生框
         window.addEventListener('message', function (event) {
-            if (event.data && event.data.type === 'h2o2-update') {
-                nativeTextarea.value = event.data.payload;
-            }
+            if (event.origin !== EDITOR_ORIGIN) return;
+            if (!event.data || event.data.type !== 'h2o2-update') return;
+
+            var nativeTextarea = getNativeTextarea();
+            if (!nativeTextarea) return;
+            nativeTextarea.value = typeof event.data.payload === 'string' ? event.data.payload : '';
         });
     }
 
-    const observer = new MutationObserver(injectEditor);
+    function mountOrRemountEditor() {
+        if (!isLikelyEditPage()) return;
+
+        var nativeTextarea = getNativeTextarea();
+        if (!nativeTextarea || !nativeTextarea.parentNode) return;
+
+        ensureHostHidden(nativeTextarea);
+        bindMessageListener();
+
+        var iframe = document.getElementById(IFRAME_ID);
+        if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.id = IFRAME_ID;
+            iframe.src = buildIframeUrl();
+            iframe.style.cssText = [
+                'width: 100%',
+                'height: 70vh',
+                'min-height: 520px',
+                'border: 1px solid #ccc',
+                'border-radius: 4px',
+                'display: block',
+                'margin-bottom: 8px'
+            ].join(';');
+
+            nativeTextarea.parentNode.insertBefore(iframe, nativeTextarea);
+            iframe.addEventListener('load', function () {
+                // 避免编辑器内部尚未完成初始化导致丢失首包
+                setTimeout(function () {
+                    pushInitContent(iframe, getNativeTextarea());
+                }, 350);
+            });
+        } else {
+            iframe.style.display = 'block';
+
+            // 如果 Wikidot 动态替换了 textarea，确保 iframe 仍与当前 textarea 同级
+            if (iframe.parentNode !== nativeTextarea.parentNode) {
+                nativeTextarea.parentNode.insertBefore(iframe, nativeTextarea);
+            }
+
+            // 用户点“取消”再点“编辑”时通常会复用旧 iframe，这里主动再同步一次初始内容
+            pushInitContent(iframe, nativeTextarea);
+        }
+    }
+
+    function boot() {
+        if (document.readyState === 'loading') return;
+        mountOrRemountEditor();
+    }
+
+    document.addEventListener('DOMContentLoaded', mountOrRemountEditor);
+    window.addEventListener('load', mountOrRemountEditor);
+    window.addEventListener('pageshow', mountOrRemountEditor);
+
+    // Wikidot 可能无整页刷新；用 mutation 持续兜底，不主动断开
+    observer = new MutationObserver(function () {
+        mountOrRemountEditor();
+    });
+
     observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    // 额外定时兜底：覆盖慢加载和异步渲染
+    setTimeout(mountOrRemountEditor, 300);
+    setTimeout(mountOrRemountEditor, 1200);
+    setTimeout(mountOrRemountEditor, 2500);
+
+    boot();
 })();
