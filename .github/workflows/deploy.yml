@@ -37,13 +37,22 @@ jobs:
         run: npm run build
         
       - name: Prepare Public Directory
+        # 统一输出到根目录，避免 develop 分支发布到 /dev 路径
         run: |
-          mkdir -p public/assets
-          cp index.html public/
-          if [ -f "test.html" ]; then
-            cp test.html public/
+          mkdir -p public
+
+          # 1. 若有 dist 产物，先拷贝
+          if [ -d "dist" ]; then
+            cp -r dist/* public/
           fi
+
+          # 2. 强制将入口页面放到站点根目录
+          [ -f "index.html" ] && cp index.html public/
+          [ -f "test.html" ] && cp test.html public/
+
+          # 3. 拷贝静态资源
           if [ -d "assets" ]; then
+            mkdir -p public/assets
             cp -r assets/* public/assets/
           fi
 
@@ -53,4 +62,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
-          destination_dir: ${{ github.ref_name == 'develop' && 'dev' || '.' }}
+          destination_dir: .

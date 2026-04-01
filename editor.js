@@ -601,8 +601,8 @@ const customKeymap = keymap.of([
             const line = state.doc.lineAt(selection.head);
             const cursorPos = selection.head - line.from;
             
-            // 检查光标是否在行末（或者接近行末）
-            const isAtEndOfLine = cursorPos >= line.text.length - 1;
+            // 仅在光标位于行尾时接管行为，避免“行尾前一位”也被误判
+            const isAtEndOfLine = cursorPos === line.text.length;
             
             if (!isAtEndOfLine) {
                 // 如果光标不在行末，让默认行为处理（比如在行中间换行）
@@ -611,8 +611,8 @@ const customKeymap = keymap.of([
             
             // Wikidot列表语法：单个*表示无序列表，单个#表示有序列表
             // 匹配行首的 * 或 #，后面必须跟空格
-            const listMatch = line.text.match(/^([*#])\s+/);
-            const list3Match = line.text.match(/^(:.*?:)\s+/); // 定义列表匹配
+            const listMatch = line.text.match(/^([*#]+)\s+/);
+            const list3Match = line.text.match(/^(:+)\s+/); // 定义列表匹配
             
             if (listMatch || list3Match) {
                 const listMarker = listMatch ? listMatch[1] : list3Match[1]; // * 或 # 或 :
@@ -622,11 +622,12 @@ const customKeymap = keymap.of([
                 const isListItemEmpty = contentAfterMarker === '';
                 
                 if (isListItemEmpty) {
-                    // 空列表项：删除当前行的列表标记
+                    // 空列表项：只删除列表标记，避免整行删除导致和下一行意外拼接
+                    const markerLength = listMarker.length + 1; // marker + 空格
                     view.dispatch({
                         changes: { 
                             from: line.from, 
-                            to: line.to, 
+                            to: line.from + markerLength, 
                             insert: "" 
                         },
                         selection: { anchor: line.from }
@@ -661,6 +662,14 @@ import { wikidotCompletionSource } from "./component/completion.js";
 
 // 3. 初始化编辑器
 const startEditor = () => {
+    const isIframeMode = window.parent !== window;
+    let hasReceivedInitContent = false;
+    const urlParams = new URLSearchParams(window.location.search);
+    const configuredParentOrigin = urlParams.get('parentOrigin');
+    const parentOrigin = configuredParentOrigin && /^https?:\/\//.test(configuredParentOrigin)
+        ? configuredParentOrigin
+        : null;
+
     const state = EditorState.create({
         doc: EXAMPLE_CODE,
         extensions: [
@@ -679,17 +688,24 @@ const startEditor = () => {
             // Web版本：添加本地存储自动保存功能
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
-                    try {
-                        // 保存到localStorage
-                        const content = update.state.doc.toString();
-                        localStorage.setItem('wikidot-editor-content', content);
-                        
-                        // 触发自定义事件，供其他组件使用
-                        window.dispatchEvent(new CustomEvent('editorContentChanged', {
-                            detail: { content }
-                        }));
-                    } catch (error) {
-                        console.warn('无法保存到本地存储:', error);
+                    const content = update.state.doc.toString();
+
+                    // iframe 模式下向父页面广播；独立页面模式写 localStorage
+                    if (isIframeMode) {
+                        window.parent.postMessage({
+                            type: 'h2o2-update',
+                            payload: content,
+                            source: 'h2o2-editor'
+                        }, parentOrigin || '*');
+                    } else {
+                        try {
+                            localStorage.setItem('wikidot-editor-content', content);
+                            window.dispatchEvent(new CustomEvent('editorContentChanged', {
+                                detail: { content }
+                            }));
+                        } catch (error) {
+                            console.warn('无法保存到本地存储:', error);
+                        }
                     }
                 }
             }),
@@ -735,27 +751,47 @@ const startEditor = () => {
     // 设置颜色选择器事件处理
     setupColorPickerHandler(editorView);
     
-    // 尝试从localStorage加载之前的内容
-    try {
-        const savedContent = localStorage.getItem('wikidot-editor-content');
-        if (savedContent) {
-            // 延迟一点时间设置内容，确保编辑器完全初始化
-            setTimeout(() => {
-                editorView.dispatch({
-                    changes: {
-                        from: 0,
-                        to: editorView.state.doc.length,
-                        insert: savedContent
-                    }
-                });
-            }, 100);
+    // 独立模式才从 localStorage 读取，避免 iframe 嵌入时覆盖宿主传入内容
+    if (!isIframeMode) {
+        try {
+            const savedContent = localStorage.getItem('wikidot-editor-content');
+            if (savedContent) {
+                // 延迟一点时间设置内容，确保编辑器完全初始化
+                setTimeout(() => {
+                    editorView.dispatch({
+                        changes: {
+                            from: 0,
+                            to: editorView.state.doc.length,
+                            insert: savedContent
+                        }
+                    });
+                }, 100);
+            }
+        } catch (error) {
+            console.warn('无法从本地存储加载内容:', error);
         }
-    } catch (error) {
-        console.warn('无法从本地存储加载内容:', error);
     }
     
     // 将实例挂载到全局，方便 index.html 的按钮调用
     window.editorInstance = editorView;
+    
+    // 接收外部（如油猴脚本宿主页面）发送的初始内容，仅应用一次
+    window.addEventListener('message', function(event) {
+        if (!isIframeMode) return;
+        if (parentOrigin && event.origin !== parentOrigin) return;
+        if (!event.data || event.data.type !== 'h2o2-init' || hasReceivedInitContent) return;
+        const content = event.data.payload;
+        if (typeof content === 'string') {
+            editorView.dispatch({
+                changes: {
+                    from: 0,
+                    to: editorView.state.doc.length,
+                    insert: content
+                }
+            });
+            hasReceivedInitContent = true;
+        }
+    });
 
     return editorView;
 };
