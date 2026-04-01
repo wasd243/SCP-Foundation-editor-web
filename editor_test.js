@@ -431,6 +431,7 @@ const customKeymap = keymap.of([
  * 自动补全配置
  */
 import { wikidotCompletionSource } from "./component/completion.js";
+import { foldEffect } from "@codemirror/language/dist/index.js";
 
 // 3. 初始化编辑器
 const startEditor = () => {
@@ -453,12 +454,18 @@ const startEditor = () => {
             // Web版本：添加本地存储自动保存功能
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
+                    const content = update.state.doc.toString();
+                    
+                    // 【核心补丁 1：向外发送数据】
+                    // 把当前的最新代码通过 postMessage 喊给油猴脚本听
+                    window.parent.postMessage({
+                        type: 'h2o2-update',
+                        payload: content
+                    }, '*'); 
+
                     try {
-                        // 保存到localStorage
-                        const content = update.state.doc.toString();
+                        // 保留你原来的本地备份功能
                         localStorage.setItem('wikidot-editor-content', content);
-                        
-                        // 触发自定义事件，供其他组件使用
                         window.dispatchEvent(new CustomEvent('editorContentChanged', {
                             detail: { content }
                         }));
@@ -543,6 +550,29 @@ const startEditor = () => {
 
     return editorView;
 };
+
+// 【核心补丁 2：接收初始数据】
+// 监听油猴脚本发来的初始化/重新同步请求
+window.addEventListener('message', (event) => {
+    // 过滤掉无关紧要的消息（比如插件注入的乱七八糟的消息）
+    if (!event.data || event.data.type !== 'h2o2-init') return;
+    
+    console.log("H2O2 Web端: 成功接收到 Wikidot 原生文本框的初始内容！");
+    
+    const view = window.editorInstance;
+    if (view) {
+        // 使用收到的原生内容，替换掉编辑器里现有的所有内容（包括那个 EXAMPLE_CODE 模板）
+        view.dispatch({
+            changes: { 
+                from: 0, 
+                to: view.state.doc.length, 
+                insert: event.data.payload || ''
+            }
+        });
+    } else {
+        console.warn("H2O2 Web端: 收到数据，但编辑器实例还没准备好！");
+    }
+});
 
 // 导出编辑器实例供其他脚本使用
 window.WikidotEditor = {
