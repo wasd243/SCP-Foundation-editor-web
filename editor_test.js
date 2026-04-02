@@ -402,27 +402,16 @@ const startEditor = () => {
             colorPreviewExtension,
             autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
             
-            // Web版本：添加本地存储自动保存功能
+            // Web版本：删除本地存储自动保存功能
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
                     const content = update.state.doc.toString();
                     
-                    // 【核心补丁 1：向外发送数据】
                     // 把当前的最新代码通过 postMessage 喊给油猴脚本听
                     window.parent.postMessage({
                         type: 'h2o2-update',
                         payload: content
                     }, '*'); 
-
-                    try {
-                        // 保留你原来的本地备份功能
-                        localStorage.setItem('wikidot-editor-content', content);
-                        window.dispatchEvent(new CustomEvent('editorContentChanged', {
-                            detail: { content }
-                        }));
-                    } catch (error) {
-                        console.warn('无法保存到本地存储:', error);
-                    }
                 }
             }),
 
@@ -477,34 +466,18 @@ const startEditor = () => {
     // 设置颜色选择器事件处理
     setupColorPickerHandler(editorView);
     
-    // 尝试从localStorage加载之前的内容
-    try {
-        const savedContent = localStorage.getItem('wikidot-editor-content');
-        if (savedContent) {
-            // 延迟一点时间设置内容，确保编辑器完全初始化
-            setTimeout(() => {
-                editorView.dispatch({
-                    changes: {
-                        from: 0,
-                        to: editorView.state.doc.length,
-                        insert: savedContent
-                    }
-                });
-            }, 100);
-        }
-    } catch (error) {
-        console.warn('无法从本地存储加载内容:', error);
-    }
-    
     // 将实例挂载到全局，方便 index.html 的按钮调用
     window.editorInstance = editorView;
 
     return editorView;
 };
 
-// 【核心补丁 2：接收初始数据】
 // 监听油猴脚本发来的初始化/重新同步请求
 window.addEventListener('message', (event) => {
+    // 允许来自所有 Wikidot 分站的消息
+    const isWikidot = event.origin.endsWith('wikidot.com');
+    
+    if (!isWikidot) return;
     // 过滤掉无关紧要的消息（比如插件注入的乱七八糟的消息）
     if (!event.data || event.data.type !== 'h2o2-init') return;
     
