@@ -27795,7 +27795,7 @@ ${listMarker} `;
           // 再添加普通颜色预览扩展
           colorPreviewExtension,
           autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
-          // Web版本：添加本地存储自动保存功能
+          // Web版本：删除本地存储自动保存功能
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
               const content2 = update.state.doc.toString();
@@ -27803,14 +27803,6 @@ ${listMarker} `;
                 type: "h2o2-update",
                 payload: content2
               }, "*");
-              try {
-                localStorage.setItem("wikidot-editor-content", content2);
-                window.dispatchEvent(new CustomEvent("editorContentChanged", {
-                  detail: { content: content2 }
-                }));
-              } catch (error) {
-                console.warn("\u65E0\u6CD5\u4FDD\u5B58\u5230\u672C\u5730\u5B58\u50A8:", error);
-              }
             }
           }),
           EditorView.theme({
@@ -27857,22 +27849,6 @@ ${listMarker} `;
         });
       };
       setupColorPickerHandler(editorView);
-      try {
-        const savedContent = localStorage.getItem("wikidot-editor-content");
-        if (savedContent) {
-          setTimeout(() => {
-            editorView.dispatch({
-              changes: {
-                from: 0,
-                to: editorView.state.doc.length,
-                insert: savedContent
-              }
-            });
-          }, 100);
-        }
-      } catch (error) {
-        console.warn("\u65E0\u6CD5\u4ECE\u672C\u5730\u5B58\u50A8\u52A0\u8F7D\u5185\u5BB9:", error);
-      }
       window.editorInstance = editorView;
       return editorView;
     };
