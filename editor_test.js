@@ -402,7 +402,7 @@ const startEditor = () => {
             colorPreviewExtension,
             autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
             
-            // Web版本：添加本地存储自动保存功能
+            // Web版本：删除本地存储自动保存功能
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
                     const content = update.state.doc.toString();
@@ -412,16 +412,6 @@ const startEditor = () => {
                         type: 'h2o2-update',
                         payload: content
                     }, '*'); 
-
-                    try {
-                        // 保留你原来的本地备份功能
-                        localStorage.setItem('wikidot-editor-content', content);
-                        window.dispatchEvent(new CustomEvent('editorContentChanged', {
-                            detail: { content }
-                        }));
-                    } catch (error) {
-                        console.warn('无法保存到本地存储:', error);
-                    }
                 }
             }),
 
@@ -475,25 +465,6 @@ const startEditor = () => {
     
     // 设置颜色选择器事件处理
     setupColorPickerHandler(editorView);
-    
-    // 尝试从localStorage加载之前的内容
-    try {
-        const savedContent = localStorage.getItem('wikidot-editor-content');
-        if (savedContent) {
-            // 延迟一点时间设置内容，确保编辑器完全初始化
-            setTimeout(() => {
-                editorView.dispatch({
-                    changes: {
-                        from: 0,
-                        to: editorView.state.doc.length,
-                        insert: savedContent
-                    }
-                });
-            }, 100);
-        }
-    } catch (error) {
-        console.warn('无法从本地存储加载内容:', error);
-    }
     
     // 将实例挂载到全局，方便 index.html 的按钮调用
     window.editorInstance = editorView;
