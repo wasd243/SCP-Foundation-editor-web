@@ -309,7 +309,8 @@ Attr {
 
 @tokens {
   RawContent { ![\[\n\r]+ | "[" ![\[\n\r]* }
-  Rate { "[[module rate]]"}
+  // able to identify and highlight "Module Rate"
+  Rate { "[[" $[mM]"odule " $[rR]"ate]]" }
   DivOpen  { "[[div" }
   DivClose { "[[/div]]" }
   SpanOpenToken { "[[span" }
