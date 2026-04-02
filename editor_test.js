@@ -474,8 +474,10 @@ const startEditor = () => {
 
 // 监听油猴脚本发来的初始化/重新同步请求
 window.addEventListener('message', (event) => {
-    // 域名防护
-    if (event.origin !== 'https://wasd243.github.io') return;
+    // 允许来自所有 Wikidot 分站的消息
+    const isWikidot = event.origin.endsWith('wikidot.com');
+    
+    if (!isWikidot) return;
     // 过滤掉无关紧要的消息（比如插件注入的乱七八糟的消息）
     if (!event.data || event.data.type !== 'h2o2-init') return;
     
