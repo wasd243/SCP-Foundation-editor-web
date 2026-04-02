@@ -21,6 +21,8 @@
     * [查看组件页面](https://scp-wiki.wikidot.com/component:acs-animation)
 * **Peroxide Theme** - By *OxygenNine*
     * [查看版式页面](https://scp-wiki-cn.wikidot.com/theme:peroxide)
+* **Icons & Assets**: 本项目使用的图标来源于经典 Minecraft 模组 [Avaritia](https://github.com/SpitefulFox/Avaritia)，由 **SpitefulFox** 创作并以 **MIT License** 授权。
+* **Editor Engine**: Powered by [CodeMirror 6](https://codemirror.net/).
 ## 🛠 构建指南
 本项目前端部分使用 `esbuild` 进行模块打包。
 
