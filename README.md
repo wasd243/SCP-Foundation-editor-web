@@ -1,7 +1,7 @@
 # SCP Foundation Editor (Web Edition)
 
 ![License](https://img.shields.io/badge/license-AGPL--3.0-red.svg)
-![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)
+![Version](https://img.shields.io/badge/Version-1.1.0-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Windows%20%7C%20macOS-blue.svg)
 ![Language](https://img.shields.io/badge/language-JavaScript-yellow.svg)
 ![Language](https://img.shields.io/badge/language-CSS-purple.svg)
