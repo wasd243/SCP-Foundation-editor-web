@@ -23,76 +23,40 @@
  */
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
-import { StreamLanguage, syntaxHighlighting, HighlightStyle } from "@codemirror/language";
+// Stream导入
+import { syntaxHighlighting, HighlightStyle } from "@codemirror/language";
+// Lezer导入
+import { parser } from "./src/parser.js";
+import { LRLanguage, LanguageSupport } from "@codemirror/language";
+import { parseMixed } from "@lezer/common"
+import { cssLanguage } from "@codemirror/lang-css"
+import { htmlLanguage} from "@codemirror/lang-html"
+import { styleTags, tags as t, Tag } from "@lezer/highlight";
+import { foldNodeProp, foldInside } from "@codemirror/language";
+// 其他导入
+import { foldGutter } from "@codemirror/language";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { autocompletion } from "@codemirror/autocomplete";
 import { keymap } from "@codemirror/view";
 import { indentWithTab } from "@codemirror/commands";
-import { Tag } from "@lezer/highlight";
 // 导入颜色预览扩展和事件处理函数
 import { colorPreviewExtension, setupColorPickerHandler } from "./component/color_preview.js";
 import { wikidotColorExtension } from "./component/color_widgets.js";
+// AST测试
+import { syntaxTree } from "@codemirror/language";
 
-// 初始化内容
-const EXAMPLE_CODE = `[[include :scp-wiki-cn:theme:peroxide]]
+// 初始化内容 已删除
 
-[https://github.com/wasd243/SCP-Foundation-editor-web 源代码链接]
-
-[[div class="xxx"]]
-++ **SCP-CN-WEB-EDITOR**
-//测试版 v1.0.0 //
-[[/div]]
-
-+ 点几下试试？这里是可以编辑的，顺便说一句，这不是Google docs，你编辑的内容别人应该看不到的（当然啊我不保证100%没有低克入侵）
-
-------
-
-> **编辑器功能演示：**
-**高亮测试**：###ff4d4d|这行文本应该是红色的##。
-> 但是在引用里面会默认为绿色
-> * **高亮测试**：###ff4d4d|这行文本应该是红色的##。
-> * **代码块**：{{monospace}}。
-> * **折叠块**：
-[[collapsible show="+ 展开技术细节" hide="- 隐藏内容"]]
-当前编辑器基于 **CodeMirror 6** 核心，支持：
-1. **自动补全**：尝试在下方输入 \`[[\` 或 \`@@\`。
-2. **快捷工具栏**：点击上方 **CODE TOOLS** 标签试试看！
-3. **安全初始化**：初始化不如CLEAR一根，在这里只是为了展示说明
-[[/collapsible]]
-
--------
-
-||~ 语法项目 ||~ 高亮状态 ||
-|| 加粗 || **完成** ||
-|| 斜体 || //完成// ||
-|| 下划线 || __完成__ ||
-|| 删除线 || --完成-- ||
-
-[[footnote]]xxx[[/footnote]]
-
-[[footnoteblock]]
-
-@@@@
-[[div class="footer"]]
-[[/div]]
-[[/div]]
-
-[[module CSS]]
-/* 未来将支持 CSS 高亮补全 */
-.container {
-    border: 1px solid #fff;
-}
-[[/module]]`
-
-// 1. 定义自定义高亮标签，防止 "Unknown highlighting tag" 报错
+// 定义自定义高亮标签，防止 "Unknown highlighting tag" 报错
 const customTags = {
     header: Tag.define(),
     strong: Tag.define(),
     em: Tag.define(),
     underline: Tag.define(),
     strikethrough: Tag.define(),
-    wikiTag: Tag.define(),
-    link: Tag.define(),
+    module: Tag.define(), // MODULE
+    html: Tag.define(), // HTML
+    link: Tag.define(), // 链接🔗
     hr: Tag.define(),
     rate: Tag.define(),
     right: Tag.define(),
@@ -101,480 +65,240 @@ const customTags = {
     sup: Tag.define(),
     sub: Tag.define(),
     newline: Tag.define(),
-    monosapace: Tag.define(),
     list1: Tag.define(),
     list2: Tag.define(),
     list3: Tag.define(),
     list4: Tag.define(),
     quote: Tag.define(),
+    newline_defult: Tag.define(), // IMPORTANT new line defult defination
+    code: Tag.define(), // 用于代码块
     table: Tag.define(),
     table_header: Tag.define(),
-    table_cell: Tag.define(),
     original_text: Tag.define(), // 用于原始文本
     image: Tag.define(), // 用于图片
     footnote: Tag.define(),
     footnote_block: Tag.define(), // 用于脚注块
     color: Tag.define(), 
     include: Tag.define(), // 用于 [[include ...]] 标签
+    include_1: Tag.define(),
+    include_2: Tag.define(),
+    include_3: Tag.define(),
+    num: Tag.define(),
+    keyword: Tag.define(), // 参数
     scp_wiki: Tag.define(), // 用于特定的主题标签
     div: Tag.define(), // 用于 [[div ...]] 标签
     tabview: Tag.define(), // 用于 [[tabview]] 标签
     tab: Tag.define(), // tabview增强
     acs: Tag.define(), // 用于ACS
-    components: Tag.define(), // Components
     equal: Tag.define(), // 用于 = 号
     line_up: Tag.define(), // 用于|
     size: Tag.define(), // 用于字体大小标签
     aim: Tag.define(), // 用于AIM
+    components: Tag.define(), // ATTRpathToken
     collapsible: Tag.define(), // 用于可折叠内容
+    monospace: Tag.define(), // 等宽字
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
     user: Tag.define(), // user
-    Highlight: Tag.define(), // CSS and html temporary highlight
+    Highlight: Tag.define(), // ATTR highlight
 };
+
+const wikidotParser = parser.configure({
+    wrap: parseMixed((node, input) => {
+    // 当解析器走到 ModuleContent 节点时
+        if (node.name === "ModuleContent") {
+            const moduleBlock = node.node.parent;
+            if (moduleBlock && moduleBlock.name === "ModuleBlock") {
+                const openTag = moduleBlock.getChild("ModuleOpenTag");
+                if (openTag) {
+                    // 直接读取整个 [[module CSS]] 标签的文本
+                    const tagText = input.read(openTag.from, openTag.to).toLowerCase();
+                    
+                    // 排除原生的 Wikidot 模块
+                    const nativeModules = ["rate", "listpages", "backlinks"];
+                    if (nativeModules.some(m => tagText.includes(m))) {
+                        return null;
+                    }
+
+                    // 只要标签里写了 css，就开启 CSS 嵌套高亮
+                    if (tagText.includes("css")) {
+                        return {
+                            parser: cssLanguage.parser,
+                            overlay: [{ from: node.from, to: node.to }]
+                        };
+                    }
+                }
+            }
+        }
+        
+        // HTML 同理
+        if (node.name === "HTMLContent") {
+            return { 
+                parser: htmlLanguage.parser,
+                overlay: [{ from: node.from, to: node.to }] 
+            };
+        }
+        return null;
+    }),
+    props: [
+        styleTags({
+            "Rate":                   customTags.rate,
+            "IncludeOpen":            customTags.include,
+            "IncludePart1":           customTags.include_1,
+            "IncludePart2":           customTags.include_2,
+            "IncludePart3":           customTags.include_3,
+            "IncludeSimplePath":      customTags.include_2,
+            "IncludeBar":             customTags.line_up,
+            "IncludeValue":           customTags.keyword,
+            "IncludeTagEnd":          customTags.include,
+            "DivOpen":                customTags.div,
+            "DivTagEnd":              customTags.div,
+            "DivClose":               customTags.div,
+            "CollapsibleOpen":        customTags.collapsible,
+            "CollapsibleTagEnd":      customTags.collapsible,
+            "CollapsibleClose":       customTags.collapsible,
+            "CodeOpen":               customTags.code,
+            "CodeTagEnd":             customTags.code,
+            "CodeClose":              customTags.code,
+            "UserOpen":               customTags.user,
+            "UserTagEnd":             customTags.user,
+            "FootnoteOpen":           customTags.footnote,
+            "FootnoteTagEnd":         customTags.footnote,
+            "FootnoteClose":          customTags.footnote,
+            "LinkURL":                customTags.link,
+            "ImageOpen":              customTags.image,
+            "ImageTagEnd":            customTags.image,
+            "TabViewOpenToken":       customTags.tabview,
+            "TabViewCloseToken":      customTags.tabview,
+            "TabOpenToken":           customTags.tab,
+            "TabTagEnd":              customTags.tab,
+            "TabCloseToken":          customTags.tab,
+            "ModuleOpenToken":        customTags.module,
+            "ModuleCloseToken":       customTags.module,
+            "ModuleTagEnd":           customTags.module,
+            "HTMLOpenToken":          customTags.html,
+            "HTMLCloseToken":         customTags.html,
+            "HTMLTagEnd":             customTags.html,
+            "NoteOpenToken":          customTags.note,
+            "NoteCloseToken":         customTags.note,
+            "SizeOpenToken":          customTags.size,
+            "SizeCloseToken":         customTags.size,
+            "SizeTagEnd":             customTags.size,
+            "AlignCenterOpenToken":   customTags.center,
+            "AlignCenterCloseToken":  customTags.center,
+            "AlignLeftOpenToken":     customTags.left,
+            "AlignLeftCloseToken":    customTags.left,
+            "AlignRightOpenToken":    customTags.right,
+            "AlignRightCloseToken":   customTags.right,
+            "SpanOpenToken":          customTags.div, // 这里div和span的颜色一样
+            "SpanCloseToken":         customTags.div,
+            "SpanTagEnd":             customTags.div,
+
+            // ——————————————————————————表格操作——————————————————————————
+            "TableTilde":             customTags.table_header,
+            "TableBar":               customTags.table,
+            // ——————————————————————————表格操作——————————————————————————
+            "List1":                  customTags.list1,
+            "List2":                  customTags.list2,
+
+
+            "FootnoteBlock":          customTags.footnote_block,
+
+
+            // ——————————————————————————常用标记——————————————————————————
+            "Blockquote":             customTags.quote,
+            "Hr":                     customTags.hr,
+            "Title":                  customTags.header,
+            "StrongText":             customTags.strong,
+            "EmText":                 customTags.em,
+            "UnderlineText":          customTags.underline,
+            "StrikeText":             customTags.strikethrough,
+            "SupText":                customTags.sup,
+            "SubText":                customTags.sub,
+            "Monospace":              customTags.monospace,
+            "ForcedNewLine":          customTags.newline,
+            "Original":               customTags.original_text,
+            // ——————————————————————————常用标记——————————————————————————
+            "newline":                customTags.newline_defult,
+            "attrPathToken":          customTags.components,
+            "Equals":                 customTags.equal,
+            "AttrValue":              customTags.Highlight,
+        }),
+        foldNodeProp.add({
+            "DivBlock":         foldInside,
+            "CollapsibleBlock": foldInside,
+            "CodeBlock":        foldInside,
+            "TabViewBlock":     foldInside,
+            "TabBlock":         foldInside,
+            "ModuleBlock":      foldInside,
+            "IncludeBlock":     foldInside,
+            "HTMLBlock":        foldInside,
+            "NoteBlock":        foldInside,
+            "SizeBlock":        foldInside,
+            "AlignCenter":      foldInside,
+            "AlignLeft":        foldInside,
+            "AlignRight":       foldInside,
+            "SpanBlock":        foldInside,
+        })
+    ]
+});
 
 /**
  * 自定义 Wikidot 语法解析器
  */
-const wikidotLanguage = StreamLanguage.define({
-    // ====== 新增：1. 初始化状态 ======
-    startState() {
-        return { inCSS: false, inHTML: false };
-    },
-    // ====== 新增：2. 状态拷贝（处理撤销/重做必须） ======
-    copyState(state) {
-        return { inCSS: state.inCSS, inHTML: state.inHTML };
-    },
-    token(stream, state) {
-        // ====== 新增：3. 范围判定与拦截 ======
-
-        // ================================================================
-        
-        // 检测进入特定模块
-        if (!state.inCSS && !state.inHTML) {
-            if (stream.match(/\[\[module css\]\]/i)) {
-                state.inCSS = true;
-                return "wikiTag"; 
-            }
-            if (stream.match(/\[\[html\]\]/i)) {
-                state.inHTML = true;
-                return "wikiTag";
-            }
-        }
-
-        // CSS 模块内部解析逻辑（完美复用你现有的Tag）
-        if (state.inCSS) {
-            if (stream.match(/\[\[\/module\]\]/i)) {
-                state.inCSS = false;
-                return "wikiTag";
-            }
-            if (stream.match(/[\{\}\:\;]/)) return "equal"; // 符号复用等号颜色
-            if (stream.match(/\.[a-zA-Z0-9_-]+/)) return "components"; // 类名
-            if (stream.match(/#[a-zA-Z0-9_-]+/)) return "Highlight"; // #ID 或 颜色代码
-            if (stream.match(/[a-zA-Z-]+(?=\s*:)/)) return "aim"; // 属性名 (如 color:)
-            stream.next();
-            return "original_text";
-        }
-
-        // HTML 模块内部解析逻辑（完美复用你现有的Tag）
-        if (state.inHTML) {
-            if (stream.match(/\[\[\/html\]\]/i)) {
-                state.inHTML = false;
-                return "wikiTag";
-            }
-            if (stream.match(/<\/?[a-zA-Z0-9-]+\s?>?/)) {
-                return "components"; 
-            }
-
-            // 如果上面没匹配到，单独匹配剩下的尖括号或等号
-            if (stream.match(/[\<\>\=\/]/)) {
-                return "equal"; // 借用定义的等号颜色 (#d19a66 橙色) 
-            }
-            if (stream.match(/[a-zA-Z-]+(?=\=)/)) return "aim"; // 属性名
-            if (stream.match(/".*?"/)) return "Highlight"; // 引号内字符串
-            stream.next();
-            return "original_text";
-        }
-
-        // ================================================================
-
-        // 标题
-        if (stream.sol() && stream.match(/\++ /)) {
-            stream.skipToEnd();
-            return "header";
-        }
-
-        // 改进的格式匹配，支持基本嵌套
-        // 加粗：允许内部包含单个*字符
-        if (stream.match(/\*\*(?:[^*]|\*[^*])*\*\*/)) return "strong";
-        
-        // 斜体：允许内部包含单个/字符
-        if (stream.match(/\/\/(?:[^/]|\/[^/])*\/\//)) return "em";
-        
-        // 下划线：允许内部包含单个_字符
-        if (stream.match(/__(?:[^_]|_[^_])*__/)) return "underline";
-        
-        // 删除线：允许内部包含单个-字符
-        if (stream.match(/--(?:[^-]|-[^-])*--/)) return "strikethrough";
-        
-        // 上标：允许内部包含单个^字符
-        if (stream.match(/\^\^(?:[^\^]|\^[^\^])*\^\^/)) return "sup";
-        
-        // 下标：允许内部包含单个,字符
-        if (stream.match(/,,(?:[^,]|,[^,])*,,/)) return "sub";
-
-        // 链接
-        if (stream.match(/\[https?:\/\/.*?\]/)) return "link";
-
-        // 强制换行符
-        if (stream.match(/\@\@\@\@/)) return "newline";
-
-        // 英文等宽字体
-        if (stream.match(/\{\{.*?\}\}/)) return "monosapace";
-
-        // size 标签
-        if (stream.match(/\[\[size.*?\]\]/) || stream.match(/\[\[\/size\]\]/)) return "size";
-
-        // user 标签
-        if (stream.match(/\[\[user .*?\]\]/i) || stream.match(/\[\[\*user .*?\]\]/i)) return "user";
-
-        // 在wikidotLanguage的token函数中修改颜色匹配部分：
-        // Wikidot颜色标签：###ffffff|文字##
-        if (stream.match(/###([0-9a-fA-F]{6})\|/)) {
-            // 匹配了 ###ffffff| 部分
-            // 现在查找文字内容直到 ##（注意是2个#，不是3个）
-            let content = "";
-            while (!stream.eol()) {
-                // 检查是否遇到 ##
-                if (stream.peek() === "#") {
-                    stream.next(); // 跳过第一个#
-                    if (stream.peek() === "#") {
-                        stream.next(); // 跳过第二个#
-                        // 找到了结束标记 ##
-                        return "color";
-                    }
-                } else {
-                    content += stream.next();
-                }
-            }
-            // 如果没有找到结束标记，返回null
-            return null;
-        }
-
-        // 16进制颜色代码（用于普通颜色预览）
-        if (stream.match(/#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/)) {
-            return "color";
-        }
-
-        // 原始文本
-        if (stream.match(/\@\@.*?\@\@/)) {
-            stream.skipToEnd();
-            return "original_text";
-        }
-
-        // 无序列表
-        if (stream.sol() && stream.match(/\*+ /)) {
-            return "list1";
-        }
-
-        // 有序列表
-        if (stream.sol() && stream.match(/#+ /)) {
-            return "list2";
-        }
-
-        // 定义列表
-        if (stream.sol() && stream.match(/\:.*?\:/)) {
-            return "list3";
-        }
-
-        // 高级列表
-        if (stream.match(/\[\[ul\]\]/) || stream.match(/\[\[li\]\]/) || stream.match(/\[\[ol\]\]/)){
-            return "list4";
-        }
-
-        // 引用
-        if (stream.sol() && stream.match(/>+ /)) {
-            stream.skipToEnd();
-            return "quote";
-        }
-
-        // = 号
-        if (stream.match(/=/)) {
-            return "equal";
-        }
-
-        // 表格
-        // ================================================================
-        if (stream.match(/\|\|/)) {
-            // 高亮竖线
-            return "table";
-        }
-        if (stream.match(/\~/)) {
-            return "table_header";
-        }
-        // 匹配普通表格行
-        if (stream.sol() && stream.match(/\|\|(?!~)/)) {
-            stream.skipToEnd();
-            return "table_cell";
-        }
-        // ================================================================
-
-        // | 竖线
-        if (stream.match(/\|/)) {
-            return "line_up";
-        }
-
-        // 带有[[]]的注意需要放在标签前面，因为它也是以 [[ 开头的
-        // ================================================================
-        // 评分
-        if (stream.match(/\[\[module rate\]\]/i)) return "rate";
-
-        // 右对齐
-        if (stream.match(/\[\[\>?\]\]/)) return "right";
-        if (stream.match(/\[\[\/\>?\]\]/)) return "right";
-
-        // 左对齐
-        if (stream.match(/\[\[\<?\]\]/)) return "left";
-        if (stream.match(/\[\[\/\<?\]\]/)) return "left";
-
-        // 居中
-        if (stream.match(/\[\[\=?\]\]/)) return "center";
-        if (stream.match(/\[\[\/\=?\]\]/)) return "center";
-
-        // 图片
-        if (stream.match(/\[\[.*?image.*?\]\]/i) || stream.match(/include component:image-block/i)) return "image";
-
-        // 脚注
-        if (stream.match(/\[\[footnote\]\]/) || stream.match(/\[\[\/footnote\]\]/)) return "footnote";
-
-        // 脚注块
-        if (stream.match(/\[\[footnoteblock\]\]/i)) return "footnote_block";
-
-        // div
-        if (stream.match(/\[\[div.*?\]\]/i) || stream.match(/\[\[\/div\]\]/i)) {
-            return "div";
-        }
-
-        // collapsible
-        if (stream.match(/\[\[collapsible.*?\]\]/i) || stream.match(/\[\[\/collapsible\]\]/i)) {
-            return "collapsible";
-        }
-
-        // LICENSE
-        if (stream.match(/include :scp-wiki-cn:component:license-box/i) || stream.match(/include :scp-wiki-cn:component:license-end/i)) {
-            return "license";
-        }
-
-        // note
-        if (stream.match(/\[\[note\]\]/i) || stream.match(/\[\[\/note\]\]/i)) {
-            return "note";
-        }
-
-        // ACS AIM
-        // ================================================================
-        if (stream.match(/include :scp-wiki-cn:component:anomaly-class-bar-source *?/i)) {
-            return "acs";
-        }
-        if (stream.match(/include :scp-wiki-cn:component:advanced-information-methodaology *?/i)){
-            return "aim";
-        }
-        // ================================================================
-        // Components
-        // ================================================================
-        if (stream.match(/lang.*?/)){
-            return "components";
-        }
-        if (stream.match(/item-number.*?/)){
-            return "components";
-        }
-        if (stream.match(/clearance.*?/)){
-            return "components";
-        }
-        if (stream.match(/container-class.*?/)){
-            return "components";
-        }
-        if (stream.match(/disruption.*?/)){
-            return "components";
-        }
-        if (stream.match(/risk-class.*?/)){
-            return "components";
-        }
-        if (stream.match(/lv/)){
-            return "components";
-        }
-        if (stream.match(/cc/)){
-            return "components";
-        }
-        if (stream.match(/dc/)){
-            return "components";
-        }
-        if (stream.match(/site/)){
-            return "components";
-        }
-        if (stream.match(/dir/)){
-            return "components";
-        }
-        if (stream.match(/head/)){
-            return "components";
-        }
-        if (stream.match(/mtf/)){
-            return "components";
-        }
-        if (stream.match(/XXXX/)){
-            return "components";
-        }
-        if (stream.match(/blocks/)){
-            return "components";
-        }
-        if (stream.match(/author/)){
-            return "components";
-        }
-        if (stream.match(/translator/)){
-            return "components";
-        }
-        if (stream.match(/custom/i)){
-            return "components";
-        }
-        if (stream.match(/title/i)){
-            return "components";
-        }
-        if (stream.match(/slogan/i)){
-            return "components";
-        }
-        if (stream.match(/logoinvert/i)){
-            return "components";
-        }
-        if (stream.match(/logo/i)){
-            return "components";
-        }
-        if (stream.match(/colorlight/i)){
-            return "components";
-        }
-        if (stream.match(/colornormal/i)){
-            return "components";
-        }
-        if (stream.match(/colordark/i)){
-            return "components";
-        }
-        if (stream.match(/name/) || stream.match(/caption/) || stream.match(/width/) || stream.match(/height/) || stream.match(/align/)) {
-            return "components";
-        }
-        // ================================================================
-        // Tabview
-        // ================================================================
-        if (stream.match(/\[\[tabview.*?\]\]/) || stream.match(/\[\[\/tabview\]\]/)) {
-            return "tabview";
-        }
-        if (stream.match(/\[\[tab.*?\]\]/) || stream.match(/\[\[\/tab\]\]/)) {
-            return "tab";
-        }
-        // ================================================================
-        if (stream.match(/\[\[include[^\]]*\]\]/)) {
-            // 匹配整个 include 标签
-            // 我们可以检查里面是否有分会
-            const match = stream.current();
-            if (match.includes(':scp-wiki')) {
-                return "scp_wiki";  // 如果有分会，整个标签都高亮为 scp_wiki
-            }
-            return "include";  // 否则高亮为 include
-        }
-        // ================================================================
-        // Wikidot 标签
-        if (stream.match(/\]\]/) || stream.match(/\[\[/)) return "wikiTag";
-
-        // 分割线
-        if (stream.sol() && stream.match(/^-{6,}$/)) return "hr";
-
-        stream.next();
-        return null;
-    },
-    // 关键：建立字符串标记与 Tag 对象的映射
-    tokenTable: {
-        "header": customTags.header,
-        "strong": customTags.strong,
-        "em": customTags.em,
-        "underline": customTags.underline,
-        "strikethrough": customTags.strikethrough,
-        "wikiTag": customTags.wikiTag,
-        "sup": customTags.sup,
-        "sub": customTags.sub,
-        "link": customTags.link,
-        "hr": customTags.hr,
-        "rate": customTags.rate,
-        "right": customTags.right,
-        "left": customTags.left,
-        "center": customTags.center,
-        "newline": customTags.newline,
-        "monosapace": customTags.monosapace,
-        "list1": customTags.list1,
-        "list2": customTags.list2,
-        "list3": customTags.list3,
-        "list4": customTags.list4,
-        "quote": customTags.quote,
-        "table": customTags.table,
-        "table_header": customTags.table_header,
-        "table_cell": customTags.table_cell,
-        "original_text": customTags.original_text,
-        "image": customTags.image,
-        "footnote": customTags.footnote,
-        "footnote_block": customTags.footnote_block,
-        "color": customTags.color,
-        "include": customTags.include,
-        "scp_wiki": customTags.scp_wiki,
-        "div": customTags.div,
-        "tabview": customTags.tabview,
-        "tab": customTags.tab,
-        "acs": customTags.acs,
-        "components": customTags.components,
-        "equal": customTags.equal,
-        "line_up": customTags.line_up,
-        "size": customTags.size,
-        "aim": customTags.aim,
-        "collapsible": customTags.collapsible,
-        "note": customTags.note,
-        "user": customTags.user,
-        "Highlight": customTags.Highlight,
-    }
+const wikidotLanguage = LRLanguage.define({
+  name: "wikidot",
+  parser: wikidotParser,
+  languageData: {
+    commentTokens: { block: { open: "[[comment]]", close: "[[/comment]]" } }
+  }
 });
 
-// 2. 创建高亮样式映射，将标签转换为具体的 CSS 类名
+
 const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.header, class: "cm-header" },
     { tag: customTags.strong, class: "cm-strong" },
     { tag: customTags.em, class: "cm-em" },
     { tag: customTags.underline, class: "cm-underline" },
     { tag: customTags.strikethrough, class: "cm-strikethrough" },
-    { tag: customTags.wikiTag, class: "cm-wikiTag" },
     { tag: customTags.link, class: "cm-link" },
     { tag: customTags.hr, class: "cm-hr" },
+    { tag: customTags.module, class: "cm-module"},
+    { tag: customTags.html, class: "cm-html"},
     { tag: customTags.rate, class: "cm-rate" },
     { tag: customTags.right, class: "cm-right" },
     { tag: customTags.left, class: "cm-left" },
     { tag: customTags.center, class: "cm-center" },
     { tag: customTags.sup, class: "cm-sup" },
     { tag: customTags.sub, class: "cm-sub" },
+    { tag: customTags.components, class: "cm-components"}, // ATTRLIST IMPORTANT
+    { tag: customTags.keyword, class: "cm-keyword"}, // 参数
     { tag: customTags.newline, class: "cm-newline" },
-    { tag: customTags.monosapace, class: "cm-monosapace" },
+    { tag: customTags.newline_defult, class: ""}, // IMPORTANT defult newline defination
+    { tag: customTags.monospace, class: "cm-monospace"},
     { tag: customTags.list1, class: "cm-list1" },
     { tag: customTags.list2, class: "cm-list2" },
     { tag: customTags.list3, class: "cm-list3" },
     { tag: customTags.list4, class: "cm-list4" },
-    { tag: customTags.quote, class: "cm-quote" },
+    { tag: customTags.num, class: "cm-num"},
+    { tag: customTags.quote, class: "cm-quote"},
+    { tag: customTags.code, class: "cm-code"},
     { tag: customTags.table, class: "cm-table" },
     { tag: customTags.table_header, class: "cm-table-header" },
-    { tag: customTags.table_cell, class: "cm-table-cell" },
     { tag: customTags.original_text, class: "cm-original-text" },
     { tag: customTags.image, class: "cm-image" },
     { tag: customTags.footnote, class: "cm-footnote" },
     { tag: customTags.footnote_block, class: "cm-footnote-block" },
     { tag: customTags.color, class: "cm-color" },
     { tag: customTags.include, class: "cm-include" },
+    { tag: customTags.include_1, class: "cm-include-1"},
+    { tag: customTags.include_2, class: "cm-include-2"},
+    { tag: customTags.include_3, class: "cm-include-3"},
     { tag: customTags.scp_wiki, class: "cm-scp-wiki" },
     { tag: customTags.div, class: "cm-div" },
     { tag: customTags.tabview, class: "cm-tabview" },
     { tag: customTags.tab, class: "cm-tab" },
     { tag: customTags.acs, class: "cm-acs" },
-    { tag: customTags.components, class: "cm-components" },
     { tag: customTags.equal, class: "cm-equal" },
     { tag: customTags.line_up, class: "cm-line-up" },
     { tag: customTags.size, class: "cm-size" },
@@ -601,8 +325,8 @@ const customKeymap = keymap.of([
             const line = state.doc.lineAt(selection.head);
             const cursorPos = selection.head - line.from;
             
-            // 仅在光标位于行尾时接管行为，避免“行尾前一位”也被误判
-            const isAtEndOfLine = cursorPos === line.text.length;
+            // 检查光标是否在行末（或者接近行末）
+            const isAtEndOfLine = cursorPos >= line.text.length - 1;
             
             if (!isAtEndOfLine) {
                 // 如果光标不在行末，让默认行为处理（比如在行中间换行）
@@ -611,8 +335,8 @@ const customKeymap = keymap.of([
             
             // Wikidot列表语法：单个*表示无序列表，单个#表示有序列表
             // 匹配行首的 * 或 #，后面必须跟空格
-            const listMatch = line.text.match(/^([*#]+)\s+/);
-            const list3Match = line.text.match(/^(:+)\s+/); // 定义列表匹配
+            const listMatch = line.text.match(/^([*#])\s+/);
+            const list3Match = line.text.match(/^(:.*?:)\s+/); // 定义列表匹配
             
             if (listMatch || list3Match) {
                 const listMarker = listMatch ? listMatch[1] : list3Match[1]; // * 或 # 或 :
@@ -622,12 +346,11 @@ const customKeymap = keymap.of([
                 const isListItemEmpty = contentAfterMarker === '';
                 
                 if (isListItemEmpty) {
-                    // 空列表项：只删除列表标记，避免整行删除导致和下一行意外拼接
-                    const markerLength = listMarker.length + 1; // marker + 空格
+                    // 空列表项：删除当前行的列表标记
                     view.dispatch({
                         changes: { 
                             from: line.from, 
-                            to: line.from + markerLength, 
+                            to: line.to, 
                             insert: "" 
                         },
                         selection: { anchor: line.from }
@@ -659,24 +382,18 @@ const customKeymap = keymap.of([
  * 自动补全配置
  */
 import { wikidotCompletionSource } from "./component/completion.js";
+import { foldEffect } from "@codemirror/language/dist/index.js";
 
 // 3. 初始化编辑器
 const startEditor = () => {
-    const isIframeMode = window.parent !== window;
-    let hasReceivedInitContent = false;
-    const urlParams = new URLSearchParams(window.location.search);
-    const configuredParentOrigin = urlParams.get('parentOrigin');
-    const parentOrigin = configuredParentOrigin && /^https?:\/\//.test(configuredParentOrigin)
-        ? configuredParentOrigin
-        : null;
-
     const state = EditorState.create({
-        doc: EXAMPLE_CODE,
+        doc: "",
         extensions: [
             // 将 customKeymap 放在 basicSetup 之前，确保优先级
             customKeymap,
             basicSetup,
             oneDark,
+            // 自定义wikidot语法
             wikidotLanguage,
             syntaxHighlighting(wikidotHighlightStyle),
             // 先添加Wikidot颜色标签扩展
@@ -685,28 +402,16 @@ const startEditor = () => {
             colorPreviewExtension,
             autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
             
-            // Web版本：添加本地存储自动保存功能
+            // Web版本：删除本地存储自动保存功能
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
                     const content = update.state.doc.toString();
-
-                    // iframe 模式下向父页面广播；独立页面模式写 localStorage
-                    if (isIframeMode) {
-                        window.parent.postMessage({
-                            type: 'h2o2-update',
-                            payload: content,
-                            source: 'h2o2-editor'
-                        }, parentOrigin || '*');
-                    } else {
-                        try {
-                            localStorage.setItem('wikidot-editor-content', content);
-                            window.dispatchEvent(new CustomEvent('editorContentChanged', {
-                                detail: { content }
-                            }));
-                        } catch (error) {
-                            console.warn('无法保存到本地存储:', error);
-                        }
-                    }
+                    
+                    // 把当前的最新代码通过 postMessage 喊给油猴脚本听
+                    window.parent.postMessage({
+                        type: 'h2o2-update',
+                        payload: content
+                    }, '*'); 
                 }
             }),
 
@@ -745,56 +450,53 @@ const startEditor = () => {
 
     const editorView = new EditorView({
         state,
-        parent: document.getElementById("editor-container")
+        parent: document.getElementById("editor-container"),
+        viewportMargin: Infinity
     });
+
+    // AST测试
+    // 在 startEditor 里，editorView 创建之后加：
+    window._debugAST = () => {
+        const tree = syntaxTree(editorView.state);
+        tree.cursor().iterate(node => {
+            console.log(node.name, editorView.state.sliceDoc(node.from, node.to));
+        });
+    };
     
     // 设置颜色选择器事件处理
     setupColorPickerHandler(editorView);
     
-    // 独立模式才从 localStorage 读取，避免 iframe 嵌入时覆盖宿主传入内容
-    if (!isIframeMode) {
-        try {
-            const savedContent = localStorage.getItem('wikidot-editor-content');
-            if (savedContent) {
-                // 延迟一点时间设置内容，确保编辑器完全初始化
-                setTimeout(() => {
-                    editorView.dispatch({
-                        changes: {
-                            from: 0,
-                            to: editorView.state.doc.length,
-                            insert: savedContent
-                        }
-                    });
-                }, 100);
-            }
-        } catch (error) {
-            console.warn('无法从本地存储加载内容:', error);
-        }
-    }
-    
     // 将实例挂载到全局，方便 index.html 的按钮调用
     window.editorInstance = editorView;
-    
-    // 接收外部（如油猴脚本宿主页面）发送的初始内容，仅应用一次
-    window.addEventListener('message', function(event) {
-        if (!isIframeMode) return;
-        if (parentOrigin && event.origin !== parentOrigin) return;
-        if (!event.data || event.data.type !== 'h2o2-init' || hasReceivedInitContent) return;
-        const content = event.data.payload;
-        if (typeof content === 'string') {
-            editorView.dispatch({
-                changes: {
-                    from: 0,
-                    to: editorView.state.doc.length,
-                    insert: content
-                }
-            });
-            hasReceivedInitContent = true;
-        }
-    });
 
     return editorView;
 };
+
+// 监听油猴脚本发来的初始化/重新同步请求
+window.addEventListener('message', (event) => {
+    // 允许来自所有 Wikidot 分站的消息
+    const isWikidot = event.origin.endsWith('wikidot.com');
+    
+    if (!isWikidot) return;
+    // 过滤掉无关紧要的消息（比如插件注入的乱七八糟的消息）
+    if (!event.data || event.data.type !== 'h2o2-init') return;
+    
+    console.log("H2O2 Web端: 成功接收到 Wikidot 原生文本框的初始内容！");
+    
+    const view = window.editorInstance;
+    if (view) {
+        // 使用收到的原生内容，替换掉编辑器里现有的所有内容（包括那个 EXAMPLE_CODE 模板）
+        view.dispatch({
+            changes: { 
+                from: 0, 
+                to: view.state.doc.length, 
+                insert: event.data.payload || ''
+            }
+        });
+    } else {
+        console.warn("H2O2 Web端: 收到数据，但编辑器实例还没准备好！");
+    }
+});
 
 // 导出编辑器实例供其他脚本使用
 window.WikidotEditor = {

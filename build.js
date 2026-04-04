@@ -24,11 +24,11 @@ const stableConfig = {
   legalComments: 'none'
 };
 
-// 测试版配置（lezer版）
+//（lezer版）
 const testConfig = {
-  entryPoints: ['editor_test.js'],
+  entryPoints: ['editor.js'],
   bundle: true,
-  outfile: 'assets/bundle_editor_test.js',
+  outfile: 'assets/bundle_editor.js',
   format: 'esm',
   platform: 'browser',
   target: ['es2020'],
