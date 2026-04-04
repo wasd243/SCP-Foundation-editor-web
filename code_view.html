@@ -19,178 +19,32 @@
             height: 100%;
             z-index: 1; /* 底层 */
         }
-        
-        /*----------------------------------同步----------------------------------*/
-        .btn-sync {
-            color: #00ff00;
-            border-color: #00ff00;
-            box-shadow: 4px 4px 0px #00ff00;
-        }
-        .btn-sync:hover {
-            background: #00ff00;
-            color: #000;
-            box-shadow: 2px 2px 0px #00ff00;
-        }
-
-        @keyframes sync-flash {
-            0% { background-color: rgba(0, 255, 0, 0); }
-            50% { background-color: rgba(0, 255, 0, 0.15); }
-            100% { background-color: rgba(0, 255, 0, 0); }
-        }
-        .syncing {
-            animation: sync-flash 0.6s ease-in-out;
-        }
-        /*----------------------------------同步----------------------------------*/
-
-        /* 强制置顶的按钮区 */
-        .editor-controls {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 9999; /* 确保在最顶层 */
-            display: flex;
-            gap: 15px;
-        }
-
-        .ctrl-btn {
-            background: #000000;
-            color: #ffffff;
-            border: 1px solid #ffffff;
-            padding: 6px 14px;
-            font-family: var(--p-font-monospace, 'Sarasa Gothic SC', monospace);
-            font-size: 12px;
-            cursor: pointer;
-            box-shadow: 4px 4px 0px #ffffff;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .ctrl-btn:hover {
-            background: #ffffff;
-            color: #000000;
-            box-shadow: 2px 2px 0px #ffffff;
-            transform: translate(2px, 2px);
-        }
-
-        .btn-clear {
-            color: #ff4444;
-            border-color: #ff4444;
-            box-shadow: 4px 4px 0px #ff4444;
-        }
-        .btn-clear:hover {
-            background: #ff4444;
-            color: #ffffff;
-            box-shadow: 2px 2px 0px #ff4444;
-        }
-
-        /*----------------------------------顶部工具栏---------------------------------*/
-        /* 初始状态：折叠 */
-        .quick-toolbar {
-            position: relative;
-            background: #000;
-            border-bottom: 2px solid #fff;
-            display: flex;
-            gap: 10px;
-            padding: 0 10px; 
-            max-height: 0;   
-            overflow: hidden; /* 加上这行，确保按钮收起时完全不可见 */
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
-            z-index: 100;
-        }
-
-        /* 标签初始状态：居中悬停 */
-        .toolbar-label {
-            position: absolute;
-            top: 0; 
-            left: 50%; /* 科学居中：定位到屏幕正中间 */
-            transform: translateX(-50%); /* 科学居中：根据自身宽度往回拉一半，实现绝对居中 */
-            background: #fff;
-            color: #000;
-            padding: 2px 12px;
-            cursor: pointer;
-            z-index: 101; 
-            border: 2px solid #000;
-            border-top: none;
-            font-size: 11px;
-            font-weight: bold;
-            /* 赋予它和工具栏一样的丝滑过渡动画 */
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
-
-        /* 1. 当开关被选中，工具栏变高 */
-        #toolbar-toggle:checked ~ .quick-toolbar {
-            max-height: 150px; 
-            padding: 10px;    
-        }
-
-        /* 2. 当开关被选中，标签跟着往下挪动！ */
-        #toolbar-toggle:checked ~ .toolbar-label {
-            /* 保持居中的同时，向下平移 43px（大约是工具栏展开的高度） */
-            transform: translate(-50%, 43px); 
-        }
-        
-        .toolbar-group {
-            display: flex;
-            gap: 5px;
-        }
-
-        .tool-btn {
-            background: #000;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 4px 12px;
-            font-family: monospace;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tool-btn:hover {
-            background: #fff;
-            color: #000;
-        }
-        /*----------------------------------顶部工具栏---------------------------------*/
-
     </style>
-    <!-- PyQt 通信脚本 -->
+    <!-- PyQt script -->
     <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
 </head>
 <body>
-
-    <div class="editor-controls">
-        <button class="ctrl-btn btn-sync" onclick="handleAction('sync')">SYNC</button>
-        <button class="ctrl-btn btn-init" onclick="handleAction('init')">INIT</button>
-        <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR</button>
-    </div>
-
-    <!------------------------------------------------功能区---------------------------------------------->
     <input type="checkbox" id="toolbar-toggle" style="display: none;">
-
-    <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
-
-    <div class="quick-toolbar">
-        <div class="toolbar-group">
-            <button class="tool-btn" onclick="insertCode('**')">B</button>
-            <button class="tool-btn" onclick="insertCode('//')">I</button>
-            <button class="tool-btn" onclick="insertCode('__')">U</button>
-            <button class="tool-btn" onclick="insertCode('--')">S</button>
-            <button class="tool-btn" onclick="insertCode('{{', '}}')">tt</button>
-            <button class="tool-btn" onclick="insertCode('^^')">X^2</button>
-            <button class="tool-btn" onclick="insertCode(',,')">X,2</button>
-            <button class="tool-btn" onclick="insertCode('@@')">@@</button>
-        </div>
-    </div>
     <div id="editor-container"></div>
-    <!------------------------------------------------功能区---------------------------------------------->
     <script type="module" src="assets/bundle_editor.js"></script>
 
     <script>
+        // --- QtWebChannel 初始化 ---
+        document.addEventListener("DOMContentLoaded", function () {
+            if (typeof qt !== 'undefined') {
+                new QWebChannel(qt.webChannelTransport, function (channel) {
+                    window.pyBridge = channel.objects.py_bridge;
+                    console.log("H2O2: Qt 通道联通成功！");
+                });
+            } else {
+                console.warn("H2O2: 未检测到 Qt 环境，处于普通浏览器模式");
+            }
+        });
         // 定义模板
         const EXAMPLE_CODE = ``;
 
         // 插入代码逻辑
-        function insertCode(before, after = before) {
+        window.insertCode = function(before, after = before) {
             const view = window.editorInstance;
             if (!view) return;
 
@@ -235,35 +89,6 @@
                 });
                 return; 
             } 
-            // --- 新增 1: 监听来自 Wikidot (油猴脚本) 的初始化信号 ---
-            window.addEventListener('message', function(event) {
-                // 安全性检查（可选）：if (event.origin !== 'https://scpsandboxcn.wikidot.com') return;
-                
-                if (event.data && event.data.type === 'h2o2-init') {
-                    console.log("H2O2: 收到来自 Wikidot 的初始内容");
-                    const view = window.editorInstance;
-                    if (view) {
-                        view.dispatch({
-                            changes: { 
-                                from: 0, 
-                                to: view.state.doc.length, 
-                                insert: event.data.payload 
-                            }
-                        });
-                    }
-                }
-            });
-        
-            // --- 新增 2: 监听编辑器变动并实时发回给 Wikidot ---
-            // 这里利用你 editor.js 中已经定义的自定义事件 'editorContentChanged'
-            window.addEventListener('editorContentChanged', function(e) {
-                if (window.parent !== window) {
-                    window.parent.postMessage({
-                        type: 'h2o2-update',
-                        payload: e.detail.content
-                    }, '*');
-                }
-            });
             
             // --- 核心修改部分 ---
             if (type === 'init') {
@@ -281,6 +106,16 @@
                 changes: { from: 0, to: view.state.doc.length, insert: contentToInsert },
                 selection: { anchor: 0 } // 初始化后光标回到开头
             });
+        };
+        // Qt 环境下，等编辑器脚本加载完毕后再初始化编辑器实例
+        window.onload = function() {
+            const container = document.getElementById('editor-container');
+            if (window.startEditor) {
+                window.editorInstance = window.startEditor(container);
+                console.log("H2O2: 编辑器已挂载到容器");
+            } else {
+                console.error("H2O2: 找不到 startEditor 函数，请检查 bundle 是否正确导出了该函数");
+            }
         }
     </script> 
 </body>

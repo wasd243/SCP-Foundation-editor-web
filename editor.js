@@ -404,14 +404,13 @@ const startEditor = () => {
             
             // Web版本：删除本地存储自动保存功能
             EditorView.updateListener.of((update) => {
+
                 if (update.docChanged) {
                     const content = update.state.doc.toString();
                     
-                    // 把当前的最新代码通过 postMessage 喊给油猴脚本听
-                    window.parent.postMessage({
-                        type: 'h2o2-update',
-                        payload: content
-                    }, '*'); 
+                    if (window.pyBridge) {
+                        window.pyBridge.on_code_changed(content);
+                    }
                 }
             }),
 
@@ -472,32 +471,6 @@ const startEditor = () => {
     return editorView;
 };
 
-// 监听油猴脚本发来的初始化/重新同步请求
-window.addEventListener('message', (event) => {
-    // 允许来自所有 Wikidot 分站的消息
-    const isWikidot = event.origin.endsWith('wikidot.com');
-    
-    if (!isWikidot) return;
-    // 过滤掉无关紧要的消息（比如插件注入的乱七八糟的消息）
-    if (!event.data || event.data.type !== 'h2o2-init') return;
-    
-    console.log("H2O2 Web端: 成功接收到 Wikidot 原生文本框的初始内容！");
-    
-    const view = window.editorInstance;
-    if (view) {
-        // 使用收到的原生内容，替换掉编辑器里现有的所有内容（包括那个 EXAMPLE_CODE 模板）
-        view.dispatch({
-            changes: { 
-                from: 0, 
-                to: view.state.doc.length, 
-                insert: event.data.payload || ''
-            }
-        });
-    } else {
-        console.warn("H2O2 Web端: 收到数据，但编辑器实例还没准备好！");
-    }
-});
-
 // 导出编辑器实例供其他脚本使用
 window.WikidotEditor = {
     startEditor,
@@ -510,3 +483,4 @@ if (document.readyState === 'loading') {
 } else {
     startEditor();
 }
+window.startEditor = startEditor; // 直接挂载到全局，方便 html 调用
