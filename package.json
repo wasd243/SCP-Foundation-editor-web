@@ -4,7 +4,7 @@
   "description": "Frontend editor module for SCP Foundation Editor using CodeMirror 6",
   "main": "assets/bundle_editor.js",
   "scripts": {
-    "build": "lezer-generator src/wikidot.grammar -o src/parser.js && node build.js",
+    "build": "npx lezer-generator src/wikidot.grammar -o src/parser.js && node build.js",
     "dev": "lezer-generator src/wikidot.grammar -o src/parser.js && node build.js --watch",
     "serve": "npx serve . -p 3000",
     "start": "npm run build && npm run serve",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@lezer/generator": "^1.8.0",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.25.12",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "serve": "^14.2.1"

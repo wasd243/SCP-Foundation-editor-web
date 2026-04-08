@@ -44,7 +44,7 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 // 假设你的 bundle 导出了初始化函数 (如果没有导出，直接挂在 window 上也行)
-import { initH2O2Editor } from '../assets/bundle_editor_test.js'
+import { initH2O2Editor } from '../assets/bundle_editor.js'
 
 // --- 纯 JS 的 Props 和 Emits 写法 ---
 const props = defineProps({

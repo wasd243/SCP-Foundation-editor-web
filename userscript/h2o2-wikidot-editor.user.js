@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         H2O2 Wikidot Editor (Universal)
 // @namespace    https://github.com/wasd243/SCP-Foundation-editor-web
-// @version      2.0.0
+// @version      2.0.1
 // @description  加了个看门狗
 // @icon         https://scpsandboxcn.wikidot.com/local--files/peroxide-hyroperoxide/%E6%97%A0%E5%B0%BD%E5%82%AC%E5%8C%96%E5%89%82%EF%BC%88%E7%8E%84%E5%AD%A6%E4%BB%A3%E7%A0%81%E9%95%87%E5%9C%BA%E5%AD%90%EF%BC%89
 // @author       wasd243
@@ -14,7 +14,7 @@
 (function () {
     'use strict';
 
-    var EDITOR_URL = 'https://wasd243.github.io/SCP-Foundation-editor-web/test.html';
+    var EDITOR_URL = 'https://wasd243.github.io/SCP-Foundation-editor-web/index.html';
     var IFRAME_ID = 'h2o2-editor-frame';
     var OBSERVER_KEY = '__h2o2_observer__';
 
