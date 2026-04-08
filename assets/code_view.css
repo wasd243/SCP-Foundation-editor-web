@@ -1,283 +1,348 @@
 /* 基础背景 */
 html, body, #editor-container {
-margin: 0;
-padding: 0;
-height: 100%;
-width: 100%;
-overflow: hidden;
-background-color: #282c34;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: #282c34;
 }
 
 .cm-editor {
-height: 100%;
+    height: 100%;
 }
 
 .cm-scroller {
-font-family: 'Cascadia Code', 'Consolas', monospace;
-font-size: 14px;
-line-height: 1.6;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-/* 强制高亮类 - 增加了层级以确保覆盖 One Dark 默认样式 */
-/* 1. 针对编辑器内容区的全局文本颜色 */
-.cm-editor .cm-content {
-    color: #f1f4f9 !important;
-}
 
-/* 2. 针对普通行（未被其他 Token 捕获的部分） */
-.cm-editor .cm-line {
-    color: #f1f4f9;
-}
-
+/* 强制高亮类 */
 .cm-editor .cm-header {
-color: #e06c75;
-font-weight: bold;
-font-size: 1.2em;
+    color: #e06c75;
+    font-weight: bold;
+    font-size: 1.2em;
 }
+
 
 /* 加粗 */
 .cm-editor .cm-strong {
-color: #f1f4f9;
-font-weight: bold;
+    color: #abb2bf;
+    font-weight: bold;
 }
+
 
 /* 斜体 */
 .cm-editor .cm-em {
-color: #f1f4f9;
-font-style: italic;
+    color: #abb2bf;
+    font-style: italic;
 }
+
 
 /* 下划线 */
 .cm-editor .cm-underline {
-color: #f1f4f9;
-text-decoration: underline;
+    color: #abb2bf;
+    text-decoration: underline;
 }
+
 
 /* 删除线 */
 .cm-editor .cm-strikethrough {
-color: #f1f4f9;
-text-decoration: line-through;
+    color: #abb2bf;
+    text-decoration: line-through;
 }
+
 
 /* 上标 */
 .cm-editor .cm-sup {
-color: #c678dd;
-font-size: 0.8em;
-vertical-align: super;
+    color: #abb2bf;
+    font-size: 0.8em;
+    vertical-align: super;
 }
+
 
 /* 下标 */
 .cm-editor .cm-sub {
-color: #c678dd;
-font-size: 0.8em;
-vertical-align: sub;
+    color: #abb2bf;
+    font-size: 0.8em;
+    vertical-align: sub;
 }
 
-/* wiki[[]] */
-.cm-editor .cm-wikiTag {
-color: #61afef;
-}
 
-/* 链接 */
-.cm-editor .cm-link {
-color: #043eff;
-text-decoration: underline;
-}
-
-/* 分隔线 */
-.cm-editor .cm-hr {
-color: #5c6370;
-}
-
-/* 评分模块 */
-.cm-editor .cm-rate {
-color: #c45d6a;
-}
-
-/* 右对齐 */
-.cm-editor .cm-right {
-color: #5173b1;
-}
-
-/* 左对齐 */
-.cm-editor .cm-left {
-color: #5173b1;
-}
-
-/* 居中 */
-.cm-editor .cm-center {
-color: #5173b1;
-}
-
-/* 强制换行符 */
-.cm-editor .cm-newline {
-color: #527ac4;
-font-weight: bold;
-}
-
-/* 英文等宽字体 */
-.cm-editor .cm-monosapace {
-color: #3e79e7;
-font-family: 'Cascadia Mono', 'Consolas', monospace ;
-}
-
-/* 无序列表 */
-.cm-editor .cm-list1 {
-color: #98c379;
-}
-
-/* 有序列表 */
-.cm-editor .cm-list2 {
-color: #98c379;
-}
-
-/* 定义列表 */
-.cm-editor .cm-list3 {
-color: #98c379;
-}
-
-/* 高级列表 */
-.cm-editor .cm-list4 {
-color: #98c379;
-}
-
-/* 引用 */
-.cm-editor .cm-quote {
-color: #639a3c;
-}
-
-/* 原始文本 */
+/* original_Text */
 .cm-editor .cm-original-text {
-color: #ffffff;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
+    color: #abb2bf;
+    font-weight: normal !important;
 }
 
-/* 图片 */
-.cm-editor .cm-image {
-color: #2ac7a5;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-}
 
-/* 脚注 */
-.cm-editor .cm-footnote {
-color: #910f0f;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-}
-/* 脚注块 */
-.cm-editor .cm-footnote-block {
-color: #910f0f;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: bold;
-}
-
-/* 表格 */
-.cm-editor .cm-table {
-color: #e5c07b !important;
-}
-.cm-table-header {
-color: #5383de;
-font-weight: bold;
-}
-.cm-table-cell {
-color: #f1f4f9 !important;
-}
-
-/* 代码块 */
-.cm-editor .cm-include {
-color: #61cdb4;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-}
-
-/* 分会高亮 */
-.cm-editor .cm-scp-wiki {
-color: #f88222 !important;
-font-weight: normal;
-}
-
-/* size标签 */
-.cm-editor .cm-size {
-color: #7a54ed !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: bold;
-}
-
-/* div标签 */
+/* div */
 .cm-editor .cm-div {
-color: #9597ff !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: bold;
+    color: #E8BF6A;
 }
 
-/* tabview标签 */
-.cm-editor .cm-tabview {
-color: #b179ff !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: normal;
-}
-.cm-editor .cm-tab {
-color: #e2d0fc !important;
-}
-
-/* ACS */
-.cm-editor .cm-acs {
-color: #00ffc8;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: bold;
-}
-
-/* AIM */
-.cm-editor .cm-aim {
-color: #00ffc8;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: bold;
-}
-
-/* Components */
-.cm-editor .cm-components {
-color: #00ffc8;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: normal;
-}
 
 /* collapsible */
 .cm-editor .cm-collapsible {
-color: #bc0404 !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: bold;
+    color: #5757ff;
+    font-style: italic;
 }
+
+
+/* code */
+.cm-editor .cm-code {
+    color: #61AFEF;
+}
+
+
+/* footnoteblock */
+.cm-editor .cm-footnote-block {
+    color: #E8BF6A;
+}
+
+/* monospace */
+.cm-editor .cm-monospace {
+    color: #759DCB;
+}
+
+
+/* link */
+.cm-editor .cm-link {
+    color: #61AFEF;
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: lighter;
+}
+
+
+/* footnote */
+.cm-editor .cm-footnote {
+    color: #E8BF6A;
+    font-weight: lighter;
+}
+
+
+/* @@@@ */
+.cm-editor .cm-newline {
+    color: #C678DD;
+    font-weight: bold;
+}
+
+
+/* include */
+.cm-editor .cm-include {
+    color: #61AFEF;
+}
+.cm-editor .cm-include-1 {
+    color: #C678DD;
+}
+.cm-editor .cm-include-2 {
+    color: #E8BF6A;
+}
+.cm-editor .cm-include-3 {
+    color: #98C379;
+}
+
+
+/* hr */
+.cm-editor .cm-hr {
+    color: #E8BF6A;
+}
+
+/* ——————————————————————————表格操作—————————————————————————— */
+.cm-editor .cm-table-header {
+    color: #FFC66D;
+    font-weight: bold;
+}
+.cm-editor .cm-table {
+    color: #FFC66D;
+    font-weight: normal;
+}
+/* ——————————————————————————表格操作—————————————————————————— */
+
+
+/* image */
+.cm-editor .cm-image {
+    color: #E8BF6A;
+    font-style: italic;
+}
+
+
+/* quote */
+.cm-editor .cm-quote {
+    color: #98C379;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+/* tabview */
+.cm-editor .cm-tabview {
+    color: #ff0000;
+    font-style: italic;
+    font-weight: normal;
+}
+.cm-editor .cm-tab {
+    color: #E06C75;
+    font-style: normal;
+}
+
+
+/* module */
+.cm-editor .cm-module {
+    color: #61AFEF;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+/* html */
+.cm-editor .cm-html {
+    color: #FFC66D;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+/* components */
+.cm-editor .cm-components {
+    color: #61AFEF;
+}
+
 
 /* = */
 .cm-editor .cm-equal {
-color: #fd7a00;
+    color: orange;
 }
+
 
 /* | */
 .cm-editor .cm-line-up {
-color: #fd7a00;
+    color: #C678DD;
 }
 
-/* note */
-.cm-editor .cm-note {
-color:lightseagreen !important;
-font-weight: normal;
+
+/* numbers */
+.cm-editor .cm-num {
+    color: #E06C75;
 }
+
 
 /* user */
 .cm-editor .cm-user {
-color: aqua !important;
+    color: #41f4d9;
+    font-style: italic;
+    font-weight: bold;
 }
 
-/* LICENSE */
-.cm-editor .cm-license {
-color: #ff0000 !important;
-font-family: 'Cascadia Mono', 'Consolas', monospace;
-font-weight: bold;
+
+/* keyword */
+.cm-editor .cm-keyword {
+    color: #98C379;
+    font-style: italic;
+    font-weight: bold;
 }
 
-/* 临时的CSS和HTML代码高亮 */
+
+/* note */
+.cm-editor .cm-note {
+    color: #FFC66D;
+    font-style: italic;
+}
+
+
+/* size */
+.cm-editor .cm-size {
+    color: #FFC66D;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+/* center */
+.cm-editor .cm-center {
+    color: #759DCB;
+    font-style: italic;
+}
+
+
+/* left */
+.cm-editor .cm-left {
+    color: #759DCB;
+    font-style: italic;
+}
+
+
+/* right */
+.cm-editor .cm-right {
+    color: #759DCB;
+    font-style: italic;
+}
+
+
+/* list1 */
+.cm-editor .cm-list1 {
+    color: #98C379;
+    font-weight: bold;
+}
+
+
+/* list2 */
+.cm-editor .cm-list2 {
+    color: #98C379;
+    font-weight: bold;
+}
+
+
+/* original text */
+.cm-editor .cm-original-text {
+    color: #FFFFFF;
+}
+
+
+/* rate */
+.cm-editor .cm-rate {
+    color: #E06C75;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* highlight */
 .cm-editor .cm-Highlight {
-color: #3e79e7;
+    color: #98C379;
+    font-style: italic;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ====== 颜色相关样式 ====== */

@@ -14,7 +14,7 @@
 (function () {
     'use strict';
 
-    var EDITOR_URL = 'https://raw.githack.com/wasd243/SCP-Foundation-editor-web/gh-pages/test.html';
+    var EDITOR_URL = 'https://raw.githack.com/wasd243/SCP-Foundation-editor-web/gh-pages/index.html';
     var IFRAME_ID = 'h2o2-editor-frame';
     var OBSERVER_KEY = '__h2o2_observer__';
 

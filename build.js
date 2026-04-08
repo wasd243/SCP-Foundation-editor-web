@@ -8,27 +8,10 @@ if (!fs.existsSync(assetsDir)) {
   fs.mkdirSync(assetsDir, { recursive: true });
 }
 
-// 稳定版配置（不动）
 const stableConfig = {
   entryPoints: ['editor.js'],
   bundle: true,
   outfile: 'assets/bundle_editor.js',
-  format: 'esm',
-  platform: 'browser',
-  target: ['es2020'],
-  loader: { '.js': 'js', '.css': 'css' },
-  define: { 'process.env.NODE_ENV': '"production"' },
-  minify: true,
-  sourcemap: true,
-  treeShaking: true,
-  legalComments: 'none'
-};
-
-// 测试版配置（lezer版）
-const testConfig = {
-  entryPoints: ['editor_test.js'],
-  bundle: true,
-  outfile: 'assets/bundle_editor_test.js',
   format: 'esm',
   platform: 'browser',
   target: ['es2020'],
@@ -47,12 +30,10 @@ async function build() {
     // 同时构建两个
     await Promise.all([
       esbuild.build(stableConfig),
-      esbuild.build(testConfig)
     ]);
 
     console.log('✅ 构建成功!');
     console.log(`📦 稳定版: ${stableConfig.outfile} (${(fs.statSync(stableConfig.outfile).size / 1024).toFixed(2)} KB)`);
-    console.log(`📦 测试版: ${testConfig.outfile} (${(fs.statSync(testConfig.outfile).size / 1024).toFixed(2)} KB)`);
 
     const buildInfo = {
       timestamp: new Date().toISOString(),

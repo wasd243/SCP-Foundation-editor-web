@@ -14,7 +14,7 @@
 (function () {
     'use strict';
 
-    var EDITOR_URL = 'https://wasd243.github.io/SCP-Foundation-editor-web/test.html';
+    var EDITOR_URL = 'https://wasd243.github.io/SCP-Foundation-editor-web/index.html';
     var IFRAME_ID = 'h2o2-editor-frame';
     var OBSERVER_KEY = '__h2o2_observer__';
 
