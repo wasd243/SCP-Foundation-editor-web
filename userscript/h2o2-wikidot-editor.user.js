@@ -6,6 +6,7 @@
 // @icon         https://scpsandboxcn.wikidot.com/local--files/peroxide-hyroperoxide/%E6%97%A0%E5%B0%BD%E5%82%AC%E5%8C%96%E5%89%82%EF%BC%88%E7%8E%84%E5%AD%A6%E4%BB%A3%E7%A0%81%E9%95%87%E5%9C%BA%E5%AD%90%EF%BC%89
 // @author       wasd243
 // @match        *://*.wikidot.com/*
+// @license      AGPLv3
 // @grant        none
 // @run-at       document-end
 // ==/UserScript==
