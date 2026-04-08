@@ -397,6 +397,66 @@ export const wikidotCompletionSource = (context) => {
                 detail: "acs-animation"
             },
             {
+                label: "[[include :scp-wiki-cn:component:wxchat-backend",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-top=--]\n|title=相亲相爱一家人\n|opacity=1\n|groupmode=true\n|theme=dark\n";
+                    view.dispatch({
+                        changes: { from, to, insert: text },
+                        selection: { anchor: from + text.length }
+                    });
+                },
+                detail: "wxchat-backend"
+            },
+            {
+                label: "[[include :scp-wiki-cn:component:wxchat-backend inc-right=--]",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-right=--]\n|name=username1\n|pure-message=true\n|icon=http://urlhere.com\n|color=white\n|content=content1\n|voice=true\n|voice-time=60\n|voice-content=content1\n|content=content1\n|image=true\n|image-url=http://urlhere.com\n|reply=true\n|reply-name=username2\n|reply-content=content2\n|blacklist=true\n";
+                    view.dispatch({
+                        changes: { from, to, insert: text },
+                        selection: { anchor: from + text.length }
+                    });
+                },
+                detail: "wxchat-backend inc-right"
+            },
+            {
+                label: "[[include :scp-wiki-cn:component:wxchat-backend inc-left=--]",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-left=--]\n|name=username1\n|pure-message=true\n|icon=http://urlhere.com\n|color=white\n|content=content1\n|voice=true\n|voice-time=60\n|voice-content=content1\n|content=content1\n|image=true\n|image-url=http://urlhere.com\n|reply=true\n|reply-name=username2\n|reply-content=content2\n|blacklist=true\n";
+                    view.dispatch({
+                        changes: { from, to, insert: text },
+                        selection: { anchor: from + text.length }
+                    });
+                },
+                detail: "wxchat-backend inc-left"
+            },
+            {
+                label: "[[include :scp-wiki-cn:component:wxchat-backend inc-tip=--]",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-tip=--]\n|content=消息已发出，但被对方拒收了。\n";
+                    view.dispatch({
+                        changes: { from, to, insert: text },
+                        selection: { anchor: from + text.length }
+                    });
+                },
+                detail: "wxchat-backend inc-tip"
+            },
+            {
+                label: "[[include :scp-wiki-cn:component:wxchat-backend inc-end=--]",
+                type: "keyword",
+                apply: (view, completion, from, to) => {
+                    const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-end=--]\n|content=none\n";
+                    view.dispatch({
+                        changes: { from, to, insert: text },
+                        selection: { anchor: from + text.length }
+                    });
+                },
+                detail: "wxchat-backend inc-end"
+            },
+            {
                 label: "[[include :scp-wiki-cn:component:anomaly-class-bar-source",
                 type: "keyword",
                 apply: (view, completion, from, to) => {
