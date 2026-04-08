@@ -13,13 +13,13 @@
 (function () {
     'use strict';
 
-    var EDITOR_URL = 'https://cdn.jsdelivr.net/gh/wasd243/SCP-Foundation-editor-web@gh-pages/test.html';
+    var EDITOR_URL = 'https://raw.githack.com/wasd243/SCP-Foundation-editor-web/gh-pages/test.html';
     var IFRAME_ID = 'h2o2-editor-frame';
     var OBSERVER_KEY = '__h2o2_observer__';
 
     // ── 消息同步：iframe → textarea ───────────────────────────
     window.addEventListener('message', function (event) {
-        if (event.origin !== 'https://cdn.jsdelivr.net' && event.origin !== 'https://wasd243.github.io') return;
+        if (event.origin !== 'https://raw.githack.com' && event.origin !== 'https://wasd243.github.io') return;
         if (!event.data || event.data.type !== 'h2o2-update') return;
         var ta = document.getElementById('edit-page-textarea');
         if (!ta) return;
