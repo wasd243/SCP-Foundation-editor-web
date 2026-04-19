@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         H2O2 Wikidot Editor (Universal)
 // @namespace    https://github.com/wasd243/SCP-Foundation-editor-web
-// @version      2.0.1
-// @description  加了个看门狗
+// @version      2.0.3
+// @description  可以自由修改窗口大小
 // @icon         https://scpsandboxcn.wikidot.com/local--files/peroxide-hyroperoxide/%E6%97%A0%E5%B0%BD%E5%82%AC%E5%8C%96%E5%89%82%EF%BC%88%E7%8E%84%E5%AD%A6%E4%BB%A3%E7%A0%81%E9%95%87%E5%9C%BA%E5%AD%90%EF%BC%89
 // @author       wasd243
 // @match        *://*.wikidot.com/*
@@ -55,20 +55,121 @@
             el.style.setProperty('display', 'none', 'important');
         });
 
+        // ── 外层可拖拽容器 ──────────────────────────────────────
+        var wrapper = document.createElement('div');
+        wrapper.id = 'h2o2-editor-wrapper';
+        wrapper.style.cssText = [
+            'width: 100%',
+            'height: 70vh',
+            'min-width: 300px',
+            'min-height: 200px',
+            'resize: both',// 允许横竖自由拖拽
+            'overflow: hidden',// resize 生效必须加这个
+            'display: block',
+            'margin-bottom: 8px',
+            'box-sizing: border-box',
+            'border: 1px solid #ccc',
+            'border-radius: 4px',
+        ].join('; ');
+
         var iframe = document.createElement('iframe');
         iframe.id = IFRAME_ID;
         iframe.src = EDITOR_URL;
         iframe.style.cssText = [
             'width: 100%',
-            'height: 70vh',
-            'min-height: 520px',
+            'height: 100%',// 撑满外层容器
             'border: none',
-            'border-radius: 4px',
             'display: block',
-            'margin-bottom: 8px'
+        ].join('; ');
+        // ── 左下角手柄 ──────────────────────────────────────────
+        var handleBL = document.createElement('div');
+        handleBL.style.cssText = [
+            'position: absolute',
+            'left: 0',
+            'bottom: 0',
+            'width: 18px',
+            'height: 18px',
+            'cursor: nesw-resize',
+            'background: linear-gradient(225deg, transparent 50%, #888 50%, #888 60%, transparent 60%, transparent 70%, #888 70%, #888 80%, transparent 80%)',
+            'z-index: 9999',
+            'border-radius: 0 0 0 4px',
         ].join('; ');
 
-        ta.parentNode.insertBefore(iframe, ta);
+        // ── 左侧拖拽条 ───────────────────────────────────────────
+        var handleLeft = document.createElement('div');
+        handleLeft.style.cssText = [
+            'position: absolute',
+            'left: -4px',
+            'top: 0',
+            'width: 8px',
+            'height: calc(100% - 18px)',
+            'cursor: ew-resize',
+            'z-index: 9998',
+        ].join('; ');
+
+        // ── 左侧专用拖拽逻辑（向左拖 = 宽度增加 + wrapper 左移）──
+        function makeDraggableLeft(el) {
+            el.addEventListener('mousedown', function (e) {
+                e.preventDefault();
+                var startX = e.clientX;
+                var startW = wrapper.offsetWidth;
+                // 记录初始 left 偏移（如果有的话）
+                var startLeft = wrapper.offsetLeft;
+
+                iframe.style.pointerEvents = 'none';
+
+                function onMove(e) {
+                    var dx = startX - e.clientX;// 向左为正
+                    var newW = Math.max(300, startW + dx);
+                    wrapper.style.width = newW + 'px';
+                    // 同步往左偏移，保持右边界不动
+                    wrapper.style.marginLeft = (startLeft - dx) + 'px';
+                }
+                function onUp() {
+                    iframe.style.pointerEvents = 'auto';
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onUp);
+                }
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+            });
+        }
+
+        // 左下角 = 同时改高度 + 左侧宽度
+        handleBL.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            var startX = e.clientX;
+            var startY = e.clientY;
+            var startW = wrapper.offsetWidth;
+            var startH = wrapper.offsetHeight;
+            var startLeft = wrapper.offsetLeft;
+
+            iframe.style.pointerEvents = 'none';
+
+            function onMove(e) {
+                var dx = startX - e.clientX;
+                var newW = Math.max(300, startW + dx);
+                var newH = Math.max(200, startH + (e.clientY - startY));
+                wrapper.style.width = newW + 'px';
+                wrapper.style.height = newH + 'px';
+                wrapper.style.marginLeft = (startLeft - dx) + 'px';
+            }
+            function onUp() {
+                iframe.style.pointerEvents = 'auto';
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+            }
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        });
+
+        makeDraggableLeft(handleLeft);
+
+        wrapper.appendChild(iframe);
+        wrapper.appendChild(handleBL); // 左下角（新增）
+        wrapper.appendChild(handleLeft); // 左侧（新增）
+
+        ta.parentNode.insertBefore(wrapper, ta);
 
         iframe.addEventListener('load', function () {
             setTimeout(function () {
@@ -83,7 +184,6 @@
             }, 500);
         });
     }
-
     // ── 启动一个 MutationObserver 实例 ───────────────────────
     function startObserver() {
         // 断开旧的
@@ -142,6 +242,8 @@
         // 没有 textarea 就清理僵尸 iframe
         if (!ta && iframe) {
             iframe.remove();
+            var wrapper = document.getElementById('h2o2-editor-wrapper');
+            if (wrapper) wrapper.remove();
         }
 
     }, 1000);
@@ -153,5 +255,5 @@
     var ta = document.getElementById('edit-page-textarea');
     if (ta) inject(ta);
 
-    console.log('H2O2: v2.0.0 已启动');
+    console.log('H2O2: v2.0.2 已启动');
 })();

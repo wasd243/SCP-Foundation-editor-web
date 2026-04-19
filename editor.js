@@ -389,6 +389,8 @@ const startEditor = () => {
     const state = EditorState.create({
         doc: "",
         extensions: [
+            // 取消滑动换行功能
+            EditorView.lineWrapping,
             // 将 customKeymap 放在 basicSetup 之前，确保优先级
             customKeymap,
             basicSetup,
@@ -451,7 +453,7 @@ const startEditor = () => {
     const editorView = new EditorView({
         state,
         parent: document.getElementById("editor-container"),
-        viewportMargin: Infinity
+        viewportMargin: 2000
     });
 
     // AST测试
