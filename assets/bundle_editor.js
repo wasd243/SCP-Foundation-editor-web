@@ -27902,7 +27902,7 @@ ${listMarker} `;
       const editorView = new EditorView({
         state,
         parent: document.getElementById("editor-container"),
-        viewportMargin: Infinity
+        viewportMargin: 2e3
       });
       window._debugAST = () => {
         const tree = syntaxTree(editorView.state);
