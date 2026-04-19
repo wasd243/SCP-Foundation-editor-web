@@ -27845,6 +27845,8 @@ ${listMarker} `;
       const state = EditorState.create({
         doc: "",
         extensions: [
+          // 取消滑动换行功能
+          EditorView.lineWrapping,
           // 将 customKeymap 放在 basicSetup 之前，确保优先级
           customKeymap,
           basicSetup,
