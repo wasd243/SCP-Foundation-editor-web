@@ -451,7 +451,7 @@ const startEditor = () => {
     const editorView = new EditorView({
         state,
         parent: document.getElementById("editor-container"),
-        viewportMargin: Infinity
+        viewportMargin: 2000
     });
 
     // AST测试
