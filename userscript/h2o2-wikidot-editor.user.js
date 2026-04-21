@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         H2O2 Wikidot Editor (Universal)
 // @namespace    https://github.com/wasd243/SCP-Foundation-editor-web
-// @version      2.2.0
-// @description  右侧面板模式，像 DevTools 一样从右侧挤入。包含左上角快捷保存/预览/取消按钮。
+// @version      2.4.0
+// @description  右侧面板模式，像 DevTools 一样从右侧挤入。包含左上角快捷保存/预览/取消/实时预览按钮，并禁用 CSS 动画。
 // @icon         https://scpsandboxcn.wikidot.com/local--files/peroxide-hyroperoxide/%E6%97%A0%E5%B0%BD%E5%82%AC%E5%8C%96%E5%89%82%EF%BC%88%E7%8E%84%E5%AD%A6%E4%BB%A3%E7%A0%81%E9%95%87%E5%9C%BA%E5%AD%90%EF%BC%89
 // @author       wasd243
 // @match        *://*.wikidot.com/*
@@ -19,10 +19,10 @@
     var PANEL_ID     = 'h2o2-panel';
     var TOGGLE_ID    = 'h2o2-toggle';
     var RESIZER_ID   = 'h2o2-resizer';
-    var ACTIONS_ID   = 'h2o2-action-buttons'; // 新增：左上角按钮组ID
+    var ACTIONS_ID   = 'h2o2-action-buttons';
     var OBSERVER_KEY = '__h2o2_observer__';
 
-    var PANEL_W      = 520;   // 初始面板宽度 px
+    var PANEL_W      = 520;
     var PANEL_MIN_W  = 300;
     var PANEL_MAX_W  = Math.round(window.innerWidth * 0.85);
 
@@ -53,7 +53,7 @@
         if (toggle) {
             toggle.style.right = w + 'px';
             toggle.title = '关闭编辑器面板';
-            toggle.innerHTML = '&#x276F;'; // ❯
+            toggle.innerHTML = '&#x276F;';
         }
         panel._open = true;
     }
@@ -68,7 +68,7 @@
         if (toggle) {
             toggle.style.right = '0';
             toggle.title = '打开编辑器面板';
-            toggle.innerHTML = '&#x276E;'; // ❮
+            toggle.innerHTML = '&#x276E;';
         }
         panel._open = false;
     }
@@ -99,8 +99,7 @@
             'backdrop-filter: blur(4px)'
         ].join('; ');
 
-        // 通用按钮生成函数
-        function createBtn(text, color, targetId) {
+        function createBtn(text, color, action) {
             var btn = document.createElement('button');
             btn.innerText = text;
             btn.style.cssText = [
@@ -123,24 +122,104 @@
 
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                var target = document.getElementById(targetId);
-                if (target) {
-                    target.click(); // 劫持并触发Wikidot原生按钮
-                } else {
-                    console.warn('H2O2: 找不到目标按钮', targetId);
+                if (typeof action === 'function') {
+                    action(e, btn);
+                } else if (typeof action === 'string') {
+                    var target = document.getElementById(action);
+                    if (target) {
+                        target.click();
+                    } else {
+                        console.warn('H2O2: 找不到目标按钮', action);
+                    }
                 }
             });
             return btn;
         }
 
-        // 颜色：红=取消(#ef5350)，灰=预览(#78909c)，绿=保存(#66bb6a)
         var btnCancel  = createBtn('取消', '#ef5350', 'edit-cancel-button');
         var btnPreview = createBtn('预览', '#78909c', 'edit-preview-button');
         var btnSave    = createBtn('保存', '#66bb6a', 'edit-save-button');
 
+        // ── 实时预览逻辑 ──
+        var isLivePreview = false;
+        var liveTimer = null;
+
+        function stopLivePreview() {
+            isLivePreview = false;
+            var btn = document.getElementById('h2o2-btn-live-preview');
+            if (btn) {
+                btn.innerText = '实时预览: 关';
+                btn.style.background = '#ab47bc';
+            }
+            var styleEl = document.getElementById('h2o2-live-preview-style');
+            if (styleEl) styleEl.remove();
+
+            var s2 = document.createElement('script');
+            s2.innerHTML = 'if (window._h2o2_orig_scrollTo) window.scrollTo = window._h2o2_orig_scrollTo;';
+            document.head.appendChild(s2);
+            setTimeout(function(){ s2.remove(); }, 100);
+
+            var sb = document.getElementById('h2o2-scroll-block');
+            if (sb) sb.remove();
+
+            if (liveTimer) {
+                clearInterval(liveTimer);
+                liveTimer = null;
+            }
+        }
+        window._h2o2_stopLivePreview = stopLivePreview;
+
+        var btnLivePreview = createBtn('实时预览: 关', '#ab47bc', function(e, btn) {
+            if (isLivePreview) {
+                stopLivePreview();
+            } else {
+                isLivePreview = true;
+                btn.innerText = '实时预览: 开';
+                btn.style.background = '#8e24aa';
+
+                // 1. 注入 CSS：屏蔽加载动画、锁屏掩罩、以及全局所有 CSS 动画和过渡效果
+                var styleEl = document.createElement('style');
+                styleEl.id = 'h2o2-live-preview-style';
+                styleEl.innerHTML = `
+                    /* 屏蔽 Wikidot 原生加载遮罩与提示 */
+                    #lock-screen, #lock-info, #saving-message, #indicator, .owindow.wait, .ajax-loader {
+                        display: none !important;
+                        opacity: 0 !important;
+                        pointer-events: none !important;
+                        visibility: hidden !important;
+                    }
+                    /* 屏蔽页面所有版式自带的动画（如文字浮出、渐变、缩放等） */
+                    * {
+                        animation: none !important;
+                        -webkit-animation: none !important;
+                        transition: none !important;
+                        -webkit-transition: none !important;
+                    }
+                `;
+                document.head.appendChild(styleEl);
+
+                // 2. 注入 JS 到页面环境：屏蔽滚动
+                var s1 = document.createElement('script');
+                s1.id = 'h2o2-scroll-block';
+                s1.innerHTML = `
+                    if (!window._h2o2_orig_scrollTo) window._h2o2_orig_scrollTo = window.scrollTo;
+                    window.scrollTo = function(){};
+                `;
+                document.head.appendChild(s1);
+
+                // 3. 开启定时点击（每 2.5 秒触发一次原生预览）
+                liveTimer = setInterval(function() {
+                    var target = document.getElementById('edit-preview-button');
+                    if (target) target.click();
+                }, 1000);
+            }
+        });
+        btnLivePreview.id = 'h2o2-btn-live-preview';
+
         container.appendChild(btnCancel);
         container.appendChild(btnPreview);
         container.appendChild(btnSave);
+        container.appendChild(btnLivePreview);
 
         document.body.appendChild(container);
     }
@@ -164,7 +243,6 @@
         if (document.getElementById(PANEL_ID)) return;
         console.log('H2O2: 注入，内容长度', content.length);
 
-        // textarea 隐藏但保留在 DOM（表单提交需要）
         ta.style.setProperty('display', 'none', 'important');
         var toolbar = document.getElementById('wd-editor-toolbar-panel');
         if (toolbar) toolbar.style.setProperty('display', 'none', 'important');
@@ -172,29 +250,26 @@
             el.style.setProperty('display', 'none', 'important');
         });
 
-        // ── 注入左上角快捷按钮 ──
         createActionButtons();
 
-        // ── 右侧固定面板 ─────────────────────────────────────
         var panel = document.createElement('div');
         panel.id = PANEL_ID;
         panel._open = false;
         panel.style.cssText = [
             'position: fixed',
             'top: 0',
-            'right: -' + PANEL_W + 'px',   // 初始藏在右侧屏幕外
+            'right: -' + PANEL_W + 'px',
             'width: ' + PANEL_W + 'px',
             'height: 100vh',
             'z-index: 999999',
             'background: #fff',
             'box-shadow: -4px 0 16px rgba(0,0,0,0.18)',
             'display: flex',
-            'flex-direction: row',         // 左边是 resizer，右边是 iframe
+            'flex-direction: row',
             'transition: right 0.25s ease',
             'box-sizing: border-box',
         ].join('; ');
 
-        // ── 左侧宽度拖拽条 ────────────────────────────────────
         var resizer = document.createElement('div');
         resizer.id = RESIZER_ID;
         resizer.title = '拖拽调整面板宽度';
@@ -213,7 +288,6 @@
             resizer.style.background = '#e0e0e0';
         });
 
-        // 拖拽 resizer → 改变面板宽度
         resizer.addEventListener('mousedown', function (e) {
             e.preventDefault();
             var startX = e.clientX;
@@ -221,13 +295,12 @@
             iframe.style.pointerEvents = 'none';
 
             function onMove(e) {
-                var dx   = startX - e.clientX;         // 向左拖 = 变宽
+                var dx   = startX - e.clientX;
                 var newW = Math.min(PANEL_MAX_W, Math.max(PANEL_MIN_W, startW + dx));
                 panel.style.width = newW + 'px';
                 if (panel._open) {
                     document.body.style.transition = 'none';
                     document.body.style.marginRight = newW + 'px';
-                    // 同步 toggle 按钮位置
                     var tog = document.getElementById(TOGGLE_ID);
                     if (tog) tog.style.right = newW + 'px';
                 }
@@ -242,7 +315,6 @@
             document.addEventListener('mouseup',   onUp);
         });
 
-        // ── iframe ────────────────────────────────────────────
         var iframe = document.createElement('iframe');
         iframe.id = IFRAME_ID;
         iframe.src = EDITOR_URL;
@@ -258,10 +330,9 @@
         panel.appendChild(iframe);
         document.body.appendChild(panel);
 
-        // ── 开关按钮（竖排，固定在右侧边缘）─────────────────
         var toggle = document.createElement('div');
         toggle.id = TOGGLE_ID;
-        toggle.innerHTML = '&#x276E;'; // ❮
+        toggle.innerHTML = '&#x276E;';
         toggle.title = '打开编辑器面板';
         toggle.style.cssText = [
             'position: fixed',
@@ -292,29 +363,29 @@
         toggle.addEventListener('click', togglePanel);
         document.body.appendChild(toggle);
 
-        // ── 推送内容到 iframe ─────────────────────────────────
         iframe.addEventListener('load', function () {
             setTimeout(function () {
                 try {
                     iframe.contentWindow.postMessage(
                         { type: 'h2o2-init', payload: content }, '*'
                     );
-                    console.log('H2O2: 内容已推送，长度', content.length);
                 } catch (e) {
                     console.warn('H2O2: postMessage 失败', e);
                 }
             }, 500);
         });
 
-        // 注入后自动打开面板
         setTimeout(openPanel, 50);
     }
 
-    // ── 清理面板 ──────────────────────────────────────────────
     function cleanupPanel() {
+        if (typeof window._h2o2_stopLivePreview === 'function') {
+            window._h2o2_stopLivePreview();
+        }
+
         var panel   = document.getElementById(PANEL_ID);
         var toggle  = document.getElementById(TOGGLE_ID);
-        var actions = document.getElementById(ACTIONS_ID); // 清理左上角按钮
+        var actions = document.getElementById(ACTIONS_ID);
         if (panel)   panel.remove();
         if (toggle)  toggle.remove();
         if (actions) actions.remove();
@@ -322,7 +393,6 @@
         console.log('H2O2: 面板已清理');
     }
 
-    // ── MutationObserver ──────────────────────────────────────
     function startObserver() {
         if (window[OBSERVER_KEY]) {
             try { window[OBSERVER_KEY].disconnect(); } catch (e) {}
@@ -332,7 +402,6 @@
             var panel  = document.getElementById(PANEL_ID);
 
             if (!ta && panel) {
-                console.log('H2O2: 编辑结束，清理面板');
                 cleanupPanel();
                 return;
             }
@@ -345,13 +414,10 @@
         });
         obs.observe(document.documentElement, { childList: true, subtree: true });
         window[OBSERVER_KEY] = obs;
-        console.log('H2O2: Observer 已(重)启动');
     }
 
-    // ── 看门狗 ────────────────────────────────────────────────
     setInterval(function () {
         if (!window[OBSERVER_KEY]) {
-            console.warn('H2O2: Observer 丢失，重建中...');
             startObserver();
             return;
         }
@@ -359,7 +425,6 @@
         var panel = document.getElementById(PANEL_ID);
 
         if (ta && !panel) {
-            console.warn('H2O2: 发现未注入的 textarea，补注入');
             inject(ta);
         }
         if (ta) {
@@ -370,10 +435,9 @@
         }
     }, 1000);
 
-    // ── 启动 ──────────────────────────────────────────────────
     startObserver();
     var ta = document.getElementById('edit-page-textarea');
     if (ta) inject(ta);
 
-    console.log('H2O2: v2.2.0 已启动');
+    console.log('H2O2: v2.4.0 已启动');
 })();
