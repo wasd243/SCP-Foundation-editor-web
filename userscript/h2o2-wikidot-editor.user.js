@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         H2O2 Wikidot Editor (Universal)
 // @namespace    https://github.com/wasd243/SCP-Foundation-editor-web
-// @version      2.4.0
+// @version      2.4.7
 // @description  右侧面板模式，像 DevTools 一样从右侧挤入。包含左上角快捷保存/预览/取消/实时预览按钮，并禁用 CSS 动画。
 // @icon         https://scpsandboxcn.wikidot.com/local--files/peroxide-hyroperoxide/%E6%97%A0%E5%B0%BD%E5%82%AC%E5%8C%96%E5%89%82%EF%BC%88%E7%8E%84%E5%AD%A6%E4%BB%A3%E7%A0%81%E9%95%87%E5%9C%BA%E5%AD%90%EF%BC%89
 // @author       wasd243
@@ -24,7 +24,11 @@
 
     var PANEL_W      = 520;
     var PANEL_MIN_W  = 300;
-    var PANEL_MAX_W  = Math.round(window.innerWidth * 0.85);
+    var PANEL_MAX_W  = window.innerWidth - 20;
+
+    window.addEventListener('resize', function () {
+        PANEL_MAX_W = window.innerWidth - 20;
+    });
 
     // ── 消息同步：iframe → textarea ───────────────────────────
     window.addEventListener('message', function (event) {
@@ -224,6 +228,68 @@
         document.body.appendChild(container);
     }
 
+    // ── 全局样式注入：屏蔽弹窗 + 屏蔽动画 ───────────────────
+    function injectGlobalStyles() {
+        if (document.getElementById('h2o2-global-style')) return;
+
+        // ── 1. 屏蔽原生 JS 弹窗 ──────────────────────────────
+        // alert 直接吞掉；confirm 自动返回 true（相当于"确定"）；prompt 返回空字符串
+        window.alert   = function (msg) { console.info('[H2O2] alert 已屏蔽:', msg); };
+        window.confirm = function (msg) { console.info('[H2O2] confirm 已屏蔽，返回 true:', msg); return true; };
+        window.prompt  = function (msg) { console.info('[H2O2] prompt 已屏蔽，返回空:', msg);  return ''; };
+
+        // ── 2. 全局 CSS 屏蔽 Wikidot 自定义弹窗 + 全站动画 ──
+        var style = document.createElement('style');
+        style.id = 'h2o2-global-style';
+        style.innerHTML = [
+            /* Wikidot 各类弹窗/遮罩/加载层 */
+            '#lock-screen, #lock-info, #saving-message,',
+            '.owindow.wait, .ajax-loader, .modal-blocker,',
+            'div.blocker, #ud-ui-dialog, .ui-dialog-overlay {',
+            '    display: none !important;',
+            '    opacity: 0 !important;',
+            '    pointer-events: none !important;',
+            '    visibility: hidden !important;',
+            '}',
+
+            /* 全站动画清零（h2o2 自身用 inline style，优先级更高，不受影响）*/
+            'body *:not([id^="h2o2"]):not([id^="h2o2"] *) {',
+            '    animation-duration:        0.001ms !important;',
+            '    animation-delay:           0.001ms !important;',
+            '    animation-iteration-count: 1       !important;',
+            '    transition-duration:       0.001ms !important;',
+            '    transition-delay:          0.001ms !important;',
+            '}',
+        ].join('\n');
+        document.head.appendChild(style);
+
+        // ── 3. MutationObserver 补漏：动态插入的弹窗也一并干掉 ──
+        var dialogKiller = new MutationObserver(function (mutations) {
+            mutations.forEach(function (m) {
+                m.addedNodes.forEach(function (node) {
+                    if (node.nodeType !== 1) return;
+                    var id  = node.id  || '';
+                    var cls = node.className || '';
+                    var kill = (
+                        id.indexOf('lock')   >= 0 ||
+                        id.indexOf('saving') >= 0 ||
+                        cls.indexOf('owindow') >= 0 ||
+                        cls.indexOf('blocker') >= 0 ||
+                        cls.indexOf('modal')   >= 0 ||
+                        cls.indexOf('ajax-loader') >= 0
+                    );
+                    if (kill) {
+                        node.style.setProperty('display',    'none',    'important');
+                        node.style.setProperty('opacity',    '0',       'important');
+                        node.style.setProperty('visibility', 'hidden',  'important');
+                    }
+                });
+            });
+        });
+        dialogKiller.observe(document.documentElement, { childList: true, subtree: true });
+
+        console.log('H2O2: 全局样式/弹窗屏蔽已启动');
+    }
     // ── 注入逻辑 ──────────────────────────────────────────────
     function inject(ta) {
         if (document.getElementById(PANEL_ID)) return;
@@ -440,4 +506,6 @@
     if (ta) inject(ta);
 
     console.log('H2O2: v2.4.0 已启动');
+    console.log("%c 翻译环境检测完成：一切正常运行。", "color: #a7b8c8;");
+    console.log("%c 愿每一次预定都被尊重。", "color: #ff0000;");
 })();
