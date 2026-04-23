@@ -523,7 +523,5 @@
     var ta = document.getElementById('edit-page-textarea');
     if (ta) inject(ta);
 
-    console.log('H2O2: v2.4.0 已启动');
-    console.log("%c 翻译环境检测完成：一切正常运行。", "color: #a7b8c8;");
-    console.log("%c 愿每一次预定都被尊重。", "color: #ff0000;");
+    console.log('H2O2: v2.5.0 已启动');
 })();
