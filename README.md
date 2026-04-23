@@ -67,8 +67,3 @@ npm run build
    - `https://scp-wiki-cn.wikidot.com/xxx/edit/true`
    - `https://scp-wiki-cn.wikidot.com/editor/edit/true`
 5. 脚本会自动隐藏原生 textarea，并注入 H2O2 编辑器 iframe。
-
-### 给用户的发布建议
-
-- 若你部署了自己的网页，请修改脚本中的 `EDITOR_URL` 为你的部署地址。
-- 上线时建议启用 `event.origin` 校验，防止跨站消息被滥用。
