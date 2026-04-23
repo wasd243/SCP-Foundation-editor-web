@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         H2O2 Wikidot Editor (Universal)
 // @namespace    https://github.com/wasd243/SCP-Foundation-editor-web
-// @version      2.4.7
+// @version      2.5.0
 // @description  右侧面板模式，像 DevTools 一样从右侧挤入。包含左上角快捷保存/预览/取消/实时预览按钮，并禁用 CSS 动画。
 // @icon         https://scpsandboxcn.wikidot.com/local--files/peroxide-hyroperoxide/%E6%97%A0%E5%B0%BD%E5%82%AC%E5%8C%96%E5%89%82%EF%BC%88%E7%8E%84%E5%AD%A6%E4%BB%A3%E7%A0%81%E9%95%87%E5%9C%BA%E5%AD%90%EF%BC%89
 // @author       wasd243
@@ -31,6 +31,10 @@
     });
 
     // ── 消息同步：iframe → textarea ───────────────────────────
+    // 防抖定时器与上次触发时间，供实时预览使用
+    var _livePreviewTimer = null;
+    var _livePreviewLastFire = 0;
+
     window.addEventListener('message', function (event) {
         if (event.origin !== 'https://wasd243.github.io') return;
         if (!event.data || event.data.type !== 'h2o2-update') return;
@@ -38,6 +42,26 @@
         if (!ta) return;
         ta.value = event.data.payload;
         ta.dispatchEvent(new Event('input', { bubbles: true }));
+
+        // 若实时预览已开启，则在内容同步时触发刷新（最小间隔 300ms）
+        if (window._h2o2_livePreviewActive) {
+            var now = Date.now();
+            var remaining = 300 - (now - _livePreviewLastFire);
+            if (_livePreviewTimer) clearTimeout(_livePreviewTimer);
+            if (remaining <= 0) {
+                // 距上次超过 300ms，立即触发
+                _livePreviewLastFire = now;
+                var target = document.getElementById('edit-preview-button');
+                if (target) target.click();
+            } else {
+                // 否则延迟到冷却结束后触发
+                _livePreviewTimer = setTimeout(function () {
+                    _livePreviewLastFire = Date.now();
+                    var target = document.getElementById('edit-preview-button');
+                    if (target) target.click();
+                }, remaining);
+            }
+        }
     });
 
     // ── 面板开关 ──────────────────────────────────────────────
@@ -150,6 +174,11 @@
 
         function stopLivePreview() {
             isLivePreview = false;
+            window._h2o2_livePreviewActive = false;  // ← 关闭标志位
+            if (_livePreviewTimer) {
+                clearTimeout(_livePreviewTimer);
+                _livePreviewTimer = null;
+            }
             var btn = document.getElementById('h2o2-btn-live-preview');
             if (btn) {
                 btn.innerText = '实时预览: 关';
@@ -165,11 +194,6 @@
 
             var sb = document.getElementById('h2o2-scroll-block');
             if (sb) sb.remove();
-
-            if (liveTimer) {
-                clearInterval(liveTimer);
-                liveTimer = null;
-            }
         }
         window._h2o2_stopLivePreview = stopLivePreview;
 
@@ -178,44 +202,38 @@
                 stopLivePreview();
             } else {
                 isLivePreview = true;
+                window._h2o2_livePreviewActive = true;  // ← 开启标志位
+                _livePreviewLastFire = 0;               // ← 重置冷却，让第一次立即触发
                 btn.innerText = '实时预览: 开';
                 btn.style.background = '#8e24aa';
 
-                // 1. 注入 CSS：屏蔽加载动画、锁屏掩罩、以及全局所有 CSS 动画和过渡效果
+                // 注入 CSS / JS（与原来相同，只是移除了 setInterval）
                 var styleEl = document.createElement('style');
                 styleEl.id = 'h2o2-live-preview-style';
                 styleEl.innerHTML = `
-                    /* 屏蔽 Wikidot 原生加载遮罩与提示 */
-                    #lock-screen, #lock-info, #saving-message, #indicator, .owindow.wait, .ajax-loader {
-                        display: none !important;
-                        opacity: 0 !important;
-                        pointer-events: none !important;
-                        visibility: hidden !important;
-                    }
-                    /* 屏蔽页面所有版式自带的动画（如文字浮出、渐变、缩放等） */
-                    * {
-                        animation: none !important;
-                        -webkit-animation: none !important;
-                        transition: none !important;
-                        -webkit-transition: none !important;
-                    }
-                `;
+            #lock-screen, #lock-info, #saving-message, #indicator, .owindow.wait, .ajax-loader {
+                display: none !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+                visibility: hidden !important;
+            }
+            * {
+                animation: none !important;
+                -webkit-animation: none !important;
+                transition: none !important;
+                -webkit-transition: none !important;
+            }
+        `;
                 document.head.appendChild(styleEl);
 
-                // 2. 注入 JS 到页面环境：屏蔽滚动
                 var s1 = document.createElement('script');
                 s1.id = 'h2o2-scroll-block';
                 s1.innerHTML = `
-                    if (!window._h2o2_orig_scrollTo) window._h2o2_orig_scrollTo = window.scrollTo;
-                    window.scrollTo = function(){};
-                `;
+            if (!window._h2o2_orig_scrollTo) window._h2o2_orig_scrollTo = window.scrollTo;
+            window.scrollTo = function(){};
+        `;
                 document.head.appendChild(s1);
-
-                // 3. 开启定时点击（每 2.5 秒触发一次原生预览）
-                liveTimer = setInterval(function() {
-                    var target = document.getElementById('edit-preview-button');
-                    if (target) target.click();
-                }, 1000);
+                // ↑ 不再有 setInterval
             }
         });
         btnLivePreview.id = 'h2o2-btn-live-preview';
