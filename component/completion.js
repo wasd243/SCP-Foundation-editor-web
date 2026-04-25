@@ -21,7 +21,7 @@ export const wikidotCompletionSource = (context) => {
 
     // 如果在 CSS 内部，拦截并专属补全
     if (inCSS) {
-        css(),
+        css()
         autocompletion()
     }
 
