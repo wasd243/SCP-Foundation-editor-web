@@ -27725,7 +27725,8 @@ var init_completion = __esm({
       const lastHtmlClose = textBefore.toLowerCase().lastIndexOf("[[/html]]");
       const inHTML = lastHtmlOpen > lastHtmlClose;
       if (inCSS) {
-        css(), autocompletion();
+        css();
+        autocompletion();
       }
       if (inHTML) {
         let word = context.matchBefore(/<\/?[a-zA-Z0-9-]*/);
