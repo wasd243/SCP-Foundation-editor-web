@@ -1,4 +1,7 @@
 // completion.js
+import { css } from "@codemirror/lang-css"
+import { autocompletion } from "@codemirror/autocomplete"
+
 export const wikidotCompletionSource = (context) => {
 
     // ====== 新增：判定当前上下文范围 ======
@@ -18,19 +21,8 @@ export const wikidotCompletionSource = (context) => {
 
     // 如果在 CSS 内部，拦截并专属补全
     if (inCSS) {
-        let word = context.matchBefore(/[a-zA-Z-]+/);
-        if (!word || (word.from === word.to && !context.explicit)) return null;
-        return {
-            from: word.from,
-            options: [
-                // 往这里加 CSS 词库
-                { label: "color", type: "property", apply: "color: ;", detail: "文本颜色" },
-                { label: "background-color", type: "property", apply: "background-color: ;", detail: "背景色" },
-                { label: "display", type: "property", apply: "display: flex;", detail: "弹性布局" },
-                { label: "border", type: "property", apply: "border: 1px solid #fff;", detail: "边框" },
-            ],
-            filter: true
-        };
+        css(),
+        autocompletion()
     }
 
     // 如果在 HTML 内部，拦截并专属补全
