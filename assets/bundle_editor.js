@@ -163,16 +163,16 @@ function addSection(sections, len, ins, forceJoin = false) {
   } else
     sections.push(len, ins);
 }
-function addInsert(values, sections, value) {
+function addInsert(values2, sections, value) {
   if (value.length == 0)
     return;
   let index = sections.length - 2 >> 1;
-  if (index < values.length) {
-    values[values.length - 1] = values[values.length - 1].append(value);
+  if (index < values2.length) {
+    values2[values2.length - 1] = values2[values2.length - 1].append(value);
   } else {
-    while (values.length < index)
-      values.push(Text.empty);
-    values.push(value);
+    while (values2.length < index)
+      values2.push(Text.empty);
+    values2.push(value);
   }
 }
 function iterChanges(desc, f, individual) {
@@ -321,16 +321,16 @@ function dynamicFacetSlot(addresses, facet, providers) {
   let dynamic = providerAddrs.filter((p) => !(p & 1));
   let idx = addresses[facet.id] >> 1;
   function get(state) {
-    let values = [];
+    let values2 = [];
     for (let i = 0; i < providerAddrs.length; i++) {
       let value = getAddr(state, providerAddrs[i]);
       if (providerTypes[i] == 2)
         for (let val of value)
-          values.push(val);
+          values2.push(val);
       else
-        values.push(value);
+        values2.push(value);
     }
-    return facet.combine(values);
+    return facet.combine(values2);
   }
   return {
     create(state) {
@@ -2235,18 +2235,18 @@ var init_dist = __esm({
     };
     languageData = /* @__PURE__ */ Facet.define();
     allowMultipleSelections = /* @__PURE__ */ Facet.define({
-      combine: (values) => values.some((v) => v),
+      combine: (values2) => values2.some((v) => v),
       static: true
     });
     lineSeparator = /* @__PURE__ */ Facet.define({
-      combine: (values) => values.length ? values[0] : void 0,
+      combine: (values2) => values2.length ? values2[0] : void 0,
       static: true
     });
     changeFilter = /* @__PURE__ */ Facet.define();
     transactionFilter = /* @__PURE__ */ Facet.define();
     transactionExtender = /* @__PURE__ */ Facet.define();
     readOnly = /* @__PURE__ */ Facet.define({
-      combine: (values) => values.length ? values[0] : false
+      combine: (values2) => values2.length ? values2[0] : false
     });
     Annotation = class {
       /**
@@ -2441,11 +2441,11 @@ var init_dist = __esm({
     } catch (_) {
     }
     EditorState = class _EditorState {
-      constructor(config2, doc2, selection2, values, computeSlot, tr) {
+      constructor(config2, doc2, selection2, values2, computeSlot, tr) {
         this.config = config2;
         this.doc = doc2;
         this.selection = selection2;
-        this.values = values;
+        this.values = values2;
         this.status = config2.statusTemplate.slice();
         this.computeSlot = computeSlot;
         if (tr)
@@ -2711,14 +2711,14 @@ var init_dist = __esm({
         bracket closing behavior.
       */
       languageDataAt(name2, pos, side = -1) {
-        let values = [];
+        let values2 = [];
         for (let provider of this.facet(languageData)) {
           for (let result of provider(this, pos, side)) {
             if (Object.prototype.hasOwnProperty.call(result, name2))
-              values.push(result[name2]);
+              values2.push(result[name2]);
           }
         }
-        return values;
+        return values2;
       }
       /**
       Return a function that can categorize strings (expected to
@@ -2762,7 +2762,7 @@ var init_dist = __esm({
     };
     EditorState.allowMultipleSelections = allowMultipleSelections;
     EditorState.tabSize = /* @__PURE__ */ Facet.define({
-      combine: (values) => values.length ? values[0] : 4
+      combine: (values2) => values2.length ? values2[0] : 4
     });
     EditorState.lineSeparator = lineSeparator;
     EditorState.readOnly = readOnly;
@@ -6664,10 +6664,10 @@ var init_dist2 = __esm({
     clipboardInputFilter = /* @__PURE__ */ Facet.define();
     clipboardOutputFilter = /* @__PURE__ */ Facet.define();
     perLineTextDirection = /* @__PURE__ */ Facet.define({
-      combine: (values) => values.some((x) => x)
+      combine: (values2) => values2.some((x) => x)
     });
     nativeSelectionHidden = /* @__PURE__ */ Facet.define({
-      combine: (values) => values.some((x) => x)
+      combine: (values2) => values2.some((x) => x)
     });
     scrollHandler = /* @__PURE__ */ Facet.define();
     ScrollTarget = class _ScrollTarget {
@@ -6688,7 +6688,7 @@ var init_dist2 = __esm({
     };
     scrollIntoView = /* @__PURE__ */ StateEffect.define({ map: (t2, ch) => t2.map(ch) });
     setEditContextFormatting = /* @__PURE__ */ StateEffect.define();
-    editable = /* @__PURE__ */ Facet.define({ combine: (values) => values.length ? values[0] : true });
+    editable = /* @__PURE__ */ Facet.define({ combine: (values2) => values2.length ? values2[0] : true });
     nextPluginID = 0;
     viewPlugin = /* @__PURE__ */ Facet.define({
       combine(plugins) {
@@ -10668,7 +10668,7 @@ var init_dist2 = __esm({
       }
     };
     theme = /* @__PURE__ */ Facet.define({ combine: (strs) => strs.join(" ") });
-    darkTheme = /* @__PURE__ */ Facet.define({ combine: (values) => values.indexOf(true) > -1 });
+    darkTheme = /* @__PURE__ */ Facet.define({ combine: (values2) => values2.indexOf(true) > -1 });
     baseThemeID = /* @__PURE__ */ StyleModule.newName();
     baseLightID = /* @__PURE__ */ StyleModule.newName();
     baseDarkID = /* @__PURE__ */ StyleModule.newName();
@@ -12515,7 +12515,7 @@ var init_dist2 = __esm({
     EditorView.bidiIsolatedRanges = bidiIsolatedRanges;
     EditorView.scrollMargins = scrollMargins;
     EditorView.darkTheme = darkTheme;
-    EditorView.cspNonce = /* @__PURE__ */ Facet.define({ combine: (values) => values.length ? values[0] : "" });
+    EditorView.cspNonce = /* @__PURE__ */ Facet.define({ combine: (values2) => values2.length ? values2[0] : "" });
     EditorView.contentAttributes = contentAttributes;
     EditorView.editorAttributes = editorAttributes;
     EditorView.lineWrapping = /* @__PURE__ */ EditorView.contentAttributes.of({ "class": "cm-lineWrapping" });
@@ -13117,12 +13117,12 @@ var init_dist2 = __esm({
       }
     };
     tooltipConfig = /* @__PURE__ */ Facet.define({
-      combine: (values) => {
+      combine: (values2) => {
         var _a2, _b, _c;
         return {
-          position: browser.ios ? "absolute" : ((_a2 = values.find((conf) => conf.position)) === null || _a2 === void 0 ? void 0 : _a2.position) || "fixed",
-          parent: ((_b = values.find((conf) => conf.parent)) === null || _b === void 0 ? void 0 : _b.parent) || null,
-          tooltipSpace: ((_c = values.find((conf) => conf.tooltipSpace)) === null || _c === void 0 ? void 0 : _c.tooltipSpace) || windowSpace
+          position: browser.ios ? "absolute" : ((_a2 = values2.find((conf) => conf.position)) === null || _a2 === void 0 ? void 0 : _a2.position) || "fixed",
+          parent: ((_b = values2.find((conf) => conf.parent)) === null || _b === void 0 ? void 0 : _b.parent) || null,
+          tooltipSpace: ((_c = values2.find((conf) => conf.tooltipSpace)) === null || _c === void 0 ? void 0 : _c.tooltipSpace) || windowSpace
         };
       }
     });
@@ -13833,7 +13833,7 @@ var init_dist2 = __esm({
     };
     activeGutters = /* @__PURE__ */ Facet.define();
     unfixGutters = /* @__PURE__ */ Facet.define({
-      combine: (values) => values.some((x) => x)
+      combine: (values2) => values2.some((x) => x)
     });
     gutterView = /* @__PURE__ */ ViewPlugin.fromClass(class {
       constructor(view) {
@@ -14146,8 +14146,8 @@ var init_dist2 = __esm({
     lineNumberMarkers = /* @__PURE__ */ Facet.define();
     lineNumberWidgetMarker = /* @__PURE__ */ Facet.define();
     lineNumberConfig = /* @__PURE__ */ Facet.define({
-      combine(values) {
-        return combineConfig(values, { formatNumber: String, domEventHandlers: {} }, {
+      combine(values2) {
+        return combineConfig(values2, { formatNumber: String, domEventHandlers: {} }, {
           domEventHandlers(a, b) {
             let result = Object.assign({}, a);
             for (let event in b) {
@@ -14713,7 +14713,7 @@ function enterFragments(mounts, ranges) {
   }
   return result;
 }
-var DefaultBufferLength, nextPropID, Range2, NodeProp, MountedTree, noProps, NodeType, NodeSet, CachedNode, CachedInnerNode, IterMode, Tree, FlatBufferCursor, TreeBuffer, BaseNode, TreeNode, BufferContext, BufferNode, StackIterator, TreeCursor, nodeSizeCache, TreeFragment, Parser, StringInput, InnerParse, ActiveOverlay, stoppedInner, MixedParse, StructureCursor, FragmentCursor;
+var DefaultBufferLength, nextPropID, Range2, NodeProp, MountedTree, noProps, NodeType, NodeSet, CachedNode, CachedInnerNode, IterMode, Tree, FlatBufferCursor, TreeBuffer, BaseNode, TreeNode, BufferContext, BufferNode, StackIterator, TreeCursor, nodeSizeCache, NodeWeakMap, TreeFragment, Parser, StringInput, InnerParse, ActiveOverlay, stoppedInner, MixedParse, StructureCursor, FragmentCursor;
 var init_dist3 = __esm({
   "node_modules/@lezer/common/dist/index.js"() {
     DefaultBufferLength = 1024;
@@ -15850,6 +15850,52 @@ var init_dist3 = __esm({
       }
     };
     nodeSizeCache = /* @__PURE__ */ new WeakMap();
+    NodeWeakMap = class {
+      constructor() {
+        this.map = /* @__PURE__ */ new WeakMap();
+      }
+      setBuffer(buffer, index, value) {
+        let inner = this.map.get(buffer);
+        if (!inner)
+          this.map.set(buffer, inner = /* @__PURE__ */ new Map());
+        inner.set(index, value);
+      }
+      getBuffer(buffer, index) {
+        let inner = this.map.get(buffer);
+        return inner && inner.get(index);
+      }
+      /**
+      Set the value for this syntax node.
+      */
+      set(node, value) {
+        if (node instanceof BufferNode)
+          this.setBuffer(node.context.buffer, node.index, value);
+        else if (node instanceof TreeNode)
+          this.map.set(node.tree, value);
+      }
+      /**
+      Retrieve value for this syntax node, if it exists in the map.
+      */
+      get(node) {
+        return node instanceof BufferNode ? this.getBuffer(node.context.buffer, node.index) : node instanceof TreeNode ? this.map.get(node.tree) : void 0;
+      }
+      /**
+      Set the value for the node that a cursor currently points to.
+      */
+      cursorSet(cursor2, value) {
+        if (cursor2.buffer)
+          this.setBuffer(cursor2.buffer.buffer, cursor2.index, value);
+        else
+          this.map.set(cursor2.tree, value);
+      }
+      /**
+      Retrieve the value for the node that a cursor currently points
+      to.
+      */
+      cursorGet(cursor2) {
+        return cursor2.buffer ? this.getBuffer(cursor2.buffer.buffer, cursor2.index) : this.map.get(cursor2.tree);
+      }
+    };
     TreeFragment = class _TreeFragment {
       /**
       Construct a tree fragment. You'll usually want to use
@@ -16242,9 +16288,9 @@ function powerSet(array) {
 function styleTags(spec) {
   let byName = /* @__PURE__ */ Object.create(null);
   for (let prop in spec) {
-    let tags2 = spec[prop];
-    if (!Array.isArray(tags2))
-      tags2 = [tags2];
+    let tags3 = spec[prop];
+    if (!Array.isArray(tags3))
+      tags3 = [tags3];
     for (let part of prop.split(" "))
       if (part) {
         let pieces = [], mode = 2, rest = part;
@@ -16272,15 +16318,15 @@ function styleTags(spec) {
         let last = pieces.length - 1, inner = pieces[last];
         if (!inner)
           throw new RangeError("Invalid path: " + part);
-        let rule = new Rule(tags2, mode, last > 0 ? pieces.slice(0, last) : null);
+        let rule = new Rule(tags3, mode, last > 0 ? pieces.slice(0, last) : null);
         byName[inner] = rule.sort(byName[inner]);
       }
   }
   return ruleNodeProp.add(byName);
 }
-function tagHighlighter(tags2, options) {
+function tagHighlighter(tags3, options) {
   let map = /* @__PURE__ */ Object.create(null);
-  for (let style of tags2) {
+  for (let style of tags3) {
     if (!Array.isArray(style.tag))
       map[style.tag.id] = style.class;
     else
@@ -16289,9 +16335,9 @@ function tagHighlighter(tags2, options) {
   }
   let { scope, all = null } = options || {};
   return {
-    style: (tags3) => {
+    style: (tags4) => {
       let cls = all;
-      for (let tag of tags3) {
+      for (let tag of tags4) {
         for (let sub of tag.set) {
           let tagClass = map[sub.id];
           if (tagClass) {
@@ -16305,10 +16351,10 @@ function tagHighlighter(tags2, options) {
     scope
   };
 }
-function highlightTags(highlighters, tags2) {
+function highlightTags(highlighters, tags3) {
   let result = null;
   for (let highlighter of highlighters) {
-    let value = highlighter.style(tags2);
+    let value = highlighter.style(tags3);
     if (value)
       result = result ? result + " " + value : value;
   }
@@ -16430,8 +16476,8 @@ var init_dist4 = __esm({
       }
     });
     Rule = class {
-      constructor(tags2, mode, context, next) {
-        this.tags = tags2;
+      constructor(tags3, mode, context, next) {
+        this.tags = tags3;
         this.mode = mode;
         this.context = context;
         this.next = next;
@@ -16959,7 +17005,7 @@ var init_dist4 = __esm({
 // node_modules/@codemirror/language/dist/index.js
 function defineLanguageFacet(baseData) {
   return Facet.define({
-    combine: baseData ? (values) => values.concat(baseData) : void 0
+    combine: baseData ? (values2) => values2.concat(baseData) : void 0
   });
 }
 function topNodeAt(state, pos, side) {
@@ -17454,7 +17500,7 @@ function createTokenType(extra, tagStr) {
   typeArray.push(type);
   return type.id;
 }
-var _a, languageDataProp, sublanguageProp, Language, LRLanguage, DocInput, currentContext, ParseContext, LanguageState, requestIdle, isInputPending, parseWorker, language, indentService, indentUnit, IndentContext, indentNodeProp, TreeIndentContext, flatIndent, DontIndentBeyond, foldService, foldNodeProp, foldEffect, unfoldEffect, foldState, foldCode, unfoldCode, foldAll, unfoldAll, foldKeymap, defaultConfig, foldConfig, foldWidget, PreparedFoldWidget, foldGutterDefaults, FoldMarker, baseTheme$12, HighlightStyle, highlighterFacet, fallbackHighlighter, TreeHighlighter, treeHighlighter, defaultHighlightStyle, baseTheme2, DefaultScanDist, DefaultBrackets, bracketMatchingConfig, matchingMark, nonmatchingMark, bracketMatcher, bracketMatchingUnique, bracketMatchingHandle, noTokens, typeArray, warned, byTag, defaultTable, marks;
+var _a, languageDataProp, sublanguageProp, Language, LRLanguage, DocInput, currentContext, ParseContext, LanguageState, requestIdle, isInputPending, parseWorker, language, LanguageSupport, indentService, indentUnit, IndentContext, indentNodeProp, TreeIndentContext, flatIndent, DontIndentBeyond, foldService, foldNodeProp, foldEffect, unfoldEffect, foldState, foldCode, unfoldCode, foldAll, unfoldAll, foldKeymap, defaultConfig, foldConfig, foldWidget, PreparedFoldWidget, foldGutterDefaults, FoldMarker, baseTheme$12, HighlightStyle, highlighterFacet, fallbackHighlighter, TreeHighlighter, treeHighlighter, defaultHighlightStyle, baseTheme2, DefaultScanDist, DefaultBrackets, bracketMatchingConfig, matchingMark, nonmatchingMark, bracketMatcher, bracketMatchingUnique, bracketMatchingHandle, noTokens, typeArray, warned, byTag, defaultTable, marks;
 var init_dist5 = __esm({
   "node_modules/@codemirror/language/dist/index.js"() {
     init_dist3();
@@ -17962,14 +18008,24 @@ var init_dist5 = __esm({
         })
       ]
     });
+    LanguageSupport = class {
+      /**
+      Create a language support object.
+      */
+      constructor(language2, support = []) {
+        this.language = language2;
+        this.support = support;
+        this.extension = [language2, support];
+      }
+    };
     indentService = /* @__PURE__ */ Facet.define();
     indentUnit = /* @__PURE__ */ Facet.define({
-      combine: (values) => {
-        if (!values.length)
+      combine: (values2) => {
+        if (!values2.length)
           return "  ";
-        let unit = values[0];
+        let unit = values2[0];
         if (!unit || /\S/.test(unit) || Array.from(unit).some((e) => e != unit[0]))
-          throw new Error("Invalid indent unit: " + JSON.stringify(values[0]));
+          throw new Error("Invalid indent unit: " + JSON.stringify(values2[0]));
         return unit;
       }
     });
@@ -18225,8 +18281,8 @@ var init_dist5 = __esm({
       placeholderText: "\u2026"
     };
     foldConfig = /* @__PURE__ */ Facet.define({
-      combine(values) {
-        return combineConfig(values, defaultConfig);
+      combine(values2) {
+        return combineConfig(values2, defaultConfig);
       }
     });
     foldWidget = /* @__PURE__ */ Decoration.replace({ widget: /* @__PURE__ */ new class extends WidgetType {
@@ -18328,8 +18384,8 @@ var init_dist5 = __esm({
     };
     highlighterFacet = /* @__PURE__ */ Facet.define();
     fallbackHighlighter = /* @__PURE__ */ Facet.define({
-      combine(values) {
-        return values.length ? [values[0]] : null;
+      combine(values2) {
+        return values2.length ? [values2[0]] : null;
       }
     });
     TreeHighlighter = class {
@@ -24679,17 +24735,17 @@ var init_dist11 = __esm({
       @internal
       */
       parseDialect(dialect) {
-        let values = Object.keys(this.dialects), flags = values.map(() => false);
+        let values2 = Object.keys(this.dialects), flags = values2.map(() => false);
         if (dialect)
           for (let part of dialect.split(" ")) {
-            let id2 = values.indexOf(part);
+            let id2 = values2.indexOf(part);
             if (id2 >= 0)
               flags[id2] = true;
           }
         let disabled = null;
-        for (let i = 0; i < values.length; i++)
+        for (let i = 0; i < values2.length; i++)
           if (!flags[i]) {
-            for (let j = this.dialects[values[i]], id2; (id2 = this.data[j++]) != 65535; )
+            for (let j = this.dialects[values2[i]], id2; (id2 = this.data[j++]) != 65535; )
               (disabled || (disabled = new Uint8Array(this.maxTerm + 1)))[id2] = 1;
           }
         return new Dialect(dialect, flags, disabled);
@@ -25222,12 +25278,853 @@ var init_dist12 = __esm({
 });
 
 // node_modules/@codemirror/lang-css/dist/index.js
-var cssLanguage;
+function properties() {
+  if (!_properties && typeof document == "object" && document.body) {
+    let { style } = document.body, names = [], seen = /* @__PURE__ */ new Set();
+    for (let prop in style)
+      if (prop != "cssText" && prop != "cssFloat") {
+        if (typeof style[prop] == "string") {
+          if (/[A-Z]/.test(prop))
+            prop = prop.replace(/[A-Z]/g, (ch) => "-" + ch.toLowerCase());
+          if (!seen.has(prop)) {
+            names.push(prop);
+            seen.add(prop);
+          }
+        }
+      }
+    _properties = names.sort().map((name2) => ({ type: "property", label: name2, apply: name2 + ": " }));
+  }
+  return _properties || [];
+}
+function isVarArg(node, doc2) {
+  var _a2;
+  if (node.name == "(" || node.type.isError)
+    node = node.parent || node;
+  if (node.name != "ArgList")
+    return false;
+  let callee2 = (_a2 = node.parent) === null || _a2 === void 0 ? void 0 : _a2.firstChild;
+  if ((callee2 === null || callee2 === void 0 ? void 0 : callee2.name) != "Callee")
+    return false;
+  return doc2.sliceString(callee2.from, callee2.to) == "var";
+}
+function astTop(node) {
+  for (let cur2 = node; ; ) {
+    if (cur2.type.isTop)
+      return cur2;
+    if (!(cur2 = cur2.parent))
+      return node;
+  }
+}
+function variableNames(doc2, node, isVariable) {
+  if (node.to - node.from > 4096) {
+    let known = VariablesByNode.get(node);
+    if (known)
+      return known;
+    let result = [], seen = /* @__PURE__ */ new Set(), cursor2 = node.cursor(IterMode.IncludeAnonymous);
+    if (cursor2.firstChild())
+      do {
+        for (let option of variableNames(doc2, cursor2.node, isVariable))
+          if (!seen.has(option.label)) {
+            seen.add(option.label);
+            result.push(option);
+          }
+      } while (cursor2.nextSibling());
+    VariablesByNode.set(node, result);
+    return result;
+  } else {
+    let result = [], seen = /* @__PURE__ */ new Set();
+    node.cursor().iterate((node2) => {
+      var _a2;
+      if (isVariable(node2) && node2.matchContext(declSelector) && ((_a2 = node2.node.nextSibling) === null || _a2 === void 0 ? void 0 : _a2.name) == ":") {
+        let name2 = doc2.sliceString(node2.from, node2.to);
+        if (!seen.has(name2)) {
+          seen.add(name2);
+          result.push({ label: name2, type: "variable" });
+        }
+      }
+    });
+    return result;
+  }
+}
+function css() {
+  return new LanguageSupport(cssLanguage, cssLanguage.data.of({ autocomplete: cssCompletionSource }));
+}
+var _properties, pseudoClasses, values, tags2, atRules, identifier2, variable, VariablesByNode, declSelector, defineCSSCompletionSource, cssCompletionSource, cssLanguage;
 var init_dist13 = __esm({
   "node_modules/@codemirror/lang-css/dist/index.js"() {
     init_dist12();
     init_dist5();
     init_dist3();
+    _properties = null;
+    pseudoClasses = /* @__PURE__ */ [
+      "active",
+      "after",
+      "any-link",
+      "autofill",
+      "backdrop",
+      "before",
+      "checked",
+      "cue",
+      "default",
+      "defined",
+      "disabled",
+      "empty",
+      "enabled",
+      "file-selector-button",
+      "first",
+      "first-child",
+      "first-letter",
+      "first-line",
+      "first-of-type",
+      "focus",
+      "focus-visible",
+      "focus-within",
+      "fullscreen",
+      "has",
+      "host",
+      "host-context",
+      "hover",
+      "in-range",
+      "indeterminate",
+      "invalid",
+      "is",
+      "lang",
+      "last-child",
+      "last-of-type",
+      "left",
+      "link",
+      "marker",
+      "modal",
+      "not",
+      "nth-child",
+      "nth-last-child",
+      "nth-last-of-type",
+      "nth-of-type",
+      "only-child",
+      "only-of-type",
+      "optional",
+      "out-of-range",
+      "part",
+      "placeholder",
+      "placeholder-shown",
+      "read-only",
+      "read-write",
+      "required",
+      "right",
+      "root",
+      "scope",
+      "selection",
+      "slotted",
+      "target",
+      "target-text",
+      "valid",
+      "visited",
+      "where"
+    ].map((name2) => ({ type: "class", label: name2 }));
+    values = /* @__PURE__ */ [
+      "above",
+      "absolute",
+      "activeborder",
+      "additive",
+      "activecaption",
+      "after-white-space",
+      "ahead",
+      "alias",
+      "all",
+      "all-scroll",
+      "alphabetic",
+      "alternate",
+      "always",
+      "antialiased",
+      "appworkspace",
+      "asterisks",
+      "attr",
+      "auto",
+      "auto-flow",
+      "avoid",
+      "avoid-column",
+      "avoid-page",
+      "avoid-region",
+      "axis-pan",
+      "background",
+      "backwards",
+      "baseline",
+      "below",
+      "bidi-override",
+      "blink",
+      "block",
+      "block-axis",
+      "bold",
+      "bolder",
+      "border",
+      "border-box",
+      "both",
+      "bottom",
+      "break",
+      "break-all",
+      "break-word",
+      "bullets",
+      "button",
+      "button-bevel",
+      "buttonface",
+      "buttonhighlight",
+      "buttonshadow",
+      "buttontext",
+      "calc",
+      "capitalize",
+      "caps-lock-indicator",
+      "caption",
+      "captiontext",
+      "caret",
+      "cell",
+      "center",
+      "checkbox",
+      "circle",
+      "cjk-decimal",
+      "clear",
+      "clip",
+      "close-quote",
+      "col-resize",
+      "collapse",
+      "color",
+      "color-burn",
+      "color-dodge",
+      "column",
+      "column-reverse",
+      "compact",
+      "condensed",
+      "contain",
+      "content",
+      "contents",
+      "content-box",
+      "context-menu",
+      "continuous",
+      "copy",
+      "counter",
+      "counters",
+      "cover",
+      "crop",
+      "cross",
+      "crosshair",
+      "currentcolor",
+      "cursive",
+      "cyclic",
+      "darken",
+      "dashed",
+      "decimal",
+      "decimal-leading-zero",
+      "default",
+      "default-button",
+      "dense",
+      "destination-atop",
+      "destination-in",
+      "destination-out",
+      "destination-over",
+      "difference",
+      "disc",
+      "discard",
+      "disclosure-closed",
+      "disclosure-open",
+      "document",
+      "dot-dash",
+      "dot-dot-dash",
+      "dotted",
+      "double",
+      "down",
+      "e-resize",
+      "ease",
+      "ease-in",
+      "ease-in-out",
+      "ease-out",
+      "element",
+      "ellipse",
+      "ellipsis",
+      "embed",
+      "end",
+      "ethiopic-abegede-gez",
+      "ethiopic-halehame-aa-er",
+      "ethiopic-halehame-gez",
+      "ew-resize",
+      "exclusion",
+      "expanded",
+      "extends",
+      "extra-condensed",
+      "extra-expanded",
+      "fantasy",
+      "fast",
+      "fill",
+      "fill-box",
+      "fixed",
+      "flat",
+      "flex",
+      "flex-end",
+      "flex-start",
+      "footnotes",
+      "forwards",
+      "from",
+      "geometricPrecision",
+      "graytext",
+      "grid",
+      "groove",
+      "hand",
+      "hard-light",
+      "help",
+      "hidden",
+      "hide",
+      "higher",
+      "highlight",
+      "highlighttext",
+      "horizontal",
+      "hsl",
+      "hsla",
+      "hue",
+      "icon",
+      "ignore",
+      "inactiveborder",
+      "inactivecaption",
+      "inactivecaptiontext",
+      "infinite",
+      "infobackground",
+      "infotext",
+      "inherit",
+      "initial",
+      "inline",
+      "inline-axis",
+      "inline-block",
+      "inline-flex",
+      "inline-grid",
+      "inline-table",
+      "inset",
+      "inside",
+      "intrinsic",
+      "invert",
+      "italic",
+      "justify",
+      "keep-all",
+      "landscape",
+      "large",
+      "larger",
+      "left",
+      "level",
+      "lighter",
+      "lighten",
+      "line-through",
+      "linear",
+      "linear-gradient",
+      "lines",
+      "list-item",
+      "listbox",
+      "listitem",
+      "local",
+      "logical",
+      "loud",
+      "lower",
+      "lower-hexadecimal",
+      "lower-latin",
+      "lower-norwegian",
+      "lowercase",
+      "ltr",
+      "luminosity",
+      "manipulation",
+      "match",
+      "matrix",
+      "matrix3d",
+      "medium",
+      "menu",
+      "menutext",
+      "message-box",
+      "middle",
+      "min-intrinsic",
+      "mix",
+      "monospace",
+      "move",
+      "multiple",
+      "multiple_mask_images",
+      "multiply",
+      "n-resize",
+      "narrower",
+      "ne-resize",
+      "nesw-resize",
+      "no-close-quote",
+      "no-drop",
+      "no-open-quote",
+      "no-repeat",
+      "none",
+      "normal",
+      "not-allowed",
+      "nowrap",
+      "ns-resize",
+      "numbers",
+      "numeric",
+      "nw-resize",
+      "nwse-resize",
+      "oblique",
+      "opacity",
+      "open-quote",
+      "optimizeLegibility",
+      "optimizeSpeed",
+      "outset",
+      "outside",
+      "outside-shape",
+      "overlay",
+      "overline",
+      "padding",
+      "padding-box",
+      "painted",
+      "page",
+      "paused",
+      "perspective",
+      "pinch-zoom",
+      "plus-darker",
+      "plus-lighter",
+      "pointer",
+      "polygon",
+      "portrait",
+      "pre",
+      "pre-line",
+      "pre-wrap",
+      "preserve-3d",
+      "progress",
+      "push-button",
+      "radial-gradient",
+      "radio",
+      "read-only",
+      "read-write",
+      "read-write-plaintext-only",
+      "rectangle",
+      "region",
+      "relative",
+      "repeat",
+      "repeating-linear-gradient",
+      "repeating-radial-gradient",
+      "repeat-x",
+      "repeat-y",
+      "reset",
+      "reverse",
+      "rgb",
+      "rgba",
+      "ridge",
+      "right",
+      "rotate",
+      "rotate3d",
+      "rotateX",
+      "rotateY",
+      "rotateZ",
+      "round",
+      "row",
+      "row-resize",
+      "row-reverse",
+      "rtl",
+      "run-in",
+      "running",
+      "s-resize",
+      "sans-serif",
+      "saturation",
+      "scale",
+      "scale3d",
+      "scaleX",
+      "scaleY",
+      "scaleZ",
+      "screen",
+      "scroll",
+      "scrollbar",
+      "scroll-position",
+      "se-resize",
+      "self-start",
+      "self-end",
+      "semi-condensed",
+      "semi-expanded",
+      "separate",
+      "serif",
+      "show",
+      "single",
+      "skew",
+      "skewX",
+      "skewY",
+      "skip-white-space",
+      "slide",
+      "slider-horizontal",
+      "slider-vertical",
+      "sliderthumb-horizontal",
+      "sliderthumb-vertical",
+      "slow",
+      "small",
+      "small-caps",
+      "small-caption",
+      "smaller",
+      "soft-light",
+      "solid",
+      "source-atop",
+      "source-in",
+      "source-out",
+      "source-over",
+      "space",
+      "space-around",
+      "space-between",
+      "space-evenly",
+      "spell-out",
+      "square",
+      "start",
+      "static",
+      "status-bar",
+      "stretch",
+      "stroke",
+      "stroke-box",
+      "sub",
+      "subpixel-antialiased",
+      "svg_masks",
+      "super",
+      "sw-resize",
+      "symbolic",
+      "symbols",
+      "system-ui",
+      "table",
+      "table-caption",
+      "table-cell",
+      "table-column",
+      "table-column-group",
+      "table-footer-group",
+      "table-header-group",
+      "table-row",
+      "table-row-group",
+      "text",
+      "text-bottom",
+      "text-top",
+      "textarea",
+      "textfield",
+      "thick",
+      "thin",
+      "threeddarkshadow",
+      "threedface",
+      "threedhighlight",
+      "threedlightshadow",
+      "threedshadow",
+      "to",
+      "top",
+      "transform",
+      "translate",
+      "translate3d",
+      "translateX",
+      "translateY",
+      "translateZ",
+      "transparent",
+      "ultra-condensed",
+      "ultra-expanded",
+      "underline",
+      "unidirectional-pan",
+      "unset",
+      "up",
+      "upper-latin",
+      "uppercase",
+      "url",
+      "var",
+      "vertical",
+      "vertical-text",
+      "view-box",
+      "visible",
+      "visibleFill",
+      "visiblePainted",
+      "visibleStroke",
+      "visual",
+      "w-resize",
+      "wait",
+      "wave",
+      "wider",
+      "window",
+      "windowframe",
+      "windowtext",
+      "words",
+      "wrap",
+      "wrap-reverse",
+      "x-large",
+      "x-small",
+      "xor",
+      "xx-large",
+      "xx-small"
+    ].map((name2) => ({ type: "keyword", label: name2 })).concat(/* @__PURE__ */ [
+      "aliceblue",
+      "antiquewhite",
+      "aqua",
+      "aquamarine",
+      "azure",
+      "beige",
+      "bisque",
+      "black",
+      "blanchedalmond",
+      "blue",
+      "blueviolet",
+      "brown",
+      "burlywood",
+      "cadetblue",
+      "chartreuse",
+      "chocolate",
+      "coral",
+      "cornflowerblue",
+      "cornsilk",
+      "crimson",
+      "cyan",
+      "darkblue",
+      "darkcyan",
+      "darkgoldenrod",
+      "darkgray",
+      "darkgreen",
+      "darkkhaki",
+      "darkmagenta",
+      "darkolivegreen",
+      "darkorange",
+      "darkorchid",
+      "darkred",
+      "darksalmon",
+      "darkseagreen",
+      "darkslateblue",
+      "darkslategray",
+      "darkturquoise",
+      "darkviolet",
+      "deeppink",
+      "deepskyblue",
+      "dimgray",
+      "dodgerblue",
+      "firebrick",
+      "floralwhite",
+      "forestgreen",
+      "fuchsia",
+      "gainsboro",
+      "ghostwhite",
+      "gold",
+      "goldenrod",
+      "gray",
+      "grey",
+      "green",
+      "greenyellow",
+      "honeydew",
+      "hotpink",
+      "indianred",
+      "indigo",
+      "ivory",
+      "khaki",
+      "lavender",
+      "lavenderblush",
+      "lawngreen",
+      "lemonchiffon",
+      "lightblue",
+      "lightcoral",
+      "lightcyan",
+      "lightgoldenrodyellow",
+      "lightgray",
+      "lightgreen",
+      "lightpink",
+      "lightsalmon",
+      "lightseagreen",
+      "lightskyblue",
+      "lightslategray",
+      "lightsteelblue",
+      "lightyellow",
+      "lime",
+      "limegreen",
+      "linen",
+      "magenta",
+      "maroon",
+      "mediumaquamarine",
+      "mediumblue",
+      "mediumorchid",
+      "mediumpurple",
+      "mediumseagreen",
+      "mediumslateblue",
+      "mediumspringgreen",
+      "mediumturquoise",
+      "mediumvioletred",
+      "midnightblue",
+      "mintcream",
+      "mistyrose",
+      "moccasin",
+      "navajowhite",
+      "navy",
+      "oldlace",
+      "olive",
+      "olivedrab",
+      "orange",
+      "orangered",
+      "orchid",
+      "palegoldenrod",
+      "palegreen",
+      "paleturquoise",
+      "palevioletred",
+      "papayawhip",
+      "peachpuff",
+      "peru",
+      "pink",
+      "plum",
+      "powderblue",
+      "purple",
+      "rebeccapurple",
+      "red",
+      "rosybrown",
+      "royalblue",
+      "saddlebrown",
+      "salmon",
+      "sandybrown",
+      "seagreen",
+      "seashell",
+      "sienna",
+      "silver",
+      "skyblue",
+      "slateblue",
+      "slategray",
+      "snow",
+      "springgreen",
+      "steelblue",
+      "tan",
+      "teal",
+      "thistle",
+      "tomato",
+      "turquoise",
+      "violet",
+      "wheat",
+      "white",
+      "whitesmoke",
+      "yellow",
+      "yellowgreen"
+    ].map((name2) => ({ type: "constant", label: name2 })));
+    tags2 = /* @__PURE__ */ [
+      "a",
+      "abbr",
+      "address",
+      "article",
+      "aside",
+      "b",
+      "bdi",
+      "bdo",
+      "blockquote",
+      "body",
+      "br",
+      "button",
+      "canvas",
+      "caption",
+      "cite",
+      "code",
+      "col",
+      "colgroup",
+      "dd",
+      "del",
+      "details",
+      "dfn",
+      "dialog",
+      "div",
+      "dl",
+      "dt",
+      "em",
+      "figcaption",
+      "figure",
+      "footer",
+      "form",
+      "header",
+      "hgroup",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "hr",
+      "html",
+      "i",
+      "iframe",
+      "img",
+      "input",
+      "ins",
+      "kbd",
+      "label",
+      "legend",
+      "li",
+      "main",
+      "meter",
+      "nav",
+      "ol",
+      "output",
+      "p",
+      "pre",
+      "ruby",
+      "section",
+      "select",
+      "small",
+      "source",
+      "span",
+      "strong",
+      "sub",
+      "summary",
+      "sup",
+      "table",
+      "tbody",
+      "td",
+      "template",
+      "textarea",
+      "tfoot",
+      "th",
+      "thead",
+      "tr",
+      "u",
+      "ul"
+    ].map((name2) => ({ type: "type", label: name2 }));
+    atRules = /* @__PURE__ */ [
+      "@charset",
+      "@color-profile",
+      "@container",
+      "@counter-style",
+      "@font-face",
+      "@font-feature-values",
+      "@font-palette-values",
+      "@import",
+      "@keyframes",
+      "@layer",
+      "@media",
+      "@namespace",
+      "@page",
+      "@position-try",
+      "@property",
+      "@scope",
+      "@starting-style",
+      "@supports",
+      "@view-transition"
+    ].map((label) => ({ type: "keyword", label }));
+    identifier2 = /^(\w[\w-]*|-\w[\w-]*|)$/;
+    variable = /^-(-[\w-]*)?$/;
+    VariablesByNode = /* @__PURE__ */ new NodeWeakMap();
+    declSelector = ["Declaration"];
+    defineCSSCompletionSource = (isVariable) => (context) => {
+      let { state, pos } = context, node = syntaxTree(state).resolveInner(pos, -1);
+      let isDash = node.type.isError && node.from == node.to - 1 && state.doc.sliceString(node.from, node.to) == "-";
+      if (node.name == "PropertyName" || (isDash || node.name == "TagName") && /^(Block|Styles)$/.test(node.resolve(node.to).name))
+        return { from: node.from, options: properties(), validFor: identifier2 };
+      if (node.name == "ValueName")
+        return { from: node.from, options: values, validFor: identifier2 };
+      if (node.name == "PseudoClassName")
+        return { from: node.from, options: pseudoClasses, validFor: identifier2 };
+      if (isVariable(node) || (context.explicit || isDash) && isVarArg(node, state.doc))
+        return {
+          from: isVariable(node) || isDash ? node.from : pos,
+          options: variableNames(state.doc, astTop(node), isVariable),
+          validFor: variable
+        };
+      if (node.name == "TagName") {
+        for (let { parent } = node; parent; parent = parent.parent)
+          if (parent.name == "Block")
+            return { from: node.from, options: properties(), validFor: identifier2 };
+        return { from: node.from, options: tags2, validFor: identifier2 };
+      }
+      if (node.name == "AtKeyword")
+        return { from: node.from, options: atRules, validFor: identifier2 };
+      if (!context.explicit)
+        return null;
+      let above = node.resolve(pos), before = above.childBefore(pos);
+      if (before && before.name == ":" && above.name == "PseudoClassSelector")
+        return { from: pos, options: pseudoClasses, validFor: identifier2 };
+      if (before && before.name == ":" && above.name == "Declaration" || above.name == "ArgList")
+        return { from: pos, options: values, validFor: identifier2 };
+      if (above.name == "Block" || above.name == "Styles")
+        return { from: pos, options: properties(), validFor: identifier2 };
+      return null;
+    };
+    cssCompletionSource = /* @__PURE__ */ defineCSSCompletionSource((n) => n.name == "VariableName");
     cssLanguage = /* @__PURE__ */ LRLanguage.define({
       name: "css",
       parser: /* @__PURE__ */ parser2.configure({
@@ -25314,17 +26211,17 @@ function findTagName(openTag, input) {
   let tagNameNode = openTag.getChild(TagName);
   return tagNameNode ? input.read(tagNameNode.from, tagNameNode.to) : " ";
 }
-function maybeNest(node, input, tags2) {
+function maybeNest(node, input, tags3) {
   let attrs;
-  for (let tag of tags2) {
+  for (let tag of tags3) {
     if (!tag.attrs || tag.attrs(attrs || (attrs = getAttrs2(node.node.parent.firstChild, input))))
       return { parser: tag.parser, bracketed: true };
   }
   return null;
 }
-function configureNesting(tags2 = [], attributes = []) {
+function configureNesting(tags3 = [], attributes = []) {
   let script = [], style = [], textarea = [], other = [];
-  for (let tag of tags2) {
+  for (let tag of tags3) {
     let array = tag.tag == "script" ? script : tag.tag == "style" ? style : tag.tag == "textarea" ? textarea : other;
     array.push(tag);
   }
@@ -26816,6 +27713,8 @@ var init_color_widgets = __esm({
 var wikidotCompletionSource;
 var init_completion = __esm({
   "component/completion.js"() {
+    init_dist13();
+    init_dist8();
     wikidotCompletionSource = (context) => {
       const textBefore = context.state.sliceDoc(0, context.pos);
       const lowerText = textBefore.toLowerCase();
@@ -26826,19 +27725,7 @@ var init_completion = __esm({
       const lastHtmlClose = textBefore.toLowerCase().lastIndexOf("[[/html]]");
       const inHTML = lastHtmlOpen > lastHtmlClose;
       if (inCSS) {
-        let word = context.matchBefore(/[a-zA-Z-]+/);
-        if (!word || word.from === word.to && !context.explicit) return null;
-        return {
-          from: word.from,
-          options: [
-            // 往这里加 CSS 词库
-            { label: "color", type: "property", apply: "color: ;", detail: "\u6587\u672C\u989C\u8272" },
-            { label: "background-color", type: "property", apply: "background-color: ;", detail: "\u80CC\u666F\u8272" },
-            { label: "display", type: "property", apply: "display: flex;", detail: "\u5F39\u6027\u5E03\u5C40" },
-            { label: "border", type: "property", apply: "border: 1px solid #fff;", detail: "\u8FB9\u6846" }
-          ],
-          filter: true
-        };
+        css(), autocompletion();
       }
       if (inHTML) {
         let word = context.matchBefore(/<\/?[a-zA-Z0-9-]*/);
