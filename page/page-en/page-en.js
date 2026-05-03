@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var flowNodes = Array.prototype.slice.call(document.querySelectorAll(".flow-node"));
+    var flowNodes = Array.prototype.slice.call(document.querySelectorAll(".pipeline-node"));
 
     flowNodes.forEach(function (node) {
         node.addEventListener("mouseenter", function () {

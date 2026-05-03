@@ -1,0 +1,3 @@
+unserscript/** linguist-vendored
+*.js linguist-vendored
+page/** linguist-vendored

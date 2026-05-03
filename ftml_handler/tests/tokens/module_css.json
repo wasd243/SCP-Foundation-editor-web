@@ -1,0 +1,140 @@
+{
+  "tokens": [
+    {
+      "slice": "[[",
+      "span": {
+        "end": 2,
+        "start": 0
+      },
+      "token": "left-block"
+    },
+    {
+      "slice": "module",
+      "span": {
+        "end": 8,
+        "start": 2
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "css",
+      "span": {
+        "end": 12,
+        "start": 9
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "end": 14,
+        "start": 12
+      },
+      "token": "right-block"
+    },
+    {
+      "slice": ".",
+      "span": {
+        "end": 17,
+        "start": 16
+      },
+      "token": "other"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "end": 21,
+        "start": 17
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "-",
+      "span": {
+        "end": 22,
+        "start": 21
+      },
+      "token": "other"
+    },
+    {
+      "slice": "class",
+      "span": {
+        "end": 27,
+        "start": 22
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "{",
+      "span": {
+        "end": 29,
+        "start": 28
+      },
+      "token": "other"
+    },
+    {
+      "slice": "color",
+      "span": {
+        "end": 40,
+        "start": 35
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": ":",
+      "span": {
+        "end": 41,
+        "start": 40
+      },
+      "token": "colon"
+    },
+    {
+      "slice": "red",
+      "span": {
+        "end": 45,
+        "start": 42
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": ";",
+      "span": {
+        "end": 46,
+        "start": 45
+      },
+      "token": "other"
+    },
+    {
+      "slice": "}",
+      "span": {
+        "end": 49,
+        "start": 48
+      },
+      "token": "other"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "end": 54,
+        "start": 51
+      },
+      "token": "left-block-end"
+    },
+    {
+      "slice": "module",
+      "span": {
+        "end": 60,
+        "start": 54
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "end": 62,
+        "start": 60
+      },
+      "token": "right-block"
+    }
+  ]
+}
