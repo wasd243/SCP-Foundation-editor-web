@@ -26603,7 +26603,7 @@ function setupColorPickerHandler(editorView) {
   window.addEventListener("colorChange", (event) => {
     const { oldColor, newColor, element } = event.detail;
     if (!editorView || !editorView.state) {
-      console.error("\u7F16\u8F91\u5668\u89C6\u56FE\u672A\u521D\u59CB\u5316");
+      console.error("Editor view is not initialized");
       return;
     }
     const text = editorView.state.doc.toString();
@@ -26617,7 +26617,7 @@ function setupColorPickerHandler(editorView) {
       });
     }
     if (matches.length === 0) {
-      console.warn(`\u672A\u627E\u5230\u989C\u8272\u4EE3\u7801: ${oldColor}`);
+      console.warn(`Color code not found: ${oldColor}`);
       return;
     }
     const selection2 = editorView.state.selection.main;
@@ -26637,13 +26637,13 @@ function setupColorPickerHandler(editorView) {
         to: bestMatch.index + bestMatch.length,
         insert: newColor
       },
-      // 保持光标位置
+      // Preserve cursor position
       selection: editorView.state.selection
     });
     if (element && element.style) {
       element.style.backgroundColor = newColor;
       element.setAttribute("data-color", newColor);
-      element.title = `\u70B9\u51FB\u4FEE\u6539\u989C\u8272: ${newColor}`;
+      element.title = `Click to change color: ${newColor}`;
     }
   });
 }
@@ -26664,7 +26664,7 @@ var init_color_preview = __esm({
         const span = document.createElement("span");
         span.className = "cm-color-preview";
         span.setAttribute("data-color", this.color);
-        span.title = `\u70B9\u51FB\u4FEE\u6539\u989C\u8272: ${this.color}`;
+        span.title = `Click to change color: ${this.color}`;
         span.style.cssText = `
       display: inline-block;
       width: 14px;
@@ -26800,11 +26800,11 @@ var init_color_widgets = __esm({
               })
             );
           }
-          console.log(`\u5339\u914D\u5230Wikidot\u989C\u8272\u6807\u7B7E: ${fullMatch}`);
-          console.log(`\u989C\u8272\u4EE3\u7801: ${colorCode}, \u5185\u5BB9: "${content2}"`);
-          console.log(`\u4F4D\u7F6E: ${start}-${end}, \u5185\u5BB9\u4F4D\u7F6E: ${contentStart}-${contentEnd}`);
+          console.log(`Matched Wikidot color tag: ${fullMatch}`);
+          console.log(`Color code: ${colorCode}, content: "${content2}"`);
+          console.log(`Range: ${start}-${end}, content range: ${contentStart}-${contentEnd}`);
         } catch (error) {
-          console.error("\u5904\u7406Wikidot\u989C\u8272\u6807\u7B7E\u65F6\u51FA\u9519:", error, match);
+          console.error("Error while processing Wikidot color tag:", error, match);
         }
       }
       return builder.finish();
@@ -26831,11 +26831,11 @@ var init_completion = __esm({
         return {
           from: word.from,
           options: [
-            // 往这里加 CSS 词库
-            { label: "color", type: "property", apply: "color: ;", detail: "\u6587\u672C\u989C\u8272" },
-            { label: "background-color", type: "property", apply: "background-color: ;", detail: "\u80CC\u666F\u8272" },
-            { label: "display", type: "property", apply: "display: flex;", detail: "\u5F39\u6027\u5E03\u5C40" },
-            { label: "border", type: "property", apply: "border: 1px solid #fff;", detail: "\u8FB9\u6846" }
+            // Add CSS suggestions here
+            { label: "color", type: "property", apply: "color: ;", detail: "text color" },
+            { label: "background-color", type: "property", apply: "background-color: ;", detail: "background color" },
+            { label: "display", type: "property", apply: "display: flex;", detail: "flex layout" },
+            { label: "border", type: "property", apply: "border: 1px solid #fff;", detail: "border" }
           ],
           filter: true
         };
@@ -26846,10 +26846,10 @@ var init_completion = __esm({
         return {
           from: word.from,
           options: [
-            { label: "<div>", type: "keyword", apply: "<div>\n\n</div>", detail: "\u5757\u7EA7\u5143\u7D20" },
-            { label: "<span>", type: "keyword", apply: "<span></span>", detail: "\u884C\u5185\u5143\u7D20" },
-            { label: "<style>", type: "keyword", apply: "<style>\n\n</style>", detail: "\u6837\u5F0F\u8868" },
-            { label: "class", type: "property", apply: 'class=""', detail: "\u7C7B\u540D" }
+            { label: "<div>", type: "keyword", apply: "<div>\n\n</div>", detail: "block element" },
+            { label: "<span>", type: "keyword", apply: "<span></span>", detail: "inline element" },
+            { label: "<style>", type: "keyword", apply: "<style>\n\n</style>", detail: "stylesheet" },
+            { label: "class", type: "property", apply: 'class=""', detail: "class name" }
           ],
           filter: true
         };
@@ -26866,7 +26866,7 @@ var init_completion = __esm({
               label: "@@@@",
               type: "keyword",
               apply: "@@@@",
-              detail: "\u5F3A\u5236\u6362\u884C / \u539F\u59CB\u6587\u672C"
+              detail: "forced line break / raw text"
             },
             {
               label: "@@...@@",
@@ -26881,10 +26881,10 @@ var init_completion = __esm({
                     anchor: selectFrom,
                     head: selectTo
                   }
-                  // 光标放在 @@ 之后
+                  // cursor after opening @@
                 });
               },
-              detail: "\u539F\u59CB\u6587\u672C"
+              detail: "raw text"
             }
           ],
           filter: true
@@ -26902,10 +26902,10 @@ var init_completion = __esm({
                 view.dispatch({
                   changes: { from, to, insert: text },
                   selection: { anchor: from + 3 }
-                  // 光标放在 ||~ 之后
+                  // cursor after ||~
                 });
               },
-              detail: "\u8868\u5934\u884C"
+              detail: "header row"
             },
             {
               label: "|| Cell 1 || Cell 2 ||",
@@ -26915,10 +26915,10 @@ var init_completion = __esm({
                 view.dispatch({
                   changes: { from, to, insert: text },
                   selection: { anchor: from + 2 }
-                  // 光标放在 || 之后
+                  // cursor after ||
                 });
               },
-              detail: "\u8868\u683C\u884C"
+              detail: "table row"
             }
           ],
           filter: true
@@ -26928,7 +26928,7 @@ var init_completion = __esm({
         return {
           from: classMatch.from,
           options: [
-            // 版式用div自动补全
+            // Theme/layout div autocomplete
             // ========================================================
             {
               label: "[[div ",
@@ -26940,7 +26940,7 @@ var init_completion = __esm({
                   selection: { anchor: from + '[[div class="'.length }
                 });
               },
-              detail: "\u5BB9\u5668"
+              detail: "container"
             },
             {
               label: "blockquote",
@@ -27074,7 +27074,7 @@ var init_completion = __esm({
       return {
         from: before.from,
         options: [
-          // 常见标签
+          // Common tags
           {
             label: "[[div ",
             type: "keyword",
@@ -27085,7 +27085,7 @@ var init_completion = __esm({
                 selection: { anchor: from + '[[div class="'.length }
               });
             },
-            detail: "\u5BB9\u5668"
+            detail: "container"
           },
           {
             label: "[[size ",
@@ -27095,7 +27095,7 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + "[[size ".length }
-                // 光标放在 size 后面
+                // cursor after size
               });
             }
           },
@@ -27107,10 +27107,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
-            detail: "\u5F15\u7528\u9875\u9762"
+            detail: "include page"
           },
           {
             label: "[[tabview",
@@ -27120,10 +27120,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + "[[tabview".length }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
-            detail: "\u6807\u7B7E\u9875"
+            detail: "tab view"
           },
           {
             label: "[[tab",
@@ -27133,7 +27133,7 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + "[[tab ".length }
-                // 光标放在tab
+                // cursor after tab
               });
             },
             detail: "tab"
@@ -27146,7 +27146,7 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
             detail: "SCP-Wiki"
@@ -27159,10 +27159,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
-            detail: "\u7248\u5F0F"
+            detail: "theme"
           },
           {
             label: "[[include :scp-wiki-cn:component:",
@@ -27172,10 +27172,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
-            detail: "\u7EC4\u4EF6"
+            detail: "component"
           },
           {
             label: "[[include :scp-wiki-cn:component:acs-animation",
@@ -27193,7 +27193,7 @@ var init_completion = __esm({
             label: "[[include :scp-wiki-cn:component:wxchat-backend",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-top=--]\n|title=\u76F8\u4EB2\u76F8\u7231\u4E00\u5BB6\u4EBA\n|opacity=1\n|groupmode=true\n|theme=dark\n";
+              const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-top=--]\n|title=Best Friends Group\n|opacity=1\n|groupmode=true\n|theme=dark\n";
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
@@ -27229,7 +27229,7 @@ var init_completion = __esm({
             label: "[[include :scp-wiki-cn:component:wxchat-backend inc-tip=--]",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-tip=--]\n|content=\u6D88\u606F\u5DF2\u53D1\u51FA\uFF0C\u4F46\u88AB\u5BF9\u65B9\u62D2\u6536\u4E86\u3002\n";
+              const text = "[[include :scp-wiki-cn:component:wxchat-backend inc-tip=--]\n|content=Message sent, but refused by recipient.\n";
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
@@ -27257,18 +27257,18 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + 80, head: from + 91 }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
             detail: "ACS",
             source: "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
-            // 设定较高的优先级,
+            // set a high priority
           },
           {
             label: "[[include :scp-wiki-cn:component:advanced-information-methodaology",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[include :scp-wiki-cn:component:advanced-information-methodaology\n|lang=cn\n|XXXX=SCP-XXXX\n|lv=\u7B49\u7EA7\n|cc= \n|dc= \n|site= \n|dir= \n|head= \n|mtf= \n";
+              const text = "[[include :scp-wiki-cn:component:advanced-information-methodaology\n|lang=cn\n|XXXX=SCP-XXXX\n|lv=Level\n|cc= \n|dc= \n|site= \n|dir= \n|head= \n|mtf= \n";
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + 87, head: from + 91 }
@@ -27279,7 +27279,7 @@ var init_completion = __esm({
             label: "[[include :scp-wiki-cn:component:license-box",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[include :scp-wiki-cn:component:license-box\n|lang=cn\n|author= \n]]\n=====\n> \u6587\u4EF6\u540D\uFF1A\n> \u56FE\u50CF\u540D\uFF1A \n> \u56FE\u50CF\u4F5C\u8005\uFF1A \n> \u6388\u6743\u534F\u8BAE\uFF1A \n> \u6765\u6E90\u94FE\u63A5\uFF1A\n=====\n[[include :scp-wiki-cn:component:license-end";
+              const text = "[[include :scp-wiki-cn:component:license-box\n|lang=cn\n|author= \n]]\n=====\n> File name:\n> Image name: \n> Image author: \n> License: \n> Source link:\n=====\n[[include :scp-wiki-cn:component:license-end";
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + 81 }
@@ -27294,7 +27294,7 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + '[[span class="'.length }
-                // 光标放在 class 属性的双引号之间
+                // cursor between class quotes
               });
             }
           },
@@ -27306,10 +27306,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + "[[collapsible".length + 8 }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
-            detail: "\u53EF\u6298\u53E0\u5185\u5BB9"
+            detail: "collapsible content"
           },
           {
             label: "[[note",
@@ -27321,7 +27321,7 @@ var init_completion = __esm({
                 selection: { anchor: from + "[[note]]\n".length }
               });
             },
-            detail: "\u7B14\u8BB0"
+            detail: "note"
           },
           {
             label: "[[user",
@@ -27333,7 +27333,7 @@ var init_completion = __esm({
                 selection: { anchor: from + "[[#user ".length }
               });
             },
-            detail: "\u7528\u6237\u5934\u50CF"
+            detail: "user avatar"
           },
           {
             label: "[[module ",
@@ -27343,10 +27343,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
-            detail: "\u529F\u80FD\u7EC4\u4EF6"
+            detail: "functional module"
           },
           {
             label: "[[module css]]",
@@ -27356,10 +27356,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + "[[module css".length + 2 }
-                // 光标放在标签内部
+                // cursor inside tag
               });
             },
-            detail: "CSS \u6A21\u5757"
+            detail: "CSS module"
           },
           {
             label: "[[html]]",
@@ -27369,12 +27369,12 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + "[[html".length + 2 }
-                // 光标放在标签内部
+                // cursor inside tag
               });
             },
-            detail: "HTML \u6A21\u5757"
+            detail: "HTML module"
           },
-          // 更多 Wikidot 标签可以在这里添加
+          // More Wikidot tags can be added here
           {
             label: "[[module rate]]",
             type: "function",
@@ -27385,7 +27385,7 @@ var init_completion = __esm({
                 selection: { anchor: from + text.length + 2 }
               });
             },
-            detail: "\u8BC4\u5206\u6A21\u5757"
+            detail: "rating module"
           },
           {
             label: "[[code]]",
@@ -27395,52 +27395,52 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + '[[code type="'.length }
-                // 光标放在双引号之间
+                // cursor inside quotes
               });
             },
-            detail: "\u4EE3\u7801\u5757"
+            detail: "code block"
           },
           {
             label: "[[>]]",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[>]]\n\u5BF9\u9F50\u5185\u5BB9\n[[/>";
+              const text = "[[>]]\nAligned content\n[[/>";
               const selectFrom = from + "[[>]]\n".length;
-              const selectTo = selectFrom + "\u5BF9\u9F50\u5185\u5BB9".length;
+              const selectTo = selectFrom + "Aligned content".length;
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: selectFrom, head: selectTo }
               });
             },
-            detail: "\u53F3\u5BF9\u9F50"
+            detail: "right align"
           },
           {
             label: "[[<]]",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[<]]\n\u5BF9\u9F50\u5185\u5BB9\n[[/<";
+              const text = "[[<]]\nAligned content\n[[/<";
               const selectFrom = from + "[[<]]\n".length;
-              const selectTo = selectFrom + "\u5BF9\u9F50\u5185\u5BB9".length;
+              const selectTo = selectFrom + "Aligned content".length;
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: selectFrom, head: selectTo }
               });
             },
-            detail: "\u5DE6\u5BF9\u9F50"
+            detail: "left align"
           },
           {
             label: "[[=]]",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[=]]\n\u5C45\u4E2D\u5185\u5BB9\n[[/=";
+              const text = "[[=]]\nCentered content\n[[/=";
               const selectFrom = from + "[[=]]\n".length;
-              const selectTo = selectFrom + "\u5C45\u4E2D\u5185\u5BB9".length;
+              const selectTo = selectFrom + "Centered content".length;
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: selectFrom, head: selectTo }
               });
             },
-            detail: "\u5C45\u4E2D"
+            detail: "center align"
           },
           {
             label: "[[image ",
@@ -27450,10 +27450,10 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: from + text.length }
-                // 光标放在标签名之后
+                // cursor after tag name
               });
             },
-            detail: "\u56FE\u7247"
+            detail: "image"
           },
           {
             label: "[[include component:image-block",
@@ -27464,24 +27464,24 @@ var init_completion = __esm({
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: selectFrom }
-                // 光标
+                // cursor
               });
             },
-            detail: "\u63D2\u56FE\u5757"
+            detail: "image block"
           },
           {
             label: "[[footnote]]",
             type: "keyword",
             apply: (view, completion, from, to) => {
-              const text = "[[footnote]]\u8FD9\u662F\u4E00\u6761\u811A\u6CE8[[/footnote";
+              const text = "[[footnote]]This is a footnote[[/footnote";
               const selectFrom = from + "[[footnote]]".length;
-              const selectTo = selectFrom + "\u8FD9\u662F\u4E00\u6761\u811A\u6CE8".length;
+              const selectTo = selectFrom + "This is a footnote".length;
               view.dispatch({
                 changes: { from, to, insert: text },
                 selection: { anchor: selectFrom, head: selectTo }
               });
             },
-            detail: "\u811A\u6CE8"
+            detail: "footnote"
           },
           {
             label: "[[footnoteblock]]",
@@ -27493,7 +27493,7 @@ var init_completion = __esm({
                 selection: { anchor: from + text.length }
               });
             },
-            detail: "\u811A\u6CE8\u5757"
+            detail: "footnote block"
           }
         ],
         filter: true
@@ -27534,7 +27534,7 @@ var require_editor = __commonJS({
       html: Tag.define(),
       // HTML
       link: Tag.define(),
-      // 链接🔗
+      // link 🔗
       hr: Tag.define(),
       rate: Tag.define(),
       right: Tag.define(),
@@ -27551,49 +27551,49 @@ var require_editor = __commonJS({
       newline_defult: Tag.define(),
       // IMPORTANT new line defult defination
       code: Tag.define(),
-      // 用于代码块
+      // for code blocks
       table: Tag.define(),
       table_header: Tag.define(),
       original_text: Tag.define(),
-      // 用于原始文本
+      // for original/raw text
       image: Tag.define(),
-      // 用于图片
+      // for images
       footnote: Tag.define(),
       footnote_block: Tag.define(),
-      // 用于脚注块
+      // for footnote blocks
       color: Tag.define(),
       include: Tag.define(),
-      // 用于 [[include ...]] 标签
+      // for [[include ...]] tags
       include_1: Tag.define(),
       include_2: Tag.define(),
       include_3: Tag.define(),
       num: Tag.define(),
       keyword: Tag.define(),
-      // 参数
+      // parameter
       scp_wiki: Tag.define(),
-      // 用于特定的主题标签
+      // for specific theme tags
       div: Tag.define(),
-      // 用于 [[div ...]] 标签
+      // for [[div ...]] tags
       tabview: Tag.define(),
-      // 用于 [[tabview]] 标签
+      // for [[tabview]] tags
       tab: Tag.define(),
-      // tabview增强
+      // tabview enhancement
       acs: Tag.define(),
-      // 用于ACS
+      // for ACS
       equal: Tag.define(),
-      // 用于 = 号
+      // for =
       line_up: Tag.define(),
-      // 用于|
+      // for |
       size: Tag.define(),
-      // 用于字体大小标签
+      // for font-size tags
       aim: Tag.define(),
-      // 用于AIM
+      // for AIM
       components: Tag.define(),
       // ATTRpathToken
       collapsible: Tag.define(),
-      // 用于可折叠内容
+      // for collapsible sections
       monospace: Tag.define(),
-      // 等宽字
+      // monospace text
       license: Tag.define(),
       // LICENSE
       note: Tag.define(),
@@ -27683,17 +27683,17 @@ var require_editor = __commonJS({
           "AlignRightOpenToken": customTags.right,
           "AlignRightCloseToken": customTags.right,
           "SpanOpenToken": customTags.div,
-          // 这里div和span的颜色一样
+          // div and span share the same color
           "SpanCloseToken": customTags.div,
           "SpanTagEnd": customTags.div,
-          // ——————————————————————————表格操作——————————————————————————
+          // -------------------- table handling --------------------
           "TableTilde": customTags.table_header,
           "TableBar": customTags.table,
-          // ——————————————————————————表格操作——————————————————————————
+          // -------------------- table handling --------------------
           "List1": customTags.list1,
           "List2": customTags.list2,
           "FootnoteBlock": customTags.footnote_block,
-          // ——————————————————————————常用标记——————————————————————————
+          // -------------------- common markers --------------------
           "Blockquote": customTags.quote,
           "Hr": customTags.hr,
           "Title": customTags.header,
@@ -27706,7 +27706,7 @@ var require_editor = __commonJS({
           "Monospace": customTags.monospace,
           "ForcedNewLine": customTags.newline,
           "Original": customTags.original_text,
-          // ——————————————————————————常用标记——————————————————————————
+          // -------------------- common markers --------------------
           "newline": customTags.newline_defult,
           "attrPathToken": customTags.components,
           "Equals": customTags.equal,
@@ -27756,7 +27756,7 @@ var require_editor = __commonJS({
       { tag: customTags.components, class: "cm-components" },
       // ATTRLIST IMPORTANT
       { tag: customTags.keyword, class: "cm-keyword" },
-      // 参数
+      // parameter
       { tag: customTags.newline, class: "cm-newline" },
       { tag: customTags.newline_defult, class: "" },
       // IMPORTANT defult newline defination
@@ -27845,21 +27845,21 @@ ${listMarker} `;
       const state = EditorState.create({
         doc: "",
         extensions: [
-          // 取消滑动换行功能
+          // Disable line wrapping
           EditorView.lineWrapping,
-          // 将 customKeymap 放在 basicSetup 之前，确保优先级
+          // Put customKeymap before basicSetup to ensure priority
           customKeymap,
           basicSetup,
           oneDark,
-          // 自定义wikidot语法
+          // Custom Wikidot syntax
           wikidotLanguage,
           syntaxHighlighting(wikidotHighlightStyle),
-          // 先添加Wikidot颜色标签扩展
+          // Add Wikidot color tag extension first
           wikidotColorExtension,
-          // 再添加普通颜色预览扩展
+          // Then add generic color preview extension
           colorPreviewExtension,
           autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
-          // Web版本：删除本地存储自动保存功能
+          // Web version: local-storage auto-save removed
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
               const content2 = update.state.doc.toString();
@@ -27877,7 +27877,7 @@ ${listMarker} `;
               lineHeight: "1.6",
               fontSize: "14px"
             },
-            // 为颜色预览添加一些基本样式
+            // Basic styles for color preview
             ".cm-color-preview": {
               display: "inline-block",
               width: "12px",
@@ -27894,7 +27894,7 @@ ${listMarker} `;
               transform: "scale(1.1)",
               borderColor: "#888"
             },
-            // Wikidot颜色文本样式
+            // Wikidot color text style
             ".cm-wikidot-colored-text": {
               fontWeight: "normal!important"
             }
@@ -27920,7 +27920,7 @@ ${listMarker} `;
       const isWikidot = event.origin.endsWith("wikidot.com");
       if (!isWikidot) return;
       if (!event.data || event.data.type !== "h2o2-init") return;
-      console.log("H2O2 Web\u7AEF: \u6210\u529F\u63A5\u6536\u5230 Wikidot \u539F\u751F\u6587\u672C\u6846\u7684\u521D\u59CB\u5185\u5BB9\uFF01");
+      console.log("H2O2 Web: Successfully received initial content from Wikidot textarea.");
       const view = window.editorInstance;
       if (view) {
         view.dispatch({
@@ -27931,12 +27931,12 @@ ${listMarker} `;
           }
         });
       } else {
-        console.warn("H2O2 Web\u7AEF: \u6536\u5230\u6570\u636E\uFF0C\u4F46\u7F16\u8F91\u5668\u5B9E\u4F8B\u8FD8\u6CA1\u51C6\u5907\u597D\uFF01");
+        console.warn("H2O2 Web: Received data, but editor instance is not ready yet.");
       }
     });
     window.WikidotEditor = {
       startEditor
-      // 可以添加其他公共API
+      // Additional public APIs can be added here
     };
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", startEditor);
