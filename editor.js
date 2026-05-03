@@ -23,9 +23,9 @@
  */
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
-// Stream导入
+// Stream imports
 import { syntaxHighlighting, HighlightStyle } from "@codemirror/language";
-// Lezer导入
+// Lezer imports
 import { parser } from "./src/parser.js";
 import { LRLanguage, LanguageSupport } from "@codemirror/language";
 import { parseMixed } from "@lezer/common"
@@ -33,21 +33,21 @@ import { cssLanguage } from "@codemirror/lang-css"
 import { htmlLanguage} from "@codemirror/lang-html"
 import { styleTags, tags as t, Tag } from "@lezer/highlight";
 import { foldNodeProp, foldInside } from "@codemirror/language";
-// 其他导入
+// Other imports
 import { foldGutter } from "@codemirror/language";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { autocompletion } from "@codemirror/autocomplete";
 import { keymap } from "@codemirror/view";
 import { indentWithTab } from "@codemirror/commands";
-// 导入颜色预览扩展和事件处理函数
+// Import color preview extension and event handlers
 import { colorPreviewExtension, setupColorPickerHandler } from "./component/color_preview.js";
 import { wikidotColorExtension } from "./component/color_widgets.js";
-// AST测试
+// AST debug
 import { syntaxTree } from "@codemirror/language";
 
-// 初始化内容 已删除
+// Initial content removed
 
-// 定义自定义高亮标签，防止 "Unknown highlighting tag" 报错
+// Define custom highlight tags to prevent "Unknown highlighting tag" errors
 const customTags = {
     header: Tag.define(),
     strong: Tag.define(),
@@ -56,7 +56,7 @@ const customTags = {
     strikethrough: Tag.define(),
     module: Tag.define(), // MODULE
     html: Tag.define(), // HTML
-    link: Tag.define(), // 链接🔗
+    link: Tag.define(), // link 🔗
     hr: Tag.define(),
     rate: Tag.define(),
     right: Tag.define(),
@@ -71,32 +71,32 @@ const customTags = {
     list4: Tag.define(),
     quote: Tag.define(),
     newline_defult: Tag.define(), // IMPORTANT new line defult defination
-    code: Tag.define(), // 用于代码块
+    code: Tag.define(), // for code blocks
     table: Tag.define(),
     table_header: Tag.define(),
-    original_text: Tag.define(), // 用于原始文本
-    image: Tag.define(), // 用于图片
+    original_text: Tag.define(), // for original/raw text
+    image: Tag.define(), // for images
     footnote: Tag.define(),
-    footnote_block: Tag.define(), // 用于脚注块
+    footnote_block: Tag.define(), // for footnote blocks
     color: Tag.define(), 
-    include: Tag.define(), // 用于 [[include ...]] 标签
+    include: Tag.define(), // for [[include ...]] tags
     include_1: Tag.define(),
     include_2: Tag.define(),
     include_3: Tag.define(),
     num: Tag.define(),
-    keyword: Tag.define(), // 参数
-    scp_wiki: Tag.define(), // 用于特定的主题标签
-    div: Tag.define(), // 用于 [[div ...]] 标签
-    tabview: Tag.define(), // 用于 [[tabview]] 标签
-    tab: Tag.define(), // tabview增强
-    acs: Tag.define(), // 用于ACS
-    equal: Tag.define(), // 用于 = 号
-    line_up: Tag.define(), // 用于|
-    size: Tag.define(), // 用于字体大小标签
-    aim: Tag.define(), // 用于AIM
+    keyword: Tag.define(), // parameter
+    scp_wiki: Tag.define(), // for specific theme tags
+    div: Tag.define(), // for [[div ...]] tags
+    tabview: Tag.define(), // for [[tabview]] tags
+    tab: Tag.define(), // tabview enhancement
+    acs: Tag.define(), // for ACS
+    equal: Tag.define(), // for =
+    line_up: Tag.define(), // for |
+    size: Tag.define(), // for font-size tags
+    aim: Tag.define(), // for AIM
     components: Tag.define(), // ATTRpathToken
-    collapsible: Tag.define(), // 用于可折叠内容
-    monospace: Tag.define(), // 等宽字
+    collapsible: Tag.define(), // for collapsible sections
+    monospace: Tag.define(), // monospace text
     license: Tag.define(), // LICENSE
     note: Tag.define(), // note
     user: Tag.define(), // user
@@ -105,22 +105,22 @@ const customTags = {
 
 const wikidotParser = parser.configure({
     wrap: parseMixed((node, input) => {
-    // 当解析器走到 ModuleContent 节点时
+    // When parser reaches ModuleContent node
         if (node.name === "ModuleContent") {
             const moduleBlock = node.node.parent;
             if (moduleBlock && moduleBlock.name === "ModuleBlock") {
                 const openTag = moduleBlock.getChild("ModuleOpenTag");
                 if (openTag) {
-                    // 直接读取整个 [[module CSS]] 标签的文本
+                    // Read full [[module CSS]] tag text directly
                     const tagText = input.read(openTag.from, openTag.to).toLowerCase();
                     
-                    // 排除原生的 Wikidot 模块
+                    // Exclude native Wikidot modules
                     const nativeModules = ["rate", "listpages", "backlinks"];
                     if (nativeModules.some(m => tagText.includes(m))) {
                         return null;
                     }
 
-                    // 只要标签里写了 css，就开启 CSS 嵌套高亮
+                    // Enable nested CSS highlighting when tag contains css
                     if (tagText.includes("css")) {
                         return {
                             parser: cssLanguage.parser,
@@ -131,7 +131,7 @@ const wikidotParser = parser.configure({
             }
         }
         
-        // HTML 同理
+        // Same approach for HTML
         if (node.name === "HTMLContent") {
             return { 
                 parser: htmlLanguage.parser,
@@ -190,14 +190,14 @@ const wikidotParser = parser.configure({
             "AlignLeftCloseToken":    customTags.left,
             "AlignRightOpenToken":    customTags.right,
             "AlignRightCloseToken":   customTags.right,
-            "SpanOpenToken":          customTags.div, // 这里div和span的颜色一样
+            "SpanOpenToken":          customTags.div, // div and span share the same color
             "SpanCloseToken":         customTags.div,
             "SpanTagEnd":             customTags.div,
 
-            // ——————————————————————————表格操作——————————————————————————
+            // -------------------- table handling --------------------
             "TableTilde":             customTags.table_header,
             "TableBar":               customTags.table,
-            // ——————————————————————————表格操作——————————————————————————
+            // -------------------- table handling --------------------
             "List1":                  customTags.list1,
             "List2":                  customTags.list2,
 
@@ -205,7 +205,7 @@ const wikidotParser = parser.configure({
             "FootnoteBlock":          customTags.footnote_block,
 
 
-            // ——————————————————————————常用标记——————————————————————————
+            // -------------------- common markers --------------------
             "Blockquote":             customTags.quote,
             "Hr":                     customTags.hr,
             "Title":                  customTags.header,
@@ -218,7 +218,7 @@ const wikidotParser = parser.configure({
             "Monospace":              customTags.monospace,
             "ForcedNewLine":          customTags.newline,
             "Original":               customTags.original_text,
-            // ——————————————————————————常用标记——————————————————————————
+            // -------------------- common markers --------------------
             "newline":                customTags.newline_defult,
             "attrPathToken":          customTags.components,
             "Equals":                 customTags.equal,
@@ -244,7 +244,7 @@ const wikidotParser = parser.configure({
 });
 
 /**
- * 自定义 Wikidot 语法解析器
+ * Custom Wikidot syntax parser
  */
 const wikidotLanguage = LRLanguage.define({
   name: "wikidot",
@@ -272,7 +272,7 @@ const wikidotHighlightStyle = HighlightStyle.define([
     { tag: customTags.sup, class: "cm-sup" },
     { tag: customTags.sub, class: "cm-sub" },
     { tag: customTags.components, class: "cm-components"}, // ATTRLIST IMPORTANT
-    { tag: customTags.keyword, class: "cm-keyword"}, // 参数
+    { tag: customTags.keyword, class: "cm-keyword"}, // parameter
     { tag: customTags.newline, class: "cm-newline" },
     { tag: customTags.newline_defult, class: ""}, // IMPORTANT defult newline defination
     { tag: customTags.monospace, class: "cm-monospace"},
@@ -310,8 +310,8 @@ const wikidotHighlightStyle = HighlightStyle.define([
 ]);
 
 /**
- * 改进的自动延续列表逻辑 - 针对Wikidot语法
- * 使用更高优先级确保覆盖默认行为
+ * Improved auto-continue list behavior for Wikidot syntax
+ * Uses higher priority to override default behavior
  */
 const customKeymap = keymap.of([
     {
@@ -325,28 +325,28 @@ const customKeymap = keymap.of([
             const line = state.doc.lineAt(selection.head);
             const cursorPos = selection.head - line.from;
             
-            // 检查光标是否在行末（或者接近行末）
+            // Check whether cursor is at (or near) line end
             const isAtEndOfLine = cursorPos >= line.text.length - 1;
             
             if (!isAtEndOfLine) {
-                // 如果光标不在行末，让默认行为处理（比如在行中间换行）
+                // If cursor is not at line end, fall back to default behavior
                 return false;
             }
             
-            // Wikidot列表语法：单个*表示无序列表，单个#表示有序列表
-            // 匹配行首的 * 或 #，后面必须跟空格
+            // Wikidot list syntax: * for unordered, # for ordered lists
+            // Match * or # at line start, followed by required whitespace
             const listMatch = line.text.match(/^([*#])\s+/);
-            const list3Match = line.text.match(/^(:.*?:)\s+/); // 定义列表匹配
+            const list3Match = line.text.match(/^(:.*?:)\s+/); // definition list match
             
             if (listMatch || list3Match) {
-                const listMarker = listMatch ? listMatch[1] : list3Match[1]; // * 或 # 或 :
+                const listMarker = listMatch ? listMatch[1] : list3Match[1]; // * or # or :
                 
-                // 检查是否在空列表项上按回车
+                // Check whether Enter was pressed on an empty list item
                 const contentAfterMarker = line.text.substring(listMarker.length + 1).trim();
                 const isListItemEmpty = contentAfterMarker === '';
                 
                 if (isListItemEmpty) {
-                    // 空列表项：删除当前行的列表标记
+                    // Empty list item: remove marker from current line
                     view.dispatch({
                         changes: { 
                             from: line.from, 
@@ -357,7 +357,7 @@ const customKeymap = keymap.of([
                     });
                     return true;
                 } else {
-                    // 非空列表项：插入新行并延续列表标记
+                    // Non-empty list item: insert new line and continue marker
                     const newLineContent = `\n${listMarker} `;
                     
                     view.dispatch({
@@ -384,32 +384,32 @@ const customKeymap = keymap.of([
 import { wikidotCompletionSource } from "./component/completion.js";
 import { foldEffect } from "@codemirror/language/dist/index.js";
 
-// 3. 初始化编辑器
+// 3. Initialize editor
 const startEditor = () => {
     const state = EditorState.create({
         doc: "",
         extensions: [
-            // 取消滑动换行功能
+            // Disable line wrapping
             EditorView.lineWrapping,
-            // 将 customKeymap 放在 basicSetup 之前，确保优先级
+            // Put customKeymap before basicSetup to ensure priority
             customKeymap,
             basicSetup,
             oneDark,
-            // 自定义wikidot语法
+            // Custom Wikidot syntax
             wikidotLanguage,
             syntaxHighlighting(wikidotHighlightStyle),
-            // 先添加Wikidot颜色标签扩展
+            // Add Wikidot color tag extension first
             wikidotColorExtension,
-            // 再添加普通颜色预览扩展
+            // Then add generic color preview extension
             colorPreviewExtension,
             autocompletion({ override: [wikidotCompletionSource], selectOnOpen: true }),
             
-            // Web版本：删除本地存储自动保存功能
+            // Web version: local-storage auto-save removed
             EditorView.updateListener.of((update) => {
                 if (update.docChanged) {
                     const content = update.state.doc.toString();
                     
-                    // 把当前的最新代码通过 postMessage 喊给油猴脚本听
+                    // Send latest content to userscript via postMessage
                     window.parent.postMessage({
                         type: 'h2o2-update',
                         payload: content
@@ -425,7 +425,7 @@ const startEditor = () => {
                     lineHeight: "1.6",
                     fontSize: "14px"
                 },
-                // 为颜色预览添加一些基本样式
+                // Basic styles for color preview
                 ".cm-color-preview": {
                     display: "inline-block",
                     width: "12px",
@@ -442,7 +442,7 @@ const startEditor = () => {
                     transform: "scale(1.1)",
                     borderColor: "#888"
                 },
-                // Wikidot颜色文本样式
+                // Wikidot color text style
                 ".cm-wikidot-colored-text": {
                     fontWeight: "normal!important",
                 }
@@ -456,8 +456,8 @@ const startEditor = () => {
         viewportMargin: 2000
     });
 
-    // AST测试
-    // 在 startEditor 里，editorView 创建之后加：
+    // AST debug
+    // Added after editorView is created in startEditor:
     window._debugAST = () => {
         const tree = syntaxTree(editorView.state);
         tree.cursor().iterate(node => {
@@ -465,29 +465,29 @@ const startEditor = () => {
         });
     };
     
-    // 设置颜色选择器事件处理
+    // Set up color picker event handling
     setupColorPickerHandler(editorView);
     
-    // 将实例挂载到全局，方便 index.html 的按钮调用
+    // Expose instance globally for index.html button actions
     window.editorInstance = editorView;
 
     return editorView;
 };
 
-// 监听油猴脚本发来的初始化/重新同步请求
+// Listen for init/re-sync requests from the userscript
 window.addEventListener('message', (event) => {
-    // 允许来自所有 Wikidot 分站的消息
+    // Allow messages from all Wikidot sub-sites
     const isWikidot = event.origin.endsWith('wikidot.com');
     
     if (!isWikidot) return;
-    // 过滤掉无关紧要的消息（比如插件注入的乱七八糟的消息）
+    // Ignore unrelated messages (e.g., noisy extension injections)
     if (!event.data || event.data.type !== 'h2o2-init') return;
     
-    console.log("H2O2 Web端: 成功接收到 Wikidot 原生文本框的初始内容！");
+    console.log("H2O2 Web: Successfully received initial content from Wikidot textarea.");
     
     const view = window.editorInstance;
     if (view) {
-        // 使用收到的原生内容，替换掉编辑器里现有的所有内容（包括那个 EXAMPLE_CODE 模板）
+        // Replace full editor content with received textarea payload
         view.dispatch({
             changes: { 
                 from: 0, 
@@ -496,17 +496,17 @@ window.addEventListener('message', (event) => {
             }
         });
     } else {
-        console.warn("H2O2 Web端: 收到数据，但编辑器实例还没准备好！");
+        console.warn("H2O2 Web: Received data, but editor instance is not ready yet.");
     }
 });
 
-// 导出编辑器实例供其他脚本使用
+// Export editor instance for other scripts
 window.WikidotEditor = {
     startEditor,
-    // 可以添加其他公共API
+    // Additional public APIs can be added here
 };
 
-// 当DOM加载完成后启动编辑器
+// Start editor after DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', startEditor);
 } else {

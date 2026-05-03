@@ -2,7 +2,7 @@
 // @name         H2O2 Wikidot Editor (Universal)
 // @namespace    https://github.com/wasd243/SCP-Foundation-editor-web
 // @version      2.5.0
-// @description  右侧面板模式，像 DevTools 一样从右侧挤入。包含左上角快捷保存/预览/取消/实时预览按钮，并禁用 CSS 动画。
+// @description  Right-side panel mode (DevTools-style), with quick Save/Preview/Cancel/Live Preview buttons and CSS animation disabling.
 // @icon         https://scpsandboxcn.wikidot.com/local--files/peroxide-hyroperoxide/%E6%97%A0%E5%B0%BD%E5%82%AC%E5%8C%96%E5%89%82%EF%BC%88%E7%8E%84%E5%AD%A6%E4%BB%A3%E7%A0%81%E9%95%87%E5%9C%BA%E5%AD%90%EF%BC%89
 // @author       wasd243
 // @match        *://*.wikidot.com/*
@@ -30,8 +30,8 @@
         PANEL_MAX_W = window.innerWidth - 20;
     });
 
-    // ── 消息同步：iframe → textarea ───────────────────────────
-    // 防抖定时器与上次触发时间，供实时预览使用
+    // ── Message sync: iframe -> textarea ───────────────────────────
+    // Debounce timer and last trigger timestamp for live preview
     var _livePreviewTimer = null;
     var _livePreviewLastFire = 0;
 
@@ -43,18 +43,18 @@
         ta.value = event.data.payload;
         ta.dispatchEvent(new Event('input', { bubbles: true }));
 
-        // 若实时预览已开启，则在内容同步时触发刷新（最小间隔 300ms）
+        // If live preview is enabled, refresh on content sync (min interval: 300ms)
         if (window._h2o2_livePreviewActive) {
             var now = Date.now();
             var remaining = 300 - (now - _livePreviewLastFire);
             if (_livePreviewTimer) clearTimeout(_livePreviewTimer);
             if (remaining <= 0) {
-                // 距上次超过 300ms，立即触发
+                // If more than 300ms since last trigger, fire immediately
                 _livePreviewLastFire = now;
                 var target = document.getElementById('edit-preview-button');
                 if (target) target.click();
             } else {
-                // 否则延迟到冷却结束后触发
+                // Otherwise delay until cooldown ends
                 _livePreviewTimer = setTimeout(function () {
                     _livePreviewLastFire = Date.now();
                     var target = document.getElementById('edit-preview-button');
@@ -64,7 +64,7 @@
         }
     });
 
-    // ── 面板开关 ──────────────────────────────────────────────
+    // ── Panel toggle ──────────────────────────────────────────────
     function getPanelWidth() {
         var p = document.getElementById(PANEL_ID);
         return p ? p.offsetWidth : PANEL_W;
@@ -80,7 +80,7 @@
         document.body.style.transition  = 'margin-right 0.25s ease';
         if (toggle) {
             toggle.style.right = w + 'px';
-            toggle.title = '关闭编辑器面板';
+            toggle.title = 'Close editor panel';
             toggle.innerHTML = '&#x276F;';
         }
         panel._open = true;
@@ -95,7 +95,7 @@
         document.body.style.marginRight = '0';
         if (toggle) {
             toggle.style.right = '0';
-            toggle.title = '打开编辑器面板';
+            toggle.title = 'Open editor panel';
             toggle.innerHTML = '&#x276E;';
         }
         panel._open = false;
@@ -107,7 +107,7 @@
         panel._open ? closePanel() : openPanel();
     }
 
-    // ── 左上角快捷按钮组 ──────────────────────────────────────
+    // ── Top-left quick action buttons ──────────────────────────────────────
     function createActionButtons() {
         if (document.getElementById(ACTIONS_ID)) return;
 
@@ -157,31 +157,31 @@
                     if (target) {
                         target.click();
                     } else {
-                        console.warn('H2O2: 找不到目标按钮', action);
+                        console.warn('H2O2: Target button not found', action);
                     }
                 }
             });
             return btn;
         }
 
-        var btnCancel  = createBtn('取消', '#ef5350', 'edit-cancel-button');
-        var btnPreview = createBtn('预览', '#78909c', 'edit-preview-button');
-        var btnSave    = createBtn('保存', '#66bb6a', 'edit-save-button');
+        var btnCancel  = createBtn('Cancel', '#ef5350', 'edit-cancel-button');
+        var btnPreview = createBtn('Preview', '#78909c', 'edit-preview-button');
+        var btnSave    = createBtn('Save', '#66bb6a', 'edit-save-button');
 
-        // ── 实时预览逻辑 ──
+        // ── Live preview logic ──
         var isLivePreview = false;
         var liveTimer = null;
 
         function stopLivePreview() {
             isLivePreview = false;
-            window._h2o2_livePreviewActive = false;  // ← 关闭标志位
+            window._h2o2_livePreviewActive = false;  // disable flag
             if (_livePreviewTimer) {
                 clearTimeout(_livePreviewTimer);
                 _livePreviewTimer = null;
             }
             var btn = document.getElementById('h2o2-btn-live-preview');
             if (btn) {
-                btn.innerText = '实时预览: 关';
+                btn.innerText = 'Live Preview: Off';
                 btn.style.background = '#ab47bc';
             }
             var styleEl = document.getElementById('h2o2-live-preview-style');
@@ -197,17 +197,17 @@
         }
         window._h2o2_stopLivePreview = stopLivePreview;
 
-        var btnLivePreview = createBtn('实时预览: 关', '#ab47bc', function(e, btn) {
+        var btnLivePreview = createBtn('Live Preview: Off', '#ab47bc', function(e, btn) {
             if (isLivePreview) {
                 stopLivePreview();
             } else {
                 isLivePreview = true;
-                window._h2o2_livePreviewActive = true;  // ← 开启标志位
-                _livePreviewLastFire = 0;               // ← 重置冷却，让第一次立即触发
-                btn.innerText = '实时预览: 开';
+                window._h2o2_livePreviewActive = true;  // enable flag
+                _livePreviewLastFire = 0;               // reset cooldown for immediate first trigger
+                btn.innerText = 'Live Preview: On';
                 btn.style.background = '#8e24aa';
 
-                // 注入 CSS / JS（与原来相同，只是移除了 setInterval）
+                // Inject CSS / JS (same as before, but without setInterval)
                 var styleEl = document.createElement('style');
                 styleEl.id = 'h2o2-live-preview-style';
                 styleEl.innerHTML = `
@@ -233,7 +233,7 @@
             window.scrollTo = function(){};
         `;
                 document.head.appendChild(s1);
-                // ↑ 不再有 setInterval
+                // ↑ No more setInterval
             }
         });
         btnLivePreview.id = 'h2o2-btn-live-preview';
@@ -246,21 +246,21 @@
         document.body.appendChild(container);
     }
 
-    // ── 全局样式注入：屏蔽弹窗 + 屏蔽动画 ───────────────────
+    // ── Global style injection: suppress popups + animations ───────────────────
     function injectGlobalStyles() {
         if (document.getElementById('h2o2-global-style')) return;
 
-        // ── 1. 屏蔽原生 JS 弹窗 ──────────────────────────────
-        // alert 直接吞掉；confirm 自动返回 true（相当于"确定"）；prompt 返回空字符串
-        window.alert   = function (msg) { console.info('[H2O2] alert 已屏蔽:', msg); };
-        window.confirm = function (msg) { console.info('[H2O2] confirm 已屏蔽，返回 true:', msg); return true; };
-        window.prompt  = function (msg) { console.info('[H2O2] prompt 已屏蔽，返回空:', msg);  return ''; };
+        // ── 1. Suppress native JS dialogs ──────────────────────────────
+        // alert is swallowed; confirm auto-returns true; prompt returns empty string
+        window.alert   = function (msg) { console.info('[H2O2] alert suppressed:', msg); };
+        window.confirm = function (msg) { console.info('[H2O2] confirm suppressed, returning true:', msg); return true; };
+        window.prompt  = function (msg) { console.info('[H2O2] prompt suppressed, returning empty string:', msg);  return ''; };
 
-        // ── 2. 全局 CSS 屏蔽 Wikidot 自定义弹窗 + 全站动画 ──
+        // ── 2. Global CSS: suppress Wikidot custom popups + sitewide animations ──
         var style = document.createElement('style');
         style.id = 'h2o2-global-style';
         style.innerHTML = [
-            /* Wikidot 各类弹窗/遮罩/加载层 */
+            /* Wikidot popups, overlays, and loading layers */
             '#lock-screen, #lock-info, #saving-message,',
             '.owindow.wait, .ajax-loader, .modal-blocker,',
             'div.blocker, #ud-ui-dialog, .ui-dialog-overlay {',
@@ -270,7 +270,7 @@
             '    visibility: hidden !important;',
             '}',
 
-            /* 全站动画清零（h2o2 自身用 inline style，优先级更高，不受影响）*/
+            /* Disable sitewide animations (h2o2 inline styles are unaffected due to higher priority) */
             'body *:not([id^="h2o2"]):not([id^="h2o2"] *) {',
             '    animation-duration:        0.001ms !important;',
             '    animation-delay:           0.001ms !important;',
@@ -281,7 +281,7 @@
         ].join('\n');
         document.head.appendChild(style);
 
-        // ── 3. MutationObserver 补漏：动态插入的弹窗也一并干掉 ──
+        // ── 3. MutationObserver fallback: suppress dynamically inserted popups too ──
         var dialogKiller = new MutationObserver(function (mutations) {
             mutations.forEach(function (m) {
                 m.addedNodes.forEach(function (node) {
@@ -306,9 +306,9 @@
         });
         dialogKiller.observe(document.documentElement, { childList: true, subtree: true });
 
-        console.log('H2O2: 全局样式/弹窗屏蔽已启动');
+        console.log('H2O2: Global style/popup suppression started');
     }
-    // ── 注入逻辑 ──────────────────────────────────────────────
+    // ── Injection logic ──────────────────────────────────────────────
     function inject(ta) {
         if (document.getElementById(PANEL_ID)) return;
 
@@ -325,7 +325,7 @@
 
     function doInject(ta, content) {
         if (document.getElementById(PANEL_ID)) return;
-        console.log('H2O2: 注入，内容长度', content.length);
+        console.log('H2O2: Injecting, content length', content.length);
 
         ta.style.setProperty('display', 'none', 'important');
         var toolbar = document.getElementById('wd-editor-toolbar-panel');
@@ -356,7 +356,7 @@
 
         var resizer = document.createElement('div');
         resizer.id = RESIZER_ID;
-        resizer.title = '拖拽调整面板宽度';
+        resizer.title = 'Drag to resize panel width';
         resizer.style.cssText = [
             'width: 5px',
             'height: 100%',
@@ -417,7 +417,7 @@
         var toggle = document.createElement('div');
         toggle.id = TOGGLE_ID;
         toggle.innerHTML = '&#x276E;';
-        toggle.title = '打开编辑器面板';
+        toggle.title = 'Open editor panel';
         toggle.style.cssText = [
             'position: fixed',
             'right: 0',
@@ -454,7 +454,7 @@
                         { type: 'h2o2-init', payload: content }, '*'
                     );
                 } catch (e) {
-                    console.warn('H2O2: postMessage 失败', e);
+                    console.warn('H2O2: postMessage failed', e);
                 }
             }, 500);
         });
@@ -474,7 +474,7 @@
         if (toggle)  toggle.remove();
         if (actions) actions.remove();
         document.body.style.marginRight = '';
-        console.log('H2O2: 面板已清理');
+        console.log('H2O2: Panel cleaned up');
     }
 
     function startObserver() {
@@ -523,5 +523,5 @@
     var ta = document.getElementById('edit-page-textarea');
     if (ta) inject(ta);
 
-    console.log('H2O2: v2.5.0 已启动');
+    console.log('H2O2: v2.5.0 started');
 })();

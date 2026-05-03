@@ -2,7 +2,7 @@
 // @name         SCP Wiki Logo Replacer
 // @namespace    http://tampermonkey.net/
 // @version      1.2
-// @description  强制替换 SCP Wiki 顶部 logo 图标
+// @description  Force-replace the SCP Wiki top logo icon
 // @author       wasd243
 // @match        *://scp-wiki.wikidot.com/*
 // @match        *://www.scp-wiki.wikidot.com/*
@@ -15,7 +15,7 @@
 
     const NEW_LOGO_URL = 'https://scp-wiki.wikidot.com/local--files/theme:basalt/basalt_scp_logo-for_lightmode.svg';
 
-    // 排除账户头像
+    // Exclude account avatar images
     const selectors = [
         '#header h1 img',
         '#header h2 img',

@@ -17,10 +17,10 @@
         #editor-container {
             width: 100%;
             height: 100%;
-            z-index: 1; /* 底层 */
+            z-index: 1; /* Base layer */
         }
         
-        /*----------------------------------同步----------------------------------*/
+        /*----------------------------------sync----------------------------------*/
         .btn-sync {
             color: #00ff00;
             border-color: #00ff00;
@@ -40,14 +40,14 @@
         .syncing {
             animation: sync-flash 0.6s ease-in-out;
         }
-        /*----------------------------------同步----------------------------------*/
+        /*----------------------------------sync----------------------------------*/
 
-        /* 强制置顶的按钮区 */
+        /* Always-on-top button area */
         .editor-controls {
             position: absolute;
             top: 20px;
             right: 20px;
-            z-index: 9999; /* 确保在最顶层 */
+            z-index: 9999; /* Ensure topmost layer */
             display: flex;
             gap: 15px;
         }
@@ -84,8 +84,8 @@
             box-shadow: 2px 2px 0px #ff4444;
         }
 
-        /*----------------------------------顶部工具栏---------------------------------*/
-        /* 初始状态：折叠 */
+        /*----------------------------------top toolbar---------------------------------*/
+        /* Initial state: collapsed */
         .quick-toolbar {
             position: relative;
             background: #000;
@@ -94,17 +94,17 @@
             gap: 10px;
             padding: 0 10px; 
             max-height: 0;   
-            overflow: hidden; /* 加上这行，确保按钮收起时完全不可见 */
+            overflow: hidden; /* Ensure buttons are fully hidden when collapsed */
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s;
             z-index: 100;
         }
 
-        /* 标签初始状态：居中悬停 */
+        /* Label initial state: centered hover */
         .toolbar-label {
             position: absolute;
             top: 0; 
-            left: 50%; /* 科学居中：定位到屏幕正中间 */
-            transform: translateX(-50%); /* 科学居中：根据自身宽度往回拉一半，实现绝对居中 */
+            left: 50%; /* Accurate centering: anchor to viewport center */
+            transform: translateX(-50%); /* Pull back by half width for absolute centering */
             background: #fff;
             color: #000;
             padding: 2px 12px;
@@ -114,19 +114,19 @@
             border-top: none;
             font-size: 11px;
             font-weight: bold;
-            /* 赋予它和工具栏一样的丝滑过渡动画 */
+            /* Use the same smooth transition as toolbar */
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
         }
 
-        /* 1. 当开关被选中，工具栏变高 */
+        /* 1. When toggled on, expand toolbar */
         #toolbar-toggle:checked ~ .quick-toolbar {
             max-height: 150px; 
             padding: 10px;    
         }
 
-        /* 2. 当开关被选中，标签跟着往下挪动！ */
+        /* 2. When toggled on, move label downward */
         #toolbar-toggle:checked ~ .toolbar-label {
-            /* 保持居中的同时，向下平移 43px（大约是工具栏展开的高度） */
+            /* Keep centered while shifting down 43px (~expanded toolbar height) */
             transform: translate(-50%, 43px); 
         }
         
@@ -150,7 +150,7 @@
             background: #fff;
             color: #000;
         }
-        /*----------------------------------顶部工具栏---------------------------------*/
+        /*----------------------------------top toolbar---------------------------------*/
 
     </style>
 </head>
@@ -162,7 +162,7 @@
         <button class="ctrl-btn btn-clear" onclick="handleAction('clear')">CLEAR</button>
     </div>
 
-    <!------------------------------------------------功能区---------------------------------------------->
+    <!------------------------------------------------tool area---------------------------------------------->
     <input type="checkbox" id="toolbar-toggle" style="display: none;">
 
     <label for="toolbar-toggle" class="toolbar-label">CODE TOOLS</label>
@@ -180,14 +180,14 @@
         </div>
     </div>
     <div id="editor-container"></div>
-    <!------------------------------------------------功能区---------------------------------------------->
+    <!------------------------------------------------tool area---------------------------------------------->
     <script type="module" src="assets/bundle_editor.js"></script>
 
     <script>
-        // 定义模板
+        // Define template
         const EXAMPLE_CODE = ``;
 
-        // 插入代码逻辑
+        // Code insertion logic
         function insertCode(before, after = before) {
             const view = window.editorInstance;
             if (!view) return;
@@ -209,7 +209,7 @@
         window.handleAction = function(type) {
             const view = window.editorInstance;
             if (!view) {
-                console.warn("[Editor] 实例尚未初始化，请稍后...");
+                console.warn("[Editor] Instance is not initialized yet, please wait...");
                 return;
             }
 
@@ -222,7 +222,7 @@
                     const oldText = syncBtn.innerText;
                     syncBtn.innerText = "COPIED!";
                     
-                    // 触发闪烁动画（如果有的话）
+                    // Trigger flash animation (if available)
                     const container = document.getElementById('editor-container');
                     if(container) container.classList.add('syncing');
                     
@@ -233,12 +233,12 @@
                 });
                 return; 
             } 
-            // --- 新增 1: 监听来自 Wikidot (油猴脚本) 的初始化信号 ---
+            // --- Added 1: Listen for init signal from Wikidot (userscript) ---
             window.addEventListener('message', function(event) {
-                // 安全性检查（可选）：if (event.origin !== 'https://scpsandboxcn.wikidot.com') return;
+                // Security check (optional): if (event.origin !== 'https://scpsandboxcn.wikidot.com') return;
                 
                 if (event.data && event.data.type === 'h2o2-init') {
-                    console.log("H2O2: 收到来自 Wikidot 的初始内容");
+                    console.log("H2O2: Received initial content from Wikidot");
                     const view = window.editorInstance;
                     if (view) {
                         view.dispatch({
@@ -252,8 +252,8 @@
                 }
             });
         
-            // --- 新增 2: 监听编辑器变动并实时发回给 Wikidot ---
-            // 这里利用你 editor.js 中已经定义的自定义事件 'editorContentChanged'
+            // --- Added 2: Listen to editor changes and sync back to Wikidot in real time ---
+            // Uses custom event 'editorContentChanged' defined in editor.js
             window.addEventListener('editorContentChanged', function(e) {
                 if (window.parent !== window) {
                     window.parent.postMessage({
@@ -263,21 +263,21 @@
                 }
             });
             
-            // --- 核心修改部分 ---
+            // --- Core update section ---
             if (type === 'init') {
-                // 增加二次确认窗口
-                const msg = "此操作将覆盖当前编辑器内的所有内容并加载演示模板，确定吗？";
+                // Add confirmation dialog
+                const msg = "This action will overwrite all current content and load the demo template. Continue?";
                 if (!confirm(msg)) return; 
                 contentToInsert = EXAMPLE_CODE;
             } else if (type === 'clear') {
-                if (!confirm("确定要清空所有内容吗？")) return;
+                if (!confirm("Are you sure you want to clear all content?")) return;
                 contentToInsert = "";
             }
 
-            // 执行替换
+            // Perform replacement
             view.dispatch({
                 changes: { from: 0, to: view.state.doc.length, insert: contentToInsert },
-                selection: { anchor: 0 } // 初始化后光标回到开头
+                selection: { anchor: 0 } // Move cursor to start after initialization
             });
         }
     </script> 

@@ -1,10 +1,76 @@
-# SCP Foundation Editor (Web Edition)
+# Wikidot Editor (Web Edition)
 
 ![License](https://img.shields.io/badge/license-AGPL--3.0-red.svg)
-![Version](https://img.shields.io/badge/Version-1.1.1-green.svg)
+![Version](https://img.shields.io/badge/Version-1.1.x-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Windows%20%7C%20macOS-blue.svg)
 ![Language](https://img.shields.io/badge/language-JavaScript-yellow.svg)
 ![Language](https://img.shields.io/badge/language-CSS-purple.svg)
+
+A Wikidot syntax editor built for the SCP Foundation Chinese community, focused on smooth real-time authoring.
+
+## 🚀 Features
+- **Platform coverage**: browser support.
+- **Component integration**: built-in support for major community components such as ACS and AIM.
+- **Modern interaction**: based on CodeMirror 6 with One Dark theme and live character counting.
+
+## 📚 Imports and Credits
+
+* **AIM (Advanced Information Methodology)** — By *Dr Moned*
+    * [Component page](https://scp-wiki.wikidot.com/component:advanced-information-methodology)
+* **ACS Animation (Anomaly Classification System)** — By *EstrellaYoshte*
+    * [Component page](https://scp-wiki.wikidot.com/component:acs-animation)
+* **Peroxide Theme** - By *OxygenNine*
+    * [Theme page](https://scp-wiki-cn.wikidot.com/theme:peroxide)
+* **Icons & Assets**: This project uses icons from the classic Minecraft mod [Avaritia](https://github.com/SpitefulFox/Avaritia), created by **SpitefulFox** and licensed under **MIT License**.
+* **Editor Engine**: Powered by [CodeMirror 6](https://codemirror.net/).
+
+## 🛠 Build Guide
+This frontend project uses `esbuild` for module bundling.
+
+---
+
+## 1. Runtime and Parsing Security
+* **Pure editor architecture**: Built on **CodeMirror 6** with a custom **Lezer** AST parser. This repository provides code editing and syntax enhancement only, and **does not include a live preview window (No-Preview Design)**.
+* **Execution isolation**: Because there is no HTML rendering container, any potentially malicious content (including XSS or JS injection) is treated as plain text in this editor and cannot execute.
+
+## 2. Backend Interaction and API Liability
+* **Transparent interaction**: The tool contains no hidden or automatic backend async requests. Calls to third-party interfaces (such as FTML/Scpper/Wikidot) are explicitly triggered by the user.
+* **Performance liability**: For high-recursion or very large documents (for example SCP-8000/9000-scale stress tests), CodeMirror state management has been optimized. If user behavior still causes backend delays or crashes, operational responsibility remains with the operator.
+* **Credential protection**: This tool does not intercept, store, or forward Wikidot login credentials (Cookies/Tokens).
+
+## 3. Code Injection and Publishing Risk
+* **Static highlight checks only**: Syntax highlighting and linting improve editing experience only; they are not a full security audit.
+* **Publishing responsibility**: Any code authored in this editor and published to wiki pages remains the user’s responsibility, including consequences such as page restrictions or anti-injection triggers.
+
+---
+
+```bash
+# install dependencies
+npm install
+
+# build
+npm run build
+```
+
+## 🐵 Tampermonkey Installation and Usage
+
+If you want to use this CodeMirror editor directly on Wikidot edit pages, use the userscript in this repository:
+
+- Script file: `userscript/h2o2-wikidot-editor.user.js`
+- Current default editor URL: `https://wasd243.github.io/SCP-Foundation-editor-web/index.html`
+
+### Installation Steps
+
+1. Install Tampermonkey in your browser.
+2. Open the Tampermonkey dashboard and create a new script.
+3. Copy all content from `userscript/h2o2-wikidot-editor.user.js` and save it.
+4. Open (or refresh) any Wikidot edit page, for example:
+   - `https://scp-wiki-cn.wikidot.com/xxx/edit/true`
+   - `https://scp-wiki-cn.wikidot.com/editor/edit/true`
+5. The script will automatically hide the native textarea and inject the H2O2 editor iframe.
+
+
+---
 
 一个专为 SCP 基金会中文站设计的 Wikidot 语法编辑器，旨在提供流畅的实时编写体验。
 

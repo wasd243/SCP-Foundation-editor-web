@@ -37,20 +37,20 @@ jobs:
         run: npm run build
         
       - name: Prepare Public Directory
-        # 统一输出到根目录，避免 develop 分支发布到 /dev 路径
+        # Always publish to repository root, avoid deploy-to-/dev behavior on develop
         run: |
           mkdir -p public
 
-          # 1. 若有 dist 产物，先拷贝
+          # 1. Copy dist artifacts first (if present)
           if [ -d "dist" ]; then
             cp -r dist/* public/
           fi
 
-          # 2. 强制将入口页面放到站点根目录
+          # 2. Ensure entry pages are at site root
           [ -f "index.html" ] && cp index.html public/
           [ -f "test.html" ] && cp test.html public/
 
-          # 3. 拷贝静态资源
+          # 3. Copy static assets
           if [ -d "assets" ]; then
             mkdir -p public/assets
             cp -r assets/* public/assets/
