@@ -1,0 +1,38 @@
+name: Deploy English Instruction Page
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'page/page-en/**'
+      - '.github/workflows/pageEN-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-page-en:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare English Instruction Page
+        run: |
+          mkdir -p public
+          cp page/page-en/page-en.html public/index.html
+          cp page/page-en/page-en.css public/page-en.css
+          cp page/page-en/page-en.js public/page-en.js
+          if [ -f "page/page-en/Feedback.png" ]; then
+            cp page/page-en/Feedback.png public/Feedback.png
+          fi
+
+      - name: Deploy English Instruction Page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          destination_dir: page-en
+          keep_files: true
