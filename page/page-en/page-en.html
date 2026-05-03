@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikidot Web Editor Introduction</title>
+    <link rel="stylesheet" href="page-en.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="topbar" aria-label="Page sections">
+            <a href="#overview">Overview</a>
+            <a href="#graph">Graph</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#tampermonkey">Tampermonkey</a>
+            <a href="#feedback">Feedback</a>
+        </nav>
+    </header>
 
+    <main>
+        <section class="hero" id="overview">
+            <div class="hero-copy">
+                <p class="eyebrow">H2O2 Wikidot Editor</p>
+                <h1>Wikidot Web Editor Introduction</h1>
+                <p class="lead">
+                    A browser-based editing environment for Wikidot source pages. It pairs CodeMirror-style editing with a Tampermonkey bridge so authors can write in a modern editor while still using Wikidot's native save, preview, and cancel actions.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#feedback">View user feedback</a>
+                    <a class="button" href="#tampermonkey">Set up Tampermonkey</a>
+                </div>
+            </div>
+            <aside class="status-panel" aria-label="Editor summary">
+                <div>
+                    <span class="status-label">Mode</span>
+                    <strong>Web iframe panel</strong>
+                </div>
+                <div>
+                    <span class="status-label">Sync</span>
+                    <strong>postMessage to Wikidot textarea</strong>
+                </div>
+                <div>
+                    <span class="status-label">Purpose</span>
+                    <strong>Write, preview, save</strong>
+                </div>
+            </aside>
+        </section>
+
+        <section class="section intro-section">
+            <div>
+                <p class="section-kicker">Introduction</p>
+                <h2>What this page is for</h2>
+            </div>
+            <p>
+                This page introduces the Wikidot Web Editor and gives users a quick reference for installing, using, and modifying the Tampermonkey script. It also includes a feedback plugin area showing user reactions and questions.
+            </p>
+        </section>
+
+        <section class="section" id="graph">
+            <div class="section-heading">
+                <p class="section-kicker">Graph</p>
+                <h2>Editing flow</h2>
+            </div>
+            <div class="flow-graph" role="img" aria-label="Wikidot editor workflow graph">
+                <div class="flow-node is-active">
+                    <span>1</span>
+                    <strong>Open edit page</strong>
+                    <p>Visit a Wikidot page with the edit textarea.</p>
+                </div>
+                <div class="flow-link" aria-hidden="true"></div>
+                <div class="flow-node">
+                    <span>2</span>
+                    <strong>Tampermonkey injects</strong>
+                    <p>The userscript hides the native textarea and loads the editor iframe.</p>
+                </div>
+                <div class="flow-link" aria-hidden="true"></div>
+                <div class="flow-node">
+                    <span>3</span>
+                    <strong>Editor syncs text</strong>
+                    <p>Content moves between the iframe editor and Wikidot textarea.</p>
+                </div>
+                <div class="flow-link" aria-hidden="true"></div>
+                <div class="flow-node">
+                    <span>4</span>
+                    <strong>Preview or save</strong>
+                    <p>Use Wikidot's original buttons through the quick action bar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section split" id="how-it-works">
+            <div class="section-heading">
+                <p class="section-kicker">How It Works</p>
+                <h2>The editor is a bridge, not a replacement backend</h2>
+            </div>
+            <div class="feature-list">
+                <article>
+                    <h3>Iframe editor</h3>
+                    <p>The web editor runs as an iframe loaded from the configured editor URL. It provides the writing surface and editor controls.</p>
+                </article>
+                <article>
+                    <h3>Textarea synchronization</h3>
+                    <p>The userscript reads the original Wikidot textarea, sends the content into the iframe, and writes editor changes back to the textarea.</p>
+                </article>
+                <article>
+                    <h3>Native Wikidot actions</h3>
+                    <p>Save, preview, cancel, and live preview still depend on Wikidot's own page controls. The script only makes those actions easier to reach.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="tampermonkey">
+            <div class="section-heading">
+                <p class="section-kicker">How To Use Tampermonkey And Edit It</p>
+                <h2>Install and customize the userscript</h2>
+            </div>
+            <div class="steps">
+                <article class="step">
+                    <span>01</span>
+                    <h3>Install Tampermonkey</h3>
+                    <p>Add Tampermonkey to your browser, open its dashboard, and create a new userscript.</p>
+                </article>
+                <article class="step">
+                    <span>02</span>
+                    <h3>Paste the script</h3>
+                    <p>Copy the content of <code>userscript/h2o2-wikidot-editor.user.js</code> into the new script and save it.</p>
+                </article>
+                <article class="step">
+                    <span>03</span>
+                    <h3>Edit the editor URL</h3>
+                    <p>Change <code>EDITOR_URL</code> if you host the editor somewhere else, such as a local server or another GitHub Pages address.</p>
+                    <pre><code>var EDITOR_URL = 'https://your-site.example/editor/index.html';</code></pre>
+                </article>
+                <article class="step">
+                    <span>04</span>
+                    <h3>Use it on Wikidot</h3>
+                    <p>Open a Wikidot edit page. The side panel should appear automatically and sync with the original page textarea.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section feedback-section" id="feedback">
+            <div class="section-heading">
+                <p class="section-kicker">User Feedback</p>
+                <h2>Feedback plugin</h2>
+                <p class="muted">Selected comments shown in a Wikidot-style feedback block.</p>
+            </div>
+            <div class="feedback-plugin" aria-label="User feedback">
+                <article class="feedback-item">
+                    <header>
+                        <div>
+                            <strong>CONGRATULATIONS</strong>
+                            <span class="meta">3 Apr 2026, 23:54</span>
+                        </div>
+                        <button type="button">Collapse</button>
+                    </header>
+                    <p>Very good plugin, makes my Wikidot spin.</p>
+                    <footer>
+                        <a href="#feedback">Reply</a>
+                        <span>|</span>
+                        <a href="#feedback">Options</a>
+                    </footer>
+                </article>
+                <article class="feedback-item">
+                    <header>
+                        <div>
+                            <span class="avatar-mask" aria-hidden="true"></span>
+                            <span class="meta">4 Apr 2026, 03:37</span>
+                        </div>
+                        <button type="button">Collapse</button>
+                    </header>
+                    <p>Recent oxidants on the Wiki have been a bit active (?)</p>
+                    <footer>
+                        <a href="#feedback">Reply</a>
+                        <span>|</span>
+                        <a href="#feedback">Options</a>
+                    </footer>
+                </article>
+                <article class="feedback-item">
+                    <header>
+                        <div>
+                            <span class="avatar-mask" aria-hidden="true"></span>
+                            <span class="meta">7 Apr 2026, 01:16</span>
+                        </div>
+                        <button type="button">Collapse</button>
+                    </header>
+                    <p>What's the reason for "web page link has changed" displaying after clicking RAW on GitHub?</p>
+                    <hr>
+                    <p>Surprisingly, there's no direct download link? The current web editor also seems to have some bugs, where inputting Chinese pushes away the previous text, I don't know if it's a problem with the computer I'm using.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section conclusion" id="conclusion">
+            <div class="section-heading">
+                <p class="section-kicker">Conclusion</p>
+                <h2>A focused editor for Wikidot authors</h2>
+            </div>
+            <p>
+                The Wikidot Web Editor improves the writing experience while keeping the final publishing workflow inside Wikidot. With Tampermonkey, the editor can be opened directly beside the page being edited, making long-form Wikidot source easier to manage without changing how the wiki saves content.
+            </p>
+        </section>
+    </main>
+
+    <script src="page-en.js"></script>
+</body>
+</html>

@@ -21,6 +21,7 @@ Thumbs.db
 .ntvs
 *.njsproj
 *.sln
+.gitnexus/
 
 # environment var
 .env
