@@ -219,27 +219,55 @@ button:hover {
     color: var(--muted);
 }
 
-.flow-graph {
+.pipeline-graph {
     display: grid;
-    grid-template-columns: minmax(180px, 1fr) 32px minmax(180px, 1fr) 32px minmax(180px, 1fr) 32px minmax(180px, 1fr);
+    grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+    gap: 18px;
     align-items: stretch;
-    gap: 0;
 }
 
-.flow-node {
-    min-height: 190px;
+.pipeline-lane {
+    display: grid;
+    gap: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #050505;
+    padding: 16px;
+}
+
+.lane-title {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+}
+
+.lane-title span {
+    display: block;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.lane-title strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 21px;
+    line-height: 1.2;
+}
+
+.pipeline-node {
     border: 1px solid var(--line);
     border-radius: 8px;
     background: var(--surface);
-    padding: 20px;
+    padding: 18px;
 }
 
-.flow-node.is-active {
-    border-color: rgba(178, 31, 45, 0.5);
+.pipeline-node.is-active {
+    border-color: var(--accent);
     box-shadow: var(--shadow);
 }
 
-.flow-node span {
+.pipeline-node span {
     display: inline-grid;
     width: 32px;
     height: 32px;
@@ -247,43 +275,94 @@ button:hover {
     border-radius: 50%;
     background: var(--accent-2);
     color: #000000;
-    font-weight: 800;
+    font-weight: 900;
 }
 
-.flow-node strong {
+.pipeline-node strong {
     display: block;
-    margin-top: 18px;
+    margin-top: 14px;
     font-size: 19px;
     line-height: 1.25;
 }
 
-.flow-node p {
-    margin: 10px 0 0;
+.pipeline-node p {
+    margin: 8px 0 0;
     color: var(--muted);
 }
 
-.flow-link {
-    position: relative;
-    min-height: 2px;
+.pipeline-node ul {
+    display: grid;
+    gap: 6px;
+    margin: 10px 0 0;
+    padding-left: 20px;
+    color: var(--muted);
 }
 
-.flow-link::before {
+.engine-lane .pipeline-node span {
+    background: var(--accent-3);
+}
+
+.assistance-node {
+    border-color: rgba(255, 211, 106, 0.55);
+}
+
+.pipeline-arrow {
+    display: grid;
+    min-height: 28px;
+    place-items: center;
+}
+
+.pipeline-arrow::before {
+    content: "";
+    width: 2px;
+    height: 28px;
+    background: var(--accent-3);
+}
+
+.pipeline-arrow::after {
+    content: "";
+    border: 7px solid transparent;
+    border-top-color: var(--accent-3);
+    transform: translateY(-2px);
+}
+
+.pipeline-bridge {
+    display: grid;
+    place-items: center;
+    min-width: 0;
+}
+
+.pipeline-bridge span {
+    position: relative;
+    display: block;
+    max-width: 118px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    padding: 12px 10px;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.pipeline-bridge span::before,
+.pipeline-bridge span::after {
     content: "";
     position: absolute;
     top: 50%;
-    left: 4px;
-    right: 4px;
+    width: 26px;
     height: 2px;
     background: var(--accent-3);
 }
 
-.flow-link::after {
-    content: "";
-    position: absolute;
-    top: calc(50% - 5px);
-    right: 2px;
-    border: 6px solid transparent;
-    border-left-color: var(--accent-3);
+.pipeline-bridge span::before {
+    right: 100%;
+}
+
+.pipeline-bridge span::after {
+    left: 100%;
 }
 
 .split {
@@ -466,13 +545,22 @@ pre code {
         max-width: none;
     }
 
-    .flow-graph,
+    .pipeline-graph,
     .steps {
         grid-template-columns: 1fr;
         gap: 14px;
     }
 
-    .flow-link {
+    .pipeline-bridge {
+        min-height: 56px;
+    }
+
+    .pipeline-bridge span {
+        max-width: 280px;
+    }
+
+    .pipeline-bridge span::before,
+    .pipeline-bridge span::after {
         display: none;
     }
 }
