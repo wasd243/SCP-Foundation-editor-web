@@ -379,7 +379,7 @@ const customKeymap = keymap.of([
 ]);
 
 /**
- * 自动补全配置
+ * Auto Completion
  */
 import { wikidotCompletionSource } from "./component/completion.js";
 import { foldEffect } from "@codemirror/language/dist/index.js";
