@@ -36,6 +36,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: gh-pages-instruction-en
-          destination_dir: .
-          force_orphan: true
+          publish_branch: gh-pages
+          destination_dir: page-en
+          keep_files: true
