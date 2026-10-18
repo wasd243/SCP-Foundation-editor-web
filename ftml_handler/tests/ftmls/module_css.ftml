@@ -1,0 +1,5 @@
+[[module css]]
+.some-class {
+    color: red;
+}
+[[/module]]

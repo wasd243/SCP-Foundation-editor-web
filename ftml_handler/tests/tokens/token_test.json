@@ -1,0 +1,220 @@
+{
+  "tokens": [
+    {
+      "slice": "[[",
+      "span": {
+        "end": 2,
+        "start": 0
+      },
+      "token": "left-block"
+    },
+    {
+      "slice": "div",
+      "span": {
+        "end": 5,
+        "start": 2
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "class",
+      "span": {
+        "end": 11,
+        "start": 6
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "end": 13,
+        "start": 12
+      },
+      "token": "equals"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "end": 15,
+        "start": 14
+      },
+      "token": "double-quote"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "end": 19,
+        "start": 15
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "end": 20,
+        "start": 19
+      },
+      "token": "double-quote"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "end": 22,
+        "start": 20
+      },
+      "token": "right-block"
+    },
+    {
+      "slice": "context",
+      "span": {
+        "end": 31,
+        "start": 24
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "end": 36,
+        "start": 33
+      },
+      "token": "left-block-end"
+    },
+    {
+      "slice": "div",
+      "span": {
+        "end": 39,
+        "start": 36
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "end": 41,
+        "start": 39
+      },
+      "token": "right-block"
+    },
+    {
+      "slice": "\r\n\r\n",
+      "span": {
+        "end": 45,
+        "start": 41
+      },
+      "token": "paragraph-break"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "end": 47,
+        "start": 45
+      },
+      "token": "left-block"
+    },
+    {
+      "slice": "note",
+      "span": {
+        "end": 51,
+        "start": 47
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "<",
+      "span": {
+        "end": 53,
+        "start": 52
+      },
+      "token": "other"
+    },
+    {
+      "slice": "-",
+      "span": {
+        "end": 54,
+        "start": 53
+      },
+      "token": "other"
+    },
+    {
+      "slice": "failed",
+      "span": {
+        "end": 61,
+        "start": 55
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "note",
+      "span": {
+        "end": 66,
+        "start": 62
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "\r\n\r\n",
+      "span": {
+        "end": 70,
+        "start": 66
+      },
+      "token": "paragraph-break"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "end": 72,
+        "start": 70
+      },
+      "token": "left-block"
+    },
+    {
+      "slice": "note",
+      "span": {
+        "end": 76,
+        "start": 72
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "end": 78,
+        "start": 76
+      },
+      "token": "right-block"
+    },
+    {
+      "slice": "something",
+      "span": {
+        "end": 89,
+        "start": 80
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "end": 94,
+        "start": 91
+      },
+      "token": "left-block-end"
+    },
+    {
+      "slice": "note",
+      "span": {
+        "end": 98,
+        "start": 94
+      },
+      "token": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "end": 100,
+        "start": 98
+      },
+      "token": "right-block"
+    }
+  ]
+}

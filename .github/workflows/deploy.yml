@@ -2,13 +2,16 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
     paths:
-      - '**.js'
-      - '**.html'
-      - '**.css'
-      - 'package.json'
-      - 'src/**.grammar'
+      - "src/**"
+      - "ftml_handler/**"
+      - "index.html"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "vite.config.ts"
+      - ".github/workflows/deploy.yml"
       - '!page/page-en/**'
   workflow_dispatch:
 
@@ -18,50 +21,47 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages-main
+      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Setup wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+
       - name: Install dependencies
-        run: npm ci
-      
-      - name: Generate Lezer Parser
-        run: npx lezer-generator src/wikidot.grammar -o src/parser.js
-      
+        run: pnpm install --frozen-lockfile
+
+      - name: Build ftml_handler wasm package
+        working-directory: ./ftml_handler
+        run: wasm-pack build --target bundler
+
       - name: Build project
-        run: npm run build
-        
-      - name: Prepare Public Directory
-        # Always publish to repository root, avoid deploy-to-/dev behavior on develop
-        run: |
-          mkdir -p public
-
-          # 1. Copy dist artifacts first (if present)
-          if [ -d "dist" ]; then
-            cp -r dist/* public/
-          fi
-
-          # 2. Ensure entry pages are at site root
-          [ -f "index.html" ] && cp index.html public/
-          [ -f "test.html" ] && cp test.html public/
-
-          # 3. Copy static assets
-          if [ -d "assets" ]; then
-            mkdir -p public/assets
-            cp -r assets/* public/assets/
-          fi
+        run: pnpm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./dist
           publish_branch: gh-pages
           destination_dir: .
           keep_files: true

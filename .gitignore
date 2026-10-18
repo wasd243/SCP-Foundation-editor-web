@@ -9,9 +9,6 @@ yarn-debug.log*
 yarn-error.log*
 .eslintcache
 
-# tests
-tests/
-
 # system and editor
 .DS_Store
 Thumbs.db
@@ -34,6 +31,6 @@ Thumbs.db
 assets/bundle_editor.js
 assets/bundle_editor.js.map
 assets/build-info.json
+pkg/
 
-# git
-.git
+target/
