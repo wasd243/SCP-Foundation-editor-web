@@ -1,9 +1,13 @@
 import * as monaco from "monaco-editor";
 import { tokenize, type FtmlToken } from "./bridge";
+import { createHighlighter } from "shiki";
+
+const SHIKI_THEME = "vitesse-dark";
+const hl = await createHighlighter({ themes: [SHIKI_THEME], langs: ["html", "css"] });
 
 const TYPES = [
   "block", "link", "markup", "structure", "table", "comment",
-  "raw", "variable", "operator", "keyword", "type", "attribute",
+  "raw", "variable", "operator", "keyword", "type", "attribute", "heading",
 ];
 
 // ftml token name -> semantic type. Tokens not listed here get no color.
@@ -42,10 +46,10 @@ const TYPE_BY_TOKEN: Record<string, string> = {
   "clear-float-left": "markup",
   "clear-float-right": "markup",
 
-  heading: "structure",
+  heading: "heading",
   "bullet-item": "structure",
   "numbered-item": "structure",
-  quote: "structure",
+  quote: "comment",
 
   "table-column": "table",
   "table-column-right": "table",
@@ -75,13 +79,14 @@ const OPENERS = new Set([
   "left-block-star",
 ]);
 
-function typeOf(tokens: FtmlToken[], i: number): string | undefined {
-  const t = tokens[i];
+function typeOf(tokens: FtmlToken[], index: number): string | undefined {
+  const t = tokens[index];
+  if (t["lsp-mark"]) return undefined;
   if (t.token !== "identifier") return TYPE_BY_TOKEN[t.token];
 
-  const prev = tokens[i - 1];
-  const prev2 = tokens[i - 2];
-  const next = tokens[i + 1];
+  const prev = tokens[index - 1];
+  const prev2 = tokens[index - 2];
+  const next = tokens[index + 1];
 
   // [[div ...]] -> block name
   if (prev && OPENERS.has(prev.token)) return "keyword";
@@ -101,8 +106,8 @@ const provider = monaco.languages.registerDocumentSemanticTokensProvider(
   "wikidot",
   {
     getLegend: () => legend,
-    provideDocumentSemanticTokens(model) {
-      const tokens = tokenize(model.getValue());
+    provideDocumentSemanticTokens(model: monaco.editor.ITextModel) {
+      const tokens: FtmlToken[] = tokenize(model.getValue());
       const data: number[] = [];
       let prevLine = 1;
       let prevChar = 0;
@@ -136,4 +141,93 @@ const provider = monaco.languages.registerDocumentSemanticTokensProvider(
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => provider.dispose());
+}
+
+type SubHighlight = {
+  span: { start: number; end: number };
+  slice: string;
+  lang: "html" | "css";
+};
+
+function collectSubHighlights(tokens: FtmlToken[], source: string): SubHighlight[] {
+  const highlights: SubHighlight[] = [];
+  let current: SubHighlight | undefined;
+
+  for (const token of tokens) {
+    const lang = token["lsp-mark"];
+    if (!lang) {
+      current = undefined;
+      continue;
+    }
+
+    if (!current || current.lang !== lang) {
+      current = {
+        span: { start: token.span.start, end: token.span.end },
+        slice: "",
+        lang,
+      };
+      highlights.push(current);
+    } else {
+      current.span.end = token.span.end;
+    }
+    current.slice = source.slice(current.span.start, current.span.end);
+  }
+
+  return highlights;
+}
+
+const styleEl = document.head.appendChild(document.createElement("style"));
+const colorClasses = new Map<string, string>();
+
+function cssClassForColor(color: string): string {
+  let cls = colorClasses.get(color);
+  if (!cls) {
+    cls = `sub-hl-${colorClasses.size}`;
+    colorClasses.set(color, cls);
+    styleEl.append(`.${cls}{color:${color} !important}`);
+  }
+  return cls;
+}
+
+function createSubHighlightDecorations(
+  model: monaco.editor.ITextModel,
+  highlight: SubHighlight,
+): monaco.editor.IModelDeltaDecoration[] {
+  const lines = hl.codeToTokensBase(highlight.slice, {
+    lang: highlight.lang,
+    theme: SHIKI_THEME,
+  });
+  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
+
+  for (const line of lines) {
+    for (const token of line) {
+      if (!token.color || token.content.length === 0) continue;
+      const start: number = highlight.span.start + token.offset;
+      const end: number = start + token.content.length;
+      decorations.push({
+        range: monaco.Range.fromPositions(
+          model.getPositionAt(start),
+          model.getPositionAt(end),
+        ),
+        options: { inlineClassName: cssClassForColor(token.color) },
+      });
+    }
+  }
+
+  return decorations;
+}
+
+const subDecorationIds = new WeakMap<monaco.editor.ITextModel, string[]>();
+
+export function updateSubHighlights(model: monaco.editor.ITextModel): void {
+  const source: string = model.getValue();
+  const tokens: FtmlToken[] = tokenize(source);
+  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
+
+  for (const highlight of collectSubHighlights(tokens, source)) {
+    decorations.push(...createSubHighlightDecorations(model, highlight));
+  }
+
+  const previous: string[] = subDecorationIds.get(model) ?? [];
+  subDecorationIds.set(model, model.deltaDecorations(previous, decorations));
 }

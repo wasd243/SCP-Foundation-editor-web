@@ -2,12 +2,18 @@ use ftml::parsing::ExtractedToken;
 use serde::Serialize;
 use serde_json::Value;
 use std::fmt::{Display, Formatter};
-use ftml::Utf16IndexMap;
 
-#[derive(Serialize, Debug, Default)]
+#[derive(Serialize, Debug)]
 pub struct ParseToken {
     /// ftml tokens
     pub tokens: Value,
+}
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[allow(dead_code)] // left `Backward` for enum
+pub(crate) enum ValueIterDirection {
+    Forward,
+    Backward,
 }
 
 impl ParseToken {
@@ -21,6 +27,49 @@ impl ParseToken {
             })
         }
     }
+
+    /// Iterate over tokens before/after `index`, nearest first.
+    pub(crate) fn value_iter(
+        &self,
+        index: usize,
+        direction: ValueIterDirection,
+    ) -> Box<dyn Iterator<Item = &Value> + '_> {
+        let arr: &[Value] = self.tokens.as_array().map(Vec::as_slice).unwrap_or(&[]);
+        let index = index.min(arr.len());
+
+        if direction == ValueIterDirection::Forward {
+            let start = (index + 1).min(arr.len());
+            Box::new(arr[start..].iter())
+        } else {
+            Box::new(arr[..index].iter().rev())
+        }
+    }
+
+    /// Iterate over tokens before/after `index` and then output with `index`.
+    pub(crate) fn value_iter_indexed(
+        &self,
+        index: usize,
+        direction: ValueIterDirection,
+    ) -> Box<dyn Iterator<Item = (usize, &Value)> + '_> {
+        let arr: &[Value] = self.tokens.as_array().map(Vec::as_slice).unwrap_or(&[]);
+        let index = index.min(arr.len());
+
+        if direction == ValueIterDirection::Forward {
+            let start = (index + 1).min(arr.len());
+            Box::new(arr.iter().enumerate().skip(start))
+        } else {
+            Box::new(arr[..index].iter().enumerate().rev())
+        }
+    }
+}
+
+#[macro_export]
+macro_rules! value_iter_next {
+    ($token:ident, $iter:ident) => {
+        let Some((_, $token)) = $iter.next() else {
+            return;
+        };
+    };
 }
 
 impl Display for ParseToken {
@@ -32,8 +81,8 @@ impl Display for ParseToken {
 impl From<&str> for ParseToken {
     /// Parse new token from wikitext
     fn from(src: &str) -> Self {
-        let mut wikitext = src.to_string();
-        let tokens = get_ftml_token(&mut wikitext);
+        let wikitext = src.to_string();
+        let tokens = get_ftml_token(&wikitext);
 
         Self {
             tokens: serde_json::to_value(tokens).expect("Should not fail"),
@@ -50,7 +99,7 @@ fn get_ftml_token(wikitext: &str) -> Vec<ExtractedToken<'_>> {
     }
 
     let tokens: Vec<ExtractedToken<'_>> = ftml::tokenize(wikitext).into();
-    let map = Utf16IndexMap::new(wikitext);
+    let map = ftml::Utf16IndexMap::new(wikitext);
 
     tokens
         .iter()

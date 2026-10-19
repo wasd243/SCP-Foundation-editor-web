@@ -1,4 +1,5 @@
 pub mod ftml_ast;
+pub mod ftml_block_identifier;
 
 use crate::ftml_ast::ParseToken;
 
@@ -9,6 +10,7 @@ use wasm_bindgen::prelude::*;
 pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
     let mut tokens = ParseToken::from(src);
     tokens.clean();
+    tokens.mark_sublanguage_blocks();
 
     let serializer = serde_wasm_bindgen::Serializer::new().serialize_maps_as_objects(true);
     tokens

@@ -33,6 +33,7 @@
       "token": "right-block"
     },
     {
+      "lsp-mark": "css",
       "slice": ".",
       "span": {
         "end": 17,
@@ -41,6 +42,7 @@
       "token": "other"
     },
     {
+      "lsp-mark": "css",
       "slice": "some",
       "span": {
         "end": 21,
@@ -49,6 +51,7 @@
       "token": "identifier"
     },
     {
+      "lsp-mark": "css",
       "slice": "-",
       "span": {
         "end": 22,
@@ -57,6 +60,7 @@
       "token": "other"
     },
     {
+      "lsp-mark": "css",
       "slice": "class",
       "span": {
         "end": 27,
@@ -65,6 +69,7 @@
       "token": "identifier"
     },
     {
+      "lsp-mark": "css",
       "slice": "{",
       "span": {
         "end": 29,
@@ -73,6 +78,7 @@
       "token": "other"
     },
     {
+      "lsp-mark": "css",
       "slice": "color",
       "span": {
         "end": 40,
@@ -81,6 +87,7 @@
       "token": "identifier"
     },
     {
+      "lsp-mark": "css",
       "slice": ":",
       "span": {
         "end": 41,
@@ -89,6 +96,7 @@
       "token": "colon"
     },
     {
+      "lsp-mark": "css",
       "slice": "red",
       "span": {
         "end": 45,
@@ -97,6 +105,7 @@
       "token": "identifier"
     },
     {
+      "lsp-mark": "css",
       "slice": ";",
       "span": {
         "end": 46,
@@ -105,6 +114,7 @@
       "token": "other"
     },
     {
+      "lsp-mark": "css",
       "slice": "}",
       "span": {
         "end": 49,

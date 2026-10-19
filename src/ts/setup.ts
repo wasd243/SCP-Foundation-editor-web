@@ -1,6 +1,9 @@
 import * as monaco from "monaco-editor";
 import EditorWorker from "monaco-editor/editor/editor.worker?worker";
 
+// temperarily only import defualt, later for theme configurations
+import template from "./templates/default.json";
+
 self.MonacoEnvironment = {
   getWorker: () => new EditorWorker(),
 };
@@ -10,33 +13,20 @@ monaco.languages.register({ id: "wikidot" });
 monaco.languages.setLanguageConfiguration("wikidot", {
   brackets: [["[[", "]]"]],
   autoClosingPairs: [
-    { open: "[[" , close: "]]" },
-    { open: "[[/", close: "]]" },
+    { open: "[!--", close: "--]" },
+    { open: "[["  , close: "]]"  },
+    { open: "["   , close: "]"   },
+    { open: "[[/" , close: "]]"  },
+    { open: "{"   , close: "}"   },
   ],
 });
 
-monaco.editor.defineTheme("scp-dark", {
-  base: "vs-dark",
-  inherit: true,
-  rules: [
-    { token: "block", foreground: "569cd6" },
-    { token: "link", foreground: "4fc1ff" },
-    { token: "markup", foreground: "d7ba7d" },
-    { token: "structure", foreground: "ce9178", fontStyle: "bold" },
-    { token: "table", foreground: "dcdcaa" },
-    { token: "comment", foreground: "6a9955", fontStyle: "italic" },
-    { token: "raw", foreground: "ce9178" },
-    { token: "variable", foreground: "b5cea8" },
-    { token: "operator", foreground: "d4d4d4" },
-    { token: "keyword", foreground: "c586c0" },
-    { token: "type", foreground: "4ec9b0" },
-    { token: "attribute", foreground: "9cdcfe" },
-  ],
-  colors: {},
-});
+monaco.editor.defineTheme("scp-dark", template as monaco.editor.IStandaloneThemeData);
 
-// Blocks that follow the simple template: name]] ... [[/name
-const BLOCKS = ["div", "note", "span", "size", "=", ">", "<"];
+const BLOCKS                   = ["note", "=", ">", "<"];                       // Blocks without attributes
+const BLOCKS_NO_LINEBREAK      = ["footnote"];                                  // Blocks without attributes but don't need linebreak
+const ATTR_BLOCKS              = ["span", "div"];                               // Blocks with attributes
+const ATTR_BLOCKS_NO_LINEBREAK = ["size", "module", "html"];                    // Blocks with attributes but don't need linebreak
 
 monaco.languages.registerCompletionItemProvider("*", {
   triggerCharacters: ["["],
@@ -60,40 +50,44 @@ monaco.languages.registerCompletionItemProvider("*", {
     return {
       suggestions: [
         // Special case: has attributes
-        {
-          label: "collapsible",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          insertText: `collapsible show="" hide=""]]\n$0[[/collapsible`,
-          insertTextRules:
-            monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+        sugg(
+          "collapsible",
+          `collapsible show="$1" hide="$2"]]\n$0\n[[/collapsible`,
           range,
-        },
-        {
-          label: "footnoteblock",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          insertText: `footnoteblock`,
-          insertTextRules:
-            monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-          range,
-        },
-        {
-          label: "footnote",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          insertText: `footnote]] $0 [[/footnote`,
-          insertTextRules:
-            monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-          range,
-        },
-        // Everything else generated from the list
-        ...BLOCKS.map((name) => ({
-          label: name,
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          insertText: `${name}]]\n$0[[/${name}`,
-          insertTextRules:
-            monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-          range,
-        })),
-      ],
+        ),
+        sugg("footnoteblock", "footnoteblock", range),
+
+        ...ATTR_BLOCKS.map((name) =>
+          sugg(name, `${name} $1]]\n$0\n[[/${name}`, range),
+        ),
+        ...ATTR_BLOCKS_NO_LINEBREAK.map((name) =>
+          sugg(name, `${name} $1]] $0 [[/${name}`, range),
+        ),
+        ...BLOCKS.map((name) =>
+          sugg(name, `${name}]]\n$0\n[[/${name}`, range),
+        ),
+        ...BLOCKS_NO_LINEBREAK.map((name) =>
+          sugg(name, `${name}]] $0 [[/${name}`, range),
+        ),
+    ],
     };
   },
 });
+
+/**
+ * This function is used to reduce suggestion boilerplate.
+ */
+function sugg(
+  name: string,
+  insertText: string,
+  range: monaco.IRange,
+): monaco.languages.CompletionItem {
+  return {
+    label: name,
+    kind: monaco.languages.CompletionItemKind.Snippet,
+    insertText,
+    insertTextRules:
+      monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+    range,
+  };
+}

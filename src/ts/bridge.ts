@@ -4,6 +4,7 @@ export interface FtmlToken {
   token: string;
   slice: string;
   span: { start: number; end: number };
+  "lsp-mark"?: "html" | "css"
 }
 
 export function tokenize(src: string): FtmlToken[] {
