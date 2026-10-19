@@ -1,0 +1,1 @@
+export{t as conf,n as language}from"./typescript--0qaD3w5.js";
