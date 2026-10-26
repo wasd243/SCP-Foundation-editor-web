@@ -34,6 +34,9 @@ onMounted(() => {
       invisibleCharacters: false,
       nonBasicASCII: false,
     },
+    bracketPairColorization: { enabled: false },
+    guides: { bracketPairs: false },
+    matchBrackets: "never",
   });
 
   const model = editor.getModel()!;

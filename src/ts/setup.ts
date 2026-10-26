@@ -11,7 +11,7 @@ self.MonacoEnvironment = {
 monaco.languages.register({ id: "wikidot" });
 
 monaco.languages.setLanguageConfiguration("wikidot", {
-  brackets: [["[[", "]]"]],
+  brackets: [],
   autoClosingPairs: [
     { open: "[!--", close: "--]" },
     { open: "[["  , close: "]]"  },
