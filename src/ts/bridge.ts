@@ -4,14 +4,34 @@ export interface FtmlToken {
   token: string;
   slice: string;
   span: { start: number; end: number };
-  "lsp-mark"?: "html" | "css"
+  "lsp-mark"?: "html" | "css";
 }
 
-export function tokenize(src: string): FtmlToken[] {
+export interface FtmlDiagnostic {
+  msg: string;
+  span: { start: number; end: number };
+}
+
+export interface FtmlResult {
+  tokens: FtmlToken[];
+  diagnostics: FtmlDiagnostic[];
+}
+
+const EMPTY: FtmlResult = { tokens: [], diagnostics: [] };
+
+// don't redo the work for the same text
+let lastSrc: string | undefined;
+let lastResult: FtmlResult = EMPTY;
+
+export function tokenize(src: string): FtmlResult {
+  if (src === lastSrc) return lastResult;
   try {
-    return tokenization(src) as FtmlToken[];
+    const result = tokenization(src) as FtmlResult;
+    lastSrc = src;
+    lastResult = result;
+    return result;
   } catch (err) {
     console.error("tokenization failed:", err);
-    return [];
+    return EMPTY;
   }
 }

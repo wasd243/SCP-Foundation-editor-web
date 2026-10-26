@@ -1,5 +1,5 @@
 import * as monaco from "monaco-editor";
-import { tokenize, type FtmlToken } from "./bridge";
+import { tokenize, type FtmlToken, type FtmlDiagnostic } from "./bridge";
 import { createHighlighter } from "shiki";
 
 const SHIKI_THEME = "vitesse-dark";
@@ -107,7 +107,7 @@ const provider = monaco.languages.registerDocumentSemanticTokensProvider(
   {
     getLegend: () => legend,
     provideDocumentSemanticTokens(model: monaco.editor.ITextModel) {
-      const tokens: FtmlToken[] = tokenize(model.getValue());
+      const tokens: FtmlToken[] = tokenize(model.getValue()).tokens;
       const data: number[] = [];
       let prevLine = 1;
       let prevChar = 0;
@@ -217,11 +217,35 @@ function createSubHighlightDecorations(
   return decorations;
 }
 
+
+function updateDiagnostics(
+  model: monaco.editor.ITextModel,
+  diagnostics: FtmlDiagnostic[],
+): void {
+  const textLength: number = model.getValueLength();
+  const markers: monaco.editor.IMarkerData[] = diagnostics.map((d) => {
+    const start: number = d.span.start;
+    // zero-width squiggles are invisible, so widen to at least one character
+    const end: number = Math.min(Math.max(d.span.end, start + 1), textLength);
+    const start_ = model.getPositionAt(start);
+    const end_ = model.getPositionAt(end);
+    return {
+      severity: monaco.MarkerSeverity.Warning,
+      message: d.msg,
+      startLineNumber: start_.lineNumber,
+      startColumn: start_.column,
+      endLineNumber: end_.lineNumber,
+      endColumn: end_.column,
+    };
+  });
+  monaco.editor.setModelMarkers(model, "ftml", markers);
+}
+
 const subDecorationIds = new WeakMap<monaco.editor.ITextModel, string[]>();
 
 export function updateSubHighlights(model: monaco.editor.ITextModel): void {
   const source: string = model.getValue();
-  const tokens: FtmlToken[] = tokenize(source);
+  const { tokens, diagnostics } = tokenize(source);
   const decorations: monaco.editor.IModelDeltaDecoration[] = [];
 
   for (const highlight of collectSubHighlights(tokens, source)) {
@@ -230,4 +254,6 @@ export function updateSubHighlights(model: monaco.editor.ITextModel): void {
 
   const previous: string[] = subDecorationIds.get(model) ?? [];
   subDecorationIds.set(model, model.deltaDecorations(previous, decorations));
+
+  updateDiagnostics(model, diagnostics);
 }

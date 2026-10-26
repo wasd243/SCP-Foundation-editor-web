@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import * as monaco from "monaco-editor";
-import "../ts/setup";
+import "../ts/sugg";
 import "../ts/semantic";
 import { updateSubHighlights } from "../ts/semantic";
 import { wrap } from "../ts/commands";
@@ -30,13 +30,17 @@ onMounted(() => {
     wordWrap                      : "on",
     "semanticHighlighting.enabled": true,
     unicodeHighlight: {
-      ambiguousCharacters: false,
-      invisibleCharacters: false,
-      nonBasicASCII: false,
+      ambiguousCharacters         : false,
+      invisibleCharacters         : false,
+      nonBasicASCII               : false,
     },
-    bracketPairColorization: { enabled: false },
-    guides: { bracketPairs: false },
-    matchBrackets: "never",
+    bracketPairColorization: { 
+      enabled                     : false, 
+    },
+    guides: {
+      bracketPairs                : false,
+    },
+    matchBrackets                 : "never",
   });
 
   const model = editor.getModel()!;

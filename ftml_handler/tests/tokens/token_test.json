@@ -216,5 +216,21 @@
       },
       "token": "right-block"
     }
+  ],
+  "diagnostics": [
+    {
+      "msg": "BlockMalformedArguments: block-note",
+      "span": {
+        "start": 52,
+        "end": 53
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 45,
+        "end": 47
+      }
+    }
   ]
 }

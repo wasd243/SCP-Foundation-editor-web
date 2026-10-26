@@ -55,19 +55,23 @@ monaco.languages.registerCompletionItemProvider("*", {
           `collapsible show="$1" hide="$2"]]\n$0\n[[/collapsible`,
           range,
         ),
+
         sugg("footnoteblock", "footnoteblock", range),
+        sugg("module rate", "module rate", range),
+        sugg("user", "user $0", range),
+        sugg("user with img", "*user $0", range),
 
         ...ATTR_BLOCKS.map((name) =>
           sugg(name, `${name} $1]]\n$0\n[[/${name}`, range),
         ),
         ...ATTR_BLOCKS_NO_LINEBREAK.map((name) =>
-          sugg(name, `${name} $1]] $0 [[/${name}`, range),
+          sugg(name, `${name} $1]]$0[[/${name}`, range),
         ),
         ...BLOCKS.map((name) =>
           sugg(name, `${name}]]\n$0\n[[/${name}`, range),
         ),
         ...BLOCKS_NO_LINEBREAK.map((name) =>
-          sugg(name, `${name}]] $0 [[/${name}`, range),
+          sugg(name, `${name}]]$0[[/${name}`, range),
         ),
     ],
     };

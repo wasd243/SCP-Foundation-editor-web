@@ -317,5 +317,42 @@
       },
       "token": "right-block"
     }
+  ],
+  "diagnostics": [
+    {
+      "msg": "BlockMalformedArguments: block-html",
+      "span": {
+        "start": 77,
+        "end": 81
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 64,
+        "end": 66
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 81,
+        "end": 83
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 104,
+        "end": 107
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 111,
+        "end": 113
+      }
+    }
   ]
 }

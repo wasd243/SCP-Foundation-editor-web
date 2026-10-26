@@ -14,7 +14,6 @@ pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
 
     let serializer = serde_wasm_bindgen::Serializer::new().serialize_maps_as_objects(true);
     tokens
-        .tokens
         .serialize(&serializer)
         .map_err(|err| JsValue::from_str(&err.to_string()))
 }
