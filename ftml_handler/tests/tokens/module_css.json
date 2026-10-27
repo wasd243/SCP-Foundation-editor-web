@@ -36,8 +36,8 @@
       "lsp-mark": "css",
       "slice": ".",
       "span": {
-        "end": 17,
-        "start": 16
+        "end": 16,
+        "start": 15
       },
       "token": "other"
     },
@@ -45,8 +45,8 @@
       "lsp-mark": "css",
       "slice": "some",
       "span": {
-        "end": 21,
-        "start": 17
+        "end": 20,
+        "start": 16
       },
       "token": "identifier"
     },
@@ -54,8 +54,8 @@
       "lsp-mark": "css",
       "slice": "-",
       "span": {
-        "end": 22,
-        "start": 21
+        "end": 21,
+        "start": 20
       },
       "token": "other"
     },
@@ -63,8 +63,8 @@
       "lsp-mark": "css",
       "slice": "class",
       "span": {
-        "end": 27,
-        "start": 22
+        "end": 26,
+        "start": 21
       },
       "token": "identifier"
     },
@@ -72,8 +72,8 @@
       "lsp-mark": "css",
       "slice": "{",
       "span": {
-        "end": 29,
-        "start": 28
+        "end": 28,
+        "start": 27
       },
       "token": "other"
     },
@@ -81,8 +81,8 @@
       "lsp-mark": "css",
       "slice": "color",
       "span": {
-        "end": 40,
-        "start": 35
+        "end": 38,
+        "start": 33
       },
       "token": "identifier"
     },
@@ -90,8 +90,8 @@
       "lsp-mark": "css",
       "slice": ":",
       "span": {
-        "end": 41,
-        "start": 40
+        "end": 39,
+        "start": 38
       },
       "token": "colon"
     },
@@ -99,8 +99,8 @@
       "lsp-mark": "css",
       "slice": "red",
       "span": {
-        "end": 45,
-        "start": 42
+        "end": 43,
+        "start": 40
       },
       "token": "identifier"
     },
@@ -108,8 +108,8 @@
       "lsp-mark": "css",
       "slice": ";",
       "span": {
-        "end": 46,
-        "start": 45
+        "end": 44,
+        "start": 43
       },
       "token": "other"
     },
@@ -117,32 +117,32 @@
       "lsp-mark": "css",
       "slice": "}",
       "span": {
-        "end": 49,
-        "start": 48
+        "end": 46,
+        "start": 45
       },
       "token": "other"
     },
     {
       "slice": "[[/",
       "span": {
-        "end": 54,
-        "start": 51
+        "end": 50,
+        "start": 47
       },
       "token": "left-block-end"
     },
     {
       "slice": "module",
       "span": {
-        "end": 60,
-        "start": 54
+        "end": 56,
+        "start": 50
       },
       "token": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 62,
-        "start": 60
+        "end": 58,
+        "start": 56
       },
       "token": "right-block"
     }

@@ -5,6 +5,7 @@ export interface FtmlToken {
   slice: string;
   span: { start: number; end: number };
   "lsp-mark"?: "html" | "css";
+  "include-fold-mark"?: "include-start" | "include-end";
 }
 
 export interface FtmlDiagnostic {

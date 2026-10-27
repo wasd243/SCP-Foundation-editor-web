@@ -24,13 +24,46 @@ impl ParseToken {
         for i in 0..len {
             module_css(self, i, &mut marks);
             html(self, i, &mut marks);
+            include(self, i, &mut marks);
         }
 
         // Phase 2: write back
         if let Some(arr) = self.tokens.as_array_mut() {
             for (i, role) in marks {
-                arr[i]["lsp-mark"] = Value::from(role);
+                let key = if role.starts_with("include") {
+                    "include-fold-mark"
+                } else {
+                    "lsp-mark"
+                };
+                arr[i][key] = Value::from(role);
             }
+        }
+    }
+}
+
+/// mark include blocks starts and ends
+fn include(p: &ParseToken, i: usize, marks: &mut Marks) {
+    let Some(t) = p.tokens.as_array().and_then(|tokens| tokens.get(i)) else {
+        return;
+    };
+    if t["token"] != BLOCK_START {
+        return;
+    }
+
+    let mut value_iter = p.value_iter_indexed(i, ValueIterDirection::Forward);
+
+    value_iter_next!(t, value_iter);
+    let slice = t["slice"].as_str().unwrap_or("");
+    if t["token"] != IDENTIFIER || !INCLUDE.is_match(slice) {
+        return;
+    }
+
+    // first `]]` closes the include; no `]]` means nothing is marked
+    for (idx, t) in value_iter {
+        if t["token"] == BLOCK_END {
+            marks.push((i, "include-start"));
+            marks.push((idx, "include-end"));
+            return;
         }
     }
 }

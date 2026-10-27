@@ -217,13 +217,27 @@ function createSubHighlightDecorations(
   return decorations;
 }
 
+// ignore false positives in `[[include]]` blocks
+const INCLUDE_RE = /\[\[\s*include\s[\s\S]*?]]/gi;
+
+function includeRanges(source: string): Array<[number, number]> {
+  return Array.from(source.matchAll(INCLUDE_RE), (m): [number, number] => {
+    const start: number = m.index ?? 0;
+    return [start, start + m[0].length];
+  });
+}
 
 function updateDiagnostics(
   model: monaco.editor.ITextModel,
   diagnostics: FtmlDiagnostic[],
 ): void {
+  const ranges = includeRanges(model.getValue());
+  const visible: FtmlDiagnostic[] = diagnostics.filter(
+      (d) => !ranges.some(([from, to]) => d.span.start >= from && d.span.start < to),
+  );
+
   const textLength: number = model.getValueLength();
-  const markers: monaco.editor.IMarkerData[] = diagnostics.map((d) => {
+  const markers: monaco.editor.IMarkerData[] = visible.map((d) => {
     const start: number = d.span.start;
     // zero-width squiggles are invisible, so widen to at least one character
     const end: number = Math.min(Math.max(d.span.end, start + 1), textLength);

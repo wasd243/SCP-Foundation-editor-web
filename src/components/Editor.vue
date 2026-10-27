@@ -3,6 +3,7 @@ import { onMounted, onBeforeUnmount, ref } from "vue";
 import * as monaco from "monaco-editor";
 import "../ts/sugg";
 import "../ts/semantic";
+import "../ts/semantic/foldProvider";
 import { updateSubHighlights } from "../ts/semantic";
 import { wrap } from "../ts/commands";
 

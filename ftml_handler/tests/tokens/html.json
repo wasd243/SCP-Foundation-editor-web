@@ -28,8 +28,8 @@
       "lsp-mark": "html",
       "slice": "<",
       "span": {
-        "end": 11,
-        "start": 10
+        "end": 10,
+        "start": 9
       },
       "token": "other"
     },
@@ -37,8 +37,8 @@
       "lsp-mark": "html",
       "slice": "div",
       "span": {
-        "end": 14,
-        "start": 11
+        "end": 13,
+        "start": 10
       },
       "token": "identifier"
     },
@@ -46,8 +46,8 @@
       "lsp-mark": "html",
       "slice": "class",
       "span": {
-        "end": 20,
-        "start": 15
+        "end": 19,
+        "start": 14
       },
       "token": "identifier"
     },
@@ -55,8 +55,8 @@
       "lsp-mark": "html",
       "slice": "=",
       "span": {
-        "end": 21,
-        "start": 20
+        "end": 20,
+        "start": 19
       },
       "token": "equals"
     },
@@ -64,8 +64,8 @@
       "lsp-mark": "html",
       "slice": "\"",
       "span": {
-        "end": 22,
-        "start": 21
+        "end": 21,
+        "start": 20
       },
       "token": "double-quote"
     },
@@ -73,8 +73,8 @@
       "lsp-mark": "html",
       "slice": "foo",
       "span": {
-        "end": 25,
-        "start": 22
+        "end": 24,
+        "start": 21
       },
       "token": "identifier"
     },
@@ -82,8 +82,8 @@
       "lsp-mark": "html",
       "slice": "\"",
       "span": {
-        "end": 26,
-        "start": 25
+        "end": 25,
+        "start": 24
       },
       "token": "double-quote"
     },
@@ -91,8 +91,8 @@
       "lsp-mark": "html",
       "slice": ">",
       "span": {
-        "end": 27,
-        "start": 26
+        "end": 26,
+        "start": 25
       },
       "token": "quote"
     },
@@ -100,8 +100,8 @@
       "lsp-mark": "html",
       "slice": "some",
       "span": {
-        "end": 33,
-        "start": 29
+        "end": 31,
+        "start": 27
       },
       "token": "identifier"
     },
@@ -109,8 +109,8 @@
       "lsp-mark": "html",
       "slice": "context",
       "span": {
-        "end": 41,
-        "start": 34
+        "end": 39,
+        "start": 32
       },
       "token": "identifier"
     },
@@ -118,8 +118,8 @@
       "lsp-mark": "html",
       "slice": "<",
       "span": {
-        "end": 44,
-        "start": 43
+        "end": 41,
+        "start": 40
       },
       "token": "other"
     },
@@ -127,8 +127,8 @@
       "lsp-mark": "html",
       "slice": "/",
       "span": {
-        "end": 45,
-        "start": 44
+        "end": 42,
+        "start": 41
       },
       "token": "other"
     },
@@ -136,8 +136,8 @@
       "lsp-mark": "html",
       "slice": "div",
       "span": {
-        "end": 48,
-        "start": 45
+        "end": 45,
+        "start": 42
       },
       "token": "identifier"
     },
@@ -145,88 +145,80 @@
       "lsp-mark": "html",
       "slice": ">",
       "span": {
-        "end": 49,
-        "start": 48
+        "end": 46,
+        "start": 45
       },
       "token": "quote"
     },
     {
       "slice": "[[/",
       "span": {
-        "end": 54,
-        "start": 51
+        "end": 50,
+        "start": 47
       },
       "token": "left-block-end"
     },
     {
       "slice": "html",
       "span": {
-        "end": 58,
-        "start": 54
+        "end": 54,
+        "start": 50
       },
       "token": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 60,
-        "start": 58
+        "end": 56,
+        "start": 54
       },
       "token": "right-block"
     },
     {
-      "slice": "\r\n\r\n",
-      "span": {
-        "end": 64,
-        "start": 60
-      },
-      "token": "paragraph-break"
-    },
-    {
       "slice": "[[",
       "span": {
-        "end": 66,
-        "start": 64
+        "end": 60,
+        "start": 58
       },
       "token": "left-block"
     },
     {
       "slice": "html",
       "span": {
-        "end": 70,
-        "start": 66
+        "end": 64,
+        "start": 60
       },
       "token": "identifier"
     },
     {
       "slice": "width",
       "span": {
-        "end": 76,
-        "start": 71
+        "end": 70,
+        "start": 65
       },
       "token": "identifier"
     },
     {
       "slice": "=",
       "span": {
-        "end": 77,
-        "start": 76
+        "end": 71,
+        "start": 70
       },
       "token": "equals"
     },
     {
       "slice": "30px",
       "span": {
-        "end": 81,
-        "start": 77
+        "end": 75,
+        "start": 71
       },
       "token": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 83,
-        "start": 81
+        "end": 77,
+        "start": 75
       },
       "token": "right-block"
     },
@@ -234,8 +226,8 @@
       "lsp-mark": "html",
       "slice": "<",
       "span": {
-        "end": 86,
-        "start": 85
+        "end": 79,
+        "start": 78
       },
       "token": "other"
     },
@@ -243,8 +235,8 @@
       "lsp-mark": "html",
       "slice": "!",
       "span": {
-        "end": 87,
-        "start": 86
+        "end": 80,
+        "start": 79
       },
       "token": "other"
     },
@@ -252,8 +244,8 @@
       "lsp-mark": "html",
       "slice": "--",
       "span": {
-        "end": 89,
-        "start": 87
+        "end": 82,
+        "start": 80
       },
       "token": "double-dash"
     },
@@ -261,8 +253,8 @@
       "lsp-mark": "html",
       "slice": "With",
       "span": {
-        "end": 93,
-        "start": 89
+        "end": 86,
+        "start": 82
       },
       "token": "identifier"
     },
@@ -270,8 +262,8 @@
       "lsp-mark": "html",
       "slice": "alias",
       "span": {
-        "end": 99,
-        "start": 94
+        "end": 92,
+        "start": 87
       },
       "token": "identifier"
     },
@@ -279,8 +271,8 @@
       "lsp-mark": "html",
       "slice": "--",
       "span": {
-        "end": 101,
-        "start": 99
+        "end": 94,
+        "start": 92
       },
       "token": "double-dash"
     },
@@ -288,32 +280,32 @@
       "lsp-mark": "html",
       "slice": ">",
       "span": {
-        "end": 102,
-        "start": 101
+        "end": 95,
+        "start": 94
       },
       "token": "quote"
     },
     {
       "slice": "[[/",
       "span": {
-        "end": 107,
-        "start": 104
+        "end": 99,
+        "start": 96
       },
       "token": "left-block-end"
     },
     {
       "slice": "html",
       "span": {
-        "end": 111,
-        "start": 107
+        "end": 103,
+        "start": 99
       },
       "token": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 113,
-        "start": 111
+        "end": 105,
+        "start": 103
       },
       "token": "right-block"
     }
@@ -322,36 +314,36 @@
     {
       "msg": "BlockMalformedArguments: block-html",
       "span": {
-        "start": 77,
-        "end": 81
+        "start": 71,
+        "end": 75
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 64,
-        "end": 66
+        "start": 58,
+        "end": 60
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 81,
-        "end": 83
+        "start": 75,
+        "end": 77
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 104,
-        "end": 107
+        "start": 96,
+        "end": 99
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 111,
-        "end": 113
+        "start": 103,
+        "end": 105
       }
     }
   ]

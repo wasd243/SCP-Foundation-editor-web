@@ -9,3 +9,4 @@ macro_rules! re_slice {
 re_slice!(MODULE, r"(?i)^module$");
 re_slice!(CSS, r"(?i)^css$");
 re_slice!(HTML, r"(?i)^html$");
+re_slice!(INCLUDE, r"(?i)^include$");

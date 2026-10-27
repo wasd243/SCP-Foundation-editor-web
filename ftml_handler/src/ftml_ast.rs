@@ -39,7 +39,13 @@ impl ParseToken {
             tokens.retain(|token| {
                 !matches!(
                     token.get("token").and_then(Value::as_str),
-                    Some("input-start" | "input-end" | "line-break" | "whitespace")
+                    Some(
+                        "input-start"
+                            | "input-end"
+                            | "line-break"
+                            | "whitespace"
+                            | "paragraph-break"
+                    )
                 )
             })
         }
