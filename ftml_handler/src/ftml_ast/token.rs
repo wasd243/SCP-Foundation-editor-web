@@ -17,16 +17,19 @@ pub struct Token {
     pub span: Span,
     /// The token type.
     pub ty: ftml::parsing::Token,
+    /// `true` if combined tokens into one token slice, `false` as default.
+    #[serde(skip)]
+    pub from_combination: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
 pub enum IncludeFoldMark {
     IncludeStart,
     IncludeEnd,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
 pub enum SubLangMark {
     Html,
@@ -46,6 +49,7 @@ impl Token {
                 end: extracted_token.span.end,
             },
             ty: extracted_token.token,
+            from_combination: false,
         }
     }
 }

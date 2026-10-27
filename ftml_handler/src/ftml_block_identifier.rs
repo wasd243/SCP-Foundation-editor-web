@@ -1,4 +1,5 @@
 mod blocks;
+mod perf;
 mod regex;
 mod utils;
 
@@ -17,11 +18,12 @@ impl ParseToken {
             ////////////////Include blocks collapse///////////////////
             self.mark_includes(i);
             //////////////////////////////////////////////////////////
-            
+
             ////////////////Sub Language Highlight////////////////////
             self.mark_module_css(i);
             self.mark_html(i);
             //////////////////////////////////////////////////////////
         }
+        self.combine_sub_languages_tokens();
     }
 }

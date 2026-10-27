@@ -47,6 +47,11 @@ impl ParseToken {
     pub(crate) fn value_iter(&self, index: usize) -> impl Iterator<Item = (usize, &Token)> + '_ {
         self.tokens.iter().enumerate().skip(index + 1)
     }
+
+    /// Checks that any line of code is from combination
+    pub fn from_combination(&self) -> bool {
+        self.tokens.iter().any(|token| token.from_combination)
+    }
 }
 
 impl From<&str> for ParseToken {

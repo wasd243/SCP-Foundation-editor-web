@@ -26,129 +26,12 @@
     },
     {
       "sub-lang-mark": "html",
-      "slice": "<",
+      "slice": "<divclass=\"foo\">somecontext</div>",
       "span": {
         "start": 10,
-        "end": 11
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "div",
-      "span": {
-        "start": 11,
-        "end": 14
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "class",
-      "span": {
-        "start": 15,
-        "end": 20
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "=",
-      "span": {
-        "start": 20,
-        "end": 21
-      },
-      "ty": "equals"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "\"",
-      "span": {
-        "start": 21,
-        "end": 22
-      },
-      "ty": "double-quote"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "foo",
-      "span": {
-        "start": 22,
-        "end": 25
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "\"",
-      "span": {
-        "start": 25,
-        "end": 26
-      },
-      "ty": "double-quote"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": ">",
-      "span": {
-        "start": 26,
-        "end": 27
-      },
-      "ty": "quote"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "some",
-      "span": {
-        "start": 29,
-        "end": 33
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "context",
-      "span": {
-        "start": 34,
-        "end": 41
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "<",
-      "span": {
-        "start": 43,
-        "end": 44
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "/",
-      "span": {
-        "start": 44,
-        "end": 45
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "div",
-      "span": {
-        "start": 45,
-        "end": 48
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": ">",
-      "span": {
-        "start": 48,
         "end": 49
       },
-      "ty": "quote"
+      "ty": "other"
     },
     {
       "slice": "[[/",
@@ -224,66 +107,12 @@
     },
     {
       "sub-lang-mark": "html",
-      "slice": "<",
+      "slice": "<!--Withalias-->",
       "span": {
         "start": 85,
-        "end": 86
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "!",
-      "span": {
-        "start": 86,
-        "end": 87
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "--",
-      "span": {
-        "start": 87,
-        "end": 89
-      },
-      "ty": "double-dash"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "With",
-      "span": {
-        "start": 89,
-        "end": 93
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "alias",
-      "span": {
-        "start": 94,
-        "end": 99
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": "--",
-      "span": {
-        "start": 99,
-        "end": 101
-      },
-      "ty": "double-dash"
-    },
-    {
-      "sub-lang-mark": "html",
-      "slice": ">",
-      "span": {
-        "start": 101,
         "end": 102
       },
-      "ty": "quote"
+      "ty": "other"
     },
     {
       "slice": "[[/",

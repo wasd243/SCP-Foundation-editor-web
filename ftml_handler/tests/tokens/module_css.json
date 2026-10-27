@@ -34,90 +34,9 @@
     },
     {
       "sub-lang-mark": "css",
-      "slice": ".",
+      "slice": ".some-class{color:red;}",
       "span": {
         "start": 16,
-        "end": 17
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": "some",
-      "span": {
-        "start": 17,
-        "end": 21
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": "-",
-      "span": {
-        "start": 21,
-        "end": 22
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": "class",
-      "span": {
-        "start": 22,
-        "end": 27
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": "{",
-      "span": {
-        "start": 28,
-        "end": 29
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": "color",
-      "span": {
-        "start": 35,
-        "end": 40
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": ":",
-      "span": {
-        "start": 40,
-        "end": 41
-      },
-      "ty": "colon"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": "red",
-      "span": {
-        "start": 42,
-        "end": 45
-      },
-      "ty": "identifier"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": ";",
-      "span": {
-        "start": 45,
-        "end": 46
-      },
-      "ty": "other"
-    },
-    {
-      "sub-lang-mark": "css",
-      "slice": "}",
-      "span": {
-        "start": 48,
         "end": 49
       },
       "ty": "other"
