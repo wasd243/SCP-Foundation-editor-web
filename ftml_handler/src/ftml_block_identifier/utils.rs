@@ -1,36 +1,47 @@
 use regex::Regex;
-use serde_json::Value;
 
-use crate::ftml_ast::{ParseToken, ValueIterDirection};
+use crate::ftml_ast::ParseToken;
 
-use super::{BLOCK_CLOSE, BLOCK_END, IDENTIFIER};
-
-fn slice_of(t: &Value) -> &str {
-    t["slice"].as_str().unwrap_or("")
-}
+use super::{IDENTIFIER, LEFT_BLOCK, LEFT_BLOCK_END, RIGHT_BLOCK};
 
 /// Check whether the token at `i` starts a `[[/name]]` sequence,
 /// where `name` matches `identifier_re`.
-pub(super) fn check_end(p: &ParseToken, i: usize, identifier_slice_re: &Regex) -> bool {
-    // token at `i` itself must be the end-block opener
-    let is_opener = p
+pub(super) fn check_end(
+    parse_token: &ParseToken,
+    index: usize,
+    identifier_slice_re: &Regex,
+) -> bool {
+    let is_opener = parse_token
         .tokens
-        .as_array()
-        .and_then(|a| a.get(i))
-        .is_some_and(|t| t["token"] == BLOCK_CLOSE);
+        .iter()
+        .any(|token| matches!(token.ty, LEFT_BLOCK_END));
+
     if !is_opener {
         return false;
     }
 
-    let mut iter = p.value_iter(i, ValueIterDirection::Forward);
+    let mut iter = parse_token.value_iter(index);
 
     // identifier matching the regex
-    let Some(t) = iter.next() else { return false };
-    if t["token"] != IDENTIFIER || !identifier_slice_re.is_match(slice_of(t)) {
+    let Some((_, token)) = iter.next() else {
+        return false;
+    };
+    if token.ty != IDENTIFIER || !identifier_slice_re.is_match(token.slice.as_str()) {
         return false;
     }
 
     // closing bracket
-    let Some(t) = iter.next() else { return false };
-    t["token"] == BLOCK_END
+    let Some((_, token)) = iter.next() else {
+        return false;
+    };
+    token.ty == RIGHT_BLOCK
+}
+
+pub(super) fn is_open(parse_token: &ParseToken, index: usize) -> bool {
+    if let Some(token) = parse_token.tokens.get(index)
+        && token.ty == LEFT_BLOCK
+    {
+        return true;
+    }
+    false
 }

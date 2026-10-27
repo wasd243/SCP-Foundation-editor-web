@@ -4,1169 +4,1169 @@
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 2,
-        "start": 0
+        "start": 0,
+        "end": 2
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 9,
-        "start": 2
+        "start": 2,
+        "end": 9
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 11,
-        "start": 10
+        "start": 10,
+        "end": 11
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 14,
-        "start": 11
+        "start": 11,
+        "end": 14
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 15,
-        "start": 14
+        "start": 14,
+        "end": 15
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 19,
-        "start": 15
+        "start": 15,
+        "end": 19
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 20,
-        "start": 19
+        "start": 19,
+        "end": 20
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "theme",
       "span": {
-        "end": 25,
-        "start": 20
+        "start": 20,
+        "end": 25
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 26,
-        "start": 25
+        "start": 25,
+        "end": 26
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "creepypasta",
       "span": {
-        "end": 37,
-        "start": 26
+        "start": 26,
+        "end": 37
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 39,
-        "start": 37
+        "start": 37,
+        "end": 39
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 43,
-        "start": 41
+        "start": 43,
+        "end": 45
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 50,
-        "start": 43
+        "start": 45,
+        "end": 52
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 52,
-        "start": 51
+        "start": 53,
+        "end": 54
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 55,
-        "start": 52
+        "start": 54,
+        "end": 57
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 56,
-        "start": 55
+        "start": 57,
+        "end": 58
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 60,
-        "start": 56
+        "start": 58,
+        "end": 62
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 61,
-        "start": 60
+        "start": 62,
+        "end": 63
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "info",
       "span": {
-        "end": 65,
-        "start": 61
+        "start": 63,
+        "end": 67
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 66,
-        "start": 65
+        "start": 67,
+        "end": 68
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "start",
       "span": {
-        "end": 71,
-        "start": 66
+        "start": 68,
+        "end": 73
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 73,
-        "start": 71
+        "start": 73,
+        "end": 75
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "slice": "**",
       "span": {
-        "end": 76,
-        "start": 74
+        "start": 77,
+        "end": 79
       },
-      "token": "bold"
+      "ty": "bold"
     },
     {
       "slice": "Kobolds",
       "span": {
-        "end": 83,
-        "start": 76
+        "start": 79,
+        "end": 86
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "And",
       "span": {
-        "end": 87,
-        "start": 84
+        "start": 87,
+        "end": 90
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "Keeps",
       "span": {
-        "end": 93,
-        "start": 88
+        "start": 91,
+        "end": 96
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "**",
       "span": {
-        "end": 95,
-        "start": 93
+        "start": 96,
+        "end": 98
       },
-      "token": "bold"
+      "ty": "bold"
     },
     {
       "slice": "**",
       "span": {
-        "end": 98,
-        "start": 96
+        "start": 100,
+        "end": 102
       },
-      "token": "bold"
+      "ty": "bold"
     },
     {
       "slice": "Author",
       "span": {
-        "end": 104,
-        "start": 98
+        "start": 102,
+        "end": 108
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 105,
-        "start": 104
+        "start": 108,
+        "end": 109
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "**",
       "span": {
-        "end": 107,
-        "start": 105
+        "start": 109,
+        "end": 111
       },
-      "token": "bold"
+      "ty": "bold"
     },
     {
       "slice": "[[*",
       "span": {
-        "end": 111,
-        "start": 108
+        "start": 112,
+        "end": 115
       },
-      "token": "left-block-star"
+      "ty": "left-block-star"
     },
     {
       "slice": "user",
       "span": {
-        "end": 115,
-        "start": 111
+        "start": 115,
+        "end": 119
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "DFAstillo91",
       "span": {
-        "end": 127,
-        "start": 116
+        "start": 120,
+        "end": 131
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 129,
-        "start": 127
+        "start": 131,
+        "end": 133
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "slice": "and",
       "span": {
-        "end": 133,
-        "start": 130
+        "start": 134,
+        "end": 137
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "[[*",
       "span": {
-        "end": 137,
-        "start": 134
+        "start": 138,
+        "end": 141
       },
-      "token": "left-block-star"
+      "ty": "left-block-star"
     },
     {
       "slice": "user",
       "span": {
-        "end": 141,
-        "start": 137
+        "start": 141,
+        "end": 145
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "WaylandLaurencePan",
       "span": {
-        "end": 160,
-        "start": 142
+        "start": 146,
+        "end": 164
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 162,
-        "start": 160
+        "start": 164,
+        "end": 166
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "slice": "**",
       "span": {
-        "end": 165,
-        "start": 163
+        "start": 168,
+        "end": 170
       },
-      "token": "bold"
+      "ty": "bold"
     },
     {
       "slice": "This",
       "span": {
-        "end": 169,
-        "start": 165
+        "start": 170,
+        "end": 174
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "work",
       "span": {
-        "end": 174,
-        "start": 170
+        "start": 175,
+        "end": 179
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "contains",
       "span": {
-        "end": 183,
-        "start": 175
+        "start": 180,
+        "end": 188
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "CWs",
       "span": {
-        "end": 187,
-        "start": 184
+        "start": 189,
+        "end": 192
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "for",
       "span": {
-        "end": 191,
-        "start": 188
+        "start": 193,
+        "end": 196
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 192,
-        "start": 191
+        "start": 196,
+        "end": 197
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "**",
       "span": {
-        "end": 194,
-        "start": 192
+        "start": 197,
+        "end": 199
       },
-      "token": "bold"
+      "ty": "bold"
     },
     {
       "slice": "Explicit",
       "span": {
-        "end": 203,
-        "start": 195
+        "start": 200,
+        "end": 208
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "depicitons",
       "span": {
-        "end": 214,
-        "start": 204
+        "start": 209,
+        "end": 219
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "of",
       "span": {
-        "end": 217,
-        "start": 215
+        "start": 220,
+        "end": 222
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "gore",
       "span": {
-        "end": 222,
-        "start": 218
+        "start": 223,
+        "end": 227
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ",",
       "span": {
-        "end": 223,
-        "start": 222
+        "start": 227,
+        "end": 228
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "self",
       "span": {
-        "end": 228,
-        "start": 224
+        "start": 229,
+        "end": 233
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "harm",
       "span": {
-        "end": 233,
-        "start": 229
+        "start": 234,
+        "end": 238
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ",",
       "span": {
-        "end": 234,
-        "start": 233
+        "start": 238,
+        "end": 239
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "and",
       "span": {
-        "end": 238,
-        "start": 235
+        "start": 240,
+        "end": 243
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "suicide",
       "span": {
-        "end": 246,
-        "start": 239
+        "start": 244,
+        "end": 251
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ".",
       "span": {
-        "end": 247,
-        "start": 246
+        "start": 251,
+        "end": 252
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": ".",
       "span": {
-        "end": 248,
-        "start": 247
+        "start": 252,
+        "end": 253
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 251,
-        "start": 249
+        "start": 255,
+        "end": 257
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 258,
-        "start": 251
+        "start": 257,
+        "end": 264
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 260,
-        "start": 259
+        "start": 265,
+        "end": 266
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 263,
-        "start": 260
+        "start": 266,
+        "end": 269
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 264,
-        "start": 263
+        "start": 269,
+        "end": 270
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 268,
-        "start": 264
+        "start": 270,
+        "end": 274
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 269,
-        "start": 268
+        "start": 274,
+        "end": 275
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "info",
       "span": {
-        "end": 273,
-        "start": 269
+        "start": 275,
+        "end": 279
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 274,
-        "start": 273
+        "start": 279,
+        "end": 280
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "end",
       "span": {
-        "end": 277,
-        "start": 274
+        "start": 280,
+        "end": 283
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 279,
-        "start": 277
+        "start": 283,
+        "end": 285
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 283,
-        "start": 281
+        "start": 289,
+        "end": 291
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 290,
-        "start": 283
+        "start": 291,
+        "end": 298
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 292,
-        "start": 291
+        "start": 299,
+        "end": 300
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 295,
-        "start": 292
+        "start": 300,
+        "end": 303
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 296,
-        "start": 295
+        "start": 303,
+        "end": 304
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 300,
-        "start": 296
+        "start": 304,
+        "end": 308
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 301,
-        "start": 300
+        "start": 308,
+        "end": 309
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "component",
       "span": {
-        "end": 310,
-        "start": 301
+        "start": 309,
+        "end": 318
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 311,
-        "start": 310
+        "start": 318,
+        "end": 319
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "info",
       "span": {
-        "end": 315,
-        "start": 311
+        "start": 319,
+        "end": 323
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 316,
-        "start": 315
+        "start": 323,
+        "end": 324
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "cw",
       "span": {
-        "end": 318,
-        "start": 316
+        "start": 324,
+        "end": 326
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 320,
-        "start": 318
+        "start": 326,
+        "end": 328
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "slice": "------------",
       "span": {
-        "end": 334,
-        "start": 322
+        "start": 332,
+        "end": 344
       },
-      "token": "triple-dash"
+      "ty": "triple-dash"
     },
     {
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 338,
-        "start": 336
+        "start": 348,
+        "end": 350
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 345,
-        "start": 338
+        "start": 350,
+        "end": 357
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 347,
-        "start": 346
+        "start": 358,
+        "end": 359
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 350,
-        "start": 347
+        "start": 359,
+        "end": 362
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 351,
-        "start": 350
+        "start": 362,
+        "end": 363
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 355,
-        "start": 351
+        "start": 363,
+        "end": 367
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 356,
-        "start": 355
+        "start": 367,
+        "end": 368
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "more",
       "span": {
-        "end": 360,
-        "start": 356
+        "start": 368,
+        "end": 372
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 361,
-        "start": 360
+        "start": 372,
+        "end": 373
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "by",
       "span": {
-        "end": 363,
-        "start": 361
+        "start": 373,
+        "end": 375
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 364,
-        "start": 363
+        "start": 375,
+        "end": 376
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "DFAstillo91",
       "span": {
-        "end": 375,
-        "start": 364
+        "start": 376,
+        "end": 387
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 377,
-        "start": 375
+        "start": 387,
+        "end": 389
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 380,
-        "start": 378
+        "start": 391,
+        "end": 393
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 387,
-        "start": 380
+        "start": 393,
+        "end": 400
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 389,
-        "start": 388
+        "start": 401,
+        "end": 402
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 392,
-        "start": 389
+        "start": 402,
+        "end": 405
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 393,
-        "start": 392
+        "start": 405,
+        "end": 406
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 397,
-        "start": 393
+        "start": 406,
+        "end": 410
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 398,
-        "start": 397
+        "start": 410,
+        "end": 411
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "more",
       "span": {
-        "end": 402,
-        "start": 398
+        "start": 411,
+        "end": 415
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 403,
-        "start": 402
+        "start": 415,
+        "end": 416
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "by",
       "span": {
-        "end": 405,
-        "start": 403
+        "start": 416,
+        "end": 418
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 406,
-        "start": 405
+        "start": 418,
+        "end": 419
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "waylandlaurencepan",
       "span": {
-        "end": 424,
-        "start": 406
+        "start": 419,
+        "end": 437
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 426,
-        "start": 424
+        "start": 437,
+        "end": 439
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 429,
-        "start": 427
+        "start": 441,
+        "end": 443
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 436,
-        "start": 429
+        "start": 443,
+        "end": 450
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 438,
-        "start": 437
+        "start": 451,
+        "end": 452
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 441,
-        "start": 438
+        "start": 452,
+        "end": 455
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 442,
-        "start": 441
+        "start": 455,
+        "end": 456
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 446,
-        "start": 442
+        "start": 456,
+        "end": 460
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 447,
-        "start": 446
+        "start": 460,
+        "end": 461
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "component",
       "span": {
-        "end": 456,
-        "start": 447
+        "start": 461,
+        "end": 470
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 457,
-        "start": 456
+        "start": 470,
+        "end": 471
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "license",
       "span": {
-        "end": 464,
-        "start": 457
+        "start": 471,
+        "end": 478
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 465,
-        "start": 464
+        "start": 478,
+        "end": 479
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "box",
       "span": {
-        "end": 468,
-        "start": 465
+        "start": 479,
+        "end": 482
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "author",
       "span": {
-        "end": 475,
-        "start": 469
+        "start": 483,
+        "end": 489
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "=",
       "span": {
-        "end": 476,
-        "start": 475
+        "start": 489,
+        "end": 490
       },
-      "token": "equals"
+      "ty": "equals"
     },
     {
       "slice": "DFAstillo91",
       "span": {
-        "end": 487,
-        "start": 476
+        "start": 490,
+        "end": 501
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "and",
       "span": {
-        "end": 491,
-        "start": 488
+        "start": 502,
+        "end": 505
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "WaylandLaurencePan",
       "span": {
-        "end": 510,
-        "start": 492
+        "start": 506,
+        "end": 524
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 512,
-        "start": 510
+        "start": 524,
+        "end": 526
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "include-fold-mark": "include-start",
       "slice": "[[",
       "span": {
-        "end": 515,
-        "start": 513
+        "start": 528,
+        "end": 530
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "include",
       "span": {
-        "end": 522,
-        "start": 515
+        "start": 530,
+        "end": 537
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 524,
-        "start": 523
+        "start": 538,
+        "end": 539
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "scp",
       "span": {
-        "end": 527,
-        "start": 524
+        "start": 539,
+        "end": 542
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 528,
-        "start": 527
+        "start": 542,
+        "end": 543
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "wiki",
       "span": {
-        "end": 532,
-        "start": 528
+        "start": 543,
+        "end": 547
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 533,
-        "start": 532
+        "start": 547,
+        "end": 548
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "component",
       "span": {
-        "end": 542,
-        "start": 533
+        "start": 548,
+        "end": 557
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": ":",
       "span": {
-        "end": 543,
-        "start": 542
+        "start": 557,
+        "end": 558
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
       "slice": "license",
       "span": {
-        "end": 550,
-        "start": 543
+        "start": 558,
+        "end": 565
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 551,
-        "start": 550
+        "start": 565,
+        "end": 566
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "box",
       "span": {
-        "end": 554,
-        "start": 551
+        "start": 566,
+        "end": 569
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "-",
       "span": {
-        "end": 555,
-        "start": 554
+        "start": 569,
+        "end": 570
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "end",
       "span": {
-        "end": 558,
-        "start": 555
+        "start": 570,
+        "end": 573
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "include-fold-mark": "include-end",
       "slice": "]]",
       "span": {
-        "end": 560,
-        "start": 558
+        "start": 573,
+        "end": 575
       },
-      "token": "right-block"
+      "ty": "right-block"
     }
   ],
   "diagnostics": [
@@ -1194,148 +1194,148 @@
     {
       "msg": "InvalidInclude: block-include",
       "span": {
-        "start": 51,
-        "end": 52
+        "start": 53,
+        "end": 54
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 41,
-        "end": 43
+        "start": 43,
+        "end": 45
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 71,
-        "end": 73
+        "start": 73,
+        "end": 75
       }
     },
     {
       "msg": "InvalidInclude: block-include",
       "span": {
-        "start": 259,
-        "end": 260
+        "start": 265,
+        "end": 266
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 249,
-        "end": 251
+        "start": 255,
+        "end": 257
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 277,
-        "end": 279
+        "start": 283,
+        "end": 285
       }
     },
     {
       "msg": "InvalidInclude: block-include",
       "span": {
-        "start": 291,
-        "end": 292
+        "start": 299,
+        "end": 300
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 281,
-        "end": 283
+        "start": 289,
+        "end": 291
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 318,
-        "end": 320
+        "start": 326,
+        "end": 328
       }
     },
     {
       "msg": "InvalidInclude: block-include",
       "span": {
-        "start": 346,
-        "end": 347
+        "start": 358,
+        "end": 359
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 336,
-        "end": 338
+        "start": 348,
+        "end": 350
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 375,
-        "end": 377
-      }
-    },
-    {
-      "msg": "InvalidInclude: block-include",
-      "span": {
-        "start": 388,
+        "start": 387,
         "end": 389
       }
     },
     {
-      "msg": "NoRulesMatch: fallback",
-      "span": {
-        "start": 378,
-        "end": 380
-      }
-    },
-    {
-      "msg": "NoRulesMatch: fallback",
-      "span": {
-        "start": 424,
-        "end": 426
-      }
-    },
-    {
       "msg": "InvalidInclude: block-include",
+      "span": {
+        "start": 401,
+        "end": 402
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 391,
+        "end": 393
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
       "span": {
         "start": 437,
-        "end": 438
-      }
-    },
-    {
-      "msg": "NoRulesMatch: fallback",
-      "span": {
-        "start": 427,
-        "end": 429
-      }
-    },
-    {
-      "msg": "NoRulesMatch: fallback",
-      "span": {
-        "start": 510,
-        "end": 512
+        "end": 439
       }
     },
     {
       "msg": "InvalidInclude: block-include",
       "span": {
-        "start": 523,
-        "end": 524
+        "start": 451,
+        "end": 452
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 513,
-        "end": 515
+        "start": 441,
+        "end": 443
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 558,
-        "end": 560
+        "start": 524,
+        "end": 526
+      }
+    },
+    {
+      "msg": "InvalidInclude: block-include",
+      "span": {
+        "start": 538,
+        "end": 539
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 528,
+        "end": 530
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 573,
+        "end": 575
       }
     }
   ]

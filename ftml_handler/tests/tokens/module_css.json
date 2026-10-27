@@ -3,148 +3,148 @@
     {
       "slice": "[[",
       "span": {
-        "end": 2,
-        "start": 0
+        "start": 0,
+        "end": 2
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "module",
       "span": {
-        "end": 8,
-        "start": 2
+        "start": 2,
+        "end": 8
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "css",
       "span": {
-        "end": 12,
-        "start": 9
+        "start": 9,
+        "end": 12
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 14,
-        "start": 12
+        "start": 12,
+        "end": 14
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": ".",
       "span": {
-        "end": 16,
-        "start": 15
+        "start": 16,
+        "end": 17
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": "some",
       "span": {
-        "end": 20,
-        "start": 16
+        "start": 17,
+        "end": 21
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": "-",
       "span": {
-        "end": 21,
-        "start": 20
+        "start": 21,
+        "end": 22
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": "class",
       "span": {
-        "end": 26,
-        "start": 21
+        "start": 22,
+        "end": 27
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": "{",
       "span": {
-        "end": 28,
-        "start": 27
+        "start": 28,
+        "end": 29
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": "color",
       "span": {
-        "end": 38,
-        "start": 33
+        "start": 35,
+        "end": 40
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": ":",
       "span": {
-        "end": 39,
-        "start": 38
+        "start": 40,
+        "end": 41
       },
-      "token": "colon"
+      "ty": "colon"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": "red",
       "span": {
-        "end": 43,
-        "start": 40
+        "start": 42,
+        "end": 45
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": ";",
       "span": {
-        "end": 44,
-        "start": 43
+        "start": 45,
+        "end": 46
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "css",
+      "sub-lang-mark": "css",
       "slice": "}",
       "span": {
-        "end": 46,
-        "start": 45
+        "start": 48,
+        "end": 49
       },
-      "token": "other"
+      "ty": "other"
     },
     {
       "slice": "[[/",
       "span": {
-        "end": 50,
-        "start": 47
+        "start": 51,
+        "end": 54
       },
-      "token": "left-block-end"
+      "ty": "left-block-end"
     },
     {
       "slice": "module",
       "span": {
-        "end": 56,
-        "start": 50
+        "start": 54,
+        "end": 60
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 58,
-        "start": 56
+        "start": 60,
+        "end": 62
       },
-      "token": "right-block"
+      "ty": "right-block"
     }
   ],
   "diagnostics": []

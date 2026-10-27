@@ -1,10 +1,10 @@
 import { tokenization } from "ftml_handler";
 
 export interface FtmlToken {
-  token: string;
+  ty: string;
   slice: string;
   span: { start: number; end: number };
-  "lsp-mark"?: "html" | "css";
+  "sub-lang-mark"?: "html" | "css";
   "include-fold-mark"?: "include-start" | "include-end";
 }
 

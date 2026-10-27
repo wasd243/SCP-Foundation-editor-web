@@ -3,347 +3,347 @@
     {
       "slice": "[[",
       "span": {
-        "end": 2,
-        "start": 0
+        "start": 0,
+        "end": 2
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "html",
       "span": {
-        "end": 6,
-        "start": 2
+        "start": 2,
+        "end": 6
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 8,
-        "start": 6
+        "start": 6,
+        "end": 8
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "<",
       "span": {
-        "end": 10,
-        "start": 9
+        "start": 10,
+        "end": 11
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "div",
       "span": {
-        "end": 13,
-        "start": 10
+        "start": 11,
+        "end": 14
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "class",
       "span": {
-        "end": 19,
-        "start": 14
+        "start": 15,
+        "end": 20
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "=",
       "span": {
-        "end": 20,
-        "start": 19
+        "start": 20,
+        "end": 21
       },
-      "token": "equals"
+      "ty": "equals"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "\"",
       "span": {
-        "end": 21,
-        "start": 20
+        "start": 21,
+        "end": 22
       },
-      "token": "double-quote"
+      "ty": "double-quote"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "foo",
       "span": {
-        "end": 24,
-        "start": 21
+        "start": 22,
+        "end": 25
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "\"",
       "span": {
-        "end": 25,
-        "start": 24
+        "start": 25,
+        "end": 26
       },
-      "token": "double-quote"
+      "ty": "double-quote"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": ">",
       "span": {
-        "end": 26,
-        "start": 25
+        "start": 26,
+        "end": 27
       },
-      "token": "quote"
+      "ty": "quote"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "some",
       "span": {
-        "end": 31,
-        "start": 27
+        "start": 29,
+        "end": 33
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "context",
       "span": {
-        "end": 39,
-        "start": 32
+        "start": 34,
+        "end": 41
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "<",
       "span": {
-        "end": 41,
-        "start": 40
+        "start": 43,
+        "end": 44
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "/",
       "span": {
-        "end": 42,
-        "start": 41
+        "start": 44,
+        "end": 45
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "div",
       "span": {
-        "end": 45,
-        "start": 42
+        "start": 45,
+        "end": 48
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": ">",
       "span": {
-        "end": 46,
-        "start": 45
+        "start": 48,
+        "end": 49
       },
-      "token": "quote"
+      "ty": "quote"
     },
     {
       "slice": "[[/",
       "span": {
-        "end": 50,
-        "start": 47
+        "start": 51,
+        "end": 54
       },
-      "token": "left-block-end"
+      "ty": "left-block-end"
     },
     {
       "slice": "html",
       "span": {
-        "end": 54,
-        "start": 50
+        "start": 54,
+        "end": 58
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 56,
-        "start": 54
+        "start": 58,
+        "end": 60
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
       "slice": "[[",
       "span": {
-        "end": 60,
-        "start": 58
+        "start": 64,
+        "end": 66
       },
-      "token": "left-block"
+      "ty": "left-block"
     },
     {
       "slice": "html",
       "span": {
-        "end": 64,
-        "start": 60
+        "start": 66,
+        "end": 70
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "width",
       "span": {
-        "end": 70,
-        "start": 65
+        "start": 71,
+        "end": 76
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "=",
       "span": {
-        "end": 71,
-        "start": 70
+        "start": 76,
+        "end": 77
       },
-      "token": "equals"
+      "ty": "equals"
     },
     {
       "slice": "30px",
       "span": {
-        "end": 75,
-        "start": 71
+        "start": 77,
+        "end": 81
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 77,
-        "start": 75
+        "start": 81,
+        "end": 83
       },
-      "token": "right-block"
+      "ty": "right-block"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "<",
       "span": {
-        "end": 79,
-        "start": 78
+        "start": 85,
+        "end": 86
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "!",
       "span": {
-        "end": 80,
-        "start": 79
+        "start": 86,
+        "end": 87
       },
-      "token": "other"
+      "ty": "other"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "--",
       "span": {
-        "end": 82,
-        "start": 80
+        "start": 87,
+        "end": 89
       },
-      "token": "double-dash"
+      "ty": "double-dash"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "With",
       "span": {
-        "end": 86,
-        "start": 82
+        "start": 89,
+        "end": 93
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "alias",
       "span": {
-        "end": 92,
-        "start": 87
+        "start": 94,
+        "end": 99
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": "--",
       "span": {
-        "end": 94,
-        "start": 92
+        "start": 99,
+        "end": 101
       },
-      "token": "double-dash"
+      "ty": "double-dash"
     },
     {
-      "lsp-mark": "html",
+      "sub-lang-mark": "html",
       "slice": ">",
       "span": {
-        "end": 95,
-        "start": 94
+        "start": 101,
+        "end": 102
       },
-      "token": "quote"
+      "ty": "quote"
     },
     {
       "slice": "[[/",
       "span": {
-        "end": 99,
-        "start": 96
+        "start": 104,
+        "end": 107
       },
-      "token": "left-block-end"
+      "ty": "left-block-end"
     },
     {
       "slice": "html",
       "span": {
-        "end": 103,
-        "start": 99
+        "start": 107,
+        "end": 111
       },
-      "token": "identifier"
+      "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "end": 105,
-        "start": 103
+        "start": 111,
+        "end": 113
       },
-      "token": "right-block"
+      "ty": "right-block"
     }
   ],
   "diagnostics": [
     {
       "msg": "BlockMalformedArguments: block-html",
       "span": {
-        "start": 71,
-        "end": 75
+        "start": 77,
+        "end": 81
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 58,
-        "end": 60
+        "start": 64,
+        "end": 66
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 75,
-        "end": 77
+        "start": 81,
+        "end": 83
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 96,
-        "end": 99
+        "start": 104,
+        "end": 107
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 103,
-        "end": 105
+        "start": 111,
+        "end": 113
       }
     }
   ]

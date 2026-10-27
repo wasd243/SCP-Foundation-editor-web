@@ -81,19 +81,19 @@ const OPENERS = new Set([
 
 function typeOf(tokens: FtmlToken[], index: number): string | undefined {
   const t = tokens[index];
-  if (t["lsp-mark"]) return undefined;
-  if (t.token !== "identifier") return TYPE_BY_TOKEN[t.token];
+  if (t["sub-lang-mark"]) return undefined;
+  if (t.ty !== "identifier") return TYPE_BY_TOKEN[t.ty];
 
   const prev = tokens[index - 1];
   const prev2 = tokens[index - 2];
   const next = tokens[index + 1];
 
   // [[div ...]] -> block name
-  if (prev && OPENERS.has(prev.token)) return "keyword";
+  if (prev && OPENERS.has(prev.ty)) return "keyword";
   // [[module css]] -> module name
-  if (prev?.slice === "module" && prev2 && OPENERS.has(prev2.token)) return "type";
+  if (prev?.slice === "module" && prev2 && OPENERS.has(prev2.ty)) return "type";
   // id="..." -> attribute name
-  if (next?.token === "equals") return "attribute";
+  if (next?.ty === "equals") return "attribute";
   return undefined;
 }
 
@@ -154,7 +154,7 @@ function collectSubHighlights(tokens: FtmlToken[], source: string): SubHighlight
   let current: SubHighlight | undefined;
 
   for (const token of tokens) {
-    const lang = token["lsp-mark"];
+    const lang = token["sub-lang-mark"];
     if (!lang) {
       current = undefined;
       continue;

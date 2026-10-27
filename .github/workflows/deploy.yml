@@ -52,7 +52,7 @@ jobs:
 
       - name: Build ftml_handler wasm package
         working-directory: ./ftml_handler
-        run: wasm-pack build --target bundler
+        run: wasm-pack build --release --target bundler
 
       - name: Build project
         run: pnpm run build

@@ -10,7 +10,7 @@ use wasm_bindgen::prelude::*;
 pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
     let mut tokens = ParseToken::from(src);
     tokens.clean();
-    tokens.mark_sublanguage_blocks();
+    tokens.mark_blocks();
 
     let serializer = serde_wasm_bindgen::Serializer::new().serialize_maps_as_objects(true);
     tokens
