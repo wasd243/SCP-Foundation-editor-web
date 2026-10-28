@@ -1,4 +1,5 @@
-use crate::ftml_ast::Span;
+use crate::ftml_ast::{Span, SubLangMark};
+
 use ftml::parsing::Token as FtmlToken;
 use serde::Serialize;
 
@@ -10,6 +11,8 @@ pub struct TokenTree {
     pub span: Span,
     /// The token tree type.
     pub ty: TokenTreeTy,
+    /// The lsp mark for sub languages highlights.
+    pub sub_lang_mark: Option<SubLangMark>,
     /// `true` if the token tree has a close tag, `false` as default.
     #[serde(skip)]
     pub has_close_tag: bool,
@@ -32,6 +35,4 @@ pub enum TokenTreeTy {
     /// A block close tag like: `[[/div]]`; `[[/module]]`, whether it's a block with alias or not,
     /// it always without alias. If the user closes the block with an alia, a parse error occurs.
     BlockClose,
-    /// Have an inline mark like: `**bold**`; `//italic//`; `[!--comment--]`.
-    WithInlineMarks(FtmlToken),
 }

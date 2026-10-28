@@ -29,7 +29,7 @@ pub enum IncludeFoldMark {
     IncludeEnd,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Debug, PartialEq, Eq, Copy, Clone)]
 #[serde(rename_all = "kebab-case")]
 pub enum SubLangMark {
     Html,

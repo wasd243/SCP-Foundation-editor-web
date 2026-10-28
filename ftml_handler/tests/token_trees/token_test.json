@@ -14,7 +14,8 @@
           "identifier",
           "double-quote"
         ]
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -24,7 +25,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "context",
@@ -34,7 +36,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -44,7 +47,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[/div]]",
@@ -52,7 +56,8 @@
         "start": 31,
         "end": 39
       },
-      "ty": "block-close"
+      "ty": "block-close",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n\n",
@@ -62,7 +67,8 @@
       },
       "ty": {
         "parse-token": "paragraph-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[note <- failed note\n\n[[note]]",
@@ -80,7 +86,8 @@
           "left-block",
           "identifier"
         ]
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -90,7 +97,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "something",
@@ -100,7 +108,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -110,7 +119,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[/note]]",
@@ -118,7 +128,8 @@
         "start": 83,
         "end": 92
       },
-      "ty": "block-close"
+      "ty": "block-close",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -128,7 +139,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     }
   ],
   "diagnostics": [

@@ -35,6 +35,7 @@ impl ParseTokenTree {
                     slice: token.slice.clone(),
                     span: token.span,
                     ty: TokenTreeTy::ParseToken(token.ty),
+                    sub_lang_mark: token.sub_lang_mark,
                     has_close_tag: false,
                 });
                 index += 1;
@@ -53,6 +54,7 @@ impl ParseTokenTree {
                     slice: token.slice.clone(),
                     span: token.span,
                     ty: TokenTreeTy::ParseToken(token.ty),
+                    sub_lang_mark: token.sub_lang_mark,
                     has_close_tag: false,
                 });
                 index += 1;
@@ -75,22 +77,22 @@ impl ParseTokenTree {
                 .find(|inner| inner.ty == FtmlToken::Identifier);
             let is_include = name.is_some_and(|inner| INCLUDE.is_match(&inner.slice));
 
-            let ty = if token.ty == FtmlToken::LeftBlockEnd {
-                TokenTreeTy::BlockClose
-            } else if is_include {
-                TokenTreeTy::Include
-            } else {
-                let alias: Vec<Alias> = inner_tokens
-                    .iter()
-                    .skip_while(|inner| inner.ty != FtmlToken::Identifier)
-                    .skip(1)
-                    .filter(|inner| inner.ty != FtmlToken::Whitespace)
-                    .map(|inner| inner.ty)
-                    .collect();
-                if alias.is_empty() {
-                    TokenTreeTy::BlockWithoutAlias
-                } else {
-                    TokenTreeTy::BlockWithAlias(Some(alias))
+            let ty = match (token.ty, is_include) {
+                (FtmlToken::LeftBlockEnd, _) => TokenTreeTy::BlockClose,
+                (_, true) => TokenTreeTy::Include,
+                _ => {
+                    let alias: Vec<Alias> = inner_tokens
+                        .iter()
+                        .skip_while(|inner| inner.ty != FtmlToken::Identifier)
+                        .skip(1)
+                        .filter(|inner| inner.ty != FtmlToken::Whitespace)
+                        .map(|inner| inner.ty)
+                        .collect();
+                    if alias.is_empty() {
+                        TokenTreeTy::BlockWithoutAlias
+                    } else {
+                        TokenTreeTy::BlockWithAlias(Some(alias))
+                    }
                 }
             };
 
@@ -98,6 +100,7 @@ impl ParseTokenTree {
                 slice,
                 span,
                 ty,
+                sub_lang_mark: token.sub_lang_mark,
                 has_close_tag: false,
             });
             index = close_index + 1;
@@ -134,12 +137,8 @@ impl ParseToken {
     pub fn clean(&mut self) {
         use ftml::parsing::Token;
 
-        self.tokens.retain(|token| {
-            !matches!(
-                token.ty,
-                Token::InputStart | Token::InputEnd
-            )
-        });
+        self.tokens
+            .retain(|token| !matches!(token.ty, Token::InputStart | Token::InputEnd));
     }
 
     /// Iterate over tokens before/after `index` and then output with `index`.

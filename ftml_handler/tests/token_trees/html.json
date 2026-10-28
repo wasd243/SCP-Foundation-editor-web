@@ -6,7 +6,8 @@
         "start": 0,
         "end": 8
       },
-      "ty": "block-without-alias"
+      "ty": "block-without-alias",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n<div class=\"foo\">\nsome context\n</div>\n",
@@ -16,7 +17,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": "html"
     },
     {
       "slice": "[[/html]]",
@@ -24,7 +26,8 @@
         "start": 47,
         "end": 56
       },
-      "ty": "block-close"
+      "ty": "block-close",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n\n",
@@ -34,7 +37,8 @@
       },
       "ty": {
         "parse-token": "paragraph-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[html width=30px]]",
@@ -48,7 +52,8 @@
           "equals",
           "identifier"
         ]
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n<!--With alias-->\n",
@@ -58,7 +63,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": "html"
     },
     {
       "slice": "[[/html]]",
@@ -66,7 +72,8 @@
         "start": 96,
         "end": 105
       },
-      "ty": "block-close"
+      "ty": "block-close",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -76,7 +83,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     }
   ],
   "diagnostics": [

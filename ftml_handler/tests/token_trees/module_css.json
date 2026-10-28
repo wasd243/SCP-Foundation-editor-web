@@ -10,7 +10,8 @@
         "block-with-alias": [
           "identifier"
         ]
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -20,7 +21,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ".",
@@ -30,7 +32,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "some",
@@ -40,7 +43,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "-",
@@ -50,7 +54,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "class",
@@ -60,7 +65,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -70,7 +76,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "{",
@@ -80,7 +87,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -90,7 +98,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "    ",
@@ -100,7 +109,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "color",
@@ -110,7 +120,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ":",
@@ -120,7 +131,8 @@
       },
       "ty": {
         "parse-token": "colon"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -130,7 +142,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "red",
@@ -140,7 +153,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ";",
@@ -150,7 +164,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -160,7 +175,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "}",
@@ -170,7 +186,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -180,7 +197,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[/module]]",
@@ -188,7 +206,8 @@
         "start": 47,
         "end": 58
       },
-      "ty": "block-close"
+      "ty": "block-close",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -198,7 +217,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     }
   ],
   "diagnostics": []

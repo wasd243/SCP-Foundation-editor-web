@@ -6,7 +6,8 @@
         "start": 0,
         "end": 39
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n\n",
@@ -16,7 +17,8 @@
       },
       "ty": {
         "parse-token": "paragraph-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[include :scp-wiki:info:start]]",
@@ -24,7 +26,8 @@
         "start": 41,
         "end": 73
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -34,7 +37,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "**",
@@ -44,7 +48,8 @@
       },
       "ty": {
         "parse-token": "bold"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "Kobolds",
@@ -54,7 +59,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -64,7 +70,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "And",
@@ -74,7 +81,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -84,7 +92,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "Keeps",
@@ -94,7 +103,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "**",
@@ -104,7 +114,8 @@
       },
       "ty": {
         "parse-token": "bold"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -114,7 +125,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "**",
@@ -124,7 +136,8 @@
       },
       "ty": {
         "parse-token": "bold"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "Author",
@@ -134,7 +147,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ":",
@@ -144,7 +158,8 @@
       },
       "ty": {
         "parse-token": "colon"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "**",
@@ -154,7 +169,8 @@
       },
       "ty": {
         "parse-token": "bold"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -164,7 +180,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[*",
@@ -174,7 +191,8 @@
       },
       "ty": {
         "parse-token": "left-block-star"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "user",
@@ -184,7 +202,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -194,7 +213,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "DFAstillo91",
@@ -204,7 +224,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "]]",
@@ -214,7 +235,8 @@
       },
       "ty": {
         "parse-token": "right-block"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -224,7 +246,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "and",
@@ -234,7 +257,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -244,7 +268,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[*",
@@ -254,7 +279,8 @@
       },
       "ty": {
         "parse-token": "left-block-star"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "user",
@@ -264,7 +290,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -274,7 +301,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "WaylandLaurencePan",
@@ -284,7 +312,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "]]",
@@ -294,7 +323,8 @@
       },
       "ty": {
         "parse-token": "right-block"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -304,7 +334,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "**",
@@ -314,7 +345,8 @@
       },
       "ty": {
         "parse-token": "bold"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "This",
@@ -324,7 +356,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -334,7 +367,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "work",
@@ -344,7 +378,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -354,7 +389,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "contains",
@@ -364,7 +400,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -374,7 +411,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "CWs",
@@ -384,7 +422,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -394,7 +433,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "for",
@@ -404,7 +444,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ":",
@@ -414,7 +455,8 @@
       },
       "ty": {
         "parse-token": "colon"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "**",
@@ -424,7 +466,8 @@
       },
       "ty": {
         "parse-token": "bold"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -434,7 +477,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "Explicit",
@@ -444,7 +488,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -454,7 +499,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "depicitons",
@@ -464,7 +510,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -474,7 +521,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "of",
@@ -484,7 +532,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -494,7 +543,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "gore",
@@ -504,7 +554,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ",",
@@ -514,7 +565,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -524,7 +576,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "self",
@@ -534,7 +587,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -544,7 +598,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "harm",
@@ -554,7 +609,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ",",
@@ -564,7 +620,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -574,7 +631,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "and",
@@ -584,7 +642,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -594,7 +653,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "suicide",
@@ -604,7 +664,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ".",
@@ -614,7 +675,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": ".",
@@ -624,7 +686,8 @@
       },
       "ty": {
         "parse-token": "other"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -634,7 +697,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[include :scp-wiki:info:end]]",
@@ -642,7 +706,8 @@
         "start": 249,
         "end": 279
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n\n",
@@ -652,7 +717,8 @@
       },
       "ty": {
         "parse-token": "paragraph-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[include :scp-wiki:component:info-cw]]",
@@ -660,7 +726,8 @@
         "start": 281,
         "end": 320
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n\n",
@@ -670,7 +737,8 @@
       },
       "ty": {
         "parse-token": "paragraph-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "------------",
@@ -680,7 +748,8 @@
       },
       "ty": {
         "parse-token": "triple-dash"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "\n\n",
@@ -690,7 +759,8 @@
       },
       "ty": {
         "parse-token": "paragraph-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[include :scp-wiki:more-by:DFAstillo91]]",
@@ -698,7 +768,8 @@
         "start": 336,
         "end": 377
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -708,7 +779,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[include :scp-wiki:more-by:waylandlaurencepan]]",
@@ -716,7 +788,8 @@
         "start": 378,
         "end": 426
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -726,7 +799,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[include :scp-wiki:component:license-box author=DFAstillo91 and WaylandLaurencePan]]",
@@ -734,7 +808,8 @@
         "start": 427,
         "end": 512
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -744,7 +819,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[include :scp-wiki:component:license-box-end]]",
@@ -752,7 +828,8 @@
         "start": 513,
         "end": 560
       },
-      "ty": "include"
+      "ty": "include",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -762,7 +839,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     }
   ],
   "diagnostics": [

@@ -8,7 +8,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[footnote]]",
@@ -16,7 +17,8 @@
         "start": 2,
         "end": 14
       },
-      "ty": "block-without-alias"
+      "ty": "block-without-alias",
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -26,7 +28,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "fff",
@@ -36,7 +39,8 @@
       },
       "ty": {
         "parse-token": "identifier"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": " ",
@@ -46,7 +50,8 @@
       },
       "ty": {
         "parse-token": "whitespace"
-      }
+      },
+      "sub_lang_mark": null
     },
     {
       "slice": "[[/footnote]]",
@@ -54,7 +59,8 @@
         "start": 19,
         "end": 32
       },
-      "ty": "block-close"
+      "ty": "block-close",
+      "sub_lang_mark": null
     },
     {
       "slice": "\n",
@@ -64,7 +70,8 @@
       },
       "ty": {
         "parse-token": "line-break"
-      }
+      },
+      "sub_lang_mark": null
     }
   ],
   "diagnostics": []
