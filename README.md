@@ -1,11 +1,13 @@
 ## SCP-foundation-editor-web
 
-Just a ftml code highlighter for my wasm practice. The userscripts are outdated, I'll update them later.
+A DSL code highlighter for my personal wasm-bindgen and AST practice.
 
 ### Build
 ```bash
-wasm-pack build --target bundler # build wasm pkg in the `ftml_handler/`
+cd ftml_handler
+wasm-pack build --release --target bundler # build wasm pkg in the `ftml_handler/`
 ```
+And then go back to the root folder use pnpm to build the frontend:
 ```bash
 pnpm build # build frontend
 ```
