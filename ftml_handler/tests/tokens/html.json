@@ -26,153 +26,177 @@
     },
     {
       "sub-lang-mark": "html",
-      "slice": "<divclass=\"foo\">somecontext</div>",
+      "slice": "\n<div class=\"foo\">\nsome context\n</div>\n",
       "span": {
-        "start": 10,
-        "end": 49
+        "start": 8,
+        "end": 47
       },
-      "ty": "other"
+      "ty": "line-break"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 51,
-        "end": 54
+        "start": 47,
+        "end": 50
       },
       "ty": "left-block-end"
     },
     {
       "slice": "html",
       "span": {
-        "start": 54,
-        "end": 58
+        "start": 50,
+        "end": 54
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 58,
-        "end": 60
+        "start": 54,
+        "end": 56
       },
       "ty": "right-block"
     },
     {
+      "slice": "\n\n",
+      "span": {
+        "start": 56,
+        "end": 58
+      },
+      "ty": "paragraph-break"
+    },
+    {
       "slice": "[[",
       "span": {
-        "start": 64,
-        "end": 66
+        "start": 58,
+        "end": 60
       },
       "ty": "left-block"
     },
     {
       "slice": "html",
       "span": {
-        "start": 66,
-        "end": 70
+        "start": 60,
+        "end": 64
       },
       "ty": "identifier"
     },
     {
+      "slice": " ",
+      "span": {
+        "start": 64,
+        "end": 65
+      },
+      "ty": "whitespace"
+    },
+    {
       "slice": "width",
       "span": {
-        "start": 71,
-        "end": 76
+        "start": 65,
+        "end": 70
       },
       "ty": "identifier"
     },
     {
       "slice": "=",
       "span": {
-        "start": 76,
-        "end": 77
+        "start": 70,
+        "end": 71
       },
       "ty": "equals"
     },
     {
       "slice": "30px",
       "span": {
-        "start": 77,
-        "end": 81
+        "start": 71,
+        "end": 75
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 81,
-        "end": 83
+        "start": 75,
+        "end": 77
       },
       "ty": "right-block"
     },
     {
       "sub-lang-mark": "html",
-      "slice": "<!--Withalias-->",
+      "slice": "\n<!--With alias-->\n",
       "span": {
-        "start": 85,
-        "end": 102
+        "start": 77,
+        "end": 96
       },
-      "ty": "other"
+      "ty": "line-break"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 104,
-        "end": 107
+        "start": 96,
+        "end": 99
       },
       "ty": "left-block-end"
     },
     {
       "slice": "html",
       "span": {
-        "start": 107,
-        "end": 111
+        "start": 99,
+        "end": 103
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 111,
-        "end": 113
+        "start": 103,
+        "end": 105
       },
       "ty": "right-block"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 105,
+        "end": 106
+      },
+      "ty": "line-break"
     }
   ],
   "diagnostics": [
     {
       "msg": "BlockMalformedArguments: block-html",
       "span": {
-        "start": 77,
-        "end": 81
+        "start": 71,
+        "end": 75
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 64,
-        "end": 66
+        "start": 58,
+        "end": 60
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 81,
-        "end": 83
+        "start": 75,
+        "end": 77
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 104,
-        "end": 107
+        "start": 96,
+        "end": 99
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 111,
-        "end": 113
+        "start": 103,
+        "end": 105
       }
     }
   ]

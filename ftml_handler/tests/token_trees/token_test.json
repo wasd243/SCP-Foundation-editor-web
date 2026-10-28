@@ -1,0 +1,150 @@
+{
+  "token_trees": [
+    {
+      "slice": "[[div class = \"some\"]]",
+      "span": {
+        "start": 0,
+        "end": 22
+      },
+      "ty": {
+        "block-with-alias": [
+          "identifier",
+          "equals",
+          "double-quote",
+          "identifier",
+          "double-quote"
+        ]
+      }
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 22,
+        "end": 23
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    },
+    {
+      "slice": "context",
+      "span": {
+        "start": 23,
+        "end": 30
+      },
+      "ty": {
+        "parse-token": "identifier"
+      }
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 30,
+        "end": 31
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    },
+    {
+      "slice": "[[/div]]",
+      "span": {
+        "start": 31,
+        "end": 39
+      },
+      "ty": "block-close"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 39,
+        "end": 41
+      },
+      "ty": {
+        "parse-token": "paragraph-break"
+      }
+    },
+    {
+      "slice": "[[note <- failed note\n\n[[note]]",
+      "span": {
+        "start": 41,
+        "end": 72
+      },
+      "ty": {
+        "block-with-alias": [
+          "other",
+          "other",
+          "identifier",
+          "identifier",
+          "paragraph-break",
+          "left-block",
+          "identifier"
+        ]
+      }
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 72,
+        "end": 73
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    },
+    {
+      "slice": "something",
+      "span": {
+        "start": 73,
+        "end": 82
+      },
+      "ty": {
+        "parse-token": "identifier"
+      }
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 82,
+        "end": 83
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    },
+    {
+      "slice": "[[/note]]",
+      "span": {
+        "start": 83,
+        "end": 92
+      },
+      "ty": "block-close"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 92,
+        "end": 93
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "msg": "BlockMalformedArguments: block-note",
+      "span": {
+        "start": 48,
+        "end": 49
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 41,
+        "end": 43
+      }
+    }
+  ]
+}

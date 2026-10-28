@@ -1,0 +1,71 @@
+{
+  "token_trees": [
+    {
+      "slice": "ff",
+      "span": {
+        "start": 0,
+        "end": 2
+      },
+      "ty": {
+        "parse-token": "identifier"
+      }
+    },
+    {
+      "slice": "[[footnote]]",
+      "span": {
+        "start": 2,
+        "end": 14
+      },
+      "ty": "block-without-alias"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 14,
+        "end": 15
+      },
+      "ty": {
+        "parse-token": "whitespace"
+      }
+    },
+    {
+      "slice": "fff",
+      "span": {
+        "start": 15,
+        "end": 18
+      },
+      "ty": {
+        "parse-token": "identifier"
+      }
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 18,
+        "end": 19
+      },
+      "ty": {
+        "parse-token": "whitespace"
+      }
+    },
+    {
+      "slice": "[[/footnote]]",
+      "span": {
+        "start": 19,
+        "end": 32
+      },
+      "ty": "block-close"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 32,
+        "end": 33
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    }
+  ],
+  "diagnostics": []
+}

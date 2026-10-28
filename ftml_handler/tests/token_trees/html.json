@@ -1,0 +1,119 @@
+{
+  "token_trees": [
+    {
+      "slice": "[[html]]",
+      "span": {
+        "start": 0,
+        "end": 8
+      },
+      "ty": "block-without-alias"
+    },
+    {
+      "slice": "\n<div class=\"foo\">\nsome context\n</div>\n",
+      "span": {
+        "start": 8,
+        "end": 47
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    },
+    {
+      "slice": "[[/html]]",
+      "span": {
+        "start": 47,
+        "end": 56
+      },
+      "ty": "block-close"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 56,
+        "end": 58
+      },
+      "ty": {
+        "parse-token": "paragraph-break"
+      }
+    },
+    {
+      "slice": "[[html width=30px]]",
+      "span": {
+        "start": 58,
+        "end": 77
+      },
+      "ty": {
+        "block-with-alias": [
+          "identifier",
+          "equals",
+          "identifier"
+        ]
+      }
+    },
+    {
+      "slice": "\n<!--With alias-->\n",
+      "span": {
+        "start": 77,
+        "end": 96
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    },
+    {
+      "slice": "[[/html]]",
+      "span": {
+        "start": 96,
+        "end": 105
+      },
+      "ty": "block-close"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 105,
+        "end": 106
+      },
+      "ty": {
+        "parse-token": "line-break"
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "msg": "BlockMalformedArguments: block-html",
+      "span": {
+        "start": 71,
+        "end": 75
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 58,
+        "end": 60
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 75,
+        "end": 77
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 96,
+        "end": 99
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 103,
+        "end": 105
+      }
+    }
+  ]
+}

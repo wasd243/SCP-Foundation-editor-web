@@ -1,9 +1,9 @@
 use crate::ftml_ast::Span;
 use ftml::parsing::ExtractedToken;
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 
 /// A lsp version of extracted token from ftml.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Debug)]
 pub struct Token {
     /// The lsp mark for `include` blocks.
     #[serde(rename = "include-fold-mark", skip_serializing_if = "Option::is_none")]
@@ -22,14 +22,14 @@ pub struct Token {
     pub from_combination: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
 pub enum IncludeFoldMark {
     IncludeStart,
     IncludeEnd,
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
 pub enum SubLangMark {
     Html,

@@ -1,16 +1,113 @@
 mod token;
+mod token_tree;
 
-use ftml::parsing::ExtractedToken;
+use token_tree::Alias;
+
+use ftml::parsing::{ExtractedToken, Token as FtmlToken};
 use ftml::prelude::*;
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use std::sync::LazyLock;
 
-pub use token::{IncludeFoldMark, SubLangMark, Token};
+use crate::ftml_block_identifier::regex::INCLUDE;
 
-#[derive(Serialize, Deserialize, Debug, Default)]
-pub struct Span {
-    pub start: usize,
-    pub end: usize,
+pub use token::{IncludeFoldMark, SubLangMark, Token};
+pub use token_tree::{TokenTree, TokenTreeTy};
+
+#[derive(Serialize, Debug)]
+pub struct ParseTokenTree {
+    /// ftml tokens but combined into trees with context.
+    pub token_trees: Vec<TokenTree>,
+    /// ftml parse warnings, keeps the same as `ParseToken`
+    pub diagnostics: Vec<Diagnostic>,
+}
+
+impl ParseTokenTree {
+    pub fn from_parse_tokens(parse_tokens: ParseToken) -> Self {
+        let tokens = parse_tokens.tokens;
+        let mut trees = Vec::new();
+        let mut index = 0;
+
+        while index < tokens.len() {
+            let token = &tokens[index];
+
+            if token.ty != FtmlToken::LeftBlock && token.ty != FtmlToken::LeftBlockEnd {
+                trees.push(TokenTree {
+                    slice: token.slice.clone(),
+                    span: token.span,
+                    ty: TokenTreeTy::ParseToken(token.ty),
+                    has_close_tag: false,
+                });
+                index += 1;
+                continue;
+            }
+
+            // find the closing `]]` of this block tag
+            let close_index = tokens[index..]
+                .iter()
+                .position(|candidate| candidate.ty == FtmlToken::RightBlock)
+                .map(|offset| index + offset);
+
+            let Some(close_index) = close_index else {
+                // unclosed tag: keep the token as it was
+                trees.push(TokenTree {
+                    slice: token.slice.clone(),
+                    span: token.span,
+                    ty: TokenTreeTy::ParseToken(token.ty),
+                    has_close_tag: false,
+                });
+                index += 1;
+                continue;
+            };
+
+            let block_tokens = &tokens[index..=close_index];
+            let slice: String = block_tokens
+                .iter()
+                .map(|inner| inner.slice.as_str())
+                .collect();
+            let span = Span {
+                start: block_tokens[0].span.start,
+                end: block_tokens[block_tokens.len() - 1].span.end,
+            };
+
+            let inner_tokens = &block_tokens[1..block_tokens.len() - 1];
+            let name = inner_tokens
+                .iter()
+                .find(|inner| inner.ty == FtmlToken::Identifier);
+            let is_include = name.is_some_and(|inner| INCLUDE.is_match(&inner.slice));
+
+            let ty = if token.ty == FtmlToken::LeftBlockEnd {
+                TokenTreeTy::BlockClose
+            } else if is_include {
+                TokenTreeTy::Include
+            } else {
+                let alias: Vec<Alias> = inner_tokens
+                    .iter()
+                    .skip_while(|inner| inner.ty != FtmlToken::Identifier)
+                    .skip(1)
+                    .filter(|inner| inner.ty != FtmlToken::Whitespace)
+                    .map(|inner| inner.ty)
+                    .collect();
+                if alias.is_empty() {
+                    TokenTreeTy::BlockWithoutAlias
+                } else {
+                    TokenTreeTy::BlockWithAlias(Some(alias))
+                }
+            };
+
+            trees.push(TokenTree {
+                slice,
+                span,
+                ty,
+                has_close_tag: false,
+            });
+            index = close_index + 1;
+        }
+
+        Self {
+            token_trees: trees,
+            diagnostics: parse_tokens.diagnostics,
+        }
+    }
 }
 
 #[derive(Serialize, Debug, Default)]
@@ -19,6 +116,12 @@ pub struct ParseToken {
     pub tokens: Vec<Token>,
     /// ftml parse warnings
     pub diagnostics: Vec<Diagnostic>,
+}
+
+#[derive(Serialize, Debug, Default, Copy, Clone)]
+pub struct Span {
+    pub start: usize,
+    pub end: usize,
 }
 
 #[derive(Serialize, Debug, Default)]
@@ -34,11 +137,7 @@ impl ParseToken {
         self.tokens.retain(|token| {
             !matches!(
                 token.ty,
-                Token::InputStart
-                    | Token::InputEnd
-                    | Token::Whitespace
-                    | Token::LineBreak
-                    | Token::ParagraphBreak
+                Token::InputStart | Token::InputEnd
             )
         });
     }
@@ -48,7 +147,7 @@ impl ParseToken {
         self.tokens.iter().enumerate().skip(index + 1)
     }
 
-    /// Checks that any line of code is from combination
+    /// Checks that any line of code is from a combination
     pub fn from_combination(&self) -> bool {
         self.tokens.iter().any(|token| token.from_combination)
     }

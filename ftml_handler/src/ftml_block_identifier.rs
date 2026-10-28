@@ -1,6 +1,6 @@
 mod blocks;
 mod perf;
-mod regex;
+pub(crate) mod regex;
 mod utils;
 
 use crate::ftml_ast::ParseToken;
