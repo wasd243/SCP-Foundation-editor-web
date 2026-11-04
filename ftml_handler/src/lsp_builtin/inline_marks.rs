@@ -50,10 +50,9 @@ fn from_parse_token_<'lsp>(
             let rest = iter.as_slice(); // taken before next(), so it starts at t
             let Some(t) = iter.next() else { break };
 
-            if t.ty == start_mark.ty {
-                end_mark = Some(t);
-                break;
-            } else if t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace {
+            if t.ty == start_mark.ty
+                || (t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace)
+            {
                 end_mark = Some(t);
                 break;
             } else if is_inline_mark_token(t.ty)
