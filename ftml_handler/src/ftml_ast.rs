@@ -31,21 +31,8 @@ impl ParseToken {
     pub fn clean(&mut self) {
         use ftml::parsing::Token;
 
-        self.tokens.retain(|token| {
-            !matches!(
-                token.ty,
-                Token::InputStart
-                    | Token::InputEnd
-                    | Token::Whitespace
-                    | Token::LineBreak
-                    | Token::ParagraphBreak
-            )
-        });
-    }
-
-    /// Iterate over tokens before/after `index` and then output with `index`.
-    pub(crate) fn value_iter(&self, index: usize) -> impl Iterator<Item = (usize, &Token)> + '_ {
-        self.tokens.iter().enumerate().skip(index + 1)
+        self.tokens
+            .retain(|token| !matches!(token.ty, Token::InputStart | Token::InputEnd));
     }
 
     /// Checks that any line of code is from combination

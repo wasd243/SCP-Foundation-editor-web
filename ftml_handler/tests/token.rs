@@ -21,7 +21,6 @@ fn bless_token() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
-            token.mark_blocks();
             let token = to_string_pretty(&token).unwrap();
 
             let stem = path.file_stem().unwrap().to_string_lossy();
@@ -47,7 +46,6 @@ fn check_token() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
-            token.mark_blocks();
             let token = to_string_pretty(&token).unwrap();
 
             let stem = path.file_stem().unwrap().to_string_lossy();

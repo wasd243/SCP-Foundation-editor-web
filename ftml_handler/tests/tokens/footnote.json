@@ -33,12 +33,28 @@
       "ty": "right-block"
     },
     {
+      "slice": " ",
+      "span": {
+        "start": 14,
+        "end": 15
+      },
+      "ty": "whitespace"
+    },
+    {
       "slice": "fff",
       "span": {
         "start": 15,
         "end": 18
       },
       "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 18,
+        "end": 19
+      },
+      "ty": "whitespace"
     },
     {
       "slice": "[[/",
@@ -63,6 +79,14 @@
         "end": 32
       },
       "ty": "right-block"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 32,
+        "end": 33
+      },
+      "ty": "line-break"
     }
   ],
   "diagnostics": []

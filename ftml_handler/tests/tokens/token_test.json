@@ -17,6 +17,14 @@
       "ty": "identifier"
     },
     {
+      "slice": " ",
+      "span": {
+        "start": 5,
+        "end": 6
+      },
+      "ty": "whitespace"
+    },
+    {
       "slice": "class",
       "span": {
         "start": 6,
@@ -25,12 +33,28 @@
       "ty": "identifier"
     },
     {
+      "slice": " ",
+      "span": {
+        "start": 11,
+        "end": 12
+      },
+      "ty": "whitespace"
+    },
+    {
       "slice": "=",
       "span": {
         "start": 12,
         "end": 13
       },
       "ty": "equals"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 13,
+        "end": 14
+      },
+      "ty": "whitespace"
     },
     {
       "slice": "\"",
@@ -65,155 +89,235 @@
       "ty": "right-block"
     },
     {
+      "slice": "\n",
+      "span": {
+        "start": 22,
+        "end": 23
+      },
+      "ty": "line-break"
+    },
+    {
       "slice": "context",
       "span": {
-        "start": 24,
-        "end": 31
+        "start": 23,
+        "end": 30
       },
       "ty": "identifier"
     },
     {
+      "slice": "\n",
+      "span": {
+        "start": 30,
+        "end": 31
+      },
+      "ty": "line-break"
+    },
+    {
       "slice": "[[/",
       "span": {
-        "start": 33,
-        "end": 36
+        "start": 31,
+        "end": 34
       },
       "ty": "left-block-end"
     },
     {
       "slice": "div",
       "span": {
-        "start": 36,
-        "end": 39
+        "start": 34,
+        "end": 37
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 39,
-        "end": 41
+        "start": 37,
+        "end": 39
       },
       "ty": "right-block"
     },
     {
+      "slice": "\n\n",
+      "span": {
+        "start": 39,
+        "end": 41
+      },
+      "ty": "paragraph-break"
+    },
+    {
       "slice": "[[",
       "span": {
-        "start": 45,
-        "end": 47
+        "start": 41,
+        "end": 43
       },
       "ty": "left-block"
     },
     {
       "slice": "note",
       "span": {
-        "start": 47,
-        "end": 51
+        "start": 43,
+        "end": 47
       },
       "ty": "identifier"
     },
     {
+      "slice": " ",
+      "span": {
+        "start": 47,
+        "end": 48
+      },
+      "ty": "whitespace"
+    },
+    {
       "slice": "<",
       "span": {
-        "start": 52,
-        "end": 53
+        "start": 48,
+        "end": 49
       },
       "ty": "other"
     },
     {
       "slice": "-",
       "span": {
-        "start": 53,
-        "end": 54
+        "start": 49,
+        "end": 50
       },
       "ty": "other"
     },
     {
+      "slice": " ",
+      "span": {
+        "start": 50,
+        "end": 51
+      },
+      "ty": "whitespace"
+    },
+    {
       "slice": "failed",
       "span": {
-        "start": 55,
-        "end": 61
+        "start": 51,
+        "end": 57
       },
       "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 57,
+        "end": 58
+      },
+      "ty": "whitespace"
     },
     {
       "slice": "note",
       "span": {
-        "start": 62,
-        "end": 66
+        "start": 58,
+        "end": 62
       },
       "ty": "identifier"
     },
     {
+      "slice": "\n\n",
+      "span": {
+        "start": 62,
+        "end": 64
+      },
+      "ty": "paragraph-break"
+    },
+    {
       "slice": "[[",
       "span": {
-        "start": 70,
-        "end": 72
+        "start": 64,
+        "end": 66
       },
       "ty": "left-block"
     },
     {
       "slice": "note",
       "span": {
-        "start": 72,
-        "end": 76
+        "start": 66,
+        "end": 70
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 76,
-        "end": 78
+        "start": 70,
+        "end": 72
       },
       "ty": "right-block"
     },
     {
+      "slice": "\n",
+      "span": {
+        "start": 72,
+        "end": 73
+      },
+      "ty": "line-break"
+    },
+    {
       "slice": "something",
       "span": {
-        "start": 80,
-        "end": 89
+        "start": 73,
+        "end": 82
       },
       "ty": "identifier"
     },
     {
+      "slice": "\n",
+      "span": {
+        "start": 82,
+        "end": 83
+      },
+      "ty": "line-break"
+    },
+    {
       "slice": "[[/",
       "span": {
-        "start": 91,
-        "end": 94
+        "start": 83,
+        "end": 86
       },
       "ty": "left-block-end"
     },
     {
       "slice": "note",
       "span": {
-        "start": 94,
-        "end": 98
+        "start": 86,
+        "end": 90
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 98,
-        "end": 100
+        "start": 90,
+        "end": 92
       },
       "ty": "right-block"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 92,
+        "end": 93
+      },
+      "ty": "line-break"
     }
   ],
   "diagnostics": [
     {
       "msg": "BlockMalformedArguments: block-note",
       "span": {
-        "start": 52,
-        "end": 53
+        "start": 48,
+        "end": 49
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 45,
-        "end": 47
+        "start": 41,
+        "end": 43
       }
     }
   ]
