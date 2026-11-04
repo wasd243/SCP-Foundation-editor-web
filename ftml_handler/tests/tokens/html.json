@@ -6,49 +6,9 @@
           "start": 80,
           "end": 94
         },
-        "start_mark": {
-          "slice": "--",
-          "span": {
-            "start": 80,
-            "end": 82
-          },
-          "ty": "double-dash"
-        },
-        "content": [
-          {
-            "slice": "With",
-            "span": {
-              "start": 82,
-              "end": 86
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 86,
-              "end": 87
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "alias",
-            "span": {
-              "start": 87,
-              "end": 92
-            },
-            "ty": "identifier"
-          }
-        ],
         "inner_marks": [],
-        "end_mark": {
-          "slice": "--",
-          "span": {
-            "start": 92,
-            "end": 94
-          },
-          "ty": "double-dash"
-        }
+        "ty": "double-dash",
+        "is_monospace": false
       }
     }
   ],

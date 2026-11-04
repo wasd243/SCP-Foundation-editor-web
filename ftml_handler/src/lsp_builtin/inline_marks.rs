@@ -10,10 +10,12 @@ use crate::{
 #[derive(Debug, Serialize)]
 pub struct InlineMarks<'lsp> {
     span: Span,
-    start_mark: &'lsp Token,
+    #[serde(skip)]
     content: Vec<&'lsp Token>,
     inner_marks: Vec<InlineMarks<'lsp>>,
-    end_mark: &'lsp Token,
+    ty: TokenTy,
+    /// Special handling for monospace because ftml both has `LeftMonospace` and `RightMonospace`
+    is_monospace: bool,
 }
 
 impl<'lsp> InlineMarks<'lsp> {
@@ -68,15 +70,17 @@ fn from_parse_token_<'lsp>(
         }
 
         if let Some(end_mark) = end_mark {
+            let ty = end_mark.ty;
+            let is_monospace = matches!(end_mark.ty, TokenTy::RightMonospace);
             return Some(InlineMarks {
                 span: Span {
                     start: start_mark.span.start,
                     end: end_mark.span.end,
                 },
-                start_mark,
                 content,
                 inner_marks,
-                end_mark,
+                ty,
+                is_monospace,
             });
         }
     }

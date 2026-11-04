@@ -6,65 +6,9 @@
           "start": 74,
           "end": 95
         },
-        "start_mark": {
-          "slice": "**",
-          "span": {
-            "start": 74,
-            "end": 76
-          },
-          "ty": "bold"
-        },
-        "content": [
-          {
-            "slice": "Kobolds",
-            "span": {
-              "start": 76,
-              "end": 83
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 83,
-              "end": 84
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "And",
-            "span": {
-              "start": 84,
-              "end": 87
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 87,
-              "end": 88
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "Keeps",
-            "span": {
-              "start": 88,
-              "end": 93
-            },
-            "ty": "identifier"
-          }
-        ],
         "inner_marks": [],
-        "end_mark": {
-          "slice": "**",
-          "span": {
-            "start": 93,
-            "end": 95
-          },
-          "ty": "bold"
-        }
+        "ty": "bold",
+        "is_monospace": false
       }
     },
     {
@@ -73,41 +17,9 @@
           "start": 96,
           "end": 107
         },
-        "start_mark": {
-          "slice": "**",
-          "span": {
-            "start": 96,
-            "end": 98
-          },
-          "ty": "bold"
-        },
-        "content": [
-          {
-            "slice": "Author",
-            "span": {
-              "start": 98,
-              "end": 104
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": ":",
-            "span": {
-              "start": 104,
-              "end": 105
-            },
-            "ty": "colon"
-          }
-        ],
         "inner_marks": [],
-        "end_mark": {
-          "slice": "**",
-          "span": {
-            "start": 105,
-            "end": 107
-          },
-          "ty": "bold"
-        }
+        "ty": "bold",
+        "is_monospace": false
       }
     },
     {
@@ -116,105 +28,9 @@
           "start": 163,
           "end": 194
         },
-        "start_mark": {
-          "slice": "**",
-          "span": {
-            "start": 163,
-            "end": 165
-          },
-          "ty": "bold"
-        },
-        "content": [
-          {
-            "slice": "This",
-            "span": {
-              "start": 165,
-              "end": 169
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 169,
-              "end": 170
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "work",
-            "span": {
-              "start": 170,
-              "end": 174
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 174,
-              "end": 175
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "contains",
-            "span": {
-              "start": 175,
-              "end": 183
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 183,
-              "end": 184
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "CWs",
-            "span": {
-              "start": 184,
-              "end": 187
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 187,
-              "end": 188
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "for",
-            "span": {
-              "start": 188,
-              "end": 191
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": ":",
-            "span": {
-              "start": 191,
-              "end": 192
-            },
-            "ty": "colon"
-          }
-        ],
         "inner_marks": [],
-        "end_mark": {
-          "slice": "**",
-          "span": {
-            "start": 192,
-            "end": 194
-          },
-          "ty": "bold"
-        }
+        "ty": "bold",
+        "is_monospace": false
       }
     }
   ],
