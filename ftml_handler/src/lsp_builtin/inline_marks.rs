@@ -1,3 +1,4 @@
+use ftml::parsing::Token as TokenTy;
 use serde::Serialize;
 
 use crate::{
@@ -50,6 +51,9 @@ fn from_parse_token_<'lsp>(
             let Some(t) = iter.next() else { break };
 
             if t.ty == start_mark.ty {
+                end_mark = Some(t);
+                break;
+            } else if t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace {
                 end_mark = Some(t);
                 break;
             } else if is_inline_mark_token(t.ty)

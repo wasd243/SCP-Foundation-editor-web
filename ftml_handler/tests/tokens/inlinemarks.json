@@ -1,0 +1,398 @@
+{
+  "tree": [
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 0,
+          "end": 8
+        },
+        "start_mark": {
+          "slice": "**",
+          "span": {
+            "start": 0,
+            "end": 2
+          },
+          "ty": "bold"
+        },
+        "content": [
+          {
+            "slice": "bold",
+            "span": {
+              "start": 2,
+              "end": 6
+            },
+            "ty": "identifier"
+          }
+        ],
+        "inner_marks": [],
+        "end_mark": {
+          "slice": "**",
+          "span": {
+            "start": 6,
+            "end": 8
+          },
+          "ty": "bold"
+        }
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 9,
+          "end": 20
+        },
+        "start_mark": {
+          "slice": "//",
+          "span": {
+            "start": 9,
+            "end": 11
+          },
+          "ty": "italics"
+        },
+        "content": [
+          {
+            "slice": "italics",
+            "span": {
+              "start": 11,
+              "end": 18
+            },
+            "ty": "identifier"
+          }
+        ],
+        "inner_marks": [],
+        "end_mark": {
+          "slice": "//",
+          "span": {
+            "start": 18,
+            "end": 20
+          },
+          "ty": "italics"
+        }
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 21,
+          "end": 34
+        },
+        "start_mark": {
+          "slice": "__",
+          "span": {
+            "start": 21,
+            "end": 23
+          },
+          "ty": "underline"
+        },
+        "content": [
+          {
+            "slice": "underline",
+            "span": {
+              "start": 23,
+              "end": 32
+            },
+            "ty": "identifier"
+          }
+        ],
+        "inner_marks": [],
+        "end_mark": {
+          "slice": "__",
+          "span": {
+            "start": 32,
+            "end": 34
+          },
+          "ty": "underline"
+        }
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 35,
+          "end": 50
+        },
+        "start_mark": {
+          "slice": "--",
+          "span": {
+            "start": 35,
+            "end": 37
+          },
+          "ty": "double-dash"
+        },
+        "content": [
+          {
+            "slice": "double",
+            "span": {
+              "start": 37,
+              "end": 43
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 43,
+              "end": 44
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "dash",
+            "span": {
+              "start": 44,
+              "end": 48
+            },
+            "ty": "identifier"
+          }
+        ],
+        "inner_marks": [],
+        "end_mark": {
+          "slice": "--",
+          "span": {
+            "start": 48,
+            "end": 50
+          },
+          "ty": "double-dash"
+        }
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 51,
+          "end": 60
+        },
+        "start_mark": {
+          "slice": "^^",
+          "span": {
+            "start": 51,
+            "end": 53
+          },
+          "ty": "superscript"
+        },
+        "content": [
+          {
+            "slice": "super",
+            "span": {
+              "start": 53,
+              "end": 58
+            },
+            "ty": "identifier"
+          }
+        ],
+        "inner_marks": [],
+        "end_mark": {
+          "slice": "^^",
+          "span": {
+            "start": 58,
+            "end": 60
+          },
+          "ty": "superscript"
+        }
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 61,
+          "end": 68
+        },
+        "start_mark": {
+          "slice": ",,",
+          "span": {
+            "start": 61,
+            "end": 63
+          },
+          "ty": "subscript"
+        },
+        "content": [
+          {
+            "slice": "sub",
+            "span": {
+              "start": 63,
+              "end": 66
+            },
+            "ty": "identifier"
+          }
+        ],
+        "inner_marks": [],
+        "end_mark": {
+          "slice": ",,",
+          "span": {
+            "start": 66,
+            "end": 68
+          },
+          "ty": "subscript"
+        }
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 69,
+          "end": 82
+        },
+        "start_mark": {
+          "slice": "{{",
+          "span": {
+            "start": 69,
+            "end": 71
+          },
+          "ty": "left-monospace"
+        },
+        "content": [
+          {
+            "slice": "monospace",
+            "span": {
+              "start": 71,
+              "end": 80
+            },
+            "ty": "identifier"
+          }
+        ],
+        "inner_marks": [],
+        "end_mark": {
+          "slice": "}}",
+          "span": {
+            "start": 80,
+            "end": 82
+          },
+          "ty": "right-monospace"
+        }
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 84,
+          "end": 110
+        },
+        "start_mark": {
+          "slice": "**",
+          "span": {
+            "start": 84,
+            "end": 86
+          },
+          "ty": "bold"
+        },
+        "content": [
+          {
+            "slice": "some",
+            "span": {
+              "start": 86,
+              "end": 90
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 90,
+              "end": 91
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "nested",
+            "span": {
+              "start": 91,
+              "end": 97
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 97,
+              "end": 98
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "//",
+            "span": {
+              "start": 98,
+              "end": 100
+            },
+            "ty": "italics"
+          },
+          {
+            "slice": "things",
+            "span": {
+              "start": 100,
+              "end": 106
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "//",
+            "span": {
+              "start": 106,
+              "end": 108
+            },
+            "ty": "italics"
+          }
+        ],
+        "inner_marks": [
+          {
+            "span": {
+              "start": 98,
+              "end": 108
+            },
+            "start_mark": {
+              "slice": "//",
+              "span": {
+                "start": 98,
+                "end": 100
+              },
+              "ty": "italics"
+            },
+            "content": [
+              {
+                "slice": "things",
+                "span": {
+                  "start": 100,
+                  "end": 106
+                },
+                "ty": "identifier"
+              }
+            ],
+            "inner_marks": [],
+            "end_mark": {
+              "slice": "//",
+              "span": {
+                "start": 106,
+                "end": 108
+              },
+              "ty": "italics"
+            }
+          }
+        ],
+        "end_mark": {
+          "slice": "**",
+          "span": {
+            "start": 108,
+            "end": 110
+          },
+          "ty": "bold"
+        }
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "msg": "RuleFailed: bold",
+      "span": {
+        "start": 123,
+        "end": 125
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 112,
+        "end": 114
+      }
+    }
+  ]
+}

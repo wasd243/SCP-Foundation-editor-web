@@ -23,5 +23,6 @@ pub fn is_inline_mark_token(ty: TokenTy) -> bool {
             | TokenTy::Subscript
             | TokenTy::DoubleDash
             | TokenTy::DoubleTilde
+            | TokenTy::LeftMonospace
     )
 }

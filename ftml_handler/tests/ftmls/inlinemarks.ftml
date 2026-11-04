@@ -1,0 +1,12 @@
+**bold**
+//italics//
+__underline__
+--double-dash--
+^^super^^
+,,sub,,
+{{monospace}}
+
+**some nested //things//**
+
+** unclosed
+
