@@ -52,14 +52,14 @@ fn from_parse_token_<'lsp>(
             if t.ty == start_mark.ty {
                 end_mark = Some(t);
                 break;
-            } else if is_inline_mark_token(t.ty) {
-                if let Some(nested) = from_parse_token_(rest, diagnostics) {
-                    let n = nested.content.len();
-                    content.extend(&rest[..n + 2]); // start + content + end of nested
-                    iter.nth(n); // skip nested content + end mark; t is already consumed
-                    inner_marks.push(nested);
-                    continue;
-                }
+            } else if is_inline_mark_token(t.ty)
+                && let Some(nested) = from_parse_token_(rest, diagnostics)
+            {
+                let n = nested.content.len();
+                content.extend(&rest[..n + 2]); // start + content + end of nested
+                iter.nth(n); // skip nested content + end mark; t is already consumed
+                inner_marks.push(nested);
+                continue;
             }
             content.push(t);
         }

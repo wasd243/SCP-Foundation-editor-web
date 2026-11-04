@@ -1,3 +1,5 @@
+#![warn(clippy::all)]
+
 pub mod ftml_ast;
 pub mod lsp_builtin;
 mod utils;
