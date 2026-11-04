@@ -1,5 +1,6 @@
 pub mod ftml_ast;
 pub mod lsp_builtin;
+mod utils;
 
 use crate::ftml_ast::ParseToken;
 

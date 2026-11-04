@@ -1,11 +1,17 @@
-use crate::{
-    Span,
-    ftml_ast::{ParseToken, Token},
-};
+mod inline_marks;
 
-#[derive(Debug)]
-pub struct BuiltIn {}
+use inline_marks::InlineMarks;
 
-impl BuiltIn {
-    pub fn start() {}
+use crate::ftml_ast::Diagnostic;
+use serde::Serialize;
+
+#[derive(Debug, Serialize)]
+pub enum BuiltIn<'lsp> {
+    InLineMarks(InlineMarks<'lsp>),
+}
+
+#[derive(Debug, Serialize)]
+pub struct LspBuiltIn<'lsp> {
+    pub tree: Vec<BuiltIn<'lsp>>,
+    pub diagnostics: Vec<Diagnostic>,
 }

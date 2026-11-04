@@ -29,3 +29,18 @@ impl Token {
         }
     }
 }
+
+impl Default for Token {
+    fn default() -> Self {
+        let slice = String::new();
+        let span = Span::default();
+        let ty = ftml::parsing::Token::Whitespace;
+
+        Self {
+            slice,
+            span,
+            ty,
+            from_combination: false,
+        }
+    }
+}
