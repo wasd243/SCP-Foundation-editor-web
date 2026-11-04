@@ -4,7 +4,7 @@ pub mod ftml_ast;
 pub mod lsp_builtin;
 mod utils;
 
-use crate::ftml_ast::ParseToken;
+use crate::{ftml_ast::ParseToken, lsp_builtin::LspBuiltIn};
 
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
@@ -16,8 +16,10 @@ pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
     let mut tokens = ParseToken::from(src);
     tokens.clean();
 
+    let lsp_built_in = LspBuiltIn::visitor(&tokens);
+
     let serializer = serde_wasm_bindgen::Serializer::new().serialize_maps_as_objects(true);
-    tokens
+    lsp_built_in
         .serialize(&serializer)
         .map_err(|err| JsValue::from_str(&err.to_string()))
 }

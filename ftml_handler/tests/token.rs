@@ -1,4 +1,5 @@
 use ftml_handler::ftml_ast::ParseToken;
+use ftml_handler::lsp_builtin::LspBuiltIn;
 use serde_json::to_string_pretty;
 use std::fs;
 use std::path::PathBuf;
@@ -21,6 +22,9 @@ fn bless_token() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
+
+            let token = LspBuiltIn::visitor(&token);
+
             let token = to_string_pretty(&token).unwrap();
 
             let stem = path.file_stem().unwrap().to_string_lossy();
@@ -46,6 +50,9 @@ fn check_token() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
+
+            let token = LspBuiltIn::visitor(&token);
+
             let token = to_string_pretty(&token).unwrap();
 
             let stem = path.file_stem().unwrap().to_string_lossy();
