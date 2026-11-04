@@ -1,15 +1,14 @@
-use ftml::parsing::Token as TokenTy;
 use serde::Serialize;
 
 use crate::{
     Span,
-    ftml_ast::{Diagnostic, ParseToken, Token},
-    utils::has_diagnostic,
+    ftml_ast::{Diagnostic, Token},
+    utils::{has_diagnostic, is_inline_mark_token},
 };
 
 #[derive(Debug, Serialize)]
 pub struct InlineMarks<'lsp> {
-    pub span: Span,
+    span: Span,
     start_mark: &'lsp Token,
     content: Vec<&'lsp Token>,
     inner_marks: Vec<InlineMarks<'lsp>>,
@@ -17,25 +16,28 @@ pub struct InlineMarks<'lsp> {
 }
 
 impl<'lsp> InlineMarks<'lsp> {
-    pub fn from_parse_token(parse_token: &'lsp ParseToken) -> Option<Self> {
-        let tokens = parse_token.tokens.as_slice();
-        let diagnostics = parse_token.diagnostics.as_slice();
-        from_parse_token_(tokens, diagnostics)
+    pub(super) fn from_parse_token_slice(
+        tokens_slice: &'lsp [Token],
+        diagnostics: &'lsp [Diagnostic],
+    ) -> Option<Self> {
+        from_parse_token_(tokens_slice, diagnostics)
+    }
+
+    pub(super) fn content_len(&self) -> usize {
+        self.content.len()
     }
 }
 
+/// This function is here for other Api args types.
 fn from_parse_token_<'lsp>(
     tokens: &'lsp [Token],
-    diagnostics: &[Diagnostic],
+    diagnostics: &'lsp [Diagnostic],
 ) -> Option<InlineMarks<'lsp>> {
     let mut iter = tokens.iter();
 
     while let Some(token) = iter.next() {
         if diagnostics.iter().any(|d| has_diagnostic(token, d)) {
             return None;
-        }
-        if !is_inline_mark_token(token.ty) {
-            continue;
         }
 
         let start_mark = token;
@@ -77,18 +79,4 @@ fn from_parse_token_<'lsp>(
     }
 
     None
-}
-
-/// Check the token type for inlinemark.
-fn is_inline_mark_token(ty: TokenTy) -> bool {
-    matches!(
-        ty,
-        TokenTy::Bold
-            | TokenTy::Italics
-            | TokenTy::Underline
-            | TokenTy::Superscript
-            | TokenTy::Subscript
-            | TokenTy::DoubleDash
-            | TokenTy::DoubleTilde
-    )
 }

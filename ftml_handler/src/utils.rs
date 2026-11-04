@@ -1,3 +1,5 @@
+use ftml::parsing::Token as TokenTy;
+
 use crate::ftml_ast::{Diagnostic, Token};
 
 /// check if token span has diagnostic
@@ -8,4 +10,18 @@ pub fn has_diagnostic(token: &Token, diagnostic: &Diagnostic) -> bool {
         return true;
     }
     false
+}
+
+/// Check the token type for inlinemark.
+pub fn is_inline_mark_token(ty: TokenTy) -> bool {
+    matches!(
+        ty,
+        TokenTy::Bold
+            | TokenTy::Italics
+            | TokenTy::Underline
+            | TokenTy::Superscript
+            | TokenTy::Subscript
+            | TokenTy::DoubleDash
+            | TokenTy::DoubleTilde
+    )
 }
