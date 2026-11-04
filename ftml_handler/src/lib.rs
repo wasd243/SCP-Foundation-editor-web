@@ -5,6 +5,8 @@ use crate::ftml_ast::ParseToken;
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
+pub use crate::ftml_ast::Span;
+
 #[wasm_bindgen]
 pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
     let mut tokens = ParseToken::from(src);

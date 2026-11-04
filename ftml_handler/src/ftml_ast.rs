@@ -5,7 +5,7 @@ use ftml::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
 
-pub use token::{IncludeFoldMark, SubLangMark, Token};
+pub use token::Token;
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct Span {
@@ -126,15 +126,15 @@ some context
 
     #[test]
     fn dbg_token1() {
-        let mut src = FTML1.to_string();
-        let tokens = get_ftml_token(&mut src);
+        let src = FTML1.to_string();
+        let tokens = get_ftml_token(&src);
         dbg!(tokens);
     }
 
     #[test]
     fn dbg_token2() {
-        let mut src = FTML2.to_string();
-        let tokens = get_ftml_token(&mut src);
+        let src = FTML2.to_string();
+        let tokens = get_ftml_token(&src);
         dbg!(tokens);
     }
 }
