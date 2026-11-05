@@ -8,14 +8,6 @@
         },
         "content": [
           {
-            "slice": "[[",
-            "span": {
-              "start": 0,
-              "end": 2
-            },
-            "ty": "left-block"
-          },
-          {
             "slice": "module",
             "span": {
               "start": 2,
@@ -40,6 +32,16 @@
             "ty": "identifier"
           }
         ]
+      }
+    },
+    {
+      "Token": {
+        "slice": "\n",
+        "span": {
+          "start": 14,
+          "end": 15
+        },
+        "ty": "line-break"
       }
     },
     {

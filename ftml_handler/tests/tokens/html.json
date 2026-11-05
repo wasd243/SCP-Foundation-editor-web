@@ -387,19 +387,19 @@
   ],
   "diagnostics": [
     {
-      "msg": "BlockMalformedArguments: block-html",
-      "ty": "block-malformed-arguments",
-      "span": {
-        "start": 71,
-        "end": 75
-      }
-    },
-    {
       "msg": "NoRulesMatch: fallback",
       "ty": "no-rules-match",
       "span": {
         "start": 58,
         "end": 60
+      }
+    },
+    {
+      "msg": "BlockMalformedArguments: block-html",
+      "ty": "block-malformed-arguments",
+      "span": {
+        "start": 71,
+        "end": 75
       }
     },
     {

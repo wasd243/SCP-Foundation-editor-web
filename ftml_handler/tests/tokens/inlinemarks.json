@@ -419,19 +419,19 @@
   ],
   "diagnostics": [
     {
-      "msg": "RuleFailed: bold",
-      "ty": "rule-failed",
-      "span": {
-        "start": 146,
-        "end": 148
-      }
-    },
-    {
       "msg": "NoRulesMatch: fallback",
       "ty": "no-rules-match",
       "span": {
         "start": 135,
         "end": 137
+      }
+    },
+    {
+      "msg": "RuleFailed: bold",
+      "ty": "rule-failed",
+      "span": {
+        "start": 146,
+        "end": 148
       }
     }
   ]

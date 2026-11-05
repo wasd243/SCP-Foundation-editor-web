@@ -18,37 +18,28 @@ impl<'lsp> InlineBlocks<'lsp> {
         tokens: &'lsp [Token],
         diagnostics: &'lsp [Diagnostic],
     ) -> Option<Self> {
-        for token in tokens {
+        let (start_mark, rest) = tokens.split_first()?;
+        let end_idx = rest.iter().position(|t| t.ty == TokenTy::RightBlock)?;
+        let end_span = rest[end_idx].span.end;
+
+        for token in tokens[..=end_idx + 1].iter() {
             if diagnostics
                 .iter()
                 .any(|d| check_diagnostic_without_include(token, d))
             {
                 return None;
             }
-
-            let start_mark = token;
-            let mut content = Vec::new();
-            let mut end_mark = None;
-
-            for token in tokens {
-                if token.ty == TokenTy::RightBlock {
-                    end_mark = Some(token);
-                    break;
-                }
-                content.push(token);
-            }
-
-            if let Some(end_mark) = end_mark {
-                return Some(Self {
-                    span: Span {
-                        start: start_mark.span.start,
-                        end: end_mark.span.end,
-                    },
-                    content,
-                });
-            }
         }
-        None
+
+        let content = rest[..end_idx].iter().collect();
+
+        Some(Self {
+            span: Span {
+                start: start_mark.span.start,
+                end: end_span,
+            },
+            content,
+        })
     }
 
     pub(super) fn content_len(&self) -> usize {

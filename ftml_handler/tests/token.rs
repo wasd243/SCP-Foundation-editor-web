@@ -22,6 +22,7 @@ fn bless_builtin() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
+            token.mute_ftml_fps();
 
             let token = LspBuiltIn::visitor(&token);
 
@@ -50,6 +51,7 @@ fn bless_token() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
+            token.mute_ftml_fps();
 
             let token = to_string_pretty(&token).unwrap();
 
@@ -76,6 +78,7 @@ fn check_builtin() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
+            token.mute_ftml_fps();
 
             let token = LspBuiltIn::visitor(&token);
 
@@ -107,6 +110,7 @@ fn check_token() {
 
             let mut token = ParseToken::from(content.as_str());
             token.clean();
+            token.mute_ftml_fps();
 
             let token = to_string_pretty(&token).unwrap();
 

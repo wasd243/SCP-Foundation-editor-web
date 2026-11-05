@@ -15,6 +15,7 @@ pub use crate::ftml_ast::Span;
 pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
     let mut tokens = ParseToken::from(src);
     tokens.clean();
+    tokens.mute_ftml_fps();
 
     let lsp_built_in = LspBuiltIn::visitor(&tokens);
 

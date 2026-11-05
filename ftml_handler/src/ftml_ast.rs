@@ -41,6 +41,29 @@ impl ParseToken {
     pub fn from_combination(&self) -> bool {
         self.tokens.iter().any(|token| token.from_combination)
     }
+
+    /// TODO: `ftml` currently produce false postivies diagnostics when everything offline
+    /// and could not fetch included pages.
+    pub fn mute_ftml_fps(&mut self) {
+        self.diagnostics.sort_by_key(|d| d.span.start);
+        let mut diagnostic_need_remove = vec![false; self.diagnostics.len()];
+
+        for (i, d) in self.diagnostics.windows(3).enumerate() {
+            if matches!(d[0].ty, ParseErrorKind::NoRulesMatch)
+                && matches!(d[1].ty, ParseErrorKind::InvalidInclude)
+                && matches!(d[2].ty, ParseErrorKind::NoRulesMatch)
+            {
+                diagnostic_need_remove[i..i + 3].fill(true);
+            }
+        }
+
+        let mut idx = 0;
+        self.diagnostics.retain(|_| {
+            let keep = !diagnostic_need_remove[idx];
+            idx += 1;
+            keep
+        });
+    }
 }
 
 impl From<&str> for ParseToken {

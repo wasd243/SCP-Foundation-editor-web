@@ -8,14 +8,6 @@
         },
         "content": [
           {
-            "slice": "[[",
-            "span": {
-              "start": 0,
-              "end": 2
-            },
-            "ty": "left-block"
-          },
-          {
             "slice": "html",
             "span": {
               "start": 2,
@@ -24,6 +16,16 @@
             "ty": "identifier"
           }
         ]
+      }
+    },
+    {
+      "Token": {
+        "slice": "\n",
+        "span": {
+          "start": 8,
+          "end": 9
+        },
+        "ty": "line-break"
       }
     },
     {
@@ -257,61 +259,83 @@
       }
     },
     {
-      "InLineBlocks": {
+      "Token": {
+        "slice": "[[",
         "span": {
           "start": 58,
+          "end": 60
+        },
+        "ty": "left-block"
+      }
+    },
+    {
+      "Token": {
+        "slice": "html",
+        "span": {
+          "start": 60,
+          "end": 64
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": 64,
+          "end": 65
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
+      "Token": {
+        "slice": "width",
+        "span": {
+          "start": 65,
+          "end": 70
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "=",
+        "span": {
+          "start": 70,
+          "end": 71
+        },
+        "ty": "equals"
+      }
+    },
+    {
+      "Token": {
+        "slice": "30px",
+        "span": {
+          "start": 71,
+          "end": 75
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "]]",
+        "span": {
+          "start": 75,
           "end": 77
         },
-        "content": [
-          {
-            "slice": "[[",
-            "span": {
-              "start": 58,
-              "end": 60
-            },
-            "ty": "left-block"
-          },
-          {
-            "slice": "html",
-            "span": {
-              "start": 60,
-              "end": 64
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": 64,
-              "end": 65
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "width",
-            "span": {
-              "start": 65,
-              "end": 70
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": "=",
-            "span": {
-              "start": 70,
-              "end": 71
-            },
-            "ty": "equals"
-          },
-          {
-            "slice": "30px",
-            "span": {
-              "start": 71,
-              "end": 75
-            },
-            "ty": "identifier"
-          }
-        ]
+        "ty": "right-block"
+      }
+    },
+    {
+      "Token": {
+        "slice": "\n",
+        "span": {
+          "start": 77,
+          "end": 78
+        },
+        "ty": "line-break"
       }
     },
     {
@@ -407,19 +431,19 @@
   ],
   "diagnostics": [
     {
-      "msg": "BlockMalformedArguments: block-html",
-      "ty": "block-malformed-arguments",
-      "span": {
-        "start": 71,
-        "end": 75
-      }
-    },
-    {
       "msg": "NoRulesMatch: fallback",
       "ty": "no-rules-match",
       "span": {
         "start": 58,
         "end": 60
+      }
+    },
+    {
+      "msg": "BlockMalformedArguments: block-html",
+      "ty": "block-malformed-arguments",
+      "span": {
+        "start": 71,
+        "end": 75
       }
     },
     {

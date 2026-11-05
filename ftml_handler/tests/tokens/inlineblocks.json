@@ -431,31 +431,111 @@
         "end": 218
       },
       "ty": "paragraph-break"
+    },
+    {
+      "slice": "[[*",
+      "span": {
+        "start": 218,
+        "end": 221
+      },
+      "ty": "left-block-star"
+    },
+    {
+      "slice": "user",
+      "span": {
+        "start": 221,
+        "end": 225
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 225,
+        "end": 226
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "wasd243",
+      "span": {
+        "start": 226,
+        "end": 233
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 233,
+        "end": 235
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 235,
+        "end": 237
+      },
+      "ty": "paragraph-break"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 237,
+        "end": 239
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "norulesmatched",
+      "span": {
+        "start": 239,
+        "end": 253
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 253,
+        "end": 255
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 255,
+        "end": 257
+      },
+      "ty": "paragraph-break"
     }
   ],
   "diagnostics": [
     {
-      "msg": "InvalidInclude: block-include",
-      "ty": "invalid-include",
+      "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
-        "start": 10,
-        "end": 11
+        "start": 237,
+        "end": 239
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "ty": "no-rules-match",
       "span": {
-        "start": 0,
-        "end": 2
+        "start": 253,
+        "end": 255
       }
     },
     {
-      "msg": "NoRulesMatch: fallback",
-      "ty": "no-rules-match",
+      "msg": "NoSuchBlock: block",
+      "ty": "no-such-block",
       "span": {
-        "start": 99,
-        "end": 101
+        "start": 255,
+        "end": 257
       }
     }
   ]

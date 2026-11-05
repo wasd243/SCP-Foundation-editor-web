@@ -15,7 +15,7 @@ pub(crate) fn check_diagnostic_without_include(token: &Token, diagnostic: &Diagn
     let diagnostic_span = &diagnostic.span;
     token_span.start == diagnostic_span.start
         && token_span.end == diagnostic_span.end
-        && matches!(diagnostic.ty, ParseErrorKind::InvalidInclude)
+        && !matches!(diagnostic.ty, ParseErrorKind::InvalidInclude)
 }
 
 /// Check the token type for inlinemark.
