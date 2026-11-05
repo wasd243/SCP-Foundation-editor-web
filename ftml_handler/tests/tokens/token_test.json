@@ -308,6 +308,7 @@
   "diagnostics": [
     {
       "msg": "BlockMalformedArguments: block-note",
+      "ty": "block-malformed-arguments",
       "span": {
         "start": 48,
         "end": 49
@@ -315,6 +316,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 41,
         "end": 43

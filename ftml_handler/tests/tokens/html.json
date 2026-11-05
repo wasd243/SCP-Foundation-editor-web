@@ -388,6 +388,7 @@
   "diagnostics": [
     {
       "msg": "BlockMalformedArguments: block-html",
+      "ty": "block-malformed-arguments",
       "span": {
         "start": 71,
         "end": 75
@@ -395,6 +396,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 58,
         "end": 60
@@ -402,6 +404,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 75,
         "end": 77
@@ -409,6 +412,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 96,
         "end": 99
@@ -416,6 +420,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 103,
         "end": 105

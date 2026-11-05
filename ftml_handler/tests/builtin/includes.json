@@ -1,263 +1,199 @@
 {
   "tree": [
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 0,
-          "end": 2
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 2,
-          "end": 9
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 9,
-          "end": 10
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 10,
-          "end": 11
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 11,
-          "end": 14
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 14,
-          "end": 15
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 15,
-          "end": 19
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 19,
-          "end": 20
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "theme",
-        "span": {
-          "start": 20,
-          "end": 25
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 25,
-          "end": 26
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "creepypasta",
-        "span": {
-          "start": 26,
-          "end": 37
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 37,
           "end": 39
         },
-        "ty": "right-block"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 0,
+              "end": 2
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 2,
+              "end": 9
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 9,
+              "end": 10
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 10,
+              "end": 11
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 11,
+              "end": 14
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 14,
+              "end": 15
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 15,
+              "end": 19
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 19,
+              "end": 20
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "theme",
+            "span": {
+              "start": 20,
+              "end": 25
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 25,
+              "end": 26
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "creepypasta",
+            "span": {
+              "start": 26,
+              "end": 37
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
-      "Token": {
-        "slice": "\n\n",
-        "span": {
-          "start": 39,
-          "end": 41
-        },
-        "ty": "paragraph-break"
-      }
-    },
-    {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 41,
-          "end": 43
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 43,
-          "end": 50
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 50,
-          "end": 51
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 51,
-          "end": 52
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 52,
-          "end": 55
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 55,
-          "end": 56
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 56,
-          "end": 60
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 60,
-          "end": 61
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "info",
-        "span": {
-          "start": 61,
-          "end": 65
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 65,
-          "end": 66
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "start",
-        "span": {
-          "start": 66,
-          "end": 71
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 71,
           "end": 73
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 73,
-          "end": 74
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 41,
+              "end": 43
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 43,
+              "end": 50
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 50,
+              "end": 51
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 51,
+              "end": 52
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 52,
+              "end": 55
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 55,
+              "end": 56
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 56,
+              "end": 60
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 60,
+              "end": 61
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "info",
+            "span": {
+              "start": 61,
+              "end": 65
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 65,
+              "end": 66
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "start",
+            "span": {
+              "start": 66,
+              "end": 71
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
@@ -301,63 +237,45 @@
       }
     },
     {
-      "Token": {
-        "slice": "[[*",
+      "InLineBlocks": {
         "span": {
           "start": 108,
-          "end": 111
-        },
-        "ty": "left-block-star"
-      }
-    },
-    {
-      "Token": {
-        "slice": "user",
-        "span": {
-          "start": 111,
-          "end": 115
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 115,
-          "end": 116
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "DFAstillo91",
-        "span": {
-          "start": 116,
-          "end": 127
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 127,
           "end": 129
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 129,
-          "end": 130
-        },
-        "ty": "whitespace"
+        "content": [
+          {
+            "slice": "[[*",
+            "span": {
+              "start": 108,
+              "end": 111
+            },
+            "ty": "left-block-star"
+          },
+          {
+            "slice": "user",
+            "span": {
+              "start": 111,
+              "end": 115
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 115,
+              "end": 116
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "DFAstillo91",
+            "span": {
+              "start": 116,
+              "end": 127
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
@@ -381,63 +299,45 @@
       }
     },
     {
-      "Token": {
-        "slice": "[[*",
+      "InLineBlocks": {
         "span": {
           "start": 134,
-          "end": 137
-        },
-        "ty": "left-block-star"
-      }
-    },
-    {
-      "Token": {
-        "slice": "user",
-        "span": {
-          "start": 137,
-          "end": 141
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 141,
-          "end": 142
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "WaylandLaurencePan",
-        "span": {
-          "start": 142,
-          "end": 160
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 160,
           "end": 162
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 162,
-          "end": 163
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[*",
+            "span": {
+              "start": 134,
+              "end": 137
+            },
+            "ty": "left-block-star"
+          },
+          {
+            "slice": "user",
+            "span": {
+              "start": 137,
+              "end": 141
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 141,
+              "end": 142
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "WaylandLaurencePan",
+            "span": {
+              "start": 142,
+              "end": 160
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
@@ -661,283 +561,215 @@
       }
     },
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 249,
-          "end": 251
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 251,
-          "end": 258
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 258,
-          "end": 259
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 259,
-          "end": 260
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 260,
-          "end": 263
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 263,
-          "end": 264
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 264,
-          "end": 268
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 268,
-          "end": 269
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "info",
-        "span": {
-          "start": 269,
-          "end": 273
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 273,
-          "end": 274
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "end",
-        "span": {
-          "start": 274,
-          "end": 277
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 277,
           "end": 279
         },
-        "ty": "right-block"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 249,
+              "end": 251
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 251,
+              "end": 258
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 258,
+              "end": 259
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 259,
+              "end": 260
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 260,
+              "end": 263
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 263,
+              "end": 264
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 264,
+              "end": 268
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 268,
+              "end": 269
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "info",
+            "span": {
+              "start": 269,
+              "end": 273
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 273,
+              "end": 274
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "end",
+            "span": {
+              "start": 274,
+              "end": 277
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
-      "Token": {
-        "slice": "\n\n",
-        "span": {
-          "start": 279,
-          "end": 281
-        },
-        "ty": "paragraph-break"
-      }
-    },
-    {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 281,
-          "end": 283
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 283,
-          "end": 290
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 290,
-          "end": 291
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 291,
-          "end": 292
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 292,
-          "end": 295
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 295,
-          "end": 296
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 296,
-          "end": 300
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 300,
-          "end": 301
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "component",
-        "span": {
-          "start": 301,
-          "end": 310
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 310,
-          "end": 311
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "info",
-        "span": {
-          "start": 311,
-          "end": 315
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 315,
-          "end": 316
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "cw",
-        "span": {
-          "start": 316,
-          "end": 318
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 318,
           "end": 320
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n\n",
-        "span": {
-          "start": 320,
-          "end": 322
-        },
-        "ty": "paragraph-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 281,
+              "end": 283
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 283,
+              "end": 290
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 290,
+              "end": 291
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 291,
+              "end": 292
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 292,
+              "end": 295
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 295,
+              "end": 296
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 296,
+              "end": 300
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 300,
+              "end": 301
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "component",
+            "span": {
+              "start": 301,
+              "end": 310
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 310,
+              "end": 311
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "info",
+            "span": {
+              "start": 311,
+              "end": 315
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 315,
+              "end": 316
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "cw",
+            "span": {
+              "start": 316,
+              "end": 318
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
@@ -961,709 +793,546 @@
       }
     },
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 336,
-          "end": 338
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 338,
-          "end": 345
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 345,
-          "end": 346
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 346,
-          "end": 347
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 347,
-          "end": 350
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 350,
-          "end": 351
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 351,
-          "end": 355
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 355,
-          "end": 356
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "more",
-        "span": {
-          "start": 356,
-          "end": 360
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 360,
-          "end": 361
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "by",
-        "span": {
-          "start": 361,
-          "end": 363
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 363,
-          "end": 364
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "DFAstillo91",
-        "span": {
-          "start": 364,
-          "end": 375
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 375,
           "end": 377
         },
-        "ty": "right-block"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 336,
+              "end": 338
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 338,
+              "end": 345
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 345,
+              "end": 346
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 346,
+              "end": 347
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 347,
+              "end": 350
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 350,
+              "end": 351
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 351,
+              "end": 355
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 355,
+              "end": 356
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "more",
+            "span": {
+              "start": 356,
+              "end": 360
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 360,
+              "end": 361
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "by",
+            "span": {
+              "start": 361,
+              "end": 363
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 363,
+              "end": 364
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "DFAstillo91",
+            "span": {
+              "start": 364,
+              "end": 375
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 377,
-          "end": 378
-        },
-        "ty": "line-break"
-      }
-    },
-    {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 378,
-          "end": 380
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 380,
-          "end": 387
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 387,
-          "end": 388
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 388,
-          "end": 389
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 389,
-          "end": 392
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 392,
-          "end": 393
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 393,
-          "end": 397
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 397,
-          "end": 398
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "more",
-        "span": {
-          "start": 398,
-          "end": 402
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 402,
-          "end": 403
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "by",
-        "span": {
-          "start": 403,
-          "end": 405
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 405,
-          "end": 406
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "waylandlaurencepan",
-        "span": {
-          "start": 406,
-          "end": 424
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 424,
           "end": 426
         },
-        "ty": "right-block"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 378,
+              "end": 380
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 380,
+              "end": 387
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 387,
+              "end": 388
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 388,
+              "end": 389
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 389,
+              "end": 392
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 392,
+              "end": 393
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 393,
+              "end": 397
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 397,
+              "end": 398
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "more",
+            "span": {
+              "start": 398,
+              "end": 402
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 402,
+              "end": 403
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "by",
+            "span": {
+              "start": 403,
+              "end": 405
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 405,
+              "end": 406
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "waylandlaurencepan",
+            "span": {
+              "start": 406,
+              "end": 424
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 426,
-          "end": 427
-        },
-        "ty": "line-break"
-      }
-    },
-    {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 427,
-          "end": 429
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 429,
-          "end": 436
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 436,
-          "end": 437
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 437,
-          "end": 438
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 438,
-          "end": 441
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 441,
-          "end": 442
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 442,
-          "end": 446
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 446,
-          "end": 447
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "component",
-        "span": {
-          "start": 447,
-          "end": 456
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 456,
-          "end": 457
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "license",
-        "span": {
-          "start": 457,
-          "end": 464
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 464,
-          "end": 465
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "box",
-        "span": {
-          "start": 465,
-          "end": 468
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 468,
-          "end": 469
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "author",
-        "span": {
-          "start": 469,
-          "end": 475
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "=",
-        "span": {
-          "start": 475,
-          "end": 476
-        },
-        "ty": "equals"
-      }
-    },
-    {
-      "Token": {
-        "slice": "DFAstillo91",
-        "span": {
-          "start": 476,
-          "end": 487
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 487,
-          "end": 488
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "and",
-        "span": {
-          "start": 488,
-          "end": 491
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 491,
-          "end": 492
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "WaylandLaurencePan",
-        "span": {
-          "start": 492,
-          "end": 510
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 510,
           "end": 512
         },
-        "ty": "right-block"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 427,
+              "end": 429
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 429,
+              "end": 436
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 436,
+              "end": 437
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 437,
+              "end": 438
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 438,
+              "end": 441
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 441,
+              "end": 442
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 442,
+              "end": 446
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 446,
+              "end": 447
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "component",
+            "span": {
+              "start": 447,
+              "end": 456
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 456,
+              "end": 457
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "license",
+            "span": {
+              "start": 457,
+              "end": 464
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 464,
+              "end": 465
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "box",
+            "span": {
+              "start": 465,
+              "end": 468
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 468,
+              "end": 469
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "author",
+            "span": {
+              "start": 469,
+              "end": 475
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "=",
+            "span": {
+              "start": 475,
+              "end": 476
+            },
+            "ty": "equals"
+          },
+          {
+            "slice": "DFAstillo91",
+            "span": {
+              "start": 476,
+              "end": 487
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 487,
+              "end": 488
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "and",
+            "span": {
+              "start": 488,
+              "end": 491
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 491,
+              "end": 492
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "WaylandLaurencePan",
+            "span": {
+              "start": 492,
+              "end": 510
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 512,
-          "end": 513
-        },
-        "ty": "line-break"
-      }
-    },
-    {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 513,
-          "end": 515
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "include",
-        "span": {
-          "start": 515,
-          "end": 522
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 522,
-          "end": 523
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 523,
-          "end": 524
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "scp",
-        "span": {
-          "start": 524,
-          "end": 527
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 527,
-          "end": 528
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "wiki",
-        "span": {
-          "start": 528,
-          "end": 532
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 532,
-          "end": 533
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "component",
-        "span": {
-          "start": 533,
-          "end": 542
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": ":",
-        "span": {
-          "start": 542,
-          "end": 543
-        },
-        "ty": "colon"
-      }
-    },
-    {
-      "Token": {
-        "slice": "license",
-        "span": {
-          "start": 543,
-          "end": 550
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 550,
-          "end": 551
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "box",
-        "span": {
-          "start": 551,
-          "end": 554
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 554,
-          "end": 555
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "end",
-        "span": {
-          "start": 555,
-          "end": 558
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 558,
           "end": 560
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 560,
-          "end": 561
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 513,
+              "end": 515
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "include",
+            "span": {
+              "start": 515,
+              "end": 522
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 522,
+              "end": 523
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 523,
+              "end": 524
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "scp",
+            "span": {
+              "start": 524,
+              "end": 527
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 527,
+              "end": 528
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "wiki",
+            "span": {
+              "start": 528,
+              "end": 532
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 532,
+              "end": 533
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "component",
+            "span": {
+              "start": 533,
+              "end": 542
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": ":",
+            "span": {
+              "start": 542,
+              "end": 543
+            },
+            "ty": "colon"
+          },
+          {
+            "slice": "license",
+            "span": {
+              "start": 543,
+              "end": 550
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 550,
+              "end": 551
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "box",
+            "span": {
+              "start": 551,
+              "end": 554
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 554,
+              "end": 555
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "end",
+            "span": {
+              "start": 555,
+              "end": 558
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     }
   ],
   "diagnostics": [
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 10,
         "end": 11
@@ -1671,6 +1340,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 0,
         "end": 2
@@ -1678,6 +1348,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 37,
         "end": 39
@@ -1685,6 +1356,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 51,
         "end": 52
@@ -1692,6 +1364,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 41,
         "end": 43
@@ -1699,6 +1372,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 71,
         "end": 73
@@ -1706,6 +1380,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 259,
         "end": 260
@@ -1713,6 +1388,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 249,
         "end": 251
@@ -1720,6 +1396,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 277,
         "end": 279
@@ -1727,6 +1404,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 291,
         "end": 292
@@ -1734,6 +1412,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 281,
         "end": 283
@@ -1741,6 +1420,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 318,
         "end": 320
@@ -1748,6 +1428,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 346,
         "end": 347
@@ -1755,6 +1436,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 336,
         "end": 338
@@ -1762,6 +1444,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 375,
         "end": 377
@@ -1769,6 +1452,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 388,
         "end": 389
@@ -1776,6 +1460,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 378,
         "end": 380
@@ -1783,6 +1468,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 424,
         "end": 426
@@ -1790,6 +1476,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 437,
         "end": 438
@@ -1797,6 +1484,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 427,
         "end": 429
@@ -1804,6 +1492,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 510,
         "end": 512
@@ -1811,6 +1500,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 523,
         "end": 524
@@ -1818,6 +1508,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 513,
         "end": 515
@@ -1825,6 +1516,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 558,
         "end": 560

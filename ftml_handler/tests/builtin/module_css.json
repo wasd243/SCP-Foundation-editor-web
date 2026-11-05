@@ -1,63 +1,45 @@
 {
   "tree": [
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 0,
-          "end": 2
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "module",
-        "span": {
-          "start": 2,
-          "end": 8
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 8,
-          "end": 9
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "css",
-        "span": {
-          "start": 9,
-          "end": 12
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 12,
           "end": 14
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 14,
-          "end": 15
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 0,
+              "end": 2
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "module",
+            "span": {
+              "start": 2,
+              "end": 8
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 8,
+              "end": 9
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "css",
+            "span": {
+              "start": 9,
+              "end": 12
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {

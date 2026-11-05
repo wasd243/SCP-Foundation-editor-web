@@ -1492,6 +1492,7 @@
   "diagnostics": [
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 10,
         "end": 11
@@ -1499,6 +1500,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 0,
         "end": 2
@@ -1506,6 +1508,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 37,
         "end": 39
@@ -1513,6 +1516,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 51,
         "end": 52
@@ -1520,6 +1524,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 41,
         "end": 43
@@ -1527,6 +1532,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 71,
         "end": 73
@@ -1534,6 +1540,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 259,
         "end": 260
@@ -1541,6 +1548,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 249,
         "end": 251
@@ -1548,6 +1556,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 277,
         "end": 279
@@ -1555,6 +1564,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 291,
         "end": 292
@@ -1562,6 +1572,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 281,
         "end": 283
@@ -1569,6 +1580,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 318,
         "end": 320
@@ -1576,6 +1588,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 346,
         "end": 347
@@ -1583,6 +1596,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 336,
         "end": 338
@@ -1590,6 +1604,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 375,
         "end": 377
@@ -1597,6 +1612,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 388,
         "end": 389
@@ -1604,6 +1620,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 378,
         "end": 380
@@ -1611,6 +1628,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 424,
         "end": 426
@@ -1618,6 +1636,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 437,
         "end": 438
@@ -1625,6 +1644,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 427,
         "end": 429
@@ -1632,6 +1652,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 510,
         "end": 512
@@ -1639,6 +1660,7 @@
     },
     {
       "msg": "InvalidInclude: block-include",
+      "ty": "invalid-include",
       "span": {
         "start": 523,
         "end": 524
@@ -1646,6 +1668,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 513,
         "end": 515
@@ -1653,6 +1676,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 558,
         "end": 560

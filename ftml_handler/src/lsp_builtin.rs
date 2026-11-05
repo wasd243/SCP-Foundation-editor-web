@@ -1,16 +1,19 @@
+mod inline_blocks;
 mod inline_marks;
 
+use inline_blocks::InlineBlocks;
 use inline_marks::InlineMarks;
 
 use crate::{
     ftml_ast::{Diagnostic, ParseToken, Token},
-    utils::is_inline_mark_token,
+    utils::{is_inline_block_token, is_inline_mark_token},
 };
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
 enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
+    InLineBlocks(InlineBlocks<'lsp>),
     Token(&'lsp Token),
 }
 
@@ -35,6 +38,15 @@ impl<'lsp> LspBuiltIn<'lsp> {
             {
                 visitor_index += inline_mark.content_len() + 2; // which including start adn the end
                 tree.push(BuiltIn::InLineMarks(inline_mark));
+                continue;
+            } else if is_inline_block_token(tokens[visitor_index].ty)
+                && let Some(inline_block) = InlineBlocks::from_parse_token_slice(
+                    &tokens[visitor_index..],
+                    &parse_token.diagnostics,
+                )
+            {
+                visitor_index += inline_block.content_len() + 2;
+                tree.push(BuiltIn::InLineBlocks(inline_block));
                 continue;
             } else {
                 tree.push(BuiltIn::Token(&tokens[visitor_index]));

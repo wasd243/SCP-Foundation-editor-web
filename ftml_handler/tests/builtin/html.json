@@ -1,43 +1,29 @@
 {
   "tree": [
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 0,
-          "end": 2
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "html",
-        "span": {
-          "start": 2,
-          "end": 6
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 6,
           "end": 8
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 8,
-          "end": 9
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 0,
+              "end": 2
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "html",
+            "span": {
+              "start": 2,
+              "end": 6
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
@@ -271,83 +257,61 @@
       }
     },
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 58,
-          "end": 60
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "html",
-        "span": {
-          "start": 60,
-          "end": 64
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 64,
-          "end": 65
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "width",
-        "span": {
-          "start": 65,
-          "end": 70
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "=",
-        "span": {
-          "start": 70,
-          "end": 71
-        },
-        "ty": "equals"
-      }
-    },
-    {
-      "Token": {
-        "slice": "30px",
-        "span": {
-          "start": 71,
-          "end": 75
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 75,
           "end": 77
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 77,
-          "end": 78
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 58,
+              "end": 60
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "html",
+            "span": {
+              "start": 60,
+              "end": 64
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 64,
+              "end": 65
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "width",
+            "span": {
+              "start": 65,
+              "end": 70
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "=",
+            "span": {
+              "start": 70,
+              "end": 71
+            },
+            "ty": "equals"
+          },
+          {
+            "slice": "30px",
+            "span": {
+              "start": 71,
+              "end": 75
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
@@ -444,6 +408,7 @@
   "diagnostics": [
     {
       "msg": "BlockMalformedArguments: block-html",
+      "ty": "block-malformed-arguments",
       "span": {
         "start": 71,
         "end": 75
@@ -451,6 +416,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 58,
         "end": 60
@@ -458,6 +424,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 75,
         "end": 77
@@ -465,6 +432,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 96,
         "end": 99
@@ -472,6 +440,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 103,
         "end": 105

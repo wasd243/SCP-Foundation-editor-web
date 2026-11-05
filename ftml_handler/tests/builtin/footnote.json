@@ -11,43 +11,29 @@
       }
     },
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 2,
-          "end": 4
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "footnote",
-        "span": {
-          "start": 4,
-          "end": 12
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 12,
           "end": 14
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 14,
-          "end": 15
-        },
-        "ty": "whitespace"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "footnote",
+            "span": {
+              "start": 4,
+              "end": 12
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {

@@ -1,6 +1,7 @@
 mod token;
 
 use ftml::parsing::ExtractedToken;
+use ftml::parsing::ParseErrorKind;
 use ftml::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
@@ -21,9 +22,10 @@ pub struct ParseToken {
     pub diagnostics: Vec<Diagnostic>,
 }
 
-#[derive(Serialize, Debug, Default)]
+#[derive(Serialize, Debug)]
 pub struct Diagnostic {
     pub msg: String,
+    pub ty: ParseErrorKind,
     pub span: Span,
 }
 
@@ -95,6 +97,7 @@ fn get_ftml_token(wikitext: &str) -> (Vec<ExtractedToken<'_>>, Vec<Diagnostic>) 
             let sp = warning.span();
             Diagnostic {
                 msg: format!("{}: {}", warning.kind().name(), warning.rule()),
+                ty: warning.kind(),
                 span: Span {
                     start: map.get_index(sp.start),
                     end: map.get_index(sp.end),

@@ -1,123 +1,93 @@
 {
   "tree": [
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 0,
-          "end": 2
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "div",
-        "span": {
-          "start": 2,
-          "end": 5
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 5,
-          "end": 6
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "class",
-        "span": {
-          "start": 6,
-          "end": 11
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 11,
-          "end": 12
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "=",
-        "span": {
-          "start": 12,
-          "end": 13
-        },
-        "ty": "equals"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 13,
-          "end": 14
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\"",
-        "span": {
-          "start": 14,
-          "end": 15
-        },
-        "ty": "double-quote"
-      }
-    },
-    {
-      "Token": {
-        "slice": "some",
-        "span": {
-          "start": 15,
-          "end": 19
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\"",
-        "span": {
-          "start": 19,
-          "end": 20
-        },
-        "ty": "double-quote"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 20,
           "end": 22
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 22,
-          "end": 23
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 0,
+              "end": 2
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "div",
+            "span": {
+              "start": 2,
+              "end": 5
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "class",
+            "span": {
+              "start": 6,
+              "end": 11
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 11,
+              "end": 12
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "=",
+            "span": {
+              "start": 12,
+              "end": 13
+            },
+            "ty": "equals"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 13,
+              "end": 14
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 14,
+              "end": 15
+            },
+            "ty": "double-quote"
+          },
+          {
+            "slice": "some",
+            "span": {
+              "start": 15,
+              "end": 19
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 19,
+              "end": 20
+            },
+            "ty": "double-quote"
+          }
+        ]
       }
     },
     {
@@ -181,143 +151,109 @@
       }
     },
     {
-      "Token": {
-        "slice": "[[",
+      "InLineBlocks": {
         "span": {
           "start": 41,
-          "end": 43
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "note",
-        "span": {
-          "start": 43,
-          "end": 47
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 47,
-          "end": 48
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "<",
-        "span": {
-          "start": 48,
-          "end": 49
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": "-",
-        "span": {
-          "start": 49,
-          "end": 50
-        },
-        "ty": "other"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 50,
-          "end": 51
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "failed",
-        "span": {
-          "start": 51,
-          "end": 57
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": " ",
-        "span": {
-          "start": 57,
-          "end": 58
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "Token": {
-        "slice": "note",
-        "span": {
-          "start": 58,
-          "end": 62
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n\n",
-        "span": {
-          "start": 62,
-          "end": 64
-        },
-        "ty": "paragraph-break"
-      }
-    },
-    {
-      "Token": {
-        "slice": "[[",
-        "span": {
-          "start": 64,
-          "end": 66
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "note",
-        "span": {
-          "start": 66,
-          "end": 70
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": 70,
           "end": 72
         },
-        "ty": "right-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "\n",
-        "span": {
-          "start": 72,
-          "end": 73
-        },
-        "ty": "line-break"
+        "content": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": 41,
+              "end": 43
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "note",
+            "span": {
+              "start": 43,
+              "end": 47
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 47,
+              "end": 48
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "<",
+            "span": {
+              "start": 48,
+              "end": 49
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "-",
+            "span": {
+              "start": 49,
+              "end": 50
+            },
+            "ty": "other"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 50,
+              "end": 51
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "failed",
+            "span": {
+              "start": 51,
+              "end": 57
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 57,
+              "end": 58
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "note",
+            "span": {
+              "start": 58,
+              "end": 62
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "\n\n",
+            "span": {
+              "start": 62,
+              "end": 64
+            },
+            "ty": "paragraph-break"
+          },
+          {
+            "slice": "[[",
+            "span": {
+              "start": 64,
+              "end": 66
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "note",
+            "span": {
+              "start": 66,
+              "end": 70
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {
@@ -384,6 +320,7 @@
   "diagnostics": [
     {
       "msg": "BlockMalformedArguments: block-note",
+      "ty": "block-malformed-arguments",
       "span": {
         "start": 48,
         "end": 49
@@ -391,6 +328,7 @@
     },
     {
       "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
       "span": {
         "start": 41,
         "end": 43
