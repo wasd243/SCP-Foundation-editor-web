@@ -9,6 +9,7 @@ pub(crate) fn has_diagnostic(token: &Token, diagnostic: &Diagnostic) -> bool {
     token_span.start == diagnostic_span.start && token_span.end == diagnostic_span.end
 }
 
+/// Check if token span has diagnostic but excluding `InvalidInclude`.
 pub(crate) fn check_diagnostic_without_include(token: &Token, diagnostic: &Diagnostic) -> bool {
     let token_span = &token.span;
     let diagnostic_span = &diagnostic.span;
