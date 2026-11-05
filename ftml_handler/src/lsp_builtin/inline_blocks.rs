@@ -18,7 +18,7 @@ impl<'lsp> InlineBlocks<'lsp> {
         tokens: &'lsp [Token],
         diagnostics: &'lsp [Diagnostic],
     ) -> Option<Self> {
-        for token in tokens.iter() {
+        for token in tokens {
             if diagnostics
                 .iter()
                 .any(|d| check_diagnostic_without_include(token, d))
