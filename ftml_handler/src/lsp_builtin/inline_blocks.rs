@@ -8,13 +8,13 @@ use crate::{
 };
 
 #[derive(Debug, Serialize)]
-pub struct InlineBlocks<'lsp> {
+pub(super) struct InlineBlocks<'lsp> {
     span: Span,
     content: Vec<&'lsp Token>,
 }
 
 impl<'lsp> InlineBlocks<'lsp> {
-    pub fn from_parse_token_slice(
+    pub(super) fn from_parse_token_slice(
         tokens: &'lsp [Token],
         diagnostics: &'lsp [Diagnostic],
     ) -> Option<Self> {
@@ -51,7 +51,7 @@ impl<'lsp> InlineBlocks<'lsp> {
         None
     }
 
-    pub fn content_len(&self) -> usize {
+    pub(super) fn content_len(&self) -> usize {
         self.content.len()
     }
 }

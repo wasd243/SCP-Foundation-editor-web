@@ -8,7 +8,7 @@ use crate::{
 };
 
 #[derive(Debug, Serialize)]
-pub struct InlineMarks<'lsp> {
+pub(super) struct InlineMarks<'lsp> {
     span: Span,
     #[serde(skip)]
     content: Vec<&'lsp Token>,
