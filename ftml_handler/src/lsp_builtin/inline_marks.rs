@@ -1,5 +1,5 @@
 use ftml::parsing::Token as TokenTy;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 
 use crate::{
     Span,
@@ -13,9 +13,8 @@ pub struct InlineMarks<'lsp> {
     #[serde(skip)]
     content: Vec<&'lsp Token>,
     inner_marks: Vec<InlineMarks<'lsp>>,
+    #[serde(serialize_with = "serialize_ty")]
     ty: TokenTy,
-    /// Special handling for monospace because ftml both has `LeftMonospace` and `RightMonospace`
-    is_monospace: bool,
 }
 
 impl<'lsp> InlineMarks<'lsp> {
@@ -71,7 +70,6 @@ fn from_parse_token_<'lsp>(
 
         if let Some(end_mark) = end_mark {
             let ty = end_mark.ty;
-            let is_monospace = matches!(end_mark.ty, TokenTy::RightMonospace);
             return Some(InlineMarks {
                 span: Span {
                     start: start_mark.span.start,
@@ -80,10 +78,20 @@ fn from_parse_token_<'lsp>(
                 content,
                 inner_marks,
                 ty,
-                is_monospace,
             });
         }
     }
 
     None
+}
+
+/// Convert `RightMonospace` or `LeftMonospace` to `monospace`.
+fn serialize_ty<S>(ty: &TokenTy, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    match ty {
+        TokenTy::LeftMonospace | TokenTy::RightMonospace => serializer.serialize_str("monospace"),
+        other => other.serialize(serializer),
+    }
 }
