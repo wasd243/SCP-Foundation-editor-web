@@ -1,2 +1,2 @@
 [alias]
-bless = "test --features bless bless_token"
+bless = "test --features bless -- bless_"

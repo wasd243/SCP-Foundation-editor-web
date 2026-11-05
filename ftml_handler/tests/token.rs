@@ -108,8 +108,6 @@ fn check_token() {
             let mut token = ParseToken::from(content.as_str());
             token.clean();
 
-            let token = LspBuiltIn::visitor(&token);
-
             let token = to_string_pretty(&token).unwrap();
 
             let stem = path.file_stem().unwrap().to_string_lossy();

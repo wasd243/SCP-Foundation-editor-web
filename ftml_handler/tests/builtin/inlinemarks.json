@@ -97,6 +97,17 @@
         "ty": "bold",
         "is_monospace": false
       }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 112,
+          "end": 133
+        },
+        "inner_marks": [],
+        "ty": "raw",
+        "is_monospace": false
+      }
     }
   ],
   "diagnostics": [
