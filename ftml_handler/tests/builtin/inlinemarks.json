@@ -1,0 +1,118 @@
+{
+  "tree": [
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 0,
+          "end": 8
+        },
+        "inner_marks": [],
+        "ty": "bold",
+        "is_monospace": false
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 9,
+          "end": 20
+        },
+        "inner_marks": [],
+        "ty": "italics",
+        "is_monospace": false
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 21,
+          "end": 34
+        },
+        "inner_marks": [],
+        "ty": "underline",
+        "is_monospace": false
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 35,
+          "end": 50
+        },
+        "inner_marks": [],
+        "ty": "double-dash",
+        "is_monospace": false
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 51,
+          "end": 60
+        },
+        "inner_marks": [],
+        "ty": "superscript",
+        "is_monospace": false
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 61,
+          "end": 68
+        },
+        "inner_marks": [],
+        "ty": "subscript",
+        "is_monospace": false
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 69,
+          "end": 82
+        },
+        "inner_marks": [],
+        "ty": "right-monospace",
+        "is_monospace": true
+      }
+    },
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 84,
+          "end": 110
+        },
+        "inner_marks": [
+          {
+            "span": {
+              "start": 98,
+              "end": 108
+            },
+            "inner_marks": [],
+            "ty": "italics",
+            "is_monospace": false
+          }
+        ],
+        "ty": "bold",
+        "is_monospace": false
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "msg": "RuleFailed: bold",
+      "span": {
+        "start": 146,
+        "end": 148
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 135,
+        "end": 137
+      }
+    }
+  ]
+}

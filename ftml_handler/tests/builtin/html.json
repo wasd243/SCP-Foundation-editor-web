@@ -1,0 +1,52 @@
+{
+  "tree": [
+    {
+      "InLineMarks": {
+        "span": {
+          "start": 80,
+          "end": 94
+        },
+        "inner_marks": [],
+        "ty": "double-dash",
+        "is_monospace": false
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "msg": "BlockMalformedArguments: block-html",
+      "span": {
+        "start": 71,
+        "end": 75
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 58,
+        "end": 60
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 75,
+        "end": 77
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 96,
+        "end": 99
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 103,
+        "end": 105
+      }
+    }
+  ]
+}

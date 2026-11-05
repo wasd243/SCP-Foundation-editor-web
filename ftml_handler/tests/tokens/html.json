@@ -1,15 +1,388 @@
 {
-  "tree": [
+  "tokens": [
     {
-      "InLineMarks": {
-        "span": {
-          "start": 80,
-          "end": 94
-        },
-        "inner_marks": [],
-        "ty": "double-dash",
-        "is_monospace": false
-      }
+      "slice": "[[",
+      "span": {
+        "start": 0,
+        "end": 2
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "html",
+      "span": {
+        "start": 2,
+        "end": 6
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 6,
+        "end": 8
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 8,
+        "end": 9
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "<",
+      "span": {
+        "start": 9,
+        "end": 10
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "div",
+      "span": {
+        "start": 10,
+        "end": 13
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 13,
+        "end": 14
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "class",
+      "span": {
+        "start": 14,
+        "end": 19
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": 19,
+        "end": 20
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 20,
+        "end": 21
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "foo",
+      "span": {
+        "start": 21,
+        "end": 24
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 24,
+        "end": 25
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": ">",
+      "span": {
+        "start": 25,
+        "end": 26
+      },
+      "ty": "quote"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 26,
+        "end": 27
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "start": 27,
+        "end": 31
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 31,
+        "end": 32
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "context",
+      "span": {
+        "start": 32,
+        "end": 39
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 39,
+        "end": 40
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "<",
+      "span": {
+        "start": 40,
+        "end": 41
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "/",
+      "span": {
+        "start": 41,
+        "end": 42
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "div",
+      "span": {
+        "start": 42,
+        "end": 45
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": ">",
+      "span": {
+        "start": 45,
+        "end": 46
+      },
+      "ty": "quote"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 46,
+        "end": 47
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 47,
+        "end": 50
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "html",
+      "span": {
+        "start": 50,
+        "end": 54
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 54,
+        "end": 56
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 56,
+        "end": 58
+      },
+      "ty": "paragraph-break"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 58,
+        "end": 60
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "html",
+      "span": {
+        "start": 60,
+        "end": 64
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 64,
+        "end": 65
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "width",
+      "span": {
+        "start": 65,
+        "end": 70
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": 70,
+        "end": 71
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "30px",
+      "span": {
+        "start": 71,
+        "end": 75
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 75,
+        "end": 77
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 77,
+        "end": 78
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "<",
+      "span": {
+        "start": 78,
+        "end": 79
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "!",
+      "span": {
+        "start": 79,
+        "end": 80
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "--",
+      "span": {
+        "start": 80,
+        "end": 82
+      },
+      "ty": "double-dash"
+    },
+    {
+      "slice": "With",
+      "span": {
+        "start": 82,
+        "end": 86
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 86,
+        "end": 87
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "alias",
+      "span": {
+        "start": 87,
+        "end": 92
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "--",
+      "span": {
+        "start": 92,
+        "end": 94
+      },
+      "ty": "double-dash"
+    },
+    {
+      "slice": ">",
+      "span": {
+        "start": 94,
+        "end": 95
+      },
+      "ty": "quote"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 95,
+        "end": 96
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 96,
+        "end": 99
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "html",
+      "span": {
+        "start": 99,
+        "end": 103
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 103,
+        "end": 105
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 105,
+        "end": 106
+      },
+      "ty": "line-break"
     }
   ],
   "diagnostics": [

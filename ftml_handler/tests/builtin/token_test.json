@@ -1,0 +1,19 @@
+{
+  "tree": [],
+  "diagnostics": [
+    {
+      "msg": "BlockMalformedArguments: block-note",
+      "span": {
+        "start": 48,
+        "end": 49
+      }
+    },
+    {
+      "msg": "NoRulesMatch: fallback",
+      "span": {
+        "start": 41,
+        "end": 43
+      }
+    }
+  ]
+}

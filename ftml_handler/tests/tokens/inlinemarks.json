@@ -1,117 +1,435 @@
 {
-  "tree": [
+  "tokens": [
     {
-      "InLineMarks": {
-        "span": {
-          "start": 0,
-          "end": 8
-        },
-        "inner_marks": [],
-        "ty": "bold",
-        "is_monospace": false
-      }
+      "slice": "**",
+      "span": {
+        "start": 0,
+        "end": 2
+      },
+      "ty": "bold"
     },
     {
-      "InLineMarks": {
-        "span": {
-          "start": 9,
-          "end": 20
-        },
-        "inner_marks": [],
-        "ty": "italics",
-        "is_monospace": false
-      }
+      "slice": "bold",
+      "span": {
+        "start": 2,
+        "end": 6
+      },
+      "ty": "identifier"
     },
     {
-      "InLineMarks": {
-        "span": {
-          "start": 21,
-          "end": 34
-        },
-        "inner_marks": [],
-        "ty": "underline",
-        "is_monospace": false
-      }
+      "slice": "**",
+      "span": {
+        "start": 6,
+        "end": 8
+      },
+      "ty": "bold"
     },
     {
-      "InLineMarks": {
-        "span": {
-          "start": 35,
-          "end": 50
-        },
-        "inner_marks": [],
-        "ty": "double-dash",
-        "is_monospace": false
-      }
+      "slice": "\n",
+      "span": {
+        "start": 8,
+        "end": 9
+      },
+      "ty": "line-break"
     },
     {
-      "InLineMarks": {
-        "span": {
-          "start": 51,
-          "end": 60
-        },
-        "inner_marks": [],
-        "ty": "superscript",
-        "is_monospace": false
-      }
+      "slice": "//",
+      "span": {
+        "start": 9,
+        "end": 11
+      },
+      "ty": "italics"
     },
     {
-      "InLineMarks": {
-        "span": {
-          "start": 61,
-          "end": 68
-        },
-        "inner_marks": [],
-        "ty": "subscript",
-        "is_monospace": false
-      }
+      "slice": "italics",
+      "span": {
+        "start": 11,
+        "end": 18
+      },
+      "ty": "identifier"
     },
     {
-      "InLineMarks": {
-        "span": {
-          "start": 69,
-          "end": 82
-        },
-        "inner_marks": [],
-        "ty": "right-monospace",
-        "is_monospace": true
-      }
+      "slice": "//",
+      "span": {
+        "start": 18,
+        "end": 20
+      },
+      "ty": "italics"
     },
     {
-      "InLineMarks": {
-        "span": {
-          "start": 84,
-          "end": 110
-        },
-        "inner_marks": [
-          {
-            "span": {
-              "start": 98,
-              "end": 108
-            },
-            "inner_marks": [],
-            "ty": "italics",
-            "is_monospace": false
-          }
-        ],
-        "ty": "bold",
-        "is_monospace": false
-      }
+      "slice": "\n",
+      "span": {
+        "start": 20,
+        "end": 21
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "__",
+      "span": {
+        "start": 21,
+        "end": 23
+      },
+      "ty": "underline"
+    },
+    {
+      "slice": "underline",
+      "span": {
+        "start": 23,
+        "end": 32
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "__",
+      "span": {
+        "start": 32,
+        "end": 34
+      },
+      "ty": "underline"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 34,
+        "end": 35
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "--",
+      "span": {
+        "start": 35,
+        "end": 37
+      },
+      "ty": "double-dash"
+    },
+    {
+      "slice": "double",
+      "span": {
+        "start": 37,
+        "end": 43
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "-",
+      "span": {
+        "start": 43,
+        "end": 44
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "dash",
+      "span": {
+        "start": 44,
+        "end": 48
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "--",
+      "span": {
+        "start": 48,
+        "end": 50
+      },
+      "ty": "double-dash"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 50,
+        "end": 51
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "^^",
+      "span": {
+        "start": 51,
+        "end": 53
+      },
+      "ty": "superscript"
+    },
+    {
+      "slice": "super",
+      "span": {
+        "start": 53,
+        "end": 58
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "^^",
+      "span": {
+        "start": 58,
+        "end": 60
+      },
+      "ty": "superscript"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 60,
+        "end": 61
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": ",,",
+      "span": {
+        "start": 61,
+        "end": 63
+      },
+      "ty": "subscript"
+    },
+    {
+      "slice": "sub",
+      "span": {
+        "start": 63,
+        "end": 66
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": ",,",
+      "span": {
+        "start": 66,
+        "end": 68
+      },
+      "ty": "subscript"
+    },
+    {
+      "slice": "\n",
+      "span": {
+        "start": 68,
+        "end": 69
+      },
+      "ty": "line-break"
+    },
+    {
+      "slice": "{{",
+      "span": {
+        "start": 69,
+        "end": 71
+      },
+      "ty": "left-monospace"
+    },
+    {
+      "slice": "monospace",
+      "span": {
+        "start": 71,
+        "end": 80
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "}}",
+      "span": {
+        "start": 80,
+        "end": 82
+      },
+      "ty": "right-monospace"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 82,
+        "end": 84
+      },
+      "ty": "paragraph-break"
+    },
+    {
+      "slice": "**",
+      "span": {
+        "start": 84,
+        "end": 86
+      },
+      "ty": "bold"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "start": 86,
+        "end": 90
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 90,
+        "end": 91
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "nested",
+      "span": {
+        "start": 91,
+        "end": 97
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 97,
+        "end": 98
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "//",
+      "span": {
+        "start": 98,
+        "end": 100
+      },
+      "ty": "italics"
+    },
+    {
+      "slice": "things",
+      "span": {
+        "start": 100,
+        "end": 106
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "//",
+      "span": {
+        "start": 106,
+        "end": 108
+      },
+      "ty": "italics"
+    },
+    {
+      "slice": "**",
+      "span": {
+        "start": 108,
+        "end": 110
+      },
+      "ty": "bold"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 110,
+        "end": 112
+      },
+      "ty": "paragraph-break"
+    },
+    {
+      "slice": "@@",
+      "span": {
+        "start": 112,
+        "end": 114
+      },
+      "ty": "raw"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 114,
+        "end": 116
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "original",
+      "span": {
+        "start": 116,
+        "end": 124
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 124,
+        "end": 125
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "text",
+      "span": {
+        "start": 125,
+        "end": 129
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 129,
+        "end": 131
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "@@",
+      "span": {
+        "start": 131,
+        "end": 133
+      },
+      "ty": "raw"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 133,
+        "end": 135
+      },
+      "ty": "paragraph-break"
+    },
+    {
+      "slice": "**",
+      "span": {
+        "start": 135,
+        "end": 137
+      },
+      "ty": "bold"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 137,
+        "end": 138
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "unclosed",
+      "span": {
+        "start": 138,
+        "end": 146
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 146,
+        "end": 148
+      },
+      "ty": "paragraph-break"
     }
   ],
   "diagnostics": [
     {
       "msg": "RuleFailed: bold",
       "span": {
-        "start": 123,
-        "end": 125
+        "start": 146,
+        "end": 148
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "span": {
-        "start": 112,
-        "end": 114
+        "start": 135,
+        "end": 137
       }
     }
   ]
