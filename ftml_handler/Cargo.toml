@@ -1,5 +1,5 @@
 [package]
-name = "ftml_handler"
+name = "ftml_analyzer"
 version = "0.1.0"
 authors = ["wasd243"]
 edition = "2024"
@@ -13,7 +13,7 @@ bless = []
 
 [dependencies]
 ftml = "1.42"
-serde = { version = "1.0", features = ["derive"]}
+serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde-wasm-bindgen = "0.6"
 regex = "1.13"

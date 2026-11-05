@@ -1,5 +1,5 @@
-use ftml_handler::ftml_ast::ParseToken;
-use ftml_handler::lsp_builtin::LspBuiltIn;
+use ftml_analyzer::ftml_ast::ParseToken;
+use ftml_analyzer::lsp_builtin::LspBuiltIn;
 use serde_json::to_string_pretty;
 use std::fs;
 use std::path::PathBuf;
