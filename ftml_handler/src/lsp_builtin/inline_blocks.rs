@@ -18,9 +18,7 @@ impl<'lsp> InlineBlocks<'lsp> {
         tokens: &'lsp [Token],
         diagnostics: &'lsp [Diagnostic],
     ) -> Option<Self> {
-        let mut iter = tokens.iter();
-
-        while let Some(token) = iter.next() {
+        for token in tokens.iter() {
             if diagnostics
                 .iter()
                 .any(|d| check_diagnostic_without_include(token, d))
