@@ -9,14 +9,14 @@ use crate::{
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
-pub enum BuiltIn<'lsp> {
+enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
 }
 
 #[derive(Debug, Serialize)]
 pub struct LspBuiltIn<'lsp> {
-    pub tree: Vec<BuiltIn<'lsp>>,
-    pub diagnostics: &'lsp Vec<Diagnostic>,
+    tree: Vec<BuiltIn<'lsp>>,
+    diagnostics: &'lsp Vec<Diagnostic>,
 }
 
 impl<'lsp> LspBuiltIn<'lsp> {
