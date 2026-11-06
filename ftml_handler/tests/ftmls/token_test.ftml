@@ -1,9 +1,0 @@
-[[div class = "some"]]
-context
-[[/div]]
-
-[[note <- failed note
-
-[[note]]
-something
-[[/note]]
