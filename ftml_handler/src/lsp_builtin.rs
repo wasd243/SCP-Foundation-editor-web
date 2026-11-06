@@ -1,5 +1,7 @@
+mod blocks;
 mod inline_blocks;
 mod inline_marks;
+mod regex;
 
 use inline_blocks::InlineBlocks;
 use inline_marks::InlineMarks;
@@ -16,6 +18,15 @@ enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
     InLineBlocks(InlineBlocks<'lsp>),
     Token(&'lsp Token),
+}
+
+#[derive(Debug, Serialize, Default)]
+#[serde(rename_all = "kebab-case")]
+pub(crate) enum BlockKind {
+    #[default]
+    Block,
+    ModuleCss,
+    Html,
 }
 
 #[derive(Debug, Serialize)]
