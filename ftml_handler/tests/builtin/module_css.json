@@ -1,7 +1,7 @@
 {
   "tree": [
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 0,
           "end": 14
@@ -35,7 +35,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 14,
@@ -45,7 +45,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ".",
         "span": {
           "start": 15,
@@ -55,7 +55,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "some",
         "span": {
           "start": 16,
@@ -65,7 +65,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "-",
         "span": {
           "start": 20,
@@ -75,7 +75,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "class",
         "span": {
           "start": 21,
@@ -85,7 +85,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 26,
@@ -95,7 +95,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "{",
         "span": {
           "start": 27,
@@ -105,7 +105,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 28,
@@ -115,7 +115,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "    ",
         "span": {
           "start": 29,
@@ -125,7 +125,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "color",
         "span": {
           "start": 33,
@@ -135,7 +135,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ":",
         "span": {
           "start": 38,
@@ -145,7 +145,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 39,
@@ -155,7 +155,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "red",
         "span": {
           "start": 40,
@@ -165,7 +165,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ";",
         "span": {
           "start": 43,
@@ -175,7 +175,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 44,
@@ -185,7 +185,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "}",
         "span": {
           "start": 45,
@@ -195,7 +195,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 46,
@@ -205,7 +205,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "[[/",
         "span": {
           "start": 47,
@@ -215,7 +215,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "module",
         "span": {
           "start": 50,
@@ -225,7 +225,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "]]",
         "span": {
           "start": 56,
@@ -235,7 +235,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 58,

@@ -1,17 +1,17 @@
 {
   "tree": [
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 0,
           "end": 8
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "bold"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 8,
@@ -21,17 +21,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 9,
           "end": 20
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "italics"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 20,
@@ -41,17 +41,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 21,
           "end": 34
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "underline"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 34,
@@ -61,17 +61,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 35,
           "end": 50
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "double-dash"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 50,
@@ -81,17 +81,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 51,
           "end": 60
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "superscript"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 60,
@@ -101,17 +101,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 61,
           "end": 68
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "subscript"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 68,
@@ -121,17 +121,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 69,
           "end": 82
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "monospace"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 82,
@@ -141,18 +141,18 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 84,
           "end": 110
         },
-        "inner_marks": [
+        "inner-marks": [
           {
             "span": {
               "start": 98,
               "end": 108
             },
-            "inner_marks": [],
+            "inner-marks": [],
             "ty": "italics"
           }
         ],
@@ -160,7 +160,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 110,
@@ -170,17 +170,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 112,
           "end": 133
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "raw"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 133,
@@ -190,7 +190,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "**",
         "span": {
           "start": 135,
@@ -200,7 +200,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 137,
@@ -210,7 +210,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "unclosed",
         "span": {
           "start": 138,
@@ -220,7 +220,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 146,

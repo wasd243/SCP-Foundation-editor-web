@@ -8,6 +8,7 @@ use crate::{
 };
 
 #[derive(Debug, Serialize)]
+#[serde(rename_all = "kebab-case")]
 pub(super) struct InlineBlocks<'lsp> {
     span: Span,
     content: Vec<&'lsp Token>,

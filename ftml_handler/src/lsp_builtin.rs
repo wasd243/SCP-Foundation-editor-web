@@ -11,6 +11,7 @@ use crate::{
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
+#[serde(rename_all = "kebab-case")]
 enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
     InLineBlocks(InlineBlocks<'lsp>),
@@ -18,6 +19,7 @@ enum BuiltIn<'lsp> {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(rename_all = "kebab-case")]
 pub struct LspBuiltIn<'lsp> {
     tree: Vec<BuiltIn<'lsp>>,
     diagnostics: &'lsp Vec<Diagnostic>,

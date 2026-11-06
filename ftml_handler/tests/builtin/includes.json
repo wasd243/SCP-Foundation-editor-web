@@ -1,7 +1,7 @@
 {
   "tree": [
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 0,
           "end": 39
@@ -91,7 +91,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 39,
@@ -101,7 +101,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 41,
           "end": 73
@@ -191,7 +191,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 73,
@@ -201,17 +201,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 74,
           "end": 95
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "bold"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 95,
@@ -221,17 +221,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 96,
           "end": 107
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "bold"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 107,
@@ -241,7 +241,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 108,
           "end": 129
@@ -275,7 +275,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 129,
@@ -285,7 +285,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "and",
         "span": {
           "start": 130,
@@ -295,7 +295,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 133,
@@ -305,7 +305,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 134,
           "end": 162
@@ -339,7 +339,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 162,
@@ -349,17 +349,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 163,
           "end": 194
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "bold"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 194,
@@ -369,7 +369,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "Explicit",
         "span": {
           "start": 195,
@@ -379,7 +379,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 203,
@@ -389,7 +389,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "depicitons",
         "span": {
           "start": 204,
@@ -399,7 +399,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 214,
@@ -409,7 +409,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "of",
         "span": {
           "start": 215,
@@ -419,7 +419,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 217,
@@ -429,7 +429,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "gore",
         "span": {
           "start": 218,
@@ -439,7 +439,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ",",
         "span": {
           "start": 222,
@@ -449,7 +449,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 223,
@@ -459,7 +459,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "self",
         "span": {
           "start": 224,
@@ -469,7 +469,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 228,
@@ -479,7 +479,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "harm",
         "span": {
           "start": 229,
@@ -489,7 +489,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ",",
         "span": {
           "start": 233,
@@ -499,7 +499,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 234,
@@ -509,7 +509,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "and",
         "span": {
           "start": 235,
@@ -519,7 +519,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 238,
@@ -529,7 +529,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "suicide",
         "span": {
           "start": 239,
@@ -539,7 +539,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ".",
         "span": {
           "start": 246,
@@ -549,7 +549,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ".",
         "span": {
           "start": 247,
@@ -559,7 +559,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 248,
@@ -569,7 +569,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 249,
           "end": 279
@@ -659,7 +659,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 279,
@@ -669,7 +669,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 281,
           "end": 320
@@ -775,7 +775,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 320,
@@ -785,7 +785,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "------------",
         "span": {
           "start": 322,
@@ -795,7 +795,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 334,
@@ -805,7 +805,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 336,
           "end": 377
@@ -911,7 +911,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 377,
@@ -921,7 +921,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 378,
           "end": 426
@@ -1027,7 +1027,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 426,
@@ -1037,7 +1037,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 427,
           "end": 512
@@ -1207,7 +1207,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 512,
@@ -1217,7 +1217,7 @@
       }
     },
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 513,
           "end": 560
@@ -1339,7 +1339,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 560,

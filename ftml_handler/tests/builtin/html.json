@@ -1,7 +1,7 @@
 {
   "tree": [
     {
-      "InLineBlocks": {
+      "in-line-blocks": {
         "span": {
           "start": 0,
           "end": 8
@@ -19,7 +19,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 8,
@@ -29,7 +29,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "<",
         "span": {
           "start": 9,
@@ -39,7 +39,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "div",
         "span": {
           "start": 10,
@@ -49,7 +49,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 13,
@@ -59,7 +59,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "class",
         "span": {
           "start": 14,
@@ -69,7 +69,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "=",
         "span": {
           "start": 19,
@@ -79,7 +79,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\"",
         "span": {
           "start": 20,
@@ -89,7 +89,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "foo",
         "span": {
           "start": 21,
@@ -99,7 +99,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\"",
         "span": {
           "start": 24,
@@ -109,7 +109,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ">",
         "span": {
           "start": 25,
@@ -119,7 +119,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 26,
@@ -129,7 +129,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "some",
         "span": {
           "start": 27,
@@ -139,7 +139,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 31,
@@ -149,7 +149,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "context",
         "span": {
           "start": 32,
@@ -159,7 +159,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 39,
@@ -169,7 +169,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "<",
         "span": {
           "start": 40,
@@ -179,7 +179,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "/",
         "span": {
           "start": 41,
@@ -189,7 +189,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "div",
         "span": {
           "start": 42,
@@ -199,7 +199,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ">",
         "span": {
           "start": 45,
@@ -209,7 +209,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 46,
@@ -219,7 +219,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "[[/",
         "span": {
           "start": 47,
@@ -229,7 +229,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "html",
         "span": {
           "start": 50,
@@ -239,7 +239,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "]]",
         "span": {
           "start": 54,
@@ -249,7 +249,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n\n",
         "span": {
           "start": 56,
@@ -259,7 +259,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "[[",
         "span": {
           "start": 58,
@@ -269,7 +269,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "html",
         "span": {
           "start": 60,
@@ -279,7 +279,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": " ",
         "span": {
           "start": 64,
@@ -289,7 +289,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "width",
         "span": {
           "start": 65,
@@ -299,7 +299,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "=",
         "span": {
           "start": 70,
@@ -309,7 +309,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "30px",
         "span": {
           "start": 71,
@@ -319,7 +319,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "]]",
         "span": {
           "start": 75,
@@ -329,7 +329,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 77,
@@ -339,7 +339,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "<",
         "span": {
           "start": 78,
@@ -349,7 +349,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "!",
         "span": {
           "start": 79,
@@ -359,17 +359,17 @@
       }
     },
     {
-      "InLineMarks": {
+      "in-line-marks": {
         "span": {
           "start": 80,
           "end": 94
         },
-        "inner_marks": [],
+        "inner-marks": [],
         "ty": "double-dash"
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": ">",
         "span": {
           "start": 94,
@@ -379,7 +379,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 95,
@@ -389,7 +389,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "[[/",
         "span": {
           "start": 96,
@@ -399,7 +399,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "html",
         "span": {
           "start": 99,
@@ -409,7 +409,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "]]",
         "span": {
           "start": 103,
@@ -419,7 +419,7 @@
       }
     },
     {
-      "Token": {
+      "token": {
         "slice": "\n",
         "span": {
           "start": 105,

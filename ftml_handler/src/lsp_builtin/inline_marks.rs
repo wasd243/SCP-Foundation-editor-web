@@ -8,6 +8,7 @@ use crate::{
 };
 
 #[derive(Debug, Serialize)]
+#[serde(rename_all = "kebab-case")]
 pub(super) struct InlineMarks<'lsp> {
     span: Span,
     #[serde(skip)]
