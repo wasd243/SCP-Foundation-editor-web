@@ -11,9 +11,6 @@ pub struct Token {
     pub span: Span,
     /// The token type.
     pub ty: ftml::parsing::Token,
-    /// `true` if combined tokens into one token slice, `false` as default.
-    #[serde(skip)]
-    pub from_combination: bool,
 }
 
 impl Token {
@@ -25,7 +22,6 @@ impl Token {
                 end: extracted_token.span.end,
             },
             ty: extracted_token.token,
-            from_combination: false,
         }
     }
 }
@@ -36,11 +32,6 @@ impl Default for Token {
         let span = Span::default();
         let ty = ftml::parsing::Token::Whitespace;
 
-        Self {
-            slice,
-            span,
-            ty,
-            from_combination: false,
-        }
+        Self { slice, span, ty }
     }
 }

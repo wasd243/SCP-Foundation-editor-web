@@ -41,11 +41,6 @@ impl ParseToken {
         });
     }
 
-    /// Checks that any line of code is from combination
-    pub fn from_combination(&self) -> bool {
-        self.tokens.iter().any(|token| token.from_combination)
-    }
-
     /// TODO: `ftml` currently produce false postivies diagnostics when everything offline
     /// and could not fetch included pages.
     pub fn mute_ftml_fps(&mut self) {

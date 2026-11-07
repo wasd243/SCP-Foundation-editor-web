@@ -135,4 +135,16 @@ impl<'lsp> Blocks<'lsp> {
     pub(super) fn token_len(&self) -> usize {
         self.used_index
     }
+
+    pub(super) fn combine_sub_lang_token(&mut self) {
+        if self.block_ty == BlockKind::ModuleCss || self.block_ty == BlockKind::Html {
+            let sub_lang_tokens = &self.block_content;
+
+            for node in sub_lang_tokens {
+                if !matches!(node, BuiltIn::Token(_)) {
+                    panic!("Should never see other BuiltIn in `html` or `css` sub lang blocks.");
+                }
+            }
+        }
+    }
 }

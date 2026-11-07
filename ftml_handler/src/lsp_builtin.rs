@@ -24,7 +24,7 @@ enum BuiltIn<'lsp> {
     Token(&'lsp Token),
 }
 
-#[derive(Debug, Serialize, Default)]
+#[derive(Debug, Default, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
 pub(crate) enum BlockKind {
     #[default]
