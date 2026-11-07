@@ -1,0 +1,30 @@
+[!--nested blocks to check code collpasiablity--]
+
+[[div class = "some"]]
+normal
+[[/div]]
+
+[[collapsible show="sss" hide="sss"]]
+linemark1
+[[<]]
+linemark2
+[[>]]
+linemark3
+[[=]]
+linemark4
+fff[[footnote]]some footnote content[[/footnote]]fff
+linemark4
+[[note]]
+linemark5
+some note
+linemark5
+[[/note]]
+linemark4
+[[/=]]
+linemark3
+[[/>]]
+linemark2
+[[/<]]
+linemark1
+[[/collapsible]]
+

@@ -1,0 +1,781 @@
+{
+  "tokens": [
+    {
+      "slice": "[!--",
+      "span": {
+        "start": 0,
+        "end": 4
+      },
+      "ty": "left-comment"
+    },
+    {
+      "slice": "nested",
+      "span": {
+        "start": 4,
+        "end": 10
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 10,
+        "end": 11
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "blocks",
+      "span": {
+        "start": 11,
+        "end": 17
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 17,
+        "end": 18
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "to",
+      "span": {
+        "start": 18,
+        "end": 20
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 20,
+        "end": 21
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "check",
+      "span": {
+        "start": 21,
+        "end": 26
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 26,
+        "end": 27
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "code",
+      "span": {
+        "start": 27,
+        "end": 31
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 31,
+        "end": 32
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "collpasiablity",
+      "span": {
+        "start": 32,
+        "end": 46
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "--]",
+      "span": {
+        "start": 46,
+        "end": 49
+      },
+      "ty": "right-comment"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 51,
+        "end": 53
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "div",
+      "span": {
+        "start": 53,
+        "end": 56
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 56,
+        "end": 57
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "class",
+      "span": {
+        "start": 57,
+        "end": 62
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 62,
+        "end": 63
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": 63,
+        "end": 64
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 64,
+        "end": 65
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 65,
+        "end": 66
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "start": 66,
+        "end": 70
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 70,
+        "end": 71
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 71,
+        "end": 73
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "normal",
+      "span": {
+        "start": 74,
+        "end": 80
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 81,
+        "end": 84
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "div",
+      "span": {
+        "start": 84,
+        "end": 87
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 87,
+        "end": 89
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 91,
+        "end": 93
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "collapsible",
+      "span": {
+        "start": 93,
+        "end": 104
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 104,
+        "end": 105
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "show",
+      "span": {
+        "start": 105,
+        "end": 109
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": 109,
+        "end": 110
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 110,
+        "end": 111
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "sss",
+      "span": {
+        "start": 111,
+        "end": 114
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 114,
+        "end": 115
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 115,
+        "end": 116
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "hide",
+      "span": {
+        "start": 116,
+        "end": 120
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": 120,
+        "end": 121
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 121,
+        "end": 122
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "sss",
+      "span": {
+        "start": 122,
+        "end": 125
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": 125,
+        "end": 126
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 126,
+        "end": 128
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark1",
+      "span": {
+        "start": 129,
+        "end": 138
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 139,
+        "end": 141
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "<",
+      "span": {
+        "start": 141,
+        "end": 142
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 142,
+        "end": 144
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark2",
+      "span": {
+        "start": 145,
+        "end": 154
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 155,
+        "end": 157
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": ">",
+      "span": {
+        "start": 157,
+        "end": 158
+      },
+      "ty": "quote"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 158,
+        "end": 160
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark3",
+      "span": {
+        "start": 161,
+        "end": 170
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 171,
+        "end": 173
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": 173,
+        "end": 174
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 174,
+        "end": 176
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark4",
+      "span": {
+        "start": 177,
+        "end": 186
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "fff",
+      "span": {
+        "start": 187,
+        "end": 190
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 190,
+        "end": 192
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "footnote",
+      "span": {
+        "start": 192,
+        "end": 200
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 200,
+        "end": 202
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "start": 202,
+        "end": 206
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 206,
+        "end": 207
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "footnote",
+      "span": {
+        "start": 207,
+        "end": 215
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 215,
+        "end": 216
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "content",
+      "span": {
+        "start": 216,
+        "end": 223
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 223,
+        "end": 226
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "footnote",
+      "span": {
+        "start": 226,
+        "end": 234
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 234,
+        "end": 236
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "fff",
+      "span": {
+        "start": 236,
+        "end": 239
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "linemark4",
+      "span": {
+        "start": 240,
+        "end": 249
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 250,
+        "end": 252
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "note",
+      "span": {
+        "start": 252,
+        "end": 256
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 256,
+        "end": 258
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark5",
+      "span": {
+        "start": 259,
+        "end": 268
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "start": 269,
+        "end": 273
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 273,
+        "end": 274
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "note",
+      "span": {
+        "start": 274,
+        "end": 278
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "linemark5",
+      "span": {
+        "start": 279,
+        "end": 288
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 289,
+        "end": 292
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "note",
+      "span": {
+        "start": 292,
+        "end": 296
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 296,
+        "end": 298
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark4",
+      "span": {
+        "start": 299,
+        "end": 308
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 309,
+        "end": 312
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": 312,
+        "end": 313
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 313,
+        "end": 315
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark3",
+      "span": {
+        "start": 316,
+        "end": 325
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 326,
+        "end": 329
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": ">",
+      "span": {
+        "start": 329,
+        "end": 330
+      },
+      "ty": "quote"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 330,
+        "end": 332
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark2",
+      "span": {
+        "start": 333,
+        "end": 342
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 343,
+        "end": 346
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "<",
+      "span": {
+        "start": 346,
+        "end": 347
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 347,
+        "end": 349
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "linemark1",
+      "span": {
+        "start": 350,
+        "end": 359
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": 360,
+        "end": 363
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "collapsible",
+      "span": {
+        "start": 363,
+        "end": 374
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 374,
+        "end": 376
+      },
+      "ty": "right-block"
+    }
+  ],
+  "diagnostics": []
+}

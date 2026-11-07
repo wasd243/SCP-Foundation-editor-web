@@ -102,19 +102,18 @@ impl<'lsp> Blocks<'lsp> {
                 }
 
                 if t.ty == TokenTy::LeftBlockEnd
-                    && let Some(name) = iter.as_slice().first()
-                    && name.ty == TokenTy::Identifier
+                    && let [name, end, ..] = iter.as_slice()
+                    && is_valid_block_end(name.ty)
+                    && end.ty == TokenTy::RightBlock
                     && match block_ty {
                         BlockKind::ModuleCss => MODULE.is_match(&name.slice),
                         BlockKind::Html => HTML.is_match(&name.slice),
                         _ => true,
                     }
                 {
-                    iter.next();
-                    if let Some(t) = iter.next() {
-                        end_token = Some(t);
-                        break;
-                    }
+                    iter.next(); // name
+                    end_token = iter.next(); // `]]`
+                    break;
                 }
 
                 block_contents.push(BuiltIn::Token(t));
@@ -167,4 +166,11 @@ impl<'lsp> Blocks<'lsp> {
             }
         }
     }
+}
+
+fn is_valid_block_end(ty: TokenTy) -> bool {
+    matches!(
+        ty,
+        TokenTy::Identifier | TokenTy::Quote | TokenTy::Other | TokenTy::Equals
+    )
 }

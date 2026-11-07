@@ -1,0 +1,542 @@
+{
+  "tree": [
+    {
+      "in-line-marks": {
+        "span": {
+          "start": 0,
+          "end": 49
+        },
+        "inner-marks": [],
+        "ty": "comment"
+      }
+    },
+    {
+      "blocks": {
+        "span": {
+          "start": 51,
+          "end": 89
+        },
+        "block-paramters": [
+          {
+            "slice": "div",
+            "span": {
+              "start": 53,
+              "end": 56
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 56,
+              "end": 57
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "class",
+            "span": {
+              "start": 57,
+              "end": 62
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 62,
+              "end": 63
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "=",
+            "span": {
+              "start": 63,
+              "end": 64
+            },
+            "ty": "equals"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 64,
+              "end": 65
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 65,
+              "end": 66
+            },
+            "ty": "double-quote"
+          },
+          {
+            "slice": "some",
+            "span": {
+              "start": 66,
+              "end": 70
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 70,
+              "end": 71
+            },
+            "ty": "double-quote"
+          }
+        ],
+        "block-content": [
+          {
+            "token": {
+              "slice": "normal",
+              "span": {
+                "start": 74,
+                "end": 80
+              },
+              "ty": "identifier"
+            }
+          }
+        ],
+        "block-ty": "block"
+      }
+    },
+    {
+      "blocks": {
+        "span": {
+          "start": 91,
+          "end": 376
+        },
+        "block-paramters": [
+          {
+            "slice": "collapsible",
+            "span": {
+              "start": 93,
+              "end": 104
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 104,
+              "end": 105
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "show",
+            "span": {
+              "start": 105,
+              "end": 109
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "=",
+            "span": {
+              "start": 109,
+              "end": 110
+            },
+            "ty": "equals"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 110,
+              "end": 111
+            },
+            "ty": "double-quote"
+          },
+          {
+            "slice": "sss",
+            "span": {
+              "start": 111,
+              "end": 114
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 114,
+              "end": 115
+            },
+            "ty": "double-quote"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": 115,
+              "end": 116
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "hide",
+            "span": {
+              "start": 116,
+              "end": 120
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "=",
+            "span": {
+              "start": 120,
+              "end": 121
+            },
+            "ty": "equals"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 121,
+              "end": 122
+            },
+            "ty": "double-quote"
+          },
+          {
+            "slice": "sss",
+            "span": {
+              "start": 122,
+              "end": 125
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "\"",
+            "span": {
+              "start": 125,
+              "end": 126
+            },
+            "ty": "double-quote"
+          }
+        ],
+        "block-content": [
+          {
+            "token": {
+              "slice": "linemark1",
+              "span": {
+                "start": 129,
+                "end": 138
+              },
+              "ty": "identifier"
+            }
+          },
+          {
+            "blocks": {
+              "span": {
+                "start": 139,
+                "end": 349
+              },
+              "block-paramters": [
+                {
+                  "slice": "<",
+                  "span": {
+                    "start": 141,
+                    "end": 142
+                  },
+                  "ty": "other"
+                }
+              ],
+              "block-content": [
+                {
+                  "token": {
+                    "slice": "linemark2",
+                    "span": {
+                      "start": 145,
+                      "end": 154
+                    },
+                    "ty": "identifier"
+                  }
+                },
+                {
+                  "blocks": {
+                    "span": {
+                      "start": 155,
+                      "end": 332
+                    },
+                    "block-paramters": [
+                      {
+                        "slice": ">",
+                        "span": {
+                          "start": 157,
+                          "end": 158
+                        },
+                        "ty": "quote"
+                      }
+                    ],
+                    "block-content": [
+                      {
+                        "token": {
+                          "slice": "linemark3",
+                          "span": {
+                            "start": 161,
+                            "end": 170
+                          },
+                          "ty": "identifier"
+                        }
+                      },
+                      {
+                        "blocks": {
+                          "span": {
+                            "start": 171,
+                            "end": 315
+                          },
+                          "block-paramters": [
+                            {
+                              "slice": "=",
+                              "span": {
+                                "start": 173,
+                                "end": 174
+                              },
+                              "ty": "equals"
+                            }
+                          ],
+                          "block-content": [
+                            {
+                              "token": {
+                                "slice": "linemark4",
+                                "span": {
+                                  "start": 177,
+                                  "end": 186
+                                },
+                                "ty": "identifier"
+                              }
+                            },
+                            {
+                              "token": {
+                                "slice": "fff",
+                                "span": {
+                                  "start": 187,
+                                  "end": 190
+                                },
+                                "ty": "identifier"
+                              }
+                            },
+                            {
+                              "blocks": {
+                                "span": {
+                                  "start": 190,
+                                  "end": 236
+                                },
+                                "block-paramters": [
+                                  {
+                                    "slice": "footnote",
+                                    "span": {
+                                      "start": 192,
+                                      "end": 200
+                                    },
+                                    "ty": "identifier"
+                                  }
+                                ],
+                                "block-content": [
+                                  {
+                                    "token": {
+                                      "slice": "some",
+                                      "span": {
+                                        "start": 202,
+                                        "end": 206
+                                      },
+                                      "ty": "identifier"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": " ",
+                                      "span": {
+                                        "start": 206,
+                                        "end": 207
+                                      },
+                                      "ty": "whitespace"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": "footnote",
+                                      "span": {
+                                        "start": 207,
+                                        "end": 215
+                                      },
+                                      "ty": "identifier"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": " ",
+                                      "span": {
+                                        "start": 215,
+                                        "end": 216
+                                      },
+                                      "ty": "whitespace"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": "content",
+                                      "span": {
+                                        "start": 216,
+                                        "end": 223
+                                      },
+                                      "ty": "identifier"
+                                    }
+                                  }
+                                ],
+                                "block-ty": "block"
+                              }
+                            },
+                            {
+                              "token": {
+                                "slice": "fff",
+                                "span": {
+                                  "start": 236,
+                                  "end": 239
+                                },
+                                "ty": "identifier"
+                              }
+                            },
+                            {
+                              "token": {
+                                "slice": "linemark4",
+                                "span": {
+                                  "start": 240,
+                                  "end": 249
+                                },
+                                "ty": "identifier"
+                              }
+                            },
+                            {
+                              "blocks": {
+                                "span": {
+                                  "start": 250,
+                                  "end": 298
+                                },
+                                "block-paramters": [
+                                  {
+                                    "slice": "note",
+                                    "span": {
+                                      "start": 252,
+                                      "end": 256
+                                    },
+                                    "ty": "identifier"
+                                  }
+                                ],
+                                "block-content": [
+                                  {
+                                    "token": {
+                                      "slice": "linemark5",
+                                      "span": {
+                                        "start": 259,
+                                        "end": 268
+                                      },
+                                      "ty": "identifier"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": "some",
+                                      "span": {
+                                        "start": 269,
+                                        "end": 273
+                                      },
+                                      "ty": "identifier"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": " ",
+                                      "span": {
+                                        "start": 273,
+                                        "end": 274
+                                      },
+                                      "ty": "whitespace"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": "note",
+                                      "span": {
+                                        "start": 274,
+                                        "end": 278
+                                      },
+                                      "ty": "identifier"
+                                    }
+                                  },
+                                  {
+                                    "token": {
+                                      "slice": "linemark5",
+                                      "span": {
+                                        "start": 279,
+                                        "end": 288
+                                      },
+                                      "ty": "identifier"
+                                    }
+                                  }
+                                ],
+                                "block-ty": "block"
+                              }
+                            },
+                            {
+                              "token": {
+                                "slice": "linemark4",
+                                "span": {
+                                  "start": 299,
+                                  "end": 308
+                                },
+                                "ty": "identifier"
+                              }
+                            }
+                          ],
+                          "block-ty": "block"
+                        }
+                      },
+                      {
+                        "token": {
+                          "slice": "linemark3",
+                          "span": {
+                            "start": 316,
+                            "end": 325
+                          },
+                          "ty": "identifier"
+                        }
+                      }
+                    ],
+                    "block-ty": "block"
+                  }
+                },
+                {
+                  "token": {
+                    "slice": "linemark2",
+                    "span": {
+                      "start": 333,
+                      "end": 342
+                    },
+                    "ty": "identifier"
+                  }
+                }
+              ],
+              "block-ty": "block"
+            }
+          },
+          {
+            "token": {
+              "slice": "linemark1",
+              "span": {
+                "start": 350,
+                "end": 359
+              },
+              "ty": "identifier"
+            }
+          }
+        ],
+        "block-ty": "block"
+      }
+    }
+  ],
+  "diagnostics": []
+}
