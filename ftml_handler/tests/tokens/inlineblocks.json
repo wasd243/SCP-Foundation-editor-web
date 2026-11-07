@@ -73,14 +73,6 @@
       "ty": "identifier"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 32,
-        "end": 33
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "|",
       "span": {
         "start": 33,
@@ -111,14 +103,6 @@
         "end": 58
       },
       "ty": "url"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 58,
-        "end": 59
-      },
-      "ty": "line-break"
     },
     {
       "slice": "|",
@@ -153,14 +137,6 @@
       "ty": "identifier"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 71,
-        "end": 72
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "|",
       "span": {
         "start": 72,
@@ -191,14 +167,6 @@
         "end": 84
       },
       "ty": "identifier"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 84,
-        "end": 85
-      },
-      "ty": "line-break"
     },
     {
       "slice": "|",
@@ -233,14 +201,6 @@
       "ty": "identifier"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 98,
-        "end": 99
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "]]",
       "span": {
         "start": 99,
@@ -249,28 +209,12 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n\n",
-      "span": {
-        "start": 101,
-        "end": 103
-      },
-      "ty": "paragraph-break"
-    },
-    {
       "slice": "---------------",
       "span": {
         "start": 103,
         "end": 118
       },
       "ty": "triple-dash"
-    },
-    {
-      "slice": "\n\n",
-      "span": {
-        "start": 118,
-        "end": 120
-      },
-      "ty": "paragraph-break"
     },
     {
       "slice": "[[",
@@ -361,28 +305,12 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n\n",
-      "span": {
-        "start": 167,
-        "end": 169
-      },
-      "ty": "paragraph-break"
-    },
-    {
       "slice": "------------",
       "span": {
         "start": 169,
         "end": 181
       },
       "ty": "triple-dash"
-    },
-    {
-      "slice": "\n\n",
-      "span": {
-        "start": 181,
-        "end": 183
-      },
-      "ty": "paragraph-break"
     },
     {
       "slice": "[[",
@@ -425,14 +353,6 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n\n",
-      "span": {
-        "start": 216,
-        "end": 218
-      },
-      "ty": "paragraph-break"
-    },
-    {
       "slice": "[[*",
       "span": {
         "start": 218,
@@ -471,14 +391,6 @@
         "end": 235
       },
       "ty": "right-block"
-    },
-    {
-      "slice": "\n\n",
-      "span": {
-        "start": 235,
-        "end": 237
-      },
-      "ty": "paragraph-break"
     },
     {
       "slice": "[[",
@@ -521,14 +433,6 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n\n",
-      "span": {
-        "start": 252,
-        "end": 254
-      },
-      "ty": "paragraph-break"
-    },
-    {
       "slice": "[[",
       "span": {
         "start": 254,
@@ -553,14 +457,6 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n\n",
-      "span": {
-        "start": 271,
-        "end": 273
-      },
-      "ty": "paragraph-break"
-    },
-    {
       "slice": "[[",
       "span": {
         "start": 273,
@@ -583,14 +479,6 @@
         "end": 291
       },
       "ty": "right-block"
-    },
-    {
-      "slice": "\n\n",
-      "span": {
-        "start": 291,
-        "end": 293
-      },
-      "ty": "paragraph-break"
     }
   ],
   "diagnostics": [

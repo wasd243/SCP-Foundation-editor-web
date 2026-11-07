@@ -63,21 +63,25 @@ fn visit<'lsp>(
     parse_token: &'lsp [Token],
     diagnostics: &'lsp [Diagnostic],
 ) -> (BuiltIn<'lsp>, usize) {
+    if parse_token[0].ty == TokenTy::LeftBlock
+        && let Some(bloks) = Blocks::from_parse_token(parse_token, diagnostics)
+    {
+        let used = bloks.token_len();
+        return (BuiltIn::Blocks(bloks), used);
+    }
+
     if is_inline_mark_token(parse_token[0].ty)
         && let Some(inline_marks) = InlineMarks::from_parse_token_slice(parse_token, diagnostics)
     {
         let used = inline_marks.content_len() + 2;
         return (BuiltIn::InLineMarks(inline_marks), used);
-    } else if is_inline_block_token(parse_token[0].ty)
+    }
+
+    if is_inline_block_token(parse_token[0].ty)
         && let Some(inline_blocks) = InlineBlocks::from_parse_token_slice(parse_token, diagnostics)
     {
         let used = inline_blocks.content_len() + 2;
         return (BuiltIn::InLineBlocks(inline_blocks), used);
-    } else if parse_token[0].ty == TokenTy::LeftBlock
-        && let Some(bloks) = Blocks::from_parse_token(parse_token, diagnostics)
-    {
-        let used = bloks.token_len();
-        return (BuiltIn::Blocks(bloks), used);
     }
     (BuiltIn::Token(&parse_token[0]), 1)
 }

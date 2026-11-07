@@ -41,14 +41,6 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 14,
-        "end": 15
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": ".",
       "span": {
         "start": 15,
@@ -79,14 +71,6 @@
         "end": 21
       },
       "ty": "other"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 21,
-        "end": 22
-      },
-      "ty": "line-break"
     },
     {
       "slice": "    ",
@@ -137,28 +121,12 @@
       "ty": "other"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 37,
-        "end": 38
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "}",
       "span": {
         "start": 38,
         "end": 39
       },
       "ty": "other"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 39,
-        "end": 40
-      },
-      "ty": "line-break"
     },
     {
       "slice": "[[/",
@@ -185,14 +153,6 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n\n",
-      "span": {
-        "start": 51,
-        "end": 53
-      },
-      "ty": "paragraph-break"
-    },
-    {
       "slice": "[[",
       "span": {
         "start": 53,
@@ -215,14 +175,6 @@
         "end": 61
       },
       "ty": "right-block"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 61,
-        "end": 62
-      },
-      "ty": "line-break"
     },
     {
       "slice": "<",
@@ -249,14 +201,6 @@
       "ty": "quote"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 68,
-        "end": 69
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "<",
       "span": {
         "start": 69,
@@ -279,14 +223,6 @@
         "end": 75
       },
       "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 75,
-        "end": 76
-      },
-      "ty": "line-break"
     },
     {
       "slice": "<",
@@ -361,14 +297,6 @@
       "ty": "quote"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 93,
-        "end": 94
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "some",
       "span": {
         "start": 94,
@@ -391,14 +319,6 @@
         "end": 106
       },
       "ty": "identifier"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 106,
-        "end": 107
-      },
-      "ty": "line-break"
     },
     {
       "slice": "<",
@@ -433,14 +353,6 @@
       "ty": "quote"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 113,
-        "end": 114
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "<",
       "span": {
         "start": 114,
@@ -471,14 +383,6 @@
         "end": 121
       },
       "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 121,
-        "end": 122
-      },
-      "ty": "line-break"
     },
     {
       "slice": "<",
@@ -513,14 +417,6 @@
       "ty": "quote"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 129,
-        "end": 130
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "[[/",
       "span": {
         "start": 130,
@@ -545,14 +441,6 @@
       "ty": "right-block"
     },
     {
-      "slice": "\n\n",
-      "span": {
-        "start": 139,
-        "end": 141
-      },
-      "ty": "paragraph-break"
-    },
-    {
       "slice": "[[",
       "span": {
         "start": 141,
@@ -561,670 +449,213 @@
       "ty": "left-block"
     },
     {
-      "slice": "html",
+      "slice": "div",
       "span": {
         "start": 143,
-        "end": 147
+        "end": 146
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 147,
-        "end": 148
+        "start": 146,
+        "end": 147
       },
       "ty": "whitespace"
     },
     {
-      "slice": "width",
+      "slice": "class",
       "span": {
-        "start": 148,
-        "end": 153
+        "start": 147,
+        "end": 152
       },
       "ty": "identifier"
     },
     {
       "slice": "=",
+      "span": {
+        "start": 152,
+        "end": 153
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "\"",
       "span": {
         "start": 153,
         "end": 154
       },
-      "ty": "equals"
+      "ty": "double-quote"
     },
     {
-      "slice": "100px",
+      "slice": "cls",
       "span": {
         "start": 154,
-        "end": 159
+        "end": 157
       },
       "ty": "identifier"
     },
     {
+      "slice": "\"",
+      "span": {
+        "start": 157,
+        "end": 158
+      },
+      "ty": "double-quote"
+    },
+    {
       "slice": "]]",
       "span": {
-        "start": 159,
-        "end": 161
+        "start": 158,
+        "end": 160
       },
       "ty": "right-block"
     },
     {
-      "slice": "\n",
+      "slice": "some",
       "span": {
         "start": 161,
-        "end": 162
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "<",
-      "span": {
-        "start": 162,
-        "end": 163
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "html",
-      "span": {
-        "start": 163,
-        "end": 167
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": ">",
-      "span": {
-        "start": 167,
-        "end": 168
-      },
-      "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 168,
-        "end": 169
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "<",
-      "span": {
-        "start": 169,
-        "end": 170
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "body",
-      "span": {
-        "start": 170,
-        "end": 174
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": ">",
-      "span": {
-        "start": 174,
-        "end": 175
-      },
-      "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 175,
-        "end": 176
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "<",
-      "span": {
-        "start": 176,
-        "end": 177
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "div",
-      "span": {
-        "start": 177,
-        "end": 180
+        "end": 165
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 180,
-        "end": 181
-      },
-      "ty": "whitespace"
-    },
-    {
-      "slice": "class",
-      "span": {
-        "start": 181,
-        "end": 186
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": "=",
-      "span": {
-        "start": 186,
-        "end": 187
-      },
-      "ty": "equals"
-    },
-    {
-      "slice": "\"",
-      "span": {
-        "start": 187,
-        "end": 188
-      },
-      "ty": "double-quote"
-    },
-    {
-      "slice": "cls",
-      "span": {
-        "start": 188,
-        "end": 191
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": "\"",
-      "span": {
-        "start": 191,
-        "end": 192
-      },
-      "ty": "double-quote"
-    },
-    {
-      "slice": ">",
-      "span": {
-        "start": 192,
-        "end": 193
-      },
-      "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 193,
-        "end": 194
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "some",
-      "span": {
-        "start": 194,
-        "end": 198
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": " ",
-      "span": {
-        "start": 198,
-        "end": 199
-      },
-      "ty": "whitespace"
-    },
-    {
-      "slice": "content",
-      "span": {
-        "start": 199,
-        "end": 206
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 206,
-        "end": 207
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "<",
-      "span": {
-        "start": 207,
-        "end": 208
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "/",
-      "span": {
-        "start": 208,
-        "end": 209
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "div",
-      "span": {
-        "start": 209,
-        "end": 212
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": ">",
-      "span": {
-        "start": 212,
-        "end": 213
-      },
-      "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 213,
-        "end": 214
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "<",
-      "span": {
-        "start": 214,
-        "end": 215
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "/",
-      "span": {
-        "start": 215,
-        "end": 216
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "body",
-      "span": {
-        "start": 216,
-        "end": 220
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": ">",
-      "span": {
-        "start": 220,
-        "end": 221
-      },
-      "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 221,
-        "end": 222
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "<",
-      "span": {
-        "start": 222,
-        "end": 223
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "/",
-      "span": {
-        "start": 223,
-        "end": 224
-      },
-      "ty": "other"
-    },
-    {
-      "slice": "html",
-      "span": {
-        "start": 224,
-        "end": 228
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": ">",
-      "span": {
-        "start": 228,
-        "end": 229
-      },
-      "ty": "quote"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 229,
-        "end": 230
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "[[/",
-      "span": {
-        "start": 230,
-        "end": 233
-      },
-      "ty": "left-block-end"
-    },
-    {
-      "slice": "html",
-      "span": {
-        "start": 233,
-        "end": 237
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": "]]",
-      "span": {
-        "start": 237,
-        "end": 239
-      },
-      "ty": "right-block"
-    },
-    {
-      "slice": "\n\n",
-      "span": {
-        "start": 239,
-        "end": 241
-      },
-      "ty": "paragraph-break"
-    },
-    {
-      "slice": "[[",
-      "span": {
-        "start": 241,
-        "end": 243
-      },
-      "ty": "left-block"
-    },
-    {
-      "slice": "div",
-      "span": {
-        "start": 243,
-        "end": 246
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": " ",
-      "span": {
-        "start": 246,
-        "end": 247
-      },
-      "ty": "whitespace"
-    },
-    {
-      "slice": "class",
-      "span": {
-        "start": 247,
-        "end": 252
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": "=",
-      "span": {
-        "start": 252,
-        "end": 253
-      },
-      "ty": "equals"
-    },
-    {
-      "slice": "\"",
-      "span": {
-        "start": 253,
-        "end": 254
-      },
-      "ty": "double-quote"
-    },
-    {
-      "slice": "cls",
-      "span": {
-        "start": 254,
-        "end": 257
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": "\"",
-      "span": {
-        "start": 257,
-        "end": 258
-      },
-      "ty": "double-quote"
-    },
-    {
-      "slice": "]]",
-      "span": {
-        "start": 258,
-        "end": 260
-      },
-      "ty": "right-block"
-    },
-    {
-      "slice": "\n",
-      "span": {
-        "start": 260,
-        "end": 261
-      },
-      "ty": "line-break"
-    },
-    {
-      "slice": "some",
-      "span": {
-        "start": 261,
-        "end": 265
-      },
-      "ty": "identifier"
-    },
-    {
-      "slice": " ",
-      "span": {
-        "start": 265,
-        "end": 266
+        "start": 165,
+        "end": 166
       },
       "ty": "whitespace"
     },
     {
       "slice": "con",
       "span": {
-        "start": 266,
-        "end": 269
+        "start": 166,
+        "end": 169
       },
       "ty": "identifier"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 269,
-        "end": 271
+        "start": 169,
+        "end": 171
       },
       "ty": "left-block"
     },
     {
       "slice": "footnote",
       "span": {
-        "start": 271,
-        "end": 279
+        "start": 171,
+        "end": 179
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 279,
-        "end": 281
+        "start": 179,
+        "end": 181
       },
       "ty": "right-block"
     },
     {
       "slice": "SOME",
       "span": {
-        "start": 281,
-        "end": 285
+        "start": 181,
+        "end": 185
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 285,
-        "end": 286
+        "start": 185,
+        "end": 186
       },
       "ty": "whitespace"
     },
     {
       "slice": "FOOTNOTE",
       "span": {
-        "start": 286,
-        "end": 294
+        "start": 186,
+        "end": 194
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 294,
-        "end": 295
+        "start": 194,
+        "end": 195
       },
       "ty": "whitespace"
     },
     {
       "slice": "NESTED",
       "span": {
-        "start": 295,
-        "end": 301
+        "start": 195,
+        "end": 201
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 301,
-        "end": 304
+        "start": 201,
+        "end": 204
       },
       "ty": "left-block-end"
     },
     {
       "slice": "footnote",
       "span": {
-        "start": 304,
-        "end": 312
+        "start": 204,
+        "end": 212
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 312,
-        "end": 314
+        "start": 212,
+        "end": 214
       },
       "ty": "right-block"
     },
     {
       "slice": "tent",
       "span": {
-        "start": 314,
-        "end": 318
+        "start": 214,
+        "end": 218
       },
       "ty": "identifier"
     },
     {
-      "slice": "\n",
-      "span": {
-        "start": 318,
-        "end": 319
-      },
-      "ty": "line-break"
-    },
-    {
       "slice": "[[/",
       "span": {
-        "start": 319,
-        "end": 322
+        "start": 219,
+        "end": 222
       },
       "ty": "left-block-end"
     },
     {
       "slice": "div",
       "span": {
-        "start": 322,
-        "end": 325
+        "start": 222,
+        "end": 225
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 325,
-        "end": 327
+        "start": 225,
+        "end": 227
       },
       "ty": "right-block"
-    },
-    {
-      "slice": "\n\n",
-      "span": {
-        "start": 327,
-        "end": 329
-      },
-      "ty": "paragraph-break"
     }
   ],
-  "diagnostics": [
-    {
-      "msg": "NoRulesMatch: fallback",
-      "ty": "no-rules-match",
-      "span": {
-        "start": 141,
-        "end": 143
-      }
-    },
-    {
-      "msg": "BlockMalformedArguments: block-html",
-      "ty": "block-malformed-arguments",
-      "span": {
-        "start": 154,
-        "end": 159
-      }
-    },
-    {
-      "msg": "NoRulesMatch: fallback",
-      "ty": "no-rules-match",
-      "span": {
-        "start": 159,
-        "end": 161
-      }
-    },
-    {
-      "msg": "NoRulesMatch: fallback",
-      "ty": "no-rules-match",
-      "span": {
-        "start": 230,
-        "end": 233
-      }
-    },
-    {
-      "msg": "NoRulesMatch: fallback",
-      "ty": "no-rules-match",
-      "span": {
-        "start": 237,
-        "end": 239
-      }
-    }
-  ]
+  "diagnostics": []
 }

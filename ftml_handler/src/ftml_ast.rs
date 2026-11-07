@@ -33,8 +33,12 @@ impl ParseToken {
     pub fn clean(&mut self) {
         use ftml::parsing::Token;
 
-        self.tokens
-            .retain(|token| !matches!(token.ty, Token::InputStart | Token::InputEnd));
+        self.tokens.retain(|token| {
+            !matches!(
+                token.ty,
+                Token::InputStart | Token::InputEnd | Token::LineBreak | Token::ParagraphBreak
+            )
+        });
     }
 
     /// Checks that any line of code is from combination
