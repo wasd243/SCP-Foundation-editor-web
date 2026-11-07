@@ -18,3 +18,7 @@ some content
 some con[[footnote]]SOME FOOTNOTE NESTED[[/footnote]]tent
 [[/div]]
 
+[!--html with hardcoded break--]
+[[html]]
+<div>[[/div]]</div>
+[[/html]]

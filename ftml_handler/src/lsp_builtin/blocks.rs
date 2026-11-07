@@ -83,13 +83,15 @@ impl<'lsp> Blocks<'lsp> {
 
             let mut block_contents = Vec::new();
 
+            let need_raw = matches!(block_ty, BlockKind::ModuleCss | BlockKind::Html);
+
             loop {
                 let rest = iter.as_slice();
                 let Some(t) = iter.next() else {
                     break;
                 };
 
-                if t.ty == TokenTy::LeftBlock {
+                if t.ty == TokenTy::LeftBlock && !need_raw {
                     let (node, used) = visit(rest, diagnostic);
                     block_contents.push(node);
                     // `t` is already consumed, skip the remaining used - 1 tokens
@@ -99,12 +101,17 @@ impl<'lsp> Blocks<'lsp> {
                     continue;
                 }
 
-                if t.ty == TokenTy::LeftBlockEnd {
-                    let t = iter.next()?;
-
-                    if t.ty == TokenTy::Identifier
-                        && let Some(t) = iter.next()
-                    {
+                if t.ty == TokenTy::LeftBlockEnd
+                    && let Some(name) = iter.as_slice().first()
+                    && name.ty == TokenTy::Identifier
+                    && match block_ty {
+                        BlockKind::ModuleCss => MODULE.is_match(&name.slice),
+                        BlockKind::Html => HTML.is_match(&name.slice),
+                        _ => true,
+                    }
+                {
+                    iter.next();
+                    if let Some(t) = iter.next() {
                         end_token = Some(t);
                         break;
                     }
@@ -116,7 +123,7 @@ impl<'lsp> Blocks<'lsp> {
             if let Some(end_token) = end_token {
                 let used_index = parse_token.len() - iter.as_slice().len();
 
-                return Some(Self {
+                let mut block = Self {
                     span: Span {
                         start: start_token.span.start,
                         end: end_token.span.end,
@@ -125,7 +132,13 @@ impl<'lsp> Blocks<'lsp> {
                     block_content: block_contents,
                     block_ty,
                     used_index,
-                });
+                };
+
+                if matches!(block.block_ty, BlockKind::ModuleCss | BlockKind::Html) {
+                    Self::token_escape(&mut block);
+                }
+
+                return Some(block);
             }
         }
 
@@ -136,14 +149,21 @@ impl<'lsp> Blocks<'lsp> {
         self.used_index
     }
 
-    pub(super) fn combine_sub_lang_token(&mut self) {
-        if self.block_ty == BlockKind::ModuleCss || self.block_ty == BlockKind::Html {
-            let sub_lang_tokens = &self.block_content;
-
-            for node in sub_lang_tokens {
-                if !matches!(node, BuiltIn::Token(_)) {
-                    panic!("Should never see other BuiltIn in `html` or `css` sub lang blocks.");
+    /// Escape `[` and `]`.
+    fn token_escape(&mut self) {
+        for builtin in &mut self.block_content {
+            match builtin {
+                BuiltIn::Token(t) => {
+                    let slice = t.slice.replace('[', "\\[").replace(']', "\\]");
+                    let span = Span {
+                        start: t.span.start,
+                        end: t.span.end,
+                    };
+                    *builtin = BuiltIn::EscapedToken { slice, span };
                 }
+                _ => unreachable!(
+                    "token must be escaped in `html` and `css` blocks, found another BuiltIn"
+                ),
             }
         }
     }

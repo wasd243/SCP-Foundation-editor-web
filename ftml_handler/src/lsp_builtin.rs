@@ -8,6 +8,7 @@ use inline_blocks::InlineBlocks;
 use inline_marks::InlineMarks;
 
 use crate::{
+    Span,
     ftml_ast::{Diagnostic, ParseToken, Token},
     utils::{is_inline_block_token, is_inline_mark_token},
 };
@@ -22,6 +23,12 @@ enum BuiltIn<'lsp> {
     InLineBlocks(InlineBlocks<'lsp>),
     Blocks(Blocks<'lsp>),
     Token(&'lsp Token),
+    /// For escaped tokens in `[[html]]` and `[[module css]]`.
+    #[serde(rename = "token")]
+    EscapedToken {
+        slice: String,
+        span: Span,
+    },
 }
 
 #[derive(Debug, Default, Serialize, PartialEq, Eq)]
@@ -64,10 +71,10 @@ fn visit<'lsp>(
     diagnostics: &'lsp [Diagnostic],
 ) -> (BuiltIn<'lsp>, usize) {
     if parse_token[0].ty == TokenTy::LeftBlock
-        && let Some(bloks) = Blocks::from_parse_token(parse_token, diagnostics)
+        && let Some(blocks) = Blocks::from_parse_token(parse_token, diagnostics)
     {
-        let used = bloks.token_len();
-        return (BuiltIn::Blocks(bloks), used);
+        let used = blocks.token_len();
+        return (BuiltIn::Blocks(blocks), used);
     }
 
     if is_inline_mark_token(parse_token[0].ty)
