@@ -489,26 +489,106 @@
       "ty": "left-block"
     },
     {
-      "slice": "norulesmatched",
+      "slice": "module",
       "span": {
         "start": 239,
-        "end": 253
+        "end": 245
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": 245,
+        "end": 246
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "rate",
+      "span": {
+        "start": 246,
+        "end": 250
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 253,
-        "end": 255
+        "start": 250,
+        "end": 252
       },
       "ty": "right-block"
     },
     {
       "slice": "\n\n",
       "span": {
-        "start": 255,
-        "end": 257
+        "start": 252,
+        "end": 254
+      },
+      "ty": "paragraph-break"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 254,
+        "end": 256
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "footnoteblock",
+      "span": {
+        "start": 256,
+        "end": 269
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 269,
+        "end": 271
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 271,
+        "end": 273
+      },
+      "ty": "paragraph-break"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": 273,
+        "end": 275
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "norulesmatched",
+      "span": {
+        "start": 275,
+        "end": 289
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": 289,
+        "end": 291
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "\n\n",
+      "span": {
+        "start": 291,
+        "end": 293
       },
       "ty": "paragraph-break"
     }
@@ -518,24 +598,24 @@
       "msg": "NoRulesMatch: fallback",
       "ty": "no-rules-match",
       "span": {
-        "start": 237,
-        "end": 239
+        "start": 273,
+        "end": 275
       }
     },
     {
       "msg": "NoRulesMatch: fallback",
       "ty": "no-rules-match",
       "span": {
-        "start": 253,
-        "end": 255
+        "start": 289,
+        "end": 291
       }
     },
     {
       "msg": "NoSuchBlock: block",
       "ty": "no-such-block",
       "span": {
-        "start": 255,
-        "end": 257
+        "start": 291,
+        "end": 293
       }
     }
   ]

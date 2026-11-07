@@ -1,0 +1,30 @@
+[[module css]]
+.cls {
+    color: red;
+}
+[[/module]]
+
+[[html]]
+<html>
+<body>
+<div class="cls">
+some content
+</div>
+</body>
+</html>
+[[/html]]
+
+[[html width=100px]]
+<html>
+<body>
+<div class="cls">
+some content
+</div>
+</body>
+</html>
+[[/html]]
+
+[[div class="cls"]]
+some con[[footnote]]SOME FOOTNOTE NESTED[[/footnote]]tent
+[[/div]]
+

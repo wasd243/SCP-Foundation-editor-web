@@ -1,9 +1,0 @@
-[[html]]
-<div class="foo">
-some context
-</div>
-[[/html]]
-
-[[html width=30px]]
-<!--With alias-->
-[[/html]]
