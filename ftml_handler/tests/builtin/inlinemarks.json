@@ -100,11 +100,21 @@
       }
     },
     {
+      "in-line-marks": {
+        "span": {
+          "start": 135,
+          "end": 149
+        },
+        "inner-marks": [],
+        "ty": "comment"
+      }
+    },
+    {
       "token": {
         "slice": "**",
         "span": {
-          "start": 135,
-          "end": 137
+          "start": 151,
+          "end": 153
         },
         "ty": "bold"
       }
@@ -113,8 +123,8 @@
       "token": {
         "slice": " ",
         "span": {
-          "start": 137,
-          "end": 138
+          "start": 153,
+          "end": 154
         },
         "ty": "whitespace"
       }
@@ -123,8 +133,8 @@
       "token": {
         "slice": "unclosed",
         "span": {
-          "start": 138,
-          "end": 146
+          "start": 154,
+          "end": 162
         },
         "ty": "identifier"
       }
@@ -135,16 +145,16 @@
       "msg": "NoRulesMatch: fallback",
       "ty": "no-rules-match",
       "span": {
-        "start": 135,
-        "end": 137
+        "start": 151,
+        "end": 153
       }
     },
     {
       "msg": "RuleFailed: bold",
       "ty": "rule-failed",
       "span": {
-        "start": 146,
-        "end": 148
+        "start": 162,
+        "end": 164
       }
     }
   ]

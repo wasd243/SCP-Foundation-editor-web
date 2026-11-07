@@ -608,93 +608,13 @@
       }
     },
     {
-      "token": {
-        "slice": "[!--",
+      "in-line-marks": {
         "span": {
           "start": 229,
-          "end": 233
-        },
-        "ty": "left-comment"
-      }
-    },
-    {
-      "token": {
-        "slice": "html",
-        "span": {
-          "start": 233,
-          "end": 237
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "token": {
-        "slice": " ",
-        "span": {
-          "start": 237,
-          "end": 238
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "token": {
-        "slice": "with",
-        "span": {
-          "start": 238,
-          "end": 242
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "token": {
-        "slice": " ",
-        "span": {
-          "start": 242,
-          "end": 243
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "token": {
-        "slice": "hardcoded",
-        "span": {
-          "start": 243,
-          "end": 252
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "token": {
-        "slice": " ",
-        "span": {
-          "start": 252,
-          "end": 253
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "token": {
-        "slice": "break",
-        "span": {
-          "start": 253,
-          "end": 258
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "token": {
-        "slice": "--]",
-        "span": {
-          "start": 258,
           "end": 261
         },
-        "ty": "right-comment"
+        "inner-marks": [],
+        "ty": "comment"
       }
     },
     {

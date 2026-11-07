@@ -54,6 +54,7 @@ fn from_parse_token_<'lsp>(
 
             if t.ty == start_mark.ty
                 || (t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace)
+                || (t.ty == TokenTy::RightComment && start_mark.ty == TokenTy::LeftComment)
             {
                 end_mark = Some(t);
                 break;
@@ -93,6 +94,7 @@ where
 {
     match ty {
         TokenTy::LeftMonospace | TokenTy::RightMonospace => serializer.serialize_str("monospace"),
+        TokenTy::LeftComment | TokenTy::RightComment => serializer.serialize_str("comment"),
         other => other.serialize(serializer),
     }
 }
