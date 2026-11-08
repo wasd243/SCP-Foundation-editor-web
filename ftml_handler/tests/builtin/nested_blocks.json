@@ -28,7 +28,7 @@
             8
           ]
         },
-        "block-paramters": [
+        "block-parameters": [
           {
             "slice": "div",
             "span": {
@@ -156,6 +156,7 @@
             "ty": "double-quote"
           }
         ],
+        "block-parameter-ty": "has-attributes",
         "block-content": [
           {
             "token": {
@@ -190,7 +191,7 @@
             16
           ]
         },
-        "block-paramters": [
+        "block-parameters": [
           {
             "slice": "collapsible",
             "span": {
@@ -374,6 +375,7 @@
             "ty": "double-quote"
           }
         ],
+        "block-parameter-ty": "has-attributes",
         "block-content": [
           {
             "token": {
@@ -403,7 +405,7 @@
                   6
                 ]
               },
-              "block-paramters": [
+              "block-parameters": [
                 {
                   "slice": "<",
                   "span": {
@@ -419,6 +421,7 @@
                   "ty": "other"
                 }
               ],
+              "block-parameter-ty": "default",
               "block-content": [
                 {
                   "token": {
@@ -448,7 +451,7 @@
                         6
                       ]
                     },
-                    "block-paramters": [
+                    "block-parameters": [
                       {
                         "slice": ">",
                         "span": {
@@ -464,6 +467,7 @@
                         "ty": "quote"
                       }
                     ],
+                    "block-parameter-ty": "default",
                     "block-content": [
                       {
                         "token": {
@@ -493,7 +497,7 @@
                               6
                             ]
                           },
-                          "block-paramters": [
+                          "block-parameters": [
                             {
                               "slice": "=",
                               "span": {
@@ -509,6 +513,7 @@
                               "ty": "equals"
                             }
                           ],
+                          "block-parameter-ty": "default",
                           "block-content": [
                             {
                               "token": {
@@ -554,7 +559,7 @@
                                     49
                                   ]
                                 },
-                                "block-paramters": [
+                                "block-parameters": [
                                   {
                                     "slice": "footnote",
                                     "span": {
@@ -570,6 +575,7 @@
                                     "ty": "identifier"
                                   }
                                 ],
+                                "block-parameter-ty": "default",
                                 "block-content": [
                                   {
                                     "token": {
@@ -700,7 +706,7 @@
                                     9
                                   ]
                                 },
-                                "block-paramters": [
+                                "block-parameters": [
                                   {
                                     "slice": "note",
                                     "span": {
@@ -716,6 +722,7 @@
                                     "ty": "identifier"
                                   }
                                 ],
+                                "block-parameter-ty": "default",
                                 "block-content": [
                                   {
                                     "token": {

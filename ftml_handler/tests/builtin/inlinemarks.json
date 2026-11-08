@@ -222,6 +222,54 @@
         },
         "ty": "identifier"
       }
+    },
+    {
+      "token": {
+        "slice": "normal",
+        "span": {
+          "start": [
+            16,
+            0
+          ],
+          "end": [
+            16,
+            6
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            16,
+            6
+          ],
+          "end": [
+            16,
+            7
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
+      "token": {
+        "slice": "text",
+        "span": {
+          "start": [
+            16,
+            7
+          ],
+          "end": [
+            16,
+            11
+          ]
+        },
+        "ty": "identifier"
+      }
     }
   ],
   "diagnostics": [

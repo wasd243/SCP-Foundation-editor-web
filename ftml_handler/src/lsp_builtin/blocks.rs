@@ -12,14 +12,16 @@ use crate::{
     utils::has_diagnostic,
 };
 
-use super::{BuiltIn, visit};
+use super::{BuiltIn, ParamKind, visit};
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub(super) struct Blocks<'lsp> {
     span: Span,
     /// This contains parameters like `div` `class` `=`.
-    block_paramters: Vec<&'lsp Token>,
+    block_parameters: Vec<&'lsp Token>,
+    /// This contains block parameters type.
+    block_parameter_ty: ParamKind,
     /// This contains block contents, includes everything.
     block_content: Vec<BuiltIn<'lsp>>,
     /// BlockKind, which determines CSS/HTML highlights.
@@ -47,6 +49,7 @@ impl<'lsp> Blocks<'lsp> {
             let start_token = token;
             let mut block_parameters = Vec::new();
             let mut end_token: Option<&Token> = None;
+            let mut block_parameter_ty = ParamKind::default();
             let mut block_ty = BlockKind::default();
 
             // match a block start: such as `[[div ]]` `[[footnote]]` `[[span ]]` `[[html ]]`
@@ -89,6 +92,13 @@ impl<'lsp> Blocks<'lsp> {
                 block_parameters.push(t);
             }
 
+            if block_parameters.len() > 1 {
+                block_parameter_ty = ParamKind::Attr;
+                if block_parameters.iter().any(|t| t.ty == TokenTy::Equals) {
+                    block_parameter_ty = ParamKind::Expr;
+                }
+            }
+
             let mut block_contents = Vec::new();
 
             let need_raw = matches!(block_ty, BlockKind::ModuleCss | BlockKind::Html);
@@ -116,7 +126,7 @@ impl<'lsp> Blocks<'lsp> {
                     && match block_ty {
                         BlockKind::ModuleCss => MODULE.is_match(&name.slice),
                         BlockKind::Html => HTML.is_match(&name.slice),
-                        _ => true,
+                        BlockKind::Block => true,
                     }
                 {
                     iter.next(); // name
@@ -137,7 +147,8 @@ impl<'lsp> Blocks<'lsp> {
                         start: start_token.span.start,
                         end: end_token.span.end,
                     },
-                    block_paramters: block_parameters,
+                    block_parameters,
+                    block_parameter_ty,
                     block_content: block_contents,
                     block_ty,
                     block_sub_lang_span: None,
@@ -166,6 +177,7 @@ impl<'lsp> Blocks<'lsp> {
     }
 }
 
+/// Check close tags like `[[/div]]` `[[/<]]`.
 fn is_valid_block_end(ty: TokenTy) -> bool {
     matches!(
         ty,

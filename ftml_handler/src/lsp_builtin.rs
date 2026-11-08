@@ -86,3 +86,61 @@ fn visit<'lsp>(
     }
     (BuiltIn::Token(&parse_token[0]), 1)
 }
+
+#[derive(Debug, Serialize, Default)]
+#[serde(rename_all = "kebab-case")]
+enum ParamKind {
+    /// Normal blocks like `[[note]][[/note]]` `[[footnote]] [[/footnote]]`
+    /// Also includes `[[div]] [[/div]]` `[[module]] [[/module]]`.
+    /// This value means all `Blocks` with a single parameter.
+    #[default]
+    Single,
+    /// Blocks have attrs, which includes `[[module css]]`.
+    Attr,
+    /// Expressions within `=`.
+    Expr,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "kebab-case")]
+enum ParamKeys {
+    /// Block name like `footnote`
+    BlockName,
+    /// Block attributes like:
+    /// ```ftml,ignore
+    /// [[module css]]
+    ///          ^^^
+    /// ```
+    BlockAttr,
+    /// =
+    Equals,
+    /// ""
+    Quote,
+    /// "string inside quote"
+    Value,
+    /// For other tokens
+    Other,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "kebab-case")]
+struct Param<'lsp> {
+    token: &'lsp Token,
+    ty: ParamKeys,
+}
+
+impl<'lsp> Param<'lsp> {
+    fn from_tokens(tokens: Vec<&'lsp Token>, param_kind: ParamKind) -> Vec<Self> {
+        let mut params: Vec<Param> = Vec::with_capacity(tokens.len());
+        match param_kind {
+            ParamKind::Single => tokens
+                .into_iter()
+                .map(|token| Self {
+                    token,
+                    ty: ParamKeys::BlockName,
+                })
+                .collect(),
+            _ => {}
+        }
+    }
+}
