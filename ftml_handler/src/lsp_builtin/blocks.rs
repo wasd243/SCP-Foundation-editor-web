@@ -150,7 +150,7 @@ impl<'lsp> Blocks<'lsp> {
                     // get the `html`/`css` sub languages highlights' range.
                     let first = block.span.start.0 + 1;
                     let last = block.span.end.0;
-                    block.block_sub_lang_span = (first < last).then(|| first..last);
+                    block.block_sub_lang_span = (first < last).then_some(first..last);
                 }
 
                 return Some(block);
