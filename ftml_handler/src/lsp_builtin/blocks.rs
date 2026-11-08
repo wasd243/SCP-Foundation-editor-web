@@ -19,7 +19,7 @@ use super::{BuiltIn, ParamKind, visit};
 pub(super) struct Blocks<'lsp> {
     span: Span,
     /// This contains parameters like `div` `class` `=`.
-    block_parameters: Vec<Param<'lsp>>,
+    block_parameters: Vec<Param>,
     /// This contains block contents, includes everything.
     block_content: Vec<BuiltIn<'lsp>>,
     /// BlockKind, which determines CSS/HTML highlights.

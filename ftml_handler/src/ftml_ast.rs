@@ -10,7 +10,7 @@ use std::sync::LazyLock;
 
 pub use token::Token;
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, Copy)]
 pub struct Span {
     pub start: (u32, u32),
     pub end: (u32, u32),

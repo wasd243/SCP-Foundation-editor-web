@@ -8,6 +8,7 @@ use inline_blocks::InlineBlocks;
 use inline_marks::InlineMarks;
 
 use crate::{
+    Span,
     ftml_ast::{Diagnostic, ParseToken, Token},
     utils::{is_inline_block_token, is_inline_mark_token},
 };
@@ -20,7 +21,7 @@ use serde::Serialize;
 /// A private enum for different types of builtin AST nodes.
 enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
-    InLineBlocks(InlineBlocks<'lsp>),
+    InLineBlocks(InlineBlocks),
     Blocks(Blocks<'lsp>),
     Token(&'lsp Token),
 }
@@ -144,24 +145,26 @@ enum ParamKeys {
     Quote,
     /// "string inside quote"
     Value,
+    /// :
+    Colon,
 }
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
-struct Param<'lsp> {
-    token: &'lsp Token,
+struct Param {
+    span: Span,
     ty: ParamKeys,
 }
 
-impl<'lsp> Param<'lsp> {
+impl Param {
     /// Identify attributes for `Blocks` and `InlineBlocks`.
     #[must_use]
-    fn from_tokens(tokens: Vec<&'lsp Token>, param_kind: &ParamKind) -> Vec<Self> {
+    fn from_tokens(tokens: Vec<&Token>, param_kind: &ParamKind) -> Vec<Self> {
         match param_kind {
             ParamKind::Single => tokens
                 .into_iter()
                 .map(|token| Self {
-                    token,
+                    span: token.span,
                     ty: ParamKeys::BlockName,
                 })
                 .collect(),
@@ -175,7 +178,10 @@ impl<'lsp> Param<'lsp> {
                         (_, TokenTy::Whitespace) => ParamKeys::Whitespace,
                         _ => ParamKeys::BlockAttr,
                     };
-                    Self { token, ty }
+                    Self {
+                        span: token.span,
+                        ty,
+                    }
                 })
                 .collect(),
 
@@ -195,9 +201,13 @@ impl<'lsp> Param<'lsp> {
                             (_, TokenTy::Whitespace) => ParamKeys::Whitespace,
                             (_, TokenTy::Pipe) => ParamKeys::Pipe,
                             (_, TokenTy::Equals) => ParamKeys::Equals,
+                            (_, TokenTy::Colon) => ParamKeys::Colon,
                             _ => ParamKeys::BlockAttr,
                         };
-                        Self { token, ty }
+                        Self {
+                            span: token.span,
+                            ty,
+                        }
                     })
                     .collect()
             }
