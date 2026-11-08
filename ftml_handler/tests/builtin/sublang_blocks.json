@@ -14,53 +14,41 @@
         },
         "block-parameters": [
           {
-            "token": {
-              "slice": "module",
-              "span": {
-                "start": [
-                  0,
-                  2
-                ],
-                "end": [
-                  0,
-                  8
-                ]
-              },
-              "ty": "identifier"
+            "span": {
+              "start": [
+                0,
+                2
+              ],
+              "end": [
+                0,
+                8
+              ]
             },
             "ty": "block-name"
           },
           {
-            "token": {
-              "slice": " ",
-              "span": {
-                "start": [
-                  0,
-                  8
-                ],
-                "end": [
-                  0,
-                  9
-                ]
-              },
-              "ty": "whitespace"
+            "span": {
+              "start": [
+                0,
+                8
+              ],
+              "end": [
+                0,
+                9
+              ]
             },
             "ty": "whitespace"
           },
           {
-            "token": {
-              "slice": "css",
-              "span": {
-                "start": [
-                  0,
-                  9
-                ],
-                "end": [
-                  0,
-                  12
-                ]
-              },
-              "ty": "identifier"
+            "span": {
+              "start": [
+                0,
+                9
+              ],
+              "end": [
+                0,
+                12
+              ]
             },
             "ty": "block-attr"
           }
@@ -87,19 +75,15 @@
         },
         "block-parameters": [
           {
-            "token": {
-              "slice": "html",
-              "span": {
-                "start": [
-                  6,
-                  2
-                ],
-                "end": [
-                  6,
-                  6
-                ]
-              },
-              "ty": "identifier"
+            "span": {
+              "start": [
+                6,
+                2
+              ],
+              "end": [
+                6,
+                6
+              ]
             },
             "ty": "block-name"
           }
@@ -126,121 +110,93 @@
         },
         "block-parameters": [
           {
-            "token": {
-              "slice": "div",
-              "span": {
-                "start": [
-                  16,
-                  2
-                ],
-                "end": [
-                  16,
-                  5
-                ]
-              },
-              "ty": "identifier"
+            "span": {
+              "start": [
+                16,
+                2
+              ],
+              "end": [
+                16,
+                5
+              ]
             },
             "ty": "block-name"
           },
           {
-            "token": {
-              "slice": " ",
-              "span": {
-                "start": [
-                  16,
-                  5
-                ],
-                "end": [
-                  16,
-                  6
-                ]
-              },
-              "ty": "whitespace"
+            "span": {
+              "start": [
+                16,
+                5
+              ],
+              "end": [
+                16,
+                6
+              ]
             },
             "ty": "whitespace"
           },
           {
-            "token": {
-              "slice": "class",
-              "span": {
-                "start": [
-                  16,
-                  6
-                ],
-                "end": [
-                  16,
-                  11
-                ]
-              },
-              "ty": "identifier"
+            "span": {
+              "start": [
+                16,
+                6
+              ],
+              "end": [
+                16,
+                11
+              ]
             },
             "ty": "block-attr"
           },
           {
-            "token": {
-              "slice": "=",
-              "span": {
-                "start": [
-                  16,
-                  11
-                ],
-                "end": [
-                  16,
-                  12
-                ]
-              },
-              "ty": "equals"
+            "span": {
+              "start": [
+                16,
+                11
+              ],
+              "end": [
+                16,
+                12
+              ]
             },
             "ty": "equals"
           },
           {
-            "token": {
-              "slice": "\"",
-              "span": {
-                "start": [
-                  16,
-                  12
-                ],
-                "end": [
-                  16,
-                  13
-                ]
-              },
-              "ty": "double-quote"
+            "span": {
+              "start": [
+                16,
+                12
+              ],
+              "end": [
+                16,
+                13
+              ]
             },
             "ty": "quote"
           },
           {
-            "token": {
-              "slice": "cls",
-              "span": {
-                "start": [
-                  16,
-                  13
-                ],
-                "end": [
-                  16,
-                  16
-                ]
-              },
-              "ty": "identifier"
+            "span": {
+              "start": [
+                16,
+                13
+              ],
+              "end": [
+                16,
+                16
+              ]
             },
             "ty": "value"
           },
           {
-            "token": {
-              "slice": "\"",
-              "span": {
-                "start": [
-                  16,
-                  16
-                ],
-                "end": [
-                  16,
-                  17
-                ]
-              },
-              "ty": "double-quote"
+            "span": {
+              "start": [
+                16,
+                16
+              ],
+              "end": [
+                16,
+                17
+              ]
             },
             "ty": "quote"
           }
@@ -308,19 +264,15 @@
               },
               "block-parameters": [
                 {
-                  "token": {
-                    "slice": "footnote",
-                    "span": {
-                      "start": [
-                        17,
-                        10
-                      ],
-                      "end": [
-                        17,
-                        18
-                      ]
-                    },
-                    "ty": "identifier"
+                  "span": {
+                    "start": [
+                      17,
+                      10
+                    ],
+                    "end": [
+                      17,
+                      18
+                    ]
                   },
                   "ty": "block-name"
                 }
@@ -462,19 +414,15 @@
         },
         "block-parameters": [
           {
-            "token": {
-              "slice": "html",
-              "span": {
-                "start": [
-                  21,
-                  2
-                ],
-                "end": [
-                  21,
-                  6
-                ]
-              },
-              "ty": "identifier"
+            "span": {
+              "start": [
+                21,
+                2
+              ],
+              "end": [
+                21,
+                6
+              ]
             },
             "ty": "block-name"
           }
