@@ -6,7 +6,7 @@ use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
     lsp_builtin::{
-        BlockKind,
+        BlockKind, Param,
         regex::{CSS, HTML, MODULE},
     },
     utils::has_diagnostic,
@@ -19,9 +19,7 @@ use super::{BuiltIn, ParamKind, visit};
 pub(super) struct Blocks<'lsp> {
     span: Span,
     /// This contains parameters like `div` `class` `=`.
-    block_parameters: Vec<&'lsp Token>,
-    /// This contains block parameters type.
-    block_parameter_ty: ParamKind,
+    block_parameters: Vec<Param<'lsp>>,
     /// This contains block contents, includes everything.
     block_content: Vec<BuiltIn<'lsp>>,
     /// BlockKind, which determines CSS/HTML highlights.
@@ -47,9 +45,10 @@ impl<'lsp> Blocks<'lsp> {
             }
 
             let start_token = token;
-            let mut block_parameters = Vec::new();
+
+            // cache block token parameters temporarily.
+            let mut block_token_parameters = Vec::new();
             let mut end_token: Option<&Token> = None;
-            let mut block_parameter_ty = ParamKind::default();
             let mut block_ty = BlockKind::default();
 
             // match a block start: such as `[[div ]]` `[[footnote]]` `[[span ]]` `[[html ]]`
@@ -58,18 +57,20 @@ impl<'lsp> Blocks<'lsp> {
 
                 match t.ty {
                     TokenTy::Identifier if MODULE.is_match(&t.slice) => {
-                        block_parameters.push(t);
+                        block_token_parameters.push(t);
 
                         let next = iter.next()?;
-                        block_parameters.push(next);
 
                         if next.ty == TokenTy::RightBlock {
                             break;
                         }
 
+                        // push after the check, to prevent we push `]]` into the parameters
+                        block_token_parameters.push(next);
+
                         if next.ty == TokenTy::Whitespace {
                             let next2 = iter.next()?;
-                            block_parameters.push(next2);
+                            block_token_parameters.push(next2);
 
                             if next2.ty == TokenTy::Identifier && CSS.is_match(&next2.slice) {
                                 block_ty = BlockKind::ModuleCss;
@@ -89,15 +90,12 @@ impl<'lsp> Blocks<'lsp> {
                     break;
                 }
 
-                block_parameters.push(t);
+                block_token_parameters.push(t);
             }
 
-            if block_parameters.len() > 1 {
-                block_parameter_ty = ParamKind::Attr;
-                if block_parameters.iter().any(|t| t.ty == TokenTy::Equals) {
-                    block_parameter_ty = ParamKind::Expr;
-                }
-            }
+            let param_kind = ParamKind::match_param_kind(&block_token_parameters);
+
+            let block_parameters = Param::from_tokens(block_token_parameters, &param_kind);
 
             let mut block_contents = Vec::new();
 
@@ -148,7 +146,6 @@ impl<'lsp> Blocks<'lsp> {
                         end: end_token.span.end,
                     },
                     block_parameters,
-                    block_parameter_ty,
                     block_content: block_contents,
                     block_ty,
                     block_sub_lang_span: None,

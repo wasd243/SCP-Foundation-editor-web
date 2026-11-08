@@ -30,133 +30,159 @@
         },
         "block-parameters": [
           {
-            "slice": "div",
-            "span": {
-              "start": [
-                2,
-                2
-              ],
-              "end": [
-                2,
-                5
-              ]
+            "token": {
+              "slice": "div",
+              "span": {
+                "start": [
+                  2,
+                  2
+                ],
+                "end": [
+                  2,
+                  5
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-name"
           },
           {
-            "slice": " ",
-            "span": {
-              "start": [
-                2,
-                5
-              ],
-              "end": [
-                2,
-                6
-              ]
-            },
-            "ty": "whitespace"
-          },
-          {
-            "slice": "class",
-            "span": {
-              "start": [
-                2,
-                6
-              ],
-              "end": [
-                2,
-                11
-              ]
-            },
-            "ty": "identifier"
-          },
-          {
-            "slice": " ",
-            "span": {
-              "start": [
-                2,
-                11
-              ],
-              "end": [
-                2,
-                12
-              ]
+            "token": {
+              "slice": " ",
+              "span": {
+                "start": [
+                  2,
+                  5
+                ],
+                "end": [
+                  2,
+                  6
+                ]
+              },
+              "ty": "whitespace"
             },
             "ty": "whitespace"
           },
           {
-            "slice": "=",
-            "span": {
-              "start": [
-                2,
-                12
-              ],
-              "end": [
-                2,
-                13
-              ]
+            "token": {
+              "slice": "class",
+              "span": {
+                "start": [
+                  2,
+                  6
+                ],
+                "end": [
+                  2,
+                  11
+                ]
+              },
+              "ty": "identifier"
+            },
+            "ty": "block-attr"
+          },
+          {
+            "token": {
+              "slice": " ",
+              "span": {
+                "start": [
+                  2,
+                  11
+                ],
+                "end": [
+                  2,
+                  12
+                ]
+              },
+              "ty": "whitespace"
+            },
+            "ty": "whitespace"
+          },
+          {
+            "token": {
+              "slice": "=",
+              "span": {
+                "start": [
+                  2,
+                  12
+                ],
+                "end": [
+                  2,
+                  13
+                ]
+              },
+              "ty": "equals"
             },
             "ty": "equals"
           },
           {
-            "slice": " ",
-            "span": {
-              "start": [
-                2,
-                13
-              ],
-              "end": [
-                2,
-                14
-              ]
+            "token": {
+              "slice": " ",
+              "span": {
+                "start": [
+                  2,
+                  13
+                ],
+                "end": [
+                  2,
+                  14
+                ]
+              },
+              "ty": "whitespace"
             },
             "ty": "whitespace"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                2,
-                14
-              ],
-              "end": [
-                2,
-                15
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  2,
+                  14
+                ],
+                "end": [
+                  2,
+                  15
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           },
           {
-            "slice": "some",
-            "span": {
-              "start": [
-                2,
-                15
-              ],
-              "end": [
-                2,
-                19
-              ]
+            "token": {
+              "slice": "some",
+              "span": {
+                "start": [
+                  2,
+                  15
+                ],
+                "end": [
+                  2,
+                  19
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "value"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                2,
-                19
-              ],
-              "end": [
-                2,
-                20
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  2,
+                  19
+                ],
+                "end": [
+                  2,
+                  20
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           }
         ],
-        "block-parameter-ty": "has-attributes",
         "block-content": [
           {
             "token": {
@@ -193,189 +219,227 @@
         },
         "block-parameters": [
           {
-            "slice": "collapsible",
-            "span": {
-              "start": [
-                6,
-                2
-              ],
-              "end": [
-                6,
-                13
-              ]
+            "token": {
+              "slice": "collapsible",
+              "span": {
+                "start": [
+                  6,
+                  2
+                ],
+                "end": [
+                  6,
+                  13
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-name"
           },
           {
-            "slice": " ",
-            "span": {
-              "start": [
-                6,
-                13
-              ],
-              "end": [
-                6,
-                14
-              ]
+            "token": {
+              "slice": " ",
+              "span": {
+                "start": [
+                  6,
+                  13
+                ],
+                "end": [
+                  6,
+                  14
+                ]
+              },
+              "ty": "whitespace"
             },
             "ty": "whitespace"
           },
           {
-            "slice": "show",
-            "span": {
-              "start": [
-                6,
-                14
-              ],
-              "end": [
-                6,
-                18
-              ]
+            "token": {
+              "slice": "show",
+              "span": {
+                "start": [
+                  6,
+                  14
+                ],
+                "end": [
+                  6,
+                  18
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-attr"
           },
           {
-            "slice": "=",
-            "span": {
-              "start": [
-                6,
-                18
-              ],
-              "end": [
-                6,
-                19
-              ]
+            "token": {
+              "slice": "=",
+              "span": {
+                "start": [
+                  6,
+                  18
+                ],
+                "end": [
+                  6,
+                  19
+                ]
+              },
+              "ty": "equals"
             },
             "ty": "equals"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                6,
-                19
-              ],
-              "end": [
-                6,
-                20
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  6,
+                  19
+                ],
+                "end": [
+                  6,
+                  20
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           },
           {
-            "slice": "sss",
-            "span": {
-              "start": [
-                6,
-                20
-              ],
-              "end": [
-                6,
-                23
-              ]
+            "token": {
+              "slice": "sss",
+              "span": {
+                "start": [
+                  6,
+                  20
+                ],
+                "end": [
+                  6,
+                  23
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "value"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                6,
-                23
-              ],
-              "end": [
-                6,
-                24
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  6,
+                  23
+                ],
+                "end": [
+                  6,
+                  24
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           },
           {
-            "slice": " ",
-            "span": {
-              "start": [
-                6,
-                24
-              ],
-              "end": [
-                6,
-                25
-              ]
+            "token": {
+              "slice": " ",
+              "span": {
+                "start": [
+                  6,
+                  24
+                ],
+                "end": [
+                  6,
+                  25
+                ]
+              },
+              "ty": "whitespace"
             },
             "ty": "whitespace"
           },
           {
-            "slice": "hide",
-            "span": {
-              "start": [
-                6,
-                25
-              ],
-              "end": [
-                6,
-                29
-              ]
+            "token": {
+              "slice": "hide",
+              "span": {
+                "start": [
+                  6,
+                  25
+                ],
+                "end": [
+                  6,
+                  29
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-attr"
           },
           {
-            "slice": "=",
-            "span": {
-              "start": [
-                6,
-                29
-              ],
-              "end": [
-                6,
-                30
-              ]
+            "token": {
+              "slice": "=",
+              "span": {
+                "start": [
+                  6,
+                  29
+                ],
+                "end": [
+                  6,
+                  30
+                ]
+              },
+              "ty": "equals"
             },
             "ty": "equals"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                6,
-                30
-              ],
-              "end": [
-                6,
-                31
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  6,
+                  30
+                ],
+                "end": [
+                  6,
+                  31
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           },
           {
-            "slice": "sss",
-            "span": {
-              "start": [
-                6,
-                31
-              ],
-              "end": [
-                6,
-                34
-              ]
+            "token": {
+              "slice": "sss",
+              "span": {
+                "start": [
+                  6,
+                  31
+                ],
+                "end": [
+                  6,
+                  34
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "value"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                6,
-                34
-              ],
-              "end": [
-                6,
-                35
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  6,
+                  34
+                ],
+                "end": [
+                  6,
+                  35
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           }
         ],
-        "block-parameter-ty": "has-attributes",
         "block-content": [
           {
             "token": {
@@ -407,21 +471,23 @@
               },
               "block-parameters": [
                 {
-                  "slice": "<",
-                  "span": {
-                    "start": [
-                      8,
-                      2
-                    ],
-                    "end": [
-                      8,
-                      3
-                    ]
+                  "token": {
+                    "slice": "<",
+                    "span": {
+                      "start": [
+                        8,
+                        2
+                      ],
+                      "end": [
+                        8,
+                        3
+                      ]
+                    },
+                    "ty": "other"
                   },
-                  "ty": "other"
+                  "ty": "block-name"
                 }
               ],
-              "block-parameter-ty": "default",
               "block-content": [
                 {
                   "token": {
@@ -453,21 +519,23 @@
                     },
                     "block-parameters": [
                       {
-                        "slice": ">",
-                        "span": {
-                          "start": [
-                            10,
-                            2
-                          ],
-                          "end": [
-                            10,
-                            3
-                          ]
+                        "token": {
+                          "slice": ">",
+                          "span": {
+                            "start": [
+                              10,
+                              2
+                            ],
+                            "end": [
+                              10,
+                              3
+                            ]
+                          },
+                          "ty": "quote"
                         },
-                        "ty": "quote"
+                        "ty": "block-name"
                       }
                     ],
-                    "block-parameter-ty": "default",
                     "block-content": [
                       {
                         "token": {
@@ -499,21 +567,23 @@
                           },
                           "block-parameters": [
                             {
-                              "slice": "=",
-                              "span": {
-                                "start": [
-                                  12,
-                                  2
-                                ],
-                                "end": [
-                                  12,
-                                  3
-                                ]
+                              "token": {
+                                "slice": "=",
+                                "span": {
+                                  "start": [
+                                    12,
+                                    2
+                                  ],
+                                  "end": [
+                                    12,
+                                    3
+                                  ]
+                                },
+                                "ty": "equals"
                               },
-                              "ty": "equals"
+                              "ty": "block-name"
                             }
                           ],
-                          "block-parameter-ty": "default",
                           "block-content": [
                             {
                               "token": {
@@ -561,21 +631,23 @@
                                 },
                                 "block-parameters": [
                                   {
-                                    "slice": "footnote",
-                                    "span": {
-                                      "start": [
-                                        14,
-                                        5
-                                      ],
-                                      "end": [
-                                        14,
-                                        13
-                                      ]
+                                    "token": {
+                                      "slice": "footnote",
+                                      "span": {
+                                        "start": [
+                                          14,
+                                          5
+                                        ],
+                                        "end": [
+                                          14,
+                                          13
+                                        ]
+                                      },
+                                      "ty": "identifier"
                                     },
-                                    "ty": "identifier"
+                                    "ty": "block-name"
                                   }
                                 ],
-                                "block-parameter-ty": "default",
                                 "block-content": [
                                   {
                                     "token": {
@@ -708,21 +780,23 @@
                                 },
                                 "block-parameters": [
                                   {
-                                    "slice": "note",
-                                    "span": {
-                                      "start": [
-                                        16,
-                                        2
-                                      ],
-                                      "end": [
-                                        16,
-                                        6
-                                      ]
+                                    "token": {
+                                      "slice": "note",
+                                      "span": {
+                                        "start": [
+                                          16,
+                                          2
+                                        ],
+                                        "end": [
+                                          16,
+                                          6
+                                        ]
+                                      },
+                                      "ty": "identifier"
                                     },
-                                    "ty": "identifier"
+                                    "ty": "block-name"
                                   }
                                 ],
-                                "block-parameter-ty": "default",
                                 "block-content": [
                                   {
                                     "token": {

@@ -17,6 +17,7 @@ use serde::Serialize;
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
+/// A private enum for different types of builtin AST nodes.
 enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
     InLineBlocks(InlineBlocks<'lsp>),
@@ -26,6 +27,7 @@ enum BuiltIn<'lsp> {
 
 #[derive(Debug, Default, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
+/// An easy sub highlight for different sub languages.
 pub(crate) enum BlockKind {
     #[default]
     Block,
@@ -35,6 +37,7 @@ pub(crate) enum BlockKind {
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
+/// The whole LSP builin AST will store in this struct.
 pub struct LspBuiltIn<'lsp> {
     tree: Vec<BuiltIn<'lsp>>,
     diagnostics: &'lsp Vec<Diagnostic>,
@@ -60,6 +63,7 @@ impl<'lsp> LspBuiltIn<'lsp> {
     }
 }
 
+/// A separate visitor function.
 fn visit<'lsp>(
     parse_token: &'lsp [Token],
     diagnostics: &'lsp [Diagnostic],
@@ -89,6 +93,8 @@ fn visit<'lsp>(
 
 #[derive(Debug, Serialize, Default)]
 #[serde(rename_all = "kebab-case")]
+/// This enum is set for different parameter expressions types,
+/// which will NOT store as structs' fields.
 enum ParamKind {
     /// Normal blocks like `[[note]][[/note]]` `[[footnote]] [[/footnote]]`
     /// Also includes `[[div]] [[/div]]` `[[module]] [[/module]]`.
@@ -101,8 +107,24 @@ enum ParamKind {
     Expr,
 }
 
+impl ParamKind {
+    /// Identify parameter kinds from token slice.
+    #[must_use]
+    fn match_param_kind(token_params: &[&Token]) -> Self {
+        let mut param_kind = Self::default();
+        if token_params.len() > 1 {
+            param_kind = Self::Attr;
+            if token_params.iter().any(|t| matches!(t.ty, TokenTy::Equals)) {
+                param_kind = Self::Expr;
+            }
+        }
+        param_kind
+    }
+}
+
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
+/// An easy sub highlight in `Blocks` and `InlineBlocks` tokens.
 enum ParamKeys {
     /// Block name like `footnote`
     BlockName,
@@ -112,14 +134,16 @@ enum ParamKeys {
     ///          ^^^
     /// ```
     BlockAttr,
+    /// For " " Whitespace
+    Whitespace,
+    /// |
+    Pipe,
     /// =
     Equals,
     /// ""
     Quote,
     /// "string inside quote"
     Value,
-    /// For other tokens
-    Other,
 }
 
 #[derive(Debug, Serialize)]
@@ -130,8 +154,9 @@ struct Param<'lsp> {
 }
 
 impl<'lsp> Param<'lsp> {
-    fn from_tokens(tokens: Vec<&'lsp Token>, param_kind: ParamKind) -> Vec<Self> {
-        let mut params: Vec<Param> = Vec::with_capacity(tokens.len());
+    /// Identify attributes for `Blocks` and `InlineBlocks`.
+    #[must_use]
+    fn from_tokens(tokens: Vec<&'lsp Token>, param_kind: &ParamKind) -> Vec<Self> {
         match param_kind {
             ParamKind::Single => tokens
                 .into_iter()
@@ -140,7 +165,42 @@ impl<'lsp> Param<'lsp> {
                     ty: ParamKeys::BlockName,
                 })
                 .collect(),
-            _ => {}
+
+            ParamKind::Attr => tokens
+                .into_iter()
+                .enumerate()
+                .map(|(i, token)| {
+                    let ty = match (i, token.ty) {
+                        (0, _) => ParamKeys::BlockName,
+                        (_, TokenTy::Whitespace) => ParamKeys::Whitespace,
+                        _ => ParamKeys::BlockAttr,
+                    };
+                    Self { token, ty }
+                })
+                .collect(),
+
+            ParamKind::Expr => {
+                let mut is_in_quote = false;
+                tokens
+                    .into_iter()
+                    .enumerate()
+                    .map(|(i, token)| {
+                        let ty = match (i, token.ty) {
+                            (0, _) => ParamKeys::BlockName,
+                            (_, TokenTy::DoubleQuote) => {
+                                is_in_quote = !is_in_quote;
+                                ParamKeys::Quote
+                            }
+                            _ if is_in_quote => ParamKeys::Value,
+                            (_, TokenTy::Whitespace) => ParamKeys::Whitespace,
+                            (_, TokenTy::Pipe) => ParamKeys::Pipe,
+                            (_, TokenTy::Equals) => ParamKeys::Equals,
+                            _ => ParamKeys::BlockAttr,
+                        };
+                        Self { token, ty }
+                    })
+                    .collect()
+            }
         }
     }
 }

@@ -14,49 +14,57 @@
         },
         "block-parameters": [
           {
-            "slice": "module",
-            "span": {
-              "start": [
-                0,
-                2
-              ],
-              "end": [
-                0,
-                8
-              ]
+            "token": {
+              "slice": "module",
+              "span": {
+                "start": [
+                  0,
+                  2
+                ],
+                "end": [
+                  0,
+                  8
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-name"
           },
           {
-            "slice": " ",
-            "span": {
-              "start": [
-                0,
-                8
-              ],
-              "end": [
-                0,
-                9
-              ]
+            "token": {
+              "slice": " ",
+              "span": {
+                "start": [
+                  0,
+                  8
+                ],
+                "end": [
+                  0,
+                  9
+                ]
+              },
+              "ty": "whitespace"
             },
             "ty": "whitespace"
           },
           {
-            "slice": "css",
-            "span": {
-              "start": [
-                0,
-                9
-              ],
-              "end": [
-                0,
-                12
-              ]
+            "token": {
+              "slice": "css",
+              "span": {
+                "start": [
+                  0,
+                  9
+                ],
+                "end": [
+                  0,
+                  12
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-attr"
           }
         ],
-        "block-parameter-ty": "has-attributes",
         "block-content": [],
         "block-ty": "module-css",
         "block-sub-lang-span": {
@@ -79,21 +87,23 @@
         },
         "block-parameters": [
           {
-            "slice": "html",
-            "span": {
-              "start": [
-                6,
-                2
-              ],
-              "end": [
-                6,
-                6
-              ]
+            "token": {
+              "slice": "html",
+              "span": {
+                "start": [
+                  6,
+                  2
+                ],
+                "end": [
+                  6,
+                  6
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-name"
           }
         ],
-        "block-parameter-ty": "default",
         "block-content": [],
         "block-ty": "html",
         "block-sub-lang-span": {
@@ -116,105 +126,125 @@
         },
         "block-parameters": [
           {
-            "slice": "div",
-            "span": {
-              "start": [
-                16,
-                2
-              ],
-              "end": [
-                16,
-                5
-              ]
+            "token": {
+              "slice": "div",
+              "span": {
+                "start": [
+                  16,
+                  2
+                ],
+                "end": [
+                  16,
+                  5
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-name"
           },
           {
-            "slice": " ",
-            "span": {
-              "start": [
-                16,
-                5
-              ],
-              "end": [
-                16,
-                6
-              ]
+            "token": {
+              "slice": " ",
+              "span": {
+                "start": [
+                  16,
+                  5
+                ],
+                "end": [
+                  16,
+                  6
+                ]
+              },
+              "ty": "whitespace"
             },
             "ty": "whitespace"
           },
           {
-            "slice": "class",
-            "span": {
-              "start": [
-                16,
-                6
-              ],
-              "end": [
-                16,
-                11
-              ]
+            "token": {
+              "slice": "class",
+              "span": {
+                "start": [
+                  16,
+                  6
+                ],
+                "end": [
+                  16,
+                  11
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-attr"
           },
           {
-            "slice": "=",
-            "span": {
-              "start": [
-                16,
-                11
-              ],
-              "end": [
-                16,
-                12
-              ]
+            "token": {
+              "slice": "=",
+              "span": {
+                "start": [
+                  16,
+                  11
+                ],
+                "end": [
+                  16,
+                  12
+                ]
+              },
+              "ty": "equals"
             },
             "ty": "equals"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                16,
-                12
-              ],
-              "end": [
-                16,
-                13
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  16,
+                  12
+                ],
+                "end": [
+                  16,
+                  13
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           },
           {
-            "slice": "cls",
-            "span": {
-              "start": [
-                16,
-                13
-              ],
-              "end": [
-                16,
-                16
-              ]
+            "token": {
+              "slice": "cls",
+              "span": {
+                "start": [
+                  16,
+                  13
+                ],
+                "end": [
+                  16,
+                  16
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "value"
           },
           {
-            "slice": "\"",
-            "span": {
-              "start": [
-                16,
-                16
-              ],
-              "end": [
-                16,
-                17
-              ]
+            "token": {
+              "slice": "\"",
+              "span": {
+                "start": [
+                  16,
+                  16
+                ],
+                "end": [
+                  16,
+                  17
+                ]
+              },
+              "ty": "double-quote"
             },
-            "ty": "double-quote"
+            "ty": "quote"
           }
         ],
-        "block-parameter-ty": "has-attributes",
         "block-content": [
           {
             "token": {
@@ -278,21 +308,23 @@
               },
               "block-parameters": [
                 {
-                  "slice": "footnote",
-                  "span": {
-                    "start": [
-                      17,
-                      10
-                    ],
-                    "end": [
-                      17,
-                      18
-                    ]
+                  "token": {
+                    "slice": "footnote",
+                    "span": {
+                      "start": [
+                        17,
+                        10
+                      ],
+                      "end": [
+                        17,
+                        18
+                      ]
+                    },
+                    "ty": "identifier"
                   },
-                  "ty": "identifier"
+                  "ty": "block-name"
                 }
               ],
-              "block-parameter-ty": "default",
               "block-content": [
                 {
                   "token": {
@@ -430,21 +462,23 @@
         },
         "block-parameters": [
           {
-            "slice": "html",
-            "span": {
-              "start": [
-                21,
-                2
-              ],
-              "end": [
-                21,
-                6
-              ]
+            "token": {
+              "slice": "html",
+              "span": {
+                "start": [
+                  21,
+                  2
+                ],
+                "end": [
+                  21,
+                  6
+                ]
+              },
+              "ty": "identifier"
             },
-            "ty": "identifier"
+            "ty": "block-name"
           }
         ],
-        "block-parameter-ty": "default",
         "block-content": [],
         "block-ty": "html",
         "block-sub-lang-span": {

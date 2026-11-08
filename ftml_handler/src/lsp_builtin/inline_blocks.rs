@@ -4,15 +4,18 @@ use serde::Serialize;
 use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
+    lsp_builtin::Param,
     utils::check_diagnostic_without_include,
 };
+
+use super::ParamKind;
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub(super) struct InlineBlocks<'lsp> {
     span: Span,
     /// Keep content for sub hihgliht in `[[include]]` `[[user name]]`.
-    content: Vec<&'lsp Token>,
+    parameters: Vec<Param<'lsp>>,
 }
 
 impl<'lsp> InlineBlocks<'lsp> {
@@ -34,18 +37,20 @@ impl<'lsp> InlineBlocks<'lsp> {
             }
         }
 
-        let content = rest[..end_idx].iter().collect();
+        let token_parameters: Vec<&Token> = rest[..end_idx].iter().collect();
+        let param_kind = ParamKind::match_param_kind(&token_parameters);
+        let parameters = Param::from_tokens(token_parameters, &param_kind);
 
         Some(Self {
             span: Span {
                 start: start_mark.span.start,
                 end: end_span,
             },
-            content,
+            parameters,
         })
     }
 
     pub(super) fn content_len(&self) -> usize {
-        self.content.len()
+        self.parameters.len()
     }
 }
