@@ -17,8 +17,11 @@ use super::{BuiltIn, visit};
 #[serde(rename_all = "kebab-case")]
 pub(super) struct Blocks<'lsp> {
     span: Span,
+    /// This contains parameters like `div` `class` `=`.
     block_paramters: Vec<&'lsp Token>,
+    /// This contains block contents, includes everything.
     block_content: Vec<BuiltIn<'lsp>>,
+    /// BlockKind, which determines CSS/HTML highlights.
     block_ty: BlockKind,
     #[serde(skip)]
     used_index: usize,

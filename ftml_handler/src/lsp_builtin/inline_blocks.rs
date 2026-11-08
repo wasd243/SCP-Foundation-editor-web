@@ -11,6 +11,7 @@ use crate::{
 #[serde(rename_all = "kebab-case")]
 pub(super) struct InlineBlocks<'lsp> {
     span: Span,
+    /// Keep content for sub hihgliht in `[[include]]` `[[user name]]`.
     content: Vec<&'lsp Token>,
 }
 
