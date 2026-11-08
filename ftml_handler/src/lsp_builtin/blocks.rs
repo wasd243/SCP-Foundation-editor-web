@@ -1,5 +1,6 @@
 use ftml::parsing::Token as TokenTy;
 use serde::Serialize;
+use std::ops::Range;
 
 use crate::{
     Span,
@@ -23,6 +24,9 @@ pub(super) struct Blocks<'lsp> {
     block_content: Vec<BuiltIn<'lsp>>,
     /// BlockKind, which determines CSS/HTML highlights.
     block_ty: BlockKind,
+    /// Only use in sub languages BlockKind, otherwise stay as `None`.
+    /// An Optional Range which only record line numbers.
+    block_sub_lang_span: Option<Range<u32>>,
     #[serde(skip)]
     used_index: usize,
 }
@@ -119,7 +123,9 @@ impl<'lsp> Blocks<'lsp> {
                     break;
                 }
 
-                block_contents.push(BuiltIn::Token(t));
+                if !need_raw {
+                    block_contents.push(BuiltIn::Token(t));
+                }
             }
 
             if let Some(end_token) = end_token {
@@ -133,11 +139,18 @@ impl<'lsp> Blocks<'lsp> {
                     block_paramters: block_parameters,
                     block_content: block_contents,
                     block_ty,
+                    block_sub_lang_span: None,
                     used_index,
                 };
 
                 if matches!(block.block_ty, BlockKind::ModuleCss | BlockKind::Html) {
-                    Self::token_escape(&mut block);
+                    // we don't need to escape the `[` `]` token because there's nothing stored in
+                    // block_contents when `block_ty` is html or css.
+
+                    // get the `html`/`css` sub languages highlights' range.
+                    let first = block.span.start.0 + 1;
+                    let last = block.span.end.0;
+                    block.block_sub_lang_span = (first < last).then(|| first..last);
                 }
 
                 return Some(block);
@@ -149,25 +162,6 @@ impl<'lsp> Blocks<'lsp> {
 
     pub(super) fn token_len(&self) -> usize {
         self.used_index
-    }
-
-    /// Escape `[` and `]`.
-    fn token_escape(&mut self) {
-        for builtin in &mut self.block_content {
-            match builtin {
-                BuiltIn::Token(t) => {
-                    let slice = t.slice.replace('[', "\\[").replace(']', "\\]");
-                    let span = Span {
-                        start: t.span.start,
-                        end: t.span.end,
-                    };
-                    *builtin = BuiltIn::EscapedToken { slice, span };
-                }
-                _ => unreachable!(
-                    "token must be escaped in `html` and `css` blocks, found another BuiltIn"
-                ),
-            }
-        }
     }
 }
 

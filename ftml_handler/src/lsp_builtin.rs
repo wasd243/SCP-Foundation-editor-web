@@ -8,7 +8,6 @@ use inline_blocks::InlineBlocks;
 use inline_marks::InlineMarks;
 
 use crate::{
-    Span,
     ftml_ast::{Diagnostic, ParseToken, Token},
     utils::{is_inline_block_token, is_inline_mark_token},
 };
@@ -23,12 +22,6 @@ enum BuiltIn<'lsp> {
     InLineBlocks(InlineBlocks<'lsp>),
     Blocks(Blocks<'lsp>),
     Token(&'lsp Token),
-    /// For escaped tokens in `[[html]]` and `[[module css]]`.
-    #[serde(rename = "token")]
-    EscapedToken {
-        slice: String,
-        span: Span,
-    },
 }
 
 #[derive(Debug, Default, Serialize, PartialEq, Eq)]
