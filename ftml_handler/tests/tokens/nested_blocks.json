@@ -3,776 +3,1358 @@
     {
       "slice": "[!--",
       "span": {
-        "start": 0,
-        "end": 4
+        "start": [
+          0,
+          0
+        ],
+        "end": [
+          0,
+          4
+        ]
       },
       "ty": "left-comment"
     },
     {
       "slice": "nested",
       "span": {
-        "start": 4,
-        "end": 10
+        "start": [
+          0,
+          4
+        ],
+        "end": [
+          0,
+          10
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 10,
-        "end": 11
+        "start": [
+          0,
+          10
+        ],
+        "end": [
+          0,
+          11
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "blocks",
       "span": {
-        "start": 11,
-        "end": 17
+        "start": [
+          0,
+          11
+        ],
+        "end": [
+          0,
+          17
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 17,
-        "end": 18
+        "start": [
+          0,
+          17
+        ],
+        "end": [
+          0,
+          18
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "to",
       "span": {
-        "start": 18,
-        "end": 20
+        "start": [
+          0,
+          18
+        ],
+        "end": [
+          0,
+          20
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 20,
-        "end": 21
+        "start": [
+          0,
+          20
+        ],
+        "end": [
+          0,
+          21
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "check",
       "span": {
-        "start": 21,
-        "end": 26
+        "start": [
+          0,
+          21
+        ],
+        "end": [
+          0,
+          26
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 26,
-        "end": 27
+        "start": [
+          0,
+          26
+        ],
+        "end": [
+          0,
+          27
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "code",
       "span": {
-        "start": 27,
-        "end": 31
+        "start": [
+          0,
+          27
+        ],
+        "end": [
+          0,
+          31
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 31,
-        "end": 32
+        "start": [
+          0,
+          31
+        ],
+        "end": [
+          0,
+          32
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "collpasiablity",
       "span": {
-        "start": 32,
-        "end": 46
+        "start": [
+          0,
+          32
+        ],
+        "end": [
+          0,
+          46
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "--]",
       "span": {
-        "start": 46,
-        "end": 49
+        "start": [
+          0,
+          46
+        ],
+        "end": [
+          0,
+          49
+        ]
       },
       "ty": "right-comment"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 51,
-        "end": 53
+        "start": [
+          2,
+          0
+        ],
+        "end": [
+          2,
+          2
+        ]
       },
       "ty": "left-block"
     },
     {
       "slice": "div",
       "span": {
-        "start": 53,
-        "end": 56
+        "start": [
+          2,
+          2
+        ],
+        "end": [
+          2,
+          5
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 56,
-        "end": 57
+        "start": [
+          2,
+          5
+        ],
+        "end": [
+          2,
+          6
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "class",
       "span": {
-        "start": 57,
-        "end": 62
+        "start": [
+          2,
+          6
+        ],
+        "end": [
+          2,
+          11
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 62,
-        "end": 63
+        "start": [
+          2,
+          11
+        ],
+        "end": [
+          2,
+          12
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "=",
       "span": {
-        "start": 63,
-        "end": 64
+        "start": [
+          2,
+          12
+        ],
+        "end": [
+          2,
+          13
+        ]
       },
       "ty": "equals"
     },
     {
       "slice": " ",
       "span": {
-        "start": 64,
-        "end": 65
+        "start": [
+          2,
+          13
+        ],
+        "end": [
+          2,
+          14
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "\"",
       "span": {
-        "start": 65,
-        "end": 66
+        "start": [
+          2,
+          14
+        ],
+        "end": [
+          2,
+          15
+        ]
       },
       "ty": "double-quote"
     },
     {
       "slice": "some",
       "span": {
-        "start": 66,
-        "end": 70
+        "start": [
+          2,
+          15
+        ],
+        "end": [
+          2,
+          19
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "\"",
       "span": {
-        "start": 70,
-        "end": 71
+        "start": [
+          2,
+          19
+        ],
+        "end": [
+          2,
+          20
+        ]
       },
       "ty": "double-quote"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 71,
-        "end": 73
+        "start": [
+          2,
+          20
+        ],
+        "end": [
+          2,
+          22
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "normal",
       "span": {
-        "start": 74,
-        "end": 80
+        "start": [
+          3,
+          0
+        ],
+        "end": [
+          3,
+          6
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 81,
-        "end": 84
+        "start": [
+          4,
+          0
+        ],
+        "end": [
+          4,
+          3
+        ]
       },
       "ty": "left-block-end"
     },
     {
       "slice": "div",
       "span": {
-        "start": 84,
-        "end": 87
+        "start": [
+          4,
+          3
+        ],
+        "end": [
+          4,
+          6
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 87,
-        "end": 89
+        "start": [
+          4,
+          6
+        ],
+        "end": [
+          4,
+          8
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 91,
-        "end": 93
+        "start": [
+          6,
+          0
+        ],
+        "end": [
+          6,
+          2
+        ]
       },
       "ty": "left-block"
     },
     {
       "slice": "collapsible",
       "span": {
-        "start": 93,
-        "end": 104
+        "start": [
+          6,
+          2
+        ],
+        "end": [
+          6,
+          13
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 104,
-        "end": 105
+        "start": [
+          6,
+          13
+        ],
+        "end": [
+          6,
+          14
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "show",
       "span": {
-        "start": 105,
-        "end": 109
+        "start": [
+          6,
+          14
+        ],
+        "end": [
+          6,
+          18
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "=",
       "span": {
-        "start": 109,
-        "end": 110
+        "start": [
+          6,
+          18
+        ],
+        "end": [
+          6,
+          19
+        ]
       },
       "ty": "equals"
     },
     {
       "slice": "\"",
       "span": {
-        "start": 110,
-        "end": 111
+        "start": [
+          6,
+          19
+        ],
+        "end": [
+          6,
+          20
+        ]
       },
       "ty": "double-quote"
     },
     {
       "slice": "sss",
       "span": {
-        "start": 111,
-        "end": 114
+        "start": [
+          6,
+          20
+        ],
+        "end": [
+          6,
+          23
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "\"",
       "span": {
-        "start": 114,
-        "end": 115
+        "start": [
+          6,
+          23
+        ],
+        "end": [
+          6,
+          24
+        ]
       },
       "ty": "double-quote"
     },
     {
       "slice": " ",
       "span": {
-        "start": 115,
-        "end": 116
+        "start": [
+          6,
+          24
+        ],
+        "end": [
+          6,
+          25
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "hide",
       "span": {
-        "start": 116,
-        "end": 120
+        "start": [
+          6,
+          25
+        ],
+        "end": [
+          6,
+          29
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "=",
       "span": {
-        "start": 120,
-        "end": 121
+        "start": [
+          6,
+          29
+        ],
+        "end": [
+          6,
+          30
+        ]
       },
       "ty": "equals"
     },
     {
       "slice": "\"",
       "span": {
-        "start": 121,
-        "end": 122
+        "start": [
+          6,
+          30
+        ],
+        "end": [
+          6,
+          31
+        ]
       },
       "ty": "double-quote"
     },
     {
       "slice": "sss",
       "span": {
-        "start": 122,
-        "end": 125
+        "start": [
+          6,
+          31
+        ],
+        "end": [
+          6,
+          34
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "\"",
       "span": {
-        "start": 125,
-        "end": 126
+        "start": [
+          6,
+          34
+        ],
+        "end": [
+          6,
+          35
+        ]
       },
       "ty": "double-quote"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 126,
-        "end": 128
+        "start": [
+          6,
+          35
+        ],
+        "end": [
+          6,
+          37
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark1",
       "span": {
-        "start": 129,
-        "end": 138
+        "start": [
+          7,
+          0
+        ],
+        "end": [
+          7,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 139,
-        "end": 141
+        "start": [
+          8,
+          0
+        ],
+        "end": [
+          8,
+          2
+        ]
       },
       "ty": "left-block"
     },
     {
       "slice": "<",
       "span": {
-        "start": 141,
-        "end": 142
+        "start": [
+          8,
+          2
+        ],
+        "end": [
+          8,
+          3
+        ]
       },
       "ty": "other"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 142,
-        "end": 144
+        "start": [
+          8,
+          3
+        ],
+        "end": [
+          8,
+          5
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark2",
       "span": {
-        "start": 145,
-        "end": 154
+        "start": [
+          9,
+          0
+        ],
+        "end": [
+          9,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 155,
-        "end": 157
+        "start": [
+          10,
+          0
+        ],
+        "end": [
+          10,
+          2
+        ]
       },
       "ty": "left-block"
     },
     {
       "slice": ">",
       "span": {
-        "start": 157,
-        "end": 158
+        "start": [
+          10,
+          2
+        ],
+        "end": [
+          10,
+          3
+        ]
       },
       "ty": "quote"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 158,
-        "end": 160
+        "start": [
+          10,
+          3
+        ],
+        "end": [
+          10,
+          5
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark3",
       "span": {
-        "start": 161,
-        "end": 170
+        "start": [
+          11,
+          0
+        ],
+        "end": [
+          11,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 171,
-        "end": 173
+        "start": [
+          12,
+          0
+        ],
+        "end": [
+          12,
+          2
+        ]
       },
       "ty": "left-block"
     },
     {
       "slice": "=",
       "span": {
-        "start": 173,
-        "end": 174
+        "start": [
+          12,
+          2
+        ],
+        "end": [
+          12,
+          3
+        ]
       },
       "ty": "equals"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 174,
-        "end": 176
+        "start": [
+          12,
+          3
+        ],
+        "end": [
+          12,
+          5
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark4",
       "span": {
-        "start": 177,
-        "end": 186
+        "start": [
+          13,
+          0
+        ],
+        "end": [
+          13,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "fff",
       "span": {
-        "start": 187,
-        "end": 190
+        "start": [
+          14,
+          0
+        ],
+        "end": [
+          14,
+          3
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 190,
-        "end": 192
+        "start": [
+          14,
+          3
+        ],
+        "end": [
+          14,
+          5
+        ]
       },
       "ty": "left-block"
     },
     {
       "slice": "footnote",
       "span": {
-        "start": 192,
-        "end": 200
+        "start": [
+          14,
+          5
+        ],
+        "end": [
+          14,
+          13
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 200,
-        "end": 202
+        "start": [
+          14,
+          13
+        ],
+        "end": [
+          14,
+          15
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "some",
       "span": {
-        "start": 202,
-        "end": 206
+        "start": [
+          14,
+          15
+        ],
+        "end": [
+          14,
+          19
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 206,
-        "end": 207
+        "start": [
+          14,
+          19
+        ],
+        "end": [
+          14,
+          20
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "footnote",
       "span": {
-        "start": 207,
-        "end": 215
+        "start": [
+          14,
+          20
+        ],
+        "end": [
+          14,
+          28
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 215,
-        "end": 216
+        "start": [
+          14,
+          28
+        ],
+        "end": [
+          14,
+          29
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "content",
       "span": {
-        "start": 216,
-        "end": 223
+        "start": [
+          14,
+          29
+        ],
+        "end": [
+          14,
+          36
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 223,
-        "end": 226
+        "start": [
+          14,
+          36
+        ],
+        "end": [
+          14,
+          39
+        ]
       },
       "ty": "left-block-end"
     },
     {
       "slice": "footnote",
       "span": {
-        "start": 226,
-        "end": 234
+        "start": [
+          14,
+          39
+        ],
+        "end": [
+          14,
+          47
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 234,
-        "end": 236
+        "start": [
+          14,
+          47
+        ],
+        "end": [
+          14,
+          49
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "fff",
       "span": {
-        "start": 236,
-        "end": 239
+        "start": [
+          14,
+          49
+        ],
+        "end": [
+          14,
+          52
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "linemark4",
       "span": {
-        "start": 240,
-        "end": 249
+        "start": [
+          15,
+          0
+        ],
+        "end": [
+          15,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[",
       "span": {
-        "start": 250,
-        "end": 252
+        "start": [
+          16,
+          0
+        ],
+        "end": [
+          16,
+          2
+        ]
       },
       "ty": "left-block"
     },
     {
       "slice": "note",
       "span": {
-        "start": 252,
-        "end": 256
+        "start": [
+          16,
+          2
+        ],
+        "end": [
+          16,
+          6
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 256,
-        "end": 258
+        "start": [
+          16,
+          6
+        ],
+        "end": [
+          16,
+          8
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark5",
       "span": {
-        "start": 259,
-        "end": 268
+        "start": [
+          17,
+          0
+        ],
+        "end": [
+          17,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "some",
       "span": {
-        "start": 269,
-        "end": 273
+        "start": [
+          18,
+          0
+        ],
+        "end": [
+          18,
+          4
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": " ",
       "span": {
-        "start": 273,
-        "end": 274
+        "start": [
+          18,
+          4
+        ],
+        "end": [
+          18,
+          5
+        ]
       },
       "ty": "whitespace"
     },
     {
       "slice": "note",
       "span": {
-        "start": 274,
-        "end": 278
+        "start": [
+          18,
+          5
+        ],
+        "end": [
+          18,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "linemark5",
       "span": {
-        "start": 279,
-        "end": 288
+        "start": [
+          19,
+          0
+        ],
+        "end": [
+          19,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 289,
-        "end": 292
+        "start": [
+          20,
+          0
+        ],
+        "end": [
+          20,
+          3
+        ]
       },
       "ty": "left-block-end"
     },
     {
       "slice": "note",
       "span": {
-        "start": 292,
-        "end": 296
+        "start": [
+          20,
+          3
+        ],
+        "end": [
+          20,
+          7
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 296,
-        "end": 298
+        "start": [
+          20,
+          7
+        ],
+        "end": [
+          20,
+          9
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark4",
       "span": {
-        "start": 299,
-        "end": 308
+        "start": [
+          21,
+          0
+        ],
+        "end": [
+          21,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 309,
-        "end": 312
+        "start": [
+          22,
+          0
+        ],
+        "end": [
+          22,
+          3
+        ]
       },
       "ty": "left-block-end"
     },
     {
       "slice": "=",
       "span": {
-        "start": 312,
-        "end": 313
+        "start": [
+          22,
+          3
+        ],
+        "end": [
+          22,
+          4
+        ]
       },
       "ty": "equals"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 313,
-        "end": 315
+        "start": [
+          22,
+          4
+        ],
+        "end": [
+          22,
+          6
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark3",
       "span": {
-        "start": 316,
-        "end": 325
+        "start": [
+          23,
+          0
+        ],
+        "end": [
+          23,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 326,
-        "end": 329
+        "start": [
+          24,
+          0
+        ],
+        "end": [
+          24,
+          3
+        ]
       },
       "ty": "left-block-end"
     },
     {
       "slice": ">",
       "span": {
-        "start": 329,
-        "end": 330
+        "start": [
+          24,
+          3
+        ],
+        "end": [
+          24,
+          4
+        ]
       },
       "ty": "quote"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 330,
-        "end": 332
+        "start": [
+          24,
+          4
+        ],
+        "end": [
+          24,
+          6
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark2",
       "span": {
-        "start": 333,
-        "end": 342
+        "start": [
+          25,
+          0
+        ],
+        "end": [
+          25,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 343,
-        "end": 346
+        "start": [
+          26,
+          0
+        ],
+        "end": [
+          26,
+          3
+        ]
       },
       "ty": "left-block-end"
     },
     {
       "slice": "<",
       "span": {
-        "start": 346,
-        "end": 347
+        "start": [
+          26,
+          3
+        ],
+        "end": [
+          26,
+          4
+        ]
       },
       "ty": "other"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 347,
-        "end": 349
+        "start": [
+          26,
+          4
+        ],
+        "end": [
+          26,
+          6
+        ]
       },
       "ty": "right-block"
     },
     {
       "slice": "linemark1",
       "span": {
-        "start": 350,
-        "end": 359
+        "start": [
+          27,
+          0
+        ],
+        "end": [
+          27,
+          9
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "[[/",
       "span": {
-        "start": 360,
-        "end": 363
+        "start": [
+          28,
+          0
+        ],
+        "end": [
+          28,
+          3
+        ]
       },
       "ty": "left-block-end"
     },
     {
       "slice": "collapsible",
       "span": {
-        "start": 363,
-        "end": 374
+        "start": [
+          28,
+          3
+        ],
+        "end": [
+          28,
+          14
+        ]
       },
       "ty": "identifier"
     },
     {
       "slice": "]]",
       "span": {
-        "start": 374,
-        "end": 376
+        "start": [
+          28,
+          14
+        ],
+        "end": [
+          28,
+          16
+        ]
       },
       "ty": "right-block"
     }

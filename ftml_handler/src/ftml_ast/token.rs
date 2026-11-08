@@ -14,13 +14,10 @@ pub struct Token {
 }
 
 impl Token {
-    pub fn from_extracted_tokens(extracted_token: ExtractedToken) -> Self {
+    pub fn from_extracted_tokens_with_span(extracted_token: ExtractedToken, span: Span) -> Self {
         Self {
             slice: extracted_token.slice.to_string(),
-            span: Span {
-                start: extracted_token.span.start,
-                end: extracted_token.span.end,
-            },
+            span,
             ty: extracted_token.token,
         }
     }

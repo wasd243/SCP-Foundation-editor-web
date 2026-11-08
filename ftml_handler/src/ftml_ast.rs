@@ -1,17 +1,34 @@
 mod token;
 
-use ftml::parsing::ExtractedToken;
-use ftml::parsing::ParseErrorKind;
+use ftml::parsing::{ExtractedToken, ParseErrorKind};
 use ftml::prelude::*;
+use line_index::LineCol;
+use line_index::{LineIndex, TextSize, WideEncoding};
 use serde::{Deserialize, Serialize};
+use std::ops::Range;
 use std::sync::LazyLock;
 
 pub use token::Token;
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct Span {
-    pub start: usize,
-    pub end: usize,
+    pub start: (u32, u32),
+    pub end: (u32, u32),
+}
+
+/// Convert `Range<usize>` to `Span`.
+fn from_index_to_span(index: &LineIndex, range: Range<usize>) -> Option<Span> {
+    Some(Span {
+        start: from_utf8_to_pos(index, range.start)?,
+        end: from_utf8_to_pos(index, range.end)?,
+    })
+}
+
+/// Convert utf-8 to line col positions.
+fn from_utf8_to_pos(index: &LineIndex, byte_off: usize) -> Option<(u32, u32)> {
+    let line_col: LineCol = index.try_line_col(TextSize::new(byte_off as u32))?;
+    let wide = index.to_wide(WideEncoding::Utf16, line_col)?;
+    Some((wide.line, wide.col))
 }
 
 #[derive(Serialize, Debug, Default)]
@@ -69,10 +86,14 @@ impl From<&str> for ParseToken {
     /// Parse new token from wikitext
     fn from(src: &str) -> Self {
         let wikitext = src.to_string();
-        let (tokens, diagnostics) = get_ftml_token(&wikitext);
+        let index = LineIndex::new(&wikitext);
+        let (tokens, diagnostics) = get_ftml_token(&wikitext, &index);
         let tokens = tokens
             .into_iter()
-            .map(|token| Token::from_extracted_tokens(token))
+            .filter_map(|t| {
+                let span = from_index_to_span(&index, t.span.clone())?;
+                Some(Token::from_extracted_tokens_with_span(t, span))
+            })
             .collect();
 
         Self {
@@ -99,67 +120,42 @@ static DEFAULT_PAGE_INFO: LazyLock<PageInfo> = LazyLock::new(|| PageInfo {
 /// Tokenize without preprocessing, so spans match the editor text.
 /// Spans are converted from UTF-8 byte offsets to UTF-16 offsets.
 /// Collect warnings from ftml to highlight them in editor.
-fn get_ftml_token(wikitext: &str) -> (Vec<ExtractedToken<'_>>, Vec<Diagnostic>) {
+fn get_ftml_token<'index>(
+    wikitext: &'index str,
+    index: &LineIndex,
+) -> (Vec<ExtractedToken<'index>>, Vec<Diagnostic>) {
     // Utf16IndexMap has no entries for empty text, get_index would panic.
     if wikitext.is_empty() {
         return (vec![], vec![]);
     }
 
-    let map = ftml::Utf16IndexMap::new(wikitext);
-
     let tokens = tokenize(wikitext);
 
-    let parse_result = parse(&tokens, &DEFAULT_PAGE_INFO, &DEFAULT_SETTINGS);
-
-    let (_, warnings) = parse_result.into();
+    let (_, warnings) = parse(&tokens, &DEFAULT_PAGE_INFO, &DEFAULT_SETTINGS).into();
 
     let diagnostics: Vec<Diagnostic> = warnings
         .iter()
-        .map(|warning| {
-            let sp = warning.span();
-            Diagnostic {
-                msg: format!("{}: {}", warning.kind().name(), warning.rule()),
-                ty: warning.kind(),
-                span: Span {
-                    start: map.get_index(sp.start),
-                    end: map.get_index(sp.end),
-                },
-            }
+        .filter_map(|w| {
+            Some(Diagnostic {
+                msg: format!("{}: {}", w.kind().name(), w.rule()),
+                ty: w.kind(),
+                span: from_index_to_span(index, w.span())?,
+            })
         })
         .collect();
 
-    let tokens: Vec<ExtractedToken<'_>> = tokens.into();
-    let tokens: Vec<ExtractedToken<'_>> = tokens
-        .iter()
-        .map(|token| token.to_utf16_indices(&map))
-        .collect::<Vec<ExtractedToken>>();
-
-    (tokens, diagnostics)
+    (Vec::from(tokens), diagnostics)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    const FTML1: &str = r#"[[div id="some-id"]]
-some context
-[[/div]]"#;
-
-    const FTML2: &str = r#"[[div class="div-without-close-tag]]
-some context
-[!--no close tag here, should warning--]"#;
-
     #[test]
-    fn dbg_token1() {
-        let src = FTML1.to_string();
-        let tokens = get_ftml_token(&src);
-        dbg!(tokens);
-    }
-
-    #[test]
-    fn dbg_token2() {
-        let src = FTML2.to_string();
-        let tokens = get_ftml_token(&src);
-        dbg!(tokens);
+    fn line_col_at_eof() {
+        let src = "中文abc\n中文";
+        let index = LineIndex::new(src);
+        let pos = from_utf8_to_pos(&index, src.len()).unwrap();
+        assert_eq!(pos, (1, 2))
     }
 }
