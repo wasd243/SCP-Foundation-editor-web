@@ -16,6 +16,7 @@ pub(super) struct InlineBlocks<'lsp> {
 }
 
 impl<'lsp> InlineBlocks<'lsp> {
+    #[must_use]
     pub(super) fn from_parse_token_slice(
         tokens: &'lsp [Token],
         diagnostics: &'lsp [Diagnostic],

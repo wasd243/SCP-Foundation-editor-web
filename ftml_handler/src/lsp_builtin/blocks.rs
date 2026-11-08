@@ -32,6 +32,7 @@ pub(super) struct Blocks<'lsp> {
 }
 
 impl<'lsp> Blocks<'lsp> {
+    #[must_use]
     pub(super) fn from_parse_token(
         parse_token: &'lsp [Token],
         diagnostic: &'lsp [Diagnostic],

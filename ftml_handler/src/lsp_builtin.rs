@@ -41,6 +41,7 @@ pub struct LspBuiltIn<'lsp> {
 }
 
 impl<'lsp> LspBuiltIn<'lsp> {
+    #[must_use]
     pub fn visitor(parse_token: &'lsp ParseToken) -> Self {
         let mut tree = Vec::new();
         let tokens = &parse_token.tokens;

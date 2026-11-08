@@ -19,6 +19,7 @@ pub(super) struct InlineMarks<'lsp> {
 }
 
 impl<'lsp> InlineMarks<'lsp> {
+    #[must_use]
     pub(super) fn from_parse_token_slice(
         tokens_slice: &'lsp [Token],
         diagnostics: &'lsp [Diagnostic],
