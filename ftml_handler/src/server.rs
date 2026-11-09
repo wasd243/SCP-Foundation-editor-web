@@ -4,7 +4,8 @@ use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
     DidChangeTextDocumentParams, DidCloseTextDocumentParams, DidOpenTextDocumentParams,
-    PublishDiagnosticsParams, Uri,
+    FoldingRangeProviderCapability, PublishDiagnosticsParams, ServerCapabilities,
+    TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
     notification::{
         DidChangeTextDocument, DidCloseTextDocument, DidOpenTextDocument, Notification as _,
         PublishDiagnostics,
@@ -12,8 +13,16 @@ use lsp_types::{
     request::{FoldingRangeRequest, Request as _},
 };
 use std::collections::HashMap;
+use std::sync::LazyLock;
 
 use crate::parse_token;
+
+pub static SERVER_CAPABILITIES: LazyLock<ServerCapabilities> =
+    LazyLock::new(|| ServerCapabilities {
+        text_document_sync: Some(TextDocumentSyncCapability::Kind(TextDocumentSyncKind::FULL)),
+        folding_range_provider: Some(FoldingRangeProviderCapability::Simple(true)),
+        ..ServerCapabilities::default()
+    });
 
 pub type Buffers = HashMap<Uri, String>;
 
@@ -28,7 +37,7 @@ pub fn main_loop(connection: Connection) -> Result<()> {
                 let response = match_request(req, &buffers);
                 connection.sender.send(Message::Response(response))?;
             }
-            Message::Notification(n) => match_notifacations(&connection, n, &mut buffers)?,
+            Message::Notification(n) => match_notifications(&connection, n, &mut buffers)?,
             Message::Response(_) => {}
         }
     }
@@ -48,7 +57,7 @@ fn match_request(req: Request, _buffers: &Buffers) -> Response {
     }
 }
 
-fn match_notifacations(
+fn match_notifications(
     connection: &Connection,
     n: Notification,
     buffers: &mut Buffers,

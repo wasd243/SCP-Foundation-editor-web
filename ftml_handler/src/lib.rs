@@ -6,8 +6,14 @@ pub mod lsp_builtin;
 pub mod server;
 mod utils;
 
-use crate::{ftml_ast::ParseToken, lsp_builtin::LspBuiltIn};
+use crate::{
+    ftml_ast::ParseToken,
+    lsp_builtin::LspBuiltIn,
+    server::{SERVER_CAPABILITIES, main_loop},
+};
 
+use anyhow::{Ok, Result};
+use lsp_server::Connection;
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
@@ -47,4 +53,14 @@ pub fn parse_token(src: &str) -> ParseToken {
     tokens.clean();
     tokens.mute_ftml_fps();
     tokens
+}
+
+/// Build the LSP server.
+pub fn build_server() -> Result<()> {
+    let (connection, io_threads) = Connection::stdio();
+    connection.initialize(serde_json::to_value(&*SERVER_CAPABILITIES)?)?;
+
+    main_loop(connection)?;
+    io_threads.join()?;
+    Ok(())
 }
