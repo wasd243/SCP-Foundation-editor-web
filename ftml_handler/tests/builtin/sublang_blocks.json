@@ -172,7 +172,7 @@
                 13
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           },
           {
             "span": {
@@ -185,7 +185,7 @@
                 16
               ]
             },
-            "ty": "value"
+            "ty": "string"
           },
           {
             "span": {
@@ -198,7 +198,7 @@
                 17
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           }
         ],
         "block-content": [
@@ -359,8 +359,7 @@
                   }
                 }
               ],
-              "block-ty": "block",
-              "block-sub-lang-span": null
+              "block-ty": "block"
             }
           },
           {
@@ -380,8 +379,7 @@
             }
           }
         ],
-        "block-ty": "block",
-        "block-sub-lang-span": null
+        "block-ty": "block"
       }
     },
     {

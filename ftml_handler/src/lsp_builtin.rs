@@ -141,9 +141,9 @@ enum ParamKeys {
     Pipe,
     /// =
     Equals,
-    /// ""
-    Quote,
     /// "string inside quote"
+    String,
+    /// Value after `=` equals
     Value,
     /// :
     Colon,
@@ -187,6 +187,7 @@ impl Param {
 
             ParamKind::Expr => {
                 let mut is_in_quote = false;
+                let mut after_equals = false;
                 tokens
                     .into_iter()
                     .enumerate()
@@ -195,12 +196,22 @@ impl Param {
                             (0, _) => ParamKeys::BlockName,
                             (_, TokenTy::DoubleQuote) => {
                                 is_in_quote = !is_in_quote;
-                                ParamKeys::Quote
+                                ParamKeys::String
                             }
-                            _ if is_in_quote => ParamKeys::Value,
-                            (_, TokenTy::Whitespace) => ParamKeys::Whitespace,
-                            (_, TokenTy::Pipe) => ParamKeys::Pipe,
-                            (_, TokenTy::Equals) => ParamKeys::Equals,
+                            _ if is_in_quote => ParamKeys::String,
+                            (_, TokenTy::Whitespace) => {
+                                after_equals = false;
+                                ParamKeys::Whitespace
+                            }
+                            (_, TokenTy::Pipe) => {
+                                after_equals = false;
+                                ParamKeys::Pipe
+                            }
+                            (_, TokenTy::Equals) => {
+                                after_equals = true;
+                                ParamKeys::Equals
+                            }
+                            _ if after_equals => ParamKeys::Value,
                             (_, TokenTy::Colon) => ParamKeys::Colon,
                             _ => ParamKeys::BlockAttr,
                         };

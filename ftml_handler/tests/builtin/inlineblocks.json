@@ -167,7 +167,7 @@
                 25
               ]
             },
-            "ty": "block-attr"
+            "ty": "value"
           },
           {
             "span": {
@@ -219,7 +219,7 @@
                 12
               ]
             },
-            "ty": "block-attr"
+            "ty": "value"
           },
           {
             "span": {
@@ -271,7 +271,7 @@
                 12
               ]
             },
-            "ty": "block-attr"
+            "ty": "value"
           },
           {
             "span": {
@@ -323,7 +323,7 @@
                 13
               ]
             },
-            "ty": "block-attr"
+            "ty": "value"
           }
         ]
       }
@@ -446,7 +446,7 @@
                 39
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           },
           {
             "span": {
@@ -459,7 +459,7 @@
                 44
               ]
             },
-            "ty": "value"
+            "ty": "string"
           },
           {
             "span": {
@@ -472,7 +472,7 @@
                 45
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           }
         ]
       }

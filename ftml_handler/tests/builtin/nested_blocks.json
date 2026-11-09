@@ -118,7 +118,7 @@
                 15
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           },
           {
             "span": {
@@ -131,7 +131,7 @@
                 19
               ]
             },
-            "ty": "value"
+            "ty": "string"
           },
           {
             "span": {
@@ -144,7 +144,7 @@
                 20
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           }
         ],
         "block-content": [
@@ -165,8 +165,7 @@
             }
           }
         ],
-        "block-ty": "block",
-        "block-sub-lang-span": null
+        "block-ty": "block"
       }
     },
     {
@@ -245,7 +244,7 @@
                 20
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           },
           {
             "span": {
@@ -258,7 +257,7 @@
                 23
               ]
             },
-            "ty": "value"
+            "ty": "string"
           },
           {
             "span": {
@@ -271,7 +270,7 @@
                 24
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           },
           {
             "span": {
@@ -323,7 +322,7 @@
                 31
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           },
           {
             "span": {
@@ -336,7 +335,7 @@
                 34
               ]
             },
-            "ty": "value"
+            "ty": "string"
           },
           {
             "span": {
@@ -349,7 +348,7 @@
                 35
               ]
             },
-            "ty": "quote"
+            "ty": "string"
           }
         ],
         "block-content": [
@@ -626,8 +625,7 @@
                                     }
                                   }
                                 ],
-                                "block-ty": "block",
-                                "block-sub-lang-span": null
+                                "block-ty": "block"
                               }
                             },
                             {
@@ -771,8 +769,7 @@
                                     }
                                   }
                                 ],
-                                "block-ty": "block",
-                                "block-sub-lang-span": null
+                                "block-ty": "block"
                               }
                             },
                             {
@@ -792,8 +789,7 @@
                               }
                             }
                           ],
-                          "block-ty": "block",
-                          "block-sub-lang-span": null
+                          "block-ty": "block"
                         }
                       },
                       {
@@ -813,8 +809,7 @@
                         }
                       }
                     ],
-                    "block-ty": "block",
-                    "block-sub-lang-span": null
+                    "block-ty": "block"
                   }
                 },
                 {
@@ -834,8 +829,7 @@
                   }
                 }
               ],
-              "block-ty": "block",
-              "block-sub-lang-span": null
+              "block-ty": "block"
             }
           },
           {
@@ -855,8 +849,7 @@
             }
           }
         ],
-        "block-ty": "block",
-        "block-sub-lang-span": null
+        "block-ty": "block"
       }
     }
   ],

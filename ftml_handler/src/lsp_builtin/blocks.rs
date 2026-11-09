@@ -26,6 +26,7 @@ pub(super) struct Blocks<'lsp> {
     block_ty: BlockKind,
     /// Only use in sub languages BlockKind, otherwise stay as `None`.
     /// An Optional Range which only record line numbers.
+    #[serde(skip_serializing_if = "Option::is_none")]
     block_sub_lang_span: Option<Range<u32>>,
     #[serde(skip)]
     used_index: usize,
