@@ -193,22 +193,6 @@
     },
     {
       "token": {
-        "slice": " ",
-        "span": {
-          "start": [
-            14,
-            2
-          ],
-          "end": [
-            14,
-            3
-          ]
-        },
-        "ty": "whitespace"
-      }
-    },
-    {
-      "token": {
         "slice": "unclosed",
         "span": {
           "start": [
@@ -237,22 +221,6 @@
           ]
         },
         "ty": "identifier"
-      }
-    },
-    {
-      "token": {
-        "slice": " ",
-        "span": {
-          "start": [
-            16,
-            6
-          ],
-          "end": [
-            16,
-            7
-          ]
-        },
-        "ty": "whitespace"
       }
     },
     {

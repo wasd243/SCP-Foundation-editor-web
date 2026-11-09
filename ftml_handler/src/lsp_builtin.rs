@@ -62,6 +62,12 @@ impl<'lsp> LspBuiltIn<'lsp> {
             diagnostics: &parse_token.diagnostics,
         }
     }
+
+    /// Remove unnecessary `Whitespace`.
+    pub fn sanitize_whitespace(&mut self) {
+        self.tree
+            .retain(|node| !matches!(node, BuiltIn::Token(t) if t.ty == TokenTy::Whitespace));
+    }
 }
 
 /// A separate visitor function.

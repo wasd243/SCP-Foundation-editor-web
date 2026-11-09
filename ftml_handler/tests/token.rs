@@ -26,7 +26,9 @@ macro_rules! bless {
                 token.mute_ftml_fps();
 
                 if $need_visitor {
-                    let token = LspBuiltIn::visitor(&token);
+                    let mut token = LspBuiltIn::visitor(&token);
+                    token.sanitize_whitespace();
+
                     let token = to_string_pretty(&token).unwrap();
 
                     let stem = path.file_stem().unwrap().to_string_lossy();
@@ -73,7 +75,8 @@ fn check_builtin() {
             token.clean();
             token.mute_ftml_fps();
 
-            let token = LspBuiltIn::visitor(&token);
+            let mut token = LspBuiltIn::visitor(&token);
+            token.sanitize_whitespace();
 
             let token = to_string_pretty(&token).unwrap();
 

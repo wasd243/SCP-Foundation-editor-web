@@ -17,7 +17,8 @@ pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
     tokens.clean();
     tokens.mute_ftml_fps();
 
-    let lsp_built_in = LspBuiltIn::visitor(&tokens);
+    let mut lsp_built_in = LspBuiltIn::visitor(&tokens);
+    lsp_built_in.sanitize_whitespace();
 
     let serializer = serde_wasm_bindgen::Serializer::new().serialize_maps_as_objects(true);
     lsp_built_in
