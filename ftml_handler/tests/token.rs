@@ -1,8 +1,9 @@
 use ftml_analyzer::ftml_ast::ParseToken;
 use ftml_analyzer::lsp_builtin::LspBuiltIn;
+use ftml_analyzer::parse_token;
 use serde_json::to_string_pretty;
 use std::fs;
-use std::path::PathBuf;
+use std::path::Path;
 
 const BLESS: bool = cfg!(feature = "bless");
 const FTML: &str = "tests/ftmls/";
@@ -21,9 +22,7 @@ fn test(input_path: &str, output_path: &str, need_visitor: bool, is_bless: bool)
 
         let content = fs::read_to_string(&path).unwrap();
 
-        let mut token = ParseToken::from(content.as_str());
-        token.clean();
-        token.mute_ftml_fps();
+        let token = parse_token(&content);
 
         let (out_path, json) = get_path_and_token(output_path, &path, &token, need_visitor);
 
@@ -38,7 +37,7 @@ fn test(input_path: &str, output_path: &str, need_visitor: bool, is_bless: bool)
 
 fn get_path_and_token(
     output_path: &str,
-    file_path: &PathBuf,
+    file_path: &Path,
     parse_token: &ParseToken,
     need_visitor: bool,
 ) -> (String, String) {
