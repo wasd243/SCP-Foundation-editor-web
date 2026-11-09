@@ -7,116 +7,76 @@ use std::path::PathBuf;
 const BLESS: bool = cfg!(feature = "bless");
 const FTML: &str = "tests/ftmls/";
 
-macro_rules! bless {
-    ($input_path:expr, $output_path:expr, $need_visitor:expr) => {
-        if !BLESS {
-            return;
+fn test(input_path: &str, output_path: &str, need_visitor: bool, is_bless: bool) {
+    // bless tests only run with `--features bless`, check tests only run without it.
+    if is_bless != BLESS {
+        return;
+    }
+
+    for entry in fs::read_dir(input_path).unwrap() {
+        let path = entry.unwrap().path();
+        if !path.is_file() {
+            continue;
         }
 
-        let output_dir = $output_path;
+        let content = fs::read_to_string(&path).unwrap();
 
-        for entry in fs::read_dir(PathBuf::from($input_path)).unwrap() {
-            let entry = entry.unwrap();
-            let path = entry.path();
-            if path.is_file() {
-                let content = fs::read_to_string(&path).unwrap();
+        let mut token = ParseToken::from(content.as_str());
+        token.clean();
+        token.mute_ftml_fps();
 
-                let mut token = ParseToken::from(content.as_str());
-                token.clean();
-                token.mute_ftml_fps();
+        let (out_path, json) = get_path_and_token(output_path, &path, &token, need_visitor);
 
-                if $need_visitor {
-                    let mut token = LspBuiltIn::visitor(&token);
-                    token.sanitize_whitespace();
-
-                    let token = to_string_pretty(&token).unwrap();
-
-                    let stem = path.file_stem().unwrap().to_string_lossy();
-
-                    let path = format!("tests/{output_dir}/{stem}.json");
-                    fs::write(path, token).unwrap()
-                } else {
-                    let token = to_string_pretty(&token).unwrap();
-
-                    let stem = path.file_stem().unwrap().to_string_lossy();
-
-                    let path = format!("tests/{output_dir}/{stem}.json");
-                    fs::write(path, token).unwrap()
-                }
-            }
+        if is_bless {
+            fs::write(out_path, json).unwrap();
+        } else {
+            let expect = fs::read_to_string(out_path).unwrap();
+            assert_eq!(expect, json);
         }
-    };
+    }
+}
+
+fn get_path_and_token(
+    output_path: &str,
+    file_path: &PathBuf,
+    parse_token: &ParseToken,
+    need_visitor: bool,
+) -> (String, String) {
+    if need_visitor {
+        let mut token = LspBuiltIn::visitor(parse_token);
+        token.sanitize_whitespace();
+
+        let token = to_string_pretty(&token).unwrap();
+
+        let stem = file_path.file_stem().unwrap().to_string_lossy();
+
+        let path = format!("tests/{output_path}/{stem}.json");
+
+        (path, token)
+    } else {
+        let token = to_string_pretty(parse_token).unwrap();
+        let stem = file_path.file_stem().unwrap().to_string_lossy();
+        let path = format!("tests/{output_path}/{stem}.json");
+        (path, token)
+    }
 }
 
 #[test]
 fn bless_builtin() {
-    bless!(FTML, "builtin", true);
+    test(FTML, "builtin", true, true);
 }
 
 #[test]
 fn bless_token() {
-    bless!(FTML, "tokens", false);
+    test(FTML, "tokens", false, true);
 }
 
 #[test]
 fn check_builtin() {
-    if BLESS {
-        return;
-    }
-
-    let path = PathBuf::from(FTML);
-    for entry in fs::read_dir(path).unwrap() {
-        let entry = entry.unwrap();
-        let path = entry.path();
-        if path.is_file() {
-            let content = fs::read_to_string(&path).unwrap();
-
-            let mut token = ParseToken::from(content.as_str());
-            token.clean();
-            token.mute_ftml_fps();
-
-            let mut token = LspBuiltIn::visitor(&token);
-            token.sanitize_whitespace();
-
-            let token = to_string_pretty(&token).unwrap();
-
-            let stem = path.file_stem().unwrap().to_string_lossy();
-
-            let path = format!("tests/builtin/{stem}.json");
-
-            let expect = fs::read_to_string(path).unwrap();
-
-            assert_eq!(expect, token);
-        }
-    }
+    test(FTML, "builtin", true, false);
 }
 
 #[test]
 fn check_token() {
-    if BLESS {
-        return;
-    }
-
-    let path = PathBuf::from(FTML);
-    for entry in fs::read_dir(path).unwrap() {
-        let entry = entry.unwrap();
-        let path = entry.path();
-        if path.is_file() {
-            let content = fs::read_to_string(&path).unwrap();
-
-            let mut token = ParseToken::from(content.as_str());
-            token.clean();
-            token.mute_ftml_fps();
-
-            let token = to_string_pretty(&token).unwrap();
-
-            let stem = path.file_stem().unwrap().to_string_lossy();
-
-            let path = format!("tests/tokens/{stem}.json");
-
-            let expect = fs::read_to_string(path).unwrap();
-
-            assert_eq!(expect, token);
-        }
-    }
+    test(FTML, "tokens", false, false);
 }
