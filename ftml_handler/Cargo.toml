@@ -12,6 +12,7 @@ crate-type = ["cdylib", "rlib"]
 bless = []
 
 [dependencies]
+anyhow = "1"
 ftml = "1.42"
 regex = "1.13"
 line-index = "0.1"
