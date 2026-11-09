@@ -1,8 +1,9 @@
 #![warn(clippy::all)]
+#![warn(unused_lifetimes)]
 
 pub mod ftml_ast;
-pub mod lsp;
 pub mod lsp_builtin;
+pub mod server;
 mod utils;
 
 use crate::{ftml_ast::ParseToken, lsp_builtin::LspBuiltIn};
