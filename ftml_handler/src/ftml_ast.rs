@@ -14,11 +14,16 @@ use ftml::parsing::{ExtractedToken, ParseErrorKind};
 use ftml::prelude::*;
 use line_index::LineCol;
 use line_index::{LineIndex, TextSize, WideEncoding};
+use lsp_types::{
+    Diagnostic as ServerDiagnostic, DiagnosticSeverity, Position, Range as ServerRange,
+};
 use serde::{Deserialize, Serialize};
 use std::ops::Range;
 use std::sync::LazyLock;
 
 pub use token::Token;
+
+const SOURCE: &str = "ftml-analyzer";
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, Copy)]
 pub struct Span {
@@ -89,6 +94,27 @@ impl ParseToken {
             idx += 1;
             keep
         });
+    }
+
+    /// Clone diagnostics to IDEs.
+    ///
+    /// TODO: implement different type of diagnostics' severities.
+    pub fn to_diagnostics(&self) -> Vec<ServerDiagnostic> {
+        let mut server_diagnostics = Vec::with_capacity(self.diagnostics.len());
+        for diag in &self.diagnostics {
+            let server_diagnostic = ServerDiagnostic {
+                range: ServerRange::new(
+                    Position::new(diag.span.start.0, diag.span.start.1),
+                    Position::new(diag.span.end.0, diag.span.end.1),
+                ),
+                severity: Some(DiagnosticSeverity::WARNING),
+                source: Some(SOURCE.to_string()),
+                message: diag.msg.clone(),
+                ..Default::default()
+            };
+            server_diagnostics.push(server_diagnostic);
+        }
+        server_diagnostics
     }
 }
 

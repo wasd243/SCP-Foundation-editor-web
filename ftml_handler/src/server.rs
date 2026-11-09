@@ -13,6 +13,8 @@ use lsp_types::{
 };
 use std::collections::HashMap;
 
+use crate::parse_token;
+
 pub type Buffers = HashMap<Uri, String>;
 
 pub fn main_loop(connection: Connection) -> Result<()> {
@@ -81,7 +83,10 @@ fn match_notifacations(
 fn push(connection: &Connection, buffers: &mut Buffers, uri: Uri) -> Result<()> {
     let diags = buffers
         .get(&uri)
-        .map(|text| /* ParseToken::from(text) -> lsp Diagnostics */ Vec::new())
+        .map(|src| {
+            let parse_token_diags = parse_token(src).to_diagnostics();
+            parse_token_diags
+        })
         .unwrap_or_default();
     manage_diagnostics(connection, uri, diags)
 }
