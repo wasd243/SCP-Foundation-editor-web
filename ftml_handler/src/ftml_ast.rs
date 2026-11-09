@@ -1,3 +1,13 @@
+//! # FTML AST
+//!
+//! This module handles ftml's tokenstream and parse errors.
+//! For the LSP, we only needs tokens and diagnostics, so the parse results are dropped.
+//!
+//! # Known Issues
+//! It's difficult to resolve and fetch `[[include]]` included pages, so ftml produce false
+//! postivies warnings on `[[include]]`, use `tokens.mute_ftml_fps()`
+//! to remove those false postivies.
+
 mod token;
 
 use ftml::parsing::{ExtractedToken, ParseErrorKind};

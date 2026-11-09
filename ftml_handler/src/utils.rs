@@ -1,3 +1,7 @@
+//! # Utils
+//!
+//! This module is build to providing util functions for `LSP BuiltIn`.
+
 use ftml::parsing::{ParseErrorKind, Token as TokenTy};
 
 use crate::ftml_ast::{Diagnostic, Token};

@@ -1,3 +1,8 @@
+//! # LSP BuiltIn
+//!
+//! This module is set for building AST with span.
+//! The AST is builtin only for frontend highlightings rather than parsing.
+
 mod blocks;
 mod inline_blocks;
 mod inline_marks;
