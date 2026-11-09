@@ -1,0 +1,10 @@
+[package]
+name = "lsp_driver"
+version = "0.1.0"
+edition = "2024"
+authors = ["wasd243"]
+publish = false
+
+[dependencies]
+anyhow = "1.0"
+ftml_analyzer = { path = "../ftml_analyzer" }
