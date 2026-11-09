@@ -47,7 +47,7 @@ pub fn main_loop(connection: Connection) -> Result<()> {
 fn match_request(req: Request, _buffers: &Buffers) -> Response {
     match req.method.as_str() {
         FoldingRangeRequest::METHOD => {
-            todo!("Extract params, build Vec<FoldingRange>")
+            Response::new_ok(req.id, Vec::<lsp_types::FoldingRange>::new())
         }
         _ => Response::new_err(
             req.id,

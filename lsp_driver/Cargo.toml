@@ -1,5 +1,5 @@
 [package]
-name = "lsp_driver"
+name = "ftml_analyzer_lsp"
 version = "0.1.0"
 edition = "2024"
 authors = ["wasd243"]
@@ -8,3 +8,9 @@ publish = false
 [dependencies]
 anyhow = "1.0"
 ftml_analyzer = { path = "../ftml_analyzer" }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
