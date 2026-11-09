@@ -83,10 +83,7 @@ fn match_notifacations(
 fn push(connection: &Connection, buffers: &mut Buffers, uri: Uri) -> Result<()> {
     let diags = buffers
         .get(&uri)
-        .map(|src| {
-            let parse_token_diags = parse_token(src).to_diagnostics();
-            parse_token_diags
-        })
+        .map(|src| parse_token(src).to_diagnostics())
         .unwrap_or_default();
     manage_diagnostics(connection, uri, diags)
 }
