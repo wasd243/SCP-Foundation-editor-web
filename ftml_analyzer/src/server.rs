@@ -1,5 +1,7 @@
 #![allow(clippy::mutable_key_type)]
 
+mod highlights;
+
 use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
