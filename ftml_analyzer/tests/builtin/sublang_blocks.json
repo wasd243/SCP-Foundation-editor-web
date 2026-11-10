@@ -58,6 +58,20 @@
         "block-sub-lang-span": {
           "start": 1,
           "end": 4
+        },
+        "close-tag": {
+          "slice": "module",
+          "span": {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              4,
+              9
+            ]
+          },
+          "ty": "identifier"
         }
       }
     },
@@ -93,6 +107,20 @@
         "block-sub-lang-span": {
           "start": 7,
           "end": 14
+        },
+        "close-tag": {
+          "slice": "html",
+          "span": {
+            "start": [
+              14,
+              3
+            ],
+            "end": [
+              14,
+              7
+            ]
+          },
+          "ty": "identifier"
         }
       }
     },
@@ -359,7 +387,21 @@
                   }
                 }
               ],
-              "block-ty": "block"
+              "block-ty": "block",
+              "close-tag": {
+                "slice": "footnote",
+                "span": {
+                  "start": [
+                    17,
+                    43
+                  ],
+                  "end": [
+                    17,
+                    51
+                  ]
+                },
+                "ty": "identifier"
+              }
             }
           },
           {
@@ -379,7 +421,21 @@
             }
           }
         ],
-        "block-ty": "block"
+        "block-ty": "block",
+        "close-tag": {
+          "slice": "div",
+          "span": {
+            "start": [
+              18,
+              3
+            ],
+            "end": [
+              18,
+              6
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {
@@ -430,6 +486,20 @@
         "block-sub-lang-span": {
           "start": 22,
           "end": 23
+        },
+        "close-tag": {
+          "slice": "html",
+          "span": {
+            "start": [
+              23,
+              3
+            ],
+            "end": [
+              23,
+              7
+            ]
+          },
+          "ty": "identifier"
         }
       }
     }

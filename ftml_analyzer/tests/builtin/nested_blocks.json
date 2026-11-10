@@ -165,7 +165,21 @@
             }
           }
         ],
-        "block-ty": "block"
+        "block-ty": "block",
+        "close-tag": {
+          "slice": "div",
+          "span": {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              4,
+              6
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {
@@ -625,7 +639,21 @@
                                     }
                                   }
                                 ],
-                                "block-ty": "block"
+                                "block-ty": "block",
+                                "close-tag": {
+                                  "slice": "footnote",
+                                  "span": {
+                                    "start": [
+                                      14,
+                                      39
+                                    ],
+                                    "end": [
+                                      14,
+                                      47
+                                    ]
+                                  },
+                                  "ty": "identifier"
+                                }
                               }
                             },
                             {
@@ -769,7 +797,21 @@
                                     }
                                   }
                                 ],
-                                "block-ty": "block"
+                                "block-ty": "block",
+                                "close-tag": {
+                                  "slice": "note",
+                                  "span": {
+                                    "start": [
+                                      20,
+                                      3
+                                    ],
+                                    "end": [
+                                      20,
+                                      7
+                                    ]
+                                  },
+                                  "ty": "identifier"
+                                }
                               }
                             },
                             {
@@ -789,7 +831,21 @@
                               }
                             }
                           ],
-                          "block-ty": "block"
+                          "block-ty": "block",
+                          "close-tag": {
+                            "slice": "=",
+                            "span": {
+                              "start": [
+                                22,
+                                3
+                              ],
+                              "end": [
+                                22,
+                                4
+                              ]
+                            },
+                            "ty": "equals"
+                          }
                         }
                       },
                       {
@@ -809,7 +865,21 @@
                         }
                       }
                     ],
-                    "block-ty": "block"
+                    "block-ty": "block",
+                    "close-tag": {
+                      "slice": ">",
+                      "span": {
+                        "start": [
+                          24,
+                          3
+                        ],
+                        "end": [
+                          24,
+                          4
+                        ]
+                      },
+                      "ty": "quote"
+                    }
                   }
                 },
                 {
@@ -829,7 +899,21 @@
                   }
                 }
               ],
-              "block-ty": "block"
+              "block-ty": "block",
+              "close-tag": {
+                "slice": "<",
+                "span": {
+                  "start": [
+                    26,
+                    3
+                  ],
+                  "end": [
+                    26,
+                    4
+                  ]
+                },
+                "ty": "other"
+              }
             }
           },
           {
@@ -849,7 +933,21 @@
             }
           }
         ],
-        "block-ty": "block"
+        "block-ty": "block",
+        "close-tag": {
+          "slice": "collapsible",
+          "span": {
+            "start": [
+              28,
+              3
+            ],
+            "end": [
+              28,
+              14
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     }
   ],

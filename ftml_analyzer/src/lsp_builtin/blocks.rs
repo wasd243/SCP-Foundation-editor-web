@@ -31,6 +31,9 @@ pub struct Blocks<'lsp> {
     pub block_sub_lang_span: Option<Range<u32>>,
     #[serde(skip)]
     used_index: usize,
+    /// Oh shit I forgot the close tags.
+    /// Close tags would only be a Identifier in the lsp.
+    pub close_tag: Option<&'lsp Token>,
 }
 
 impl<'lsp> Blocks<'lsp> {
@@ -103,6 +106,7 @@ impl<'lsp> Blocks<'lsp> {
 
             let need_raw = matches!(block_ty, BlockKind::ModuleCss | BlockKind::Html);
 
+            let mut close_tag = None;
             loop {
                 let rest = iter.as_slice();
                 let Some(t) = iter.next() else {
@@ -129,7 +133,7 @@ impl<'lsp> Blocks<'lsp> {
                         BlockKind::Block => true,
                     }
                 {
-                    iter.next(); // name
+                    close_tag = iter.next(); // name
                     end_token = iter.next(); // `]]`
                     break;
                 }
@@ -152,6 +156,7 @@ impl<'lsp> Blocks<'lsp> {
                     block_ty,
                     block_sub_lang_span: None,
                     used_index,
+                    close_tag,
                 };
 
                 if matches!(block.block_ty, BlockKind::ModuleCss | BlockKind::Html) {
@@ -190,9 +195,16 @@ fn is_valid_block_end(ty: TokenTy) -> bool {
 /// contains in `block_contents` is also implemented.
 impl<'lsp> ToAbsoluteSpans for Blocks<'lsp> {
     fn to_abs_spans(&self) -> Vec<AbsoluteSpan> {
-        self.block_parameters
+        let mut abs_spans: Vec<AbsoluteSpan> = self
+            .block_parameters
             .iter()
             .filter_map(|bp| bp.to_abs_span())
-            .collect()
+            .collect();
+
+        if let Some(close_tag) = self.close_tag.and_then(|token| token.to_abs_span()) {
+            abs_spans.push(close_tag);
+        }
+
+        abs_spans
     }
 }
