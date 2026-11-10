@@ -26,7 +26,7 @@ impl Token {
     }
 
     /// Specifically handling for close tags.
-    pub fn with_ident_to_abs_span(&self) -> Option<AbsoluteSpan> {
+    pub fn with_idents_and_symbols_to_abs_span(&self) -> Option<AbsoluteSpan> {
         Some(AbsoluteSpan {
             line: self.span.start.0,
             start: self.span.start.1,
@@ -61,8 +61,9 @@ fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
 /// Specifically handling for close tags.
 fn match_token_ty_with_ident(ty: &TokenTy) -> Option<HighlightTy> {
     match ty {
-        TokenTy::Quote => Some(HighlightTy::Quote),
-        TokenTy::Identifier => Some(HighlightTy::KeyWord),
+        TokenTy::Identifier | TokenTy::Quote | TokenTy::Equals | TokenTy::Other => {
+            Some(HighlightTy::KeyWord)
+        }
         _ => None,
     }
 }

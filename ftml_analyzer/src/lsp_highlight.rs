@@ -1,4 +1,7 @@
 pub mod types;
+pub mod utils;
+
+use utils::color_nodes;
 
 use lsp_types::{SemanticToken, SemanticTokenType};
 use serde::Serialize;
@@ -101,12 +104,7 @@ impl AbsoluteSpanTree {
         let mut spans = Vec::new();
 
         for node in tree {
-            match node {
-                BuiltIn::Token(t) => spans.extend(t.to_abs_span()),
-                BuiltIn::InLineMarks(m) => spans.extend(m.to_abs_spans()),
-                BuiltIn::InLineBlocks(b) => spans.extend(b.to_abs_spans()),
-                BuiltIn::Blocks(b) => spans.extend(b.to_abs_spans()),
-            }
+            color_nodes(&node, &mut spans);
         }
 
         Self { tree: spans }

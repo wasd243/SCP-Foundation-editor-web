@@ -69,27 +69,6 @@
       "len": 14,
       "ty": "Comment",
       "mods": 0
-    },
-    {
-      "line": 14,
-      "start": 3,
-      "len": 8,
-      "ty": "KeyWord",
-      "mods": 0
-    },
-    {
-      "line": 16,
-      "start": 0,
-      "len": 6,
-      "ty": "KeyWord",
-      "mods": 0
-    },
-    {
-      "line": 16,
-      "start": 7,
-      "len": 4,
-      "ty": "KeyWord",
-      "mods": 0
     }
   ]
 }

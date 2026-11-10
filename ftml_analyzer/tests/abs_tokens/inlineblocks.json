@@ -258,13 +258,6 @@
       "len": 13,
       "ty": "KeyWord",
       "mods": 0
-    },
-    {
-      "line": 21,
-      "start": 2,
-      "len": 14,
-      "ty": "KeyWord",
-      "mods": 0
     }
   ]
 }

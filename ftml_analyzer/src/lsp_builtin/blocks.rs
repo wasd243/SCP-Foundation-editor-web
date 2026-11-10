@@ -9,7 +9,7 @@ use crate::{
         BlockKind, Param,
         regex::{CSS, HTML, MODULE},
     },
-    lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans},
+    lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans, utils::color_nodes},
     utils::has_diagnostic,
 };
 
@@ -204,9 +204,13 @@ impl<'lsp> ToAbsoluteSpans for Blocks<'lsp> {
         // We need to handle Identifiers specifically in `close_tag`.
         if let Some(close_tag) = self
             .close_tag
-            .and_then(|token| token.with_ident_to_abs_span())
+            .and_then(|token| token.with_idents_and_symbols_to_abs_span())
         {
             abs_spans.push(close_tag);
+        }
+
+        for content in &self.block_content {
+            color_nodes(content, &mut abs_spans);
         }
 
         abs_spans

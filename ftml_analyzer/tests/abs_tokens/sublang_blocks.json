@@ -85,6 +85,20 @@
       "mods": 0
     },
     {
+      "line": 17,
+      "start": 10,
+      "len": 8,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 43,
+      "len": 8,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
       "line": 20,
       "start": 0,
       "len": 32,
