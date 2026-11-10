@@ -1,23 +1,23 @@
 #![allow(clippy::mutable_key_type)]
 
+mod diagnostics;
 mod highlights;
 
 use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
     DidChangeTextDocumentParams, DidCloseTextDocumentParams, DidOpenTextDocumentParams,
-    FoldingRangeProviderCapability, PublishDiagnosticsParams, ServerCapabilities,
-    TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
+    FoldingRangeProviderCapability, ServerCapabilities, TextDocumentSyncCapability,
+    TextDocumentSyncKind, Uri,
     notification::{
         DidChangeTextDocument, DidCloseTextDocument, DidOpenTextDocument, Notification as _,
-        PublishDiagnostics,
     },
     request::{FoldingRangeRequest, Request as _},
 };
 use std::collections::HashMap;
 use std::sync::LazyLock;
 
-use crate::parse_token;
+use crate::server::diagnostics::{manage_diagnostics, push};
 
 pub static SERVER_CAPABILITIES: LazyLock<ServerCapabilities> =
     LazyLock::new(|| ServerCapabilities {
@@ -87,29 +87,5 @@ fn match_notifications(
         }
         _ => {}
     }
-    Ok(())
-}
-
-/// Push diagnostics to IDEs.
-fn push(connection: &Connection, buffers: &mut Buffers, uri: Uri) -> Result<()> {
-    let diags = buffers
-        .get(&uri)
-        .map(|src| parse_token(src).to_diagnostics())
-        .unwrap_or_default();
-    manage_diagnostics(connection, uri, diags)
-}
-
-fn manage_diagnostics(
-    connection: &Connection,
-    uri: Uri,
-    diagnostics: Vec<lsp_types::Diagnostic>,
-) -> Result<()> {
-    let params = PublishDiagnosticsParams {
-        uri,
-        diagnostics,
-        version: None,
-    };
-    let n = Notification::new(PublishDiagnostics::METHOD.to_string(), params);
-    connection.sender.send(Message::Notification(n))?;
     Ok(())
 }
