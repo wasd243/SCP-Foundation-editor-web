@@ -30,7 +30,6 @@ pub const TYPES: &[SemanticTokenType] = &[
     SemanticTokenType::DECORATOR,
 ];
 
-#[expect(unused)]
 pub const MODIFIERS: &[SemanticTokenModifier] = &[
     SemanticTokenModifier::DECLARATION,
     SemanticTokenModifier::DEFINITION,

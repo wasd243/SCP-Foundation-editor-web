@@ -1,4 +1,4 @@
-mod types;
+pub mod types;
 
 use lsp_types::{SemanticToken, SemanticTokenType};
 use serde::Serialize;

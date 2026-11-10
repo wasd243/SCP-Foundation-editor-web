@@ -3,12 +3,15 @@
 mod diagnostics;
 mod highlights;
 
+use diagnostics::{manage_diagnostics, push};
+
 use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
     DidChangeTextDocumentParams, DidCloseTextDocumentParams, DidOpenTextDocumentParams,
-    FoldingRangeProviderCapability, ServerCapabilities, TextDocumentSyncCapability,
-    TextDocumentSyncKind, Uri,
+    FoldingRangeProviderCapability, SemanticToken, SemanticTokens, SemanticTokensParams,
+    SemanticTokensResult, ServerCapabilities, TextDocumentSyncCapability, TextDocumentSyncKind,
+    Uri,
     notification::{
         DidChangeTextDocument, DidCloseTextDocument, DidOpenTextDocument, Notification as _,
     },
@@ -17,12 +20,13 @@ use lsp_types::{
 use std::collections::HashMap;
 use std::sync::LazyLock;
 
-use crate::server::diagnostics::{manage_diagnostics, push};
+use crate::{lsp_highlight::types::semantic_tokens_capability, parse};
 
 pub static SERVER_CAPABILITIES: LazyLock<ServerCapabilities> =
     LazyLock::new(|| ServerCapabilities {
         text_document_sync: Some(TextDocumentSyncCapability::Kind(TextDocumentSyncKind::FULL)),
         folding_range_provider: Some(FoldingRangeProviderCapability::Simple(true)),
+        semantic_tokens_provider: Some(semantic_tokens_capability()),
         ..ServerCapabilities::default()
     });
 
@@ -46,7 +50,7 @@ pub fn main_loop(connection: Connection) -> Result<()> {
     Ok(())
 }
 
-fn match_request(req: Request, _buffers: &Buffers) -> Response {
+fn match_request(req: Request, buffers: &Buffers) -> Response {
     match req.method.as_str() {
         FoldingRangeRequest::METHOD => {
             Response::new_ok(req.id, Vec::<lsp_types::FoldingRange>::new())
@@ -54,7 +58,22 @@ fn match_request(req: Request, _buffers: &Buffers) -> Response {
         SemanticTokensFullRequest::METHOD => {
             let (id, params): (_, SemanticTokensParams) =
                 req.extract(SemanticTokensFullRequest::METHOD).unwrap();
-            // Parse highlights here.
+            let Some(source) = buffers.get(&params.text_document.uri) else {
+                return Response::new_err(
+                    id,
+                    lsp_server::ErrorCode::InvalidParams as i32,
+                    "The requested document is not open.".to_owned(),
+                );
+            };
+
+            let tokens: Vec<SemanticToken> = parse(source);
+            Response::new_ok(
+                id,
+                SemanticTokensResult::Tokens(SemanticTokens {
+                    result_id: None,
+                    data: tokens,
+                }),
+            )
         }
         _ => Response::new_err(
             req.id,
