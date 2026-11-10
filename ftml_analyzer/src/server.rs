@@ -12,7 +12,7 @@ use lsp_types::{
     notification::{
         DidChangeTextDocument, DidCloseTextDocument, DidOpenTextDocument, Notification as _,
     },
-    request::{FoldingRangeRequest, Request as _},
+    request::{FoldingRangeRequest, Request as _, SemanticTokensFullRequest},
 };
 use std::collections::HashMap;
 use std::sync::LazyLock;
@@ -50,6 +50,11 @@ fn match_request(req: Request, _buffers: &Buffers) -> Response {
     match req.method.as_str() {
         FoldingRangeRequest::METHOD => {
             Response::new_ok(req.id, Vec::<lsp_types::FoldingRange>::new())
+        }
+        SemanticTokensFullRequest::METHOD => {
+            let (id, params): (_, SemanticTokensParams) =
+                req.extract(SemanticTokensFullRequest::METHOD).unwrap();
+            // Parse highlights here.
         }
         _ => Response::new_err(
             req.id,
