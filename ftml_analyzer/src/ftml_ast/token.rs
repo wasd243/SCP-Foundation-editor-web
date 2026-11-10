@@ -39,10 +39,10 @@ impl ToAbsoluteSpan for Token {
     }
 }
 
-/// Only the `> ` quote mark in a raw token needs highlighting.
 fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
     match ty {
         TokenTy::Quote => Some(HighlightTy::Quote),
+        TokenTy::Identifier => Some(HighlightTy::KeyWord),
         _ => None,
     }
 }

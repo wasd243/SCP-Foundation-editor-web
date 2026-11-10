@@ -1,5 +1,4 @@
 use ftml_analyzer::debug_parse;
-use serde_json::to_string_pretty;
 use std::fs;
 
 const FTML: &str = "tests/ftmls/";
@@ -21,11 +20,9 @@ fn bless_highlight_abs_token() {
 
         let abs_token = debug_parse(&content).unwrap();
 
-        let json = to_string_pretty(&abs_token).unwrap();
-
         let path = format!("{OUTPUT_PATH}{stem}.json");
 
-        fs::write(path, json).unwrap();
+        fs::write(path, abs_token).unwrap();
     }
 }
 
@@ -44,12 +41,10 @@ fn check_highlight_abs_token() {
 
         let abs_token = debug_parse(&content).unwrap();
 
-        let json = to_string_pretty(&abs_token).unwrap();
-
         let path = format!("{OUTPUT_PATH}{stem}.json");
 
         let expect = fs::read_to_string(path).unwrap();
 
-        assert_eq!(expect, json);
+        assert_eq!(expect, abs_token);
     }
 }
