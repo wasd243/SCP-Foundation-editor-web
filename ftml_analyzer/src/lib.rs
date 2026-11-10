@@ -10,6 +10,7 @@ mod utils;
 use crate::{
     ftml_ast::ParseToken,
     lsp_builtin::LspBuiltIn,
+    lsp_highlight::AbsoluteSpanTree,
     server::{SERVER_CAPABILITIES, main_loop},
 };
 
@@ -45,7 +46,9 @@ pub fn parse(src: &str) -> Result<String, serde_json::Error> {
     let mut lsp_builtin = LspBuiltIn::visitor(&tokens);
     lsp_builtin.sanitize_whitespace();
 
-    serde_json::to_string_pretty(&lsp_builtin)
+    let highlight_abs_token = AbsoluteSpanTree::from_builtin_tree(lsp_builtin.tree);
+
+    serde_json::to_string_pretty(&highlight_abs_token)
 }
 
 /// A function to get `ParseToken`.

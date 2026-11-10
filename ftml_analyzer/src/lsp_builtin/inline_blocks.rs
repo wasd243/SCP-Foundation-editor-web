@@ -5,6 +5,7 @@ use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
     lsp_builtin::Param,
+    lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan, ToAbsoluteSpans},
     utils::check_diagnostic_without_include,
 };
 
@@ -52,5 +53,17 @@ impl InlineBlocks {
 
     pub(super) fn content_len(&self) -> usize {
         self.parameters.len()
+    }
+}
+
+/// # NOTE:
+/// This implementation ONLY convert parameters to `AbsoluteSpan`,
+/// span, is left for collapsing.
+impl ToAbsoluteSpans for InlineBlocks {
+    fn to_abs_spans(&self) -> Vec<AbsoluteSpan> {
+        self.parameters
+            .iter()
+            .filter_map(|p| p.to_abs_span())
+            .collect()
     }
 }

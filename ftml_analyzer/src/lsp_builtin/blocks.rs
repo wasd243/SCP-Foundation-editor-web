@@ -9,6 +9,7 @@ use crate::{
         BlockKind, Param,
         regex::{CSS, HTML, MODULE},
     },
+    lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans},
     utils::has_diagnostic,
 };
 
@@ -181,4 +182,17 @@ fn is_valid_block_end(ty: TokenTy) -> bool {
         ty,
         TokenTy::Identifier | TokenTy::Quote | TokenTy::Other | TokenTy::Equals
     )
+}
+
+/// # NOTE:
+/// implement for parameters only, `span` left for collapsing, `block_sub_lang_span` is left for
+/// sublanguage highlights, `block_contents` could contains everything, so `block_parameters`
+/// contains in `block_contents` is also implemented.
+impl<'lsp> ToAbsoluteSpans for Blocks<'lsp> {
+    fn to_abs_spans(&self) -> Vec<AbsoluteSpan> {
+        self.block_parameters
+            .iter()
+            .filter_map(|bp| bp.to_abs_span())
+            .collect()
+    }
 }

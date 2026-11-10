@@ -15,6 +15,7 @@ use inline_marks::InlineMarks;
 use crate::{
     Span,
     ftml_ast::{Diagnostic, ParseToken, Token},
+    lsp_highlight::{AbsoluteSpan, HighlightTy, ToAbsoluteSpan},
     utils::{is_inline_block_token, is_inline_mark_token},
 };
 
@@ -72,11 +73,6 @@ impl<'lsp> LspBuiltIn<'lsp> {
     pub fn sanitize_whitespace(&mut self) {
         self.tree
             .retain(|node| !matches!(node, BuiltIn::Token(t) if t.ty == TokenTy::Whitespace));
-    }
-
-    /// Move tree out of `LspBuiltIn`.
-    pub fn get_builtin_tree(&self) -> &Vec<BuiltIn<'lsp>> {
-        &self.tree
     }
 }
 
@@ -139,7 +135,7 @@ impl ParamKind {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone, Copy)]
 #[serde(rename_all = "kebab-case")]
 /// An easy sub highlight in `Blocks` and `InlineBlocks` tokens.
 pub enum ParamKeys {
@@ -165,7 +161,7 @@ pub enum ParamKeys {
     Colon,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone, Copy)]
 #[serde(rename_all = "kebab-case")]
 pub struct Param {
     pub span: Span,
@@ -239,5 +235,32 @@ impl Param {
                     .collect()
             }
         }
+    }
+}
+
+impl ToAbsoluteSpan for Param {
+    fn to_abs_span(&self) -> Option<AbsoluteSpan> {
+        Some(AbsoluteSpan {
+            line: self.span.start.0,
+            start: self.span.start.1,
+            len: self.span.end.1 - self.span.start.1,
+            ty: match_param_keys(&self.ty)?,
+            // TODO: mods is a placeholder
+            mods: 0,
+        })
+    }
+}
+
+fn match_param_keys(ty: &ParamKeys) -> Option<HighlightTy> {
+    match ty {
+        ParamKeys::BlockName => Some(HighlightTy::KeyWord),
+        ParamKeys::BlockAttr => Some(HighlightTy::Attr),
+        ParamKeys::Equals => Some(HighlightTy::Equals),
+        ParamKeys::Pipe => Some(HighlightTy::Pipe),
+        ParamKeys::String => Some(HighlightTy::String),
+        ParamKeys::Value => Some(HighlightTy::Value),
+        ParamKeys::Colon => Some(HighlightTy::PathBuffer),
+        // NOTE: Skip white spaces as `None`.
+        ParamKeys::Whitespace => None,
     }
 }

@@ -49,6 +49,16 @@ pub enum HighlightTy {
     Raw = 8,
     /// [!----]
     Comment = 9,
+    /// div class, collapsible show,hide, etc.
+    Attr = 10,
+    /// |
+    Pipe = 11,
+    /// ""
+    String = 12,
+    /// |attr=Value
+    Value = 13,
+    /// include :component:image-block
+    PathBuffer = 14,
     // TODO: add more as needed, keep in sync with the legend
 }
 
@@ -61,7 +71,8 @@ impl AbsoluteSpanTree {
             match node {
                 BuiltIn::Token(t) => spans.extend(t.to_abs_span()),
                 BuiltIn::InLineMarks(m) => spans.extend(m.to_abs_spans()),
-                _ => {} // TODO: implement for other types.
+                BuiltIn::InLineBlocks(b) => spans.extend(b.to_abs_spans()),
+                BuiltIn::Blocks(b) => spans.extend(b.to_abs_spans()),
             }
         }
 
