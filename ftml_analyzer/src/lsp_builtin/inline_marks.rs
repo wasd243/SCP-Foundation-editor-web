@@ -132,6 +132,8 @@ fn match_inline_marks_ty(ty: TokenTy) -> HighlightTy {
         TokenTy::Italics => HighlightTy::Italics,
         TokenTy::Underline => HighlightTy::Underline,
         TokenTy::DoubleDash => HighlightTy::StrikeThrough,
+        TokenTy::Superscript => HighlightTy::Superscript,
+        TokenTy::Subscript => HighlightTy::Subscript,
         TokenTy::Raw => HighlightTy::Raw,
         TokenTy::LeftComment | TokenTy::RightComment => HighlightTy::Comment,
         TokenTy::LeftMonospace | TokenTy::RightMonospace => HighlightTy::Monospace,

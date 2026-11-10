@@ -59,6 +59,10 @@ pub enum HighlightTy {
     Value = 13,
     /// include :component:image-block
     PathBuffer = 14,
+    /// ^^
+    Superscript = 15,
+    /// ,,
+    Subscript = 16,
     // TODO: add more as needed, keep in sync with the legend
 }
 
