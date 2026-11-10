@@ -38,7 +38,9 @@ pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
 }
 
 /// A function for parsing token to builin tree JSON.
-pub fn parse(src: &str) -> Result<String, serde_json::Error> {
+///
+/// NOTE: this function is set for debug only.
+pub fn debug_parse(src: &str) -> Result<String, serde_json::Error> {
     let mut tokens = ParseToken::from(src);
     tokens.clean();
     tokens.mute_ftml_fps();

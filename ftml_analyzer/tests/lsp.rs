@@ -1,4 +1,4 @@
-use ftml_analyzer::parse;
+use ftml_analyzer::debug_parse;
 use serde_json::to_string_pretty;
 use std::fs;
 
@@ -19,7 +19,7 @@ fn bless_highlight_abs_token() {
 
         let stem = path.file_stem().unwrap().to_string_lossy();
 
-        let abs_token = parse(&content).unwrap();
+        let abs_token = debug_parse(&content).unwrap();
 
         let json = to_string_pretty(&abs_token).unwrap();
 
@@ -42,7 +42,7 @@ fn check_highlight_abs_token() {
 
         let stem = path.file_stem().unwrap().to_string_lossy();
 
-        let abs_token = parse(&content).unwrap();
+        let abs_token = debug_parse(&content).unwrap();
 
         let json = to_string_pretty(&abs_token).unwrap();
 
