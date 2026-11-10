@@ -12,10 +12,10 @@ use super::ParamKind;
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub(super) struct InlineBlocks {
-    span: Span,
+pub struct InlineBlocks {
+    pub span: Span,
     /// Keep content for sub hihgliht in `[[include]]` `[[user name]]`.
-    parameters: Vec<Param>,
+    pub parameters: Vec<Param>,
 }
 
 impl InlineBlocks {

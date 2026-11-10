@@ -16,18 +16,18 @@ use super::{BuiltIn, ParamKind, visit};
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub(super) struct Blocks<'lsp> {
-    span: Span,
+pub struct Blocks<'lsp> {
+    pub span: Span,
     /// This contains parameters like `div` `class` `=`.
-    block_parameters: Vec<Param>,
+    pub block_parameters: Vec<Param>,
     /// This contains block contents, includes everything.
-    block_content: Vec<BuiltIn<'lsp>>,
+    pub block_content: Vec<BuiltIn<'lsp>>,
     /// BlockKind, which determines CSS/HTML highlights.
-    block_ty: BlockKind,
+    pub block_ty: BlockKind,
     /// Only use in sub languages BlockKind, otherwise stay as `None`.
     /// An Optional Range which only record line numbers.
     #[serde(skip_serializing_if = "Option::is_none")]
-    block_sub_lang_span: Option<Range<u32>>,
+    pub block_sub_lang_span: Option<Range<u32>>,
     #[serde(skip)]
     used_index: usize,
 }

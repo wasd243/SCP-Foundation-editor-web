@@ -9,13 +9,13 @@ use crate::{
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub(super) struct InlineMarks<'lsp> {
-    span: Span,
+pub struct InlineMarks<'lsp> {
+    pub span: Span,
     #[serde(skip)]
     content: Vec<&'lsp Token>,
-    inner_marks: Vec<InlineMarks<'lsp>>,
+    pub inner_marks: Vec<InlineMarks<'lsp>>,
     #[serde(serialize_with = "serialize_ty")]
-    ty: TokenTy,
+    pub ty: TokenTy,
 }
 
 impl<'lsp> InlineMarks<'lsp> {

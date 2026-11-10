@@ -24,7 +24,7 @@ use serde::Serialize;
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
 /// A private enum for different types of builtin AST nodes.
-enum BuiltIn<'lsp> {
+pub enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
     InLineBlocks(InlineBlocks),
     Blocks(Blocks<'lsp>),
@@ -34,7 +34,7 @@ enum BuiltIn<'lsp> {
 #[derive(Debug, Default, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
 /// An easy sub highlight for different sub languages.
-pub(crate) enum BlockKind {
+pub enum BlockKind {
     #[default]
     Block,
     ModuleCss,
@@ -45,8 +45,8 @@ pub(crate) enum BlockKind {
 #[serde(rename_all = "kebab-case")]
 /// The whole LSP builin AST will store in this struct.
 pub struct LspBuiltIn<'lsp> {
-    tree: Vec<BuiltIn<'lsp>>,
-    diagnostics: &'lsp Vec<Diagnostic>,
+    pub tree: Vec<BuiltIn<'lsp>>,
+    pub diagnostics: &'lsp Vec<Diagnostic>,
 }
 
 impl<'lsp> LspBuiltIn<'lsp> {
@@ -137,7 +137,7 @@ impl ParamKind {
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
 /// An easy sub highlight in `Blocks` and `InlineBlocks` tokens.
-enum ParamKeys {
+pub enum ParamKeys {
     /// Block name like `footnote`
     BlockName,
     /// Block attributes like:
@@ -162,9 +162,9 @@ enum ParamKeys {
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
-struct Param {
-    span: Span,
-    ty: ParamKeys,
+pub struct Param {
+    pub span: Span,
+    pub ty: ParamKeys,
 }
 
 impl Param {
