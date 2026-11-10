@@ -1,5 +1,8 @@
-use crate::ftml_ast::Span;
-use ftml::parsing::ExtractedToken;
+use crate::{
+    ftml_ast::Span,
+    lsp_highlight::{AbsoluteSpan, HighlightTy, ToAbsoluteSpan},
+};
+use ftml::parsing::{ExtractedToken, Token as TokenTy};
 use serde::{Deserialize, Serialize};
 
 /// A lsp version of extracted token from ftml.
@@ -10,7 +13,7 @@ pub struct Token {
     /// The span of the original text.
     pub span: Span,
     /// The token type.
-    pub ty: ftml::parsing::Token,
+    pub ty: TokenTy,
 }
 
 impl Token {
@@ -23,12 +26,23 @@ impl Token {
     }
 }
 
-impl Default for Token {
-    fn default() -> Self {
-        let slice = String::new();
-        let span = Span::default();
-        let ty = ftml::parsing::Token::Whitespace;
+impl ToAbsoluteSpan for Token {
+    fn to_abs_span(&self) -> Option<AbsoluteSpan> {
+        Some(AbsoluteSpan {
+            line: self.span.start.0,
+            start: self.span.start.1,
+            len: self.span.end.1 - self.span.start.1,
+            ty: match_token_ty(&self.ty)?,
+            // TODO: mods are temporarily a placeholder
+            mods: 0,
+        })
+    }
+}
 
-        Self { slice, span, ty }
+/// Only the `> ` quote mark in a raw token needs highlighting.
+fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
+    match ty {
+        TokenTy::Quote => Some(HighlightTy::Quote),
+        _ => None,
     }
 }

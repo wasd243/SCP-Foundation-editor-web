@@ -73,6 +73,11 @@ impl<'lsp> LspBuiltIn<'lsp> {
         self.tree
             .retain(|node| !matches!(node, BuiltIn::Token(t) if t.ty == TokenTy::Whitespace));
     }
+
+    /// Move tree out of `LspBuiltIn`.
+    pub fn get_builtin_tree(&self) -> &Vec<BuiltIn<'lsp>> {
+        &self.tree
+    }
 }
 
 /// A separate visitor function.
