@@ -24,6 +24,18 @@ impl Token {
             ty: extracted_token.token,
         }
     }
+
+    /// Specifically handling for close tags.
+    pub fn with_ident_to_abs_span(&self) -> Option<AbsoluteSpan> {
+        Some(AbsoluteSpan {
+            line: self.span.start.0,
+            start: self.span.start.1,
+            len: self.span.end.1 - self.span.start.1,
+            ty: match_token_ty_with_ident(&self.ty)?,
+            // TODO: mods are temporarily a placeholder
+            mods: 0,
+        })
+    }
 }
 
 impl ToAbsoluteSpan for Token {
@@ -40,6 +52,14 @@ impl ToAbsoluteSpan for Token {
 }
 
 fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
+    match ty {
+        TokenTy::Quote => Some(HighlightTy::Quote),
+        _ => None,
+    }
+}
+
+/// Specifically handling for close tags.
+fn match_token_ty_with_ident(ty: &TokenTy) -> Option<HighlightTy> {
     match ty {
         TokenTy::Quote => Some(HighlightTy::Quote),
         TokenTy::Identifier => Some(HighlightTy::KeyWord),

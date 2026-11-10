@@ -201,7 +201,11 @@ impl<'lsp> ToAbsoluteSpans for Blocks<'lsp> {
             .filter_map(|bp| bp.to_abs_span())
             .collect();
 
-        if let Some(close_tag) = self.close_tag.and_then(|token| token.to_abs_span()) {
+        // We need to handle Identifiers specifically in `close_tag`.
+        if let Some(close_tag) = self
+            .close_tag
+            .and_then(|token| token.with_ident_to_abs_span())
+        {
             abs_spans.push(close_tag);
         }
 
