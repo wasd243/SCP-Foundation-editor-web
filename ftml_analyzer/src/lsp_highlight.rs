@@ -2,10 +2,12 @@ use serde::Serialize;
 
 use crate::lsp_builtin::BuiltIn;
 
+/// For converting span -> AbsoluteSpan.
 pub trait ToAbsoluteSpan {
     fn to_abs_span(&self) -> Option<AbsoluteSpan>;
 }
 
+/// For converting mutiple spans -> Vec<AbsoluteSpan>.
 pub trait ToAbsoluteSpans {
     fn to_abs_spans(&self) -> Vec<AbsoluteSpan>;
 }
