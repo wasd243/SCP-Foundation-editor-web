@@ -4,6 +4,7 @@ use serde::{Serialize, Serializer};
 use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
+    lsp_highlight::{AbsoluteSpan, HighlightTy},
     utils::{has_diagnostic, is_inline_mark_token},
 };
 
@@ -97,5 +98,43 @@ where
         TokenTy::LeftMonospace | TokenTy::RightMonospace => serializer.serialize_str("monospace"),
         TokenTy::LeftComment | TokenTy::RightComment => serializer.serialize_str("comment"),
         other => other.serialize(serializer),
+    }
+}
+
+impl InlineMarks<'_> {
+    pub fn to_abs_span(&self) -> Vec<AbsoluteSpan> {
+        if self.inner_marks.is_empty() {
+            vec![to_abs_span_(self)]
+        } else {
+            self.inner_marks
+                .iter()
+                .flat_map(|m| m.to_abs_span())
+                .collect()
+        }
+    }
+}
+
+/// To Absolute Span Inner.
+fn to_abs_span_(inline_marks: &InlineMarks) -> AbsoluteSpan {
+    AbsoluteSpan {
+        line: inline_marks.span.start.0,
+        start: inline_marks.span.start.1,
+        len: inline_marks.span.end.1 - inline_marks.span.start.1,
+        ty: match_inline_marks_ty(inline_marks.ty),
+        // TODO: mods is a placeholder
+        mods: 0,
+    }
+}
+
+fn match_inline_marks_ty(ty: TokenTy) -> HighlightTy {
+    match ty {
+        TokenTy::Bold => HighlightTy::Bold,
+        TokenTy::Italics => HighlightTy::Italics,
+        TokenTy::Underline => HighlightTy::Underline,
+        TokenTy::DoubleDash => HighlightTy::StrikeThrough,
+        TokenTy::Raw => HighlightTy::Raw,
+        TokenTy::LeftComment | TokenTy::RightComment => HighlightTy::Comment,
+        TokenTy::LeftMonospace | TokenTy::RightMonospace => HighlightTy::Monospace,
+        _ => unreachable!("Should never reach other token type in `inline_marks`"),
     }
 }

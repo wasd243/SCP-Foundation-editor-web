@@ -23,9 +23,26 @@ pub struct AbsoluteSpan {
 #[derive(Debug, Serialize)]
 #[repr(u32)]
 pub enum HighlightTy {
+    /// div, collapsible, etc.
     KeyWord = 0,
+    /// =
     Equals = 1,
+    /// >
     Quote = 2,
+    /// **
+    Bold = 3,
+    /// //
+    Italics = 4,
+    /// __
+    Underline = 5,
+    /// --
+    StrikeThrough = 6,
+    /// {{}}
+    Monospace = 7,
+    /// @@
+    Raw = 8,
+    /// [!----]
+    Comment = 9,
     // TODO: add more as needed, keep in sync with the legend
 }
 
@@ -37,6 +54,7 @@ impl AbsoluteSpanTree {
         for node in tree {
             match node {
                 BuiltIn::Token(t) => spans.extend(t.to_abs_span()),
+                BuiltIn::InLineMarks(m) => spans.extend(m.to_abs_span()),
                 _ => {} // TODO: implement for other types.
             }
         }
