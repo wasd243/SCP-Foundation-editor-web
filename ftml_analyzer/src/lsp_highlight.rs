@@ -6,6 +6,10 @@ pub trait ToAbsoluteSpan {
     fn to_abs_span(&self) -> Option<AbsoluteSpan>;
 }
 
+pub trait ToAbsoluteSpans {
+    fn to_abs_spans(&self) -> Vec<AbsoluteSpan>;
+}
+
 #[derive(Debug, Serialize)]
 pub struct AbsoluteSpanTree {
     tree: Vec<AbsoluteSpan>,
@@ -54,7 +58,7 @@ impl AbsoluteSpanTree {
         for node in tree {
             match node {
                 BuiltIn::Token(t) => spans.extend(t.to_abs_span()),
-                BuiltIn::InLineMarks(m) => spans.extend(m.to_abs_span()),
+                BuiltIn::InLineMarks(m) => spans.extend(m.to_abs_spans()),
                 _ => {} // TODO: implement for other types.
             }
         }

@@ -4,7 +4,7 @@ use serde::{Serialize, Serializer};
 use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
-    lsp_highlight::{AbsoluteSpan, HighlightTy},
+    lsp_highlight::{AbsoluteSpan, HighlightTy, ToAbsoluteSpans},
     utils::{has_diagnostic, is_inline_mark_token},
 };
 
@@ -101,14 +101,14 @@ where
     }
 }
 
-impl InlineMarks<'_> {
-    pub fn to_abs_span(&self) -> Vec<AbsoluteSpan> {
+impl ToAbsoluteSpans for InlineMarks<'_> {
+    fn to_abs_spans(&self) -> Vec<AbsoluteSpan> {
         if self.inner_marks.is_empty() {
             vec![to_abs_span_(self)]
         } else {
             self.inner_marks
                 .iter()
-                .flat_map(|m| m.to_abs_span())
+                .flat_map(|m| m.to_abs_spans())
                 .collect()
         }
     }
