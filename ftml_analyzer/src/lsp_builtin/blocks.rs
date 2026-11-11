@@ -58,7 +58,7 @@ impl<'lsp> Blocks<'lsp> {
             let mut block_ty = BlockKind::default();
 
             let mut end: Option<&Token> = None;
-            let mut start2: Option<&Token> = None;
+            let mut block_end_start_token: Option<&Token> = None;
 
             // match a block start: such as `[[div ]]` `[[footnote]]` `[[span ]]` `[[html ]]`
             loop {
@@ -142,7 +142,7 @@ impl<'lsp> Blocks<'lsp> {
                         BlockKind::Block => true,
                     }
                 {
-                    start2 = Some(t); // [[/
+                    block_end_start_token = Some(t); // [[/
                     close_tag = iter.next(); // name
                     end_token = iter.next(); // `]]`
                     break;
@@ -154,7 +154,7 @@ impl<'lsp> Blocks<'lsp> {
             }
 
             let end2 = Some(end_token?);
-            let starts_and_ends_of_the_block = [token, end?, start2?, end2?];
+            let starts_and_ends_of_the_block = [token, end?, block_end_start_token?, end2?];
 
             if let Some(end_token) = end_token {
                 let used_index = parse_token.len() - iter.as_slice().len();
