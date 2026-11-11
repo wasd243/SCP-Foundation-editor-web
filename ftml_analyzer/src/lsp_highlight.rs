@@ -72,7 +72,7 @@ pub enum HighlightTy {
 }
 
 impl HighlightTy {
-    fn to_index(&self) -> Option<u32> {
+    fn to_index(&self) -> u32 {
         let ty = match self {
             Self::KeyWord => SemanticTokenType::KEYWORD,
             Self::Equals | Self::Pipe | Self::Quote | Self::Operator => SemanticTokenType::OPERATOR,
@@ -82,18 +82,17 @@ impl HighlightTy {
             Self::Value => SemanticTokenType::ENUM_MEMBER,
             Self::PathBuffer => SemanticTokenType::NAMESPACE,
             Self::Raw => SemanticTokenType::REGEXP,
-            // TODO: no standard counterpart, left for a theme-side fontStyle.
-            Self::Bold
-            | Self::Italics
-            | Self::Underline
-            | Self::StrikeThrough
-            | Self::Monospace
-            | Self::Superscript
-            | Self::Subscript => return None,
+            Self::Bold => SemanticTokenType::new("ftmlBold"),
+            Self::Italics => SemanticTokenType::new("ftmlItalic"),
+            Self::Underline => SemanticTokenType::new("ftmlUnderline"),
+            Self::StrikeThrough => SemanticTokenType::new("ftmlStrike"),
+            Self::Monospace => SemanticTokenType::new("ftmlMonospace"),
+            Self::Superscript => SemanticTokenType::new("ftmlSuperscript"),
+            Self::Subscript => SemanticTokenType::new("ftmlSubscript"),
         };
 
         //  NOTE: The slice and `ty` come from the same list, so this cannot fail.
-        Some(TYPES.iter().position(|t| *t == ty).unwrap() as u32)
+        TYPES.iter().position(|t| *t == ty).unwrap() as u32
     }
 }
 
@@ -114,7 +113,7 @@ impl AbsoluteSpanTree {
         let mut spans: Vec<_> = self
             .tree
             .into_iter()
-            .filter_map(|s| Some((s.line, s.start, s.len, s.ty.to_index()?, s.mods)))
+            .filter_map(|s| Some((s.line, s.start, s.len, s.ty.to_index(), s.mods)))
             .collect();
         spans.sort_unstable_by_key(|&(line, start, ..)| (line, start));
 

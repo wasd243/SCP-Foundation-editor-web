@@ -28,6 +28,14 @@ pub const TYPES: &[SemanticTokenType] = &[
     SemanticTokenType::REGEXP,
     SemanticTokenType::OPERATOR,
     SemanticTokenType::DECORATOR,
+    // NOTE: ALL previous types are the default types in IDE, do NOT touch.
+    SemanticTokenType::new("ftmlBold"),
+    SemanticTokenType::new("ftmlItalic"),
+    SemanticTokenType::new("ftmlUnderline"),
+    SemanticTokenType::new("ftmlStrike"),
+    SemanticTokenType::new("ftmlMonospace"),
+    SemanticTokenType::new("ftmlSuperscript"),
+    SemanticTokenType::new("ftmlSubscript"),
 ];
 
 pub const MODIFIERS: &[SemanticTokenModifier] = &[
