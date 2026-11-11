@@ -113,7 +113,7 @@ impl AbsoluteSpanTree {
         let mut spans: Vec<_> = self
             .tree
             .into_iter()
-            .filter_map(|s| Some((s.line, s.start, s.len, s.ty.to_index(), s.mods)))
+            .map(|s| (s.line, s.start, s.len, s.ty.to_index(), s.mods))
             .collect();
         spans.sort_unstable_by_key(|&(line, start, ..)| (line, start));
 
