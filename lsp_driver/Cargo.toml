@@ -1,16 +1,12 @@
 [package]
 name = "ftml_analyzer_lsp"
-version = "0.1.0"
-edition = "2024"
-authors = ["wasd243"]
-publish = false
+version.workspace = true
+edition.workspace = true
 
 [dependencies]
-anyhow = "1.0"
-ftml_analyzer = { path = "../ftml_analyzer" }
+anyhow.workspace = true
+ftml_analyzer.workspace = true
 
-[profile.release]
-opt-level = "z"
-lto = true
-codegen-units = 1
-panic = "abort"
+[[bin]]
+name = "ftml_analyzer"
+path = "src/main.rs"

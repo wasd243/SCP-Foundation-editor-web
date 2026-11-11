@@ -3,11 +3,11 @@ vim.filetype.add({ extension = { ftml = "ftml" } })
 -- setup LSP custom highlights.
 local function apply()
   local set = vim.api.nvim_set_hl
-  set(0, "@lsp.type.ftmlBold", { bold = true })
-  set(0, "@lsp.type.ftmlItalic", { italic = true })
-  set(0, "@lsp.type.ftmlUnderline", { underline = true })
-  set(0, "@lsp.type.ftmlStrike", { strikethrough = true })
-  set(0, "@lsp.type.ftmlMonospace", { link = "@markup.raw" })
+  set(0, "@lsp.type.ftmlBold.ftml", { bold = true })
+  set(0, "@lsp.type.ftmlItalic.ftml", { italic = true })
+  set(0, "@lsp.type.ftmlUnderline.ftml", { underline = true })
+  set(0, "@lsp.type.ftmlStrike.ftml", { strikethrough = true })
+  set(0, "@lsp.type.ftmlMonospace.ftml", { link = "@markup.raw" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {

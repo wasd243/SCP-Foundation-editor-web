@@ -1,0 +1,22 @@
+[workspace]
+resolver = "3"
+members = ["ftml_analyzer", "lsp_driver"]
+default-members = ["lsp_driver"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+# custom crate
+ftml_analyzer = { path = "ftml_analyzer" }
+
+# dependencies
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = "z"
+lto = "thin"
+codegen-units = 16
