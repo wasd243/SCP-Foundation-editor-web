@@ -24,11 +24,8 @@ pub use crate::ftml_ast::Span;
 
 /// A macro to avoid repeating code.
 macro_rules! set_up_parsing {
-    ($src:ident, $out:ident) => {
-        let mut tokens = ParseToken::from($src);
-        tokens.clean();
-        tokens.mute_ftml_fps();
-
+    ($src:expr, $out:ident) => {
+        let tokens = parse_token($src);
         let mut $out = LspBuiltIn::visitor(&tokens);
         $out.sanitize_whitespace();
     };
