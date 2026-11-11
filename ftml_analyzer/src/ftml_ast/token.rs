@@ -31,7 +31,7 @@ impl Token {
             line: self.span.start.0,
             start: self.span.start.1,
             len: self.span.end.1 - self.span.start.1,
-            ty: match_token_ty_with_ident(&self.ty)?,
+            ty: match_token_ty_with_idents(&self.ty)?,
             // TODO: mods are temporarily a placeholder
             mods: 0,
         })
@@ -58,13 +58,15 @@ fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
         | TokenTy::LeftBlockStar
         | TokenTy::RightBlock
         | TokenTy::LeftBlockEnd
-        | TokenTy::LeftBlockAnchor => Some(HighlightTy::Operator),
+        | TokenTy::LeftBlockAnchor
+        // save herizontol rules to `Operator`
+        | TokenTy::TripleDash => Some(HighlightTy::Operator),
         _ => None,
     }
 }
 
 /// Specifically handling for close tags.
-fn match_token_ty_with_ident(ty: &TokenTy) -> Option<HighlightTy> {
+fn match_token_ty_with_idents(ty: &TokenTy) -> Option<HighlightTy> {
     match ty {
         TokenTy::Identifier | TokenTy::Quote | TokenTy::Equals | TokenTy::Other => {
             Some(HighlightTy::KeyWord)

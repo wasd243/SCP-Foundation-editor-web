@@ -1,0 +1,39 @@
+{
+  "tree": [
+    {
+      "line": 0,
+      "start": 0,
+      "len": 1,
+      "ty": "Quote",
+      "mods": 0
+    },
+    {
+      "line": 0,
+      "start": 2,
+      "len": 18,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 0,
+      "len": 1,
+      "ty": "Quote",
+      "mods": 0
+    },
+    {
+      "line": 3,
+      "start": 0,
+      "len": 11,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 3,
+      "start": 12,
+      "len": 22,
+      "ty": "Comment",
+      "mods": 0
+    }
+  ]
+}
