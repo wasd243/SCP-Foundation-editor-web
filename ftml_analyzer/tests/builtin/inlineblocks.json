@@ -12,6 +12,34 @@
             2
           ]
         },
+        "start-block": {
+          "slice": "[[",
+          "span": {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              0,
+              2
+            ]
+          },
+          "ty": "left-block"
+        },
+        "end-block": {
+          "slice": "]]",
+          "span": {
+            "start": [
+              5,
+              0
+            ],
+            "end": [
+              5,
+              2
+            ]
+          },
+          "ty": "right-block"
+        },
         "parameters": [
           {
             "span": {
@@ -356,6 +384,34 @@
             47
           ]
         },
+        "start-block": {
+          "slice": "[[",
+          "span": {
+            "start": [
+              9,
+              0
+            ],
+            "end": [
+              9,
+              2
+            ]
+          },
+          "ty": "left-block"
+        },
+        "end-block": {
+          "slice": "]]",
+          "span": {
+            "start": [
+              9,
+              45
+            ],
+            "end": [
+              9,
+              47
+            ]
+          },
+          "ty": "right-block"
+        },
         "parameters": [
           {
             "span": {
@@ -505,6 +561,34 @@
             33
           ]
         },
+        "start-block": {
+          "slice": "[[",
+          "span": {
+            "start": [
+              13,
+              0
+            ],
+            "end": [
+              13,
+              2
+            ]
+          },
+          "ty": "left-block"
+        },
+        "end-block": {
+          "slice": "]]",
+          "span": {
+            "start": [
+              13,
+              31
+            ],
+            "end": [
+              13,
+              33
+            ]
+          },
+          "ty": "right-block"
+        },
         "parameters": [
           {
             "span": {
@@ -559,6 +643,34 @@
             15,
             17
           ]
+        },
+        "start-block": {
+          "slice": "[[*",
+          "span": {
+            "start": [
+              15,
+              0
+            ],
+            "end": [
+              15,
+              3
+            ]
+          },
+          "ty": "left-block-star"
+        },
+        "end-block": {
+          "slice": "]]",
+          "span": {
+            "start": [
+              15,
+              15
+            ],
+            "end": [
+              15,
+              17
+            ]
+          },
+          "ty": "right-block"
         },
         "parameters": [
           {
@@ -615,6 +727,34 @@
             15
           ]
         },
+        "start-block": {
+          "slice": "[[",
+          "span": {
+            "start": [
+              17,
+              0
+            ],
+            "end": [
+              17,
+              2
+            ]
+          },
+          "ty": "left-block"
+        },
+        "end-block": {
+          "slice": "]]",
+          "span": {
+            "start": [
+              17,
+              13
+            ],
+            "end": [
+              17,
+              15
+            ]
+          },
+          "ty": "right-block"
+        },
         "parameters": [
           {
             "span": {
@@ -669,6 +809,34 @@
             19,
             17
           ]
+        },
+        "start-block": {
+          "slice": "[[",
+          "span": {
+            "start": [
+              19,
+              0
+            ],
+            "end": [
+              19,
+              2
+            ]
+          },
+          "ty": "left-block"
+        },
+        "end-block": {
+          "slice": "]]",
+          "span": {
+            "start": [
+              19,
+              15
+            ],
+            "end": [
+              19,
+              17
+            ]
+          },
+          "ty": "right-block"
         },
         "parameters": [
           {

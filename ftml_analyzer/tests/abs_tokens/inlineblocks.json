@@ -2,6 +2,13 @@
   "tree": [
     {
       "line": 0,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 0,
       "start": 2,
       "len": 7,
       "ty": "KeyWord",
@@ -162,6 +169,20 @@
       "mods": 0
     },
     {
+      "line": 5,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 9,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
       "line": 9,
       "start": 2,
       "len": 5,
@@ -211,6 +232,20 @@
       "mods": 0
     },
     {
+      "line": 9,
+      "start": 45,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 13,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
       "line": 13,
       "start": 2,
       "len": 5,
@@ -222,6 +257,20 @@
       "start": 8,
       "len": 23,
       "ty": "Attr",
+      "mods": 0
+    },
+    {
+      "line": 13,
+      "start": 31,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 15,
+      "start": 0,
+      "len": 3,
+      "ty": "Operator",
       "mods": 0
     },
     {
@@ -239,6 +288,20 @@
       "mods": 0
     },
     {
+      "line": 15,
+      "start": 15,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
       "line": 17,
       "start": 2,
       "len": 6,
@@ -253,10 +316,45 @@
       "mods": 0
     },
     {
+      "line": 17,
+      "start": 13,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 19,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
       "line": 19,
       "start": 2,
       "len": 13,
       "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 19,
+      "start": 15,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 16,
+      "len": 2,
+      "ty": "Operator",
       "mods": 0
     }
   ]

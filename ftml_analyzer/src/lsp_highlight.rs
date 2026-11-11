@@ -66,6 +66,8 @@ pub enum HighlightTy {
     Superscript = 15,
     /// ,,
     Subscript = 16,
+    /// [[ ]] [[/ [[*
+    Operator = 17,
     // TODO: add more as needed, keep in sync with the legend
 }
 
@@ -73,7 +75,7 @@ impl HighlightTy {
     fn to_index(&self) -> Option<u32> {
         let ty = match self {
             Self::KeyWord => SemanticTokenType::KEYWORD,
-            Self::Equals | Self::Pipe | Self::Quote => SemanticTokenType::OPERATOR,
+            Self::Equals | Self::Pipe | Self::Quote | Self::Operator => SemanticTokenType::OPERATOR,
             Self::Comment => SemanticTokenType::COMMENT,
             Self::Attr => SemanticTokenType::PROPERTY,
             Self::String => SemanticTokenType::STRING,

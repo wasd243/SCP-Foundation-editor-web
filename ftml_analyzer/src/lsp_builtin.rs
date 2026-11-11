@@ -27,7 +27,7 @@ use serde::Serialize;
 /// A private enum for different types of builtin AST nodes.
 pub enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
-    InLineBlocks(InlineBlocks),
+    InLineBlocks(InlineBlocks<'lsp>),
     Blocks(Blocks<'lsp>),
     Token(&'lsp Token),
 }

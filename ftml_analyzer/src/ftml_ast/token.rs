@@ -54,6 +54,11 @@ impl ToAbsoluteSpan for Token {
 fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
     match ty {
         TokenTy::Quote => Some(HighlightTy::Quote),
+        TokenTy::LeftBlock
+        | TokenTy::LeftBlockStar
+        | TokenTy::RightBlock
+        | TokenTy::LeftBlockEnd
+        | TokenTy::LeftBlockAnchor => Some(HighlightTy::Operator),
         _ => None,
     }
 }

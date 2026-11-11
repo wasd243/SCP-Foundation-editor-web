@@ -13,16 +13,20 @@ use super::ParamKind;
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct InlineBlocks {
+pub struct InlineBlocks<'lsp> {
     pub span: Span,
+    /// [[
+    pub start_block: &'lsp Token,
+    /// ]]
+    pub end_block: &'lsp Token,
     /// Keep content for sub hihgliht in `[[include]]` `[[user name]]`.
     pub parameters: Vec<Param>,
 }
 
-impl InlineBlocks {
+impl<'lsp> InlineBlocks<'lsp> {
     #[must_use]
     pub(super) fn from_parse_token_slice(
-        tokens: &[Token],
+        tokens: &'lsp [Token],
         diagnostics: &[Diagnostic],
     ) -> Option<Self> {
         let (start_mark, rest) = tokens.split_first()?;
@@ -47,6 +51,8 @@ impl InlineBlocks {
                 start: start_mark.span.start,
                 end: end_span,
             },
+            start_block: start_mark,
+            end_block: &rest[end_idx],
             parameters,
         })
     }
@@ -59,11 +65,12 @@ impl InlineBlocks {
 /// # NOTE:
 /// This implementation ONLY convert parameters to `AbsoluteSpan`,
 /// span, is left for collapsing.
-impl ToAbsoluteSpans for InlineBlocks {
+impl ToAbsoluteSpans for InlineBlocks<'_> {
     fn to_abs_spans(&self) -> Vec<AbsoluteSpan> {
-        self.parameters
-            .iter()
-            .filter_map(|p| p.to_abs_span())
-            .collect()
+        let mut spans = Vec::with_capacity(self.parameters.len() + 2);
+        spans.extend(self.start_block.to_abs_span());
+        spans.extend(self.parameters.iter().filter_map(|p| p.to_abs_span()));
+        spans.extend(self.end_block.to_abs_span());
+        spans
     }
 }
