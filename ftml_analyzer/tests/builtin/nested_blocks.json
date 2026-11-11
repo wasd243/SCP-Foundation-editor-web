@@ -147,7 +147,7 @@
             "ty": "string"
           }
         ],
-        "block-content": [
+        "block-contents": [
           {
             "token": {
               "slice": "normal",
@@ -423,7 +423,7 @@
             "ty": "string"
           }
         ],
-        "block-content": [
+        "block-contents": [
           {
             "token": {
               "slice": "linemark1",
@@ -467,7 +467,7 @@
                   "ty": "block-name"
                 }
               ],
-              "block-content": [
+              "block-contents": [
                 {
                   "token": {
                     "slice": "linemark2",
@@ -511,7 +511,7 @@
                         "ty": "block-name"
                       }
                     ],
-                    "block-content": [
+                    "block-contents": [
                       {
                         "token": {
                           "slice": "linemark3",
@@ -555,7 +555,7 @@
                               "ty": "block-name"
                             }
                           ],
-                          "block-content": [
+                          "block-contents": [
                             {
                               "token": {
                                 "slice": "linemark4",
@@ -615,7 +615,7 @@
                                     "ty": "block-name"
                                   }
                                 ],
-                                "block-content": [
+                                "block-contents": [
                                   {
                                     "token": {
                                       "slice": "some",
@@ -831,7 +831,7 @@
                                     "ty": "block-name"
                                   }
                                 ],
-                                "block-content": [
+                                "block-contents": [
                                   {
                                     "token": {
                                       "slice": "linemark5",

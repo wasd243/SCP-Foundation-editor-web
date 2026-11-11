@@ -22,7 +22,7 @@ pub struct Blocks<'lsp> {
     /// This contains parameters like `div` `class` `=`.
     pub block_parameters: Vec<Param>,
     /// This contains block contents, includes everything.
-    pub block_content: Vec<BuiltIn<'lsp>>,
+    pub block_contents: Vec<BuiltIn<'lsp>>,
     /// BlockKind, which determines CSS/HTML highlights.
     pub block_ty: BlockKind,
     /// Only use in sub languages BlockKind, otherwise stay as `None`.
@@ -161,13 +161,13 @@ impl<'lsp> Blocks<'lsp> {
             if let Some(end_token) = end_token {
                 let used_index = parse_token.len() - iter.as_slice().len();
 
-                let mut block = Self {
+                let mut blocks = Self {
                     span: Span {
                         start: start_token.span.start,
                         end: end_token.span.end,
                     },
                     block_parameters,
-                    block_content: block_contents,
+                    block_contents,
                     block_ty,
                     block_sub_lang_span: None,
                     used_index,
@@ -175,17 +175,9 @@ impl<'lsp> Blocks<'lsp> {
                     starts_and_ends_of_the_block,
                 };
 
-                if matches!(block.block_ty, BlockKind::ModuleCss | BlockKind::Html) {
-                    // we don't need to escape the `[` `]` token because there's nothing stored in
-                    // block_contents when `block_ty` is html or css.
+                calc_sub_highlight_span(&mut blocks);
 
-                    // get the `html`/`css` sub languages highlights' range.
-                    let first = block.span.start.0 + 1;
-                    let last = block.span.end.0;
-                    block.block_sub_lang_span = (first < last).then_some(first..last);
-                }
-
-                return Some(block);
+                return Some(blocks);
             }
         }
 
@@ -231,10 +223,23 @@ impl<'lsp> ToAbsoluteSpans for Blocks<'lsp> {
                 .filter_map(|t| t.to_abs_span()),
         );
 
-        for content in &self.block_content {
+        for content in &self.block_contents {
             color_nodes(content, &mut abs_spans);
         }
 
         abs_spans
+    }
+}
+
+/// Calculate sublanguage highlights' spans.
+fn calc_sub_highlight_span(blocks: &mut Blocks) {
+    if matches!(blocks.block_ty, BlockKind::ModuleCss | BlockKind::Html) {
+        // we don't need to escape the `[` `]` token because there's nothing stored in
+        // block_contents when `block_ty` is html or css.
+
+        // get the `html`/`css` sub languages highlights' range.
+        let first = blocks.span.start.0 + 1;
+        let last = blocks.span.end.0;
+        blocks.block_sub_lang_span = (first < last).then_some(first..last);
     }
 }

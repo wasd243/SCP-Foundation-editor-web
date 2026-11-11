@@ -53,7 +53,7 @@
             "ty": "block-attr"
           }
         ],
-        "block-content": [],
+        "block-contents": [],
         "block-ty": "module-css",
         "block-sub-lang-span": {
           "start": 1,
@@ -160,7 +160,7 @@
             "ty": "block-name"
           }
         ],
-        "block-content": [],
+        "block-contents": [],
         "block-ty": "html",
         "block-sub-lang-span": {
           "start": 7,
@@ -345,7 +345,7 @@
             "ty": "string"
           }
         ],
-        "block-content": [
+        "block-contents": [
           {
             "token": {
               "slice": "some",
@@ -421,7 +421,7 @@
                   "ty": "block-name"
                 }
               ],
-              "block-content": [
+              "block-contents": [
                 {
                   "token": {
                     "slice": "SOME",
@@ -713,7 +713,7 @@
             "ty": "block-name"
           }
         ],
-        "block-content": [],
+        "block-contents": [],
         "block-ty": "html",
         "block-sub-lang-span": {
           "start": 22,
