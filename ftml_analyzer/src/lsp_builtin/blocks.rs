@@ -51,14 +51,12 @@ impl<'lsp> Blocks<'lsp> {
                 return None;
             }
 
-            let start_token = token;
-
             // cache block token parameters temporarily.
+            // we don't need to rename start token, the `token` variable is the start of the block token.
             let mut block_token_parameters = Vec::new();
             let mut end_token: Option<&Token> = None;
             let mut block_ty = BlockKind::default();
 
-            let start = start_token;
             let mut end: Option<&Token> = None;
             let mut start2: Option<&Token> = None;
 
@@ -156,14 +154,14 @@ impl<'lsp> Blocks<'lsp> {
             }
 
             let end2 = Some(end_token?);
-            let starts_and_ends_of_the_block = [start, end?, start2?, end2?];
+            let starts_and_ends_of_the_block = [token, end?, start2?, end2?];
 
             if let Some(end_token) = end_token {
                 let used_index = parse_token.len() - iter.as_slice().len();
 
                 let mut blocks = Self {
                     span: Span {
-                        start: start_token.span.start,
+                        start: token.span.start,
                         end: end_token.span.end,
                     },
                     block_parameters,
