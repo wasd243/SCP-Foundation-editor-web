@@ -179,7 +179,65 @@
             ]
           },
           "ty": "identifier"
-        }
+        },
+        "starts-and-ends-of-the-block": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": [
+                2,
+                0
+              ],
+              "end": [
+                2,
+                2
+              ]
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "]]",
+            "span": {
+              "start": [
+                2,
+                20
+              ],
+              "end": [
+                2,
+                22
+              ]
+            },
+            "ty": "right-block"
+          },
+          {
+            "slice": "[[/",
+            "span": {
+              "start": [
+                4,
+                0
+              ],
+              "end": [
+                4,
+                3
+              ]
+            },
+            "ty": "left-block-end"
+          },
+          {
+            "slice": "]]",
+            "span": {
+              "start": [
+                4,
+                6
+              ],
+              "end": [
+                4,
+                8
+              ]
+            },
+            "ty": "right-block"
+          }
+        ]
       }
     },
     {
@@ -653,7 +711,65 @@
                                     ]
                                   },
                                   "ty": "identifier"
-                                }
+                                },
+                                "starts-and-ends-of-the-block": [
+                                  {
+                                    "slice": "[[",
+                                    "span": {
+                                      "start": [
+                                        14,
+                                        3
+                                      ],
+                                      "end": [
+                                        14,
+                                        5
+                                      ]
+                                    },
+                                    "ty": "left-block"
+                                  },
+                                  {
+                                    "slice": "]]",
+                                    "span": {
+                                      "start": [
+                                        14,
+                                        13
+                                      ],
+                                      "end": [
+                                        14,
+                                        15
+                                      ]
+                                    },
+                                    "ty": "right-block"
+                                  },
+                                  {
+                                    "slice": "[[/",
+                                    "span": {
+                                      "start": [
+                                        14,
+                                        36
+                                      ],
+                                      "end": [
+                                        14,
+                                        39
+                                      ]
+                                    },
+                                    "ty": "left-block-end"
+                                  },
+                                  {
+                                    "slice": "]]",
+                                    "span": {
+                                      "start": [
+                                        14,
+                                        47
+                                      ],
+                                      "end": [
+                                        14,
+                                        49
+                                      ]
+                                    },
+                                    "ty": "right-block"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -811,7 +927,65 @@
                                     ]
                                   },
                                   "ty": "identifier"
-                                }
+                                },
+                                "starts-and-ends-of-the-block": [
+                                  {
+                                    "slice": "[[",
+                                    "span": {
+                                      "start": [
+                                        16,
+                                        0
+                                      ],
+                                      "end": [
+                                        16,
+                                        2
+                                      ]
+                                    },
+                                    "ty": "left-block"
+                                  },
+                                  {
+                                    "slice": "]]",
+                                    "span": {
+                                      "start": [
+                                        16,
+                                        6
+                                      ],
+                                      "end": [
+                                        16,
+                                        8
+                                      ]
+                                    },
+                                    "ty": "right-block"
+                                  },
+                                  {
+                                    "slice": "[[/",
+                                    "span": {
+                                      "start": [
+                                        20,
+                                        0
+                                      ],
+                                      "end": [
+                                        20,
+                                        3
+                                      ]
+                                    },
+                                    "ty": "left-block-end"
+                                  },
+                                  {
+                                    "slice": "]]",
+                                    "span": {
+                                      "start": [
+                                        20,
+                                        7
+                                      ],
+                                      "end": [
+                                        20,
+                                        9
+                                      ]
+                                    },
+                                    "ty": "right-block"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -845,7 +1019,65 @@
                               ]
                             },
                             "ty": "equals"
-                          }
+                          },
+                          "starts-and-ends-of-the-block": [
+                            {
+                              "slice": "[[",
+                              "span": {
+                                "start": [
+                                  12,
+                                  0
+                                ],
+                                "end": [
+                                  12,
+                                  2
+                                ]
+                              },
+                              "ty": "left-block"
+                            },
+                            {
+                              "slice": "]]",
+                              "span": {
+                                "start": [
+                                  12,
+                                  3
+                                ],
+                                "end": [
+                                  12,
+                                  5
+                                ]
+                              },
+                              "ty": "right-block"
+                            },
+                            {
+                              "slice": "[[/",
+                              "span": {
+                                "start": [
+                                  22,
+                                  0
+                                ],
+                                "end": [
+                                  22,
+                                  3
+                                ]
+                              },
+                              "ty": "left-block-end"
+                            },
+                            {
+                              "slice": "]]",
+                              "span": {
+                                "start": [
+                                  22,
+                                  4
+                                ],
+                                "end": [
+                                  22,
+                                  6
+                                ]
+                              },
+                              "ty": "right-block"
+                            }
+                          ]
                         }
                       },
                       {
@@ -879,7 +1111,65 @@
                         ]
                       },
                       "ty": "quote"
-                    }
+                    },
+                    "starts-and-ends-of-the-block": [
+                      {
+                        "slice": "[[",
+                        "span": {
+                          "start": [
+                            10,
+                            0
+                          ],
+                          "end": [
+                            10,
+                            2
+                          ]
+                        },
+                        "ty": "left-block"
+                      },
+                      {
+                        "slice": "]]",
+                        "span": {
+                          "start": [
+                            10,
+                            3
+                          ],
+                          "end": [
+                            10,
+                            5
+                          ]
+                        },
+                        "ty": "right-block"
+                      },
+                      {
+                        "slice": "[[/",
+                        "span": {
+                          "start": [
+                            24,
+                            0
+                          ],
+                          "end": [
+                            24,
+                            3
+                          ]
+                        },
+                        "ty": "left-block-end"
+                      },
+                      {
+                        "slice": "]]",
+                        "span": {
+                          "start": [
+                            24,
+                            4
+                          ],
+                          "end": [
+                            24,
+                            6
+                          ]
+                        },
+                        "ty": "right-block"
+                      }
+                    ]
                   }
                 },
                 {
@@ -913,7 +1203,65 @@
                   ]
                 },
                 "ty": "other"
-              }
+              },
+              "starts-and-ends-of-the-block": [
+                {
+                  "slice": "[[",
+                  "span": {
+                    "start": [
+                      8,
+                      0
+                    ],
+                    "end": [
+                      8,
+                      2
+                    ]
+                  },
+                  "ty": "left-block"
+                },
+                {
+                  "slice": "]]",
+                  "span": {
+                    "start": [
+                      8,
+                      3
+                    ],
+                    "end": [
+                      8,
+                      5
+                    ]
+                  },
+                  "ty": "right-block"
+                },
+                {
+                  "slice": "[[/",
+                  "span": {
+                    "start": [
+                      26,
+                      0
+                    ],
+                    "end": [
+                      26,
+                      3
+                    ]
+                  },
+                  "ty": "left-block-end"
+                },
+                {
+                  "slice": "]]",
+                  "span": {
+                    "start": [
+                      26,
+                      4
+                    ],
+                    "end": [
+                      26,
+                      6
+                    ]
+                  },
+                  "ty": "right-block"
+                }
+              ]
             }
           },
           {
@@ -947,7 +1295,65 @@
             ]
           },
           "ty": "identifier"
-        }
+        },
+        "starts-and-ends-of-the-block": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": [
+                6,
+                0
+              ],
+              "end": [
+                6,
+                2
+              ]
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "]]",
+            "span": {
+              "start": [
+                6,
+                35
+              ],
+              "end": [
+                6,
+                37
+              ]
+            },
+            "ty": "right-block"
+          },
+          {
+            "slice": "[[/",
+            "span": {
+              "start": [
+                28,
+                0
+              ],
+              "end": [
+                28,
+                3
+              ]
+            },
+            "ty": "left-block-end"
+          },
+          {
+            "slice": "]]",
+            "span": {
+              "start": [
+                28,
+                14
+              ],
+              "end": [
+                28,
+                16
+              ]
+            },
+            "ty": "right-block"
+          }
+        ]
       }
     }
   ],

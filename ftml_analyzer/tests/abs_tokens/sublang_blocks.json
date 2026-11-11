@@ -22,6 +22,34 @@
       "mods": 0
     },
     {
+      "line": 0,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 0,
+      "start": 12,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 4,
+      "start": 0,
+      "len": 3,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 4,
+      "start": 9,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
       "line": 6,
       "start": 2,
       "len": 4,
@@ -33,6 +61,34 @@
       "start": 3,
       "len": 4,
       "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 6,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 6,
+      "start": 6,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 14,
+      "start": 0,
+      "len": 3,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 14,
+      "start": 7,
+      "len": 2,
+      "ty": "Operator",
       "mods": 0
     },
     {
@@ -85,6 +141,34 @@
       "mods": 0
     },
     {
+      "line": 16,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 16,
+      "start": 17,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 18,
+      "start": 0,
+      "len": 3,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 18,
+      "start": 6,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
       "line": 17,
       "start": 10,
       "len": 8,
@@ -96,6 +180,34 @@
       "start": 43,
       "len": 8,
       "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 8,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 18,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 40,
+      "len": 3,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 51,
+      "len": 2,
+      "ty": "Operator",
       "mods": 0
     },
     {
@@ -117,6 +229,34 @@
       "start": 3,
       "len": 4,
       "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 6,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 23,
+      "start": 0,
+      "len": 3,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 23,
+      "start": 7,
+      "len": 2,
+      "ty": "Operator",
       "mods": 0
     }
   ]

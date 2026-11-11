@@ -34,6 +34,8 @@ pub struct Blocks<'lsp> {
     /// Oh shit I forgot the close tags.
     /// Close tags would only be a Identifier in the lsp.
     pub close_tag: Option<&'lsp Token>,
+    /// [[ ]] [[/ ]]
+    pub starts_and_ends_of_the_block: [&'lsp Token; 4],
 }
 
 impl<'lsp> Blocks<'lsp> {
@@ -56,6 +58,10 @@ impl<'lsp> Blocks<'lsp> {
             let mut end_token: Option<&Token> = None;
             let mut block_ty = BlockKind::default();
 
+            let start = start_token;
+            let mut end: Option<&Token> = None;
+            let mut start2: Option<&Token> = None;
+
             // match a block start: such as `[[div ]]` `[[footnote]]` `[[span ]]` `[[html ]]`
             loop {
                 let t = iter.next()?;
@@ -67,6 +73,8 @@ impl<'lsp> Blocks<'lsp> {
                         let next = iter.next()?;
 
                         if next.ty == TokenTy::RightBlock {
+                            // push the `]]` into container
+                            end = Some(next);
                             break;
                         }
 
@@ -91,6 +99,9 @@ impl<'lsp> Blocks<'lsp> {
                 }
 
                 if t.ty == TokenTy::RightBlock {
+                    // this is the same token as previous, should NEVER repeat because previous code
+                    // already break the loop.
+                    end = Some(t);
                     // won't assign value to end_token, end_token will be assigned at `[[/ ]]<-`
                     break;
                 }
@@ -133,6 +144,7 @@ impl<'lsp> Blocks<'lsp> {
                         BlockKind::Block => true,
                     }
                 {
+                    start2 = Some(t); // [[/
                     close_tag = iter.next(); // name
                     end_token = iter.next(); // `]]`
                     break;
@@ -142,6 +154,9 @@ impl<'lsp> Blocks<'lsp> {
                     block_contents.push(BuiltIn::Token(t));
                 }
             }
+
+            let end2 = Some(end_token?);
+            let starts_and_ends_of_the_block = [start, end?, start2?, end2?];
 
             if let Some(end_token) = end_token {
                 let used_index = parse_token.len() - iter.as_slice().len();
@@ -157,6 +172,7 @@ impl<'lsp> Blocks<'lsp> {
                     block_sub_lang_span: None,
                     used_index,
                     close_tag,
+                    starts_and_ends_of_the_block,
                 };
 
                 if matches!(block.block_ty, BlockKind::ModuleCss | BlockKind::Html) {
@@ -208,6 +224,12 @@ impl<'lsp> ToAbsoluteSpans for Blocks<'lsp> {
         {
             abs_spans.push(close_tag);
         }
+
+        abs_spans.extend(
+            self.starts_and_ends_of_the_block
+                .iter()
+                .filter_map(|t| t.to_abs_span()),
+        );
 
         for content in &self.block_content {
             color_nodes(content, &mut abs_spans);
