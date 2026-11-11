@@ -1,0 +1,46 @@
+name: Check analyzer
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - "ftml_analyzer/**"
+      - ".github/workflows/check.yml"
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - "ftml_analyzer/**"
+      - ".github/workflows/check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clippy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Run Clippy
+        working-directory: ./ftml_analyzer
+        run: cargo clippy --all-targets -- -D warnings
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Run tests
+        working-directory: ./ftml_analyzer
+        run: cargo test
