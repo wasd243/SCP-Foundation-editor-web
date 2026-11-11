@@ -1,12 +1,9 @@
 pub mod types;
-pub mod utils;
-
-use utils::color_nodes;
 
 use lsp_types::{SemanticToken, SemanticTokenType};
 use serde::Serialize;
 
-use crate::{lsp_builtin::BuiltIn, lsp_highlight::types::TYPES};
+use crate::{lsp_builtin::BuiltIn, lsp_highlight::types::TYPES, utils::highlight::color_nodes};
 
 /// For converting span -> AbsoluteSpan.
 pub trait ToAbsoluteSpan {

@@ -1,10 +1,10 @@
 //! # Utils
 //!
 //! This module is build to providing util functions for `LSP BuiltIn`.
-
-use ftml::parsing::{ParseErrorKind, Token as TokenTy};
+pub(crate) mod highlight;
 
 use crate::ftml_ast::{Diagnostic, Token};
+use ftml::parsing::{ParseErrorKind, Token as TokenTy};
 
 /// Check if token span has diagnostic.
 pub(crate) fn has_diagnostic(token: &Token, diagnostic: &Diagnostic) -> bool {

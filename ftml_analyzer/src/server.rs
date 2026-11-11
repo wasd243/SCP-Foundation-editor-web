@@ -1,7 +1,6 @@
 #![allow(clippy::mutable_key_type)]
 
 mod diagnostics;
-mod highlights;
 
 use diagnostics::{manage_diagnostics, push};
 

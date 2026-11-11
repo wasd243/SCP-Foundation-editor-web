@@ -9,8 +9,8 @@ use crate::{
         BlockKind, Param,
         regex::{CSS, HTML, MODULE},
     },
-    lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans, utils::color_nodes},
-    utils::has_diagnostic,
+    lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans},
+    utils::{has_diagnostic, highlight::color_nodes},
 };
 
 use super::{BuiltIn, ParamKind, visit};
