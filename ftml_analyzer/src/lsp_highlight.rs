@@ -91,7 +91,7 @@ impl HighlightTy {
             Self::Subscript => SemanticTokenType::new("ftmlSubscript"),
         };
 
-        //  NOTE: The slice and `ty` come from the same list, so this cannot fail.
+        // NOTE: The slice and `ty` come from the same list, so this cannot fail.
         TYPES.iter().position(|t| *t == ty).unwrap() as u32
     }
 }

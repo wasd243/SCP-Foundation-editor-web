@@ -80,3 +80,16 @@ pub fn build_server() -> Result<()> {
     io_threads.join()?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const BOLD: &str = "**aaa**";
+
+    #[test]
+    fn bold_is_correct_parsed() {
+        let sem_tokens = parse(BOLD);
+        dbg!(sem_tokens);
+    }
+}
