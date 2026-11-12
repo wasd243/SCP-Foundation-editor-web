@@ -15,7 +15,8 @@ use ftml::prelude::*;
 use line_index::LineCol;
 use line_index::{LineIndex, TextSize, WideEncoding};
 use lsp_types::{
-    Diagnostic as ServerDiagnostic, DiagnosticSeverity, Position, Range as ServerRange,
+    Diagnostic as ServerDiagnostic, DiagnosticSeverity, DiagnosticTag, Position,
+    Range as ServerRange,
 };
 use serde::{Deserialize, Serialize};
 use std::ops::Range;
@@ -97,8 +98,6 @@ impl ParseToken {
     }
 
     /// Clone diagnostics to IDEs.
-    ///
-    /// TODO: implement different type of diagnostics' severities.
     pub fn to_diagnostics(&self) -> Vec<ServerDiagnostic> {
         let mut server_diagnostics = Vec::with_capacity(self.diagnostics.len());
         for diag in &self.diagnostics {
@@ -110,6 +109,7 @@ impl ParseToken {
                 severity: Some(DiagnosticSeverity::WARNING),
                 source: Some(SOURCE.to_string()),
                 message: diag.msg.clone(),
+                tags: Some(vec![DiagnosticTag::UNNECESSARY]),
                 ..Default::default()
             };
             server_diagnostics.push(server_diagnostic);
