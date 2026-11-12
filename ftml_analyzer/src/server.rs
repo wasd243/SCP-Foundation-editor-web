@@ -50,21 +50,23 @@ pub fn main_loop(connection: Connection) -> Result<()> {
 }
 
 fn match_request(req: Request, buffers: &Buffers) -> Response {
+    let (id, params): (_, SemanticTokensParams) = req
+        .clone()
+        .extract(SemanticTokensFullRequest::METHOD)
+        .unwrap();
+    let Some(source) = buffers.get(&params.text_document.uri) else {
+        return Response::new_err(
+            id,
+            lsp_server::ErrorCode::InvalidParams as i32,
+            "The requested document is not open.".to_owned(),
+        );
+    };
+
     match req.method.as_str() {
         FoldingRangeRequest::METHOD => {
             Response::new_ok(req.id, Vec::<lsp_types::FoldingRange>::new())
         }
         SemanticTokensFullRequest::METHOD => {
-            let (id, params): (_, SemanticTokensParams) =
-                req.extract(SemanticTokensFullRequest::METHOD).unwrap();
-            let Some(source) = buffers.get(&params.text_document.uri) else {
-                return Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InvalidParams as i32,
-                    "The requested document is not open.".to_owned(),
-                );
-            };
-
             let tokens: Vec<SemanticToken> = parse(source);
             Response::new_ok(
                 id,
