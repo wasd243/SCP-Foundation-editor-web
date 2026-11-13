@@ -36,7 +36,7 @@ pub static SERVER_CAPABILITIES: LazyLock<ServerCapabilities> =
         ..ServerCapabilities::default()
     });
 
-pub type Buffers = HashMap<Uri, String>;
+type Buffers = HashMap<Uri, String>;
 
 pub fn main_loop(connection: Connection) -> Result<()> {
     let mut buffers = HashMap::new();
