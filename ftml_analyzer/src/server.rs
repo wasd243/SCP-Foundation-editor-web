@@ -74,37 +74,27 @@ fn match_request(req: Request, buffers: &Buffers) -> Response {
             for node in builtin_tree {
                 match node {
                     BuiltIn::InLineBlocks(b) => {
-                        let start_line = b.span.start.0;
-                        let end_line = b.span.end.0;
-                        let start_character =
-                            Some(b.start_block.span.start.1 + b.start_block.span.end.1);
-                        let end_character = Some(b.end_block.span.start.1 + b.end_block.span.end.1);
-                        let folding_range = FoldingRange {
-                            start_line,
-                            end_line,
-                            start_character,
-                            end_character,
+                        let (open, close) = (b.start_block.span, b.end_block.span);
+                        folding_ranges.push(FoldingRange {
+                            start_line: b.span.start.0,
+                            end_line: b.span.end.0,
+                            start_character: Some(open.start.1 + open.end.1),
+                            end_character: Some(close.start.1 + close.end.1),
                             kind: Some(FoldingRangeKind::Region),
                             collapsed_text: Some(COLLAPSED_TEXT.to_owned()),
-                        };
-                        folding_ranges.push(folding_range);
+                        });
                     }
                     BuiltIn::Blocks(b) => {
-                        let start_line = b.span.start.0;
-                        let end_line = b.span.end.0;
-                        let start_char = b.starts_and_ends_of_the_block[0].span;
-                        let start_character = Some(start_char.start.1 + start_char.end.1);
-                        let end_char = b.starts_and_ends_of_the_block[3].span;
-                        let end_character = Some(end_char.start.1 + end_char.end.1);
-                        let folding_range = FoldingRange {
-                            start_line,
-                            end_line,
-                            start_character,
-                            end_character,
+                        let tags = &b.starts_and_ends_of_the_block;
+                        let (open, close) = (tags[0].span, tags[3].span);
+                        folding_ranges.push(FoldingRange {
+                            start_line: b.span.start.0,
+                            end_line: b.span.end.0,
+                            start_character: Some(open.start.1 + open.end.1),
+                            end_character: Some(close.start.1 + close.end.1),
                             kind: Some(FoldingRangeKind::Region),
                             collapsed_text: Some(COLLAPSED_TEXT.to_owned()),
-                        };
-                        folding_ranges.push(folding_range);
+                        });
                     }
                     _ => {}
                 };
