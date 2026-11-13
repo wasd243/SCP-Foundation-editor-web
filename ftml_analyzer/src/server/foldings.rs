@@ -1,6 +1,6 @@
 use lsp_types::{FoldingRange, FoldingRangeKind};
 
-use crate::{Span, lsp_builtin::BuiltIn, lsp_highlight::ToAbsoluteSpans, server::COLLAPSED_TEXT};
+use crate::{lsp_builtin::BuiltIn, server::COLLAPSED_TEXT};
 
 pub(super) fn fold(tree: Vec<BuiltIn<'_>>) -> Vec<FoldingRange> {
     let mut folding_ranges = Vec::new();
