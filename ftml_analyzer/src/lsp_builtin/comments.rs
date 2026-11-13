@@ -35,14 +35,13 @@ impl<'lsp> Comments<'lsp> {
         let (start_token, rest) = tokens.split_first()?;
 
         let mut end_token = None;
-        let mut contents = Vec::new();
+        let mut contents = vec![start_token];
 
         for token in rest {
+            contents.push(token);
             if token.ty == TokenTy::RightComment {
                 end_token = Some(token);
                 break;
-            } else {
-                contents.push(token);
             }
         }
 

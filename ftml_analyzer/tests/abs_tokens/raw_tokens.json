@@ -9,6 +9,13 @@
     },
     {
       "line": 0,
+      "start": 2,
+      "len": 4,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 0,
       "start": 6,
       "len": 5,
       "ty": "Comment",
@@ -29,17 +36,17 @@
       "mods": 0
     },
     {
-      "line": 1,
-      "start": 0,
-      "len": 1,
-      "ty": "Quote",
+      "line": 0,
+      "start": 17,
+      "len": 3,
+      "ty": "Comment",
       "mods": 0
     },
     {
       "line": 3,
-      "start": 0,
-      "len": 11,
-      "ty": "Operator",
+      "start": 12,
+      "len": 4,
+      "ty": "Comment",
       "mods": 0
     },
     {
@@ -60,6 +67,13 @@
       "line": 3,
       "start": 27,
       "len": 4,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 3,
+      "start": 31,
+      "len": 3,
       "ty": "Comment",
       "mods": 0
     }

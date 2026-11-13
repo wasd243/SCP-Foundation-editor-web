@@ -2,6 +2,13 @@
   "tree": [
     {
       "line": 0,
+      "start": 0,
+      "len": 4,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 0,
       "start": 4,
       "len": 6,
       "ty": "Comment",
@@ -78,59 +85,10 @@
       "mods": 0
     },
     {
-      "line": 2,
-      "start": 2,
+      "line": 0,
+      "start": 46,
       "len": 3,
-      "ty": "KeyWord",
-      "mods": 0
-    },
-    {
-      "line": 2,
-      "start": 6,
-      "len": 5,
-      "ty": "Attr",
-      "mods": 0
-    },
-    {
-      "line": 2,
-      "start": 12,
-      "len": 1,
-      "ty": "Equals",
-      "mods": 0
-    },
-    {
-      "line": 2,
-      "start": 14,
-      "len": 1,
-      "ty": "String",
-      "mods": 0
-    },
-    {
-      "line": 2,
-      "start": 15,
-      "len": 4,
-      "ty": "String",
-      "mods": 0
-    },
-    {
-      "line": 2,
-      "start": 19,
-      "len": 1,
-      "ty": "String",
-      "mods": 0
-    },
-    {
-      "line": 4,
-      "start": 3,
-      "len": 3,
-      "ty": "KeyWord",
-      "mods": 0
-    },
-    {
-      "line": 2,
-      "start": 0,
-      "len": 2,
-      "ty": "Operator",
+      "ty": "Comment",
       "mods": 0
     },
     {
