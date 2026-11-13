@@ -23,7 +23,7 @@ use std::sync::LazyLock;
 
 use crate::{
     ftml_ast::ParseToken, get_builtin_ast, lsp_highlight::types::semantic_tokens_capability, parse,
-    parse_token, server::foldings::fold,
+    parse_token, server::foldings::fold, utils::highlight::get_source,
 };
 
 const COLLAPSED_TEXT: &str = "...";
@@ -36,7 +36,7 @@ pub static SERVER_CAPABILITIES: LazyLock<ServerCapabilities> =
         ..ServerCapabilities::default()
     });
 
-type Buffers = HashMap<Uri, String>;
+pub type Buffers = HashMap<Uri, String>;
 
 pub fn main_loop(connection: Connection) -> Result<()> {
     let mut buffers = HashMap::new();
@@ -59,35 +59,29 @@ pub fn main_loop(connection: Connection) -> Result<()> {
 fn match_request(req: Request, buffers: &Buffers) -> Response {
     match req.method.as_str() {
         FoldingRangeRequest::METHOD => {
-            let (id, params): (_, FoldingRangeParams) =
-                req.clone().extract(FoldingRangeRequest::METHOD).unwrap();
-
-            let Some(source) = buffers.get(&params.text_document.uri) else {
-                return Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InvalidParams as i32,
-                    "The requested document is not open.".to_owned(),
-                );
-            };
+            get_source!(
+                req,
+                buffers,
+                FoldingRangeParams,
+                FoldingRangeRequest::METHOD,
+                id,
+                source
+            );
 
             let tokens: ParseToken = parse_token(source);
             let builtin_tree = get_builtin_ast(&tokens).tree;
             let folding_ranges = fold(builtin_tree);
-            Response::new_ok(req.id, folding_ranges)
+            Response::new_ok(id, folding_ranges)
         }
         SemanticTokensFullRequest::METHOD => {
-            let (id, params): (_, SemanticTokensParams) = req
-                .clone()
-                .extract(SemanticTokensFullRequest::METHOD)
-                .unwrap();
-
-            let Some(source) = buffers.get(&params.text_document.uri) else {
-                return Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InvalidParams as i32,
-                    "The requested document is not open.".to_owned(),
-                );
-            };
+            get_source!(
+                req,
+                buffers,
+                SemanticTokensParams,
+                SemanticTokensFullRequest::METHOD,
+                id,
+                source
+            );
 
             let tokens: Vec<SemanticToken> = parse(source);
             Response::new_ok(

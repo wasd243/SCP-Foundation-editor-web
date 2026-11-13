@@ -13,3 +13,19 @@ pub(crate) fn color_nodes(node: &BuiltIn<'_>, spans: &mut Vec<AbsoluteSpan>) {
         BuiltIn::Comments(c) => spans.extend(c.to_abs_spans()),
     }
 }
+
+macro_rules! get_source {
+    ($req:ident, $buffers:ident, $req_ty:ty, $method:expr, $id:ident, $source:ident) => {
+        let ($id, params): (_, $req_ty) = $req.clone().extract($method).unwrap();
+
+        let Some($source) = $buffers.get(&params.text_document.uri) else {
+            return lsp_server::Response::new_err(
+                $id,
+                lsp_server::ErrorCode::InvalidParams as i32,
+                "The requested document is not open.".to_owned(),
+            );
+        };
+    };
+}
+
+pub(crate) use get_source;
