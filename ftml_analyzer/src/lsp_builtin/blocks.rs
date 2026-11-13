@@ -6,14 +6,14 @@ use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
     lsp_builtin::{
-        BlockKind, Param,
+        BlockKind,
         regex::{CSS, HTML, MODULE},
     },
     lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans},
     utils::{has_diagnostic, highlight::color_nodes},
 };
 
-use super::{BuiltIn, ParamKind, visit};
+use super::{BuiltIn, Param, ParamKind, visit};
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
