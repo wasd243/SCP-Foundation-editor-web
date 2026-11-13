@@ -56,8 +56,14 @@
         "block-contents": [],
         "block-ty": "module-css",
         "block-sub-lang-span": {
-          "start": 1,
-          "end": 4
+          "start": [
+            1,
+            0
+          ],
+          "end": [
+            3,
+            11
+          ]
         },
         "close-tag": {
           "slice": "module",
@@ -163,8 +169,14 @@
         "block-contents": [],
         "block-ty": "html",
         "block-sub-lang-span": {
-          "start": 7,
-          "end": 14
+          "start": [
+            7,
+            0
+          ],
+          "end": [
+            13,
+            9
+          ]
         },
         "close-tag": {
           "slice": "html",
@@ -842,8 +854,14 @@
         "block-contents": [],
         "block-ty": "html",
         "block-sub-lang-span": {
-          "start": 22,
-          "end": 23
+          "start": [
+            22,
+            0
+          ],
+          "end": [
+            22,
+            9
+          ]
         },
         "close-tag": {
           "slice": "html",

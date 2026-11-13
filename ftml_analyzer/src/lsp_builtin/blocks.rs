@@ -1,6 +1,5 @@
 use ftml::parsing::Token as TokenTy;
 use serde::Serialize;
-use std::ops::Range;
 
 use crate::{
     Span,
@@ -28,7 +27,7 @@ pub struct Blocks<'lsp> {
     /// Only use in sub languages BlockKind, otherwise stay as `None`.
     /// An Optional Range which only record line numbers.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub block_sub_lang_span: Option<Range<u32>>,
+    pub block_sub_lang_span: Option<Span>,
     #[serde(skip)]
     used_index: usize,
     /// Oh shit I forgot the close tags.
@@ -231,9 +230,11 @@ fn calc_sub_highlight_span(blocks: &mut Blocks) {
         // we don't need to escape the `[` `]` token because there's nothing stored in
         // block_contents when `block_ty` is html or css.
 
-        // get the `html`/`css` sub languages highlights' range.
-        let first = blocks.span.start.0 + 1;
-        let last = blocks.span.end.0;
-        blocks.block_sub_lang_span = (first < last).then_some(first..last);
+        let first = (blocks.span.start.0 + 1, 0_u32);
+        let last = (blocks.span.end.0 - 1, blocks.span.end.1);
+        blocks.block_sub_lang_span = Some(Span {
+            start: first,
+            end: last,
+        });
     }
 }
