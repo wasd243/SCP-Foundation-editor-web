@@ -35,7 +35,6 @@ pub(crate) fn is_inline_mark_token(ty: TokenTy) -> bool {
             | TokenTy::DoubleTilde
             | TokenTy::Raw
             | TokenTy::LeftMonospace
-            | TokenTy::LeftComment
     )
 }
 

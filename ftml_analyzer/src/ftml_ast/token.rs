@@ -36,6 +36,18 @@ impl Token {
             mods: 0,
         })
     }
+
+    /// Only should use in `Comment` blocks.
+    pub fn to_comments_abs_span(&self) -> AbsoluteSpan {
+        AbsoluteSpan {
+            line: self.span.start.0,
+            start: self.span.start.1,
+            len: self.span.end.1 - self.span.start.1,
+            ty: HighlightTy::Comment,
+            // TODO: mods are temporarily a placeholder
+            mods: 0,
+        }
+    }
 }
 
 impl ToAbsoluteSpan for Token {

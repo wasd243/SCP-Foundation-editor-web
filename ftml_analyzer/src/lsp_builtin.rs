@@ -4,6 +4,7 @@
 //! The AST is builtin only for frontend highlightings rather than parsing.
 
 mod blocks;
+mod comments;
 mod inline_blocks;
 mod inline_marks;
 mod regex;
@@ -15,6 +16,7 @@ use inline_marks::InlineMarks;
 use crate::{
     Span,
     ftml_ast::{Diagnostic, ParseToken, Token},
+    lsp_builtin::comments::Comments,
     lsp_highlight::{AbsoluteSpan, HighlightTy, ToAbsoluteSpan},
     utils::{is_inline_block_token, is_inline_mark_token},
 };
@@ -29,6 +31,7 @@ pub enum BuiltIn<'lsp> {
     InLineMarks(InlineMarks<'lsp>),
     InLineBlocks(InlineBlocks<'lsp>),
     Blocks(Blocks<'lsp>),
+    Comments(Comments<'lsp>),
     Token(&'lsp Token),
 }
 
@@ -86,6 +89,13 @@ fn visit<'lsp>(
     {
         let used = blocks.token_len();
         return (BuiltIn::Blocks(blocks), used);
+    }
+
+    if parse_token[0].ty == TokenTy::LeftComment
+        && let Some(comments) = Comments::from_parse_token_slice(parse_token, diagnostics)
+    {
+        let used = comments.content_len() + 2;
+        return (BuiltIn::Comments(comments), used);
     }
 
     if is_inline_mark_token(parse_token[0].ty)

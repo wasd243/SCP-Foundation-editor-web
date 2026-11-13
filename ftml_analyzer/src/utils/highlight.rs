@@ -10,5 +10,6 @@ pub(crate) fn color_nodes(node: &BuiltIn<'_>, spans: &mut Vec<AbsoluteSpan>) {
         BuiltIn::InLineMarks(m) => spans.extend(m.to_abs_spans()),
         BuiltIn::InLineBlocks(b) => spans.extend(b.to_abs_spans()),
         BuiltIn::Blocks(b) => spans.extend(b.to_abs_spans()),
+        BuiltIn::Comments(c) => spans.extend(c.to_abs_spans()),
     }
 }

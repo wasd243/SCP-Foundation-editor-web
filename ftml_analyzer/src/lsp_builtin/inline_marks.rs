@@ -56,7 +56,6 @@ fn from_parse_token_<'lsp>(
 
             if t.ty == start_mark.ty
                 || (t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace)
-                || (t.ty == TokenTy::RightComment && start_mark.ty == TokenTy::LeftComment)
             {
                 end_mark = Some(t);
                 break;
@@ -96,7 +95,6 @@ where
 {
     match ty {
         TokenTy::LeftMonospace | TokenTy::RightMonospace => serializer.serialize_str("monospace"),
-        TokenTy::LeftComment | TokenTy::RightComment => serializer.serialize_str("comment"),
         other => other.serialize(serializer),
     }
 }
@@ -135,7 +133,6 @@ fn match_inline_marks_ty(ty: TokenTy) -> HighlightTy {
         TokenTy::Superscript => HighlightTy::Superscript,
         TokenTy::Subscript => HighlightTy::Subscript,
         TokenTy::Raw => HighlightTy::Raw,
-        TokenTy::LeftComment | TokenTy::RightComment => HighlightTy::Comment,
         TokenTy::LeftMonospace | TokenTy::RightMonospace => HighlightTy::Monospace,
         _ => unreachable!("Should never reach other token type in `inline_marks`"),
     }
