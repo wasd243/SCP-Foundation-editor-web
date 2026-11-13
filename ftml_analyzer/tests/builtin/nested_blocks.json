@@ -1,7 +1,7 @@
 {
   "tree": [
     {
-      "in-line-marks": {
+      "comments": {
         "span": {
           "start": [
             0,
@@ -12,8 +12,162 @@
             49
           ]
         },
-        "inner-marks": [],
-        "ty": "comment"
+        "contents": [
+          {
+            "slice": "nested",
+            "span": {
+              "start": [
+                0,
+                4
+              ],
+              "end": [
+                0,
+                10
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                10
+              ],
+              "end": [
+                0,
+                11
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "blocks",
+            "span": {
+              "start": [
+                0,
+                11
+              ],
+              "end": [
+                0,
+                17
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                17
+              ],
+              "end": [
+                0,
+                18
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "to",
+            "span": {
+              "start": [
+                0,
+                18
+              ],
+              "end": [
+                0,
+                20
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                20
+              ],
+              "end": [
+                0,
+                21
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "check",
+            "span": {
+              "start": [
+                0,
+                21
+              ],
+              "end": [
+                0,
+                26
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                26
+              ],
+              "end": [
+                0,
+                27
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "code",
+            "span": {
+              "start": [
+                0,
+                27
+              ],
+              "end": [
+                0,
+                31
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                31
+              ],
+              "end": [
+                0,
+                32
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "collpasiablity",
+            "span": {
+              "start": [
+                0,
+                32
+              ],
+              "end": [
+                0,
+                46
+              ]
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {

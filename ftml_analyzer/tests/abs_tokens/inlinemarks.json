@@ -62,13 +62,6 @@
       "len": 21,
       "ty": "Raw",
       "mods": 0
-    },
-    {
-      "line": 12,
-      "start": 0,
-      "len": 14,
-      "ty": "Comment",
-      "mods": 0
     }
   ]
 }

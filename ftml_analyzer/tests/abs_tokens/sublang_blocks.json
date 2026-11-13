@@ -212,8 +212,50 @@
     },
     {
       "line": 20,
-      "start": 0,
-      "len": 32,
+      "start": 4,
+      "len": 4,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 20,
+      "start": 8,
+      "len": 1,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 20,
+      "start": 9,
+      "len": 4,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 20,
+      "start": 13,
+      "len": 1,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 20,
+      "start": 14,
+      "len": 9,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 20,
+      "start": 23,
+      "len": 1,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 20,
+      "start": 24,
+      "len": 5,
       "ty": "Comment",
       "mods": 0
     },

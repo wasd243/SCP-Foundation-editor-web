@@ -671,7 +671,7 @@
       }
     },
     {
-      "in-line-marks": {
+      "comments": {
         "span": {
           "start": [
             20,
@@ -682,8 +682,106 @@
             32
           ]
         },
-        "inner-marks": [],
-        "ty": "comment"
+        "contents": [
+          {
+            "slice": "html",
+            "span": {
+              "start": [
+                20,
+                4
+              ],
+              "end": [
+                20,
+                8
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                20,
+                8
+              ],
+              "end": [
+                20,
+                9
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "with",
+            "span": {
+              "start": [
+                20,
+                9
+              ],
+              "end": [
+                20,
+                13
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                20,
+                13
+              ],
+              "end": [
+                20,
+                14
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "hardcoded",
+            "span": {
+              "start": [
+                20,
+                14
+              ],
+              "end": [
+                20,
+                23
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                20,
+                23
+              ],
+              "end": [
+                20,
+                24
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "break",
+            "span": {
+              "start": [
+                20,
+                24
+              ],
+              "end": [
+                20,
+                29
+              ]
+            },
+            "ty": "identifier"
+          }
+        ]
       }
     },
     {

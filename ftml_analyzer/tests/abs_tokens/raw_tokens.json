@@ -9,8 +9,22 @@
     },
     {
       "line": 0,
-      "start": 2,
-      "len": 18,
+      "start": 6,
+      "len": 5,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 0,
+      "start": 11,
+      "len": 1,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 0,
+      "start": 12,
+      "len": 5,
       "ty": "Comment",
       "mods": 0
     },
@@ -30,8 +44,22 @@
     },
     {
       "line": 3,
-      "start": 12,
-      "len": 22,
+      "start": 16,
+      "len": 10,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 3,
+      "start": 26,
+      "len": 1,
+      "ty": "Comment",
+      "mods": 0
+    },
+    {
+      "line": 3,
+      "start": 27,
+      "len": 4,
       "ty": "Comment",
       "mods": 0
     }
