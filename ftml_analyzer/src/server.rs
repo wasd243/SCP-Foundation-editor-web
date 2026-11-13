@@ -61,6 +61,7 @@ fn match_request(req: Request, buffers: &Buffers) -> Response {
         FoldingRangeRequest::METHOD => {
             let (id, params): (_, FoldingRangeParams) =
                 req.clone().extract(FoldingRangeRequest::METHOD).unwrap();
+
             let Some(source) = buffers.get(&params.text_document.uri) else {
                 return Response::new_err(
                     id,
@@ -79,6 +80,7 @@ fn match_request(req: Request, buffers: &Buffers) -> Response {
                 .clone()
                 .extract(SemanticTokensFullRequest::METHOD)
                 .unwrap();
+
             let Some(source) = buffers.get(&params.text_document.uri) else {
                 return Response::new_err(
                     id,

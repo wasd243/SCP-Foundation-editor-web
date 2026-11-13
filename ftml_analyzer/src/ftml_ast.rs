@@ -122,20 +122,31 @@ impl From<&str> for ParseToken {
     /// Parse new token from wikitext
     fn from(src: &str) -> Self {
         let wikitext = src.to_string();
-        let index = LineIndex::new(&wikitext);
-        let (tokens, diagnostics) = get_ftml_token(&wikitext, &index);
-        let tokens = tokens
-            .into_iter()
-            .filter_map(|t| {
-                let span = from_index_to_span(&index, t.span.clone())?;
-                Some(Token::from_extracted_tokens_with_span(t, span))
-            })
-            .collect();
+        from_(wikitext)
+    }
+}
 
-        Self {
-            tokens,
-            diagnostics,
-        }
+impl From<String> for ParseToken {
+    fn from(src: String) -> Self {
+        from_(src)
+    }
+}
+
+/// Inner function for `From` trait implementations.
+fn from_(src: String) -> ParseToken {
+    let index = LineIndex::new(&src);
+    let (tokens, diagnostics) = get_ftml_token(&src, &index);
+    let tokens = tokens
+        .into_iter()
+        .filter_map(|t| {
+            let span = from_index_to_span(&index, t.span.clone())?;
+            Some(Token::from_extracted_tokens_with_span(t, span))
+        })
+        .collect();
+
+    ParseToken {
+        tokens,
+        diagnostics,
     }
 }
 

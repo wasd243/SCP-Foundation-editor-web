@@ -25,7 +25,8 @@ pub use crate::ftml_ast::Span;
 /// A macro to avoid repeating code.
 macro_rules! set_up_parsing {
     ($src:expr, $out:ident) => {
-        let tokens = parse_token($src);
+        let src = &$src.replace("\r\n", "\n");
+        let tokens = parse_token(src);
         let mut $out = LspBuiltIn::visitor(&tokens);
         $out.sanitize_whitespace();
     };
@@ -62,6 +63,8 @@ pub fn parse(src: &str) -> Vec<SemanticToken> {
 
 /// A function to get `ParseToken`.
 pub fn parse_token(src: &str) -> ParseToken {
+    let src = src.replace("\r\n", "\n");
+
     let mut tokens = ParseToken::from(src);
     tokens.clean();
     tokens.mute_ftml_fps();
