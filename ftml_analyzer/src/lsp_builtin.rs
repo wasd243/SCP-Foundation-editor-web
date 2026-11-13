@@ -94,7 +94,7 @@ fn visit<'lsp>(
     if parse_token[0].ty == TokenTy::LeftComment
         && let Some(comments) = Comments::from_parse_token_slice(parse_token, diagnostics)
     {
-        let used = comments.content_len() + 2;
+        let used = comments.content_len();
         return (BuiltIn::Comments(comments), used);
     }
 

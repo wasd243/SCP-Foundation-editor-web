@@ -25,37 +25,28 @@ impl<'lsp> Comments<'lsp> {
         tokens: &'lsp [Token],
         diagnostics: &[Diagnostic],
     ) -> Option<Self> {
-        if tokens
+        let start_token = tokens.first()?;
+
+        // Unclosed comment: no RightComment found, fall back to None
+        let end_idx = tokens.iter().position(|t| t.ty == TokenTy::RightComment)?;
+
+        let slice = &tokens[..=end_idx];
+
+        // Only check diagnostics inside the comment range, not the whole rest of the file
+        if slice
             .iter()
             .any(|t| diagnostics.iter().any(|d| has_diagnostic(t, d)))
         {
             return None;
         }
 
-        let (start_token, rest) = tokens.split_first()?;
-
-        let mut end_token = None;
-        let mut contents = vec![start_token];
-
-        for token in rest {
-            contents.push(token);
-            if token.ty == TokenTy::RightComment {
-                end_token = Some(token);
-                break;
-            }
-        }
-
-        if let Some(end_token) = end_token {
-            return Some(Comments {
-                span: Span {
-                    start: start_token.span.start,
-                    end: end_token.span.end,
-                },
-                contents,
-            });
-        }
-
-        None
+        Some(Comments {
+            span: Span {
+                start: start_token.span.start,
+                end: slice[end_idx].span.end,
+            },
+            contents: slice.iter().collect(),
+        })
     }
 
     pub fn content_len(&self) -> usize {

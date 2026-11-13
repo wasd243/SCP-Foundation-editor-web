@@ -103,6 +103,38 @@
       }
     },
     {
+      "token": {
+        "slice": ">",
+        "span": {
+          "start": [
+            1,
+            0
+          ],
+          "end": [
+            1,
+            1
+          ]
+        },
+        "ty": "quote"
+      }
+    },
+    {
+      "token": {
+        "slice": "-----------",
+        "span": {
+          "start": [
+            3,
+            0
+          ],
+          "end": [
+            3,
+            11
+          ]
+        },
+        "ty": "triple-dash"
+      }
+    },
+    {
       "comments": {
         "span": {
           "start": [

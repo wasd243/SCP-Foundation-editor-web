@@ -160,8 +160,7 @@
       }
     },
     {
-      "token": {
-        "slice": "[!--",
+      "comments": {
         "span": {
           "start": [
             12,
@@ -169,42 +168,53 @@
           ],
           "end": [
             12,
-            4
-          ]
-        },
-        "ty": "left-comment"
-      }
-    },
-    {
-      "token": {
-        "slice": "comment",
-        "span": {
-          "start": [
-            12,
-            4
-          ],
-          "end": [
-            12,
-            11
-          ]
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "token": {
-        "slice": "--]",
-        "span": {
-          "start": [
-            12,
-            11
-          ],
-          "end": [
-            12,
             14
           ]
         },
-        "ty": "right-comment"
+        "contents": [
+          {
+            "slice": "[!--",
+            "span": {
+              "start": [
+                12,
+                0
+              ],
+              "end": [
+                12,
+                4
+              ]
+            },
+            "ty": "left-comment"
+          },
+          {
+            "slice": "comment",
+            "span": {
+              "start": [
+                12,
+                4
+              ],
+              "end": [
+                12,
+                11
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "--]",
+            "span": {
+              "start": [
+                12,
+                11
+              ],
+              "end": [
+                12,
+                14
+              ]
+            },
+            "ty": "right-comment"
+          }
+        ]
       }
     },
     {

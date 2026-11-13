@@ -275,37 +275,30 @@
     },
     {
       "line": 21,
+      "start": 2,
+      "len": 4,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 23,
+      "start": 3,
+      "len": 4,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 21,
       "start": 6,
       "len": 2,
       "ty": "Operator",
-      "mods": 0
-    },
-    {
-      "line": 22,
-      "start": 4,
-      "len": 1,
-      "ty": "Quote",
-      "mods": 0
-    },
-    {
-      "line": 22,
-      "start": 5,
-      "len": 3,
-      "ty": "Operator",
-      "mods": 0
-    },
-    {
-      "line": 22,
-      "start": 11,
-      "len": 2,
-      "ty": "Operator",
-      "mods": 0
-    },
-    {
-      "line": 22,
-      "start": 18,
-      "len": 1,
-      "ty": "Quote",
       "mods": 0
     },
     {
