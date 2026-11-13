@@ -35,7 +35,7 @@ pub struct Blocks<'lsp> {
     /// Close tags would only be a Identifier in the lsp.
     pub close_tag: Option<&'lsp Token>,
     /// [[ ]] [[/ ]]
-    pub starts_and_ends_of_the_block: [&'lsp Token; 4],
+    pub delimiters: [&'lsp Token; 4],
 }
 
 impl<'lsp> Blocks<'lsp> {
@@ -170,7 +170,7 @@ impl<'lsp> Blocks<'lsp> {
                     block_sub_lang_span: None,
                     used_index,
                     close_tag,
-                    starts_and_ends_of_the_block,
+                    delimiters: starts_and_ends_of_the_block,
                 };
 
                 calc_sub_highlight_span(&mut blocks);
@@ -215,11 +215,7 @@ impl<'lsp> ToAbsoluteSpans for Blocks<'lsp> {
             abs_spans.push(close_tag);
         }
 
-        abs_spans.extend(
-            self.starts_and_ends_of_the_block
-                .iter()
-                .filter_map(|t| t.to_abs_span()),
-        );
+        abs_spans.extend(self.delimiters.iter().filter_map(|t| t.to_abs_span()));
 
         for content in &self.block_contents {
             color_nodes(content, &mut abs_spans);

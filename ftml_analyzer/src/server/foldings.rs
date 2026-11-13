@@ -23,7 +23,7 @@ pub(super) fn fold(tree: Vec<BuiltIn<'_>>) -> Vec<FoldingRange> {
                     folding_ranges.extend(fold(b.block_contents));
                 }
 
-                let tags = &b.starts_and_ends_of_the_block;
+                let tags = &b.delimiters;
 
                 let (open, close) = (tags[0].span, tags[3].span);
 
