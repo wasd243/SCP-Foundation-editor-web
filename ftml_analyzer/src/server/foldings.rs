@@ -1,6 +1,6 @@
 use lsp_types::{FoldingRange, FoldingRangeKind};
 
-use crate::{lsp_builtin::BuiltIn, server::COLLAPSED_TEXT};
+use crate::{Span, lsp_builtin::BuiltIn, lsp_highlight::ToAbsoluteSpans, server::COLLAPSED_TEXT};
 
 pub(super) fn fold(tree: Vec<BuiltIn<'_>>) -> Vec<FoldingRange> {
     let mut folding_ranges = Vec::new();
@@ -33,6 +33,16 @@ pub(super) fn fold(tree: Vec<BuiltIn<'_>>) -> Vec<FoldingRange> {
                     start_character: Some(open.start.1 + open.end.1),
                     end_character: Some(close.start.1 + close.end.1),
                     kind: Some(FoldingRangeKind::Region),
+                    collapsed_text: Some(COLLAPSED_TEXT.to_owned()),
+                });
+            }
+            BuiltIn::Comments(c) => {
+                folding_ranges.push(FoldingRange {
+                    start_line: c.span.start.0,
+                    end_line: c.span.end.0,
+                    start_character: None,
+                    end_character: None,
+                    kind: Some(FoldingRangeKind::Comment),
                     collapsed_text: Some(COLLAPSED_TEXT.to_owned()),
                 });
             }
