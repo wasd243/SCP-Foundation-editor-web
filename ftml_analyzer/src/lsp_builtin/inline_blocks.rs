@@ -4,12 +4,11 @@ use serde::Serialize;
 use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
-    lsp_builtin::Param,
     lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan, ToAbsoluteSpans},
     utils::check_diagnostic_without_include,
 };
 
-use super::ParamKind;
+use super::{ParamKind, types::Param};
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "kebab-case")]
