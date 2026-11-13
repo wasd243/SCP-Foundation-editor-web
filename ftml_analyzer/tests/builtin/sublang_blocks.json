@@ -73,7 +73,7 @@
           },
           "ty": "identifier"
         },
-        "starts-and-ends-of-the-block": [
+        "delimiters": [
           {
             "slice": "[[",
             "span": {
@@ -180,7 +180,7 @@
           },
           "ty": "identifier"
         },
-        "starts-and-ends-of-the-block": [
+        "delimiters": [
           {
             "slice": "[[",
             "span": {
@@ -518,7 +518,7 @@
                 },
                 "ty": "identifier"
               },
-              "starts-and-ends-of-the-block": [
+              "delimiters": [
                 {
                   "slice": "[[",
                   "span": {
@@ -610,7 +610,7 @@
           },
           "ty": "identifier"
         },
-        "starts-and-ends-of-the-block": [
+        "delimiters": [
           {
             "slice": "[[",
             "span": {
@@ -733,7 +733,7 @@
           },
           "ty": "identifier"
         },
-        "starts-and-ends-of-the-block": [
+        "delimiters": [
           {
             "slice": "[[",
             "span": {
