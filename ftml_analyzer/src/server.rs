@@ -1,5 +1,6 @@
 #![allow(clippy::mutable_key_type)]
 
+mod completions;
 mod diagnostics;
 
 use diagnostics::{manage_diagnostics, push};
@@ -8,9 +9,9 @@ use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
     DidChangeTextDocumentParams, DidCloseTextDocumentParams, DidOpenTextDocumentParams,
-    FoldingRangeProviderCapability, SemanticToken, SemanticTokens, SemanticTokensParams,
-    SemanticTokensResult, ServerCapabilities, TextDocumentSyncCapability, TextDocumentSyncKind,
-    Uri,
+    FoldingRange, FoldingRangeKind, FoldingRangeParams, FoldingRangeProviderCapability,
+    SemanticToken, SemanticTokens, SemanticTokensParams, SemanticTokensResult, ServerCapabilities,
+    TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
     notification::{
         DidChangeTextDocument, DidCloseTextDocument, DidOpenTextDocument, Notification as _,
     },
@@ -19,7 +20,12 @@ use lsp_types::{
 use std::collections::HashMap;
 use std::sync::LazyLock;
 
-use crate::{lsp_highlight::types::semantic_tokens_capability, parse};
+use crate::{
+    ftml_ast::ParseToken, get_builtin_ast, lsp_builtin::BuiltIn,
+    lsp_highlight::types::semantic_tokens_capability, parse, parse_token,
+};
+
+const COLLAPSED_TEXT: &str = "...";
 
 pub static SERVER_CAPABILITIES: LazyLock<ServerCapabilities> =
     LazyLock::new(|| ServerCapabilities {
@@ -50,23 +56,74 @@ pub fn main_loop(connection: Connection) -> Result<()> {
 }
 
 fn match_request(req: Request, buffers: &Buffers) -> Response {
-    let (id, params): (_, SemanticTokensParams) = req
-        .clone()
-        .extract(SemanticTokensFullRequest::METHOD)
-        .unwrap();
-    let Some(source) = buffers.get(&params.text_document.uri) else {
-        return Response::new_err(
-            id,
-            lsp_server::ErrorCode::InvalidParams as i32,
-            "The requested document is not open.".to_owned(),
-        );
-    };
-
     match req.method.as_str() {
         FoldingRangeRequest::METHOD => {
-            Response::new_ok(req.id, Vec::<lsp_types::FoldingRange>::new())
+            let (id, params): (_, FoldingRangeParams) =
+                req.clone().extract(FoldingRangeRequest::METHOD).unwrap();
+            let Some(source) = buffers.get(&params.text_document.uri) else {
+                return Response::new_err(
+                    id,
+                    lsp_server::ErrorCode::InvalidParams as i32,
+                    "The requested document is not open.".to_owned(),
+                );
+            };
+
+            let tokens: ParseToken = parse_token(source);
+            let builtin_tree = get_builtin_ast(&tokens).tree;
+            let mut folding_ranges = Vec::new();
+            for node in builtin_tree {
+                match node {
+                    BuiltIn::InLineBlocks(b) => {
+                        let start_line = b.span.start.0;
+                        let end_line = b.span.end.0;
+                        let start_character =
+                            Some(b.start_block.span.start.1 + b.start_block.span.end.1);
+                        let end_character = Some(b.end_block.span.start.1 + b.end_block.span.end.1);
+                        let folding_range = FoldingRange {
+                            start_line,
+                            end_line,
+                            start_character,
+                            end_character,
+                            kind: Some(FoldingRangeKind::Region),
+                            collapsed_text: Some(COLLAPSED_TEXT.to_owned()),
+                        };
+                        folding_ranges.push(folding_range);
+                    }
+                    BuiltIn::Blocks(b) => {
+                        let start_line = b.span.start.0;
+                        let end_line = b.span.end.0;
+                        let start_char = b.starts_and_ends_of_the_block[0].span;
+                        let start_character = Some(start_char.start.1 + start_char.end.1);
+                        let end_char = b.starts_and_ends_of_the_block[3].span;
+                        let end_character = Some(end_char.start.1 + end_char.end.1);
+                        let folding_range = FoldingRange {
+                            start_line,
+                            end_line,
+                            start_character,
+                            end_character,
+                            kind: Some(FoldingRangeKind::Region),
+                            collapsed_text: Some(COLLAPSED_TEXT.to_owned()),
+                        };
+                        folding_ranges.push(folding_range);
+                    }
+                    _ => {}
+                };
+            }
+            Response::new_ok(req.id, folding_ranges)
         }
         SemanticTokensFullRequest::METHOD => {
+            let (id, params): (_, SemanticTokensParams) = req
+                .clone()
+                .extract(SemanticTokensFullRequest::METHOD)
+                .unwrap();
+            let Some(source) = buffers.get(&params.text_document.uri) else {
+                return Response::new_err(
+                    id,
+                    lsp_server::ErrorCode::InvalidParams as i32,
+                    "The requested document is not open.".to_owned(),
+                );
+            };
+
             let tokens: Vec<SemanticToken> = parse(source);
             Response::new_ok(
                 id,

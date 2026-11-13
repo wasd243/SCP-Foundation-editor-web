@@ -68,6 +68,13 @@ pub fn parse_token(src: &str) -> ParseToken {
     tokens
 }
 
+/// Caller owns the `ParseToken`; the returned builtin borrows from it.
+pub fn get_builtin_ast(token: &ParseToken) -> LspBuiltIn<'_> {
+    let mut builtin = LspBuiltIn::visitor(token);
+    builtin.sanitize_whitespace();
+    builtin
+}
+
 /// Build the LSP server.
 pub fn build_server() -> Result<()> {
     let (connection, io_threads) = Connection::stdio();
