@@ -22,8 +22,13 @@ use std::collections::HashMap;
 use std::sync::LazyLock;
 
 use crate::{
-    ftml_ast::ParseToken, get_builtin_ast, lsp_highlight::types::semantic_tokens_capability, parse,
-    parse_token, server::foldings::fold, utils::highlight::get_source,
+    ftml_ast::ParseToken,
+    get_builtin_ast,
+    lsp_builtin::{BlockKind, types::VirtualDocument},
+    lsp_highlight::{AbsoluteSpanTree, types::semantic_tokens_capability},
+    parse_token,
+    server::foldings::fold,
+    utils::highlight::get_source,
 };
 
 const COLLAPSED_TEXT: &str = "...";
@@ -83,7 +88,16 @@ fn match_request(req: Request, buffers: &Buffers) -> Response {
                 source
             );
 
-            let tokens: Vec<SemanticToken> = parse(source);
+            let token = parse_token(source);
+            let builtin = get_builtin_ast(&token);
+
+            let _html_visual_docs = VirtualDocument::new(BlockKind::Html, source, &builtin.tree);
+            let _css_visual_docs =
+                VirtualDocument::new(BlockKind::ModuleCss, source, &builtin.tree);
+
+            let tokens: Vec<SemanticToken> =
+                AbsoluteSpanTree::from_builtin_tree(builtin.tree).into_semantic_tokens();
+
             Response::new_ok(
                 id,
                 SemanticTokensResult::Tokens(SemanticTokens {
