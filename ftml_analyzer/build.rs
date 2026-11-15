@@ -9,6 +9,8 @@ fn main() -> Result<()> {
     let status = Command::new("deno")
         .args([
             "bundle",
+            "--platform",
+            "browser",
             "--config",
             "deno/deno.json",
             "deno/src/main.ts",
