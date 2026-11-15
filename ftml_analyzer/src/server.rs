@@ -3,6 +3,7 @@
 mod completions;
 mod diagnostics;
 mod foldings;
+mod web_service;
 
 use diagnostics::{manage_diagnostics, push};
 

@@ -35,12 +35,11 @@ function handle(req: Req): unknown {
   }
 }
 
-// stdout is the protocol channel: log with console.error only.
-for await (const line of createInterface({ input: process.stdin })) {
-  const req: Req = JSON.parse(line);
+(globalThis as any).handle = (json: string): string => {
+  const req = JSON.parse(json);
   try {
-    console.log(JSON.stringify({ id: req.id, result: handle(req) ?? null }));
+    return JSON.stringify({ id: req.id, result: handle(req) ?? null });
   } catch (e) {
-    console.log(JSON.stringify({ id: req.id, error: String(e) }));
+    return JSON.stringify({ id: req.id, error: String(e) });
   }
-}
+};

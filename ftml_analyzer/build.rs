@@ -1,24 +1,26 @@
 use anyhow::{Context, Result};
-use std::env;
-use std::process::Command;
+use std::{env, path::PathBuf, process::Command};
 
 fn main() -> Result<()> {
-    println!("cargo:rerun-if-changed=deno/src");
-    println!("cargo:rerun-if-changed=deno/deno.json");
-    println!("cargo:rerun-if-changed=deno/deno.lock");
+    println!("cargo:rerun-if-changed=deno/src/main.ts");
+    println!("cargo:rerun-if-changed=deno/src/deno.json");
 
-    let out_dir = env::var("OUT_DIR")?;
-
+    let out = PathBuf::from(env::var("OUT_DIR")?).join("bundle.js");
     let status = Command::new("deno")
-        .args(["compile", "--output"])
-        .arg(format!("{out_dir}/ftml-wrapper"))
-        .arg("src/main.ts")
-        .current_dir("deno")
+        .args([
+            "bundle",
+            "--config",
+            "deno/deno.json",
+            "deno/src/main.ts",
+            "-o",
+        ])
+        .arg(&out)
         .status()
-        .context("failed to run `deno`, is it in PATH?")?;
+        .context("Need to install deno CLI")?;
 
     if !status.success() {
-        anyhow::bail!("deno compile failed");
+        anyhow::bail!("Failed to build bundle");
     }
+
     Ok(())
 }

@@ -12,12 +12,15 @@ bless = []
 [dependencies]
 anyhow.workspace = true
 ftml = "1.42"
-regex = "1.13"
 line-index = "0.1"
+regex = "1.13"
 serde.workspace = true
 serde_json.workspace = true
 serde-wasm-bindgen = "0.6"
 wasm-bindgen = "0.2"
+
+# lsp dependencies
+deno_core = "=0.413.0"
 lsp-server = "0.10.0"
 lsp-types = "0.97.0"
 
