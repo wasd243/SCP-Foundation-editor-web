@@ -55,6 +55,12 @@ CI runs Clippy and tests with `working-directory: ./ftml_analyzer`, so the equiv
 
 - Normalize CRLF to LF before parsing. Use the existing `parse_token`/`set_up_parsing!` path instead of bypassing normalization.
 - Keep parser spans and semantic-token coordinates consistent with the source after whitespace sanitization. Semantic tokens must be sorted and encoded as LSP relative deltas; preserve the legend in `lsp_highlight/types.rs` when adding token kinds.
+- `Span.start` and `Span.end` line/column values already use the editor/LSP coordinate convention. Pass them through directly; do not recalculate columns from byte offsets or apply another coordinate conversion when combining embedded results.
+- Only edit files explicitly marked by the user. If a change appears to require touching an unmarked dependent file, stop and request permission instead of widening the change set.
+- Before implementing new conversion, parsing, or request-handling logic, check whether the active dependency or existing code already provides a suitable API. Reuse a known API when one exists; do not add redundant custom implementations.
+- Do not make unnecessary changes. Extend and reuse existing functions and call paths instead of bypassing or duplicating them.
+- Before performing any potentially risky operation or introducing a potentially risky implementation, explain the risk and obtain the user's permission. Do not silently proceed with known risks or present an unapproved risky implementation as complete.
+- If the user explicitly prohibits tests or validation commands for a task, do not run them; document the restriction rather than overriding it.
 - Treat `LspBuiltIn` as an editor/highlighting tree, not the full FTML semantic model. Add grouping logic in the appropriate `lsp_builtin` submodule and keep token-level parsing in `ftml_ast`.
 - The server uses full-document synchronization. Changes replace the entire buffer, and diagnostics are republished after open/change and cleared on close.
 - Embedded-language requests should go through the existing Deno bundle and `WebService` boundary. Keep the TypeScript request shape (`lang`, `method`, `text`, `position`) aligned with the Rust caller and return explicit JSON errors.
