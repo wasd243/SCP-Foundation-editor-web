@@ -1,19 +1,40 @@
 use anyhow::Result;
 use lsp_server::{Connection, Message, Notification};
 use lsp_types::{
-    PublishDiagnosticsParams, Uri,
+    Diagnostic, PublishDiagnosticsParams, Uri,
     notification::{Notification as _, PublishDiagnostics},
 };
 
-use crate::{parse_token, server::Buffers};
+use crate::{
+    get_builtin_ast,
+    lsp_builtin::{BlockKind, types::VirtualDocument},
+    parse_token,
+    server::{Buffers, web_service::WebService},
+};
 
 /// Push diagnostics to IDEs.
-pub(super) fn push(connection: &Connection, buffers: &mut Buffers, uri: Uri) -> Result<()> {
-    let diags = buffers
-        .get(&uri)
-        .map(|src| parse_token(src).to_diagnostics())
-        .unwrap_or_default();
-    manage_diagnostics(connection, uri, diags)
+pub(super) fn push(
+    connection: &Connection,
+    buffers: &mut Buffers,
+    uri: Uri,
+    web: &mut WebService,
+) -> Result<()> {
+    let Some(source) = buffers.get(&uri) else {
+        return manage_diagnostics(connection, uri, Vec::new());
+    };
+
+    let token = parse_token(source);
+    let builtin = get_builtin_ast(&token);
+    let mut diagnostics: Vec<Diagnostic> = token.to_diagnostics();
+
+    for (lang, kind) in [("html", BlockKind::Html), ("css", BlockKind::ModuleCss)] {
+        let Some(document) = VirtualDocument::new(kind, source, &builtin.tree) else {
+            continue;
+        };
+        diagnostics.extend(web.diagnose(lang, &document.source)?);
+    }
+
+    manage_diagnostics(connection, uri, diagnostics)
 }
 
 pub(super) fn manage_diagnostics(

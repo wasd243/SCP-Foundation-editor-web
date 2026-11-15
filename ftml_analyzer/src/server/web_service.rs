@@ -1,5 +1,5 @@
 use anyhow::{Result, anyhow};
-use deno_core::{JsRuntime, RuntimeOptions, v8};
+use deno_core::{JsRuntime, ModuleSpecifier, RuntimeOptions, futures::executor::block_on, v8};
 use lsp_types::{CompletionList, Diagnostic, Hover, Position};
 use serde::{Deserialize, de::DeserializeOwned};
 use serde_json::{Value, json};
@@ -21,7 +21,9 @@ pub struct WebService {
 impl WebService {
     pub fn new() -> Result<Self> {
         let mut rt = JsRuntime::new(RuntimeOptions::default());
-        rt.execute_script("bundle.js", BUNDLE)?;
+        let specifier = ModuleSpecifier::parse("file:///bundle.js")?;
+        let module_id = block_on(rt.load_main_es_module_from_code(&specifier, BUNDLE))?;
+        block_on(rt.mod_evaluate(module_id))?;
         Ok(Self { rt })
     }
 
