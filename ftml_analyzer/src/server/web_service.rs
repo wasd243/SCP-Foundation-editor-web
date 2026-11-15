@@ -1,11 +1,11 @@
 use anyhow::{Result, anyhow};
 use deno_core::{JsRuntime, RuntimeOptions, v8};
-use lsp_types::Position;
+use lsp_types::{CompletionList, Diagnostic, Hover, Position};
+use serde::de::DeserializeOwned;
 use serde_json::{Value, json};
 
 static BUNDLE: &str = include_str!(concat!(env!("OUT_DIR"), "/bundle.js"));
 
-/// This struct is set for running HTML/CSS LSPs.
 pub struct WebService {
     rt: JsRuntime,
 }
@@ -17,22 +17,32 @@ impl WebService {
         Ok(Self { rt })
     }
 
-    pub fn call(
+    pub fn diagnose(&mut self, lang: &str, text: &str) -> Result<Vec<Diagnostic>> {
+        self.call(lang, "diagnose", text, Position::new(0, 0))
+    }
+
+    pub fn complete(&mut self, lang: &str, text: &str, pos: Position) -> Result<CompletionList> {
+        self.call(lang, "complete", text, pos)
+    }
+
+    pub fn hover(&mut self, lang: &str, text: &str, pos: Position) -> Result<Option<Hover>> {
+        self.call(lang, "hover", text, pos)
+    }
+
+    fn call<T: DeserializeOwned>(
         &mut self,
         lang: &str,
         method: &str,
         text: &str,
         position: Position,
-    ) -> Result<Value> {
+    ) -> Result<T> {
         let req = json!({
-            "id": 0, "lang": lang, "method": method,
+            "lang": lang, "method": method,
             "text": text, "position": position,
-        })
-        .to_string();
-
-        // Serialize again
-        let code = format!("handle({})", serde_json::to_string(&req)?);
-        let global = self.rt.execute_script("call.js", code)?;
+        });
+        let global = self
+            .rt
+            .execute_script("call.js", format!("handle({req})"))?;
 
         let out = {
             deno_core::scope!(scope, &mut self.rt);
@@ -44,6 +54,6 @@ impl WebService {
         if let Some(e) = resp.get("error") {
             return Err(anyhow!("{e}"));
         }
-        Ok(resp["result"].take())
+        Ok(serde_json::from_value(resp["result"].take())?)
     }
 }
