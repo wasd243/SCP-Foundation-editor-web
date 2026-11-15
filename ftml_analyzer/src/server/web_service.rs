@@ -1,10 +1,18 @@
 use anyhow::{Result, anyhow};
 use deno_core::{JsRuntime, RuntimeOptions, v8};
 use lsp_types::{CompletionList, Diagnostic, Hover, Position};
-use serde::de::DeserializeOwned;
+use serde::{Deserialize, de::DeserializeOwned};
 use serde_json::{Value, json};
 
 static BUNDLE: &str = include_str!(concat!(env!("OUT_DIR"), "/bundle.js"));
+
+#[derive(Debug, Deserialize)]
+pub struct EmbeddedToken {
+    pub line: u32,
+    pub character: u32,
+    pub length: u32,
+    pub kind: String,
+}
 
 pub struct WebService {
     rt: JsRuntime,
@@ -27,6 +35,10 @@ impl WebService {
 
     pub fn hover(&mut self, lang: &str, text: &str, pos: Position) -> Result<Option<Hover>> {
         self.call(lang, "hover", text, pos)
+    }
+
+    pub fn tokens(&mut self, lang: &str, text: &str) -> Result<Vec<EmbeddedToken>> {
+        self.call(lang, "tokens", text, Position::new(0, 0))
     }
 
     fn call<T: DeserializeOwned>(
