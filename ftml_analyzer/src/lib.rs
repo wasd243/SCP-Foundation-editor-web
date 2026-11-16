@@ -17,8 +17,6 @@ use crate::{
 use anyhow::{Ok, Result};
 use lsp_server::Connection;
 use lsp_types::SemanticToken;
-use serde::Serialize;
-use wasm_bindgen::prelude::*;
 
 pub use crate::ftml_ast::Span;
 
@@ -32,6 +30,10 @@ macro_rules! set_up_parsing {
     };
 }
 
+#[cfg(target_arch = "wasm32")]
+use wasm_bindgen::prelude::*;
+
+#[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 /// Same function for WASM.
 pub fn tokenization(src: &str) -> Result<JsValue, JsValue> {
