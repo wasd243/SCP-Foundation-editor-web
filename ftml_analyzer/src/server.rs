@@ -3,6 +3,7 @@
 mod completions;
 mod diagnostics;
 mod foldings;
+mod requests;
 mod web_service;
 
 use diagnostics::{manage_diagnostics, push as push_diagnostics};
@@ -10,11 +11,9 @@ use diagnostics::{manage_diagnostics, push as push_diagnostics};
 use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
-    CompletionOptions, CompletionParams, CompletionResponse, DidChangeTextDocumentParams,
-    DidCloseTextDocumentParams, DidOpenTextDocumentParams, FoldingRangeParams,
-    FoldingRangeProviderCapability, HoverParams, HoverProviderCapability, Position, SemanticToken,
-    SemanticTokens, SemanticTokensParams, SemanticTokensResult, ServerCapabilities,
-    TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
+    CompletionOptions, DidChangeTextDocumentParams, DidCloseTextDocumentParams,
+    DidOpenTextDocumentParams, FoldingRangeProviderCapability, HoverProviderCapability, Position,
+    SemanticToken, ServerCapabilities, TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
     notification::{
         DidChangeTextDocument, DidCloseTextDocument, DidOpenTextDocument, Notification as _,
     },
@@ -29,13 +28,11 @@ use crate::{
     ftml_ast::ParseToken,
     get_builtin_ast,
     lsp_builtin::{BlockKind, BuiltIn, types::VirtualDocument},
-    lsp_highlight::{
-        AbsoluteSpanTree,
-        types::{TYPES, semantic_tokens_capability},
+    lsp_highlight::types::{TYPES, semantic_tokens_capability},
+    server::{
+        foldings::fold,
+        requests::{completion, folding_range_request, hover_request, semantic_full_request},
     },
-    parse_token,
-    server::foldings::fold,
-    utils::highlight::get_source,
 };
 use web_service::WebService;
 
@@ -62,7 +59,7 @@ pub fn main_loop(connection: Connection) -> Result<()> {
                 if connection.handle_shutdown(&req)? {
                     return Ok(());
                 }
-                let response = match_request(req, &buffers, &mut web);
+                let response = match_requests(req, &buffers, &mut web);
                 connection.sender.send(Message::Response(response))?;
             }
             Message::Notification(n) => {
@@ -74,136 +71,12 @@ pub fn main_loop(connection: Connection) -> Result<()> {
     Ok(())
 }
 
-fn match_request(req: Request, buffers: &Buffers, web: &mut WebService) -> Response {
+fn match_requests(req: Request, buffers: &Buffers, web: &mut WebService) -> Response {
     match req.method.as_str() {
-        FoldingRangeRequest::METHOD => {
-            get_source!(
-                req,
-                buffers,
-                FoldingRangeParams,
-                FoldingRangeRequest::METHOD,
-                id,
-                source
-            );
-
-            let tokens: ParseToken = parse_token(source);
-            let builtin_tree = get_builtin_ast(&tokens).tree;
-            let folding_ranges = fold(builtin_tree);
-            Response::new_ok(id, folding_ranges)
-        }
-        SemanticTokensFullRequest::METHOD => {
-            get_source!(
-                req,
-                buffers,
-                SemanticTokensParams,
-                SemanticTokensFullRequest::METHOD,
-                id,
-                source
-            );
-
-            let token = parse_token(source);
-            let builtin = get_builtin_ast(&token);
-
-            let mut absolute_tokens = decode_semantic_tokens(
-                AbsoluteSpanTree::from_builtin_tree(builtin.tree).into_semantic_tokens(),
-            );
-            if let Err(error) = append_embedded_tokens(web, source, &token, &mut absolute_tokens) {
-                return Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InternalError as i32,
-                    error.to_string(),
-                );
-            }
-            let tokens = encode_semantic_tokens(absolute_tokens);
-
-            Response::new_ok(
-                id,
-                SemanticTokensResult::Tokens(SemanticTokens {
-                    result_id: None,
-                    data: tokens,
-                }),
-            )
-        }
-        Completion::METHOD => {
-            let (id, params): (_, CompletionParams) = match req.clone().extract(Completion::METHOD)
-            {
-                Ok(value) => value,
-                Err(error) => {
-                    return Response::new_err(
-                        req.id,
-                        lsp_server::ErrorCode::InvalidParams as i32,
-                        error.to_string(),
-                    );
-                }
-            };
-            let Some(source) = buffers.get(&params.text_document_position.text_document.uri) else {
-                return Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InvalidParams as i32,
-                    "The requested document is not open.".to_owned(),
-                );
-            };
-            let token = parse_token(source);
-            let builtin = get_builtin_ast(&token);
-            let Some(lang) =
-                embedded_language(&builtin.tree, params.text_document_position.position)
-            else {
-                return Response::new_ok(id, None::<CompletionResponse>);
-            };
-            let Some(document) = virtual_source(lang, source, &builtin.tree) else {
-                return Response::new_ok(id, None::<CompletionResponse>);
-            };
-            match web.complete(lang, &document, params.text_document_position.position) {
-                Ok(list) => Response::new_ok(id, Some(CompletionResponse::List(list))),
-                Err(error) => Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InternalError as i32,
-                    error.to_string(),
-                ),
-            }
-        }
-        HoverRequest::METHOD => {
-            let (id, params): (_, HoverParams) = match req.clone().extract(HoverRequest::METHOD) {
-                Ok(value) => value,
-                Err(error) => {
-                    return Response::new_err(
-                        req.id,
-                        lsp_server::ErrorCode::InvalidParams as i32,
-                        error.to_string(),
-                    );
-                }
-            };
-            let Some(source) = buffers.get(&params.text_document_position_params.text_document.uri)
-            else {
-                return Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InvalidParams as i32,
-                    "The requested document is not open.".to_owned(),
-                );
-            };
-            let token = parse_token(source);
-            let builtin = get_builtin_ast(&token);
-            let Some(lang) =
-                embedded_language(&builtin.tree, params.text_document_position_params.position)
-            else {
-                return Response::new_ok(id, None::<lsp_types::Hover>);
-            };
-            let Some(document) = virtual_source(lang, source, &builtin.tree) else {
-                return Response::new_ok(id, None::<lsp_types::Hover>);
-            };
-            match web.hover(
-                lang,
-                &document,
-                params.text_document_position_params.position,
-            ) {
-                Ok(hover) => Response::new_ok(id, hover),
-                Err(error) => Response::new_err(
-                    id,
-                    lsp_server::ErrorCode::InternalError as i32,
-                    error.to_string(),
-                ),
-            }
-        }
+        FoldingRangeRequest::METHOD => folding_range_request(req, buffers),
+        SemanticTokensFullRequest::METHOD => semantic_full_request(req, buffers, web),
+        Completion::METHOD => completion(req, buffers, web),
+        HoverRequest::METHOD => hover_request(req, buffers, web),
         _ => Response::new_err(
             req.id,
             lsp_server::ErrorCode::MethodNotFound as i32,
