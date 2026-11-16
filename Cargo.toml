@@ -16,6 +16,12 @@ anyhow = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
+[profile.debug]
+strip = false
+lto = false
+codegen-units = 16
+panic = "abort"
+
 [profile.release]
 opt-level = "z"
 strip = true
