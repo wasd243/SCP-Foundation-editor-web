@@ -4,8 +4,9 @@ use serde::{Serialize, Serializer};
 use crate::{
     Span,
     ftml_ast::{Diagnostic, Token},
+    lsp_builtin::{BuiltIn, visit},
     lsp_highlight::{AbsoluteSpan, HighlightTy, ToAbsoluteSpans},
-    utils::{has_diagnostic, is_inline_mark_token},
+    utils::{has_diagnostic, highlight::color_nodes},
 };
 
 #[derive(Debug, Serialize)]
@@ -14,7 +15,7 @@ pub struct InlineMarks<'lsp> {
     pub span: Span,
     #[serde(skip)]
     content: Vec<&'lsp Token>,
-    pub inner_marks: Vec<InlineMarks<'lsp>>,
+    pub inner: Vec<BuiltIn<'lsp>>,
     #[serde(serialize_with = "serialize_ty")]
     pub ty: TokenTy,
 }
@@ -40,14 +41,13 @@ fn from_parse_token_<'lsp>(
 ) -> Option<InlineMarks<'lsp>> {
     let mut iter = tokens.iter();
 
-    while let Some(token) = iter.next() {
-        if diagnostics.iter().any(|d| has_diagnostic(token, d)) {
+    while let Some(start_mark) = iter.next() {
+        if diagnostics.iter().any(|d| has_diagnostic(start_mark, d)) {
             return None;
         }
 
-        let start_mark = token;
         let mut content = Vec::new();
-        let mut inner_marks = Vec::new();
+        let mut inner = Vec::new();
         let mut end_mark = None;
 
         loop {
@@ -59,16 +59,23 @@ fn from_parse_token_<'lsp>(
             {
                 end_mark = Some(t);
                 break;
-            } else if is_inline_mark_token(t.ty)
-                && let Some(nested) = from_parse_token_(rest, diagnostics)
-            {
-                let n = nested.content.len();
-                content.extend(&rest[..n + 2]); // start + content + end of nested
-                iter.nth(n); // skip nested content + end mark; t is already consumed
-                inner_marks.push(nested);
+            }
+
+            if matches!(start_mark.ty, TokenTy::Raw) {
+                content.push(t);
                 continue;
             }
-            content.push(t);
+
+            let (node, used) = visit(rest, diagnostics);
+            content.extend(&rest[..used]);
+            for _ in 1..used {
+                iter.next(); // t is already consumed
+            }
+
+            // normal tokens won't get into `inner`, inner only contains nodes
+            if !matches!(node, BuiltIn::Token(_)) {
+                inner.push(node);
+            }
         }
 
         if let Some(end_mark) = end_mark {
@@ -79,7 +86,7 @@ fn from_parse_token_<'lsp>(
                     end: end_mark.span.end,
                 },
                 content,
-                inner_marks,
+                inner,
                 ty,
             });
         }
@@ -101,14 +108,17 @@ where
 
 impl ToAbsoluteSpans for InlineMarks<'_> {
     fn to_abs_spans(&self) -> Vec<AbsoluteSpan> {
-        if self.inner_marks.is_empty() {
-            vec![to_abs_span_(self)]
+        let mut abs_spans = Vec::new();
+
+        if self.inner.is_empty() {
+            abs_spans.push(to_abs_span_(self));
         } else {
-            self.inner_marks
-                .iter()
-                .flat_map(|m| m.to_abs_spans())
-                .collect()
+            for node in &self.inner {
+                color_nodes(node, &mut abs_spans);
+            }
         }
+
+        abs_spans
     }
 }
 

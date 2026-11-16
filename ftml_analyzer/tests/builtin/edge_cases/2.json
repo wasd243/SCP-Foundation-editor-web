@@ -294,7 +294,128 @@
             38
           ]
         },
-        "inner-marks": [],
+        "inner": [
+          {
+            "blocks": {
+              "span": {
+                "start": [
+                  1,
+                  7
+                ],
+                "end": [
+                  1,
+                  36
+                ]
+              },
+              "block-parameters": [
+                {
+                  "span": {
+                    "start": [
+                      1,
+                      9
+                    ],
+                    "end": [
+                      1,
+                      17
+                    ]
+                  },
+                  "ty": "block-name"
+                }
+              ],
+              "block-contents": [
+                {
+                  "token": {
+                    "slice": "foot",
+                    "span": {
+                      "start": [
+                        1,
+                        19
+                      ],
+                      "end": [
+                        1,
+                        23
+                      ]
+                    },
+                    "ty": "identifier"
+                  }
+                }
+              ],
+              "block-ty": "block",
+              "close-tag": {
+                "slice": "footnote",
+                "span": {
+                  "start": [
+                    1,
+                    26
+                  ],
+                  "end": [
+                    1,
+                    34
+                  ]
+                },
+                "ty": "identifier"
+              },
+              "delimiters": [
+                {
+                  "slice": "[[",
+                  "span": {
+                    "start": [
+                      1,
+                      7
+                    ],
+                    "end": [
+                      1,
+                      9
+                    ]
+                  },
+                  "ty": "left-block"
+                },
+                {
+                  "slice": "]]",
+                  "span": {
+                    "start": [
+                      1,
+                      17
+                    ],
+                    "end": [
+                      1,
+                      19
+                    ]
+                  },
+                  "ty": "right-block"
+                },
+                {
+                  "slice": "[[/",
+                  "span": {
+                    "start": [
+                      1,
+                      23
+                    ],
+                    "end": [
+                      1,
+                      26
+                    ]
+                  },
+                  "ty": "left-block-end"
+                },
+                {
+                  "slice": "]]",
+                  "span": {
+                    "start": [
+                      1,
+                      34
+                    ],
+                    "end": [
+                      1,
+                      36
+                    ]
+                  },
+                  "ty": "right-block"
+                }
+              ]
+            }
+          }
+        ],
         "ty": "bold"
       }
     }

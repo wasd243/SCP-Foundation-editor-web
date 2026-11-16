@@ -1,4 +1,4 @@
-- [ ] Fix recursive `Block` highlights mismatch in `InlineMarks`
+- [x] Fix recursive `Block` highlights mismatch in `InlineMarks`
 
 ```ftml
 **Bold [[footnote]] something footnote [[/footnote]] **

@@ -135,9 +135,44 @@
     },
     {
       "line": 1,
-      "start": 0,
-      "len": 38,
-      "ty": "Bold",
+      "start": 9,
+      "len": 8,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 26,
+      "len": 8,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 7,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 17,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 23,
+      "len": 3,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 34,
+      "len": 2,
+      "ty": "Operator",
       "mods": 0
     }
   ]

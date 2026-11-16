@@ -12,7 +12,7 @@
             8
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "bold"
       }
     },
@@ -28,7 +28,7 @@
             11
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "italics"
       }
     },
@@ -44,7 +44,7 @@
             13
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "underline"
       }
     },
@@ -60,7 +60,7 @@
             15
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "double-dash"
       }
     },
@@ -76,7 +76,7 @@
             9
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "superscript"
       }
     },
@@ -92,7 +92,7 @@
             7
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "subscript"
       }
     },
@@ -108,7 +108,7 @@
             13
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "monospace"
       }
     },
@@ -124,20 +124,22 @@
             26
           ]
         },
-        "inner-marks": [
+        "inner": [
           {
-            "span": {
-              "start": [
-                8,
-                14
-              ],
-              "end": [
-                8,
-                24
-              ]
-            },
-            "inner-marks": [],
-            "ty": "italics"
+            "in-line-marks": {
+              "span": {
+                "start": [
+                  8,
+                  14
+                ],
+                "end": [
+                  8,
+                  24
+                ]
+              },
+              "inner": [],
+              "ty": "italics"
+            }
           }
         ],
         "ty": "bold"
@@ -155,7 +157,7 @@
             21
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "raw"
       }
     },

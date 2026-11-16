@@ -266,7 +266,7 @@
             8
           ]
         },
-        "inner-marks": [],
+        "inner": [],
         "ty": "bold"
       }
     },
@@ -492,7 +492,7 @@
                   8
                 ]
               },
-              "inner-marks": [],
+              "inner": [],
               "ty": "bold"
             }
           }
