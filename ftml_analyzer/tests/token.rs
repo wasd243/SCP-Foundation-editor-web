@@ -7,6 +7,7 @@ use std::path::Path;
 
 const BLESS: bool = cfg!(feature = "bless");
 const FTML: &str = "tests/ftmls/";
+const FTML_EDGE_CASES: &str = "tests/ftmls/edge_cases";
 
 fn test(input_path: &str, output_path: &str, need_visitor: bool, is_bless: bool) {
     // bless tests only run with `--features bless`, check tests only run without it.
@@ -61,6 +62,11 @@ fn get_path_and_token(
 }
 
 #[test]
+fn bless_edge_cases() {
+    test(FTML_EDGE_CASES, "builtin/edge_cases/", true, true);
+}
+
+#[test]
 fn bless_builtin() {
     test(FTML, "builtin", true, true);
 }
@@ -78,4 +84,9 @@ fn check_builtin() {
 #[test]
 fn check_token() {
     test(FTML, "tokens", false, false);
+}
+
+#[test]
+fn check_edge_cases() {
+    test(FTML_EDGE_CASES, "builtin/edge_cases/", true, false);
 }

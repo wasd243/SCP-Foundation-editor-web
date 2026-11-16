@@ -1,0 +1,6 @@
+[!--This file contains `inlinemark` in `blocks`--]
+
+**bold**
+[[collapsible show="+xxx" hide="-xxx"]]
+**bold**
+[[/collapsible]]

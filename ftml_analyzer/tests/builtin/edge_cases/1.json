@@ -1,0 +1,609 @@
+{
+  "tree": [
+    {
+      "comments": {
+        "span": {
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            0,
+            50
+          ]
+        },
+        "contents": [
+          {
+            "slice": "[!--",
+            "span": {
+              "start": [
+                0,
+                0
+              ],
+              "end": [
+                0,
+                4
+              ]
+            },
+            "ty": "left-comment"
+          },
+          {
+            "slice": "This",
+            "span": {
+              "start": [
+                0,
+                4
+              ],
+              "end": [
+                0,
+                8
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                8
+              ],
+              "end": [
+                0,
+                9
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "file",
+            "span": {
+              "start": [
+                0,
+                9
+              ],
+              "end": [
+                0,
+                13
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                13
+              ],
+              "end": [
+                0,
+                14
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "contains",
+            "span": {
+              "start": [
+                0,
+                14
+              ],
+              "end": [
+                0,
+                22
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                22
+              ],
+              "end": [
+                0,
+                23
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "`",
+            "span": {
+              "start": [
+                0,
+                23
+              ],
+              "end": [
+                0,
+                24
+              ]
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "inlinemark",
+            "span": {
+              "start": [
+                0,
+                24
+              ],
+              "end": [
+                0,
+                34
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "`",
+            "span": {
+              "start": [
+                0,
+                34
+              ],
+              "end": [
+                0,
+                35
+              ]
+            },
+            "ty": "other"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                35
+              ],
+              "end": [
+                0,
+                36
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "in",
+            "span": {
+              "start": [
+                0,
+                36
+              ],
+              "end": [
+                0,
+                38
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": " ",
+            "span": {
+              "start": [
+                0,
+                38
+              ],
+              "end": [
+                0,
+                39
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "slice": "`",
+            "span": {
+              "start": [
+                0,
+                39
+              ],
+              "end": [
+                0,
+                40
+              ]
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "blocks",
+            "span": {
+              "start": [
+                0,
+                40
+              ],
+              "end": [
+                0,
+                46
+              ]
+            },
+            "ty": "identifier"
+          },
+          {
+            "slice": "`",
+            "span": {
+              "start": [
+                0,
+                46
+              ],
+              "end": [
+                0,
+                47
+              ]
+            },
+            "ty": "other"
+          },
+          {
+            "slice": "--]",
+            "span": {
+              "start": [
+                0,
+                47
+              ],
+              "end": [
+                0,
+                50
+              ]
+            },
+            "ty": "right-comment"
+          }
+        ]
+      }
+    },
+    {
+      "in-line-marks": {
+        "span": {
+          "start": [
+            2,
+            0
+          ],
+          "end": [
+            2,
+            8
+          ]
+        },
+        "inner-marks": [],
+        "ty": "bold"
+      }
+    },
+    {
+      "blocks": {
+        "span": {
+          "start": [
+            3,
+            0
+          ],
+          "end": [
+            5,
+            16
+          ]
+        },
+        "block-parameters": [
+          {
+            "span": {
+              "start": [
+                3,
+                2
+              ],
+              "end": [
+                3,
+                13
+              ]
+            },
+            "ty": "block-name"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                13
+              ],
+              "end": [
+                3,
+                14
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                14
+              ],
+              "end": [
+                3,
+                18
+              ]
+            },
+            "ty": "block-attr"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                18
+              ],
+              "end": [
+                3,
+                19
+              ]
+            },
+            "ty": "equals"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                19
+              ],
+              "end": [
+                3,
+                20
+              ]
+            },
+            "ty": "string"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                20
+              ],
+              "end": [
+                3,
+                21
+              ]
+            },
+            "ty": "string"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                21
+              ],
+              "end": [
+                3,
+                24
+              ]
+            },
+            "ty": "string"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                24
+              ],
+              "end": [
+                3,
+                25
+              ]
+            },
+            "ty": "string"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                25
+              ],
+              "end": [
+                3,
+                26
+              ]
+            },
+            "ty": "whitespace"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                26
+              ],
+              "end": [
+                3,
+                30
+              ]
+            },
+            "ty": "block-attr"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                30
+              ],
+              "end": [
+                3,
+                31
+              ]
+            },
+            "ty": "equals"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                31
+              ],
+              "end": [
+                3,
+                32
+              ]
+            },
+            "ty": "string"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                32
+              ],
+              "end": [
+                3,
+                33
+              ]
+            },
+            "ty": "string"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                33
+              ],
+              "end": [
+                3,
+                36
+              ]
+            },
+            "ty": "string"
+          },
+          {
+            "span": {
+              "start": [
+                3,
+                36
+              ],
+              "end": [
+                3,
+                37
+              ]
+            },
+            "ty": "string"
+          }
+        ],
+        "block-contents": [
+          {
+            "token": {
+              "slice": "**",
+              "span": {
+                "start": [
+                  4,
+                  0
+                ],
+                "end": [
+                  4,
+                  2
+                ]
+              },
+              "ty": "bold"
+            }
+          },
+          {
+            "token": {
+              "slice": "bold",
+              "span": {
+                "start": [
+                  4,
+                  2
+                ],
+                "end": [
+                  4,
+                  6
+                ]
+              },
+              "ty": "identifier"
+            }
+          },
+          {
+            "token": {
+              "slice": "**",
+              "span": {
+                "start": [
+                  4,
+                  6
+                ],
+                "end": [
+                  4,
+                  8
+                ]
+              },
+              "ty": "bold"
+            }
+          }
+        ],
+        "block-ty": "block",
+        "close-tag": {
+          "slice": "collapsible",
+          "span": {
+            "start": [
+              5,
+              3
+            ],
+            "end": [
+              5,
+              14
+            ]
+          },
+          "ty": "identifier"
+        },
+        "delimiters": [
+          {
+            "slice": "[[",
+            "span": {
+              "start": [
+                3,
+                0
+              ],
+              "end": [
+                3,
+                2
+              ]
+            },
+            "ty": "left-block"
+          },
+          {
+            "slice": "]]",
+            "span": {
+              "start": [
+                3,
+                37
+              ],
+              "end": [
+                3,
+                39
+              ]
+            },
+            "ty": "right-block"
+          },
+          {
+            "slice": "[[/",
+            "span": {
+              "start": [
+                5,
+                0
+              ],
+              "end": [
+                5,
+                3
+              ]
+            },
+            "ty": "left-block-end"
+          },
+          {
+            "slice": "]]",
+            "span": {
+              "start": [
+                5,
+                14
+              ],
+              "end": [
+                5,
+                16
+              ]
+            },
+            "ty": "right-block"
+          }
+        ]
+      }
+    }
+  ],
+  "diagnostics": []
+}
