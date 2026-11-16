@@ -251,7 +251,7 @@ fn embedded_language(tree: &[BuiltIn<'_>], position: Position) -> Option<&'stati
         };
 
         if let Some(span) = block.block_sub_lang_span
-            && span_contains(span, position)
+            && span.contains_pos(position)
         {
             return match block.block_ty {
                 BlockKind::Html => Some("html"),
@@ -266,12 +266,6 @@ fn embedded_language(tree: &[BuiltIn<'_>], position: Position) -> Option<&'stati
     }
 
     None
-}
-
-fn span_contains(span: crate::Span, position: Position) -> bool {
-    (span.start.0..=span.end.0).contains(&position.line)
-        && (position.line != span.start.0 || position.character >= span.start.1)
-        && (position.line != span.end.0 || position.character <= span.end.1)
 }
 
 fn virtual_source(lang: &str, source: &str, tree: &[BuiltIn<'_>]) -> Option<String> {
