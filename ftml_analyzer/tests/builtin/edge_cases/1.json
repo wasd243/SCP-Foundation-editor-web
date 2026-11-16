@@ -481,8 +481,7 @@
         ],
         "block-contents": [
           {
-            "token": {
-              "slice": "**",
+            "in-line-marks": {
               "span": {
                 "start": [
                   4,
@@ -490,41 +489,10 @@
                 ],
                 "end": [
                   4,
-                  2
-                ]
-              },
-              "ty": "bold"
-            }
-          },
-          {
-            "token": {
-              "slice": "bold",
-              "span": {
-                "start": [
-                  4,
-                  2
-                ],
-                "end": [
-                  4,
-                  6
-                ]
-              },
-              "ty": "identifier"
-            }
-          },
-          {
-            "token": {
-              "slice": "**",
-              "span": {
-                "start": [
-                  4,
-                  6
-                ],
-                "end": [
-                  4,
                   8
                 ]
               },
+              "inner-marks": [],
               "ty": "bold"
             }
           }

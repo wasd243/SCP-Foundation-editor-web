@@ -121,16 +121,6 @@ impl<'lsp> Blocks<'lsp> {
                     break;
                 };
 
-                if t.ty == TokenTy::LeftBlock && !need_raw {
-                    let (node, used) = visit(rest, diagnostic);
-                    block_contents.push(node);
-                    // `t` is already consumed, skip the remaining used - 1 tokens
-                    for _ in 1..used {
-                        iter.next();
-                    }
-                    continue;
-                }
-
                 if t.ty == TokenTy::LeftBlockEnd
                     && let [name, end, ..] = iter.as_slice()
                     && is_valid_block_end(name.ty)
@@ -148,7 +138,12 @@ impl<'lsp> Blocks<'lsp> {
                 }
 
                 if !need_raw {
-                    block_contents.push(BuiltIn::Token(t));
+                    let (node, used) = visit(rest, diagnostic);
+                    block_contents.push(node);
+                    // `t` is already consumed, skip the remaining used - 1 tokens
+                    for _ in 1..used {
+                        iter.next();
+                    }
                 }
             }
 
