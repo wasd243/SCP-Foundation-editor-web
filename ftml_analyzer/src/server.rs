@@ -10,11 +10,11 @@ use diagnostics::{manage_diagnostics, push as push_diagnostics};
 use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
-    CompletionOptions, CompletionParams, CompletionResponse,
-    DidChangeTextDocumentParams, DidCloseTextDocumentParams, DidOpenTextDocumentParams,
-    FoldingRangeParams, FoldingRangeProviderCapability, HoverParams, HoverProviderCapability,
-    Position, SemanticToken, SemanticTokens, SemanticTokensParams, SemanticTokensResult,
-    ServerCapabilities, TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
+    CompletionOptions, CompletionParams, CompletionResponse, DidChangeTextDocumentParams,
+    DidCloseTextDocumentParams, DidOpenTextDocumentParams, FoldingRangeParams,
+    FoldingRangeProviderCapability, HoverParams, HoverProviderCapability, Position, SemanticToken,
+    SemanticTokens, SemanticTokensParams, SemanticTokensResult, ServerCapabilities,
+    TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
     notification::{
         DidChangeTextDocument, DidCloseTextDocument, DidOpenTextDocument, Notification as _,
     },
@@ -29,7 +29,10 @@ use crate::{
     ftml_ast::ParseToken,
     get_builtin_ast,
     lsp_builtin::{BlockKind, BuiltIn, types::VirtualDocument},
-    lsp_highlight::{AbsoluteSpanTree, types::{TYPES, semantic_tokens_capability}},
+    lsp_highlight::{
+        AbsoluteSpanTree,
+        types::{TYPES, semantic_tokens_capability},
+    },
     parse_token,
     server::foldings::fold,
     utils::highlight::get_source,
@@ -271,11 +274,7 @@ fn span_contains(span: crate::Span, position: Position) -> bool {
         && (position.line != span.end.0 || position.character <= span.end.1)
 }
 
-fn virtual_source(
-    lang: &str,
-    source: &str,
-    tree: &[BuiltIn<'_>],
-) -> Option<String> {
+fn virtual_source(lang: &str, source: &str, tree: &[BuiltIn<'_>]) -> Option<String> {
     let kind = match lang {
         "html" => BlockKind::Html,
         "css" => BlockKind::ModuleCss,
@@ -358,4 +357,3 @@ fn encode_semantic_tokens(mut tokens: Vec<(u32, u32, u32, u32, u32)>) -> Vec<Sem
         })
         .collect()
 }
-
