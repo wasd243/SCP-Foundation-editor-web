@@ -1,0 +1,35 @@
+{
+  "tree": [
+    {
+      "in-line-marks": {
+        "span": {
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            0,
+            8
+          ]
+        },
+        "inner": [],
+        "ty": "double-tilde"
+      }
+    },
+    {
+      "comments": {
+        "span": {
+          "start": [
+            0,
+            9
+          ],
+          "end": [
+            0,
+            45
+          ]
+        }
+      }
+    }
+  ],
+  "diagnostics": []
+}

@@ -26,73 +26,65 @@ impl<'lsp> InlineMarks<'lsp> {
         tokens_slice: &'lsp [Token],
         diagnostics: &'lsp [Diagnostic],
     ) -> Option<Self> {
-        from_parse_token_(tokens_slice, diagnostics)
+        let mut iter = tokens_slice.iter();
+
+        while let Some(start_mark) = iter.next() {
+            if diagnostics.iter().any(|d| has_diagnostic(start_mark, d)) {
+                return None;
+            }
+
+            let mut content = Vec::new();
+            let mut inner = Vec::new();
+            let mut end_mark = None;
+
+            loop {
+                let rest = iter.as_slice(); // taken before next(), so it starts at t
+                let Some(t) = iter.next() else { break };
+
+                if t.ty == start_mark.ty
+                    || (t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace)
+                {
+                    end_mark = Some(t);
+                    break;
+                }
+
+                if matches!(start_mark.ty, TokenTy::Raw) {
+                    content.push(t);
+                    continue;
+                }
+
+                let (node, used) = visit(rest, diagnostics);
+                content.extend(&rest[..used]);
+                for _ in 1..used {
+                    iter.next(); // t is already consumed
+                }
+
+                // normal tokens won't get into `inner`, inner only contains nodes
+                if !matches!(node, BuiltIn::Token(_)) {
+                    inner.push(node);
+                }
+            }
+
+            if let Some(end_mark) = end_mark {
+                let ty = end_mark.ty;
+                return Some(InlineMarks {
+                    span: Span {
+                        start: start_mark.span.start,
+                        end: end_mark.span.end,
+                    },
+                    content,
+                    inner,
+                    ty,
+                });
+            }
+        }
+
+        None
     }
 
     pub(super) fn content_len(&self) -> usize {
         self.content.len()
     }
-}
-
-/// This function is here for other Api args types.
-fn from_parse_token_<'lsp>(
-    tokens: &'lsp [Token],
-    diagnostics: &'lsp [Diagnostic],
-) -> Option<InlineMarks<'lsp>> {
-    let mut iter = tokens.iter();
-
-    while let Some(start_mark) = iter.next() {
-        if diagnostics.iter().any(|d| has_diagnostic(start_mark, d)) {
-            return None;
-        }
-
-        let mut content = Vec::new();
-        let mut inner = Vec::new();
-        let mut end_mark = None;
-
-        loop {
-            let rest = iter.as_slice(); // taken before next(), so it starts at t
-            let Some(t) = iter.next() else { break };
-
-            if t.ty == start_mark.ty
-                || (t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace)
-            {
-                end_mark = Some(t);
-                break;
-            }
-
-            if matches!(start_mark.ty, TokenTy::Raw) {
-                content.push(t);
-                continue;
-            }
-
-            let (node, used) = visit(rest, diagnostics);
-            content.extend(&rest[..used]);
-            for _ in 1..used {
-                iter.next(); // t is already consumed
-            }
-
-            // normal tokens won't get into `inner`, inner only contains nodes
-            if !matches!(node, BuiltIn::Token(_)) {
-                inner.push(node);
-            }
-        }
-
-        if let Some(end_mark) = end_mark {
-            let ty = end_mark.ty;
-            return Some(InlineMarks {
-                span: Span {
-                    start: start_mark.span.start,
-                    end: end_mark.span.end,
-                },
-                content,
-                inner,
-                ty,
-            });
-        }
-    }
-
-    None
 }
 
 /// Convert `RightMonospace` or `LeftMonospace` to `monospace`.
@@ -116,6 +108,7 @@ impl ToAbsoluteSpans for InlineMarks<'_> {
             for node in &self.inner {
                 color_nodes(node, &mut abs_spans);
             }
+            abs_spans.push(to_abs_span_(self));
         }
 
         abs_spans
@@ -144,6 +137,8 @@ fn match_inline_marks_ty(ty: TokenTy) -> HighlightTy {
         TokenTy::Subscript => HighlightTy::Subscript,
         TokenTy::Raw => HighlightTy::Raw,
         TokenTy::LeftMonospace | TokenTy::RightMonospace => HighlightTy::Monospace,
+        // convert to strike through
+        TokenTy::DoubleTilde => HighlightTy::StrikeThrough,
         _ => unreachable!("Should never reach other token type in `inline_marks`"),
     }
 }

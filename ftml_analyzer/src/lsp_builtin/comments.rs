@@ -17,6 +17,7 @@ use crate::{
 /// ```
 pub struct Comments<'lsp> {
     pub span: Span,
+    #[serde(skip)]
     pub contents: Vec<&'lsp Token>,
 }
 

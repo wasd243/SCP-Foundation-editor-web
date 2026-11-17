@@ -1,0 +1,3 @@
+**bold //italic// bold** [!--Should expand `bold` highlights--]
+__--**//b//**--__ 
+
