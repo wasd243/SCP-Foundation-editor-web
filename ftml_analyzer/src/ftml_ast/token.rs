@@ -72,7 +72,12 @@ fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
         | TokenTy::LeftBlockEnd
         | TokenTy::LeftBlockAnchor
         // save herizontol rules to `Operator`
-        | TokenTy::TripleDash => Some(HighlightTy::Operator),
+        | TokenTy::TripleDash
+        | TokenTy::TableColumn
+        | TokenTy::TableColumnRight
+        | TokenTy::TableColumnCenter
+        | TokenTy::TableColumnTitle
+        => Some(HighlightTy::Operator),
         _ => None,
     }
 }

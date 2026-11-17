@@ -6,7 +6,7 @@
 **Bold [[footnote]] something footnote [[/footnote]] **
 ```
 
-- [ ] Add highlights for table
+- [x] Add highlights for table
 
 ```ftml
 ||~ table head ||~ table head2 ||
