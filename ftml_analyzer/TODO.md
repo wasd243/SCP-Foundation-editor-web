@@ -25,6 +25,11 @@
 **bold //italic// bold**
 ```
 
+- [ ] Add auto-completion service for "wikitext"
+- [ ] Add autofix service for "wikitext"
+
+## Pending
+
 - [ ] Implement a lint system for formatting the code
 - [ ] Implement a test harness to make tests more readable
 
