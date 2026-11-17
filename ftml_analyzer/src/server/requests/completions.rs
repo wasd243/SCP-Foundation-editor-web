@@ -55,8 +55,10 @@ fn ftml_completion(source: &str, pos: Position) -> Option<CompletionResponse> {
 
     let items = match ctx {
         Ctx::BlockName => BLOCKS.iter().map(|b| b.to_completion_item()).collect(),
-        // TODO: finish attr name completions
-        Ctx::AttrName(_) => return None,
+        Ctx::AttrName(name) => {
+            let block = BLOCKS.iter().find(|b| b.name == name)?;
+            block.attrs_to_completion_items()
+        }
     };
     Some(CompletionResponse::Array(items))
 }
