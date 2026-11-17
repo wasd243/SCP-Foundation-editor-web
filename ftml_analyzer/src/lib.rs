@@ -95,10 +95,18 @@ mod tests {
     use super::*;
 
     const BOLD: &str = "**aaa**";
+    const NOTE: &str = "[[note]]\nsomething\n[[/note]]";
 
     #[test]
     fn bold_is_correct_parsed() {
         let sem_tokens = parse(BOLD);
         dbg!(sem_tokens);
+    }
+
+    #[test]
+    fn note_is_correct_parsed() {
+        let tokens = parse_token(NOTE);
+        let tree = get_builtin_ast(&tokens);
+        eprintln!("{:#?}", tree);
     }
 }
