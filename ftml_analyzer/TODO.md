@@ -25,7 +25,7 @@
 **bold //italic// bold**
 ```
 
-- [ ] Add auto-completion service for "wikitext"
+- [x] Add auto-completion service for "wikitext"
 - [ ] Add autofix service for "wikitext"
 
 ## Pending
@@ -35,14 +35,22 @@
 
 ## Known issues
 
+### InlineBlocks
+
 `InlineBlocks` have incorrect highlights while parsing code like:
 
 ```ftml
 [[include :path:to:page
 |var = value
 ]]
-
 ```
 
 If there's an empty space between `=` and value, the value type would become `Attr` rather than `Value`.
 Generally, this is acceptable most time, will implement a lint/formatter for that.
+
+### Note
+
+> [!NOTE]
+> Mostly finished auto-completion, I don't known why ftml returns an error for `[[note]][[/note]]` blocks
+> I double checked my implementation and tests in ftml, but everything goes fine... This is documented here as a known issue.
+
