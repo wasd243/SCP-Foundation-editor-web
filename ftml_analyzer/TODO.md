@@ -13,7 +13,7 @@
 || table row   || table row2   ||
 ```
 
-- [ ] Add highlights for url token types
+- [x] Add highlights for url token types
 
 ```ftml
 [https://example.com example]

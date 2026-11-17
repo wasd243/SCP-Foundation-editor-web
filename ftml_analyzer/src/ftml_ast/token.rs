@@ -66,11 +66,16 @@ impl ToAbsoluteSpan for Token {
 fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
     match ty {
         TokenTy::Quote => Some(HighlightTy::Quote),
+
         TokenTy::LeftBlock
         | TokenTy::LeftBlockStar
         | TokenTy::RightBlock
         | TokenTy::LeftBlockEnd
         | TokenTy::LeftBlockAnchor
+        | TokenTy::LeftBracket
+        | TokenTy::LeftBracketAnchor
+        | TokenTy::LeftBracketStar
+        | TokenTy::RightBracket
         // save herizontol rules to `Operator`
         | TokenTy::TripleDash
         | TokenTy::TableColumn
@@ -78,6 +83,12 @@ fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
         | TokenTy::TableColumnCenter
         | TokenTy::TableColumnTitle
         => Some(HighlightTy::Operator),
+
+        TokenTy::LeftLink
+        | TokenTy::RightLink
+        | TokenTy::LeftLinkStar
+        | TokenTy::Url
+        | TokenTy::Email => Some(HighlightTy::Link),
         _ => None,
     }
 }

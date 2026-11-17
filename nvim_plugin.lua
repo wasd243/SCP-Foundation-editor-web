@@ -21,6 +21,8 @@ local function apply()
 	set(0, "@lsp.type.ftmlUnderline.ftml", { underline = true })
 	set(0, "@lsp.type.ftmlStrike.ftml", { strikethrough = true })
 	set(0, "@lsp.type.ftmlMonospace.ftml", { link = "@markup.raw" })
+	set(0, "@lsp.type.ftmlLinkUrl.ftml", { link = "@markup.link.url" })
+	-- super/sub scripts are unset due to terminal rendering issues
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {

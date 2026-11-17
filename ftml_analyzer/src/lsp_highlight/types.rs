@@ -36,6 +36,7 @@ pub const TYPES: &[SemanticTokenType] = &[
     SemanticTokenType::new("ftmlMonospace"),
     SemanticTokenType::new("ftmlSuperscript"),
     SemanticTokenType::new("ftmlSubscript"),
+    SemanticTokenType::new("ftmlLinkUrl"),
 ];
 
 pub const MODIFIERS: &[SemanticTokenModifier] = &[

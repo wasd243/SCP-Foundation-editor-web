@@ -1,0 +1,39 @@
+{
+  "tree": [
+    {
+      "line": 0,
+      "start": 0,
+      "len": 19,
+      "ty": "Link",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 0,
+      "len": 1,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 1,
+      "len": 19,
+      "ty": "Link",
+      "mods": 0
+    },
+    {
+      "line": 1,
+      "start": 28,
+      "len": 1,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 2,
+      "start": 0,
+      "len": 19,
+      "ty": "Link",
+      "mods": 0
+    }
+  ]
+}

@@ -68,6 +68,8 @@ pub enum HighlightTy {
     Subscript = 16,
     /// [[ ]] [[/ [[*
     Operator = 17,
+    /// https://example.com
+    Link = 18,
     // TODO: add more as needed, keep in sync with the legend
 }
 
@@ -89,6 +91,7 @@ impl HighlightTy {
             Self::Monospace => SemanticTokenType::new("ftmlMonospace"),
             Self::Superscript => SemanticTokenType::new("ftmlSuperscript"),
             Self::Subscript => SemanticTokenType::new("ftmlSubscript"),
+            Self::Link => SemanticTokenType::new("ftmlLinkUrl"),
         };
 
         // NOTE: The slice and `ty` come from the same list, so this cannot fail.
