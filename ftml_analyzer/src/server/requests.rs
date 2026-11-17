@@ -1,10 +1,9 @@
+mod completions;
+
 use lsp_server::{Request, Response};
 use lsp_types::{
-    CompletionParams, CompletionResponse, FoldingRangeParams, HoverParams, SemanticTokens,
-    SemanticTokensParams, SemanticTokensResult,
-    request::{
-        Completion, FoldingRangeRequest, HoverRequest, Request as _, SemanticTokensFullRequest,
-    },
+    FoldingRangeParams, HoverParams, SemanticTokens, SemanticTokensParams, SemanticTokensResult,
+    request::{FoldingRangeRequest, HoverRequest, Request as _, SemanticTokensFullRequest},
 };
 
 use crate::{
@@ -20,6 +19,8 @@ use super::{
     append_embedded_tokens, decode_semantic_tokens, embedded_language, encode_semantic_tokens,
     virtual_source,
 };
+
+pub(crate) use completions::completion;
 
 pub(super) fn folding_range_request(req: Request, buffers: &Buffers) -> Response {
     get_source!(
@@ -73,48 +74,6 @@ pub(super) fn semantic_full_request(
             data: tokens,
         }),
     )
-}
-
-pub(super) fn completion(req: Request, buffers: &Buffers, web: &mut WebService) -> Response {
-    let (id, params): (_, CompletionParams) = match req.clone().extract(Completion::METHOD) {
-        Ok(value) => value,
-        Err(error) => {
-            return Response::new_err(
-                req.id,
-                lsp_server::ErrorCode::InvalidParams as i32,
-                error.to_string(),
-            );
-        }
-    };
-
-    let Some(source) = buffers.get(&params.text_document_position.text_document.uri) else {
-        return Response::new_err(
-            id,
-            lsp_server::ErrorCode::InvalidParams as i32,
-            "The requested document is not open.".to_owned(),
-        );
-    };
-
-    let token = parse_token(source);
-    let builtin = get_builtin_ast(&token);
-
-    let Some(lang) = embedded_language(&builtin.tree, params.text_document_position.position)
-    else {
-        return Response::new_ok(id, None::<CompletionResponse>);
-    };
-
-    let Some(document) = virtual_source(lang, source, &builtin.tree) else {
-        return Response::new_ok(id, None::<CompletionResponse>);
-    };
-
-    match web.complete(lang, &document, params.text_document_position.position) {
-        Ok(list) => Response::new_ok(id, Some(CompletionResponse::List(list))),
-        Err(error) => Response::new_err(
-            id,
-            lsp_server::ErrorCode::InternalError as i32,
-            error.to_string(),
-        ),
-    }
 }
 
 pub(super) fn hover_request(req: Request, buffers: &Buffers, web: &mut WebService) -> Response {

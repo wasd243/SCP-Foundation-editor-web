@@ -26,6 +26,19 @@ macro_rules! get_source {
             );
         };
     };
+
+    // this arm is only set for completions
+    ($req:ident, $buffers:ident, $req_ty:ty, $method:expr, $id:ident, $source:ident, $params:ident) => {
+        let ($id, $params): (_, $req_ty) = $req.clone().extract($method).unwrap();
+
+        let Some($source) = $buffers.get(&$params.text_document_position.text_document.uri) else {
+            return lsp_server::Response::new_err(
+                $id,
+                lsp_server::ErrorCode::InvalidParams as i32,
+                "The requested document is not open.".to_owned(),
+            );
+        };
+    };
 }
 
 pub(crate) use get_source;

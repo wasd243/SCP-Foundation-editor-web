@@ -1,6 +1,5 @@
 #![allow(clippy::mutable_key_type)]
 
-mod completions;
 mod diagnostics;
 mod foldings;
 mod requests;
