@@ -86,6 +86,7 @@ pub(super) fn completion(req: Request, buffers: &Buffers, web: &mut WebService) 
             );
         }
     };
+
     let Some(source) = buffers.get(&params.text_document_position.text_document.uri) else {
         return Response::new_err(
             id,
@@ -93,15 +94,19 @@ pub(super) fn completion(req: Request, buffers: &Buffers, web: &mut WebService) 
             "The requested document is not open.".to_owned(),
         );
     };
+
     let token = parse_token(source);
     let builtin = get_builtin_ast(&token);
+
     let Some(lang) = embedded_language(&builtin.tree, params.text_document_position.position)
     else {
         return Response::new_ok(id, None::<CompletionResponse>);
     };
+
     let Some(document) = virtual_source(lang, source, &builtin.tree) else {
         return Response::new_ok(id, None::<CompletionResponse>);
     };
+
     match web.complete(lang, &document, params.text_document_position.position) {
         Ok(list) => Response::new_ok(id, Some(CompletionResponse::List(list))),
         Err(error) => Response::new_err(
@@ -123,6 +128,7 @@ pub(super) fn hover_request(req: Request, buffers: &Buffers, web: &mut WebServic
             );
         }
     };
+
     let Some(source) = buffers.get(&params.text_document_position_params.text_document.uri) else {
         return Response::new_err(
             id,
@@ -130,16 +136,20 @@ pub(super) fn hover_request(req: Request, buffers: &Buffers, web: &mut WebServic
             "The requested document is not open.".to_owned(),
         );
     };
+
     let token = parse_token(source);
     let builtin = get_builtin_ast(&token);
+
     let Some(lang) =
         embedded_language(&builtin.tree, params.text_document_position_params.position)
     else {
         return Response::new_ok(id, None::<lsp_types::Hover>);
     };
+
     let Some(document) = virtual_source(lang, source, &builtin.tree) else {
         return Response::new_ok(id, None::<lsp_types::Hover>);
     };
+
     match web.hover(
         lang,
         &document,
