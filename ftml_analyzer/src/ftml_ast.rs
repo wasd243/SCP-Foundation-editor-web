@@ -15,8 +15,7 @@ use ftml::parsing::{ExtractedToken, ParseErrorKind};
 use ftml::prelude::*;
 use line_index::LineIndex;
 use lsp_types::{
-    Diagnostic as ServerDiagnostic, DiagnosticSeverity, DiagnosticTag, Position,
-    Range as ServerRange,
+    Diagnostic as ServerDiagnostic, DiagnosticSeverity, Position, Range as ServerRange,
 };
 use serde::Serialize;
 use std::sync::LazyLock;
@@ -26,7 +25,7 @@ pub use token::Token;
 
 use crate::ftml_ast::span::from_index_to_span;
 
-const SOURCE: &str = "ftml-analyzer";
+const SOURCE: &str = "ftml";
 
 #[derive(Serialize, Debug, Default)]
 pub struct ParseToken {
@@ -80,22 +79,19 @@ impl ParseToken {
 
     /// Clone diagnostics to IDEs.
     pub fn to_diagnostics(&self) -> Vec<ServerDiagnostic> {
-        let mut server_diagnostics = Vec::with_capacity(self.diagnostics.len());
-        for diag in &self.diagnostics {
-            let server_diagnostic = ServerDiagnostic {
+        self.diagnostics
+            .iter()
+            .map(|d| ServerDiagnostic {
                 range: ServerRange::new(
-                    Position::new(diag.span.start.0, diag.span.start.1),
-                    Position::new(diag.span.end.0, diag.span.end.1),
+                    Position::new(d.span.start.0, d.span.start.1),
+                    Position::new(d.span.end.0, d.span.end.1),
                 ),
                 severity: Some(DiagnosticSeverity::WARNING),
                 source: Some(SOURCE.to_string()),
-                message: diag.msg.clone(),
-                tags: Some(vec![DiagnosticTag::UNNECESSARY]),
+                message: d.msg.clone(),
                 ..Default::default()
-            };
-            server_diagnostics.push(server_diagnostic);
-        }
-        server_diagnostics
+            })
+            .collect()
     }
 }
 

@@ -95,7 +95,7 @@ mod tests {
     use super::*;
 
     const BOLD: &str = "**aaa**";
-    const NOTE: &str = "[[note]]\nsomething\n[[/note]]";
+    const NOTE: &str = "[[note]]\n\n[[/note]]";
 
     #[test]
     fn bold_is_correct_parsed() {
