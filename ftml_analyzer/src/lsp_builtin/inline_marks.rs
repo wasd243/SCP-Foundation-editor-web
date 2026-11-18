@@ -35,17 +35,15 @@ impl<'lsp> InlineMarks<'lsp> {
 
             let mut content = Vec::new();
             let mut inner = Vec::new();
-            let mut end_mark = None;
 
-            loop {
+            let end_mark: Option<&Token> = loop {
                 let rest = iter.as_slice(); // taken before next(), so it starts at t
-                let Some(t) = iter.next() else { break };
+                let Some(t) = iter.next() else { break None };
 
                 if t.ty == start_mark.ty
                     || (t.ty == TokenTy::RightMonospace && start_mark.ty == TokenTy::LeftMonospace)
                 {
-                    end_mark = Some(t);
-                    break;
+                    break Some(t);
                 }
 
                 if matches!(start_mark.ty, TokenTy::Raw) {
@@ -63,10 +61,9 @@ impl<'lsp> InlineMarks<'lsp> {
                 if !matches!(node, BuiltIn::Token(_)) {
                     inner.push(node);
                 }
-            }
+            };
 
             if let Some(end_mark) = end_mark {
-                let ty = end_mark.ty;
                 return Some(InlineMarks {
                     span: Span {
                         start: start_mark.span.start,
@@ -74,7 +71,7 @@ impl<'lsp> InlineMarks<'lsp> {
                     },
                     content,
                     inner,
-                    ty,
+                    ty: end_mark.ty,
                 });
             }
         }
