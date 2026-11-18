@@ -10,6 +10,12 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.breakindent = true
 		vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = true })
 		vim.keymap.set({ "n", "v" }, "k", "gk", { buffer = true })
+
+		vim.schedule(function()
+			-- Override global pair mappings for this buffer with plain keys.
+			vim.keymap.set("i", "[", "[", { buffer = true })
+			vim.keymap.set("i", "]", "]", { buffer = true })
+		end)
 	end,
 })
 
@@ -37,7 +43,7 @@ return {
 	opts = function(_, opts)
 		vim.lsp.config("ftml_analyzer", {
 			-- use your build directory like this.
-			cmd = { vim.fn.expand("~/SCP-Foundation-editor-web/target/release/ftml_analyzer") },
+			cmd = { vim.fn.expand("~/project/SCP-Foundation-editor-web/target/release/ftml_analyzer") },
 			filetypes = { "ftml" },
 			root_markers = { ".git" },
 		})

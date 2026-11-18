@@ -69,12 +69,12 @@ impl BlockInfo {
 
     /// Convert single `BlockInfo` to `CompletionItem`.
     pub(super) fn to_completion_item(&self) -> CompletionItem {
-        let snippet = if self.closes {
-            format!("{name}$1]]\n$0\n[[/{name}", name = self.name)
-        } else if self.closes && BLOCKS_SHOULD_INLINE.contains(&self.name) {
-            format!("{name}$1]]$0[[/{name}", name = self.name)
+        let snippet = if self.closes && BLOCKS_SHOULD_INLINE.contains(&self.name) {
+            format!("{name}$1]]$0[[/{name}]]", name = self.name)
+        } else if self.closes {
+            format!("{name}$1]]\n$0\n[[/{name}]]", name = self.name)
         } else {
-            format!("{}$0", self.name)
+            format!("{}$0]]", self.name)
         };
 
         CompletionItem {
@@ -94,7 +94,7 @@ impl BlockInfo {
             .map(|a| CompletionItem {
                 label: a.to_string(),
                 kind: Some(CompletionItemKind::PROPERTY),
-                insert_text: Some(format!("{a}=\"$1\"$0")),
+                insert_text: Some(format!("{a}$0")),
                 insert_text_format: Some(InsertTextFormat::SNIPPET),
                 ..Default::default()
             })
