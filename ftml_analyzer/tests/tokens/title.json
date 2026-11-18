@@ -1,0 +1,173 @@
+{
+  "tokens": [
+    {
+      "slice": "+++",
+      "span": {
+        "start": [
+          0,
+          0
+        ],
+        "end": [
+          0,
+          3
+        ]
+      },
+      "ty": "heading"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          0,
+          3
+        ],
+        "end": [
+          0,
+          4
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "some",
+      "span": {
+        "start": [
+          0,
+          4
+        ],
+        "end": [
+          0,
+          8
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          0,
+          8
+        ],
+        "end": [
+          0,
+          9
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "titles",
+      "span": {
+        "start": [
+          0,
+          9
+        ],
+        "end": [
+          0,
+          15
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "++++",
+      "span": {
+        "start": [
+          1,
+          0
+        ],
+        "end": [
+          1,
+          4
+        ]
+      },
+      "ty": "heading"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          1,
+          4
+        ],
+        "end": [
+          1,
+          5
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "asdfasdf",
+      "span": {
+        "start": [
+          1,
+          5
+        ],
+        "end": [
+          1,
+          13
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "+",
+      "span": {
+        "start": [
+          2,
+          0
+        ],
+        "end": [
+          2,
+          1
+        ]
+      },
+      "ty": "heading"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          2,
+          1
+        ],
+        "end": [
+          2,
+          2
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "标",
+      "span": {
+        "start": [
+          2,
+          2
+        ],
+        "end": [
+          2,
+          3
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "题",
+      "span": {
+        "start": [
+          2,
+          3
+        ],
+        "end": [
+          2,
+          4
+        ]
+      },
+      "ty": "other"
+    }
+  ],
+  "diagnostics": []
+}

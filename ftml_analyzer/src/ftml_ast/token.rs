@@ -89,6 +89,8 @@ fn match_token_ty(ty: &TokenTy) -> Option<HighlightTy> {
         | TokenTy::LeftLinkStar
         | TokenTy::Url
         | TokenTy::Email => Some(HighlightTy::Link),
+
+        TokenTy::Heading => Some(HighlightTy::Heading),
         _ => None,
     }
 }

@@ -70,6 +70,8 @@ pub enum HighlightTy {
     Operator = 17,
     /// https://example.com
     Link = 18,
+    /// +++ head
+    Heading = 19,
     // TODO: add more as needed, keep in sync with the legend
 }
 
@@ -79,7 +81,7 @@ impl HighlightTy {
             Self::KeyWord => SemanticTokenType::KEYWORD,
             Self::Equals | Self::Pipe | Self::Quote | Self::Operator => SemanticTokenType::OPERATOR,
             Self::Comment => SemanticTokenType::COMMENT,
-            Self::Attr => SemanticTokenType::PROPERTY,
+            Self::Attr | Self::Heading => SemanticTokenType::PROPERTY,
             Self::String => SemanticTokenType::STRING,
             Self::Value => SemanticTokenType::ENUM_MEMBER,
             Self::PathBuffer => SemanticTokenType::NAMESPACE,
