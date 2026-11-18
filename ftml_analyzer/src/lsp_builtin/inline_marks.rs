@@ -85,10 +85,7 @@ impl<'lsp> InlineMarks<'lsp> {
 }
 
 /// Convert `RightMonospace` or `LeftMonospace` to `monospace`.
-fn serialize_ty<S>(ty: &TokenTy, serializer: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
+fn serialize_ty<S: Serializer>(ty: &TokenTy, serializer: S) -> Result<S::Ok, S::Error> {
     match ty {
         TokenTy::LeftMonospace | TokenTy::RightMonospace => serializer.serialize_str("monospace"),
         other => other.serialize(serializer),
