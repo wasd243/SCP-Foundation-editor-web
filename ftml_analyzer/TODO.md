@@ -26,11 +26,11 @@
 ```
 
 - [x] Add auto-completion service for "wikitext"
-- [ ] Add autofix service for "wikitext"
 
 ## Pending
 
-- [ ] Implement a lint system for formatting the code
+- [ ] Implement a lint system for formatting the code (also mark `ERROR` on invalid code)
+- [ ] Add autofix service for "wikitext"
 - [ ] Implement a test harness to make tests more readable
 
 ## Known issues
@@ -53,4 +53,3 @@ Generally, this is acceptable most time, will implement a lint/formatter for tha
 > [!NOTE]
 > Mostly finished auto-completion, I don't known why ftml returns an error for `[[note]][[/note]]` blocks
 > I double checked my implementation and tests in ftml, but everything goes fine... This is documented here as a known issue.
-

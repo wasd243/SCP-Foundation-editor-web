@@ -4,6 +4,7 @@
 pub mod ftml_ast;
 pub mod lsp_builtin;
 pub mod lsp_highlight;
+pub mod lsp_lints;
 pub mod server;
 pub mod utils;
 
@@ -19,6 +20,7 @@ use lsp_server::Connection;
 use lsp_types::SemanticToken;
 
 pub use crate::ftml_ast::Span;
+pub use crate::lsp_lints::LspLints;
 
 /// A macro to avoid repeating code.
 macro_rules! set_up_parsing {

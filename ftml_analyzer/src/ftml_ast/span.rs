@@ -4,7 +4,7 @@ use line_index::{LineCol, LineIndex, TextSize, WideEncoding};
 use lsp_types::Position;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, Copy)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub struct Span {
     pub start: (u32, u32),
     pub end: (u32, u32),
@@ -13,9 +13,13 @@ pub struct Span {
 impl Span {
     /// Check span contains any positions.
     pub fn contains_pos(&self, position: Position) -> bool {
-        (self.start.0..=self.end.0).contains(&position.line)
-            && (position.line != self.start.0 || position.character >= self.start.1)
-            && (position.line != self.end.0 || position.character <= self.end.1)
+        let pos = (position.line, position.character);
+        self.start <= pos && pos <= self.end
+    }
+
+    /// Check span contains any other span.
+    pub fn contains_span(&self, other: &Span) -> bool {
+        self.start <= other.start && other.end <= self.end
     }
 }
 
