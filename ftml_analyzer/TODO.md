@@ -29,7 +29,7 @@
 
 ## Pending
 
-- [ ] Implement a lint system for formatting the code (also mark `ERROR` on invalid code)
+- [x] Implement a lint system for formatting the code (also mark `ERROR` on invalid code)
 - [ ] Add autofix service for "wikitext"
 - [ ] Implement a test harness to make tests more readable
 

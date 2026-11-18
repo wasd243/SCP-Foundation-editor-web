@@ -6,7 +6,7 @@ use crate::{
     ftml_ast::{Diagnostic, Token},
     lsp_builtin::{
         BlockKind,
-        regex::{CSS, HTML, MODULE},
+        regex::{CODE, CSS, HTML, MODULE},
     },
     lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans},
     utils::{has_diagnostic, highlight::color_nodes},
@@ -92,6 +92,7 @@ impl<'lsp> Blocks<'lsp> {
                         continue;
                     }
                     TokenTy::Identifier if HTML.is_match(&t.slice) => block_ty = BlockKind::Html,
+                    TokenTy::Identifier if CODE.is_match(&t.slice) => block_ty = BlockKind::Code,
                     _ => {}
                 }
 
@@ -112,7 +113,10 @@ impl<'lsp> Blocks<'lsp> {
 
             let mut block_contents = Vec::new();
 
-            let need_raw = matches!(block_ty, BlockKind::ModuleCss | BlockKind::Html);
+            let need_raw = matches!(
+                block_ty,
+                BlockKind::ModuleCss | BlockKind::Html | BlockKind::Code
+            );
 
             let mut close_tag = None;
             loop {
@@ -128,6 +132,7 @@ impl<'lsp> Blocks<'lsp> {
                     && match block_ty {
                         BlockKind::ModuleCss => MODULE.is_match(&name.slice),
                         BlockKind::Html => HTML.is_match(&name.slice),
+                        BlockKind::Code => CODE.is_match(&name.slice),
                         BlockKind::Block => true,
                     }
                 {

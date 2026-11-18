@@ -128,6 +128,8 @@ fn embedded_language(tree: &[BuiltIn<'_>], position: Position) -> Option<&'stati
             return match block.block_ty {
                 BlockKind::Html => Some("html"),
                 BlockKind::ModuleCss => Some("css"),
+                // TODO: `[[code]]` block embedded language service.
+                BlockKind::Code => None,
                 BlockKind::Block => None,
             };
         }

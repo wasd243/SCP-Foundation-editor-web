@@ -1,0 +1,17 @@
+[[code type="c"]]
+#include <stdio.h>
+
+// Something inside code block should never be regonized
+
+int main() {
+    printf("hello");
+    return 0;
+}
+[[/code]]
+
+[[code type="python"]]
+# highlight marks also should never be regonized
+if __name__ == "__main__":
+    print("hello")
+[[/code]]
+

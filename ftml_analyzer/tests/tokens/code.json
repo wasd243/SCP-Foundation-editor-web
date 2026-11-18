@@ -1,0 +1,1503 @@
+{
+  "tokens": [
+    {
+      "slice": "[[",
+      "span": {
+        "start": [
+          0,
+          0
+        ],
+        "end": [
+          0,
+          2
+        ]
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "code",
+      "span": {
+        "start": [
+          0,
+          2
+        ],
+        "end": [
+          0,
+          6
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          0,
+          6
+        ],
+        "end": [
+          0,
+          7
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "type",
+      "span": {
+        "start": [
+          0,
+          7
+        ],
+        "end": [
+          0,
+          11
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": [
+          0,
+          11
+        ],
+        "end": [
+          0,
+          12
+        ]
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          0,
+          12
+        ],
+        "end": [
+          0,
+          13
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "c",
+      "span": {
+        "start": [
+          0,
+          13
+        ],
+        "end": [
+          0,
+          14
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          0,
+          14
+        ],
+        "end": [
+          0,
+          15
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": [
+          0,
+          15
+        ],
+        "end": [
+          0,
+          17
+        ]
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "#",
+      "span": {
+        "start": [
+          1,
+          0
+        ],
+        "end": [
+          1,
+          1
+        ]
+      },
+      "ty": "numbered-item"
+    },
+    {
+      "slice": "include",
+      "span": {
+        "start": [
+          1,
+          1
+        ],
+        "end": [
+          1,
+          8
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          1,
+          8
+        ],
+        "end": [
+          1,
+          9
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "<",
+      "span": {
+        "start": [
+          1,
+          9
+        ],
+        "end": [
+          1,
+          10
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "stdio",
+      "span": {
+        "start": [
+          1,
+          10
+        ],
+        "end": [
+          1,
+          15
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": ".",
+      "span": {
+        "start": [
+          1,
+          15
+        ],
+        "end": [
+          1,
+          16
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "h",
+      "span": {
+        "start": [
+          1,
+          16
+        ],
+        "end": [
+          1,
+          17
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": ">",
+      "span": {
+        "start": [
+          1,
+          17
+        ],
+        "end": [
+          1,
+          18
+        ]
+      },
+      "ty": "quote"
+    },
+    {
+      "slice": "//",
+      "span": {
+        "start": [
+          3,
+          0
+        ],
+        "end": [
+          3,
+          2
+        ]
+      },
+      "ty": "italics"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          2
+        ],
+        "end": [
+          3,
+          3
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "Something",
+      "span": {
+        "start": [
+          3,
+          3
+        ],
+        "end": [
+          3,
+          12
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          12
+        ],
+        "end": [
+          3,
+          13
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "inside",
+      "span": {
+        "start": [
+          3,
+          13
+        ],
+        "end": [
+          3,
+          19
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          19
+        ],
+        "end": [
+          3,
+          20
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "code",
+      "span": {
+        "start": [
+          3,
+          20
+        ],
+        "end": [
+          3,
+          24
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          24
+        ],
+        "end": [
+          3,
+          25
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "block",
+      "span": {
+        "start": [
+          3,
+          25
+        ],
+        "end": [
+          3,
+          30
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          30
+        ],
+        "end": [
+          3,
+          31
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "should",
+      "span": {
+        "start": [
+          3,
+          31
+        ],
+        "end": [
+          3,
+          37
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          37
+        ],
+        "end": [
+          3,
+          38
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "never",
+      "span": {
+        "start": [
+          3,
+          38
+        ],
+        "end": [
+          3,
+          43
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          43
+        ],
+        "end": [
+          3,
+          44
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "be",
+      "span": {
+        "start": [
+          3,
+          44
+        ],
+        "end": [
+          3,
+          46
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          3,
+          46
+        ],
+        "end": [
+          3,
+          47
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "regonized",
+      "span": {
+        "start": [
+          3,
+          47
+        ],
+        "end": [
+          3,
+          56
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "int",
+      "span": {
+        "start": [
+          5,
+          0
+        ],
+        "end": [
+          5,
+          3
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          5,
+          3
+        ],
+        "end": [
+          5,
+          4
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "main",
+      "span": {
+        "start": [
+          5,
+          4
+        ],
+        "end": [
+          5,
+          8
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "(",
+      "span": {
+        "start": [
+          5,
+          8
+        ],
+        "end": [
+          5,
+          9
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": ")",
+      "span": {
+        "start": [
+          5,
+          9
+        ],
+        "end": [
+          5,
+          10
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          5,
+          10
+        ],
+        "end": [
+          5,
+          11
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "{",
+      "span": {
+        "start": [
+          5,
+          11
+        ],
+        "end": [
+          5,
+          12
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "    ",
+      "span": {
+        "start": [
+          6,
+          0
+        ],
+        "end": [
+          6,
+          4
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "printf",
+      "span": {
+        "start": [
+          6,
+          4
+        ],
+        "end": [
+          6,
+          10
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "(",
+      "span": {
+        "start": [
+          6,
+          10
+        ],
+        "end": [
+          6,
+          11
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          6,
+          11
+        ],
+        "end": [
+          6,
+          12
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "hello",
+      "span": {
+        "start": [
+          6,
+          12
+        ],
+        "end": [
+          6,
+          17
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          6,
+          17
+        ],
+        "end": [
+          6,
+          18
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": ")",
+      "span": {
+        "start": [
+          6,
+          18
+        ],
+        "end": [
+          6,
+          19
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": ";",
+      "span": {
+        "start": [
+          6,
+          19
+        ],
+        "end": [
+          6,
+          20
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "    ",
+      "span": {
+        "start": [
+          7,
+          0
+        ],
+        "end": [
+          7,
+          4
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "return",
+      "span": {
+        "start": [
+          7,
+          4
+        ],
+        "end": [
+          7,
+          10
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          7,
+          10
+        ],
+        "end": [
+          7,
+          11
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "0",
+      "span": {
+        "start": [
+          7,
+          11
+        ],
+        "end": [
+          7,
+          12
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": ";",
+      "span": {
+        "start": [
+          7,
+          12
+        ],
+        "end": [
+          7,
+          13
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "}",
+      "span": {
+        "start": [
+          8,
+          0
+        ],
+        "end": [
+          8,
+          1
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": [
+          9,
+          0
+        ],
+        "end": [
+          9,
+          3
+        ]
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "code",
+      "span": {
+        "start": [
+          9,
+          3
+        ],
+        "end": [
+          9,
+          7
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": [
+          9,
+          7
+        ],
+        "end": [
+          9,
+          9
+        ]
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "[[",
+      "span": {
+        "start": [
+          11,
+          0
+        ],
+        "end": [
+          11,
+          2
+        ]
+      },
+      "ty": "left-block"
+    },
+    {
+      "slice": "code",
+      "span": {
+        "start": [
+          11,
+          2
+        ],
+        "end": [
+          11,
+          6
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          11,
+          6
+        ],
+        "end": [
+          11,
+          7
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "type",
+      "span": {
+        "start": [
+          11,
+          7
+        ],
+        "end": [
+          11,
+          11
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": [
+          11,
+          11
+        ],
+        "end": [
+          11,
+          12
+        ]
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          11,
+          12
+        ],
+        "end": [
+          11,
+          13
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "python",
+      "span": {
+        "start": [
+          11,
+          13
+        ],
+        "end": [
+          11,
+          19
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          11,
+          19
+        ],
+        "end": [
+          11,
+          20
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": [
+          11,
+          20
+        ],
+        "end": [
+          11,
+          22
+        ]
+      },
+      "ty": "right-block"
+    },
+    {
+      "slice": "#",
+      "span": {
+        "start": [
+          12,
+          0
+        ],
+        "end": [
+          12,
+          1
+        ]
+      },
+      "ty": "numbered-item"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          12,
+          1
+        ],
+        "end": [
+          12,
+          2
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "highlight",
+      "span": {
+        "start": [
+          12,
+          2
+        ],
+        "end": [
+          12,
+          11
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          12,
+          11
+        ],
+        "end": [
+          12,
+          12
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "marks",
+      "span": {
+        "start": [
+          12,
+          12
+        ],
+        "end": [
+          12,
+          17
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          12,
+          17
+        ],
+        "end": [
+          12,
+          18
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "also",
+      "span": {
+        "start": [
+          12,
+          18
+        ],
+        "end": [
+          12,
+          22
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          12,
+          22
+        ],
+        "end": [
+          12,
+          23
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "should",
+      "span": {
+        "start": [
+          12,
+          23
+        ],
+        "end": [
+          12,
+          29
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          12,
+          29
+        ],
+        "end": [
+          12,
+          30
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "never",
+      "span": {
+        "start": [
+          12,
+          30
+        ],
+        "end": [
+          12,
+          35
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          12,
+          35
+        ],
+        "end": [
+          12,
+          36
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "be",
+      "span": {
+        "start": [
+          12,
+          36
+        ],
+        "end": [
+          12,
+          38
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          12,
+          38
+        ],
+        "end": [
+          12,
+          39
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "regonized",
+      "span": {
+        "start": [
+          12,
+          39
+        ],
+        "end": [
+          12,
+          48
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "if",
+      "span": {
+        "start": [
+          13,
+          0
+        ],
+        "end": [
+          13,
+          2
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          13,
+          2
+        ],
+        "end": [
+          13,
+          3
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "__",
+      "span": {
+        "start": [
+          13,
+          3
+        ],
+        "end": [
+          13,
+          5
+        ]
+      },
+      "ty": "underline"
+    },
+    {
+      "slice": "name",
+      "span": {
+        "start": [
+          13,
+          5
+        ],
+        "end": [
+          13,
+          9
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "__",
+      "span": {
+        "start": [
+          13,
+          9
+        ],
+        "end": [
+          13,
+          11
+        ]
+      },
+      "ty": "underline"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          13,
+          11
+        ],
+        "end": [
+          13,
+          12
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": [
+          13,
+          12
+        ],
+        "end": [
+          13,
+          13
+        ]
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": "=",
+      "span": {
+        "start": [
+          13,
+          13
+        ],
+        "end": [
+          13,
+          14
+        ]
+      },
+      "ty": "equals"
+    },
+    {
+      "slice": " ",
+      "span": {
+        "start": [
+          13,
+          14
+        ],
+        "end": [
+          13,
+          15
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          13,
+          15
+        ],
+        "end": [
+          13,
+          16
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "__",
+      "span": {
+        "start": [
+          13,
+          16
+        ],
+        "end": [
+          13,
+          18
+        ]
+      },
+      "ty": "underline"
+    },
+    {
+      "slice": "main",
+      "span": {
+        "start": [
+          13,
+          18
+        ],
+        "end": [
+          13,
+          22
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "__",
+      "span": {
+        "start": [
+          13,
+          22
+        ],
+        "end": [
+          13,
+          24
+        ]
+      },
+      "ty": "underline"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          13,
+          24
+        ],
+        "end": [
+          13,
+          25
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": ":",
+      "span": {
+        "start": [
+          13,
+          25
+        ],
+        "end": [
+          13,
+          26
+        ]
+      },
+      "ty": "colon"
+    },
+    {
+      "slice": "    ",
+      "span": {
+        "start": [
+          14,
+          0
+        ],
+        "end": [
+          14,
+          4
+        ]
+      },
+      "ty": "whitespace"
+    },
+    {
+      "slice": "print",
+      "span": {
+        "start": [
+          14,
+          4
+        ],
+        "end": [
+          14,
+          9
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "(",
+      "span": {
+        "start": [
+          14,
+          9
+        ],
+        "end": [
+          14,
+          10
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          14,
+          10
+        ],
+        "end": [
+          14,
+          11
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": "hello",
+      "span": {
+        "start": [
+          14,
+          11
+        ],
+        "end": [
+          14,
+          16
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "\"",
+      "span": {
+        "start": [
+          14,
+          16
+        ],
+        "end": [
+          14,
+          17
+        ]
+      },
+      "ty": "double-quote"
+    },
+    {
+      "slice": ")",
+      "span": {
+        "start": [
+          14,
+          17
+        ],
+        "end": [
+          14,
+          18
+        ]
+      },
+      "ty": "other"
+    },
+    {
+      "slice": "[[/",
+      "span": {
+        "start": [
+          15,
+          0
+        ],
+        "end": [
+          15,
+          3
+        ]
+      },
+      "ty": "left-block-end"
+    },
+    {
+      "slice": "code",
+      "span": {
+        "start": [
+          15,
+          3
+        ],
+        "end": [
+          15,
+          7
+        ]
+      },
+      "ty": "identifier"
+    },
+    {
+      "slice": "]]",
+      "span": {
+        "start": [
+          15,
+          7
+        ],
+        "end": [
+          15,
+          9
+        ]
+      },
+      "ty": "right-block"
+    }
+  ],
+  "diagnostics": []
+}

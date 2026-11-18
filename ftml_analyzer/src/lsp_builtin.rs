@@ -42,6 +42,7 @@ pub enum BlockKind {
     #[default]
     Block,
     ModuleCss,
+    Code,
     Html,
 }
 
