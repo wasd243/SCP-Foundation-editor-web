@@ -37,9 +37,8 @@ pub(super) const BLOCKS: &[BlockInfo] = info! {
     ("user", "", NO_ATTR, false),
     ("*user", "", NO_ATTR, false),
     ("size", "", SIZE_ATTRS, true),
-    ("<", "", NO_ATTR, true),
-    ("=", "", NO_ATTR, true),
-    (">", "", NO_ATTR, true),
+    ("iftags", "", &["component", "theme"], true),
+    ("code", "", &["type"], true)
     // TODO: complete completion form.
 };
 
