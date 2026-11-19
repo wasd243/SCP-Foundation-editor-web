@@ -14,9 +14,6 @@ mod token;
 use ftml::parsing::{ExtractedToken, ParseErrorKind};
 use ftml::prelude::*;
 use line_index::LineIndex;
-use lsp_types::{
-    Diagnostic as ServerDiagnostic, DiagnosticSeverity, Position, Range as ServerRange,
-};
 use serde::Serialize;
 use std::sync::LazyLock;
 
@@ -24,8 +21,6 @@ pub use span::Span;
 pub use token::Token;
 
 use crate::ftml_ast::span::from_index_to_span;
-
-const SOURCE: &str = "ftml";
 
 #[derive(Serialize, Debug, Default)]
 pub struct ParseToken {
@@ -76,36 +71,29 @@ impl ParseToken {
             keep
         });
     }
-
-    /// Clone diagnostics to IDEs.
-    pub fn to_diagnostics(&self) -> Vec<ServerDiagnostic> {
-        self.diagnostics
-            .iter()
-            .map(|d| ServerDiagnostic {
-                range: ServerRange::new(
-                    Position::new(d.span.start.0, d.span.start.1),
-                    Position::new(d.span.end.0, d.span.end.1),
-                ),
-                severity: Some(DiagnosticSeverity::WARNING),
-                source: Some(SOURCE.to_string()),
-                message: d.msg.clone(),
-                ..Default::default()
-            })
-            .collect()
-    }
 }
 
+/// implementations for &str.
 impl From<&str> for ParseToken {
     /// Parse new token from wikitext
     fn from(src: &str) -> Self {
         let wikitext = src.to_string();
-        from_(wikitext)
+        let mut parse_token = from_(wikitext);
+        parse_token.clean();
+        parse_token.mute_ftml_fps();
+
+        parse_token
     }
 }
 
+/// implementations for String.
 impl From<String> for ParseToken {
     fn from(src: String) -> Self {
-        from_(src)
+        let mut parse_token = from_(src);
+        parse_token.clean();
+        parse_token.mute_ftml_fps();
+
+        parse_token
     }
 }
 
