@@ -153,6 +153,83 @@
       "len": 2,
       "ty": "Operator",
       "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 2,
+      "len": 4,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 7,
+      "len": 4,
+      "ty": "Attr",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 11,
+      "len": 1,
+      "ty": "Equals",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 12,
+      "len": 1,
+      "ty": "String",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 13,
+      "len": 3,
+      "ty": "String",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 16,
+      "len": 1,
+      "ty": "String",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 3,
+      "len": 4,
+      "ty": "KeyWord",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 0,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 17,
+      "start": 17,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 0,
+      "len": 3,
+      "ty": "Operator",
+      "mods": 0
+    },
+    {
+      "line": 21,
+      "start": 7,
+      "len": 2,
+      "ty": "Operator",
+      "mods": 0
     }
   ]
 }

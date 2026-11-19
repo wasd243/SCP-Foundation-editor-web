@@ -15,3 +15,9 @@ if __name__ == "__main__":
     print("hello")
 [[/code]]
 
+[[code type="css"]]
+.cls {
+    color: red;
+}
+[[/code]]
+

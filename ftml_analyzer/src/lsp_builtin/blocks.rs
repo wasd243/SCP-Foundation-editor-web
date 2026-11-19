@@ -6,7 +6,7 @@ use crate::{
     ftml_ast::{Diagnostic, Token},
     lsp_builtin::{
         BlockKind,
-        regex::{CODE, CSS, HTML, MODULE},
+        regex::{CODE, CSS, HTML, MODULE, TYPE},
     },
     lsp_highlight::{AbsoluteSpan, ToAbsoluteSpan as _, ToAbsoluteSpans},
     utils::{has_diagnostic, highlight::color_nodes},
@@ -55,6 +55,7 @@ impl<'lsp> Blocks<'lsp> {
             let mut block_token_parameters = Vec::new();
             let mut end_token: Option<&Token> = None;
             let mut block_ty = BlockKind::default();
+            let mut is_code_block = false;
 
             let mut end: Option<&Token> = None;
             let mut block_end_start_token: Option<&Token> = None;
@@ -92,7 +93,61 @@ impl<'lsp> Blocks<'lsp> {
                         continue;
                     }
                     TokenTy::Identifier if HTML.is_match(&t.slice) => block_ty = BlockKind::Html,
-                    TokenTy::Identifier if CODE.is_match(&t.slice) => block_ty = BlockKind::Code,
+                    TokenTy::Identifier if CODE.is_match(&t.slice) => {
+                        block_token_parameters.push(t);
+                        block_ty = BlockKind::Code;
+                        is_code_block = true;
+
+                        let next = iter.next()?;
+
+                        if next.ty == TokenTy::RightBlock {
+                            // push the `]]` into container
+                            end = Some(next);
+                            break;
+                        }
+
+                        // push after the check, to prevent we push `]]` into the parameters
+                        block_token_parameters.push(next);
+
+                        if next.ty == TokenTy::Whitespace {
+                            let next2 = iter.next()?;
+                            block_token_parameters.push(next2);
+
+                            if next2.ty == TokenTy::Identifier && TYPE.is_match(&next2.slice) {
+                                // `=`
+                                let eq = iter.next()?;
+                                block_token_parameters.push(eq);
+                                if eq.ty == TokenTy::Whitespace {
+                                    block_token_parameters.push(iter.next()?);
+                                }
+
+                                // `"`
+                                let quote = iter.next()?;
+                                block_token_parameters.push(quote);
+                                if quote.ty == TokenTy::Whitespace {
+                                    block_token_parameters.push(iter.next()?);
+                                }
+
+                                // value: `css` / `html`
+                                let val = iter.next()?;
+                                block_token_parameters.push(val);
+
+                                if val.ty == TokenTy::Identifier {
+                                    if CSS.is_match(&val.slice) {
+                                        block_ty = BlockKind::ModuleCss;
+                                    } else if HTML.is_match(&val.slice) {
+                                        block_ty = BlockKind::Html;
+                                    }
+                                }
+
+                                // closing `"`
+                                let quote2 = iter.next()?;
+                                block_token_parameters.push(quote2);
+                            }
+                        }
+
+                        continue;
+                    }
                     _ => {}
                 }
 
@@ -129,11 +184,15 @@ impl<'lsp> Blocks<'lsp> {
                     && let [name, end, ..] = iter.as_slice()
                     && is_valid_block_end(name.ty)
                     && end.ty == TokenTy::RightBlock
-                    && match block_ty {
-                        BlockKind::ModuleCss => MODULE.is_match(&name.slice),
-                        BlockKind::Html => HTML.is_match(&name.slice),
-                        BlockKind::Code => CODE.is_match(&name.slice),
-                        BlockKind::Block => true,
+                    && if is_code_block {
+                        CODE.is_match(&name.slice)
+                    } else {
+                        match block_ty {
+                            BlockKind::ModuleCss => MODULE.is_match(&name.slice),
+                            BlockKind::Html => HTML.is_match(&name.slice),
+                            BlockKind::Code => CODE.is_match(&name.slice),
+                            BlockKind::Block => true,
+                        }
                     }
                 {
                     block_end_start_token = Some(t); // [[/
