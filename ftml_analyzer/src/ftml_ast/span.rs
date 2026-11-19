@@ -1,26 +1,12 @@
 use std::ops::Range;
 
 use line_index::{LineCol, LineIndex, TextSize, WideEncoding};
-use lsp_types::Position;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub struct Span {
     pub start: (u32, u32),
     pub end: (u32, u32),
-}
-
-impl Span {
-    /// Check span contains any positions.
-    pub fn contains_pos(&self, position: Position) -> bool {
-        let pos = (position.line, position.character);
-        self.start <= pos && pos <= self.end
-    }
-
-    /// Check span contains any other span.
-    pub fn contains_span(&self, other: &Span) -> bool {
-        self.start <= other.start && other.end <= self.end
-    }
 }
 
 /// Convert `Range<usize>` to `Span`.
