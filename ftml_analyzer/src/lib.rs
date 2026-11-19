@@ -4,4 +4,5 @@
 pub mod cursor;
 pub mod ftml_ast;
 
-pub use crate::ftml_ast::{Span, Token};
+pub use cursor::Cursor;
+pub use ftml_ast::{Span, Token};
