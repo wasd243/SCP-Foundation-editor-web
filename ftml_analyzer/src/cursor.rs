@@ -1,8 +1,6 @@
-use serde::Serialize;
+use crate::{Token, TokenKind};
 
-use crate::Token;
-
-#[derive(Debug, Serialize)]
+#[derive(Debug)]
 /// # Cursor
 ///
 /// For parsing span to BuiltIn AST nodes.
@@ -21,6 +19,14 @@ pub struct Cursor<'c> {
 }
 
 impl<'c> Cursor<'c> {
+    // NOTE: For constants in `Cursor`:
+    // These constants are used for calculating span/index/etc.
+    // `Cursor` is used for pointing them, so these constants are written as implementations
+    // of `Cursor`.
+
+    ///The token count of a mark with no content (start and end marks only).
+    pub const START_AND_END_MARK: usize = 2;
+
     /// Build a new cursor from tokens.
     pub fn new(tokens: &'c [Token]) -> Option<Self> {
         let before: Option<&Token> = None;
@@ -38,6 +44,16 @@ impl<'c> Cursor<'c> {
             after,
             rest,
         })
+    }
+
+    /// Search all the tokens from `before` to `rest`.
+    pub fn contains_token(&self, token_kind: TokenKind) -> bool {
+        self.before.is_some_and(|t| t.ty == token_kind)
+            || self.token.ty == token_kind
+            || self.after.is_some_and(|t| t.ty == token_kind)
+            || self
+                .rest
+                .is_some_and(|ts| ts.iter().any(|t| t.ty == token_kind))
     }
 }
 
@@ -67,7 +83,7 @@ impl<'c> Iterator for Cursor<'c> {
         Some(self.token)
     }
 
-    /// Get last token.
+    /// Get last item.
     fn last(self) -> Option<Self::Item> {
         self.rest?.last()
     }

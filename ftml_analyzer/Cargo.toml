@@ -10,7 +10,7 @@ crate-type = ["cdylib", "rlib"]
 bless = []
 
 [dependencies]
-# anyhow.workspace = true
+anyhow.workspace = true
 ftml = "1.42"
 line-index = "0.1"
 # tokio = { version = "1", features = ["rt"] }
