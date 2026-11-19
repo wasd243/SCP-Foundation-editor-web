@@ -24,6 +24,6 @@ pub(super) fn check(diagnostics: &[Diagnostic]) -> Vec<LspLint> {
     diagnostics
         .iter()
         .filter(|d| d.ty == ParseErrorKind::NoRulesMatch)
-        .map(|d| LspLint::new(NAME, d.span, MSG.to_owned(), LintKind::Correctness))
+        .map(|d| LspLint::new(NAME, d.span, MSG.to_owned(), LintKind::Hint))
         .collect()
 }

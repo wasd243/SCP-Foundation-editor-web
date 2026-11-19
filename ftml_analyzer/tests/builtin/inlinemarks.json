@@ -286,7 +286,7 @@
         ]
       },
       "msg": "Consider adding `@@` `@@` raw wrappings",
-      "ty": "Correctness"
+      "ty": "Hint"
     }
   ]
 }

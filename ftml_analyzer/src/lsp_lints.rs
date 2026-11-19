@@ -67,13 +67,14 @@ impl LspLint {
 #[derive(Debug, Serialize)]
 pub enum LintKind {
     Correctness,
-    // NOTE: Add more types as needed.
+    Hint,
 }
 
 impl LintKind {
     fn to_severity(&self) -> DiagnosticSeverity {
         match self {
             Self::Correctness => DiagnosticSeverity::ERROR,
+            Self::Hint => DiagnosticSeverity::HINT,
         }
     }
 }
