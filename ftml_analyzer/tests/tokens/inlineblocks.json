@@ -885,4 +885,38 @@
       }
     }
   ]
+},
+{
+  "lints": [
+    {
+      "name": "unwrapped_fallback",
+      "span": {
+        "start": [
+          21,
+          0
+        ],
+        "end": [
+          21,
+          2
+        ]
+      },
+      "msg": "Consider adding `@@` `@@` raw wrappings",
+      "ty": "Correctness"
+    },
+    {
+      "name": "unwrapped_fallback",
+      "span": {
+        "start": [
+          21,
+          16
+        ],
+        "end": [
+          21,
+          18
+        ]
+      },
+      "msg": "Consider adding `@@` `@@` raw wrappings",
+      "ty": "Correctness"
+    }
+  ]
 }

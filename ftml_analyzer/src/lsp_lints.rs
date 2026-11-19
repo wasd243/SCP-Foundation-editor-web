@@ -1,5 +1,6 @@
 //! This module is set for linting unnecessary code or incorrect.
 
+mod empty_include;
 mod unwrapped_fallbacks;
 
 use lsp_types::{
@@ -12,15 +13,16 @@ use crate::{Span, ftml_ast::Diagnostic, ftml_ast::Token};
 
 #[derive(Debug, Serialize)]
 pub struct LspLints {
-    lints: Vec<LspLint>,
+    pub lints: Vec<LspLint>,
 }
 
 impl LspLints {
-    pub fn linting(_tokens: &[Token], diagnostics: &[Diagnostic]) -> Self {
+    pub fn linting(tokens: &[Token], diagnostics: &[Diagnostic]) -> Self {
         let mut lints = Vec::new();
 
         // Add lints here
         lints.extend(unwrapped_fallbacks::check(diagnostics));
+        lints.extend(empty_include::check(tokens));
 
         Self { lints }
     }

@@ -703,4 +703,23 @@
       }
     }
   ]
+},
+{
+  "lints": [
+    {
+      "name": "unwrapped_fallback",
+      "span": {
+        "start": [
+          14,
+          0
+        ],
+        "end": [
+          14,
+          2
+        ]
+      },
+      "msg": "Consider adding `@@` `@@` raw wrappings",
+      "ty": "Correctness"
+    }
+  ]
 }

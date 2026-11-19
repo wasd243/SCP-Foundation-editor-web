@@ -1,6 +1,6 @@
 use ftml_analyzer::ftml_ast::ParseToken;
 use ftml_analyzer::lsp_builtin::LspBuiltIn;
-use ftml_analyzer::parse_token;
+use ftml_analyzer::{LspLints, parse_token};
 use serde_json::to_string_pretty;
 use std::fs;
 use std::path::Path;
@@ -23,9 +23,9 @@ fn test(input_path: &str, output_path: &str, need_visitor: bool, is_bless: bool)
 
         let content = fs::read_to_string(&path).unwrap();
 
-        let token = parse_token(&content);
+        let parse_token = parse_token(&content);
 
-        let (out_path, json) = get_path_and_token(output_path, &path, &token, need_visitor);
+        let (out_path, json) = get_path_and_token(output_path, &path, &parse_token, need_visitor);
 
         if is_bless {
             fs::write(out_path, json).unwrap();
@@ -42,22 +42,30 @@ fn get_path_and_token(
     parse_token: &ParseToken,
     need_visitor: bool,
 ) -> (String, String) {
+    let lints = LspLints::linting(&parse_token.tokens, &parse_token.diagnostics);
     if need_visitor {
         let mut token = LspBuiltIn::visitor(parse_token);
         token.sanitize_whitespace();
 
         let token = to_string_pretty(&token).unwrap();
+        let lints = to_string_pretty(&lints).unwrap();
+
+        let json = format!("{token},\n{lints}");
 
         let stem = file_path.file_stem().unwrap().to_string_lossy();
 
         let path = format!("tests/{output_path}/{stem}.json");
 
-        (path, token)
+        (path, json)
     } else {
         let token = to_string_pretty(parse_token).unwrap();
+        let lints = to_string_pretty(&lints).unwrap();
+
+        let json = format!("{token},\n{lints}");
+
         let stem = file_path.file_stem().unwrap().to_string_lossy();
         let path = format!("tests/{output_path}/{stem}.json");
-        (path, token)
+        (path, json)
     }
 }
 
