@@ -1,0 +1,2 @@
+[alias]
+bless = "test -p tests --features bless"

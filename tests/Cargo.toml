@@ -1,0 +1,11 @@
+[package]
+name = "tests"
+version.workspace = true
+edition.workspace = true
+
+[features]
+bless = []
+
+[dev-dependencies]
+anyhow.workspace = true
+lsp_test.workspace = true

@@ -5,7 +5,7 @@ use comment::Comment;
 use serde::Serialize;
 
 use crate::{
-    Cursor, Token,
+    Cursor, Span, Token,
     ftml_ast::{Diagnostic, ParseToken},
 };
 
@@ -45,15 +45,28 @@ impl Node {
 
         loop {
             if let Some(comment) = Comment::parse(&cursor) {
-                cursor.nth(comment.len());
+                nth_len(&mut cursor, comment.len());
                 nodes.push(Self::Comment(comment));
             }
 
-            if cursor.after.is_none() {
+            if cursor.next().is_none() {
                 break;
             }
         }
 
         nodes
+    }
+
+    /// An info API for test harnnes.
+    pub fn info(&self) -> (&'static str, Span) {
+        match self {
+            Node::Comment(c) => ("Comment", c.span),
+        }
+    }
+}
+
+fn nth_len(cursor: &mut Cursor, len: usize) {
+    for _ in 1..len {
+        cursor.next();
     }
 }

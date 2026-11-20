@@ -1,0 +1,7 @@
+[[expectation]]
+kind = "Comment"
+span = { start = [0, 0], end = [2, 3] }
+
+[[expectation]]
+kind = "Comment"
+span = { start = [4, 0], end = [6, 3] }

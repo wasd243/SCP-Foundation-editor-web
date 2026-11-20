@@ -1,0 +1,33 @@
+{
+  "diagnostics": [],
+  "nodes": [
+    {
+      "Comment": {
+        "span": {
+          "end": [
+            0,
+            7
+          ],
+          "start": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "Comment": {
+        "span": {
+          "end": [
+            1,
+            26
+          ],
+          "start": [
+            1,
+            0
+          ]
+        }
+      }
+    }
+  ]
+}
