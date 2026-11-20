@@ -9,6 +9,6 @@ handwriting so much `while` and `loops`).
 
 - [ ] InlineMarks
 - [ ] InlineBlocks
-- [ ] Comments
+- [x] Comments
 - [ ] Blocks
 

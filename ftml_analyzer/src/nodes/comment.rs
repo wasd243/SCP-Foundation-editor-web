@@ -59,6 +59,7 @@ impl Comment {
         })
     }
 
+    /// Get the length.
     pub fn len(&self) -> usize {
         self.len
     }
