@@ -49,7 +49,7 @@ impl From<TokenKind> for InlineMarkKind {
 
 impl CursorToNode for InlineMark {
     const COLLAPSIBLE: bool = false;
-
+    impl_len!();
     fn parse(cursor: &Cursor) -> Option<Self> {
         if !is_inline_mark_token_(cursor.token.ty)
             && !matches!(cursor.token.ty, TokenKind::LeftMonospace)
@@ -88,10 +88,6 @@ impl CursorToNode for InlineMark {
             ty,
             len: i + Cursor::START_AND_END_MARK + 1,
         })
-    }
-
-    fn len(&self) -> usize {
-        self.len
     }
 }
 

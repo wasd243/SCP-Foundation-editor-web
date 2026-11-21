@@ -20,10 +20,8 @@ pub struct Comment {
 }
 
 impl CursorToNode for Comment {
-    /// Use `COLLAPSIBLE` to config LSP code collapse feature.
     const COLLAPSIBLE: bool = true;
-
-    /// Try to parse one comment at the cursor. Does not move the cursor on failure.
+    impl_len!();
     fn parse(cursor: &Cursor) -> Option<Self> {
         if cursor.token.ty != TokenKind::LeftComment {
             return None;
@@ -57,10 +55,5 @@ impl CursorToNode for Comment {
             // e.g. `[!--` `x` `--]` is 3 tokens, with `--]` at rest[0].
             len: i + Cursor::START_AND_END_MARK + 1,
         })
-    }
-
-    /// Get the length.
-    fn len(&self) -> usize {
-        self.len
     }
 }

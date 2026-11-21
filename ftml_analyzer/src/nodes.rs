@@ -1,3 +1,12 @@
+/// A private mancro to generate `len()` implementations.
+macro_rules! impl_len {
+    () => {
+        fn len(&self) -> usize {
+            self.len
+        }
+    };
+}
+
 mod comment;
 
 #[cfg(feature = "highlight")]
@@ -18,12 +27,13 @@ use crate::{
 /// A trait for each node implementations.
 trait CursorToNode {
     #[expect(unused)]
+    /// Use `COLLAPSIBLE` to config LSP code collapse feature.
     const COLLAPSIBLE: bool;
-
+    /// Try to parse at the cursor. Does not move the cursor on failure.
     fn parse(cursor: &Cursor) -> Option<Self>
     where
         Self: Sized;
-
+    /// Output the private len field.
     fn len(&self) -> usize;
 }
 
