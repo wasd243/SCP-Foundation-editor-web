@@ -97,5 +97,5 @@ fn read_optional(path: &Path) -> Result<Option<String>> {
 
 /// Add the head to result.
 fn render(ast: &impl serde::Serialize) -> Result<String> {
-    Ok(format!("{TOML_HEAD}\n{}", toml::to_string_pretty(ast)?))
+    Ok(format!("{TOML_HEAD}\n{}", toml::to_string(ast)?))
 }

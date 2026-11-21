@@ -8,14 +8,8 @@ diagnostics = []
 ty = "Bold"
 
 [nodes.InlineMark.span]
-start = [
-    0,
-    0,
-]
-end = [
-    0,
-    8,
-]
+start = [0, 0]
+end = [0, 8]
 
 [[nodes]]
 
@@ -23,14 +17,8 @@ end = [
 ty = "Italic"
 
 [nodes.InlineMark.span]
-start = [
-    1,
-    0,
-]
-end = [
-    1,
-    10,
-]
+start = [1, 0]
+end = [1, 10]
 
 [[nodes]]
 
@@ -38,14 +26,8 @@ end = [
 ty = "Underline"
 
 [nodes.InlineMark.span]
-start = [
-    2,
-    0,
-]
-end = [
-    2,
-    13,
-]
+start = [2, 0]
+end = [2, 13]
 
 [[nodes]]
 
@@ -53,14 +35,8 @@ end = [
 ty = "StrikeThrough"
 
 [nodes.InlineMark.span]
-start = [
-    3,
-    0,
-]
-end = [
-    3,
-    17,
-]
+start = [3, 0]
+end = [3, 17]
 
 [[nodes]]
 
@@ -68,14 +44,8 @@ end = [
 ty = "Monospace"
 
 [nodes.InlineMark.span]
-start = [
-    4,
-    0,
-]
-end = [
-    4,
-    8,
-]
+start = [4, 0]
+end = [4, 8]
 
 [[nodes]]
 
@@ -83,14 +53,8 @@ end = [
 ty = "Raw"
 
 [nodes.InlineMark.span]
-start = [
-    5,
-    0,
-]
-end = [
-    5,
-    7,
-]
+start = [5, 0]
+end = [5, 7]
 
 [[nodes]]
 
@@ -98,14 +62,8 @@ end = [
 ty = "Superscript"
 
 [nodes.InlineMark.span]
-start = [
-    6,
-    0,
-]
-end = [
-    6,
-    9,
-]
+start = [6, 0]
+end = [6, 9]
 
 [[nodes]]
 
@@ -113,11 +71,5 @@ end = [
 ty = "Subscript"
 
 [nodes.InlineMark.span]
-start = [
-    7,
-    0,
-]
-end = [
-    7,
-    7,
-]
+start = [7, 0]
+end = [7, 7]

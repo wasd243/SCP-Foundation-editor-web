@@ -6,14 +6,8 @@
 ty = "Bold"
 
 [nodes.InlineMark.span]
-start = [
-    0,
-    0,
-]
-end = [
-    0,
-    52,
-]
+start = [0, 0]
+end = [0, 52]
 
 [[nodes]]
 
@@ -21,14 +15,8 @@ end = [
 ty = "Italic"
 
 [nodes.InlineMark.span]
-start = [
-    0,
-    7,
-]
-end = [
-    0,
-    50,
-]
+start = [0, 7]
+end = [0, 50]
 
 [[nodes]]
 
@@ -36,14 +24,8 @@ end = [
 ty = "Underline"
 
 [nodes.InlineMark.span]
-start = [
-    0,
-    16,
-]
-end = [
-    0,
-    48,
-]
+start = [0, 16]
+end = [0, 48]
 
 [[nodes]]
 
@@ -51,14 +33,8 @@ end = [
 ty = "StrikeThrough"
 
 [nodes.InlineMark.span]
-start = [
-    0,
-    28,
-]
-end = [
-    0,
-    46,
-]
+start = [0, 28]
+end = [0, 46]
 
 [[nodes]]
 
@@ -66,51 +42,27 @@ end = [
 ty = "Italic"
 
 [nodes.InlineMark.span]
-start = [
-    2,
-    7,
-]
-end = [
-    2,
-    17,
-]
+start = [2, 7]
+end = [2, 17]
 
 [[nodes]]
 
 [nodes.Comment.span]
-start = [
-    2,
-    18,
-]
-end = [
-    2,
-    38,
-]
+start = [2, 18]
+end = [2, 38]
 
 [[diagnostics]]
 msg = "NoRulesMatch: fallback"
 ty = "no-rules-match"
 
 [diagnostics.span]
-start = [
-    2,
-    0,
-]
-end = [
-    2,
-    2,
-]
+start = [2, 0]
+end = [2, 2]
 
 [[diagnostics]]
 msg = "RuleFailed: bold"
 ty = "rule-failed"
 
 [diagnostics.span]
-start = [
-    2,
-    38,
-]
-end = [
-    4,
-    0,
-]
+start = [2, 38]
+end = [4, 0]
