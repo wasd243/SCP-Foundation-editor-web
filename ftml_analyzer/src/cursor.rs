@@ -16,6 +16,8 @@ pub struct Cursor<'c> {
     pub after: Option<&'c Token>,
     /// All the tokens after cursor pointing one.
     pub rest: Option<&'c [Token]>,
+    /// Check that is cursor in `[[ ]]` context.
+    block_depth: usize,
 }
 
 impl<'c> Cursor<'c> {
@@ -38,11 +40,16 @@ impl<'c> Cursor<'c> {
             None => (None, None),
         };
 
+        // Automatically check cursor status.
+        let mut block_depth = 0;
+        match_block_tokens(token.ty, &mut block_depth);
+
         Some(Self {
             before,
             token,
             after,
             rest,
+            block_depth,
         })
     }
 
@@ -54,6 +61,16 @@ impl<'c> Cursor<'c> {
             || self
                 .rest
                 .is_some_and(|ts| ts.iter().any(|t| t.ty == token_kind))
+    }
+
+    /// Check cursor is in block.
+    pub fn is_in_block(&self) -> bool {
+        self.block_depth > 0
+    }
+
+    /// Update block depth.
+    fn update_depth(&mut self) {
+        match_block_tokens(self.token.ty, &mut self.block_depth);
     }
 }
 
@@ -70,6 +87,7 @@ impl<'c> Iterator for Cursor<'c> {
             self.before = Some(self.token); // also update for other fields
             self.token = self.after?;
             self.after = None;
+            self.update_depth();
             return Some(self.token);
         }
 
@@ -80,11 +98,48 @@ impl<'c> Iterator for Cursor<'c> {
         self.after = Some(after);
         self.rest = if rest.is_empty() { None } else { Some(rest) };
 
+        self.update_depth();
+
         Some(self.token)
     }
 
     /// Get last item.
     fn last(self) -> Option<Self::Item> {
-        self.rest?.last()
+        self.rest
+            .and_then(|r| r.last())
+            .or(self.after)
+            .or(Some(self.token))
+    }
+}
+
+/// Match and update block depth.
+///
+/// NOTE: `is_in_block()` only contains `[[` not `]]`,
+/// so the status is including `[[` but excluding `]]`.
+fn match_block_tokens(ty: TokenKind, depth: &mut usize) {
+    match ty {
+        TokenKind::LeftBlock => *depth += 1,
+        TokenKind::RightBlock => *depth = depth.saturating_sub(1),
+        _ => {}
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::ftml_ast::ParseToken;
+
+    use super::*;
+
+    const FTML: &str = "[[footnote]]something[[/footnote]]";
+
+    #[test]
+    fn cursor_works() {
+        let tokens = ParseToken::from(FTML);
+        let mut cursor = Cursor::new(&tokens.tokens).unwrap();
+        assert!(cursor.is_in_block());
+        cursor.next();
+        assert!(cursor.is_in_block());
+        cursor.next();
+        assert!(!cursor.is_in_block());
     }
 }

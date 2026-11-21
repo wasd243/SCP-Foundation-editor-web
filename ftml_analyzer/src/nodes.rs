@@ -7,13 +7,12 @@ macro_rules! impl_len {
     };
 }
 
+mod block;
 mod comment;
-
 #[cfg(feature = "highlight")]
 mod inline_mark;
 
 use comment::Comment;
-
 #[cfg(feature = "highlight")]
 use inline_mark::InlineMark;
 
