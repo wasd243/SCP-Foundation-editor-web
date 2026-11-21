@@ -1,6 +1,6 @@
 use serde::Serialize;
 
-use crate::{Cursor, Span, TokenKind};
+use crate::{Cursor, Span, TokenKind, nodes::CursorToNode};
 
 #[derive(Clone, Debug, Serialize, PartialEq, Eq)]
 /// # Comment
@@ -19,12 +19,12 @@ pub struct Comment {
     len: usize,
 }
 
-impl Comment {
+impl CursorToNode for Comment {
     /// Use `COLLAPSIBLE` to config LSP code collapse feature.
-    pub const COLLAPSIBLE: bool = true;
+    const COLLAPSIBLE: bool = true;
 
     /// Try to parse one comment at the cursor. Does not move the cursor on failure.
-    pub fn parse(cursor: &Cursor) -> Option<Self> {
+    fn parse(cursor: &Cursor) -> Option<Self> {
         if cursor.token.ty != TokenKind::LeftComment {
             return None;
         }
@@ -60,7 +60,7 @@ impl Comment {
     }
 
     /// Get the length.
-    pub fn len(&self) -> usize {
+    fn len(&self) -> usize {
         self.len
     }
 }

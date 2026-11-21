@@ -21,4 +21,9 @@ impl Token {
             ty: extracted_token.token,
         }
     }
+
+    /// Whether the range from `self` to `other` crosses lines.
+    pub fn is_cross_line_with(&self, other: &Self) -> bool {
+        self.span.start.0 != other.span.end.0
+    }
 }

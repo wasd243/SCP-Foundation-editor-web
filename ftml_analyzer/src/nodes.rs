@@ -1,6 +1,12 @@
 mod comment;
 
+#[cfg(feature = "highlight")]
+mod inline_mark;
+
 use comment::Comment;
+
+#[cfg(feature = "highlight")]
+use inline_mark::InlineMark;
 
 use serde::Serialize;
 
@@ -8,6 +14,18 @@ use crate::{
     Cursor, Span, Token,
     ftml_ast::{Diagnostic, ParseToken},
 };
+
+/// A trait for each node implementations.
+trait CursorToNode {
+    #[expect(unused)]
+    const COLLAPSIBLE: bool;
+
+    fn parse(cursor: &Cursor) -> Option<Self>
+    where
+        Self: Sized;
+
+    fn len(&self) -> usize;
+}
 
 #[derive(Clone, Debug, Serialize, PartialEq, Eq)]
 /// # Node
@@ -17,6 +35,8 @@ use crate::{
 /// This enum is constructed in `BuiltIn`.
 pub enum Node {
     Comment(Comment),
+    #[cfg(feature = "highlight")]
+    InlineMark(InlineMark),
 }
 
 #[derive(Debug, Serialize)]
@@ -49,6 +69,12 @@ impl Node {
                 nodes.push(Self::Comment(comment));
             }
 
+            #[cfg(feature = "highlight")]
+            if let Some(mark) = InlineMark::parse(&cursor) {
+                nodes.push(Self::InlineMark(mark));
+                // no nth_len: step one token so nested marks are visited
+            }
+
             if cursor.next().is_none() {
                 break;
             }
@@ -57,10 +83,12 @@ impl Node {
         nodes
     }
 
-    /// An info API for test harnnes.
+    /// An info API for test harnnes (Debug only).
     pub fn info(&self) -> (&'static str, Span) {
         match self {
             Node::Comment(c) => ("Comment", c.span),
+            #[cfg(feature = "highlight")]
+            Node::InlineMark(m) => ("InlineMark", m.span),
         }
     }
 }
