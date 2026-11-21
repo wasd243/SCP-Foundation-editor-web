@@ -29,6 +29,9 @@ impl<'c> Cursor<'c> {
     ///The token count of a mark with no content (start and end marks only).
     pub const START_AND_END_MARK: usize = 2;
 
+    /// The token count of a mark `]]` because the cursor won't count it into `block_depth`.
+    pub const BLOCK_END_MARK: usize = 1;
+
     /// Build a new cursor from tokens.
     pub fn new(tokens: &'c [Token]) -> Option<Self> {
         let before: Option<&Token> = None;
