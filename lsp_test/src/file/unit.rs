@@ -8,7 +8,6 @@
 //! ```
 use anyhow::{Context, Result};
 use ftml_analyzer::get_ast;
-use serde_json::Value;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::str::FromStr as _;
@@ -17,7 +16,9 @@ use super::Expect;
 
 const INPUT_FILE: &str = "input.ftml";
 const EXPECT_FILE: &str = "expect.toml";
-const BUILTIN_FILE: &str = "builtin.json";
+const BUILTIN_FILE: &str = "builtin.toml";
+
+const TOML_HEAD: &str = include_str!("head.toml");
 
 #[derive(Debug)]
 pub struct TestUnit {
@@ -25,7 +26,7 @@ pub struct TestUnit {
     pub name: String,
     pub input: String,
     pub expect: Option<String>,
-    pub builtin: Option<Value>,
+    pub builtin: Option<String>,
 }
 
 impl TestUnit {
@@ -41,9 +42,7 @@ impl TestUnit {
 
         let expect = read_optional(&dir.join(EXPECT_FILE))?;
 
-        let builtin = read_optional(&dir.join(BUILTIN_FILE))?
-            .map(|s| serde_json::from_str::<Value>(&s))
-            .transpose()?;
+        let builtin = read_optional(&dir.join(BUILTIN_FILE))?;
 
         Ok(Self {
             dir,
@@ -56,12 +55,9 @@ impl TestUnit {
 
     /// Bless builtin JSON based on input ftml source code.
     pub fn bless(&mut self) -> Result<()> {
-        let value = serde_json::to_value(get_ast(&self.input))?;
-        fs::write(
-            self.dir.join(BUILTIN_FILE),
-            serde_json::to_string_pretty(&value)?,
-        )?;
-        self.builtin = Some(value);
+        let text = render(&get_ast(&self.input))?;
+        fs::write(self.dir.join(BUILTIN_FILE), &text)?;
+        self.builtin = Some(text);
         Ok(())
     }
 
@@ -70,7 +66,8 @@ impl TestUnit {
         let ast = get_ast(&self.input);
 
         // snapshot, required
-        let actual = serde_json::to_value(&ast)?;
+        let actual = render(&ast)?;
+
         let Some(snapshot) = &self.builtin else {
             anyhow::bail!("no `{BUILTIN_FILE}` snapshot, bless before check");
         };
@@ -96,4 +93,9 @@ fn read_optional(path: &Path) -> Result<Option<String>> {
         Err(e) if e.kind() == std::io::ErrorKind::NotFound => Ok(None),
         Err(e) => Err(e.into()),
     }
+}
+
+/// Add the head to result.
+fn render(ast: &impl serde::Serialize) -> Result<String> {
+    Ok(format!("{TOML_HEAD}\n{}", toml::to_string_pretty(ast)?))
 }
