@@ -12,6 +12,7 @@ mod comment;
 #[cfg(feature = "highlight")]
 mod inline_mark;
 
+use block::Block;
 use comment::Comment;
 #[cfg(feature = "highlight")]
 use inline_mark::InlineMark;
@@ -36,13 +37,14 @@ trait CursorToNode {
     fn len(&self) -> usize;
 }
 
-#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
 /// # Node
 ///
 /// This enum represents individual nodes in the LSP builtin AST.
 /// Each node has a struct with the same name.
 /// This enum is constructed in `BuiltIn`.
 pub enum Node {
+    Block(Block),
     Comment(Comment),
     #[cfg(feature = "highlight")]
     InlineMark(InlineMark),
@@ -96,6 +98,7 @@ impl Node {
     /// An info API for test harnnes (Debug only).
     pub fn info(&self) -> (&'static str, Span) {
         match self {
+            Node::Block(b) => ("Block", b.span),
             Node::Comment(c) => ("Comment", c.span),
             #[cfg(feature = "highlight")]
             Node::InlineMark(m) => ("InlineMark", m.span),

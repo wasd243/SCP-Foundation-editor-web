@@ -29,9 +29,6 @@ impl<'c> Cursor<'c> {
     ///The token count of a mark with no content (start and end marks only).
     pub const START_AND_END_MARK: usize = 2;
 
-    /// The token count of a mark `]]` because the cursor won't count it into `block_depth`.
-    pub const BLOCK_END_MARK: usize = 1;
-
     /// Build a new cursor from tokens.
     pub fn new(tokens: &'c [Token]) -> Option<Self> {
         let before: Option<&Token> = None;
@@ -45,7 +42,7 @@ impl<'c> Cursor<'c> {
 
         // Automatically check cursor status.
         let mut block_depth = 0;
-        match_block_tokens(token.ty, &mut block_depth);
+        add_block_depth(token.ty, &mut block_depth);
 
         Some(Self {
             before,
@@ -80,7 +77,10 @@ impl<'c> Cursor<'c> {
 
     /// Update block depth.
     fn update_depth(&mut self) {
-        match_block_tokens(self.token.ty, &mut self.block_depth);
+        add_block_depth(self.token.ty, &mut self.block_depth);
+        if let Some(before) = self.before {
+            minus_block_depth(before.ty, &mut self.block_depth);
+        }
     }
 }
 
@@ -122,15 +122,17 @@ impl<'c> Iterator for Cursor<'c> {
     }
 }
 
-/// Match and update block depth.
-///
-/// NOTE: `is_in_block()` only contains `[[` not `]]`,
-/// so the status is including `[[` but excluding `]]`.
-fn match_block_tokens(ty: TokenKind, depth: &mut usize) {
-    match ty {
-        TokenKind::LeftBlock => *depth += 1,
-        TokenKind::RightBlock => *depth = depth.saturating_sub(1),
-        _ => {}
+/// +1 when current is `[[`.
+fn add_block_depth(ty: TokenKind, depth: &mut usize) {
+    if ty == TokenKind::LeftBlock {
+        *depth += 1;
+    }
+}
+
+/// -1 when before is `]]`.
+fn minus_block_depth(ty: TokenKind, depth: &mut usize) {
+    if ty == TokenKind::RightBlock {
+        *depth = depth.saturating_sub(1);
     }
 }
 
@@ -146,6 +148,8 @@ mod tests {
     fn cursor_works() {
         let tokens = ParseToken::from(FTML);
         let mut cursor = Cursor::new(&tokens.tokens).unwrap();
+        assert!(cursor.is_in_block());
+        cursor.next();
         assert!(cursor.is_in_block());
         cursor.next();
         assert!(cursor.is_in_block());
