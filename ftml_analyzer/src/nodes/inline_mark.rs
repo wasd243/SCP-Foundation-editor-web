@@ -9,7 +9,7 @@
 use crate::{Cursor, Span, Token, TokenKind, nodes::CursorToNode};
 use serde::Serialize;
 
-#[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
 pub struct InlineMark {
     pub span: Span,
     pub ty: InlineMarkKind,

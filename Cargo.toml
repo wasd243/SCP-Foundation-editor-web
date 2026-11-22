@@ -8,7 +8,7 @@ version = "0.1.0"
 edition = "2024"
 
 [workspace.dependencies]
-ftml_analyzer = { path = "ftml_analyzer", features = ["default", "highlight"] }
+ftml_analyzer = { path = "ftml_analyzer", features = ["highlight", "debug"] }
 lsp_test = { path = "lsp_test" }
 
 # dependencies

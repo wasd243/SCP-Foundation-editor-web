@@ -1,0 +1,264 @@
+{
+  "nodes": [
+    {
+      "Block": {
+        "span": {
+          "start": [
+            2,
+            0
+          ],
+          "end": [
+            4,
+            8
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": []
+      }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            6,
+            0
+          ],
+          "end": [
+            28,
+            16
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": [
+          {
+            "span": {
+              "start": [
+                12,
+                3
+              ],
+              "end": [
+                12,
+                5
+              ]
+            },
+            "ty": "Value"
+          },
+          {
+            "span": {
+              "start": [
+                14,
+                5
+              ],
+              "end": [
+                14,
+                13
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                16,
+                2
+              ],
+              "end": [
+                16,
+                6
+              ]
+            },
+            "ty": "KeyWord"
+          }
+        ]
+      }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            8,
+            0
+          ],
+          "end": [
+            26,
+            6
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": [
+          {
+            "span": {
+              "start": [
+                12,
+                3
+              ],
+              "end": [
+                12,
+                5
+              ]
+            },
+            "ty": "Value"
+          },
+          {
+            "span": {
+              "start": [
+                14,
+                5
+              ],
+              "end": [
+                14,
+                13
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                16,
+                2
+              ],
+              "end": [
+                16,
+                6
+              ]
+            },
+            "ty": "KeyWord"
+          }
+        ]
+      }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            10,
+            0
+          ],
+          "end": [
+            24,
+            6
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": [
+          {
+            "span": {
+              "start": [
+                12,
+                3
+              ],
+              "end": [
+                12,
+                5
+              ]
+            },
+            "ty": "Value"
+          },
+          {
+            "span": {
+              "start": [
+                14,
+                5
+              ],
+              "end": [
+                14,
+                13
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                16,
+                2
+              ],
+              "end": [
+                16,
+                6
+              ]
+            },
+            "ty": "KeyWord"
+          }
+        ]
+      }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            12,
+            0
+          ],
+          "end": [
+            22,
+            6
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": [
+          {
+            "span": {
+              "start": [
+                14,
+                5
+              ],
+              "end": [
+                14,
+                13
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                16,
+                2
+              ],
+              "end": [
+                16,
+                6
+              ]
+            },
+            "ty": "KeyWord"
+          }
+        ]
+      }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            14,
+            3
+          ],
+          "end": [
+            14,
+            49
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": []
+      }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            16,
+            0
+          ],
+          "end": [
+            20,
+            9
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": []
+      }
+    }
+  ],
+  "diagnostics": []
+}

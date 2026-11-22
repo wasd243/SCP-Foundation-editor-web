@@ -2,7 +2,7 @@ use serde::Serialize;
 
 use crate::{Cursor, Span, TokenKind, nodes::CursorToNode};
 
-#[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
 /// # Comment
 ///
 /// A comment in ftml, collapsible in LSP.

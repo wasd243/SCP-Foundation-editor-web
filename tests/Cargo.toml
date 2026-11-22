@@ -1,3 +1,4 @@
+# This crate is written for testing.
 [package]
 name = "tests"
 version.workspace = true

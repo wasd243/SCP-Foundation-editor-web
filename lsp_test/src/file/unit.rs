@@ -16,9 +16,7 @@ use super::Expect;
 
 const INPUT_FILE: &str = "input.ftml";
 const EXPECT_FILE: &str = "expect.toml";
-const BUILTIN_FILE: &str = "builtin.toml";
-
-const TOML_HEAD: &str = include_str!("head.toml");
+const BUILTIN_FILE: &str = "builtin.json";
 
 #[derive(Debug)]
 pub struct TestUnit {
@@ -97,5 +95,5 @@ fn read_optional(path: &Path) -> Result<Option<String>> {
 
 /// Add the head to result.
 fn render(ast: &impl serde::Serialize) -> Result<String> {
-    Ok(format!("{TOML_HEAD}\n{}", toml::to_string(ast)?))
+    Ok(serde_json::to_string_pretty(&ast)?)
 }

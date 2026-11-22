@@ -1,0 +1,123 @@
+{
+  "nodes": [
+    {
+      "InlineMark": {
+        "span": {
+          "start": [
+            0,
+            0
+          ],
+          "end": [
+            0,
+            52
+          ]
+        },
+        "ty": "Bold"
+      }
+    },
+    {
+      "InlineMark": {
+        "span": {
+          "start": [
+            0,
+            7
+          ],
+          "end": [
+            0,
+            50
+          ]
+        },
+        "ty": "Italic"
+      }
+    },
+    {
+      "InlineMark": {
+        "span": {
+          "start": [
+            0,
+            16
+          ],
+          "end": [
+            0,
+            48
+          ]
+        },
+        "ty": "Underline"
+      }
+    },
+    {
+      "InlineMark": {
+        "span": {
+          "start": [
+            0,
+            28
+          ],
+          "end": [
+            0,
+            46
+          ]
+        },
+        "ty": "StrikeThrough"
+      }
+    },
+    {
+      "InlineMark": {
+        "span": {
+          "start": [
+            2,
+            7
+          ],
+          "end": [
+            2,
+            17
+          ]
+        },
+        "ty": "Italic"
+      }
+    },
+    {
+      "Comment": {
+        "span": {
+          "start": [
+            2,
+            18
+          ],
+          "end": [
+            2,
+            38
+          ]
+        }
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "msg": "NoRulesMatch: fallback",
+      "ty": "no-rules-match",
+      "span": {
+        "start": [
+          2,
+          0
+        ],
+        "end": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "msg": "RuleFailed: bold",
+      "ty": "rule-failed",
+      "span": {
+        "start": [
+          2,
+          38
+        ],
+        "end": [
+          4,
+          0
+        ]
+      }
+    }
+  ]
+}

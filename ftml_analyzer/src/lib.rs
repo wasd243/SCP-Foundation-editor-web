@@ -4,6 +4,7 @@ pub use ftml::parsing::Token as TokenKind;
 
 pub mod cursor;
 pub mod ftml_ast;
+pub mod mapping;
 pub mod nodes;
 
 pub use cursor::Cursor;

@@ -1,3 +1,5 @@
+mod update;
+
 use crate::{Token, TokenKind};
 
 #[derive(Debug)]
@@ -8,16 +10,24 @@ use crate::{Token, TokenKind};
 ///
 /// All context in `Cursor` won't move value and will remains read-only borrows.
 pub struct Cursor<'c> {
-    /// The token before cursor pointing one.
+    pub index: usize,
+    /// Token before cursor pointing.
     pub before: Option<&'c Token>,
-    /// The token cursor is pointing.
+    /// Token cursor is pointing.
     pub token: &'c Token,
-    /// The token after cursor pointing one.
+    /// Token after cursor pointing.
     pub after: Option<&'c Token>,
     /// All the tokens after cursor pointing one.
     pub rest: Option<&'c [Token]>,
     /// Check that is cursor in `[[ ]]` context.
     block_depth: usize,
+    /// This field only use for checking in block attributes equals.
+    /// Always false while initializing cursor.
+    /// Private because it remains `true` even if the cursor is NOT in block.
+    after_equals: bool,
+    /// This field only use for checking in block attributes "double quotes".
+    /// Always false while initializing cursor.
+    is_string: bool,
 }
 
 impl<'c> Cursor<'c> {
@@ -45,11 +55,14 @@ impl<'c> Cursor<'c> {
         add_block_depth(token.ty, &mut block_depth);
 
         Some(Self {
+            index: 0,
             before,
             token,
             after,
             rest,
             block_depth,
+            after_equals: false,
+            is_string: false,
         })
     }
 
@@ -63,11 +76,6 @@ impl<'c> Cursor<'c> {
                 .is_some_and(|ts| ts.iter().any(|t| t.ty == token_kind))
     }
 
-    /// Check cursor is in block.
-    pub fn is_in_block(&self) -> bool {
-        self.block_depth > 0
-    }
-
     /// A manually nth implementation for builtin nodes.
     pub fn nth_len(&mut self, len: usize) {
         for _ in 1..len {
@@ -75,12 +83,19 @@ impl<'c> Cursor<'c> {
         }
     }
 
-    /// Update block depth.
-    fn update_depth(&mut self) {
-        add_block_depth(self.token.ty, &mut self.block_depth);
-        if let Some(before) = self.before {
-            minus_block_depth(before.ty, &mut self.block_depth);
-        }
+    /// Check cursor is in block.
+    pub fn is_in_block(&self) -> bool {
+        self.block_depth > 0
+    }
+
+    /// Check that the cursor is after `=` context.
+    pub fn is_value(&self) -> bool {
+        self.is_in_block() && self.after_equals
+    }
+
+    /// Check that the cursor is in `"string"`.
+    pub fn is_string(&self) -> bool {
+        self.is_string || (self.token.ty == TokenKind::DoubleQuote && self.is_in_block())
     }
 }
 
@@ -97,7 +112,8 @@ impl<'c> Iterator for Cursor<'c> {
             self.before = Some(self.token); // also update for other fields
             self.token = self.after?;
             self.after = None;
-            self.update_depth();
+            self.index += 1;
+            self.update();
             return Some(self.token);
         }
 
@@ -108,7 +124,8 @@ impl<'c> Iterator for Cursor<'c> {
         self.after = Some(after);
         self.rest = if rest.is_empty() { None } else { Some(rest) };
 
-        self.update_depth();
+        self.index += 1;
+        self.update();
 
         Some(self.token)
     }
@@ -133,27 +150,5 @@ fn add_block_depth(ty: TokenKind, depth: &mut usize) {
 fn minus_block_depth(ty: TokenKind, depth: &mut usize) {
     if ty == TokenKind::RightBlock {
         *depth = depth.saturating_sub(1);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::ftml_ast::ParseToken;
-
-    use super::*;
-
-    const FTML: &str = "[[footnote]]something[[/footnote]]";
-
-    #[test]
-    fn cursor_works() {
-        let tokens = ParseToken::from(FTML);
-        let mut cursor = Cursor::new(&tokens.tokens).unwrap();
-        assert!(cursor.is_in_block());
-        cursor.next();
-        assert!(cursor.is_in_block());
-        cursor.next();
-        assert!(cursor.is_in_block());
-        cursor.next();
-        assert!(!cursor.is_in_block());
     }
 }

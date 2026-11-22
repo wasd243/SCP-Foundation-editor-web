@@ -22,6 +22,8 @@ use serde::Serialize;
 use crate::{
     Cursor, Span, Token,
     ftml_ast::{Diagnostic, ParseToken},
+    mapping::build_map,
+    nodes::block::BlockKind,
 };
 
 /// A trait for each node implementations.
@@ -37,7 +39,7 @@ trait CursorToNode {
     fn len(&self) -> usize;
 }
 
-#[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
 /// # Node
 ///
 /// This enum represents individual nodes in the LSP builtin AST.
@@ -72,6 +74,7 @@ impl Node {
         let Some(mut cursor) = Cursor::new(&tokens) else {
             return vec![];
         };
+        let map = build_map(&tokens);
         let mut nodes: Vec<Self> = vec![];
 
         // the main parse loop
@@ -79,6 +82,15 @@ impl Node {
             if let Some(comment) = Comment::parse(&cursor) {
                 cursor.nth_len(comment.len());
                 nodes.push(Self::Comment(comment));
+            }
+
+            if let Some(block) = Block::parse(&cursor, &map) {
+                if block.ty == BlockKind::Inline {
+                    // nth_len: do not accept nested inline blocks
+                    cursor.nth_len(block.len());
+                }
+                // no nth_len: step one token so nested blocks are visited
+                nodes.push(Self::Block(block));
             }
 
             #[cfg(feature = "highlight")]
@@ -95,6 +107,7 @@ impl Node {
         nodes
     }
 
+    #[cfg(feature = "debug")]
     /// An info API for test harnnes (Debug only).
     pub fn info(&self) -> (&'static str, Span) {
         match self {

@@ -1,3 +1,4 @@
+# This crate is written for testing.
 [package]
 name = "lsp_test"
 version.workspace = true
