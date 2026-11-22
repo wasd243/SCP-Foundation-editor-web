@@ -71,6 +71,13 @@ impl<'c> Cursor<'c> {
         self.block_depth > 0
     }
 
+    /// A manually nth implementation for builtin nodes.
+    pub fn nth_len(&mut self, len: usize) {
+        for _ in 1..len {
+            self.next();
+        }
+    }
+
     /// Update block depth.
     fn update_depth(&mut self) {
         match_block_tokens(self.token.ty, &mut self.block_depth);

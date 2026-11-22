@@ -72,9 +72,10 @@ impl Node {
         };
         let mut nodes: Vec<Self> = vec![];
 
+        // the main parse loop
         loop {
             if let Some(comment) = Comment::parse(&cursor) {
-                nth_len(&mut cursor, comment.len());
+                cursor.nth_len(comment.len());
                 nodes.push(Self::Comment(comment));
             }
 
@@ -99,11 +100,5 @@ impl Node {
             #[cfg(feature = "highlight")]
             Node::InlineMark(m) => ("InlineMark", m.span),
         }
-    }
-}
-
-fn nth_len(cursor: &mut Cursor, len: usize) {
-    for _ in 1..len {
-        cursor.next();
     }
 }
