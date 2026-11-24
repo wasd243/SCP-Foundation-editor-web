@@ -1,4 +1,13 @@
 [alias]
+# generate test snapshote
 bless = "test -p tests --features bless"
+# check all-features and all-targets
 checka = "check --workspace --all-features --all-targets"
+# run clippy for all-features and all-targets
 clippya = "clippy --workspace --all-features --all-targets"
+# check with default features 
+checkm = "check -p ftml_analyzer -p ftml_lsp"
+# build a binary LSP without highlights
+buildlsp = "build --release -p lsp_driver"
+# build a binary LSP with highlight feature
+buildhighlight = "build --release -p lsp_driver --features highlight"

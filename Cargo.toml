@@ -1,7 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["ftml_analyzer", "ftml_lsp", "lsp_test", "tests"]
-# default-members = ["lsp_driver"]
+members = ["ftml_analyzer", "ftml_lsp", "lsp_driver", "lsp_test", "tests"]
 
 [workspace.package]
 version = "0.1.0"
@@ -9,6 +8,7 @@ edition = "2024"
 
 [workspace.dependencies]
 ftml_analyzer = { path = "ftml_analyzer", features = ["debug"] }
+ftml_lsp = { path = "ftml_lsp" }
 lsp_test = { path = "lsp_test" }
 
 # dependencies

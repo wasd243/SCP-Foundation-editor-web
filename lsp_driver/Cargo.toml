@@ -1,0 +1,15 @@
+[package]
+name = "lsp_driver"
+version.workspace = true
+edition.workspace = true
+
+[features]
+highlight = ["ftml_lsp/highlight"]
+
+[dependencies]
+anyhow.workspace = true
+ftml_lsp.workspace = true
+
+[[bin]]
+name = "ftml_analyzer"
+path = "src/main.rs"
