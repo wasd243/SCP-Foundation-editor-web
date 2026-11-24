@@ -3,7 +3,7 @@ mod types;
 use lsp_types::SemanticTokenType;
 use serde::Serialize;
 
-pub use types::{MODIFIERS, TYPES};
+pub use types::{MODIFIERS, TYPES, semantic_tokens_capability};
 
 use crate::nodes::Node;
 

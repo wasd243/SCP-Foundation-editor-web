@@ -11,6 +11,8 @@ pub mod nodes;
 
 pub use cursor::Cursor;
 pub use ftml_ast::{Span, Token};
+#[cfg(feature = "highlight")]
+pub use highlight::semantic_tokens_capability;
 
 use crate::{ftml_ast::ParseToken, nodes::BuiltIn};
 

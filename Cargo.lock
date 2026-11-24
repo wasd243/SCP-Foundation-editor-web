@@ -488,9 +488,11 @@ dependencies = [
 name = "ftml_lsp"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "ftml_analyzer",
  "lsp-server",
  "lsp-types",
+ "serde_json",
 ]
 
 [[package]]
