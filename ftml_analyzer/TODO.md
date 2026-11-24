@@ -12,3 +12,14 @@ handwriting so much `while` and `loops`).
 - [x] Comments
 - [x] Blocks
 
+---
+
+- [ ] server
+
+Should refactor server for new builtin structure.
+
+- [x] `SemanticFullRequest`
+- [x] `Folding`
+- [ ] Auto completion
+- [ ] Diagnostics
+
