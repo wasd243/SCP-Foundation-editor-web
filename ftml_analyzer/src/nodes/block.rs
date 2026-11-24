@@ -10,6 +10,8 @@ use param::collect_params;
 
 use serde::Serialize;
 
+#[cfg(feature = "highlight")]
+use crate::highlight::AbsoluteToken;
 use crate::{Cursor, Span, TokenKind, mapping::Map};
 
 #[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
@@ -88,5 +90,11 @@ impl Block {
         }
 
         None
+    }
+
+    #[cfg(feature = "highlight")]
+    /// This function only convert params to AbsoluteTokens.
+    pub fn to_abs_tokens(&self) -> Vec<AbsoluteToken> {
+        self.params.iter().map(|p| p.to_abs_token()).collect()
     }
 }

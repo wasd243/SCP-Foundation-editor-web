@@ -6,10 +6,14 @@
 //! ```
 //!
 //! Due to other extensions' support, this feature is not turned on by default.
-use crate::{Cursor, Span, Token, TokenKind, nodes::CursorToNode};
+use crate::{
+    Cursor, Span, Token, TokenKind,
+    highlight::{AbsoluteToken, HighlightKind},
+    nodes::CursorToNode,
+};
 use serde::Serialize;
 
-#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
 pub struct InlineMark {
     pub span: Span,
     pub ty: InlineMarkKind,
@@ -91,6 +95,19 @@ impl CursorToNode for InlineMark {
     }
 }
 
+impl InlineMark {
+    pub fn to_abs_span(self) -> AbsoluteToken {
+        AbsoluteToken {
+            line: self.span.start.0,
+            start: self.span.start.1,
+            // NOTE: This will led to overflow if any token crosses any line.
+            len: self.span.end.1 - self.span.start.1,
+            ty: match_inline_mark_ty(self.ty),
+            mods: 0,
+        }
+    }
+}
+
 fn find_close_mark<'c>(cursor: &Cursor<'c>, ty: InlineMarkKind) -> Option<(usize, &'c Token)> {
     let mut i = 0;
     let rest = cursor.rest?;
@@ -138,4 +155,17 @@ fn is_inline_mark_token_(token_kind: TokenKind) -> bool {
             | TokenKind::Superscript
             | TokenKind::Subscript
     )
+}
+
+fn match_inline_mark_ty(inline_mark_ty: InlineMarkKind) -> HighlightKind {
+    match inline_mark_ty {
+        InlineMarkKind::Bold => HighlightKind::Bold,
+        InlineMarkKind::Italic => HighlightKind::Italics,
+        InlineMarkKind::Underline => HighlightKind::Underline,
+        InlineMarkKind::StrikeThrough => HighlightKind::StrikeThrough,
+        InlineMarkKind::Monospace => HighlightKind::Monospace,
+        InlineMarkKind::Raw => HighlightKind::Raw,
+        InlineMarkKind::Superscript => HighlightKind::Superscript,
+        InlineMarkKind::Subscript => HighlightKind::Subscript,
+    }
 }

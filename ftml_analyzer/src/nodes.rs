@@ -17,8 +17,12 @@ use comment::Comment;
 #[cfg(feature = "highlight")]
 use inline_mark::InlineMark;
 
+#[cfg(feature = "highlight")]
+use lsp_types::SemanticToken;
 use serde::Serialize;
 
+#[cfg(feature = "highlight")]
+use crate::highlight::color_nodes;
 use crate::{
     Cursor, Span, Token,
     ftml_ast::{Diagnostic, ParseToken},
@@ -69,6 +73,56 @@ impl From<ParseToken> for BuiltIn {
         let nodes = Node::parse(parse_token.tokens);
         let diagnostics = parse_token.diagnostics;
         Self { nodes, diagnostics }
+    }
+}
+
+#[cfg(feature = "highlight")]
+impl BuiltIn {
+    /// Clone nodes and highlight them to LSP accept SemanticTokens.
+    pub fn to_semantic(&self) -> Vec<SemanticToken> {
+        let nodes = self.nodes.clone();
+        let mut tokens = vec![];
+        for node in nodes {
+            color_nodes(node, &mut tokens);
+        }
+
+        let mut tokens: Vec<_> = tokens
+            .into_iter()
+            .map(|abs_t| {
+                (
+                    abs_t.line,
+                    abs_t.start,
+                    abs_t.len,
+                    abs_t.ty.to_index(),
+                    abs_t.mods,
+                )
+            })
+            .collect();
+
+        tokens.sort_unstable_by_key(|&(line, start, ..)| (line, start));
+
+        let (mut prev_line, mut prev_start) = (0, 0);
+
+        tokens
+            .into_iter()
+            .map(|(line, start, length, token_type, mods)| {
+                let delta_line = line - prev_line;
+                // On the same line the start is relative to the previous token.
+                let delta_start = if delta_line == 0 {
+                    start - prev_start
+                } else {
+                    start
+                };
+                (prev_line, prev_start) = (line, start);
+                SemanticToken {
+                    delta_line,
+                    delta_start,
+                    length,
+                    token_type,
+                    token_modifiers_bitset: mods,
+                }
+            })
+            .collect()
     }
 }
 

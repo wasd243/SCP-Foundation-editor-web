@@ -1,6 +1,9 @@
 use serde::Serialize;
 
-use crate::{Cursor, Span, Token, TokenKind};
+use crate::{
+    Cursor, Span, Token, TokenKind,
+    highlight::{AbsoluteToken, HighlightKind},
+};
 
 #[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
 pub struct BlockParam {
@@ -67,6 +70,24 @@ impl BlockParam {
         }
 
         None
+    }
+
+    pub(super) fn to_abs_token(self) -> AbsoluteToken {
+        let ty = match self.ty {
+            BlockParamKind::Attr => HighlightKind::Attr,
+            BlockParamKind::KeyWord => HighlightKind::KeyWord,
+            BlockParamKind::String => HighlightKind::String,
+            BlockParamKind::Value => HighlightKind::Value,
+        };
+
+        AbsoluteToken {
+            line: self.span.start.0,
+            start: self.span.start.1,
+            // NOTE: This will led to overflow if any token crosses any line.
+            len: self.span.end.1 - self.span.start.1,
+            ty,
+            mods: 0,
+        }
     }
 }
 

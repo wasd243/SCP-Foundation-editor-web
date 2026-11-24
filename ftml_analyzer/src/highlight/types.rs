@@ -52,6 +52,7 @@ pub const MODIFIERS: &[SemanticTokenModifier] = &[
     SemanticTokenModifier::DEFAULT_LIBRARY,
 ];
 
+#[expect(unused)]
 /// Initialize highlighter
 pub(crate) fn semantic_tokens_capability() -> SemanticTokensServerCapabilities {
     SemanticTokensServerCapabilities::SemanticTokensOptions(SemanticTokensOptions {

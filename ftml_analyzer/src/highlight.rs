@@ -1,11 +1,11 @@
-#![allow(unused)]
 mod types;
 
+use lsp_types::SemanticTokenType;
 use serde::Serialize;
 
-use crate::{BuiltIn, nodes::Node};
-
 pub use types::{MODIFIERS, TYPES};
+
+use crate::nodes::Node;
 
 #[derive(Debug, Serialize, Clone, Copy)]
 pub struct AbsoluteToken {
@@ -59,4 +59,40 @@ pub enum HighlightKind {
     Link = 18,
     /// +++ head
     Heading = 19,
+}
+
+impl HighlightKind {
+    pub(crate) fn to_index(self) -> u32 {
+        let ty = match self {
+            Self::KeyWord => SemanticTokenType::KEYWORD,
+            Self::Equals | Self::Pipe | Self::Quote | Self::Operator => SemanticTokenType::OPERATOR,
+            Self::Comment => SemanticTokenType::COMMENT,
+            Self::Attr | Self::Heading => SemanticTokenType::PROPERTY,
+            Self::String => SemanticTokenType::STRING,
+            Self::Value => SemanticTokenType::ENUM_MEMBER,
+            Self::PathBuffer => SemanticTokenType::NAMESPACE,
+            Self::Raw => SemanticTokenType::REGEXP,
+            Self::Bold => SemanticTokenType::new("ftmlBold"),
+            Self::Italics => SemanticTokenType::new("ftmlItalic"),
+            Self::Underline => SemanticTokenType::new("ftmlUnderline"),
+            Self::StrikeThrough => SemanticTokenType::new("ftmlStrike"),
+            Self::Monospace => SemanticTokenType::new("ftmlMonospace"),
+            Self::Superscript => SemanticTokenType::new("ftmlSuperscript"),
+            Self::Subscript => SemanticTokenType::new("ftmlSubscript"),
+            Self::Link => SemanticTokenType::new("ftmlLinkUrl"),
+        };
+
+        // NOTE: The slice and `ty` come from the same list, so this cannot fail.
+        TYPES.iter().position(|t| *t == ty).unwrap() as u32
+    }
+}
+
+/// Color each node by their implementations and push back.
+pub(crate) fn color_nodes(node: Node, abs_tokens: &mut Vec<AbsoluteToken>) {
+    match node {
+        Node::Block(b) => abs_tokens.extend(b.to_abs_tokens()),
+        Node::Comment(c) => abs_tokens.extend(c.to_abs_tokens()),
+        Node::InlineMark(im) => abs_tokens.push(im.to_abs_span()),
+        Node::Token(t) => abs_tokens.extend(t.to_abs_token()),
+    }
 }
