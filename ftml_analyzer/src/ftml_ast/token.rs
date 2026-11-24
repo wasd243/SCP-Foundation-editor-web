@@ -1,7 +1,6 @@
-use crate::{
-    ftml_ast::Span,
-    highlight::{AbsoluteToken, HighlightKind},
-};
+use crate::ftml_ast::Span;
+#[cfg(feature = "highlight")]
+use crate::highlight::{AbsoluteToken, HighlightKind};
 use ftml::parsing::{ExtractedToken, Token as TokenTy};
 use serde::{Deserialize, Serialize};
 

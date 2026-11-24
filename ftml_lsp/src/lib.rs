@@ -1,3 +1,6 @@
+#![warn(clippy::all)]
+#![expect(clippy::mutable_key_type)]
+
 mod activities;
 
 use activities::main_loop;

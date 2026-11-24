@@ -6,6 +6,7 @@ mod param;
 
 #[cfg(feature = "highlight")]
 pub use param::BlockParam;
+#[cfg(feature = "highlight")]
 use param::collect_params;
 
 use serde::Serialize;

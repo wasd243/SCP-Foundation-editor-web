@@ -1,2 +1,4 @@
 [alias]
 bless = "test -p tests --features bless"
+checka = "check --workspace --all-features --all-targets"
+clippya = "clippy --workspace --all-features --all-targets"

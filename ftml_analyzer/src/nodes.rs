@@ -21,10 +21,12 @@ use inline_mark::InlineMark;
 use lsp_types::SemanticToken;
 use serde::Serialize;
 
+#[cfg(feature = "debug")]
+use crate::Span;
 #[cfg(feature = "highlight")]
 use crate::highlight::color_nodes;
 use crate::{
-    Cursor, Span, Token,
+    Cursor, Token,
     ftml_ast::{Diagnostic, ParseToken},
     mapping::build_map,
     nodes::block::BlockKind,
@@ -55,7 +57,7 @@ pub enum Node {
     Comment(Comment),
     #[cfg(feature = "highlight")]
     InlineMark(InlineMark),
-    #[cfg(feature = "highlight")]
+    #[cfg(any(feature = "highlight", feature = "debug"))]
     Token(Token),
 }
 

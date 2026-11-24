@@ -19,6 +19,7 @@ pub(super) fn folding_range_request(req: Request, buffers: &Buffers) -> Response
 
     let builtin = ftml_analyzer::get_ast(source);
     let folding_ranges = fold(builtin);
+
     Response::new_ok(id, folding_ranges)
 }
 
