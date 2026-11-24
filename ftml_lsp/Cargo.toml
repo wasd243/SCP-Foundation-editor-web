@@ -1,0 +1,8 @@
+[package]
+name = "ftml_lsp"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+lsp-server = "0.10.0"
+lsp-types.workspace = true

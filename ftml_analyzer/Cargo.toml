@@ -11,14 +11,9 @@ debug = []
 highlight = []
 
 [dependencies]
-# anyhow.workspace = true
 ftml = "1.42"
 line-index = "0.1"
-# tokio = { version = "1", features = ["rt"] }
 regex = "1.13"
 serde.workspace = true
 serde_json.workspace = true
-# lsp dependencies
-# deno_core = "=0.413.0"
-# lsp-server = "0.10.0"
-lsp-types = "0.97.0"
+lsp-types.workspace = true

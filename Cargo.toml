@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["ftml_analyzer", "lsp_test", "tests"]
+members = ["ftml_analyzer", "ftml_lsp", "lsp_test", "tests"]
 # default-members = ["lsp_driver"]
 
 [workspace.package]
@@ -15,6 +15,7 @@ lsp_test = { path = "lsp_test" }
 anyhow = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+lsp-types = "0.97"
 
 [profile.debug]
 strip = false
