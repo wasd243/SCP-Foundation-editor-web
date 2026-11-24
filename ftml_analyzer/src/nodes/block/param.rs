@@ -70,7 +70,6 @@ impl BlockParam {
     }
 }
 
-#[cfg(feature = "highlight")]
 /// Build a sub cursor collect parameters.
 pub(super) fn collect_params(inner: &[Token]) -> Vec<BlockParam> {
     let Some(mut sub) = Cursor::new(inner) else {

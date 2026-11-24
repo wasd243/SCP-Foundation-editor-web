@@ -16,6 +16,38 @@
       }
     },
     {
+      "Token": {
+        "slice": "bold",
+        "span": {
+          "start": [
+            0,
+            2
+          ],
+          "end": [
+            0,
+            6
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            0,
+            6
+          ],
+          "end": [
+            0,
+            7
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
       "InlineMark": {
         "span": {
           "start": [
@@ -28,6 +60,38 @@
           ]
         },
         "ty": "Italic"
+      }
+    },
+    {
+      "Token": {
+        "slice": "italic",
+        "span": {
+          "start": [
+            0,
+            9
+          ],
+          "end": [
+            0,
+            15
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            0,
+            15
+          ],
+          "end": [
+            0,
+            16
+          ]
+        },
+        "ty": "whitespace"
       }
     },
     {
@@ -46,6 +110,38 @@
       }
     },
     {
+      "Token": {
+        "slice": "underline",
+        "span": {
+          "start": [
+            0,
+            18
+          ],
+          "end": [
+            0,
+            27
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            0,
+            27
+          ],
+          "end": [
+            0,
+            28
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
       "InlineMark": {
         "span": {
           "start": [
@@ -61,6 +157,166 @@
       }
     },
     {
+      "Token": {
+        "slice": "strike",
+        "span": {
+          "start": [
+            0,
+            30
+          ],
+          "end": [
+            0,
+            36
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "-",
+        "span": {
+          "start": [
+            0,
+            36
+          ],
+          "end": [
+            0,
+            37
+          ]
+        },
+        "ty": "other"
+      }
+    },
+    {
+      "Token": {
+        "slice": "through",
+        "span": {
+          "start": [
+            0,
+            37
+          ],
+          "end": [
+            0,
+            44
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "--",
+        "span": {
+          "start": [
+            0,
+            44
+          ],
+          "end": [
+            0,
+            46
+          ]
+        },
+        "ty": "double-dash"
+      }
+    },
+    {
+      "Token": {
+        "slice": "__",
+        "span": {
+          "start": [
+            0,
+            46
+          ],
+          "end": [
+            0,
+            48
+          ]
+        },
+        "ty": "underline"
+      }
+    },
+    {
+      "Token": {
+        "slice": "//",
+        "span": {
+          "start": [
+            0,
+            48
+          ],
+          "end": [
+            0,
+            50
+          ]
+        },
+        "ty": "italics"
+      }
+    },
+    {
+      "Token": {
+        "slice": "**",
+        "span": {
+          "start": [
+            0,
+            50
+          ],
+          "end": [
+            0,
+            52
+          ]
+        },
+        "ty": "bold"
+      }
+    },
+    {
+      "Token": {
+        "slice": "**",
+        "span": {
+          "start": [
+            2,
+            0
+          ],
+          "end": [
+            2,
+            2
+          ]
+        },
+        "ty": "bold"
+      }
+    },
+    {
+      "Token": {
+        "slice": "bold",
+        "span": {
+          "start": [
+            2,
+            2
+          ],
+          "end": [
+            2,
+            6
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            2,
+            6
+          ],
+          "end": [
+            2,
+            7
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
       "InlineMark": {
         "span": {
           "start": [
@@ -73,6 +329,54 @@
           ]
         },
         "ty": "Italic"
+      }
+    },
+    {
+      "Token": {
+        "slice": "italic",
+        "span": {
+          "start": [
+            2,
+            9
+          ],
+          "end": [
+            2,
+            15
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "//",
+        "span": {
+          "start": [
+            2,
+            15
+          ],
+          "end": [
+            2,
+            17
+          ]
+        },
+        "ty": "italics"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            2,
+            17
+          ],
+          "end": [
+            2,
+            18
+          ]
+        },
+        "ty": "whitespace"
       }
     },
     {

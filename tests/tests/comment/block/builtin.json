@@ -15,6 +15,134 @@
       }
     },
     {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            2,
+            3
+          ],
+          "end": [
+            2,
+            4
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
+      "Token": {
+        "slice": "should",
+        "span": {
+          "start": [
+            2,
+            4
+          ],
+          "end": [
+            2,
+            10
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            2,
+            10
+          ],
+          "end": [
+            2,
+            11
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
+      "Token": {
+        "slice": "not",
+        "span": {
+          "start": [
+            2,
+            11
+          ],
+          "end": [
+            2,
+            14
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            2,
+            14
+          ],
+          "end": [
+            2,
+            15
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
+      "Token": {
+        "slice": "see",
+        "span": {
+          "start": [
+            2,
+            15
+          ],
+          "end": [
+            2,
+            18
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            2,
+            18
+          ],
+          "end": [
+            2,
+            19
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
+      "Token": {
+        "slice": "this",
+        "span": {
+          "start": [
+            2,
+            19
+          ],
+          "end": [
+            2,
+            23
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
       "Comment": {
         "span": {
           "start": [

@@ -30,7 +30,7 @@ pub struct Block {
 
 /// Build and return a Block.
 macro_rules! block {
-    ($span_start:expr, $span_end:expr, $ty:expr, $params:ident,  $len:ident) => {
+    ($span_start:expr, $span_end:expr, $ty:expr, $params:ident, $len:expr) => {
         return Some($crate::nodes::block::Block {
             span: Span {
                 start: $span_start.span.start,
@@ -68,7 +68,14 @@ impl Block {
                 #[cfg(feature = "highlight")]
                 let params = collect_params(&rest[..=i1]);
 
-                block!(left_block, right_block, BlockKind::Inline, params, i1);
+                block!(
+                    left_block,
+                    right_block,
+                    BlockKind::Inline,
+                    params,
+                    // add 3 to skip enough token.
+                    i1 + Cursor::START_AND_END_MARK + 1
+                );
             };
 
             let i2 = block_end - cursor.index - Cursor::START_AND_END_MARK;

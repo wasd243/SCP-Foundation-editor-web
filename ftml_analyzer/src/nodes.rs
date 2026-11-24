@@ -40,6 +40,7 @@ trait CursorToNode {
 }
 
 #[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+#[warn(clippy::arbitrary_source_item_ordering)]
 /// # Node
 ///
 /// This enum represents individual nodes in the LSP builtin AST.
@@ -50,6 +51,8 @@ pub enum Node {
     Comment(Comment),
     #[cfg(feature = "highlight")]
     InlineMark(InlineMark),
+    #[cfg(feature = "highlight")]
+    Token(Token),
 }
 
 #[derive(Debug, Serialize)]
@@ -79,6 +82,9 @@ impl Node {
 
         // the main parse loop
         loop {
+            #[cfg(feature = "highlight")]
+            let len_before = nodes.len();
+
             if let Some(comment) = Comment::parse(&cursor) {
                 cursor.nth_len(comment.len());
                 nodes.push(Self::Comment(comment));
@@ -99,6 +105,14 @@ impl Node {
                 // no nth_len: step one token so nested marks are visited
             }
 
+            #[cfg(feature = "highlight")]
+            // NOTE: `Block` and `InlineMark` don't use `nth_len` for skipping tokens, so all tokens
+            // around them will be pushed into `BuiltIn.nodes`. This highlight feature is NOT
+            // enabled by default.
+            if nodes.len() == len_before {
+                nodes.push(Self::Token(cursor.token.clone()));
+            }
+
             if cursor.next().is_none() {
                 break;
             }
@@ -108,6 +122,7 @@ impl Node {
     }
 
     #[cfg(feature = "debug")]
+    #[warn(clippy::arbitrary_source_item_ordering)]
     /// An info API for test harnnes (Debug only).
     pub fn info(&self) -> (&'static str, Span) {
         match self {
@@ -115,6 +130,7 @@ impl Node {
             Node::Comment(c) => ("Comment", c.span),
             #[cfg(feature = "highlight")]
             Node::InlineMark(m) => ("InlineMark", m.span),
+            Node::Token(t) => ("Token", t.span),
         }
     }
 }

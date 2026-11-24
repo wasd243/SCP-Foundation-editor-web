@@ -16,6 +16,38 @@
       }
     },
     {
+      "Token": {
+        "slice": "bold",
+        "span": {
+          "start": [
+            0,
+            2
+          ],
+          "end": [
+            0,
+            6
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "**",
+        "span": {
+          "start": [
+            0,
+            6
+          ],
+          "end": [
+            0,
+            8
+          ]
+        },
+        "ty": "bold"
+      }
+    },
+    {
       "InlineMark": {
         "span": {
           "start": [
@@ -28,6 +60,38 @@
           ]
         },
         "ty": "Italic"
+      }
+    },
+    {
+      "Token": {
+        "slice": "italic",
+        "span": {
+          "start": [
+            1,
+            2
+          ],
+          "end": [
+            1,
+            8
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "//",
+        "span": {
+          "start": [
+            1,
+            8
+          ],
+          "end": [
+            1,
+            10
+          ]
+        },
+        "ty": "italics"
       }
     },
     {
@@ -46,6 +110,38 @@
       }
     },
     {
+      "Token": {
+        "slice": "underline",
+        "span": {
+          "start": [
+            2,
+            2
+          ],
+          "end": [
+            2,
+            11
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "__",
+        "span": {
+          "start": [
+            2,
+            11
+          ],
+          "end": [
+            2,
+            13
+          ]
+        },
+        "ty": "underline"
+      }
+    },
+    {
       "InlineMark": {
         "span": {
           "start": [
@@ -58,6 +154,38 @@
           ]
         },
         "ty": "StrikeThrough"
+      }
+    },
+    {
+      "Token": {
+        "slice": "strikethourgh",
+        "span": {
+          "start": [
+            3,
+            2
+          ],
+          "end": [
+            3,
+            15
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "--",
+        "span": {
+          "start": [
+            3,
+            15
+          ],
+          "end": [
+            3,
+            17
+          ]
+        },
+        "ty": "double-dash"
       }
     },
     {
@@ -76,6 +204,38 @@
       }
     },
     {
+      "Token": {
+        "slice": "mono",
+        "span": {
+          "start": [
+            4,
+            2
+          ],
+          "end": [
+            4,
+            6
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "}}",
+        "span": {
+          "start": [
+            4,
+            6
+          ],
+          "end": [
+            4,
+            8
+          ]
+        },
+        "ty": "right-monospace"
+      }
+    },
+    {
       "InlineMark": {
         "span": {
           "start": [
@@ -88,6 +248,38 @@
           ]
         },
         "ty": "Raw"
+      }
+    },
+    {
+      "Token": {
+        "slice": "raw",
+        "span": {
+          "start": [
+            5,
+            2
+          ],
+          "end": [
+            5,
+            5
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "@@",
+        "span": {
+          "start": [
+            5,
+            5
+          ],
+          "end": [
+            5,
+            7
+          ]
+        },
+        "ty": "raw"
       }
     },
     {
@@ -106,6 +298,38 @@
       }
     },
     {
+      "Token": {
+        "slice": "super",
+        "span": {
+          "start": [
+            6,
+            2
+          ],
+          "end": [
+            6,
+            7
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "^^",
+        "span": {
+          "start": [
+            6,
+            7
+          ],
+          "end": [
+            6,
+            9
+          ]
+        },
+        "ty": "superscript"
+      }
+    },
+    {
       "InlineMark": {
         "span": {
           "start": [
@@ -118,6 +342,38 @@
           ]
         },
         "ty": "Subscript"
+      }
+    },
+    {
+      "Token": {
+        "slice": "sub",
+        "span": {
+          "start": [
+            7,
+            2
+          ],
+          "end": [
+            7,
+            5
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": ",,",
+        "span": {
+          "start": [
+            7,
+            5
+          ],
+          "end": [
+            7,
+            7
+          ]
+        },
+        "ty": "subscript"
       }
     }
   ],

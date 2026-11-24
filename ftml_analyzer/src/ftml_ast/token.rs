@@ -3,7 +3,7 @@ use ftml::parsing::{ExtractedToken, Token as TokenTy};
 use serde::{Deserialize, Serialize};
 
 /// A lsp version of extracted token from ftml.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct Token {
     /// The slice of the original text.
     pub slice: String,

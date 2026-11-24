@@ -4,6 +4,8 @@ pub use ftml::parsing::Token as TokenKind;
 
 pub mod cursor;
 pub mod ftml_ast;
+#[cfg(feature = "highlight")]
+pub mod highlight;
 pub mod mapping;
 pub mod nodes;
 

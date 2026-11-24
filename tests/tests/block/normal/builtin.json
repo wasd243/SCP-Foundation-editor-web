@@ -17,6 +17,198 @@
       }
     },
     {
+      "Token": {
+        "slice": "div",
+        "span": {
+          "start": [
+            0,
+            2
+          ],
+          "end": [
+            0,
+            5
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": " ",
+        "span": {
+          "start": [
+            0,
+            5
+          ],
+          "end": [
+            0,
+            6
+          ]
+        },
+        "ty": "whitespace"
+      }
+    },
+    {
+      "Token": {
+        "slice": "class",
+        "span": {
+          "start": [
+            0,
+            6
+          ],
+          "end": [
+            0,
+            11
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "=",
+        "span": {
+          "start": [
+            0,
+            11
+          ],
+          "end": [
+            0,
+            12
+          ]
+        },
+        "ty": "equals"
+      }
+    },
+    {
+      "Token": {
+        "slice": "\"",
+        "span": {
+          "start": [
+            0,
+            12
+          ],
+          "end": [
+            0,
+            13
+          ]
+        },
+        "ty": "double-quote"
+      }
+    },
+    {
+      "Token": {
+        "slice": "cls",
+        "span": {
+          "start": [
+            0,
+            13
+          ],
+          "end": [
+            0,
+            16
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "\"",
+        "span": {
+          "start": [
+            0,
+            16
+          ],
+          "end": [
+            0,
+            17
+          ]
+        },
+        "ty": "double-quote"
+      }
+    },
+    {
+      "Token": {
+        "slice": "]]",
+        "span": {
+          "start": [
+            0,
+            17
+          ],
+          "end": [
+            0,
+            19
+          ]
+        },
+        "ty": "right-block"
+      }
+    },
+    {
+      "Token": {
+        "slice": "[[/",
+        "span": {
+          "start": [
+            2,
+            0
+          ],
+          "end": [
+            2,
+            3
+          ]
+        },
+        "ty": "left-block-end"
+      }
+    },
+    {
+      "Token": {
+        "slice": "div",
+        "span": {
+          "start": [
+            2,
+            3
+          ],
+          "end": [
+            2,
+            6
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "]]",
+        "span": {
+          "start": [
+            2,
+            6
+          ],
+          "end": [
+            2,
+            8
+          ]
+        },
+        "ty": "right-block"
+      }
+    },
+    {
+      "Token": {
+        "slice": "context",
+        "span": {
+          "start": [
+            4,
+            0
+          ],
+          "end": [
+            4,
+            7
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
       "Block": {
         "span": {
           "start": [
@@ -30,6 +222,118 @@
         },
         "ty": "HasCloseTag",
         "params": []
+      }
+    },
+    {
+      "Token": {
+        "slice": "footnote",
+        "span": {
+          "start": [
+            4,
+            9
+          ],
+          "end": [
+            4,
+            17
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "]]",
+        "span": {
+          "start": [
+            4,
+            17
+          ],
+          "end": [
+            4,
+            19
+          ]
+        },
+        "ty": "right-block"
+      }
+    },
+    {
+      "Token": {
+        "slice": "somenote",
+        "span": {
+          "start": [
+            4,
+            19
+          ],
+          "end": [
+            4,
+            27
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "[[/",
+        "span": {
+          "start": [
+            4,
+            27
+          ],
+          "end": [
+            4,
+            30
+          ]
+        },
+        "ty": "left-block-end"
+      }
+    },
+    {
+      "Token": {
+        "slice": "footnote",
+        "span": {
+          "start": [
+            4,
+            30
+          ],
+          "end": [
+            4,
+            38
+          ]
+        },
+        "ty": "identifier"
+      }
+    },
+    {
+      "Token": {
+        "slice": "]]",
+        "span": {
+          "start": [
+            4,
+            38
+          ],
+          "end": [
+            4,
+            40
+          ]
+        },
+        "ty": "right-block"
+      }
+    },
+    {
+      "Token": {
+        "slice": "context",
+        "span": {
+          "start": [
+            4,
+            40
+          ],
+          "end": [
+            4,
+            47
+          ]
+        },
+        "ty": "identifier"
       }
     }
   ],
