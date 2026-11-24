@@ -64,12 +64,12 @@ impl Block {
         let left_block = cursor.token;
         let rest = cursor.rest?;
 
-        if let Some(i1) = rest.iter().position(|t| t.ty == TokenKind::RightBlock) {
+        if let Some(open_end) = rest.iter().position(|t| t.ty == TokenKind::RightBlock) {
             let Some(block_end) = map.get(&cursor.index) else {
-                let right_block = &rest[i1];
+                let right_block = &rest[open_end];
 
                 #[cfg(feature = "highlight")]
-                let params = collect_params(&rest[..=i1]);
+                let params = collect_params(&rest[..=open_end]);
 
                 block!(
                     left_block,
@@ -77,17 +77,19 @@ impl Block {
                     BlockKind::Inline,
                     params,
                     // add 3 to skip enough token.
-                    i1 + Cursor::START_AND_END_MARK + 1
+                    open_end + Cursor::START_AND_END_MARK + 1
                 );
             };
 
-            let i2 = block_end - cursor.index - Cursor::START_AND_END_MARK;
-            let close = &rest[i2];
+            let close_end = block_end - cursor.index - Cursor::START_AND_END_MARK;
+            let close = &rest[close_end];
+
+            debug_assert_eq!(close.ty, TokenKind::RightBlock);
 
             #[cfg(feature = "highlight")]
-            let params = collect_params(&rest[..=i2]);
+            let params = collect_params(&rest[..=close_end]);
 
-            block!(left_block, close, BlockKind::HasCloseTag, params, i2);
+            block!(left_block, close, BlockKind::HasCloseTag, params, close_end);
         }
 
         None

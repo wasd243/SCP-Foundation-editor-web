@@ -19,6 +19,24 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.cmd([=[
+  " Embedded CSS: [[module css]] ... [[/module]]
+  unlet! b:current_syntax
+  silent! syntax include @ftmlCss syntax/css.vim
+  syntax region ftmlCssBlock matchgroup=Delimiter
+    \ start=/\c\[\[module\s\+css\s*\]\]/
+    \ end=/\c\[\[\/module\]\]/
+    \ contains=@ftmlCss keepend
+
+  " Embedded HTML: [[html]] ... [[/html]]
+  unlet! b:current_syntax
+  silent! syntax include @ftmlHtml syntax/html.vim
+  syntax region ftmlHtmlBlock matchgroup=Delimiter
+    \ start=/\c\[\[html[^\]]*\]\]/
+    \ end=/\c\[\[\/html\]\]/
+    \ contains=@ftmlHtml keepend
+]=])
+
 -- setup LSP custom highlights.
 local function apply()
 	local set = vim.api.nvim_set_hl
