@@ -1,69 +1,44 @@
 # Copilot instructions
 
-## Project shape
-
-This is a Rust workspace for an LSP that parses FTML and publishes editor features for `.ftml` files. The workspace has two crates:
-
-- `ftml_analyzer` contains the FTML tokenizer, built-in AST visitor, diagnostics, folding ranges, semantic-token conversion, and the embedded web-language service.
-- `lsp_driver` is the small executable entrypoint that starts `ftml_analyzer::build_server()` over stdio. The workspace default member is `lsp_driver`.
-
-FTML parsing is layered: `ftml_analyzer/src/ftml_ast.rs` produces parser tokens, `src/lsp_builtin/` groups them into an editor-oriented tree, and `src/lsp_highlight.rs` plus `src/utils/highlight.rs` converts that tree into absolute spans and then LSP semantic-token deltas. `src/server.rs` owns the stdio loop, document buffers, notifications, diagnostics, folding requests, and semantic-token requests.
-
-HTML and CSS are embedded-language services rather than Rust parsers. `ftml_analyzer/src/lsp_builtin/types/visual_document.rs` identifies embedded regions, while the Deno/TypeScript code under `ftml_analyzer/deno/src/` calls `vscode-html-languageservice` and `vscode-css-languageservice` for virtual documents. `ftml_analyzer/build.rs` bundles `deno/src/main.ts` into `OUT_DIR/bundle.js`; `src/server/web_service.rs` executes that bundle inside `deno_core`.
-
 ## Build, test, and lint
 
-The Deno CLI must be installed before building `ftml_analyzer`, because its Cargo build script invokes `deno bundle`.
-
-From the repository root:
+Run commands from the workspace root:
 
 ```sh
-# Build the default LSP executable
-cargo build --release
+# Build the LSP executable
+cargo build --release -p lsp_driver
 
-# Run all analyzer tests
+# Build with semantic highlighting enabled
+cargo build --release -p lsp_driver --features highlight
+
+# Run all workspace tests (including the snapshot suites)
+cargo test --workspace
+
+# Run analyzer unit tests or one named unit test
 cargo test -p ftml_analyzer
+cargo test -p ftml_analyzer line_col_at_eof
 
-# Run the CI-equivalent lint
+# Run the block snapshot test group
+cargo test -p tests --test block
+
+# Run the analyzer Clippy command used by CI
 cargo clippy -p ftml_analyzer --all-targets -- -D warnings
 ```
 
-The README's release-build path is also valid:
+Snapshot cases live under `tests/tests/`. To intentionally regenerate their `builtin.json` files, run `cargo test -p tests --features bless`.
 
-```sh
-cd lsp_driver
-cargo build --release
-```
+## Architecture
 
-Run one integration test by test name, or one test module by target:
+This Rust workspace implements an FTML language server. `ftml_analyzer` parses source and builds editor-facing structure; `ftml_lsp` exposes that functionality over the Language Server Protocol; `lsp_driver` starts the server over stdio. `lsp_test` and the `tests` crate provide the snapshot/expectation test harness.
 
-```sh
-cargo test -p ftml_analyzer --test token check_builtin
-cargo test -p ftml_analyzer --test lsp check_highlight_abs_token
-```
+Parsing flows through `ftml_analyzer::get_ast`: `ftml_ast::ParseToken` uses the upstream `ftml` crate to tokenize and parse warnings, then converts token and diagnostic spans; `nodes::BuiltIn` groups those tokens into editor-oriented block and comment nodes (and inline-mark nodes with highlighting enabled). `Cursor` carries token context during grouping, while `mapping::build_map` pairs block delimiters. `BuiltIn` is for editor features, not a complete FTML semantic model.
 
-The snapshot-style tests in `ftml_analyzer/tests/token.rs` and `tests/lsp.rs` support regeneration with the `bless` feature. Use this only when intentionally updating expected JSON:
-
-```sh
-cargo test -p ftml_analyzer --features bless --test token
-cargo test -p ftml_analyzer --features bless --test lsp
-```
-
-CI runs Clippy and tests with `working-directory: ./ftml_analyzer`, so the equivalent commands from that directory are `cargo clippy --all-targets -- -D warnings` and `cargo test`.
+`ftml_lsp` owns document buffers and dispatches notifications and requests. It uses full-document synchronization; open/change updates the buffer and republishes parser diagnostics, while close removes the buffer and clears diagnostics. Folding and completion are registered in the current server; semantic-token support is conditional on the `highlight` feature.
 
 ## Repository conventions
 
-- Normalize CRLF to LF before parsing. Use the existing `parse_token`/`set_up_parsing!` path instead of bypassing normalization.
-- Keep parser spans and semantic-token coordinates consistent with the source after whitespace sanitization. Semantic tokens must be sorted and encoded as LSP relative deltas; preserve the legend in `lsp_highlight/types.rs` when adding token kinds.
-- `Span.start` and `Span.end` line/column values already use the editor/LSP coordinate convention. Pass them through directly; do not recalculate columns from byte offsets or apply another coordinate conversion when combining embedded results.
-- Only edit files explicitly marked by the user. If a change appears to require touching an unmarked dependent file, stop and request permission instead of widening the change set.
-- Before implementing new conversion, parsing, or request-handling logic, check whether the active dependency or existing code already provides a suitable API. Reuse a known API when one exists; do not add redundant custom implementations.
-- Do not make unnecessary changes. Extend and reuse existing functions and call paths instead of bypassing or duplicating them.
-- Before performing any potentially risky operation or introducing a potentially risky implementation, explain the risk and obtain the user's permission. Do not silently proceed with known risks or present an unapproved risky implementation as complete.
-- If the user explicitly prohibits tests or validation commands for a task, do not run them; document the restriction rather than overriding it.
-- Treat `LspBuiltIn` as an editor/highlighting tree, not the full FTML semantic model. Add grouping logic in the appropriate `lsp_builtin` submodule and keep token-level parsing in `ftml_ast`.
-- The server uses full-document synchronization. Changes replace the entire buffer, and diagnostics are republished after open/change and cleared on close.
-- Embedded-language requests should go through the existing Deno bundle and `WebService` boundary. Keep the TypeScript request shape (`lang`, `method`, `text`, `position`) aligned with the Rust caller and return explicit JSON errors.
-- Snapshot fixtures under `ftml_analyzer/tests/{tokens,builtin,abs_tokens}` are checked byte-for-byte. Update fixtures deliberately with `--features bless`; do not hand-edit generated output.
-- Custom FTML semantic token types are mapped in `nvim_plugin.lua`; keep new custom legend entries and editor highlight links synchronized.
-- The project is still incomplete: syntax completion and HTML/CSS highlighting are active work areas. Do not document or assume complete embedded-language support; add focused coverage when extending those paths.
+- Use `get_ast` and the existing `ParseToken` path when parsing source. It applies the parser's token cleanup and diagnostic filtering before node grouping.
+- `Span` positions are converted from UTF-8 byte offsets to UTF-16 line/column positions in `ftml_ast/span.rs`, matching LSP coordinates. Preserve these coordinates when passing spans to LSP responses; avoid recalculating columns from byte offsets.
+- Keep token extraction in `ftml_ast` and editor-node grouping in `nodes/`; use the existing `Cursor` and block map rather than duplicating their context/matching logic.
+- Semantic highlighting is opt-in. When changing token kinds, keep `HighlightKind` conversion and the ordered legend in `ftml_analyzer/src/highlight/` aligned; custom FTML token names also have Neovim highlight links in `nvim_plugin.lua`. Semantic tokens are sorted and encoded as LSP relative deltas in `nodes.rs`.
+- Snapshot test groups (`block`, `comment`, `inline_mark`) read case directories containing `input.ftml`, generated `builtin.json`, and optional `expect.toml`. Update generated JSON through the `bless` feature, not by hand.

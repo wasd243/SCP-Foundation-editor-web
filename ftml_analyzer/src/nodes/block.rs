@@ -48,8 +48,6 @@ macro_rules! block {
 }
 
 impl Block {
-    #[expect(unused)]
-    const COLLAPSIBLE: bool = true;
     pub fn len(&self) -> usize {
         self.len
     }
@@ -98,6 +96,18 @@ impl Block {
     #[cfg(feature = "highlight")]
     /// This function only convert params to AbsoluteTokens.
     pub fn to_abs_tokens(&self) -> Vec<AbsoluteToken> {
-        self.params.iter().map(|p| p.to_abs_token()).collect()
+        use crate::highlight::HighlightKind;
+
+        let mut tokens: Vec<AbsoluteToken> = self.params.iter().map(|p| p.to_abs_token()).collect();
+        // Push the `[[` token into AbsoluteToken list.
+        tokens.push(AbsoluteToken {
+            line: self.span.start.0,
+            start: self.span.start.1,
+            len: 2,
+            ty: HighlightKind::Operator,
+            mods: 0,
+        });
+
+        tokens
     }
 }
