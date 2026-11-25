@@ -220,6 +220,19 @@
             "span": {
               "start": [
                 2,
+                12
+              ],
+              "end": [
+                2,
+                13
+              ]
+            },
+            "ty": "Attr"
+          },
+          {
+            "span": {
+              "start": [
+                2,
                 14
               ],
               "end": [
@@ -553,6 +566,19 @@
             "span": {
               "start": [
                 6,
+                18
+              ],
+              "end": [
+                6,
+                19
+              ]
+            },
+            "ty": "Equals"
+          },
+          {
+            "span": {
+              "start": [
+                6,
                 19
               ],
               "end": [
@@ -605,6 +631,19 @@
             "span": {
               "start": [
                 6,
+                29
+              ],
+              "end": [
+                6,
+                30
+              ]
+            },
+            "ty": "Equals"
+          },
+          {
+            "span": {
+              "start": [
+                6,
                 30
               ],
               "end": [
@@ -639,6 +678,45 @@
               ]
             },
             "ty": "String"
+          },
+          {
+            "span": {
+              "start": [
+                8,
+                2
+              ],
+              "end": [
+                8,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                10,
+                2
+              ],
+              "end": [
+                10,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                12,
+                2
+              ],
+              "end": [
+                12,
+                3
+              ]
+            },
+            "ty": "KeyWord"
           },
           {
             "span": {
@@ -940,6 +1018,45 @@
           {
             "span": {
               "start": [
+                8,
+                2
+              ],
+              "end": [
+                8,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                10,
+                2
+              ],
+              "end": [
+                10,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                12,
+                2
+              ],
+              "end": [
+                12,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
                 14,
                 5
               ],
@@ -1045,6 +1162,32 @@
           {
             "span": {
               "start": [
+                10,
+                2
+              ],
+              "end": [
+                10,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                12,
+                2
+              ],
+              "end": [
+                12,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
                 14,
                 5
               ],
@@ -1147,6 +1290,19 @@
         },
         "ty": "HasCloseTag",
         "params": [
+          {
+            "span": {
+              "start": [
+                12,
+                2
+              ],
+              "end": [
+                12,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
           {
             "span": {
               "start": [

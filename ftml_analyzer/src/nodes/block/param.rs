@@ -16,6 +16,7 @@ pub struct BlockParam {
 #[rustfmt::skip]
 pub enum BlockParamKind {
     Attr,    // css in `[[module css]]`
+    Equals,  // =
     KeyWord, // footnote in `[[footnote]]`
     Pipe,    // |
     String,  // for highlighting, mark a `string`
@@ -40,7 +41,11 @@ impl BlockParam {
         let current_span = cursor.token.span;
 
         if let Some(before) = cursor.before
-            && cursor.token.ty == TokenKind::Identifier
+            && matches!(
+                cursor.token.ty,
+                // special handling for `[[=]]` `[[>]]` `[[<]]`
+                TokenKind::Identifier | TokenKind::Other | TokenKind::Quote | TokenKind::Equals
+            )
         {
             // `[[module css]]`
             //          ^Whitespace
@@ -71,8 +76,10 @@ impl BlockParam {
             param!(current_span, BlockParamKind::Value);
         }
 
-        if cursor.is(TokenKind::Pipe) {
-            param!(current_span, BlockParamKind::Pipe);
+        match cursor.token.ty {
+            TokenKind::Pipe => param!(current_span, BlockParamKind::Pipe),
+            TokenKind::Equals => param!(current_span, BlockParamKind::Equals),
+            _ => {}
         }
 
         None
@@ -81,6 +88,7 @@ impl BlockParam {
     pub(super) fn to_abs_token(self) -> AbsoluteToken {
         let ty = match self.ty {
             BlockParamKind::Attr => HighlightKind::Attr,
+            BlockParamKind::Equals => HighlightKind::Equals,
             BlockParamKind::KeyWord => HighlightKind::KeyWord,
             BlockParamKind::String => HighlightKind::String,
             BlockParamKind::Value => HighlightKind::Value,
