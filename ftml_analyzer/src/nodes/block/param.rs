@@ -50,7 +50,10 @@ impl BlockParam {
             // `[[module css]]`
             //          ^Whitespace
             //           ^^^Identifier -> Attr
-            if before.ty == TokenKind::Whitespace || before.ty == TokenKind::Pipe {
+            if (before.ty == TokenKind::Whitespace || before.ty == TokenKind::Pipe)
+                && !cursor.is_string()
+                && !cursor.is_value()
+            {
                 param!(current_span, BlockParamKind::Attr);
             }
 
