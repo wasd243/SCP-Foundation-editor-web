@@ -34,9 +34,6 @@ use crate::{
 
 /// A trait for each node implementations.
 trait CursorToNode {
-    #[expect(unused)]
-    /// Use `COLLAPSIBLE` to config LSP code collapse feature.
-    const COLLAPSIBLE: bool;
     /// Try to parse at the cursor. Does not move the cursor on failure.
     fn parse(cursor: &Cursor) -> Option<Self>
     where

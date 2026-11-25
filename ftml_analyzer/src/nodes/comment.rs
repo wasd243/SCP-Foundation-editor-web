@@ -25,7 +25,6 @@ pub struct Comment {
 }
 
 impl CursorToNode for Comment {
-    const COLLAPSIBLE: bool = true;
     impl_len!();
     fn parse(cursor: &Cursor) -> Option<Self> {
         if cursor.token.ty != TokenKind::LeftComment {

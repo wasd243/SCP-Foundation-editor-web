@@ -52,7 +52,6 @@ impl From<TokenKind> for InlineMarkKind {
 }
 
 impl CursorToNode for InlineMark {
-    const COLLAPSIBLE: bool = false;
     impl_len!();
     fn parse(cursor: &Cursor) -> Option<Self> {
         if !is_inline_mark_token_(cursor.token.ty)
