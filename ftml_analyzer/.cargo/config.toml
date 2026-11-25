@@ -1,2 +1,0 @@
-[alias]
-bless = "test --features bless -- bless_"
