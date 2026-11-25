@@ -2105,6 +2105,186 @@
         },
         "ty": "right-block"
       }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            31,
+            0
+          ],
+          "end": [
+            33,
+            6
+          ]
+        },
+        "ty": "HasCloseTag",
+        "params": [
+          {
+            "span": {
+              "start": [
+                31,
+                2
+              ],
+              "end": [
+                31,
+                3
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                32,
+                2
+              ],
+              "end": [
+                32,
+                8
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                32,
+                9
+              ],
+              "end": [
+                32,
+                13
+              ]
+            },
+            "ty": "Attr"
+          }
+        ],
+        "end_param": {
+          "slice": "<",
+          "span": {
+            "start": [
+              33,
+              3
+            ],
+            "end": [
+              33,
+              4
+            ]
+          },
+          "ty": "other"
+        }
+      }
+    },
+    {
+      "Token": {
+        "slice": "<",
+        "span": {
+          "start": [
+            31,
+            2
+          ],
+          "end": [
+            31,
+            3
+          ]
+        },
+        "ty": "other"
+      }
+    },
+    {
+      "Token": {
+        "slice": "]]",
+        "span": {
+          "start": [
+            31,
+            3
+          ],
+          "end": [
+            31,
+            5
+          ]
+        },
+        "ty": "right-block"
+      }
+    },
+    {
+      "Block": {
+        "span": {
+          "start": [
+            32,
+            0
+          ],
+          "end": [
+            32,
+            15
+          ]
+        },
+        "ty": "Inline",
+        "params": [
+          {
+            "span": {
+              "start": [
+                32,
+                2
+              ],
+              "end": [
+                32,
+                8
+              ]
+            },
+            "ty": "KeyWord"
+          }
+        ]
+      }
+    },
+    {
+      "Token": {
+        "slice": "[[/",
+        "span": {
+          "start": [
+            33,
+            0
+          ],
+          "end": [
+            33,
+            3
+          ]
+        },
+        "ty": "left-block-end"
+      }
+    },
+    {
+      "Token": {
+        "slice": "<",
+        "span": {
+          "start": [
+            33,
+            3
+          ],
+          "end": [
+            33,
+            4
+          ]
+        },
+        "ty": "other"
+      }
+    },
+    {
+      "Token": {
+        "slice": "]]",
+        "span": {
+          "start": [
+            33,
+            4
+          ],
+          "end": [
+            33,
+            6
+          ]
+        },
+        "ty": "right-block"
+      }
     }
   ],
   "diagnostics": []

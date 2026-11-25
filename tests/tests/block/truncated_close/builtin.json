@@ -1,8 +1,7 @@
 {
   "nodes": [
     {
-      "Token": {
-        "slice": "[[",
+      "Block": {
         "span": {
           "start": [
             0,
@@ -10,42 +9,25 @@
           ],
           "end": [
             0,
-            2
-          ]
-        },
-        "ty": "left-block"
-      }
-    },
-    {
-      "Token": {
-        "slice": "div",
-        "span": {
-          "start": [
-            0,
-            2
-          ],
-          "end": [
-            0,
-            5
-          ]
-        },
-        "ty": "identifier"
-      }
-    },
-    {
-      "Token": {
-        "slice": "]]",
-        "span": {
-          "start": [
-            0,
-            5
-          ],
-          "end": [
-            0,
             7
           ]
         },
-        "ty": "right-block"
+        "ty": "Inline",
+        "params": [
+          {
+            "span": {
+              "start": [
+                0,
+                2
+              ],
+              "end": [
+                0,
+                5
+              ]
+            },
+            "ty": "KeyWord"
+          }
+        ]
       }
     },
     {
