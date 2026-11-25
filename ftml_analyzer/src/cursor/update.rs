@@ -22,7 +22,12 @@ impl<'c> Cursor<'c> {
 
     /// Update self eq field.
     fn update_eq(&mut self) {
-        if let Some(before) = self.before {
+        if let Some(before) = self.before
+            // [[=]]
+            //   ^Eq
+            //    ^^RightBlock
+            && !matches!(self.token.ty, TokenKind::RightBlock)
+        {
             match before.ty {
                 TokenKind::Equals => self.after_equals = true,
                 TokenKind::RightBlock | TokenKind::Whitespace | TokenKind::Pipe => {

@@ -17,6 +17,7 @@ pub struct BlockParam {
 pub enum BlockParamKind {
     Attr,    // css in `[[module css]]`
     KeyWord, // footnote in `[[footnote]]`
+    Pipe,    // |
     String,  // for highlighting, mark a `string`
     Value,   // for |=value in `[[include]]` or other values in blocks 
 }
@@ -70,6 +71,10 @@ impl BlockParam {
             param!(current_span, BlockParamKind::Value);
         }
 
+        if cursor.is(TokenKind::Pipe) {
+            param!(current_span, BlockParamKind::Pipe);
+        }
+
         None
     }
 
@@ -79,6 +84,7 @@ impl BlockParam {
             BlockParamKind::KeyWord => HighlightKind::KeyWord,
             BlockParamKind::String => HighlightKind::String,
             BlockParamKind::Value => HighlightKind::Value,
+            BlockParamKind::Pipe => HighlightKind::Pipe,
         };
 
         AbsoluteToken {

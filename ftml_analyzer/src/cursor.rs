@@ -105,6 +105,11 @@ impl<'c> Cursor<'c> {
     pub fn is_string(&self) -> bool {
         self.is_string || (self.token.ty == TokenKind::DoubleQuote && self.is_in_block())
     }
+
+    /// Check that the cursor in on `|`.
+    pub fn is(&self, kind: TokenKind) -> bool {
+        self.token.ty == kind
+    }
 }
 
 impl<'c> Iterator for Cursor<'c> {
