@@ -10,94 +10,20 @@
   "engines": {
     "vscode": "^1.90.0"
   },
+  "activationEvents": [
+    "onLanguage:ftml"
+  ],
   "main": "./out/extension.js",
   "scripts": {
     "check": "tsc -p .",
     "compile": "pnpm run check && esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=out/extension.js",
     "watch": "esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=out/extension.js --watch",
-    "build:server": "cargo buildhighlight --manifest-path ../../Cargo.toml && python scripts/build.py stage",
+    "build:server": "cargo buildlsp --manifest-path ../../Cargo.toml && python scripts/build.py stage",
     "check:binaries": "python scripts/build.py check-binaries",
     "package": "pnpm run build:server && pnpm run compile && python scripts/build.py package-local",
     "package:release": "pnpm run check:binaries && pnpm run compile && python scripts/build.py package-release"
   },
   "contributes": {
-    "languages": [
-      {
-        "id": "ftml",
-        "extensions": [
-          ".ftml",
-          ".wj"
-        ],
-        "configuration": "./language-configuration.json"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "ftml",
-        "scopeName": "source.ftml",
-        "path": "./syntaxes/ftml.tmLanguage.json",
-        "embeddedLanguages": {
-          "meta.embedded.block.css": "css",
-          "meta.embedded.block.html": "html"
-        }
-      }
-    ],
-    "semanticTokenTypes": [
-      {
-        "id": "ftmlBold",
-        "description": "Bold text"
-      },
-      {
-        "id": "ftmlItalic",
-        "description": "Italic text"
-      },
-      {
-        "id": "ftmlUnderline",
-        "description": "Underlined text"
-      },
-      {
-        "id": "ftmlStrike",
-        "description": "Struck text"
-      },
-      {
-        "id": "ftmlMonospace",
-        "description": "Monospace text"
-      },
-      {
-        "id": "ftmlLinkUrl",
-        "description": "Link URL"
-      }
-    ],
-    "semanticTokenScopes": [
-      {
-        "language": "ftml",
-        "scopes": {
-          "ftmlBold": [
-            "markup.bold"
-          ],
-          "ftmlItalic": [
-            "markup.italic"
-          ],
-          "ftmlUnderline": [
-            "markup.underline"
-          ],
-          "ftmlStrike": [
-            "markup.strikethrough"
-          ],
-          "ftmlMonospace": [
-            "markup.inline.raw"
-          ],
-          "ftmlLinkUrl": [
-            "markup.underline.link"
-          ]
-        }
-      }
-    ],
-    "configurationDefaults": {
-      "[ftml]": {
-        "editor.wordWrap": "on"
-      }
-    },
     "configuration": {
       "properties": {
         "ftml.serverPath": {
@@ -109,13 +35,13 @@
     }
   },
   "dependencies": {
-    "vscode-languageclient": "^9.0.1"
+    "vscode-languageclient": "^11.0.1"
   },
   "devDependencies": {
-    "@vscode/vsce": "^3.2.1",
+    "@vscode/vsce": "^4.1.1",
     "@types/node": "^26.6.7",
     "@types/vscode": "^1.90.0",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.2",
     "typescript": "^5.0.0"
   }
 }

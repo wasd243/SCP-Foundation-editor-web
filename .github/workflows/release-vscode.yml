@@ -54,7 +54,7 @@ jobs:
           key: ${{ matrix.rust_target }}
 
       - name: Build language server
-        run: cargo buildhighlight --locked --target "${{ matrix.rust_target }}"
+        run: cargo buildlsp --locked --target "${{ matrix.rust_target }}"
 
       - name: Stage language server
         run: python extensions/vscode/scripts/build.py stage --target "${{ matrix.extension_target }}" --source "target/${{ matrix.rust_target }}/release/${{ matrix.binary }}"

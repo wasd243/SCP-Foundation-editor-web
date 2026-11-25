@@ -8,7 +8,7 @@ use activities::main_loop;
 use anyhow::Result;
 use lsp_server::Connection;
 use lsp_types::{
-    CompletionOptions, FoldingRangeProviderCapability, HoverProviderCapability, ServerCapabilities,
+    CompletionOptions, FoldingRangeProviderCapability, ServerCapabilities,
     TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
 };
 use std::collections::HashMap;
@@ -23,7 +23,6 @@ fn server_capabilities() -> ServerCapabilities {
         #[cfg(feature = "highlight")]
         semantic_tokens_provider: Some(ftml_analyzer::semantic_tokens_capability()),
         completion_provider: Some(CompletionOptions::default()),
-        hover_provider: Some(HoverProviderCapability::Simple(true)),
         ..ServerCapabilities::default()
     }
 }

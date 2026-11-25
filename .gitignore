@@ -1,7 +1,9 @@
 # system and editor
 .DS_Store
 Thumbs.db
-.vscode/
+!.vscode/
+!.vscode/launch.json
+!.vscode/tasks.json
 .idea/
 *.suo
 .ntvs
