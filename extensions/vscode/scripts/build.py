@@ -58,20 +58,35 @@ def check_binaries():
     print(f"Found and prepared {len(PLATFORMS)} platform LSP binaries.")
 
 
-def package_local():
-    target = host_target()
-    if target not in PLATFORMS:
-        raise ValueError(f"Cannot package an extension for unsupported host: {target}")
-
+def package_vsix(target: str | None):
     node = shutil.which("node")
     if not node:
         raise RuntimeError("Node.js is required to run VSCE.")
     vsce = EXTENSION_ROOT / "node_modules" / "@vscode" / "vsce" / "vsce"
-    subprocess.run(
-        [node, str(vsce), "package", "--no-dependencies", "--target", PLATFORMS[target][1]],
-        cwd=EXTENSION_ROOT,
-        check=True,
-    )
+    license_source = EXTENSION_ROOT.parents[1] / "LICENSE"
+    license_destination = EXTENSION_ROOT / "LICENSE"
+    if not license_source.is_file():
+        raise FileNotFoundError(f"Repository license not found: {license_source}")
+
+    remove_license = not license_destination.exists()
+    if remove_license:
+        shutil.copy2(license_source, license_destination)
+
+    command = [node, str(vsce), "package", "--no-dependencies"]
+    if target:
+        command.extend(["--target", target])
+    try:
+        subprocess.run(command, cwd=EXTENSION_ROOT, check=True)
+    finally:
+        if remove_license:
+            license_destination.unlink(missing_ok=True)
+
+
+def package_local():
+    target = host_target()
+    if target not in PLATFORMS:
+        raise ValueError(f"Cannot package an extension for unsupported host: {target}")
+    package_vsix(PLATFORMS[target][1])
 
 
 def check_version(tag: str):
@@ -92,6 +107,7 @@ def main():
     stage_command.add_argument("--source", type=Path)
 
     commands.add_parser("check-binaries", help="Validate all platform server binaries.")
+    commands.add_parser("package-release", help="Create a universal VSIX after checking platform binaries.")
 
     version_command = commands.add_parser("check-version", help="Validate a release tag against package.json.")
     version_command.add_argument("tag")
@@ -107,6 +123,8 @@ def main():
         check_version(args.tag)
     elif args.command == "package-local":
         package_local()
+    elif args.command == "package-release":
+        package_vsix(None)
 
 
 if __name__ == "__main__":

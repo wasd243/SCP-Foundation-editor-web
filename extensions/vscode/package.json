@@ -15,10 +15,10 @@
     "check": "tsc -p .",
     "compile": "pnpm run check && esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=out/extension.js",
     "watch": "esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=out/extension.js --watch",
-    "build:server": "cargo build --manifest-path ../../Cargo.toml --release -p lsp_driver --features highlight && python scripts/build.py stage",
+    "build:server": "cargo buildhighlight --manifest-path ../../Cargo.toml && python scripts/build.py stage",
     "check:binaries": "python scripts/build.py check-binaries",
     "package": "pnpm run build:server && pnpm run compile && python scripts/build.py package-local",
-    "package:release": "pnpm run check:binaries && pnpm run compile && vsce package --no-dependencies"
+    "package:release": "pnpm run check:binaries && pnpm run compile && python scripts/build.py package-release"
   },
   "contributes": {
     "languages": [
