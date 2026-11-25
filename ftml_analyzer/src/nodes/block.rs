@@ -82,7 +82,7 @@ impl Block {
             };
 
             let close_end = block_end - cursor.index - Cursor::START_AND_END_MARK;
-            let close = &rest[close_end];
+            let close = rest.get(close_end)?;
 
             debug_assert_eq!(close.ty, TokenKind::RightBlock);
 
