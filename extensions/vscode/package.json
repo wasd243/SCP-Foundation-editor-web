@@ -1,12 +1,25 @@
 {
-  "name": "ftml_analyzer",
+  "name": "ftml-analyzer",
   "publisher": "wasd243",
   "displayName": "LSP for FTML/Wikidot",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wasd243/SCP-Foundation-editor-web"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },
   "main": "./out/extension.js",
+  "scripts": {
+    "check": "tsc -p .",
+    "compile": "pnpm run check && esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=out/extension.js",
+    "watch": "esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=out/extension.js --watch",
+    "build:server": "cargo build --manifest-path ../../Cargo.toml --release -p lsp_driver --features highlight && python scripts/build.py stage",
+    "check:binaries": "python scripts/build.py check-binaries",
+    "package": "pnpm run build:server && pnpm run compile && python scripts/build.py package-local",
+    "package:release": "pnpm run check:binaries && pnpm run compile && vsce package --no-dependencies"
+  },
   "contributes": {
     "languages": [
       {
@@ -99,7 +112,10 @@
     "vscode-languageclient": "^9.0.1"
   },
   "devDependencies": {
+    "@vscode/vsce": "^3.2.1",
+    "@types/node": "^26.6.7",
     "@types/vscode": "^1.90.0",
+    "esbuild": "^0.25.0",
     "typescript": "^5.0.0"
   }
 }

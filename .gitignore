@@ -9,6 +9,9 @@ Thumbs.db
 *.sln
 dist/
 
+# python
+__pycache__/
+
 # environment var
 .env
 .env.local
@@ -18,6 +21,7 @@ dist/
 
 # package
 pkg/
+node_modules/
 
 # Rust
 target/

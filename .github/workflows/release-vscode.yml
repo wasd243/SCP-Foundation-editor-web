@@ -1,0 +1,147 @@
+name: Release VS Code extension
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  build-server:
+    name: Build ${{ matrix.extension_target }} LSP
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - extension_target: win32-x64
+            runner: windows-2025
+            rust_target: x86_64-pc-windows-msvc
+            binary: ftml_analyzer.exe
+          - extension_target: win32-arm64
+            runner: windows-11-arm
+            rust_target: aarch64-pc-windows-msvc
+            binary: ftml_analyzer.exe
+          - extension_target: linux-x64
+            runner: ubuntu-24.04
+            rust_target: x86_64-unknown-linux-gnu
+            binary: ftml_analyzer
+          - extension_target: linux-arm64
+            runner: ubuntu-24.04-arm
+            rust_target: aarch64-unknown-linux-gnu
+            binary: ftml_analyzer
+          - extension_target: darwin-x64
+            runner: macos-15-intel
+            rust_target: x86_64-apple-darwin
+            binary: ftml_analyzer
+          - extension_target: darwin-arm64
+            runner: macos-15
+            rust_target: aarch64-apple-darwin
+            binary: ftml_analyzer
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.rust_target }}
+
+      - name: Build language server
+        run: cargo build --locked --release -p lsp_driver --features highlight --target "${{ matrix.rust_target }}"
+
+      - name: Stage language server
+        run: python extensions/vscode/scripts/build.py stage --target "${{ matrix.extension_target }}" --source "target/${{ matrix.rust_target }}/release/${{ matrix.binary }}"
+
+      - name: Upload language server
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-${{ matrix.extension_target }}
+          path: extensions/vscode/bin/
+          if-no-files-found: error
+          retention-days: 1
+
+  package:
+    name: Package universal VSIX
+    needs: build-server
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.22.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: extensions/vscode/pnpm-lock.yaml
+
+      - name: Check tag matches extension version
+        working-directory: extensions/vscode
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python scripts/build.py check-version "$RELEASE_TAG"
+
+      - name: Install extension dependencies
+        working-directory: extensions/vscode
+        run: pnpm install --frozen-lockfile
+
+      - name: Download platform language servers
+        uses: actions/download-artifact@v4
+        with:
+          pattern: server-*
+          path: extensions/vscode/bin
+          merge-multiple: true
+
+      - name: Compile and package universal VSIX
+        working-directory: extensions/vscode
+        run: pnpm run package:release
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-extension
+          path: extensions/vscode/*.vsix
+          if-no-files-found: error
+          retention-days: 7
+
+  github-release:
+    name: Attach VSIX to GitHub Release
+    needs: package
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download VSIX
+        uses: actions/download-artifact@v4
+        with:
+          name: vscode-extension
+          path: dist
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" dist/*.vsix --clobber
+          else
+            gh release create "$RELEASE_TAG" dist/*.vsix --generate-notes
+          fi
