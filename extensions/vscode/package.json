@@ -1,0 +1,105 @@
+{
+  "name": "ftml_analyzer",
+  "publisher": "wasd243",
+  "displayName": "LSP for FTML/Wikidot",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "ftml",
+        "extensions": [
+          ".ftml",
+          ".wj"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ftml",
+        "scopeName": "source.ftml",
+        "path": "./syntaxes/ftml.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.css": "css",
+          "meta.embedded.block.html": "html"
+        }
+      }
+    ],
+    "semanticTokenTypes": [
+      {
+        "id": "ftmlBold",
+        "description": "Bold text"
+      },
+      {
+        "id": "ftmlItalic",
+        "description": "Italic text"
+      },
+      {
+        "id": "ftmlUnderline",
+        "description": "Underlined text"
+      },
+      {
+        "id": "ftmlStrike",
+        "description": "Struck text"
+      },
+      {
+        "id": "ftmlMonospace",
+        "description": "Monospace text"
+      },
+      {
+        "id": "ftmlLinkUrl",
+        "description": "Link URL"
+      }
+    ],
+    "semanticTokenScopes": [
+      {
+        "language": "ftml",
+        "scopes": {
+          "ftmlBold": [
+            "markup.bold"
+          ],
+          "ftmlItalic": [
+            "markup.italic"
+          ],
+          "ftmlUnderline": [
+            "markup.underline"
+          ],
+          "ftmlStrike": [
+            "markup.strikethrough"
+          ],
+          "ftmlMonospace": [
+            "markup.inline.raw"
+          ],
+          "ftmlLinkUrl": [
+            "markup.underline.link"
+          ]
+        }
+      }
+    ],
+    "configurationDefaults": {
+      "[ftml]": {
+        "editor.wordWrap": "on"
+      }
+    },
+    "configuration": {
+      "properties": {
+        "ftml.serverPath": {
+          "type": "string",
+          "default": "",
+          "description": "Override the bundled ftml_analyzer binary."
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.0.0"
+  }
+}
