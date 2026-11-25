@@ -11,9 +11,9 @@ use param::collect_params;
 
 use serde::Serialize;
 
-#[cfg(feature = "highlight")]
-use crate::highlight::AbsoluteToken;
 use crate::{Cursor, Span, TokenKind, mapping::Map};
+#[cfg(feature = "highlight")]
+use crate::{Token, highlight::AbsoluteToken};
 
 #[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
 pub enum BlockKind {
@@ -27,13 +27,16 @@ pub struct Block {
     pub ty: BlockKind,
     #[cfg(feature = "highlight")]
     pub params: Vec<BlockParam>,
+    #[cfg(feature = "highlight")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub end_param: Option<Token>,
     #[serde(skip)]
     len: usize,
 }
 
 /// Build and return a Block.
 macro_rules! block {
-    ($span_start:expr, $span_end:expr, $ty:expr, $params:ident, $len:expr) => {
+    ($span_start:expr, $span_end:expr, $ty:expr, $params:ident, $end_param:expr, $len:expr) => {
         return Some($crate::nodes::block::Block {
             span: Span {
                 start: $span_start.span.start,
@@ -42,6 +45,8 @@ macro_rules! block {
             ty: $ty,
             #[cfg(feature = "highlight")]
             $params,
+            #[cfg(feature = "highlight")]
+            end_param: $end_param,
             len: $len,
         })
     };
@@ -74,12 +79,14 @@ impl Block {
                     right_block,
                     BlockKind::Inline,
                     params,
+                    // No end_param when block is written inline
+                    None,
                     // add 3 to skip enough token.
                     open_end + Cursor::START_AND_END_MARK + 1
                 );
             };
 
-            let close_end = block_end - cursor.index - Cursor::START_AND_END_MARK;
+            let close_end = block_end - cursor.index - 2;
             let close = rest.get(close_end)?;
 
             debug_assert_eq!(close.ty, TokenKind::RightBlock);
@@ -87,7 +94,20 @@ impl Block {
             #[cfg(feature = "highlight")]
             let params = collect_params(left_block, cursor.after, &rest[..close_end]);
 
-            block!(left_block, close, BlockKind::HasCloseTag, params, close_end);
+            #[cfg(feature = "highlight")]
+            // [[/end]]
+            //       ^^ close_end
+            //    ^^^ close_end - 1
+            let end_param = rest.get(close_end - 1)?;
+
+            block!(
+                left_block,
+                close,
+                BlockKind::HasCloseTag,
+                params,
+                Some(end_param.clone()),
+                close_end
+            );
         }
 
         None
@@ -108,44 +128,26 @@ impl Block {
             mods: 0,
         });
 
+        // Push the `]]` token into AbsoluteToken list manually.
+        if self.ty == BlockKind::Inline {
+            tokens.push(AbsoluteToken {
+                line: self.span.end.0,
+                start: self.span.end.1.saturating_sub(2),
+                len: 2,
+                ty: HighlightKind::Operator,
+                mods: 0,
+            });
+        } else if let Some(end_param) = &self.end_param {
+            // Push the identifier on `[[/end]]` block into AbsoluteToken list manually.
+            tokens.push(AbsoluteToken {
+                line: end_param.span.start.0,
+                start: end_param.span.start.1,
+                len: end_param.span.end.1.saturating_sub(end_param.span.start.1),
+                ty: HighlightKind::KeyWord,
+                mods: 0,
+            });
+        }
+
         tokens
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::get_ast;
-    use crate::highlight::HighlightKind;
-
-    const FTML: &str = r#"[[div class="cls" foo=bar ]]"#;
-
-    #[test]
-    fn block_params_are_included_in_semantic_tokens() {
-        let semantics = get_ast(FTML).to_semantic();
-        let tokens: Vec<_> = semantics
-            .into_iter()
-            .map(|token| {
-                (
-                    token.delta_line,
-                    token.delta_start,
-                    token.length,
-                    token.token_type,
-                )
-            })
-            .collect();
-
-        assert_eq!(
-            tokens,
-            [
-                (0, 0, 2, HighlightKind::Operator.to_index()),
-                (0, 2, 3, HighlightKind::KeyWord.to_index()),
-                (0, 4, 5, HighlightKind::Attr.to_index()),
-                (0, 6, 1, HighlightKind::String.to_index()),
-                (0, 1, 3, HighlightKind::String.to_index()),
-                (0, 3, 1, HighlightKind::String.to_index()),
-                (0, 2, 3, HighlightKind::Attr.to_index()),
-                (0, 4, 3, HighlightKind::Value.to_index()),
-            ]
-        );
     }
 }

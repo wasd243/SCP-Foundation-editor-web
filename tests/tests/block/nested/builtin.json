@@ -268,7 +268,21 @@
             },
             "ty": "Value"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "div",
+          "span": {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              4,
+              6
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {
@@ -665,7 +679,21 @@
             },
             "ty": "KeyWord"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "collapsible",
+          "span": {
+            "start": [
+              28,
+              3
+            ],
+            "end": [
+              28,
+              14
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {
@@ -961,7 +989,21 @@
             },
             "ty": "KeyWord"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "<",
+          "span": {
+            "start": [
+              26,
+              3
+            ],
+            "end": [
+              26,
+              4
+            ]
+          },
+          "ty": "other"
+        }
       }
     },
     {
@@ -1065,7 +1107,21 @@
             },
             "ty": "KeyWord"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": ">",
+          "span": {
+            "start": [
+              24,
+              3
+            ],
+            "end": [
+              24,
+              4
+            ]
+          },
+          "ty": "quote"
+        }
       }
     },
     {
@@ -1156,7 +1212,21 @@
             },
             "ty": "KeyWord"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "=",
+          "span": {
+            "start": [
+              22,
+              3
+            ],
+            "end": [
+              22,
+              4
+            ]
+          },
+          "ty": "equals"
+        }
       }
     },
     {
@@ -1250,7 +1320,21 @@
             },
             "ty": "KeyWord"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "footnote",
+          "span": {
+            "start": [
+              14,
+              39
+            ],
+            "end": [
+              14,
+              47
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {
@@ -1472,7 +1556,21 @@
             },
             "ty": "KeyWord"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "note",
+          "span": {
+            "start": [
+              20,
+              3
+            ],
+            "end": [
+              20,
+              7
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {

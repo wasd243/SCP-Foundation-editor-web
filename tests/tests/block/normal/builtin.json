@@ -79,7 +79,21 @@
             },
             "ty": "String"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "div",
+          "span": {
+            "start": [
+              2,
+              3
+            ],
+            "end": [
+              2,
+              6
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {
@@ -301,7 +315,21 @@
             },
             "ty": "KeyWord"
           }
-        ]
+        ],
+        "end_param": {
+          "slice": "footnote",
+          "span": {
+            "start": [
+              4,
+              30
+            ],
+            "end": [
+              4,
+              38
+            ]
+          },
+          "ty": "identifier"
+        }
       }
     },
     {
