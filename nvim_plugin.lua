@@ -19,23 +19,44 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.cmd([=[
-  " Embedded CSS: [[module css]] ... [[/module]]
-  unlet! b:current_syntax
-  silent! syntax include @ftmlCss syntax/css.vim
-  syntax region ftmlCssBlock matchgroup=Delimiter
-    \ start=/\c\[\[module\s\+css\s*\]\]/
-    \ end=/\c\[\[\/module\]\]/
-    \ contains=@ftmlCss keepend
+-- Embedded languages via native :syntax include (no virtual documents).
+-- Must run after Neovim's own `syn clear` (done when `syntax` is set after
+-- FileType), hence vim.schedule.
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("FtmlEmbeddedSyntax", { clear = true }),
+	pattern = "ftml",
+	callback = function(args)
+		vim.schedule(function()
+			if not vim.api.nvim_buf_is_valid(args.buf) or vim.bo[args.buf].filetype ~= "ftml" then
+				return
+			end
+			vim.api.nvim_buf_call(args.buf, function()
+				-- Embedded CSS: [[module css]] ... [[/module]]
+				vim.cmd([=[
+          unlet! b:current_syntax
+          silent! syntax include @ftmlCss syntax/css.vim
+          syntax region ftmlCssBlock matchgroup=Delimiter
+            \ start=/\c\[\[module\s\+css\s*\]\]/
+            \ end=/\c\[\[\/module\]\]/
+            \ contains=@ftmlCss keepend
+        ]=])
 
-  " Embedded HTML: [[html]] ... [[/html]]
-  unlet! b:current_syntax
-  silent! syntax include @ftmlHtml syntax/html.vim
-  syntax region ftmlHtmlBlock matchgroup=Delimiter
-    \ start=/\c\[\[html[^\]]*\]\]/
-    \ end=/\c\[\[\/html\]\]/
-    \ contains=@ftmlHtml keepend
-]=])
+				-- Embedded HTML: [[html]] ... [[/html]]
+				vim.cmd([=[
+          unlet! b:current_syntax
+          silent! syntax include @ftmlHtml syntax/html.vim
+          syntax region ftmlHtmlBlock matchgroup=Delimiter
+            \ start=/\c\[\[html[^\]]*\]\]/
+            \ end=/\c\[\[\/html\]\]/
+            \ contains=@ftmlHtml keepend
+        ]=])
+
+				-- Restore our own syntax name after the includes.
+				vim.b.current_syntax = "ftml"
+			end)
+		end)
+	end,
+})
 
 -- setup LSP custom highlights.
 local function apply()
