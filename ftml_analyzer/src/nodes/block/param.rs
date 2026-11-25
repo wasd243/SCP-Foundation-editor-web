@@ -16,6 +16,7 @@ pub struct BlockParam {
 #[rustfmt::skip]
 pub enum BlockParamKind {
     Attr,    // css in `[[module css]]`
+    Colon,   // :
     Equals,  // =
     KeyWord, // footnote in `[[footnote]]`
     Pipe,    // |
@@ -82,6 +83,7 @@ impl BlockParam {
         match cursor.token.ty {
             TokenKind::Pipe => param!(current_span, BlockParamKind::Pipe),
             TokenKind::Equals => param!(current_span, BlockParamKind::Equals),
+            TokenKind::Colon => param!(current_span, BlockParamKind::Colon),
             _ => {}
         }
 
@@ -91,6 +93,7 @@ impl BlockParam {
     pub(super) fn to_abs_token(self) -> AbsoluteToken {
         let ty = match self.ty {
             BlockParamKind::Attr => HighlightKind::Attr,
+            BlockParamKind::Colon => HighlightKind::PathBuffer,
             BlockParamKind::Equals => HighlightKind::Equals,
             BlockParamKind::KeyWord => HighlightKind::KeyWord,
             BlockParamKind::String => HighlightKind::String,
