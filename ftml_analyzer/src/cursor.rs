@@ -66,6 +66,14 @@ impl<'c> Cursor<'c> {
         })
     }
 
+    /// Build a cursor for tokens that are already inside a block.
+    pub fn new_in_block(tokens: &'c [Token], before: &'c Token) -> Option<Self> {
+        let mut cursor = Self::new(tokens)?;
+        cursor.before = Some(before);
+        cursor.block_depth = 1;
+        Some(cursor)
+    }
+
     /// Search all the tokens from `before` to `rest`.
     pub fn contains_token(&self, token_kind: TokenKind) -> bool {
         self.before.is_some_and(|t| t.ty == token_kind)

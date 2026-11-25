@@ -65,7 +65,8 @@ impl BlockParam {
         // `[[include :path:to:page
         // |var=value]]`
         //      ^^^^^ -> Value
-        if cursor.is_value() {
+        if cursor.is_value() && !matches!(cursor.token.ty, TokenKind::Whitespace | TokenKind::Pipe)
+        {
             param!(current_span, BlockParamKind::Value);
         }
 
@@ -92,12 +93,24 @@ impl BlockParam {
 }
 
 /// Build a sub cursor collect parameters.
-pub(super) fn collect_params(inner: &[Token]) -> Vec<BlockParam> {
-    let Some(mut sub) = Cursor::new(inner) else {
-        return vec![];
-    };
-
+pub(super) fn collect_params(
+    left_block: &Token,
+    keyword: Option<&Token>,
+    inner: &[Token],
+) -> Vec<BlockParam> {
     let mut params = vec![];
+
+    if let Some(keyword) = keyword
+        && let Some(sub) = Cursor::new_in_block(std::slice::from_ref(keyword), left_block)
+        && let Some(param) = BlockParam::parse_params(&sub)
+    {
+        params.push(param);
+    }
+
+    let before = keyword.unwrap_or(left_block);
+    let Some(mut sub) = Cursor::new_in_block(inner, before) else {
+        return params;
+    };
 
     loop {
         if let Some(p) = BlockParam::parse_params(&sub) {

@@ -67,7 +67,7 @@ impl Block {
                 let right_block = &rest[open_end];
 
                 #[cfg(feature = "highlight")]
-                let params = collect_params(&rest[..=open_end]);
+                let params = collect_params(left_block, cursor.after, &rest[..open_end]);
 
                 block!(
                     left_block,
@@ -85,7 +85,7 @@ impl Block {
             debug_assert_eq!(close.ty, TokenKind::RightBlock);
 
             #[cfg(feature = "highlight")]
-            let params = collect_params(&rest[..=close_end]);
+            let params = collect_params(left_block, cursor.after, &rest[..close_end]);
 
             block!(left_block, close, BlockKind::HasCloseTag, params, close_end);
         }
@@ -109,5 +109,43 @@ impl Block {
         });
 
         tokens
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::get_ast;
+    use crate::highlight::HighlightKind;
+
+    const FTML: &str = r#"[[div class="cls" foo=bar ]]"#;
+
+    #[test]
+    fn block_params_are_included_in_semantic_tokens() {
+        let semantics = get_ast(FTML).to_semantic();
+        let tokens: Vec<_> = semantics
+            .into_iter()
+            .map(|token| {
+                (
+                    token.delta_line,
+                    token.delta_start,
+                    token.length,
+                    token.token_type,
+                )
+            })
+            .collect();
+
+        assert_eq!(
+            tokens,
+            [
+                (0, 0, 2, HighlightKind::Operator.to_index()),
+                (0, 2, 3, HighlightKind::KeyWord.to_index()),
+                (0, 4, 5, HighlightKind::Attr.to_index()),
+                (0, 6, 1, HighlightKind::String.to_index()),
+                (0, 1, 3, HighlightKind::String.to_index()),
+                (0, 3, 1, HighlightKind::String.to_index()),
+                (0, 2, 3, HighlightKind::Attr.to_index()),
+                (0, 4, 3, HighlightKind::Value.to_index()),
+            ]
+        );
     }
 }

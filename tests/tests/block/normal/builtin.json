@@ -13,7 +13,73 @@
           ]
         },
         "ty": "HasCloseTag",
-        "params": []
+        "params": [
+          {
+            "span": {
+              "start": [
+                0,
+                2
+              ],
+              "end": [
+                0,
+                5
+              ]
+            },
+            "ty": "KeyWord"
+          },
+          {
+            "span": {
+              "start": [
+                0,
+                6
+              ],
+              "end": [
+                0,
+                11
+              ]
+            },
+            "ty": "Attr"
+          },
+          {
+            "span": {
+              "start": [
+                0,
+                12
+              ],
+              "end": [
+                0,
+                13
+              ]
+            },
+            "ty": "String"
+          },
+          {
+            "span": {
+              "start": [
+                0,
+                13
+              ],
+              "end": [
+                0,
+                16
+              ]
+            },
+            "ty": "String"
+          },
+          {
+            "span": {
+              "start": [
+                0,
+                16
+              ],
+              "end": [
+                0,
+                17
+              ]
+            },
+            "ty": "String"
+          }
+        ]
       }
     },
     {
@@ -221,7 +287,21 @@
           ]
         },
         "ty": "HasCloseTag",
-        "params": []
+        "params": [
+          {
+            "span": {
+              "start": [
+                4,
+                9
+              ],
+              "end": [
+                4,
+                17
+              ]
+            },
+            "ty": "KeyWord"
+          }
+        ]
       }
     },
     {
