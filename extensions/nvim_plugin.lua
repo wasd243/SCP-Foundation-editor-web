@@ -81,8 +81,8 @@ return {
 	"neovim/nvim-lspconfig",
 	opts = function(_, opts)
 		vim.lsp.config("ftml_analyzer", {
-			-- use your build directory like this.
-			cmd = { vim.fn.expand("~/project/SCP-Foundation-editor-web/target/release/ftml_analyzer") },
+			-- use your build directory
+			cmd = { vim.fn.expand("directory to your binary LSP server file") },
 			filetypes = { "ftml" },
 			root_markers = { ".git" },
 		})
