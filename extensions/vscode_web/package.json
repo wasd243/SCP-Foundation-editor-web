@@ -15,6 +15,9 @@
   "activationEvents": ["onLanguage:ftml"],
   "browser": "./dist/extension.js",
   "contributes": {
+    "configurationDefaults": {
+      "workbench.colorTheme": "Default Dark Modern"
+    },
     "languages": [
       {"id": "ftml", "extensions": [".ftml"]}
     ]
