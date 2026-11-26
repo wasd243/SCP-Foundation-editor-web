@@ -1,12 +1,15 @@
-name: Build web extension
+name: Deploy VS Code Web
 
 on:
   push:
     branches: [main, dev]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -37,8 +40,19 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # build:wasm + esbuild bundle + vsce package
       - run: pnpm run package
+
+      - name: Build GitHub Pages site
+        run: node scripts/build-pages.mjs ${{ github.ref_name == 'dev' && '/SCP-Foundation-editor-web/dev' || '/SCP-Foundation-editor-web' }}
+
+      - name: Publish site
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: extensions/vscode_web/pages
+          destination_dir: ${{ github.ref_name == 'dev' && 'dev' || '' }}
+          keep_files: true
 
       - uses: actions/upload-artifact@v4
         with:

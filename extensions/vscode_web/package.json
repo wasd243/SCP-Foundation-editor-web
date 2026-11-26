@@ -26,6 +26,7 @@
     "build:wasm": "wasm-pack build ../../ftml_lsp_wasm --release --target web --out-dir ../extensions/vscode_web/wasm --out-name ftml_lsp_wasm",
     "bundle": "esbuild src/extension.ts --bundle --platform=browser --format=cjs --external:vscode --outfile=dist/extension.js && esbuild src/wasm.worker.ts --bundle --platform=browser --format=iife --outfile=dist/wasm.worker.js",
     "build": "pnpm run build:wasm && pnpm run bundle",
+    "build:pages": "pnpm run build && node scripts/build-pages.mjs",
     "package": "pnpm run build && vsce package --no-dependencies"
   },
   "dependencies": {
