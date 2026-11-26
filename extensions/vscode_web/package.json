@@ -1,0 +1,36 @@
+{
+  "name": "ftml-analyzer-web",
+  "publisher": "wasd243",
+  "displayName": "FTML Analyzer (Web)",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wasd243/SCP-Foundation-editor-web"
+  },
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "extensionKind": ["workspace"],
+  "activationEvents": ["onLanguage:ftml"],
+  "browser": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {"id": "ftml", "extensions": [".ftml"]}
+    ]
+  },
+  "scripts": {
+    "build:wasm": "wasm-pack build ../../ftml_lsp_wasm --release --target web --out-dir ../extensions/vscode_web/wasm --out-name ftml_lsp_wasm",
+    "bundle": "esbuild src/extension.ts --bundle --platform=browser --format=cjs --external:vscode --outfile=dist/extension.js && esbuild src/wasm.worker.ts --bundle --platform=browser --format=iife --outfile=dist/wasm.worker.js",
+    "build": "pnpm run build:wasm && pnpm run bundle",
+    "package": "pnpm run build && vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "vscode-languageclient": "11.0.1"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "4.1.1",
+    "esbuild": "0.28.2"
+  },
+  "packageManager": "pnpm@11.22.0"
+}

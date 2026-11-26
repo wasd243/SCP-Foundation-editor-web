@@ -14,9 +14,9 @@ use lsp_types::{
 use std::collections::HashMap;
 
 const COLLAPSED_TEXT: &str = "...";
-type Buffers = HashMap<Uri, String>;
+pub type Buffers = HashMap<Uri, String>;
 
-fn server_capabilities() -> ServerCapabilities {
+pub fn server_capabilities() -> ServerCapabilities {
     ServerCapabilities {
         text_document_sync: Some(TextDocumentSyncCapability::Kind(TextDocumentSyncKind::FULL)),
         folding_range_provider: Some(FoldingRangeProviderCapability::Simple(true)),
@@ -26,6 +26,9 @@ fn server_capabilities() -> ServerCapabilities {
         ..ServerCapabilities::default()
     }
 }
+
+pub use activities::build_diags;
+pub use activities::match_requests;
 
 /// Build the LSP server.
 pub fn build_server() -> Result<()> {

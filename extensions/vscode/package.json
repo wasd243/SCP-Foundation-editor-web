@@ -1,7 +1,7 @@
 {
   "name": "ftml-analyzer",
   "publisher": "wasd243",
-  "displayName": "LSP for FTML/Wikidot",
+  "displayName": "LSP server for FTML/Wikidot (no highlight)",
   "version": "0.1.0",
   "repository": {
     "type": "git",

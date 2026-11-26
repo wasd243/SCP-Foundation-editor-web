@@ -13,6 +13,7 @@ use lsp_types::request::SemanticTokensFullRequest;
 use semantic::semantic_full_request;
 
 pub(crate) use macros::get_source;
+pub use diagnostic::build_diags;
 
 use anyhow::Result;
 use lsp_server::{Connection, Message, Notification, Request, Response};
@@ -78,7 +79,7 @@ fn match_notifications(
 }
 
 /// Match difference requests from IDEs.
-fn match_requests(req: Request, buffers: &Buffers) -> Response {
+pub fn match_requests(req: Request, buffers: &Buffers) -> Response {
     match req.method.as_str() {
         FoldingRangeRequest::METHOD => folding_range_request(req, buffers),
         #[cfg(feature = "highlight")]

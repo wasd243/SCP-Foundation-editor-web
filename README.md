@@ -44,6 +44,15 @@ vim.lsp.config("ftml_analyzer", {
 })
 ```
 
+## Test
+
+```bash
+cargo checka  # alias expand to cargo check --workspace --all-features --all-targets
+cargo clippya # alias expand to cargo clippy --workspace --all-features --all-targets
+cargo bless   # generate new test snapshots in `tests/tests/` if change any `input.ftml` content.
+cargo test
+```
+
 ## Dependencies
 
 This repo uses `lsp-server` and `lsp-types` to implement the server. The tokenization and diagnostic parts use the [ftml](https://github.com/scpwiki/ftml.git) crate.

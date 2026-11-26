@@ -1,0 +1,47 @@
+name: Build web extension
+
+on:
+  push:
+    branches: [main, dev]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extensions/vscode_web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install wasm-pack
+        uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-pack
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: extensions/vscode_web/package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: extensions/vscode_web/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+
+      # build:wasm + esbuild bundle + vsce package
+      - run: pnpm run package
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ftml-analyzer-web-vsix
+          path: extensions/vscode_web/*.vsix
+          if-no-files-found: error

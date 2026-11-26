@@ -36,7 +36,7 @@ pub(super) fn manage_diagnostics(
 
 // NOTE: lint system unimplemented temporarily, directly use `BuiltIn`'s diagnostics.
 // move the `diagnostics` this time, do not clone.
-fn build_diags(ast: BuiltIn) -> Vec<Diagnostic> {
+pub fn build_diags(ast: BuiltIn) -> Vec<Diagnostic> {
     let diagnostics: Vec<ftml_analyzer::ftml_ast::Diagnostic> = ast.diagnostics;
 
     diagnostics

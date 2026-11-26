@@ -496,6 +496,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "ftml_lsp_wasm"
+version = "0.1.0"
+dependencies = [
+ "ftml_analyzer",
+ "ftml_lsp",
+ "lsp-server",
+ "lsp-types",
+ "serde",
+ "serde_json",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "funty"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

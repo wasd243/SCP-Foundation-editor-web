@@ -1,6 +1,13 @@
 [workspace]
 resolver = "3"
-members = ["ftml_analyzer", "ftml_lsp", "lsp_driver", "lsp_test", "tests"]
+members = [
+    "ftml_analyzer",
+    "ftml_lsp",
+    "ftml_lsp_wasm",
+    "lsp_driver",
+    "lsp_test",
+    "tests",
+]
 
 [workspace.package]
 version = "0.1.0"
